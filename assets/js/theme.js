@@ -96,6 +96,11 @@
                 updateSliderUI(theme);
             });
         });
+        // Auto-update copyright year dynamically
+        const currentYearElements = document.querySelectorAll('.current-year');
+        currentYearElements.forEach(el => {
+            el.textContent = new Date().getFullYear();
+        });
     }
 
     // Initialize as soon as DOM Content is Loaded

@@ -1,0 +1,441 @@
+% filepath: c:\Users\adurs\OneDrive\Documents\repos\repos\agopalareddy.github.io\files\cv_tex\reddy_cv.sty
+% -----------------------------------------------------------------
+% reddy_cv.sty - A professional and consistent CV style package
+% Author: Aadarsha Gopala Reddy
+% Last Updated: May 21, 2025
+% -----------------------------------------------------------------
+% This style package provides specialized environments for different
+% sections of a CV, ensuring each entry stays together on the same page
+% and maintains consistent formatting throughout the document.
+% -----------------------------------------------------------------
+
+\ProvidesPackage{reddy_cv}[2025/05/21 v1.1 Reddy CV Style]
+
+% --- Meta Information for PDF (via hyperref) ---
+% Note: \hypersetup is called later with other package initializations.
+
+% --- Required Packages ---
+% --- Geometry and Page Layout ---
+\RequirePackage[
+    ignoreheadfoot,     % Ignore header and footer in page dimensions
+    top=1.2cm,          % Top margin
+    bottom=1.2cm,       % Bottom margin
+    left=1.2cm,         % Left margin
+    right=1.3cm,        % Right margin (slightly increased)
+    footskip=0.8cm,     % Space for footer
+    showframe=false     % Don't show frame around the page
+]{geometry}
+\RequirePackage{titlesec}       % For customizing section titles
+\RequirePackage{paracol}        % For multi-column layouts
+\RequirePackage{changepage}     % For adjusting margins (used in onecolentry)
+\RequirePackage{calc}           % For calculations in lengths
+
+% --- Typography and Font ---
+\RequirePackage{charter}        % Font package
+\RequirePackage{microtype}      % Subtle typographic improvements
+\RequirePackage{amsmath}        % For advanced math typesetting
+\RequirePackage{array}          % For extending array and tabular environments
+\RequirePackage{tabularx}       % For tables with adjustable-width columns
+
+% --- Colors ---
+\RequirePackage[dvipsnames]{xcolor}  % Advanced color capabilities
+
+% --- Lists and Enumerations ---
+\RequirePackage{enumitem}       % For customizing list environments
+
+% --- Links and URLs ---
+\RequirePackage[
+    pdftitle={Aadarsha's CV},
+    pdfauthor={Aadarsha Gopala Reddy},
+    pdfcreator={LaTeX with Reddy CV Style}, % Updated creator
+    colorlinks=true,          % Color links instead of boxes
+    urlcolor=primaryColor,    % Defined below
+    breaklinks=true           % Allow links to break across lines
+]{hyperref}
+
+% --- Icons and Symbols ---
+\RequirePackage{fontawesome5}   % For icons like phone, email, etc.
+\RequirePackage{qrcode}         % For QR codes
+
+% --- Utilities and TeX Engine Specifics ---
+\RequirePackage{iftex}          % Conditional compilation based on TeX engine
+\RequirePackage{lastpage}       % For referencing the last page number (if needed)
+\RequirePackage{needspace}      % To ensure space before sections/environments
+\RequirePackage{eso-pic}        % For adding content to background
+\RequirePackage{bookmark}       % For PDF bookmarks
+\RequirePackage{caption}        % For caption formatting (though might not be heavily used in CV)
+\RequirePackage{ifthen}         % For conditional statements (already present, good)
+
+% -----------------------------------------------------------------
+% Spacing Definitions
+% -----------------------------------------------------------------
+% These lengths are used for consistent vertical spacing throughout the document.
+\newlength{\headerSpacing}      % Base spacing, e.g., around section titles or major blocks
+\setlength{\headerSpacing}{10pt}
+
+\newlength{\entrySpacing}       % Spacing before a new entry (e.g., education, experience)
+\setlength{\entrySpacing}{0.5\headerSpacing} % Proportional to headerSpacing
+
+\newlength{\highlightSpacing}   % Spacing before a list of highlights/bullet points within an entry
+\setlength{\highlightSpacing}{0.25\headerSpacing} % Proportional to headerSpacing
+
+\newlength{\kernSpacing}        % A small, fixed kerning space for inline elements
+\setlength{\kernSpacing}{2.5pt}
+
+% -----------------------------------------------------------------
+% Color Definitions
+% -----------------------------------------------------------------
+\definecolor{primaryColor}{RGB}{0, 0, 0}    % Main text color, also used for URLs by hyperref
+\definecolor{accentColor}{RGB}{50, 50, 50}   % Color for section lines and potentially other accents
+
+% -----------------------------------------------------------------
+% PDF & Typesetting Engine Settings
+% -----------------------------------------------------------------
+\ifPDFTeX
+    \input{glyphtounicode}   % Maps glyphs to unicode for better copy-paste from PDF
+    \pdfgentounicode=1       % Enable unicode mapping
+    \RequirePackage[T1]{fontenc}         % Font encoding (important for PDF output)
+    \RequirePackage[utf8]{inputenc}      % Input encoding (UTF-8 recommended)
+    \RequirePackage{lmodern}             % Latin Modern font (often used with T1)
+\fi
+
+% --- Typesetting and Hyphenation Settings ---
+\sloppy                % Allow more space between words to prevent overfull \hbox
+\hyphenpenalty=1000    % Discourage hyphenation (higher value = fewer hyphens)
+\pretolerance=150      % Tolerance for badness before first pass hyphenation
+\tolerance=1000        % Tolerance for badness after first pass hyphenation
+\emergencystretch=1em  % Add stretchable space to lines that are still too long
+
+% --- URL Breaking Rules (for hyperref) ---
+% Allows URLs to break at more characters to prevent overfull hboxes.
+\def\UrlBreaks{\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\>\do\]%
+    \do\)\do\,\do\?\do\'\do+\do\=\do\#\do-\do\&}
+\def\UrlBigBreaks{\do\:\do@\do\/\do\-}
+
+% -----------------------------------------------------------------
+% General Document Layout Settings
+% -----------------------------------------------------------------
+\raggedright                     % Left-align text, no right justification
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % Remove partopsep for adjustwidth env
+\pagestyle{empty}                % No headers or footers
+\setcounter{secnumdepth}{0}      % Do not number sections
+\setlength{\parindent}{0pt}      % No paragraph indentation
+\setlength{\topskip}{0pt}        % No extra space at the top of the page
+\setlength{\columnsep}{0.1cm}    % Space between columns in paracol
+\pagenumbering{gobble}           % Turn off page numbering completely
+
+% -----------------------------------------------------------------
+% Custom Top-Level Environments
+% -----------------------------------------------------------------
+
+% --- `header` Environment ---
+% Used for the main document header section.
+% Sets top separation, ragged right, and line spacing.
+\newenvironment{header}{%
+    \setlength{\topsep}{0pt}%
+    \par\kern\topsep
+    \raggedright
+    \linespread{1.5}\selectfont % Ensure linespread is applied
+}{%
+    \par\kern\topsep
+}
+
+% -----------------------------------------------------------------
+% Section Title Formatting (using titlesec)
+% -----------------------------------------------------------------
+% Defines the appearance of \section titles.
+\titleformat{\section}
+{\needspace{3\baselineskip}\bfseries\large\color{accentColor}} % Format: needs space, bold, large, accent color
+{} % Label: no section number
+{0pt} % Separation between label and title
+{} % Code before title
+[\vspace{0.5pt}\color{accentColor}\titlerule] % Code after title: small space, then a rule in accent color
+\titlespacing{\section}
+{0pt} % Left margin
+{0.1cm} % Space before title (vertical)
+{0.1cm} % Space after title (vertical) - before text or rule
+
+% -----------------------------------------------------------------
+% Custom List Environments
+% -----------------------------------------------------------------
+% --- Default Bullet Style for itemize ---
+% Modifies the default bullet for \item in itemize environments.
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % Small, vertically centered bullet
+
+% --- `highlightsforbulletentries` Environment ---
+% An itemize list with specific spacing and left margin, used for bullet points
+% within various entry types (education, experience, projects, etc.).
+\newenvironment{highlightsforbulletentries}{%
+    \begin{itemize}[
+            topsep=0.05cm,      % Space above the list
+            parsep=0.05cm,      % Space between paragraphs within an item (if any)
+            partopsep=0pt,      % Extra space added to topsep/parsep if list is preceded by a blank line
+            itemsep=0pt,        % Space between items
+            leftmargin=20pt     % Left margin of the list (indented)
+        ]
+        }{%
+    \end{itemize}
+}
+
+% -----------------------------------------------------------------
+% Core Layout Helper Environments
+% -----------------------------------------------------------------
+% These environments are building blocks for creating structured entries.
+
+% --- `onecolentry` Environment ---
+% A simple single-column block. Uses `adjustwidth` to manage margins if needed,
+% though here it's set to effectively zero adjustment.
+% Ensures content stays on one page if possible (via \begin{samepage} in specialized envs).
+\newenvironment{onecolentry}{%
+    \begin{adjustwidth}{0cm + 0.00001cm}{0cm + 0.00001cm} % Minimal adjustment, effectively none
+        }{%
+    \end{adjustwidth}
+}
+
+% --- `twocolentry` Environment ---
+% Creates a two-column layout. Used by most specialized entry types.
+% #1 (optional): Content for the first column. Default is empty.
+% #2: Content for the second column (typically dates or short info), right-aligned.
+% The first column takes the remaining space. Second column width is fixed at 4.5cm.
+% Usage: \begin{twocolentry}{Right Column Text} Left column text here. \end{twocolentry}
+\newenvironment{twocolentry}[2][]{%
+    % \onecolentry % Removed as specialized environments now wrap in onecolentry directly if needed for samepage
+    \def\secondColumnContent{#2}% Store the second column's content
+    \setcolumnwidth{\fill, 4.6cm} % Define column widths: 1st fills, 2nd is 4.5cm
+    \begin{paracol}{2}
+        \ifblank{#1}{}{% If #1 is provided, typeset it and switch.
+            \raggedright #1%
+            \switchcolumn%
+        }%
+        }{%
+        \switchcolumn % Ensure we are in the second column
+        \raggedleft \secondColumnContent % Place its content, right-aligned
+    \end{paracol}
+    % \endonecolentry % Removed as specialized environments now wrap in onecolentry directly
+}
+
+% --- `honorstwocolentry` Environment ---
+% A specialized two-column layout for honors/awards, with a slightly narrower right column.
+% #1 (optional): Content for the first column.
+% #2: Content for the second column (typically dates), right-aligned.
+% Second column width is fixed at 4.25cm.
+\newenvironment{honorstwocolentry}[2][]{%
+    % \onecolentry
+    \def\secondColumnContent{#2}%
+    \setcolumnwidth{\fill, 4.25cm} % Slightly narrower right column for dates
+    \begin{paracol}{2}
+        \ifblank{#1}{}{% If #1 is provided, typeset it and switch.
+            \raggedright #1%
+            \switchcolumn%
+        }%
+        }{%
+        \switchcolumn
+        \raggedleft \secondColumnContent
+    \end{paracol}
+    % \endonecolentry
+}
+
+% -----------------------------------------------------------------
+% Specialized Section Environments
+% -----------------------------------------------------------------
+% These environments use the core layout helpers to create semantic entries
+% for common CV sections. Each is wrapped in `samepage` to prevent awkward page breaks.
+
+% --- 1. `educationentry` Environment ---
+% Parameters:
+%   #1: Degree Name (e.g., "M.S. in Computer Science")
+%   #2: Institution (e.g., "University of Example")
+%   #3: Date Range (e.g., "Aug 2020 -- May 2022")
+% Content: Bullet points for GPA, coursework, honors, etc.
+\newenvironment{educationentry}[3]{%
+    \begin{samepage}
+        \vspace{\entrySpacing} % Add space before the entry
+        \begin{twocolentry}{#3} % Right column for Date Range
+            \mbox{\textbf{#1}}% Degree Name in bold
+            \kern\kernSpacing\AND\kern\kernSpacing % Separator
+            \mbox{#2} % Institution
+        \end{twocolentry}
+        \vspace{\highlightSpacing} % Space before bullet points
+        \begin{onecolentry} % Enclose highlights in a single column
+            \begin{highlightsforbulletentries} % Use indented bullet list style
+                }{%
+            \end{highlightsforbulletentries}
+        \end{onecolentry}
+    \end{samepage}
+}
+
+% --- 2. `experienceentry` Environment (General Purpose) ---
+% Used for Teaching, Industry, Volunteer, etc.
+% Parameters:
+%   #1: Position Title (e.g., "Software Engineer Intern")
+%   #2: Organization (e.g., "Tech Company Inc.")
+%   #3: Location (e.g., "City, State")
+%   #4: Date Range (e.g., "Jun 2021 -- Aug 2021")
+% Content: Bullet points for responsibilities and accomplishments.
+\newenvironment{experienceentry}[4]{%
+    \begin{samepage}
+        \vspace{\entrySpacing}
+        \begin{twocolentry}{#4} % Right column for Date Range
+            \mbox{\textbf{#1}}% Position Title in bold
+            \kern\kernSpacing\AND\kern\kernSpacing % Separator
+            \mbox{#2, #3} % Organization, Location
+        \end{twocolentry}
+        \vspace{\highlightSpacing}
+        \begin{onecolentry}
+            \begin{highlightsforbulletentries}
+                }{%
+            \end{highlightsforbulletentries}
+        \end{onecolentry}
+    \end{samepage}
+}
+
+% --- 3. `researchentry` Environment ---
+% Parameters:
+%   #1: Project Title (can include \href for links)
+%   #2: Organization/Lab (e.g., "AI Research Lab")
+%   #3: Location (e.g., "University of Example")
+%   #4: Course/Context (e.g., "Under Prof. X" or "Independent Study")
+%   #5: Date Range (e.g., "Spring 2021")
+% Content: Bullet points describing the research.
+\newenvironment{researchentry}[5]{%
+    \begin{samepage}
+        \vspace{\entrySpacing}
+        % Main project title and organization line (full width before two-column for course/date)
+        \mbox{\textbf{#1}}% Project Title in bold
+        \kern\kernSpacing\AND\kern\kernSpacing % Separator
+        \mbox{#2, #3} % Organization, Location
+        \vspace{\highlightSpacing} % Space before the course/date line
+        \begin{twocolentry}{#5} % Right column for Date
+            \mbox{\textit{#4}} % Course/Context in italics
+        \end{twocolentry}
+        % No \vspace{\highlightSpacing} here if bullets follow immediately
+        \begin{onecolentry}
+            \begin{highlightsforbulletentries}
+                }{%
+            \end{highlightsforbulletentries}
+        \end{onecolentry}
+    \end{samepage}
+}
+
+% --- 4. `projectentry` Environment ---
+% Parameters:
+%   #1: Project Title (can include \href for links)
+%   #2: Affiliation/Context (e.g., "Personal Project", "Course Project")
+%   #3: Location (if applicable, or leave empty/combine with #2)
+%   #4: Date Range (e.g., "Fall 2020")
+% Content: Bullet points describing the project.
+\newenvironment{projectentry}[4]{%
+    \begin{samepage}
+        \vspace{\entrySpacing}
+        \begin{twocolentry}{#4} % Right column for Date
+            \mbox{\textbf{#1}}% Project Title in bold
+            \kern\kernSpacing\AND\kern\kernSpacing % Separator
+            \mbox{#2, #3} % Affiliation, Location
+        \end{twocolentry}
+        \vspace{\highlightSpacing}
+        \begin{onecolentry}
+            \begin{highlightsforbulletentries}
+                }{%
+            \end{highlightsforbulletentries}
+        \end{onecolentry}
+    \end{samepage}
+}
+
+% --- 5. `leadershipentry` Environment (Header for a leadership role) ---
+% Parameters:
+%   #1: Organization Name (e.g., "Student Coding Club")
+%   #2: Location (e.g., "University of Example")
+% Content: Typically followed by one or more `positionentry` environments.
+\newenvironment{leadershipentry}[2]{%
+    \begin{samepage} % Keep organization header and its positions together
+        \vspace{\entrySpacing}
+        % Full width line for Organization and Location
+        \mbox{\textbf{#1}}% Organization Name in bold
+        \kern\kernSpacing\AND\kern\kernSpacing % Separator
+        \mbox{#2} % Location
+        % No direct bullet points here; `positionentry` will provide them.
+        }{%
+    \end{samepage}
+}
+
+% --- 5a. `positionentry` Environment (Details for a role within an organization) ---
+% Nested within `leadershipentry`.
+% Parameters:
+%   #1: Position Title (e.g., "President", "Treasurer")
+%   #2: Date Range (e.g., "Sep 2020 -- May 2021")
+% Content: Bullet points for responsibilities and achievements in that role.
+\newenvironment{positionentry}[2]{%
+    % No \begin{samepage} here, as it's part of the larger leadershipentry samepage block
+    \vspace{\highlightSpacing} % Space before this specific position
+    \begin{twocolentry}{#2} % Right column for Date Range
+        \textit{#1} % Position Title in italics
+    \end{twocolentry}
+    % \vspace{\highlightSpacing} % Removed, highlightsforbulletentries has topsep
+    \begin{onecolentry}
+        \begin{highlightsforbulletentries}
+            }{%
+        \end{highlightsforbulletentries}
+    \end{onecolentry}
+}
+
+% --- 6. `skillcategory` Environment ---
+% Parameters:
+%   #1: Skill Category Name (e.g., "Programming Languages")
+% Content: Comma-separated list of skills, or further nested lists.
+% Example: \begin{skillcategory}{Languages} Python, Java, C++ \end{skillcategory}
+\newenvironment{skillcategory}[1]{%
+    \begin{samepage}
+        \vspace{\highlightSpacing} % Use highlightSpacing for tighter packing of skill lines
+        \begin{onecolentry}
+            \textbf{#1:} % Category name in bold, followed by a colon
+            % The actual skills are provided as content within the environment
+            }{%
+        \end{onecolentry} % End of the single column entry
+    \end{samepage}
+}
+
+% --- 7. `honorentry` Environment ---
+% Parameters:
+%   #1: Date/Year of Award (e.g., "May 2021")
+%   #2: Honor/Award Name and Institution (e.g., "Dean's List, University of Example")
+% Content: None (this is a single-line entry).
+\newenvironment{honorentry}[2]{%
+    \begin{samepage}
+        \vspace{\highlightSpacing}
+        \begin{honorstwocolentry}{#1} % Use specialized two-column for honors, Date in right column
+            \mbox{#2} % Honor Name and Institution
+        \end{honorstwocolentry}
+    \end{samepage}
+}
+
+% --- 8. `presentationentry` Environment ---
+% Parameters:
+%   #1: Date of Presentation (e.g., "Mar 2021")
+%   #2: Title of Presentation
+%   #3: Venue/Event (e.g., "Annual Research Symposium")
+%   #4: University/Location (e.g., "University of Example, City, State")
+% Content: None (this is a single-line entry, details are in parameters).
+\newenvironment{presentationentry}[4]{%
+    \begin{samepage}
+        \vspace{\highlightSpacing}
+        \begin{twocolentry}{#1} % Date in right column
+            \mbox{\textbf{#2}} \\ % Title in bold, new line
+            \textit{#3}, #4 % Venue and Location in italics
+        \end{twocolentry}
+    \end{samepage}
+}
+
+% -----------------------------------------------------------------
+% Custom Helper Commands
+% -----------------------------------------------------------------
+% --- `\hrefWithoutArrow` Command ---
+% Provides an \href command that does not show the default arrow icon if hyperref is configured to do so.
+% Useful for email links, etc., where the arrow is distracting.
+\let\hrefWithoutArrow\href % By default, just an alias. Behavior depends on hyperref setup.
+
+% --- `\AND` Command ---
+% Creates a spaced vertical bar separator for use in headers or inline lists.
+% Replaces the previous `\cleaders` version with a simpler, single bar.
+\newcommand{\AND}{\hspace{0.2em}\ensuremath{|}\hspace{0.2em}}
+
+% End of reddy_cv.sty

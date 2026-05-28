@@ -61,6 +61,7 @@
 \RequirePackage{iftex}          % Conditional compilation based on TeX engine
 \RequirePackage{lastpage}       % For referencing the last page number (if needed)
 \RequirePackage{needspace}      % To ensure space before sections/environments
+\RequirePackage{etoolbox}      % For \patchcmd and \ifblank
 \RequirePackage{eso-pic}        % For adding content to background
 \RequirePackage{bookmark}       % For PDF bookmarks
 \RequirePackage{caption}        % For caption formatting (though might not be heavily used in CV)
@@ -82,11 +83,34 @@
 \newlength{\kernSpacing}        % A small, fixed kerning space for inline elements
 \setlength{\kernSpacing}{2.5pt}
 
+\newlength{\datecolumnwidth}    % Width of the date column in two-column entries
+\setlength{\datecolumnwidth}{4.6cm}
+
 % -----------------------------------------------------------------
 % Color Definitions
 % -----------------------------------------------------------------
 \definecolor{primaryColor}{RGB}{0, 0, 0}    % Main text color, also used for URLs by hyperref
 \definecolor{accentColor}{RGB}{50, 50, 50}   % Color for section lines and potentially other accents
+
+% -----------------------------------------------------------------
+% Page-Break Prevention Settings
+% -----------------------------------------------------------------
+\clubpenalty=10000             % No orphan lines (single line at page bottom)
+\widowpenalty=10000            % No widow lines (single line at page top)
+\displaywidowpenalty=10000     % No display math widows
+\brokenpenalty=10000           % No hyphenated last lines
+\makeatletter
+\@clubpenalty=10000            % LaTeX resets \clubpenalty internally; pin it
+% Patch \@afterheading to keep 3 lines with every section heading
+\patchcmd{\@afterheading}%
+    {\clubpenalty \@M}%
+    {\clubpenalties 3 \@M \@M \@M}%
+    {}{}
+\patchcmd{\@afterheading}%
+    {\clubpenalty \@clubpenalty}%
+    {\clubpenalties 2 \@clubpenalty 0}%
+    {}{}
+\makeatother
 
 % -----------------------------------------------------------------
 % PDF & Typesetting Engine Settings
@@ -165,17 +189,21 @@
 % --- `highlightsforbulletentries` Environment ---
 % An itemize list with specific spacing and left margin, used for bullet points
 % within various entry types (education, experience, projects, etc.).
+\makeatletter
 \newenvironment{highlightsforbulletentries}{%
     \begin{itemize}[
-            topsep=0.05cm,      % Space above the list
-            parsep=0.05cm,      % Space between paragraphs within an item (if any)
-            partopsep=0pt,      % Extra space added to topsep/parsep if list is preceded by a blank line
-            itemsep=0pt,        % Space between items
-            leftmargin=20pt     % Left margin of the list (indented)
+            topsep=0.05cm,
+            parsep=0.05cm,
+            partopsep=0pt,
+            itemsep=0pt,
+            leftmargin=20pt
         ]
+        \interlinepenalty=10000  % Prevent page breaks between lines within items
+        \@itempenalty=10000      % Prevent page breaks between bullet items
         }{%
     \end{itemize}
 }
+\makeatother
 
 % -----------------------------------------------------------------
 % Core Layout Helper Environments
@@ -201,7 +229,7 @@
 \newenvironment{twocolentry}[2][]{%
     % \onecolentry % Removed as specialized environments now wrap in onecolentry directly if needed for samepage
     \def\secondColumnContent{#2}% Store the second column's content
-    \setcolumnwidth{\fill, 4.6cm} % Define column widths: 1st fills, 2nd is 4.5cm
+    \setcolumnwidth{\fill, \datecolumnwidth} % Define column widths: 1st fills, 2nd is date column
     \begin{paracol}{2}
         \ifblank{#1}{}{% If #1 is provided, typeset it and switch.
             \raggedright #1%
@@ -248,20 +276,21 @@
 %   #3: Date Range (e.g., "Aug 2020 -- May 2022")
 % Content: Bullet points for GPA, coursework, honors, etc.
 \newenvironment{educationentry}[3]{%
-    \begin{samepage}
-        \vspace{\entrySpacing} % Add space before the entry
-        \begin{twocolentry}{#3} % Right column for Date Range
-            \mbox{\textbf{#1}}% Degree Name in bold
-            \kern\kernSpacing\AND\kern\kernSpacing % Separator
-            \mbox{#2} % Institution
-        \end{twocolentry}
-        \vspace{\highlightSpacing} % Space before bullet points
-        \begin{onecolentry} % Enclose highlights in a single column
-            \begin{highlightsforbulletentries} % Use indented bullet list style
+        \vspace{\entrySpacing}
+        \ensurevspace{5\baselineskip}% Paracol-aware space check
+        \gdef\thisEntryDate{#3}%
+        \setcolumnwidth{\fill, \datecolumnwidth}
+        \begin{paracol}{2}
+            \mbox{\textbf{#1}}%
+            \kern\kernSpacing\AND\kern\kernSpacing
+            \mbox{#2} \\
+            \vspace{\highlightSpacing}
+            \begin{highlightsforbulletentries}
                 }{%
             \end{highlightsforbulletentries}
-        \end{onecolentry}
-    \end{samepage}
+        \switchcolumn
+        \raggedleft \thisEntryDate
+        \end{paracol}
 }
 
 % --- 2. `experienceentry` Environment (General Purpose) ---
@@ -273,20 +302,21 @@
 %   #4: Date Range (e.g., "Jun 2021 -- Aug 2021")
 % Content: Bullet points for responsibilities and accomplishments.
 \newenvironment{experienceentry}[4]{%
-    \begin{samepage}
         \vspace{\entrySpacing}
-        \begin{twocolentry}{#4} % Right column for Date Range
-            \mbox{\textbf{#1}}% Position Title in bold
-            \kern\kernSpacing\AND\kern\kernSpacing % Separator
-            \mbox{#2, #3} % Organization, Location
-        \end{twocolentry}
-        \vspace{\highlightSpacing}
-        \begin{onecolentry}
+        \ensurevspace{7\baselineskip}% Paracol-aware space check
+        \gdef\thisEntryDate{#4}%
+        \setcolumnwidth{\fill, \datecolumnwidth}
+        \begin{paracol}{2}
+            \mbox{\textbf{#1}}%
+            \kern\kernSpacing\AND\kern\kernSpacing
+            \mbox{#2, #3} \\
+            \vspace{\highlightSpacing}
             \begin{highlightsforbulletentries}
                 }{%
             \end{highlightsforbulletentries}
-        \end{onecolentry}
-    \end{samepage}
+        \switchcolumn
+        \raggedleft \thisEntryDate
+        \end{paracol}
 }
 
 % --- 3. `researchentry` Environment ---
@@ -298,23 +328,24 @@
 %   #5: Date Range (e.g., "Spring 2021")
 % Content: Bullet points describing the research.
 \newenvironment{researchentry}[5]{%
-    \begin{samepage}
         \vspace{\entrySpacing}
-        % Main project title and organization line (full width before two-column for course/date)
-        \mbox{\textbf{#1}}% Project Title in bold
-        \kern\kernSpacing\AND\kern\kernSpacing % Separator
-        \mbox{#2, #3} % Organization, Location
-        \vspace{\highlightSpacing} % Space before the course/date line
-        \begin{twocolentry}{#5} % Right column for Date
-            \mbox{\textit{#4}} % Course/Context in italics
-        \end{twocolentry}
-        % No \vspace{\highlightSpacing} here if bullets follow immediately
-        \begin{onecolentry}
+        \needspace{10\baselineskip}% Guard full-width title + org + context + bullets
+        \mbox{\textbf{#1}}%
+        \kern\kernSpacing\AND\kern\kernSpacing
+        \mbox{#2, #3}
+        \vspace{\highlightSpacing}
+        \gdef\thisEntryDate{#5}%
+        \ensurevspace{6\baselineskip}% Guard paracol context + bullets
+        \setcolumnwidth{\fill, \datecolumnwidth}
+        \begin{paracol}{2}
+            \mbox{\textit{#4}}
+            \vspace{\highlightSpacing}
             \begin{highlightsforbulletentries}
                 }{%
             \end{highlightsforbulletentries}
-        \end{onecolentry}
-    \end{samepage}
+        \switchcolumn
+        \raggedleft \thisEntryDate
+        \end{paracol}
 }
 
 % --- 4. `projectentry` Environment ---
@@ -325,20 +356,21 @@
 %   #4: Date Range (e.g., "Fall 2020")
 % Content: Bullet points describing the project.
 \newenvironment{projectentry}[4]{%
-    \begin{samepage}
         \vspace{\entrySpacing}
-        \begin{twocolentry}{#4} % Right column for Date
-            \mbox{\textbf{#1}}% Project Title in bold
-            \kern\kernSpacing\AND\kern\kernSpacing % Separator
-            \mbox{#2, #3} % Affiliation, Location
-        \end{twocolentry}
-        \vspace{\highlightSpacing}
-        \begin{onecolentry}
+        \ensurevspace{7\baselineskip}% Paracol-aware space check
+        \gdef\thisEntryDate{#4}%
+        \setcolumnwidth{\fill, \datecolumnwidth}
+        \begin{paracol}{2}
+            \mbox{\textbf{#1}}%
+            \kern\kernSpacing\AND\kern\kernSpacing
+            \mbox{#2, #3} \\
+            \vspace{\highlightSpacing}
             \begin{highlightsforbulletentries}
                 }{%
             \end{highlightsforbulletentries}
-        \end{onecolentry}
-    \end{samepage}
+        \switchcolumn
+        \raggedleft \thisEntryDate
+        \end{paracol}
 }
 
 % --- 5. `leadershipentry` Environment (Header for a leadership role) ---
@@ -347,16 +379,12 @@
 %   #2: Location (e.g., "University of Example")
 % Content: Typically followed by one or more `positionentry` environments.
 \newenvironment{leadershipentry}[2]{%
-    \begin{samepage} % Keep organization header and its positions together
         \vspace{\entrySpacing}
-        % Full width line for Organization and Location
-        \mbox{\textbf{#1}}% Organization Name in bold
-        \kern\kernSpacing\AND\kern\kernSpacing % Separator
-        \mbox{#2} % Location
-        % No direct bullet points here; `positionentry` will provide them.
-        }{%
-    \end{samepage}
-}
+        \needspace{5\baselineskip}% Keep org header with following position(s)
+        \mbox{\textbf{#1}}%
+        \kern\kernSpacing\AND\kern\kernSpacing
+        \mbox{#2}
+        }{}
 
 % --- 5a. `positionentry` Environment (Details for a role within an organization) ---
 % Nested within `leadershipentry`.
@@ -365,17 +393,18 @@
 %   #2: Date Range (e.g., "Sep 2020 -- May 2021")
 % Content: Bullet points for responsibilities and achievements in that role.
 \newenvironment{positionentry}[2]{%
-    % No \begin{samepage} here, as it's part of the larger leadershipentry samepage block
-    \vspace{\highlightSpacing} % Space before this specific position
-    \begin{twocolentry}{#2} % Right column for Date Range
-        \textit{#1} % Position Title in italics
-    \end{twocolentry}
-    % \vspace{\highlightSpacing} % Removed, highlightsforbulletentries has topsep
-    \begin{onecolentry}
+    \vspace{\highlightSpacing}
+    \ensurevspace{5\baselineskip}% Paracol-aware space check
+    \gdef\thisEntryDate{#2}%
+    \setcolumnwidth{\fill, \datecolumnwidth}
+    \begin{paracol}{2}
+        \textit{#1}
         \begin{highlightsforbulletentries}
             }{%
         \end{highlightsforbulletentries}
-    \end{onecolentry}
+    \switchcolumn
+    \raggedleft \thisEntryDate
+    \end{paracol}
 }
 
 % --- 6. `skillcategory` Environment ---
@@ -384,14 +413,11 @@
 % Content: Comma-separated list of skills, or further nested lists.
 % Example: \begin{skillcategory}{Languages} Python, Java, C++ \end{skillcategory}
 \newenvironment{skillcategory}[1]{%
-    \begin{samepage}
-        \vspace{\highlightSpacing} % Use highlightSpacing for tighter packing of skill lines
+        \vspace{\highlightSpacing}
         \begin{onecolentry}
-            \textbf{#1:} % Category name in bold, followed by a colon
-            % The actual skills are provided as content within the environment
+            \textbf{#1:}
             }{%
-        \end{onecolentry} % End of the single column entry
-    \end{samepage}
+        \end{onecolentry}
 }
 
 % --- 7. `honorentry` Environment ---
@@ -400,12 +426,10 @@
 %   #2: Honor/Award Name and Institution (e.g., "Dean's List, University of Example")
 % Content: None (this is a single-line entry).
 \newenvironment{honorentry}[2]{%
-    \begin{samepage}
         \vspace{\highlightSpacing}
-        \begin{honorstwocolentry}{#1} % Use specialized two-column for honors, Date in right column
-            \mbox{#2} % Honor Name and Institution
+        \begin{honorstwocolentry}{#1}
+            \mbox{#2}
         \end{honorstwocolentry}
-    \end{samepage}
 }
 
 % --- 8. `presentationentry` Environment ---
@@ -416,13 +440,11 @@
 %   #4: University/Location (e.g., "University of Example, City, State")
 % Content: None (this is a single-line entry, details are in parameters).
 \newenvironment{presentationentry}[4]{%
-    \begin{samepage}
         \vspace{\highlightSpacing}
-        \begin{twocolentry}{#1} % Date in right column
-            \mbox{\textbf{#2}} \\ % Title in bold, new line
-            \textit{#3}, #4 % Venue and Location in italics
+        \begin{twocolentry}{#1}
+            \mbox{\textbf{#2}} \\
+            \textit{#3}, #4
         \end{twocolentry}
-    \end{samepage}
 }
 
 % -----------------------------------------------------------------

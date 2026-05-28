@@ -109,4 +109,37 @@
     } else {
         initSlider();
     }
+
+
+    // 3. Premium Page Transitions (fade-in & fade-out)
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('page-loaded');
+    });
+
+    // Intercept navigation links for smooth fade-out
+    window.addEventListener('load', () => {
+        document.querySelectorAll('a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href) return;
+            
+            // Filter only local page links
+            const isLocalLink = link.hostname === window.location.hostname && 
+                                !link.hash && 
+                                link.target !== '_blank' && 
+                                !href.startsWith('mailto:') && 
+                                !href.startsWith('tel:') && 
+                                !href.startsWith('javascript:');
+                                
+            if (isLocalLink) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.body.classList.remove('page-loaded');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 220); // Sync with CSS transition (0.22s)
+                });
+            }
+        });
+    });
+
 })();

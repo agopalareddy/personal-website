@@ -1681,8 +1681,16 @@ main.container {
 /* ==========================================================================
    Premium 3-State Theme Slider System
    ========================================================================== */
+/* Reserving exact layout dimensions for theme slider to prevent CLS layout shift */
 .theme-toggle-btn {
-    display: none !important;
+    width: 96px;
+    height: 34px;
+    border-radius: 20px;
+    background: transparent;
+    border: 1px solid transparent;
+    opacity: 0;
+    pointer-events: none;
+    box-sizing: border-box;
 }
 
 .theme-slider {
@@ -1773,3 +1781,16 @@ main.container {
     color: var(--accent);
 }
 
+
+
+/* ==========================================================================
+   Premium Page Transition System
+   ========================================================================== */
+body {
+    opacity: 0;
+    transition: opacity 0.22s ease-in-out;
+}
+
+body.page-loaded {
+    opacity: 1;
+}

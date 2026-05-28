@@ -277,7 +277,7 @@
 % Content: Bullet points for GPA, coursework, honors, etc.
 \newenvironment{educationentry}[3]{%
         \vspace{\entrySpacing}
-        \ensurevspace{5\baselineskip}% Paracol-aware space check
+        \needspace{6\baselineskip}% Prevent orphan education entries
         \gdef\thisEntryDate{#3}%
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
@@ -303,7 +303,7 @@
 % Content: Bullet points for responsibilities and accomplishments.
 \newenvironment{experienceentry}[4]{%
         \vspace{\entrySpacing}
-        \ensurevspace{7\baselineskip}% Paracol-aware space check
+        \needspace{7\baselineskip}% Prevent orphan experience entries
         \gdef\thisEntryDate{#4}%
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
@@ -329,13 +329,12 @@
 % Content: Bullet points describing the research.
 \newenvironment{researchentry}[5]{%
         \vspace{\entrySpacing}
-        \needspace{10\baselineskip}% Guard full-width title + org + context + bullets
+        \needspace{8\baselineskip}% Guard full-width title + org + context + bullets
         \mbox{\textbf{#1}}%
         \kern\kernSpacing\AND\kern\kernSpacing
         \mbox{#2, #3}
         \vspace{\highlightSpacing}
         \gdef\thisEntryDate{#5}%
-        \ensurevspace{6\baselineskip}% Guard paracol context + bullets
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
             \mbox{\textit{#4}}
@@ -357,7 +356,7 @@
 % Content: Bullet points describing the project.
 \newenvironment{projectentry}[4]{%
         \vspace{\entrySpacing}
-        \ensurevspace{7\baselineskip}% Paracol-aware space check
+        \needspace{7\baselineskip}% Prevent orphan project entries
         \gdef\thisEntryDate{#4}%
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
@@ -394,7 +393,7 @@
 % Content: Bullet points for responsibilities and achievements in that role.
 \newenvironment{positionentry}[2]{%
     \vspace{\highlightSpacing}
-    \ensurevspace{5\baselineskip}% Paracol-aware space check
+    \needspace{6\baselineskip}% Prevent orphan position entries
     \gdef\thisEntryDate{#2}%
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}

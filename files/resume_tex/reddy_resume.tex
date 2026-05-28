@@ -1,0 +1,299 @@
+\documentclass[10pt, letterpaper]{article}
+% ----------------------------------------------------------------------
+% LaTeX Preamble
+% ----------------------------------------------------------------------
+
+% --- Required Packages ---
+\usepackage{reddy_resume}   % Custom resume style package
+
+% ----------------------------------------------------------------------
+% Document Body
+% ----------------------------------------------------------------------
+\begin{document}
+
+% ----------------------------------------------------------------------
+% HEADER SECTION
+% ----------------------------------------------------------------------
+\begin{header}
+	% --- Left Column: Name and Contact Info ---
+	\begin{minipage}[t]{0.65\textwidth}
+		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
+		\normalsize
+		% Address (Optional - Uncomment if needed)
+		% \mbox{St. Louis, Missouri 63112 USA}%
+		% \kern \kernSpacing%
+		% \AND%
+		% \kern \kernSpacing%
+		% Email
+		\mbox{\hrefWithoutArrow{mailto:adurs2002@gmail.com}{adurs2002@gmail.com}}%
+		\kern \kernSpacing%
+		\AND%
+		\kern \kernSpacing%
+		% Phone
+		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
+		% Website Link (Optional - Uncomment if preferred in left column)
+		% \kern \kernSpacing%
+		% \AND%
+		% \kern \kernSpacing%
+		% \mbox{\href{https://agopalareddy.github.io}{\raggedright agopalareddy.github.io}}%
+	\end{minipage}
+	\hfill % Flexible space between minipages
+	% --- Middle Column: Website Link ---
+	\begin{minipage}[t]{0.15\textwidth}
+		\raggedleft % Right-align content in this minipage
+		\href{https://agopalareddy.github.io}{agopalareddy.github.io}
+	\end{minipage}
+	\hfill % Flexible space
+	% --- Right Column: QR Code ---
+	\begin{minipage}[t]{0.11\textwidth}
+		\raggedleft % Right-align content
+		\qrcode{https://agopalareddy.github.io} % Ensure qrcode package is loaded by reddy_cv.sty
+	\end{minipage}
+\end{header}
+
+% --- Vertical Space After Header ---
+\vspace{\headerSpacing} % Defined in reddy_resume.sty
+
+% ----------------------------------------------------------------------
+% SUMMARY SECTION
+% ----------------------------------------------------------------------
+\needspace{4\baselineskip} % Ensure enough space for the section title and some content
+\section{SUMMARY}
+
+\vspace{\entrySpacing} % Space before the summary content
+\begin{samepage} % Keep the summary on one page if possible
+	\begin{onecolentry}
+		MS Computer Science graduate from Washington University in St. Louis with hands-on experience in machine learning and data analytics. Skilled in building end-to-end ML pipelines, data-intensive applications, and distributed systems using Python, TensorFlow, SQL, Spark, and cloud technologies. Seeking software, data, or ML engineering roles.
+	\end{onecolentry}
+\end{samepage}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SKILLS SECTION
+% ----------------------------------------------------------------------
+\needspace{7\baselineskip} % More space needed due to multiple skill categories
+\section{SKILLS}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Programming Languages}
+	Java, C++, Python, R, HTML, CSS, JavaScript/TypeScript, PHP, C\#, SQL, Rust.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Frameworks \& Libraries}
+	TensorFlow, PyTorch, Scikit-learn, NumPy, Pandas, Node.js, Vue.js, React, Socket.IO, Gemini/OpenAI API.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Tools \& Technologies}
+	Git, Tableau, Power BI, MySQL, AWS, MongoDB, Microsoft 365, Google Workspace.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Core Competencies}
+	Analytical Skills, Problem Solving, Critical Thinking, Communication, Team Collaboration, Leadership, Adaptability, Project Management.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Languages}
+	Proficient in English, Kannada, Telugu; Conversational in Hindi.
+\end{skillcategory}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EDUCATION SECTION
+% ----------------------------------------------------------------------
+\needspace{5\baselineskip}
+\section{EDUCATION}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{M.S. in Computer Science} % Degree
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Institution & Location
+	{August 2024 - May 2026} % Date
+	\item \textbf{GPA:} 3.67/4.00
+	\item \textit{Honors:} Bauer Leaders Academy Leadership Development Badge.
+	\item \textit{Coursework:} Computational Biology, Computer Vision, Data Manipulation \& Management at Scale, Artificial Intelligence for Health, Deep Learning, Systems Security, Software Development, and Quantum Computing, Neurobiology of Learning \& Memory, Advanced Neuroscience Research Methods.
+\end{educationentry}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{B.A. in Computer Science and Data Analytics; Economics Minor} % Degree
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Institution & Location
+	{August 2020 - May 2023} % Date
+	\item \textbf{GPA:} 3.42/4.0
+	\item \textit{Honors:} Golden Bishop Award, Mortar Board, Florence Leas Prize, Spring 2022 and Spring 2023 Dean's List.
+	\item \textit{Coursework:} Computer Architecture, Theory of Computation, Algorithms, Big Data, Data Visualization, Data Analytics, Databases, Machine Learning, Artificial Intelligence, Applied Statistics.
+\end{educationentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+\needspace{6\baselineskip}
+\section{EXPERIENCE}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale} % Position
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Organization & Location
+	{January 2026 - May 2026} % Date
+	\item Guided students in building data pipelines and real-time processing systems using Python, Snowflake, SQL, Airflow, Spark, Kafka, and Flink.
+	\item Conducted oral midterm exams simulating technical interviews on distributed storage, fault tolerance, and scaling; mentored capstone project groups on data architecture.
+\end{experienceentry}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{Graduate Assistant with the Taylor Family Center for Student Success} % Position
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Organization & Location
+	{November 2025 - May 2026} % Date
+	\item Led data analysis and storytelling initiatives, tracking program impact through SA Tools, survey design, and social media analytics for evidence-based decision-making.
+	\item Administered the TFCSS website and developed process manuals to establish best practices in data evaluation for staff.
+\end{experienceentry}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{AI Engineer Intern} % Position
+	{Crittero, Inc., Remote} % Organization & Location
+	{June 2025 - August 2025} % Date
+	\item Engineered a full-stack social media simulation and recommendation system with persona-based data generation in TypeScript and a recommendation algorithm using TensorFlow/Keras.
+	\item Built a Python testing infrastructure with a configurable CLI for ML performance validation, working across the end-to-end ML lifecycle from data generation to model training.
+\end{experienceentry}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{Graduate Assistant with the Taylor Family Center for Student Success} % Position
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Organization & Location
+	{August 2024 - May 2025} % Date
+	\item Led FLI student success initiatives and pioneered data assessment of social media and newsletters to translate user interaction insights into strategies that measurably improved engagement.
+\end{experienceentry}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{Data Analyst Intern} % Position
+	{Lab714, Boca Raton, Florida, USA} % Organization & Location
+	{June 2023 - May 2024} % Date
+	\item Achieved a 20\% reduction in costs for clients through data-driven insights.
+	\item Engineered a software using React and AWS to extract, organize, and analyze data from IoT devices.
+\end{experienceentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% RESEARCH EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+\needspace{6\baselineskip}
+\section{RESEARCH EXPERIENCE}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{\href{https://openscholarship.wustl.edu/eng_etds/1341/}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data}} % Title
+	{DRIVES Project, Washington University in St. Louis, St. Louis, Missouri, USA} % Org & Location
+	{August 2025 - May 2026} % Date
+	\item Built an end-to-end pipeline processing 26,968 participant-weeks of naturalistic driving data from 304 participants, deriving weekly driving features and integrating demographic covariates for CDR status prediction.
+	\item Compared six CDR prediction models (GRU-DANN, DANN, logistic regression, random forest, XGBoost, MLP) under leave-one-group-out cross-validation; GRU-DANN achieved highest participant-level ROC AUC (0.599) and balanced accuracy (0.584).
+\end{experienceentry}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{\href{https://github.com/agopalareddy/CSE419A_Multimodal_Prediction_of_Alzheimers}{Multimodal Prediction of Alzheimer's Disease}} % Title
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Org & Location
+	{August 2024 - December 2024} % Date
+	\item Developed a multimodal approach for early detection using OASIS-1 by combining MRI imaging (CNNs, TensorFlow/Keras) and clinical data (XGBoost, Scikit-learn).
+	\item Built a combined classifier leveraging both imaging and clinical features with comprehensive evaluation and documentation in NeurIPS format.
+\end{experienceentry}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{Opinion Survey on AI in the Workplace} % Title
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Org & Location
+	{January 2023 - May 2023} % Date
+	\item Designed, fielded, and analyzed a survey experiment (N $\sim$ 1{,}000 across four industries) under faculty mentorship; surfaced trends in perceptions of AI's workplace impact using R and Tableau.
+\end{experienceentry}
+
+\vspace{\entrySpacing}
+\begin{experienceentry}
+	{\href{https://github.com/agopalareddy/LostCities}{AI in Modern Board Games (Lost Cities)}} % Title
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Org & Location
+	{May 2022 - July 2022} % Date
+	\item Built a Java implementation of Lost Cities and an AI agent; achieved 13/18 wins against a human baseline in testing.
+\end{experienceentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% LEADERSHIP SECTION
+% ----------------------------------------------------------------------
+\needspace{7\baselineskip}
+\section{LEADERSHIP}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Graduate and Professional Student Council (GPSC)}{Washington University in St. Louis}
+	\begin{positionentry}{Vice President of the Graduate-Professional Council (GPC) Chamber}{May 2025 - May 2026}
+		\item Managed the Council's unified Microsoft Teams workspace and website, establishing centralized communication hubs and maintaining up-to-date information on events, governance, and resources.
+		\item Represented the graduate student body to university leadership and supported the GPC President in advancing strategic council priorities.
+		\item Chaired the Constitution Committee (Aug 2025 - Feb 2026), coordinating stakeholder input to draft and ratify GPSC governing documents.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{HackWashU}{Washington University in St. Louis}
+	\begin{positionentry}{Treasurer}{December 2024 - July 2025}
+		\item Managed finances and coordinated fundraising and sponsorship outreach to support hackathons and coding events.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% PROJECTS SECTION
+% ----------------------------------------------------------------------
+\needspace{6\baselineskip}
+\section{PROJECTS}
+
+\vspace{\entrySpacing}
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE510A_Datacenter_Cooling}{Datacenter Cooling Optimization using Deep Reinforcement Learning}} % Project Title
+	{August 2024 - December 2024} % Date
+	\item Implemented multiple DRL algorithms (DDQN, PPO, SAC) integrated with EnergyPlus simulations for datacenter cooling optimization, achieving up to 35.8\% improvement over baseline controllers.
+	\item Developed custom environment using Sinergym that simulates a small datacenter with stochastic weather conditions, focusing on optimizing energy efficiency in small to mid-sized facilities.
+\end{projectentry}
+
+\vspace{\entrySpacing}
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE503S_Interactive_Storybook}{Interactive Storybook}} % Project Title
+	{August 2024 - December 2024} % Date
+	\item Built an interactive app with Vue.js, Node.js, and MongoDB, enabling AI-driven content generation and branching story narratives.
+	\item Integrated OpenAI API for dynamic text/image generation, offering multiple story progression choices.
+\end{projectentry}
+
+\vspace{\entrySpacing}
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CS340Final-Connect4}{AI Agent for Connect 4}} % Project Title
+	{August 2022 - December 2022} % Date
+	\item Implemented alpha-beta pruning with iterative deepening and evaluation heuristics; achieved 100\% wins against baseline AI in simulations.
+\end{projectentry}
+
+% ----------------------------------------------------------------------
+% REFERENCES SECTION
+% ----------------------------------------------------------------------
+\needspace{3\baselineskip}
+\section{REFERENCES}
+\vspace{\entrySpacing}
+\begin{onecolentry}
+	Available upon request.
+\end{onecolentry}
+
+% ----------------------------------------------------------------------
+% End of Document
+% ----------------------------------------------------------------------
+\end{document}

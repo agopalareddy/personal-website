@@ -1,0 +1,593 @@
+\documentclass[10pt, letterpaper]{article}
+% ----------------------------------------------------------------------
+% LaTeX Preamble
+% ----------------------------------------------------------------------
+
+% --- Required Packages ---
+\usepackage{reddy_cv}       % Custom CV style package
+
+% ----------------------------------------------------------------------
+% Document Body
+% ----------------------------------------------------------------------
+\begin{document}
+
+% ----------------------------------------------------------------------
+% HEADER SECTION
+% ----------------------------------------------------------------------
+\begin{header}
+	% --- Left Column: Name and Contact Info ---
+	\begin{minipage}[t]{0.65\textwidth}
+		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
+		\normalsize
+		% Address (Optional - Uncomment if needed)
+		% \mbox{St. Louis, Missouri 63112 USA}%
+		% \kern \kernSpacing%
+		% \AND%
+		% \kern \kernSpacing%
+		% Email
+		\mbox{\hrefWithoutArrow{mailto:adurs2002@gmail.com}{adurs2002@gmail.com}}%
+		\kern \kernSpacing%
+		\AND%
+		\kern \kernSpacing%
+		% Phone
+		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
+		% Website Link (Optional - Uncomment if preferred in left column)
+		% \kern \kernSpacing%
+		% \AND%
+		% \kern \kernSpacing%
+		% \mbox{\href{https://agopalareddy.github.io}{\raggedright agopalareddy.github.io}}%
+	\end{minipage}
+	\hfill % Flexible space between minipages
+	% --- Middle Column: Website Link ---
+	\begin{minipage}[t]{0.15\textwidth}
+		\raggedleft % Right-align content in this minipage
+		\href{https://agopalareddy.github.io}{agopalareddy.github.io}
+	\end{minipage}
+	\hfill % Flexible space
+	% --- Right Column: QR Code ---
+	\begin{minipage}[t]{0.11\textwidth}
+		\raggedleft % Right-align content
+		\qrcode{https://agopalareddy.github.io} % Ensure qrcode package is loaded by reddy_cv.sty
+	\end{minipage}
+\end{header}
+
+% --- Vertical Space After Header ---
+\vspace{\headerSpacing} % Defined in reddy_cv.sty
+
+% ----------------------------------------------------------------------
+% EDUCATION SECTION
+% ----------------------------------------------------------------------
+% \needspace{5\baselineskip} % Optional: Ensure space if section is close to page bottom
+\section{EDUCATION}
+
+% \vspace{\entrySpacing} % Optional: Add space before the first entry if desired
+\begin{educationentry}
+	{M.S. Computer Science} % Degree
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Institution & Location
+	{August 2024 - May 2026} % Date Range
+	\item \textbf{GPA:} 3.67/4.00
+	\item \textbf{Coursework:}  Neurobiology of Learning \& Memory, Advanced Neuroscience Research Methods, Computational Biology, Computer Vision, Data Manipulation \& Management at Scale, Artificial Intelligence for Health, Deep Learning, Systems Security, Software Development, and Quantum Computing.
+\end{educationentry}
+
+% \vspace{\entrySpacing} % Optional: Add space between education entries if desired
+\begin{educationentry}
+	{B.A. Computer Science \& Data Analytics} % Degree
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Institution & Location
+	{August 2020 - May 2023} % Date Range
+	\item \textbf{Minor:} Economics
+	\item \textbf{GPA:} 3.42/4.0
+	\item \textbf{Coursework:} Computer Architecture, Theory of Computation, Algorithms, Big Data, Data Visualization, Data Analytics, Databases, Machine Learning, Artificial Intelligence, Applied Statistics.
+\end{educationentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% RESEARCH EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+% \needspace{6\baselineskip} % Optional
+\section{RESEARCH EXPERIENCE}
+
+% \vspace{\entrySpacing} % Optional
+\begin{researchentry}
+	{\href{https://openscholarship.wustl.edu/eng_etds/1341/}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data}} % Project Title
+	{DRIVES Project, Washington University in St. Louis} % Organization/Lab
+	{St. Louis, Missouri, USA} % Location
+	{Master's Thesis (Lab PI: Dr. Ganesh Babulal)} % Course/Context
+	{August 2025 - May 2026} % Date Range
+	\item Built an end-to-end pipeline processing 26,968 participant-weeks of naturalistic driving data from 304 participants, deriving weekly driving features and integrating demographic covariates for CDR status prediction.
+	\item Compared six CDR prediction models (GRU-DANN, DANN, logistic regression, random forest, XGBoost, MLP) under leave-one-group-out cross-validation; GRU-DANN achieved highest participant-level ROC AUC (0.599) and balanced accuracy (0.584).
+\end{researchentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{researchentry}
+	{\href{https://github.com/agopalareddy/CSE419A_Multimodal_Prediction_of_Alzheimers}{Multimodal Prediction of Alzheimer's Disease}} % Project Title
+	{Washington University in St. Louis} % Organization/Lab
+	{St. Louis, Missouri, USA} % Location
+	{CSE 419A - Introduction to AI for Health} % Course/Context
+	{August 2024 - December 2024} % Date Range
+	\item Developed a multimodal approach for early detection of Alzheimer's Disease using the OASIS-1 dataset.
+	\item Implemented deep learning models (CNNs) using TensorFlow/Keras for MRI image analysis and machine learning techniques (XGBoost, Random Forest Regression) for clinical data processing.
+	\item Created a combined classifier leveraging both imaging and clinical data.
+	\item Documented the project in NeurIPS format with comprehensive performance evaluation metrics and visualizations.
+\end{researchentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{researchentry}
+	{\href{https://github.com/agopalareddy/DATA490}{Opinion Survey on Artificial Intelligence in the Workplace}} % Project Title
+	{Ohio Wesleyan University} % Organization/Lab
+	{Delaware, Ohio, USA} % Location
+	{DATA 490 - Independent Study (Mentor: Dr. Nicholas Dietrich)} % Course/Context
+	{January 2023 - May 2023} % Date Range
+	\item Designed, fielded, and investigated a survey experiment on the impact of AI on 250 employees within each of four industries using survey data.
+	\item Analyzed data using Tableau dashboards and R to identify trends and common opinions.
+	\item Presented preliminary results on AI's positive impact on employee work at the OWU Spring Student Symposium.
+\end{researchentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{researchentry}
+	{\href{https://github.com/agopalareddy/CS340Final-Connect4}{Connect 4 AI}} % Project Title
+	{Ohio Wesleyan University} % Organization/Lab
+	{Delaware, Ohio, USA} % Location
+	{CS 340 - Artificial Intelligence} % Course/Context
+	{August 2022 - December 2022} % Date Range
+	\item Developed a Connect 4 game in Java with a single-player mode against an AI opponent and a multiplayer mode for two human players.
+	\item Used the alpha-beta pruning algorithm to create a challenging AI opponent that can test players of all skill levels.
+\end{researchentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{researchentry}
+	{\href{https://github.com/agopalareddy/LostCities}{Artificial Intelligence in Modern Board Games - Lost Cities AI}} % Project Title
+	{Ohio Wesleyan University} % Organization/Lab
+	{Delaware, Ohio, USA} % Location
+	{Summer Science Research Program (Mentor: Dr. Sean McCulloch)} % Course/Context
+	{May 2022 - July 2022} % Date Range
+	\item Developed a digital version of the Lost Cities card game using Java.
+	\item Implemented an intelligent agent that played the game against a human, winning 13 of 18 games in testing.
+\end{researchentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% TEACHING EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+\needspace{8\baselineskip} % Optional
+\section{TEACHING EXPERIENCE}
+
+% \vspace{\entrySpacing} % Optional
+\begin{experienceentry}
+	{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale} % Position Title
+	{Washington University in St. Louis} % Organization
+	{St. Louis, Missouri, USA} % Location
+	{January 2026 - May 2026} % Date Range
+	\item Guided students in implementing data pipelines and real-time processing systems using Python, Snowflake, SQL, Airflow, Spark, Kafka, and Flink.
+	\item Conducted oral midterm exams simulating technical interviews on distributed storage, fault tolerance, and scaling; mentored capstone project groups on data architecture.
+\end{experienceentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{experienceentry}
+	{Computer Science Lab Assistant} % Position Title
+	{Ohio Wesleyan University} % Organization
+	{Delaware, Ohio, USA} % Location
+	{January 2022 - May 2023} % Date Range
+	\item Tutored approximately ten students for over 6 hours per week, assisting with homework and exam preparation for introductory, intermediate, and advanced computer science coursework.
+	\item Tested and graded assignments of around 35 students in introductory and intermediate computer science classes.
+\end{experienceentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% INDUSTRY EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+\needspace{6\baselineskip} % Optional
+\section{INDUSTRY EXPERIENCE}
+
+\begin{experienceentry}
+	{Graduate Assistant with the Taylor Family Center for Student Success} % Position Title
+	{Washington University in St. Louis} % Organization
+	{St. Louis, Missouri, USA} % Location
+	{November 2025 - May 2026} % Date Range
+	\item Led data analysis and storytelling initiatives, tracking program impact through SA Tools, survey design, and social media analytics for evidence-based decision-making.
+	\item Administered the TFCSS website and developed process manuals to establish best practices in data evaluation for staff.
+\end{experienceentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{experienceentry}
+	{AI Engineer Intern} % Position Title
+	{Crittero, Inc.} % Organization
+	{Remote} % Location
+	{June 2025 - August 2025} % Date Range
+	\item Engineered a full-stack social media simulation and recommendation system, developing a robust data generation pipeline with persona-based modeling in TypeScript and a foundational recommendation algorithm using TensorFlow/Keras.
+	\item Created an extensive testing infrastructure in Python, featuring a configurable CLI for performance validation and reproducibility, which established critical debugging practices for complex ML systems.
+	\item Gained hands-on experience in the end-to-end ML lifecycle, from synthetic data generation and preprocessing to model training and debugging, while establishing Git workflows for collaborative development.
+\end{experienceentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{experienceentry}
+	{Graduate Assistant with the Taylor Family Center for Student Success} % Position Title
+	{Washington University in St. Louis} % Organization
+	{St. Louis, Missouri, USA} % Location
+	{August 2024 - May 2025} % Date Range
+	\item Led strategic initiatives for First-Generation, Limited-Income (FLI) student success, planning and executing key community-building programs like ``End of Week Unwind'' and ``First Gen Week''.
+	\item Drove marketing and communication efforts by managing social media channels and co-developing targeted newsletters for alumni and the Forward Families program.
+	\item Pioneered data assessment efforts by tracking and analyzing user interaction on Instagram and newsletters, translating insights into actionable engagement strategies.
+\end{experienceentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{experienceentry}
+	{Data Analyst Intern} % Position Title
+	{Lab714} % Organization
+	{Boca Raton, Florida, USA} % Location
+	{June 2023 - May 2024} % Date Range
+	\item Achieved a 20\% reduction in costs for clients through data-driven insights.
+	\item Engineered a software using React and AWS to extract, organize, and analyze data from IoT devices.
+\end{experienceentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{experienceentry}
+	{Media Center Assistant} % Position Title
+	{Ohio Wesleyan University} % Organization
+	{Delaware, Ohio, USA} % Location
+	{September 2021 - May 2023} % Date Range
+	\item Set up and tore down audio-visual equipment, logged equipment movement using Sierra, and created appointments for use of spaces.
+	\item Assisted with providing AV systems and support for events, ensuring successful setup and execution.
+\end{experienceentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SKILLS SECTION
+% ----------------------------------------------------------------------
+% \needspace{7\baselineskip} % Optional
+\section{SKILLS}
+
+% \vspace{\entrySpacing} % Optional
+\begin{skillcategory}{Programming Languages}
+	Java, C++, Python, R, JavaScript/TypeScript, PHP, C\#, SQL, Rust.
+\end{skillcategory}
+
+% \vspace{\entrySpacing} % Optional
+\begin{skillcategory}{Frameworks \& Libraries}
+	TensorFlow, PyTorch, Scikit-learn, Keras, NumPy, Pandas, Matplotlib, Seaborn, Node.js, Vue.js, React, Socket.IO, Gemini API, OpenAI API.
+\end{skillcategory}
+
+% \vspace{\entrySpacing} % Optional
+\begin{skillcategory}{Tools \& Technologies}
+	\LaTeX, Git, Tableau, Power BI, MySQL, AWS, MongoDB, Snowflake, Apache Airflow, Spark, Kafka, Flink, Microsoft 365, Google Workspace.
+\end{skillcategory}
+
+% \vspace{\entrySpacing} % Optional
+\begin{skillcategory}{Core Competencies}
+	Analytical Skills, Problem Solving, Critical Thinking, Communication, Team Collaboration, Leadership, Adaptability, Project Management.
+\end{skillcategory}
+
+% \vspace{\entrySpacing} % Optional
+\begin{skillcategory}{Languages}
+	Proficient in English, Kannada, Telugu; Conversational in Hindi.
+\end{skillcategory}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% HONORS SECTION
+% ----------------------------------------------------------------------
+% \needspace{5\baselineskip} % Optional
+\section{HONORS}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{April 2026} % Date/Year
+	{\textbf{Bauer Leaders Academy (BLA) Leadership Development Badge}, Washington University in St. Louis} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{May 2024} % Date/Year
+	{\textbf{Affiliated School Scholarship}, Washington University in St. Louis} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{May 2023} % Date/Year
+	{\textbf{Dean's List}, Ohio Wesleyan University} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{April 2023} % Date/Year
+	{\textbf{Mortar Board National College Senior Honor Society Membership}, Ohio Wesleyan University} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{April 2023} % Date/Year
+	{\textbf{Golden Bishop Award - WCSA Best New Member}, Ohio Wesleyan University} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{May 2022} % Date/Year
+	{\textbf{Dean's List}, Ohio Wesleyan University} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{April 2022} % Date/Year
+	{\textbf{Florence Leas Sophomore Prize}, Ohio Wesleyan University} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{March 2022} % Date/Year
+	{\textbf{First Place - 32nd Annual Spring Programming Contest}, Denison University} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{January 2020} % Date/Year
+	{\textbf{International Baccalaureate Scholarship}, Ohio Wesleyan University} % Honor Name & Institution
+\end{honorentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{honorentry}
+	{January 2020} % Date/Year
+	{\textbf{Scholar}, Next Genius Scholarship Foundation} % Honor Name & Institution
+\end{honorentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% PRESENTATIONS SECTION
+% ----------------------------------------------------------------------
+% \needspace{4\baselineskip} % Optional
+\section{PRESENTATIONS}
+
+% \vspace{\entrySpacing} % Optional
+\begin{presentationentry}
+	{September 2024} % Date
+	{An Introduction to Artificial Intelligence for High School Students} % Title
+	{Engineering Workshop by AGES \& Science Coach} % Venue/Event
+	{Washington University in St. Louis} % University/Location
+\end{presentationentry}
+
+% \vspace{\entrySpacing} % Optional+
+\begin{presentationentry}
+	{April 2023} % Date
+	{Artificial Intelligence Opinion Survey} % Title
+	{Spring Student Symposium} % Venue/Event
+	{Ohio Wesleyan University} % University/Location
+\end{presentationentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{presentationentry}
+	{September 2022} % Date
+	{Artificial Intelligence in Modern Board Games} % Title
+	{Patricia Belt Conrades Summer Science Research Symposium} % Venue/Event
+	{Ohio Wesleyan University} % University/Location
+\end{presentationentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% LEADERSHIP EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+% \needspace{10\baselineskip} % Optional - adjust based on content length
+\section{LEADERSHIP EXPERIENCE}
+
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Graduate Student Affairs Advisory Board (GSAAB)} % Organization Name
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
+	\begin{positionentry}
+		{Member} % Position Title
+		{August 2025 - May 2026} % Date Range
+		\item Provided strategic feedback to the Vice Chancellor for Student Affairs on critical issues impacting graduate student life and experience.
+		\item Engaged in critical dialogue with senior university leaders, including the Dean of Students, to advocate for improvements to the graduate student experience across all academic programs.
+		\item Contributed to monthly discussions on student affairs policies and initiatives to enhance support systems and resources for the graduate student community.
+	\end{positionentry}
+\end{leadershipentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Center for Career Engagement (CCE) Student Advisory Board} % Organization Name
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
+	\begin{positionentry}
+		{Graduate Student Member} % Position Title
+		{August 2025 - May 2026} % Date Range
+		\item Guided the strategic direction of the Center for Career Engagement to ensure services align with diverse needs of graduate students from all academic backgrounds and career interests.
+		\item Provided insights on career engagement programs, workshops, and resources to enhance accessibility and effectiveness for the WashU graduate student community.
+		\item Built community around career development initiatives and fostered collaboration between the CCE and graduate student body.
+	\end{positionentry}
+\end{leadershipentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Graduate and Professional Student Council (GPSC)} % Organization Name
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
+	\begin{positionentry}
+		{Vice President of the Graduate-Professional Council (GPC) Chamber} % Position Title
+		{May 2025 - May 2026} % Date Range
+		\item Managed the Council's unified Microsoft Teams workspace and website, establishing centralized communication hubs and maintaining up-to-date information on events, governance, and resources.
+		\item Built and maintained committee membership rosters using ranked-choice preference allocation to balance workload and ensure efficient cross-committee coordination.
+		\item Oversaw information architecture for the Council's documentation repository.
+		\item Represented the graduate student body to university leadership and supported the GPC President in advancing strategic council priorities.
+		\item Chaired the Constitution Committee (August 2025 - February 2026), coordinating stakeholder input to draft and ratify GPSC governing documents aligned with the Council's mission and university policies.
+	\end{positionentry}
+\end{leadershipentry}
+
+\needspace{6\baselineskip} % Optional - adjust based on content length
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Umang (Indian Graduate Student Association)} % Organization Name
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
+	\begin{positionentry}
+		{Treasurer} % Position Title
+		{June 2025 - October 2025} % Date Range
+		\item Managed club finances, including budgeting, expense tracking, and fundraising to ensure sustainable operations and successful event planning.
+		\item Collaborated with members to organize cultural events and festivals, promoting cultural awareness and fostering community among Indian graduate students.
+	\end{positionentry}
+\end{leadershipentry}
+
+\needspace{5\baselineskip} % Ensure this leadership entry doesn't break awkwardly
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{HackWashU} % Organization Name
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
+	\begin{positionentry}
+		{Treasurer} % Position Title
+		{December 2024 - July 2025} % Date Range
+		\item Managed the club's finances, including budgeting and expense tracking, to ensure sustainable operations and successful event planning.
+		\item Coordinated fundraising efforts and sponsorship outreach to support club activities and initiatives.
+		\item Collaborated with club members to organize hackathons and coding events, fostering a culture of innovation and teamwork among participants.
+	\end{positionentry}
+\end{leadershipentry}
+
+\needspace{5\baselineskip} % Ensure this leadership entry doesn't break awkwardly
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Hindu Student Council} % Organization Name
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
+	\begin{positionentry}
+		{Treasurer and Founding Member} % Position Title
+		{January 2023 - May 2023} % Date Range
+		\item Co-established the council and organized events promoting Hindu cultural heritage, fostering youth leadership skills, and creating volunteer opportunities.
+		\item Managed organizational finances, developing and submitting formal budget requests to secure funding for council activities and events.
+	\end{positionentry}
+\end{leadershipentry}
+
+\needspace{10\baselineskip}
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Wesleyan Council on Student Affairs (WCSA)} % Organization Name
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
+	\begin{positionentry}
+		{Budget Committee Senator} % Position Title
+		{August 2022 - May 2023} % Date Range
+		\item Actively contributed to the Budget Committee's process of proposing, discussing, and deciding on senate bills, while overseeing the allocation of an annual budget exceeding \$350,000 to campus individuals and organizations.
+		\item Recipient of the Golden Bishop Award for WCSA Best New Member, recognized for making the greatest overall contribution to WCSA's mission through drive, high achievement on the Budget Committee, and providing unique, valuable perspectives.
+	\end{positionentry}
+\end{leadershipentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{The Neurds (Neuroscience Club)} % Organization Name
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
+	\begin{positionentry}
+		{Member} % Position Title
+		{August 2022 - May 2023} % Date Range
+		\item Presented on AI at Brain Fair 2023 during Brain Awareness Week, bridging neuroscience and technology.
+		\item Contributed to the planning and marketing of club events, directly supporting educational enrichment and networking opportunities for members.
+		\item Participated in initiatives promoting neuroscience awareness and community service, aiming to enhance members' intellectual and career development pathways.
+	\end{positionentry}
+\end{leadershipentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Campus Programming Board} % Organization Name
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
+	\begin{positionentry}
+		{Vice President of Finance} % Position Title
+		{January 2022 - December 2022} % Date Range
+		\item Successfully planned, created, and implemented budgets totaling over \$86,000 for campus events.
+		\item Initiated and led revamp of organization's governing documents, implementing efficient practices.
+		\item Negotiated an additional \$10,000 per year with the Wesleyan Council on Student Affairs.
+	\end{positionentry}
+\end{leadershipentry}
+
+\needspace{5\baselineskip}
+% \vspace{\entrySpacing} % Optional
+\begin{leadershipentry}
+	{Mathematics, Computer Science \& Data Analytics Student Board} % Organization Name
+	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
+	\begin{positionentry}
+		{Member} % Position Title
+		{August 2021 - May 2023} % Date Range
+		\item Analyzed faculty evaluations to provide actionable insights for departmental improvements.
+		\item Gathered and synthesized student feedback on course offerings to recommend enhancements to the department.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% PROJECTS SECTION
+% ----------------------------------------------------------------------
+\needspace{10\baselineskip} % Optional
+\section{PROJECTS}
+
+% \vspace{\entrySpacing} % Optional
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE510A_Datacenter_Cooling}{Datacenter Cooling Optimization using Deep Reinforcement Learning}} % Project Title
+	{Washington University in St. Louis} % Affiliation/Context
+	{St. Louis, Missouri, USA} % Location
+	{August 2024 - December 2024} % Date Range
+	\item Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC) integrated with EnergyPlus simulations to optimize datacenter cooling systems.
+	\item Achieved 35.8\% energy efficiency improvement over baseline using DDQN, addressing the underserved small to mid-sized datacenter market.
+	\item Created a comprehensive framework integrating building energy simulation with reinforcement learning for dynamic thermal management.
+\end{projectentry}
+
+\needspace{5\baselineskip} % Ensure this leadership entry doesn't break awkwardly
+% \vspace{\entrySpacing} % Optional
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE503S_Interactive_Storybook}{Interactive Storybook}} % Project Title
+	{Washington University in St. Louis} % Affiliation/Context
+	{St. Louis, Missouri, USA} % Location
+	{August 2024 - December 2024} % Date Range
+	\item Developed an interactive storytelling application using Vue.js, Node.js, and MongoDB with AI-powered content generation, enabling users to create branching narrative stories.
+	\item Implemented OpenAI API integration for dynamic story text and contextual image generation based on user choices.
+	\item Created a visual path tracking interface to help users navigate complex branching narratives and story progression.
+\end{projectentry}
+
+\needspace{6\baselineskip}
+% \vspace{\entrySpacing} % Optional
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE503S_Chat_App}{Socket.IO Multi-Room Chat Application}} % Project Title
+	{Washington University in St. Louis} % Affiliation/Context
+	{St. Louis, Missouri, USA} % Location
+	{August 2024 - December 2024} % Date Range
+	\item Developed a feature-rich multi-room chat application using Node.js and Socket.IO with password-protected rooms, private messaging, and user moderation capabilities.
+	\item Implemented room management features including creator privileges, user tracking, and persistent nickname storage.
+	\item Created real-time bidirectional event-based communication with responsive design for optimal user experience.
+\end{projectentry}
+
+\needspace{7\baselineskip} % Ensure this project entry doesn't break awkwardly
+% \vspace{\entrySpacing} % Optional
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE503S_PHP_Calendar_App}{PHP Calendar Application}} % Project Title
+	{Washington University in St. Louis} % Affiliation/Context
+	{St. Louis, Missouri, USA} % Location
+	{August 2024 - December 2024} % Date Range
+	\item Developed a feature-rich personal calendar and event management web application using PHP, MySQL, HTML5, CSS3, and JavaScript.
+	\item Implemented secure user authentication, CSRF protection, SQL injection prevention, and input sanitization.
+	\item Created an interactive calendar interface with comprehensive event management capabilities for creation, editing, and tracking.
+\end{projectentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/AIPS}{Parkinson's Disease AI Diagnosis Software}} % Project Title
+	{MITxSureStart FutureMakers Create-a-Thon Program} % Affiliation/Context
+	{Remote} % Location
+	{June 2022 - July 2022} % Date Range
+	\item Developed AIParkinScan software for Parkinson's diagnosis using neural networks, spectrograms, and the Random Forest algorithm trained on audio and image data.
+\end{projectentry}
+
+% ----------------------------------------------------------------------
+% REFERENCES SECTION
+% ----------------------------------------------------------------------
+\section{REFERENCES}
+\vspace{\entrySpacing}
+\begin{onecolentry}
+	Available upon request.
+\end{onecolentry}
+
+% ----------------------------------------------------------------------
+% End of Document
+% ----------------------------------------------------------------------
+\end{document}

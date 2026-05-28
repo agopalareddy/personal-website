@@ -7,8 +7,6 @@
     <title>Academic &amp; Engineering Projects - Aadarsha Gopala Reddy</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <!-- Favicons & Mobile Device Integration -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/mstile-150x150.png">
@@ -147,40 +145,7 @@
   </div>
 </div>
 
-<!-- Interactive Geography of Impact (Leaflet Map) -->
-<div class="projects-container" style="margin-top: 3rem; margin-bottom: 2rem;">
-  <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);">Geography of Impact</h2>
-  <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
-    An interactive map showcasing the locations of presentations, workshops, academic milestones, and professional internships.
-  </p>
-  <div id="talkmap-container" style="border: 1px solid var(--border-color); border-radius: 12px; box-shadow: var(--shadow-sm); overflow: hidden; height: 420px; background: var(--card-bg); backdrop-filter: blur(10px);">
-    <div id="map" style="width: 100%; height: 100%; z-index: 1;"></div>
-  </div>
-</div>
 
-<style>
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
-  background: var(--card-bg) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--border-color) !important;
-  backdrop-filter: blur(12px);
-  border-radius: 8px;
-}
-.leaflet-popup-content h3 {
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin: 0 0 0.25rem 0;
-  color: var(--text-primary);
-}
-.leaflet-popup-content p {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  margin: 0;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-</style>
 
                 </article>
             </div>
@@ -799,103 +764,6 @@
         });
         
         renderProjects();
-
-        // ── Interactive Geography of Impact (Leaflet Map Init) ──
-        (function() {
-            const mapContainer = document.getElementById("map");
-            if (!mapContainer) return;
-
-            // Center on continental USA
-            const map = L.map("map", {
-                center: [39.8283, -98.5795],
-                zoom: 4,
-                scrollWheelZoom: false
-            });
-
-            let currentTileLayer = null;
-
-            function getEffectiveTheme() {
-                const active = document.documentElement.getAttribute('data-active-theme') || 'device';
-                if (active === 'dark') return 'dark';
-                if (active === 'light') return 'light';
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            }
-
-            function updateMapLayer() {
-                const theme = getEffectiveTheme();
-                if (currentTileLayer) {
-                    map.removeLayer(currentTileLayer);
-                }
-                
-                const layerUrl = theme === 'dark' 
-                    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' 
-                    : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
-                    
-                const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
-
-                currentTileLayer = L.tileLayer(layerUrl, {
-                    attribution: attribution,
-                    maxZoom: 20
-                }).addTo(map);
-            }
-
-            updateMapLayer();
-
-            // Sync map styles dynamically on theme changes
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.attributeName === "data-active-theme") {
-                        updateMapLayer();
-                    }
-                });
-            });
-            observer.observe(document.documentElement, { attributes: true });
-
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
-                if (document.documentElement.getAttribute('data-active-theme') === 'device') {
-                    updateMapLayer();
-                }
-            });
-
-            // Map Locations Database
-            const locations = [
-                {
-                    name: "Washington University in St. Louis",
-                    lat: 38.6480,
-                    lng: -90.3050,
-                    desc: "<h3>Washington University in St. Louis</h3><p>M.S. in Computer Science. Worked as a Graduate Teaching Assistant for scale databases (CSE 5114) and Graduate Assistant at Taylor Family Center.</p>"
-                },
-                {
-                    name: "Ohio Wesleyan University",
-                    lat: 40.2989,
-                    lng: -83.0675,
-                    desc: "<h3>Ohio Wesleyan University</h3><p>B.A. in Computer Science & Data Analytics. Golden Bishop Award, Mortar Board Member, and Campus Programming Board leadership.</p>"
-                },
-                {
-                    name: "Crittero, Inc.",
-                    lat: 37.7749,
-                    lng: -122.4194,
-                    desc: "<h3>Crittero, Inc.</h3><p>AI Engineer Internship. Engineered full-stack social media simulations and recommendation engines with persona-based data generation.</p>"
-                },
-                {
-                    name: "Lab714",
-                    lat: 39.9612,
-                    lng: -82.9988,
-                    desc: "<h3>Lab714</h3><p>Data Analyst Internship. Processed real-world IoT device telemetry, built analytical dashboards, and enabled a 20% operating cost reduction for clients.</p>"
-                }
-            ];
-
-            locations.forEach(loc => {
-                L.marker([loc.lat, loc.lng])
-                    .addTo(map)
-                    .bindPopup(loc.desc);
-            });
-
-            // Re-render map tiles correctly if container resized
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 300);
-        })();
     </script>
 </body>
 </html>

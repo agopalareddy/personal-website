@@ -1794,3 +1794,46 @@ body {
 body.page-loaded {
     opacity: 1;
 }
+
+/* ==========================================================================
+   Mobile Responsive Refinements
+   ========================================================================== */
+
+/* Responsive Sidebar Visibility */
+@media (max-width: 47.99em) {
+    /* Hide the academic bio sidebar on all pages except the homepage on mobile */
+    body:not(.home-page) .academic-sidebar {
+        display: none !important;
+    }
+}
+
+/* Mobile Header & Theme Slider Adjustments */
+@media (max-width: 47.99em) {
+    /* Hide the theme toggle slider in the sticky header on mobile screens */
+    .top-header #theme-toggle,
+    .top-header .theme-slider {
+        display: none !important;
+    }
+    
+    /* Center-align navigation link row in mobile header */
+    .top-bar {
+        justify-content: center !important;
+        padding: 1rem 0;
+    }
+    
+    /* Center the footer layout elements on mobile screens */
+    .footer-bottom {
+        flex-direction: column !important;
+        gap: 1.25rem;
+        text-align: center;
+    }
+}
+
+/* Desktop Footer Theme Toggle Adjustments */
+@media (min-width: 48em) {
+    /* Hide the theme toggle slider in the footer on desktop screens */
+    .site-footer #theme-toggle-footer,
+    .site-footer .theme-slider[id="theme-toggle-footer"] {
+        display: none !important;
+    }
+}

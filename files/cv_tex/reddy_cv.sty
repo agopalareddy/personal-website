@@ -169,7 +169,7 @@
 % -----------------------------------------------------------------
 % Defines the appearance of \section titles.
 \titleformat{\section}
-{\needspace{3\baselineskip}\bfseries\large\color{accentColor}} % Format: needs space, bold, large, accent color
+{\needspace{9\baselineskip}\bfseries\large\color{accentColor}} % Format: needs space, bold, large, accent color
 {} % Label: no section number
 {0pt} % Separation between label and title
 {} % Code before title
@@ -277,7 +277,7 @@
 % Content: Bullet points for GPA, coursework, honors, etc.
 \newenvironment{educationentry}[3]{%
         \vspace{\entrySpacing}
-        \needspace{6\baselineskip}% Prevent orphan education entries
+        \ensurevspace{5\baselineskip}% Paracol-aware space check
         \gdef\thisEntryDate{#3}%
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
@@ -303,7 +303,7 @@
 % Content: Bullet points for responsibilities and accomplishments.
 \newenvironment{experienceentry}[4]{%
         \vspace{\entrySpacing}
-        \needspace{7\baselineskip}% Prevent orphan experience entries
+        \ensurevspace{7\baselineskip}% Paracol-aware space check
         \gdef\thisEntryDate{#4}%
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
@@ -335,6 +335,7 @@
         \mbox{#2, #3}
         \vspace{\highlightSpacing}
         \gdef\thisEntryDate{#5}%
+        \ensurevspace{6\baselineskip}% Guard paracol context + bullets
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
             \mbox{\textit{#4}}
@@ -356,7 +357,7 @@
 % Content: Bullet points describing the project.
 \newenvironment{projectentry}[4]{%
         \vspace{\entrySpacing}
-        \needspace{7\baselineskip}% Prevent orphan project entries
+        \ensurevspace{7\baselineskip}% Paracol-aware space check
         \gdef\thisEntryDate{#4}%
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
@@ -379,7 +380,7 @@
 % Content: Typically followed by one or more `positionentry` environments.
 \newenvironment{leadershipentry}[2]{%
         \vspace{\entrySpacing}
-        \needspace{9\baselineskip}% Keep org header with following position(s)
+        \needspace{5\baselineskip}% Keep org header with following position(s)
         \mbox{\textbf{#1}}%
         \kern\kernSpacing\AND\kern\kernSpacing
         \mbox{#2}
@@ -393,7 +394,7 @@
 % Content: Bullet points for responsibilities and achievements in that role.
 \newenvironment{positionentry}[2]{%
     \vspace{\highlightSpacing}
-    \needspace{6\baselineskip}% Prevent orphan position entries
+    \ensurevspace{5\baselineskip}% Paracol-aware space check
     \gdef\thisEntryDate{#2}%
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}

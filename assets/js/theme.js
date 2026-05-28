@@ -112,7 +112,8 @@
 
 
     // 3. Premium Page Transitions (fade-in & fade-out)
-    document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('pageshow', (event) => {
+        // Always force page-loaded class on show, resolving FOUC and bfcache (back-forward cache) blank pages
         document.body.classList.add('page-loaded');
     });
 

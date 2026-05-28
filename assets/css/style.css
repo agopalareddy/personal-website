@@ -34,6 +34,13 @@
     --cat-web-color: #1e3a8a;
     --cat-tools-bg: rgba(4, 120, 87, 0.08);
     --cat-tools-color: #047857;
+    
+    /* Document Modal Variables */
+    --modal-bg: rgba(255, 255, 255, 0.85);
+    --modal-border: rgba(255, 255, 255, 0.4);
+    --modal-header-bg: rgba(255, 255, 255, 0.35);
+    --modal-close-bg: rgba(15, 23, 42, 0.05);
+    --modal-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
 }
 
 /* Dark Theme variables applied via media query if no explicit class is set */
@@ -64,6 +71,13 @@
         --cat-web-color: #fbbf24;
         --cat-tools-bg: rgba(168, 85, 247, 0.15);
         --cat-tools-color: #c084fc;
+        
+        /* Document Modal Variables */
+        --modal-bg: rgba(24, 24, 24, 0.85);
+        --modal-border: rgba(255, 255, 255, 0.08);
+        --modal-header-bg: rgba(24, 24, 24, 0.35);
+        --modal-close-bg: rgba(255, 255, 255, 0.08);
+        --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     }
 }
 
@@ -94,6 +108,13 @@
     --cat-web-color: #fbbf24;
     --cat-tools-bg: rgba(168, 85, 247, 0.15);
     --cat-tools-color: #c084fc;
+    
+    /* Document Modal Variables */
+    --modal-bg: rgba(24, 24, 24, 0.85);
+    --modal-border: rgba(255, 255, 255, 0.08);
+    --modal-header-bg: rgba(24, 24, 24, 0.35);
+    --modal-close-bg: rgba(255, 255, 255, 0.08);
+    --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 /* Explicit Light Theme class overrides */
@@ -123,6 +144,13 @@
     --cat-web-color: #1e3a8a;
     --cat-tools-bg: rgba(4, 120, 87, 0.08);
     --cat-tools-color: #047857;
+    
+    /* Document Modal Variables */
+    --modal-bg: rgba(255, 255, 255, 0.85);
+    --modal-border: rgba(255, 255, 255, 0.4);
+    --modal-header-bg: rgba(255, 255, 255, 0.35);
+    --modal-close-bg: rgba(15, 23, 42, 0.05);
+    --modal-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
 }
 
 /* Base Styles */
@@ -1581,10 +1609,10 @@ main.container {
     position: relative;
     width: 94vw;
     height: 92vh;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--modal-bg);
+    border: 1px solid var(--modal-border);
     border-radius: 16px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--modal-shadow);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     display: flex;
@@ -1592,12 +1620,6 @@ main.container {
     overflow: hidden;
     transform: scale(0.95);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-:root.theme-dark .modal-window {
-    background: rgba(24, 24, 24, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .document-modal.active .modal-window {
@@ -1610,11 +1632,7 @@ main.container {
     align-items: center;
     padding: 0.75rem 1.5rem;
     border-bottom: none;
-    background: rgba(255, 255, 255, 0.3);
-}
-
-:root.theme-dark .modal-header {
-    background: rgba(24, 24, 24, 0.3);
+    background: var(--modal-header-bg);
 }
 
 .modal-header h2 {
@@ -1625,7 +1643,7 @@ main.container {
 }
 
 .modal-close {
-    background: rgba(15, 23, 42, 0.05);
+    background: var(--modal-close-bg);
     border: none;
     width: 32px;
     height: 32px;
@@ -1638,10 +1656,6 @@ main.container {
     transition: all var(--transition);
     font-size: 1rem;
     padding: 0;
-}
-
-:root.theme-dark .modal-close {
-    background: rgba(255, 255, 255, 0.08);
 }
 
 .modal-close:hover {

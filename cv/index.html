@@ -145,8 +145,16 @@
         const modal = document.getElementById(id);
         if (modal) {
             const iframe = modal.querySelector('iframe');
-            if (iframe && iframe.getAttribute('src') === 'about:blank') {
-                iframe.setAttribute('src', iframe.getAttribute('data-src'));
+            if (iframe) {
+                // Dynamically detect if dark mode is active
+                const isDark = document.documentElement.classList.contains('theme-dark') || 
+                               (document.documentElement.getAttribute('data-active-theme') === 'device' && 
+                                window.matchMedia('(prefers-color-scheme: dark)').matches);
+                iframe.style.colorScheme = isDark ? 'dark' : 'light';
+                
+                if (iframe.getAttribute('src') === 'about:blank') {
+                    iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                }
             }
             modal.classList.add('active');
             modal.setAttribute('aria-hidden', 'false');

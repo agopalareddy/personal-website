@@ -112,7 +112,7 @@
             <span class="tech-tag">Publications</span>
         </div>
         <div class="card-actions" style="display: flex; gap: 0.75rem; margin-top: auto;">
-            <button class="card-btn btn-demo" onclick="openModal('cv-modal')" aria-haspopup="dialog" aria-controls="cv-modal" style="flex: 1; justify-content: center; cursor: pointer;">
+            <button class="card-btn btn-demo" data-modal="cv-modal" data-action="open" class="card-btn btn-demo modal-trigger" aria-haspopup="dialog" aria-controls="cv-modal" style="flex: 1; justify-content: center; cursor: pointer;">
                 <i class="far fa-eye" aria-hidden="true"></i> Preview
             </button>
             <a href="/files/reddy_cv.pdf" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download Curriculum Vitae PDF (opens in a new tab)" style="flex: 1; justify-content: center; text-decoration: none;">
@@ -135,7 +135,7 @@
             <span class="tech-tag">Data Engineering</span>
         </div>
         <div class="card-actions" style="display: flex; gap: 0.75rem; margin-top: auto;">
-            <button class="card-btn btn-demo" onclick="openModal('resume-modal')" aria-haspopup="dialog" aria-controls="resume-modal" style="flex: 1; justify-content: center; cursor: pointer;">
+            <button class="card-btn btn-demo" data-modal="resume-modal" data-action="open" class="card-btn btn-demo modal-trigger" aria-haspopup="dialog" aria-controls="resume-modal" style="flex: 1; justify-content: center; cursor: pointer;">
                 <i class="far fa-eye" aria-hidden="true"></i> Preview
             </button>
             <a href="/files/reddy_resume.pdf" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download Resume PDF (opens in a new tab)" style="flex: 1; justify-content: center; text-decoration: none;">
@@ -151,7 +151,7 @@
     <div class="modal-window">
         <div class="modal-header">
             <h2>Curriculum Vitae</h2>
-            <button class="modal-close" onclick="closeModal('cv-modal')" aria-label="Close Preview"><i class="fas fa-times" aria-hidden="true"></i></button>
+            <button class="modal-close" data-modal="cv-modal" data-action="close" aria-label="Close Preview"><i class="fas fa-times" aria-hidden="true"></i></button>
         </div>
         <div class="modal-body">
             <iframe src="about:blank" data-src="/files/reddy_cv.pdf" title="Curriculum Vitae Fullscreen Preview"></iframe>
@@ -164,7 +164,7 @@
     <div class="modal-window">
         <div class="modal-header">
             <h2>Professional Resume</h2>
-            <button class="modal-close" onclick="closeModal('resume-modal')" aria-label="Close Preview"><i class="fas fa-times" aria-hidden="true"></i></button>
+            <button class="modal-close" data-modal="resume-modal" data-action="close" aria-label="Close Preview"><i class="fas fa-times" aria-hidden="true"></i></button>
         </div>
         <div class="modal-body">
             <iframe src="about:blank" data-src="/files/reddy_resume.pdf" title="Professional Resume Fullscreen Preview"></iframe>
@@ -172,88 +172,7 @@
     </div>
 </div>
 
-<script>
-    function openModal(id) {
-        if (window.innerWidth <= 768) {
-            const pdfUrl = id === 'cv-modal' ? '/files/reddy_cv.pdf' : '/files/reddy_resume.pdf';
-            window.open(pdfUrl, '_blank');
-            return;
-        }
-        const modal = document.getElementById(id);
-        if (modal) {
-            const iframe = modal.querySelector('iframe');
-            if (iframe) {
-                // Dynamically detect if dark mode is active
-                const isDark = document.documentElement.classList.contains('theme-dark') || 
-                               (document.documentElement.getAttribute('data-active-theme') === 'device' && 
-                                window.matchMedia('(prefers-color-scheme: dark)').matches);
-                iframe.style.colorScheme = isDark ? 'dark' : 'light';
-                
-                if (iframe.getAttribute('src') === 'about:blank') {
-                    iframe.setAttribute('src', iframe.getAttribute('data-src'));
-                }
-            }
-            modal.classList.add('active');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        }
-    }
-    
-    function closeModal(id) {
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-            
-            const iframe = modal.querySelector('iframe');
-            if (iframe) {
-                iframe.setAttribute('src', 'about:blank');
-            }
-        }
-    }
-    
-    // Close on backdrop click
-    document.querySelectorAll('.document-modal').forEach(modal => {
-        const backdrop = modal.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.addEventListener('click', () => {
-                closeModal(modal.id);
-            });
-        }
-    });
 
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const activeModal = document.querySelector('.document-modal.active');
-            if (activeModal) {
-                closeModal(activeModal.id);
-            }
-        }
-    });
-
-    // Spotlight cursor glow effect
-    function setupSpotlight() {
-        const cards = document.querySelectorAll('.spotlight-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-    }
-    
-    // Initialize spotlight
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupSpotlight);
-    } else {
-        setupSpotlight();
-    }
-</script>
 
                 </article>
             </div>
@@ -303,5 +222,6 @@
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/email-protection.js"></script>
+    <script src="/assets/js/cv-modal.js"></script>
 </body>
 </html>

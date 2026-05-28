@@ -38,30 +38,14 @@ personal-website/
 ├── 404.html                 # Custom 404 error page
 │
 ├── projects/                # Projects showcase archive
-│   ├── index.html           # Project grid hub page
-│   ├── ms-thesis.html       # Master's Thesis project detail
-│   └── ...                  # Individual portfolio detail sheets
-│
 ├── cv/                      # CV & Resume hub
-│   └── index.html           # Document modals panel page
-│
 ├── availability/            # Availability schedule
-│   └── index.html           # Contact and scheduling console
+├── assets/                  # CSS stylesheets and core scripts
+├── files/                   # Document static PDFs & LaTeX compilers
 │
-├── files/                   # Document static outputs & compilers
-│   ├── reddy_cv.pdf         # Compiled Academic CV
-│   ├── reddy_resume.pdf     # Compiled Industry Resume
-│   ├── cv_tex/              # LaTeX source folder for Academic CV
-│   │   ├── reddy_cv.tex     # LaTeX CV source
-│   │   └── reddy_cv.sty     # CV styling framework (needspace & paracol)
-│   └── resume_tex/          # LaTeX source folder for Industry Resume
-│       ├── reddy_resume.tex # LaTeX Resume source
-│       └── reddy_resume.sty # Resume styling framework
-│
-└── assets/                  # Shared style definitions and scripts
-    ├── css/
-    │   └── style.css        # Central stylesheet & variables
-    └── js/
+└── scripts/                 # Portfolio compiler pipeline
+    ├── projects_database.json # Central JSON projects database
+    └── generate_portfolio.py  # Python database-driven compiler
 ```
 
 ---
@@ -105,6 +89,43 @@ Always clean auxiliary compilation logs before committing changes:
 # Inside cv_tex or resume_tex directories:
 rm -f *.aux *.log *.fls *.fdb_latexmk *.out *.synctex.gz
 ```
+
+---
+
+## 🛠️ Portfolio Compilation Pipeline
+
+The website contains a database-driven Python automation pipeline that enables adding, removing, or updating projects without manually modifying 300+ lines of raw HTML. All projects are stored in a central JSON database.
+
+### 1. Structure
+* **`scripts/projects_database.json`** — The central JSON database containing titles, excerpts, categories, technologies, dates, action links, and custom HTML content for all showcase projects.
+* **`scripts/generate_portfolio.py`** — The Python compilation script. It parses the JSON database, automatically generates individual, glassmorphic project detail pages (`/projects/[project-id].html`), and synchronizes the catalog index grid (`/projects/index.html`).
+
+### 2. How to Add a Project
+1. Open `scripts/projects_database.json` and append a new project object using the standard template:
+   ```json
+   {
+     "id": "my-new-project",
+     "title": "My New Project Title",
+     "excerpt": "A short search-engine-optimized description...",
+     "venue": "Washington University in St. Louis",
+     "venue_tag": "WashU",
+     "date": "2026-05-28",
+     "formatted_date": "Summer 2026",
+     "category": "Web Apps",
+     "technologies": ["HTML", "CSS", "JavaScript"],
+     "github": "https://github.com/...",
+     "demo": null,
+     "pdf": null,
+     "presentation": null,
+     "has_detail": true,
+     "content_html": "<p>My high-fidelity detail content here...</p>"
+   }
+   ```
+2. Compile and synchronize the changes:
+   ```bash
+   python3 scripts/generate_portfolio.py
+   ```
+   *The pipeline will automatically generate `/projects/my-new-project.html` and inject the project card into `/projects/index.html` catalog grid.*
 
 ---
 

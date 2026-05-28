@@ -67,41 +67,49 @@
                     
 <h1 style="font-family: var(--font-heading); margin-bottom: 2rem;">Curriculum Vitae &amp; Resume</h1>
 
-<div class="document-list">
-    <!-- CV Row -->
-    <div class="document-row">
-        <div class="doc-icon-wrapper">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+<div class="project-grid" style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+    <!-- CV Card -->
+    <div class="project-card spotlight-card">
+        <div class="card-meta">
+            <span class="card-category cat-research">Curriculum Vitae</span>
+            <span class="card-venue">Academic &bull; Updated May 2026</span>
         </div>
-        <div class="doc-info">
-            <h2 class="document-row-title">Curriculum Vitae</h2>
-            <p class="document-row-description">Academic qualifications, publication works, coursework benchmarks, and detailed teaching credentials.</p>
+        <h3 class="project-title" style="margin-top: 0.5rem; margin-bottom: 0.75rem;">Curriculum Vitae</h3>
+        <p class="project-excerpt" style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: var(--text-secondary);">Comprehensive record of academic achievements, research works, graduate teaching credentials, publication reviews, and detailed course benchmarks.</p>
+        <div class="project-tech" style="margin-bottom: 1.5rem;">
+            <span class="tech-tag">Research</span>
+            <span class="tech-tag">Teaching</span>
+            <span class="tech-tag">Publications</span>
         </div>
-        <div class="document-row-actions">
-            <button class="doc-row-btn btn-primary" onclick="openModal('cv-modal')" aria-haspopup="dialog" aria-controls="cv-modal">
+        <div class="card-actions" style="display: flex; gap: 0.75rem; margin-top: auto;">
+            <button class="card-btn btn-demo" onclick="openModal('cv-modal')" aria-haspopup="dialog" aria-controls="cv-modal" style="flex: 1; justify-content: center; cursor: pointer;">
                 <i class="far fa-eye" aria-hidden="true"></i> Preview
             </button>
-            <a href="/files/reddy_cv.pdf" target="_blank" rel="noopener" class="doc-row-btn btn-secondary" aria-label="Download Curriculum Vitae PDF (opens in a new tab)">
-                <i class="fas fa-download" aria-hidden="true"></i> Download <span class="sr-only">(opens in a new tab)</span>
+            <a href="/files/reddy_cv.pdf" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download Curriculum Vitae PDF (opens in a new tab)" style="flex: 1; justify-content: center; text-decoration: none;">
+                <i class="fas fa-download" aria-hidden="true"></i> PDF <span class="sr-only">(opens in a new tab)</span>
             </a>
         </div>
     </div>
 
-    <!-- Resume Row -->
-    <div class="document-row">
-        <div class="doc-icon-wrapper">
-            <i class="fas fa-briefcase" aria-hidden="true"></i>
+    <!-- Resume Card -->
+    <div class="project-card spotlight-card">
+        <div class="card-meta">
+            <span class="card-category cat-tools">Resume</span>
+            <span class="card-venue">Industry &bull; Updated May 2026</span>
         </div>
-        <div class="doc-info">
-            <h2 class="document-row-title">Professional Resume</h2>
-            <p class="document-row-description">Industry experiences, software engineering stack, direct academic research projects, and technical skills summary.</p>
+        <h3 class="project-title" style="margin-top: 0.5rem; margin-bottom: 0.75rem;">Professional Resume</h3>
+        <p class="project-excerpt" style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: var(--text-secondary);">Industry-focused experience summary, software engineering stack, distributed systems architectures, real-time data pipelines, and technical skills highlights.</p>
+        <div class="project-tech" style="margin-bottom: 1.5rem;">
+            <span class="tech-tag">Systems</span>
+            <span class="tech-tag">Software Engineering</span>
+            <span class="tech-tag">Data Engineering</span>
         </div>
-        <div class="document-row-actions">
-            <button class="doc-row-btn btn-primary" onclick="openModal('resume-modal')" aria-haspopup="dialog" aria-controls="resume-modal">
+        <div class="card-actions" style="display: flex; gap: 0.75rem; margin-top: auto;">
+            <button class="card-btn btn-demo" onclick="openModal('resume-modal')" aria-haspopup="dialog" aria-controls="resume-modal" style="flex: 1; justify-content: center; cursor: pointer;">
                 <i class="far fa-eye" aria-hidden="true"></i> Preview
             </button>
-            <a href="/files/reddy_resume.pdf" target="_blank" rel="noopener" class="doc-row-btn btn-secondary" aria-label="Download Resume PDF (opens in a new tab)">
-                <i class="fas fa-download" aria-hidden="true"></i> Download <span class="sr-only">(opens in a new tab)</span>
+            <a href="/files/reddy_resume.pdf" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download Resume PDF (opens in a new tab)" style="flex: 1; justify-content: center; text-decoration: none;">
+                <i class="fas fa-download" aria-hidden="true"></i> PDF <span class="sr-only">(opens in a new tab)</span>
             </a>
         </div>
     </div>
@@ -194,6 +202,27 @@
             }
         }
     });
+
+    // Spotlight cursor glow effect
+    function setupSpotlight() {
+        const cards = document.querySelectorAll('.spotlight-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    }
+    
+    // Initialize spotlight
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupSpotlight);
+    } else {
+        setupSpotlight();
+    }
 </script>
 
                 </article>

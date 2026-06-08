@@ -1662,16 +1662,22 @@ main.container {
 
 /* Glassmorphic Document Modal — native <dialog> with ::backdrop */
 .document-modal {
-  width: 100dvw;
-  height: 100dvh;
-  max-width: 100dvw;
-  max-height: 100dvh;
   margin: 0;
   padding: 0;
   border: none;
   background: transparent;
   color: var(--text-primary);
   z-index: 9999;
+}
+
+/* Layout & sizing: only apply when dialog is open (showModal).
+   Setting display:flex unconditionally would override the native
+   browser `display:none` on `<dialog>` elements that are not open. */
+dialog[open].document-modal {
+  width: 100dvw;
+  height: 100dvh;
+  max-width: 100dvw;
+  max-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;

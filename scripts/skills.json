@@ -1,0 +1,55 @@
+{
+  "Programming Languages": [
+    "Java",
+    "C++",
+    "Python",
+    "R",
+    "JavaScript/TypeScript",
+    "PHP",
+    "C#",
+    "SQL",
+    "Rust"
+  ],
+  "Frameworks & Libraries": [
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
+    "Keras",
+    "NumPy",
+    "Pandas",
+    "Matplotlib",
+    "Seaborn",
+    "Node.js",
+    "Vue.js",
+    "React",
+    "Socket.IO",
+    "Gemini API",
+    "OpenAI API"
+  ],
+  "Tools & Technologies": [
+    "Git",
+    "Tableau",
+    "Power BI",
+    "MySQL",
+    "AWS",
+    "MongoDB",
+    "Snowflake",
+    "Apache Airflow",
+    "Spark",
+    "Kafka",
+    "Flink",
+    "Microsoft 365",
+    "Google Workspace"
+  ],
+  "Core Competencies": [
+    "Analytical Skills",
+    "Problem Solving",
+    "Critical Thinking",
+    "Communication",
+    "Team Collaboration",
+    "Leadership",
+    "Adaptability",
+    "Project Management"
+  ],
+  "Languages": ["Proficient in English", "Kannada", "Telugu; Conversational in Hindi"]
+}

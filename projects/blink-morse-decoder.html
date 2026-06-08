@@ -176,7 +176,74 @@
             >
               CodeTillDawn Hackathon &mdash; Summer 2026
             </p>
-            <section class="page__content"></section>
+            <section class="page__content">
+              <p>
+                <strong>Blink Morse Decoder</strong> is an accessibility-focused
+                Android application that enables hands-free, silent
+                communication by translating deliberate eye blinks into Morse
+                code and then into readable text. Built for the
+                <em>CodeTillDawn</em> hackathon, the app uses the phone&apos;s
+                front-facing camera and the SmartSpectra SDK to track facial
+                landmarks in real time — no external hardware, switches, or
+                sensors required.
+              </p>
+
+              <h3>How It Works</h3>
+              <p>
+                The core pipeline runs at 30 Hz through the Android CameraX API.
+                Each frame is processed by SmartSpectra to extract 68 facial
+                landmarks, from which a custom
+                <strong>Eye Aspect Ratio (EAR)</strong> metric is computed — a
+                dimensionless ratio of vertical to horizontal eye-opening
+                distances. When EAR drops below an adaptive threshold for a
+                calibrated duration, the app registers a blink.
+              </p>
+              <p>
+                A blink state machine with hysteresis filtering and configurable
+                debounce windows then classifies each blink as either a
+                <strong>dot</strong> (quick blink, &lt; 400 ms) or a
+                <strong>dash</strong> (held blink, &gt; 400 ms). Sequences of
+                dots and dashes are mapped to letters using the international
+                Morse code table, with inter-letter and inter-word gap timers to
+                segment the stream into coherent text.
+              </p>
+
+              <h3>Calibration Engine</h3>
+              <p>
+                Since every user has different resting eye aperture and blink
+                dynamics, the app includes a
+                <strong>6-blink calibration routine</strong>: three normal
+                blinks followed by three deliberately long blinks. An
+                interactive rhythm guide — with visual pulsing indicators —
+                walks the user through each calibration blink, and the collected
+                samples feed into adaptive threshold computation for
+                personalized dot/dash discrimination.
+              </p>
+
+              <h3>Bio-Vitals Dashboard</h3>
+              <p>
+                Beyond blink decoding, the SmartSpectra SDK extracts
+                photoplethysmographic (PPG) signals from the same facial video
+                stream. The app surfaces a live
+                <strong>bio-vitals dashboard</strong> displaying heart rate
+                (BPM), respiration rate, and galvanic skin response (GSR/EDA) —
+                all derived non-invasively from the camera feed. The dashboard
+                uses a glassmorphic Material Design 3 layout with real-time
+                updating cards.
+              </p>
+
+              <h3>Architecture</h3>
+              <p>
+                The codebase follows clean architecture principles with a strict
+                separation of concerns. Core engines — the blink state machine,
+                Morse codec, EAR calculator, and calibration logic — are written
+                in <strong>pure Kotlin</strong> with zero Android framework
+                imports, making them testable on any JVM without an emulator.
+                The UI layer is a single-activity Android app using Material
+                Design 3 components, CameraX for frame acquisition, and
+                sealed-class state management for reactive UI updates.
+              </p>
+            </section>
 
             <div
               style="

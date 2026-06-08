@@ -31,14 +31,7 @@
     "permalink": "/projects/artificial-intelligence-in-modern-board-games",
     "date": "2022-07-25",
     "category": "Web Apps",
-    "technologies": [
-      "Java",
-      "Artificial Intelligence",
-      "OOP",
-      "Game Theory",
-      "Git",
-      "Statistics"
-    ],
+    "technologies": ["Java", "Artificial Intelligence", "OOP", "Game Theory", "Git", "Statistics"],
     "github": "https://github.com/agopalareddy/LostCities",
     "demo": "/lost-cities/",
     "pdf": null,
@@ -55,12 +48,7 @@
     "permalink": "/projects/connect-4-ai",
     "date": "2022-11-30",
     "category": "Web Apps",
-    "technologies": [
-      "Java",
-      "OOP",
-      "Artificial Intelligence",
-      "Git"
-    ],
+    "technologies": ["Java", "OOP", "Artificial Intelligence", "Git"],
     "github": "https://github.com/agopalareddy/CS340Final-Connect4",
     "demo": "/connect4/",
     "pdf": null,
@@ -244,11 +232,7 @@
     "permalink": "/projects/desperate-housewives-monologues",
     "date": "2025-05-31",
     "category": "Research & ML",
-    "technologies": [
-      "Python",
-      "NLP",
-      "Text Processing"
-    ],
+    "technologies": ["Python", "NLP", "Text Processing"],
     "github": "https://github.com/agopalareddy/Desperate-Housewives-Monologues",
     "demo": null,
     "pdf": null,
@@ -292,11 +276,7 @@
     "permalink": "/projects/google-calendar-sync",
     "date": "2025-08-11",
     "category": "Software & Tools",
-    "technologies": [
-      "Google Apps Script",
-      "JavaScript",
-      "Google Calendar API"
-    ],
+    "technologies": ["Google Apps Script", "JavaScript", "Google Calendar API"],
     "github": "https://github.com/agopalareddy/GoogleCalendarSync",
     "demo": null,
     "pdf": null,
@@ -391,12 +371,7 @@
     "permalink": "/projects/instagram-unfollow-checker",
     "date": "2025-06-01",
     "category": "Software & Tools",
-    "technologies": [
-      "Python",
-      "Tkinter",
-      "Instaloader",
-      "PyInstaller"
-    ],
+    "technologies": ["Python", "Tkinter", "Instaloader", "PyInstaller"],
     "github": "https://github.com/agopalareddy/instagram-unfollow-checker",
     "demo": null,
     "pdf": null,

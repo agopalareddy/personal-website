@@ -514,27 +514,27 @@ function renderProjects() {
 
       let actions = [];
       actions.push(
-        `<a href="${p.permalink}" class="card-btn btn-detail" aria-label="Explore dedicated detail page for ${p.title}"><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>`,
+        `<a href="${p.permalink}" class="card-btn btn-detail" aria-label="Explore dedicated detail page for ${p.title}"><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>`
       );
 
       if (p.github) {
         actions.push(
-          `<a href="${p.github}" target="_blank" rel="noopener" class="card-btn btn-github" aria-label="View ${p.title} codebase on GitHub (opens in a new tab)"><i class="fab fa-github" aria-hidden="true"></i> Code <span class="sr-only">(opens in a new tab)</span></a>`,
+          `<a href="${p.github}" target="_blank" rel="noopener" class="card-btn btn-github" aria-label="View ${p.title} codebase on GitHub (opens in a new tab)"><i class="fab fa-github" aria-hidden="true"></i> Code <span class="sr-only">(opens in a new tab)</span></a>`
         );
       }
       if (p.demo) {
         actions.push(
-          `<a href="${p.demo}" class="card-btn btn-demo" aria-label="Launch live interactive demo for ${p.title}"><i class="fas fa-rocket" aria-hidden="true"></i> Demo</a>`,
+          `<a href="${p.demo}" class="card-btn btn-demo" aria-label="Launch live interactive demo for ${p.title}"><i class="fas fa-rocket" aria-hidden="true"></i> Demo</a>`
         );
       }
       if (p.pdf) {
         actions.push(
-          `<a href="${p.pdf}" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download ${p.title} PDF paper (opens in a new tab)"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF <span class="sr-only">(opens in a new tab)</span></a>`,
+          `<a href="${p.pdf}" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download ${p.title} PDF paper (opens in a new tab)"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF <span class="sr-only">(opens in a new tab)</span></a>`
         );
       }
       if (p.presentation) {
         actions.push(
-          `<a href="${p.presentation}" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download ${p.title} presentation slides (opens in a new tab)"><i class="fas fa-file-powerpoint" aria-hidden="true"></i> Slide <span class="sr-only">(opens in a new tab)</span></a>`,
+          `<a href="${p.presentation}" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download ${p.title} presentation slides (opens in a new tab)"><i class="fas fa-file-powerpoint" aria-hidden="true"></i> Slide <span class="sr-only">(opens in a new tab)</span></a>`
         );
       }
 

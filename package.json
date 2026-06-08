@@ -1,0 +1,29 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "A premium, highly responsive, glassmorphic portfolio and academic showcase website highlighting academic achievements, computer science research, distributed systems engineering, and TA/leadership credentials.",
+  "scripts": {
+    "format": "prettier --write .",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agopalareddy/personal-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/agopalareddy/personal-website/issues"
+  },
+  "homepage": "https://github.com/agopalareddy/personal-website#readme",
+  "lint-staged": {
+    "*.{html,css,js,json,md}": "prettier --write"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.3"
+  }
+}

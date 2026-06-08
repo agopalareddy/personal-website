@@ -28,6 +28,7 @@ def render_head(title, description, canonical_url, og_type="article"):
     canonical link. Caller passes dynamic values for title/description/url;
     everything else is static across the site.
     """
+    description = description.replace('"', "&quot;").replace("'", "&apos;")
     return f"""<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{description}">
@@ -115,7 +116,7 @@ def render_footer():
         <div class="container footer-grid">
             <div class="footer-col about-col">
                 <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Aadarsha Gopala Reddy</h3>
-                <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">M.S. Computer Science graduate from Washington University in St. Louis. Passionate about solving complex distributed systems problems, building high-throughput data pipelines, and training machine learning models.</p>
+                <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">M.S. Computer Science graduate from Washington University in St. Louis. Interested in solving complex distributed systems problems, building high-throughput data pipelines, and training machine learning models.</p>
             </div>
             <div class="footer-col links-col">
                 <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Explore</h3>

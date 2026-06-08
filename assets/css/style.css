@@ -218,7 +218,7 @@ body {
   color: #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  z-index: 100;
+  z-index: 1010;
   transition: top var(--transition);
   font-weight: 500;
   text-decoration: none;

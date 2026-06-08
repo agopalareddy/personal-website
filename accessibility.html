@@ -7,7 +7,7 @@
     <title>Accessibility Statement - Aadarsha Gopala Reddy</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" crossorigin="anonymous">
 
     <!-- Favicons & Mobile Device Integration -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/mstile-150x150.png">
@@ -92,33 +92,33 @@
                     
                     <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">1. ARIA Landmarks &amp; Structural Semantics</h3>
                     <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary);">
-                        <li style="margin-bottom: 0.5rem;"><strong>Skip Navigation Link:</strong> A keyboard-accessible skip link (<code>.skip-link</code>) is placed at the top of every page, allowing keyboard-only users to bypass navigation lists and jump straight to the main content.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Semantic Regions:</strong> Content is enclosed within appropriate HTML5 landmark elements: <code>&lt;nav&gt;</code> for the primary navigation, <code>&lt;aside&gt;</code> for sidebar details, <code>&lt;article&gt;</code> for core page content, and <code>&lt;footer&gt;</code> for copyright and credits.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Heading Hierarchy:</strong> Each page contains a single primary <code>&lt;h1&gt;</code> element, with logical sequential headings (<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>) to support proper screen-reader outline structures.</li>
+                        <li><strong>Skip Navigation Link:</strong> A keyboard-accessible skip link (<code>.skip-link</code>) is placed at the top of every page, allowing keyboard-only users to bypass navigation lists and jump straight to the main content.</li>
+                        <li><strong>Semantic Regions:</strong> Content is enclosed within appropriate HTML5 landmark elements: <code>&lt;nav&gt;</code> for the primary navigation, <code>&lt;aside&gt;</code> for sidebar details, <code>&lt;article&gt;</code> for core page content, and <code>&lt;footer&gt;</code> for copyright and credits.</li>
+                        <li><strong>Heading Hierarchy:</strong> Each page contains a single primary <code>&lt;h1&gt;</code> element, with logical sequential headings (<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>) to support proper screen-reader outline structures.</li>
                     </ul>
                     
                     <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">2. Keyboard &amp; Interactive Element Support</h3>
                     <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary);">
-                        <li style="margin-bottom: 0.5rem;"><strong>Focus Indicators:</strong> Dynamic borders and distinct colors for interactive focus outlines, ensuring complete visibility during keyboard navigation.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Dynamic Presets:</strong> ARIA-pressed states (<code>aria-pressed="true/false"</code>) are wired into category filter buttons so screen readers are instantly notified when filters are toggled.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Form Select Labels:</strong> Dropdowns for Sorting and Institution filtering have explicit <code>aria-label</code> tags to identify their roles to assist technologies.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Icon Hidden States:</strong> All decorative FontAwesome icon vectors (<code>&lt;i&gt;</code> tags) have <code>aria-hidden="true"</code> so they are bypassed by screen readers, preventing clutter.</li>
+                        <li><strong>Focus Indicators:</strong> Dynamic borders and distinct colors for interactive focus outlines, ensuring complete visibility during keyboard navigation.</li>
+                        <li><strong>Dynamic Presets:</strong> ARIA-pressed states (<code>aria-pressed="true/false"</code>) are wired into category filter buttons so screen readers are instantly notified when filters are toggled.</li>
+                        <li><strong>Form Select Labels:</strong> Dropdowns for Sorting and Institution filtering have explicit <code>aria-label</code> tags to identify their roles to assist technologies.</li>
+                        <li><strong>Icon Hidden States:</strong> All decorative FontAwesome icon vectors (<code>&lt;i&gt;</code> tags) have <code>aria-hidden="true"</code> so they are bypassed by screen readers, preventing clutter.</li>
                     </ul>
                     
                     <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">3. Visual &amp; Styling Enhancements</h3>
                     <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary);">
-                        <li style="margin-bottom: 0.5rem;"><strong>Color Contrast:</strong> Premium custom CSS dark and light color tokens conform to the minimum contrast ratio of <strong>4.5:1</strong> for normal text and <strong>3:1</strong> for large text against background surfaces.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Adaptive Contrast in Dark Mode:</strong> No styles are hardcoded; all cards and dropdowns dynamically reference CSS variables to prevent glaring or low-contrast text in dark themes.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Target New Tab Alerts:</strong> Any links opening in new browser tabs (<code>_blank</code>) include a screen-reader-only notification element <code>&lt;span class="sr-only"&gt;(opens in a new tab)&lt;/span&gt;</code> so users are warned of navigation behavior.</li>
+                        <li><strong>Color Contrast:</strong> Premium custom CSS dark and light color tokens conform to the minimum contrast ratio of <strong>4.5:1</strong> for normal text and <strong>3:1</strong> for large text against background surfaces.</li>
+                        <li><strong>Adaptive Contrast in Dark Mode:</strong> No styles are hardcoded; all cards and dropdowns dynamically reference CSS variables to prevent glaring or low-contrast text in dark themes.</li>
+                        <li><strong>Target New Tab Alerts:</strong> Any links opening in new browser tabs (<code>_blank</code>) include a screen-reader-only notification element <code>&lt;span class="sr-only"&gt;(opens in a new tab)&lt;/span&gt;</code> so users are warned of navigation behavior.</li>
                     </ul>
                     
                     <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
                     
                     <h2 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 1rem;"><i class="fas fa-clipboard-check" aria-hidden="true" style="margin-right: 0.5rem; color: var(--accent);"></i> Validation Methodologies</h2>
                     <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary);">
-                        <li style="margin-bottom: 0.5rem;"><strong>Structural Semantic Audits:</strong> Utilizing automated link and reference validators to confirm sitemap and document linkages remain intact.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Keyboard Navigation Walkthroughs:</strong> Testing focus trapping, tab order correctness, and skip-link execution inside modern user agents.</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Screen Reader Outlining:</strong> Auditing pages with layout headers to ensure screen-reader outline logs match standard page structures.</li>
+                        <li><strong>Structural Semantic Audits:</strong> Utilizing automated link and reference validators to confirm sitemap and document linkages remain intact.</li>
+                        <li><strong>Keyboard Navigation Walkthroughs:</strong> Testing focus trapping, tab order correctness, and skip-link execution inside modern user agents.</li>
+                        <li><strong>Screen Reader Outlining:</strong> Auditing pages with layout headers to ensure screen-reader outline logs match standard page structures.</li>
                     </ul>
                     
                     <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
@@ -128,8 +128,8 @@
                         If you encounter any accessibility barriers or have suggestions for further improvement, please contact me directly:
                     </p>
                     <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary); list-style: none;">
-                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.5rem; color: var(--accent);"></i> Email: <a href="#" class="protected-email" data-email-user="YWR1cnMyMDAy" data-email-domain="Z21haWwuY29t">&#9993; Email</a></li>
-                        <li style="margin-bottom: 0.5rem;"><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.5rem; color: var(--accent);"></i> LinkedIn: <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">Aadarsha Gopala Reddy <span class="sr-only">(opens in a new tab)</span></a></li>
+                        <li><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.5rem; color: var(--accent);"></i> Email: <a href="#" class="protected-email" data-email-user="YWR1cnMyMDAy" data-email-domain="Z21haWwuY29t">&#9993; Email</a></li>
+                        <li><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.5rem; color: var(--accent);"></i> LinkedIn: <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">Aadarsha Gopala Reddy <span class="sr-only">(opens in a new tab)</span></a></li>
                     </ul>
                 </article>
             </div>
@@ -141,36 +141,36 @@
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-col about-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Aadarsha Gopala Reddy</h3>
-                <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">M.S. Computer Science graduate from Washington University in St. Louis. Passionate about solving complex distributed systems problems, building high-throughput data pipelines, and training machine learning models.</p>
+                <h3 class="footer-col-heading">Aadarsha Gopala Reddy</h3>
+                <p>M.S. Computer Science graduate from Washington University in St. Louis. Passionate about solving complex distributed systems problems, building high-throughput data pipelines, and training machine learning models.</p>
             </div>
             <div class="footer-col links-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Explore</h3>
+                <h3 class="footer-col-heading">Explore</h3>
                 <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Home</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/projects/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Projects Showcase</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/cv/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Curriculum Vitae</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/availability/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Availability Schedule</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/projects/">Projects Showcase</a></li>
+                    <li><a href="/cv/">Curriculum Vitae</a></li>
+                    <li><a href="/availability/">Availability Schedule</a></li>
                 </ul>
             </div>
             <div class="footer-col contact-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Connect</h3>
+                <h3 class="footer-col-heading">Connect</h3>
                 <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="#" class="protected-email" data-email-user="YWR1cnMyMDAy" data-email-domain="Z21haWwuY29t" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;"><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem;"></i> Email</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;"><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem;"></i> LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="https://github.com/agopalareddy" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;"><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem;"></i> GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="#" class="protected-email" data-email-user="YWR1cnMyMDAy" data-email-domain="Z21haWwuY29t"><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem;"></i> Email</a></li>
+                    <li><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem;"></i> LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="https://github.com/agopalareddy" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem;"></i> GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
                 </ul>
             </div>
             <div class="footer-col resources-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Downloads &amp; Info</h3>
+                <h3 class="footer-col-heading">Downloads &amp; Info</h3>
                 <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="/files/reddy_cv.pdf" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Curriculum Vitae (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/files/reddy_resume.pdf" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Resume (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/accessibility.html" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Accessibility Statement</a></li>
+                    <li><a href="/files/reddy_cv.pdf" target="_blank" rel="noopener">Curriculum Vitae (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="/files/reddy_resume.pdf" target="_blank" rel="noopener">Resume (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="/accessibility.html">Accessibility Statement</a></li>
                 </ul>
             </div>
         </div>
-        <div class="container footer-bottom" style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 1.5rem;">
+        <div class="container footer-bottom">
             <p style="margin: 0;">&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
             <div id="theme-toggle-footer"></div>
         </div>

@@ -2,48 +2,48 @@
  * Premium 3-State Theme Slider System
  * Supporting: Light, Device (System), and Dark modes.
  */
-(function() {
-    const htmlEl = document.documentElement;
-    
-    // 1. Instantly read and apply theme from localStorage to prevent Flash of Unthemed Content (FOUC)
-    const savedTheme = localStorage.getItem('theme') || 'device';
-    
-    function applyTheme(theme) {
-        htmlEl.setAttribute('data-active-theme', theme);
-        
-        if (theme === 'dark') {
-            htmlEl.classList.remove('theme-light');
-            htmlEl.classList.add('theme-dark');
-        } else if (theme === 'light') {
-            htmlEl.classList.remove('theme-dark');
-            htmlEl.classList.add('theme-light');
-        } else {
-            // 'device' mode - respect system settings
-            htmlEl.classList.remove('theme-light', 'theme-dark');
-        }
+(function () {
+  const htmlEl = document.documentElement;
+
+  // 1. Instantly read and apply theme from localStorage to prevent Flash of Unthemed Content (FOUC)
+  const savedTheme = localStorage.getItem('theme') || 'device';
+
+  function applyTheme(theme) {
+    htmlEl.setAttribute('data-active-theme', theme);
+
+    if (theme === 'dark') {
+      htmlEl.classList.remove('theme-light');
+      htmlEl.classList.add('theme-dark');
+    } else if (theme === 'light') {
+      htmlEl.classList.remove('theme-dark');
+      htmlEl.classList.add('theme-light');
+    } else {
+      // 'device' mode - respect system settings
+      htmlEl.classList.remove('theme-light', 'theme-dark');
     }
-    
-    applyTheme(savedTheme);
+  }
 
-    // 2. Initialize the 3-state slider UI once the DOM is ready
-    function initSlider() {
-        const placeholders = [
-            document.getElementById('theme-toggle'),
-            document.getElementById('theme-toggle-footer')
-        ].filter(el => el !== null);
+  applyTheme(savedTheme);
 
-        if (placeholders.length === 0) return;
+  // 2. Initialize the 3-state slider UI once the DOM is ready
+  function initSlider() {
+    const placeholders = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-footer'),
+    ].filter((el) => el !== null);
 
-        placeholders.forEach((placeholder, index) => {
-            const sliderContainer = document.createElement('div');
-            sliderContainer.className = 'theme-slider';
-            if (placeholder.id === 'theme-toggle-footer') {
-                sliderContainer.id = 'theme-toggle-footer';
-            }
-            sliderContainer.setAttribute('role', 'radiogroup');
-            sliderContainer.setAttribute('aria-label', 'Theme selection');
+    if (placeholders.length === 0) return;
 
-            sliderContainer.innerHTML = `
+    placeholders.forEach((placeholder, index) => {
+      const sliderContainer = document.createElement('div');
+      sliderContainer.className = 'theme-slider';
+      if (placeholder.id === 'theme-toggle-footer') {
+        sliderContainer.id = 'theme-toggle-footer';
+      }
+      sliderContainer.setAttribute('role', 'radiogroup');
+      sliderContainer.setAttribute('aria-label', 'Theme selection');
+
+      sliderContainer.innerHTML = `
                 <div class="theme-slider-track">
                     <div class="theme-slider-thumb"></div>
                     <button class="theme-slider-btn" data-theme="light" role="radio" aria-checked="false" aria-label="Light mode" title="Light Theme">
@@ -74,87 +74,92 @@
                 </div>
             `;
 
-            placeholder.parentNode.replaceChild(sliderContainer, placeholder);
-        });
-
-        // Sync slider state globally
-        function updateAllSlidersUI(activeTheme) {
-            const allSliders = document.querySelectorAll('.theme-slider');
-            allSliders.forEach(slider => {
-                const buttons = slider.querySelectorAll('.theme-slider-btn');
-                buttons.forEach(btn => {
-                    const isSelected = btn.getAttribute('data-theme') === activeTheme;
-                    btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
-                });
-            });
-        }
-
-        const currentTheme = localStorage.getItem('theme') || 'device';
-        updateAllSlidersUI(currentTheme);
-
-        // Bind event listeners to all sliders
-        const allSliders = document.querySelectorAll('.theme-slider');
-        allSliders.forEach(slider => {
-            const buttons = slider.querySelectorAll('.theme-slider-btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const theme = btn.getAttribute('data-theme');
-                    if (theme === 'device') {
-                        localStorage.removeItem('theme');
-                    } else {
-                        localStorage.setItem('theme', theme);
-                    }
-                    applyTheme(theme);
-                    updateAllSlidersUI(theme);
-                });
-            });
-        });
-
-        // Auto-update copyright year dynamically
-        const currentYearElements = document.querySelectorAll('.current-year');
-        currentYearElements.forEach(el => {
-            el.textContent = new Date().getFullYear();
-        });
-    }
-
-    // Initialize as soon as DOM Content is Loaded
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSlider);
-    } else {
-        initSlider();
-    }
-
-
-    // 3. Premium Page Transitions (fade-in & fade-out)
-    window.addEventListener('pageshow', (event) => {
-        // Always force page-loaded class on show, resolving FOUC and bfcache (back-forward cache) blank pages
-        document.body.classList.add('page-loaded');
+      placeholder.parentNode.replaceChild(sliderContainer, placeholder);
     });
 
-    // Intercept navigation links for smooth fade-out
-    window.addEventListener('load', () => {
-        document.querySelectorAll('a').forEach(link => {
-            const href = link.getAttribute('href');
-            if (!href) return;
-            
-            // Filter only local page links
-            const isLocalLink = link.hostname === window.location.hostname && 
-                                !link.hash && 
-                                link.target !== '_blank' && 
-                                !href.startsWith('mailto:') && 
-                                !href.startsWith('tel:') && 
-                                !href.startsWith('javascript:');
-                                
-            if (isLocalLink) {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.body.classList.remove('page-loaded');
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 220); // Sync with CSS transition (0.22s)
-                });
-            }
+    // Sync slider state globally
+    function updateAllSlidersUI(activeTheme) {
+      const allSliders = document.querySelectorAll('.theme-slider');
+      allSliders.forEach((slider) => {
+        const buttons = slider.querySelectorAll('.theme-slider-btn');
+        buttons.forEach((btn) => {
+          const isSelected = btn.getAttribute('data-theme') === activeTheme;
+          btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
         });
+      });
+    }
+
+    const currentTheme = localStorage.getItem('theme') || 'device';
+    updateAllSlidersUI(currentTheme);
+
+    // Bind event listeners to all sliders
+    const allSliders = document.querySelectorAll('.theme-slider');
+    allSliders.forEach((slider) => {
+      const buttons = slider.querySelectorAll('.theme-slider-btn');
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const theme = btn.getAttribute('data-theme');
+          if (theme === 'device') {
+            localStorage.removeItem('theme');
+          } else {
+            localStorage.setItem('theme', theme);
+          }
+          applyTheme(theme);
+          updateAllSlidersUI(theme);
+        });
+      });
     });
 
+    // Auto-update copyright year dynamically
+    const currentYearElements = document.querySelectorAll('.current-year');
+    currentYearElements.forEach((el) => {
+      el.textContent = new Date().getFullYear();
+    });
+  }
+
+  // Initialize as soon as DOM Content is Loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlider);
+  } else {
+    initSlider();
+  }
+
+  // 3. Premium Page Transitions (fade-in & fade-out)
+  // Respect user's motion preference — skip transitions entirely if reduced motion is preferred
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  window.addEventListener('pageshow', (event) => {
+    // Always force page-loaded class on show, resolving FOUC and bfcache (back-forward cache) blank pages
+    document.body.classList.add('page-loaded');
+  });
+
+  // Intercept navigation links for smooth fade-out
+  window.addEventListener('load', () => {
+    // Skip transition interception when user prefers reduced motion
+    if (prefersReducedMotion) return;
+
+    document.querySelectorAll('a').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      // Filter only local page links
+      const isLocalLink =
+        link.hostname === window.location.hostname &&
+        !link.hash &&
+        link.target !== '_blank' &&
+        !href.startsWith('mailto:') &&
+        !href.startsWith('tel:') &&
+        !href.startsWith('javascript:');
+
+      if (isLocalLink) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.body.classList.remove('page-loaded');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 220); // Sync with CSS transition (0.22s)
+        });
+      }
+    });
+  });
 })();

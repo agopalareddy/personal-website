@@ -434,6 +434,13 @@
   }
 ];
         const projectGrid = document.getElementById('projectGrid');
+        // Clear SSR fallback (noscript + JSON blob) if present. Modern
+        // browsers re-execute the <noscript> contents as DOM nodes when JS
+        // is enabled, so we must remove them before the first render.
+        const ssrFallback = projectGrid.querySelector('noscript, script.projects-data');
+        if (ssrFallback) {
+            ssrFallback.remove();
+        }
         const searchInput = document.getElementById('projectSearch');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const venueFilter = document.getElementById('venueFilter');

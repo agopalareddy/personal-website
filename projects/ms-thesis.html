@@ -1,242 +1,562 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis">
-    <title>Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+    />
+    <title>
+      Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from
+      Naturalistic Driving Data - Aadarsha Gopala Reddy
+    </title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      crossorigin="anonymous"
+    />
 
     <!-- Favicons & Mobile Device Integration -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/mstile-150x150.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/mstile-70x70.png">
-    <link rel="manifest" href="/images/manifest.json">
-    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#0a0a16">
-    <meta name="msapplication-TileColor" content="#0a0a16">
-    <meta name="msapplication-TileImage" content="/images/mstile-144x144.png">
-    <meta name="msapplication-config" content="/images/browserconfig.xml">
-    <meta name="theme-color" content="#0a0a16">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/mstile-150x150.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/mstile-70x70.png" />
+    <link rel="manifest" href="/images/manifest.json" />
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#0a0a16" />
+    <meta name="msapplication-TileColor" content="#0a0a16" />
+    <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
+    <meta name="msapplication-config" content="/images/browserconfig.xml" />
+    <meta name="theme-color" content="#0a0a16" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://agreddy.com/projects/ms-thesis.html">
-    <meta property="og:title" content="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data - Aadarsha Gopala Reddy">
-    <meta property="og:description" content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis">
-    <meta property="og:image" content="https://agreddy.com/images/profile.png">
-    <meta property="og:site_name" content="Aadarsha Gopala Reddy">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://agreddy.com/projects/ms-thesis.html" />
+    <meta
+      property="og:title"
+      content="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data - Aadarsha Gopala Reddy"
+    />
+    <meta
+      property="og:description"
+      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+    />
+    <meta property="og:image" content="https://agreddy.com/images/profile.png" />
+    <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
 
     <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://agreddy.com/projects/ms-thesis.html">
-    <meta name="twitter:title" content="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data - Aadarsha Gopala Reddy">
-    <meta name="twitter:description" content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis">
-    <meta name="twitter:image" content="https://agreddy.com/images/profile.png">
-    <meta name="twitter:site" content="@aadarsha2002">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://agreddy.com/projects/ms-thesis.html" />
+    <meta
+      name="twitter:title"
+      content="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data - Aadarsha Gopala Reddy"
+    />
+    <meta
+      name="twitter:description"
+      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+    />
+    <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
+    <meta name="twitter:site" content="@aadarsha2002" />
 
     <!-- Canonical Link -->
-    <link rel="canonical" href="https://agreddy.com/projects/ms-thesis.html">
-</head>
-<body>
-
+    <link rel="canonical" href="https://agreddy.com/projects/ms-thesis.html" />
+  </head>
+  <body>
     <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Skip to Content</a>
 
     <!-- Top Navigation Bar -->
     <header class="top-header">
-        <div class="top-bar container">
-            
-    <nav class="nav-links" aria-label="Primary Navigation">
-        <a href="/" class="nav-link ">Home</a>
-        <a href="/projects/" class="nav-link active">Projects</a>
-        <a href="/cv/" class="nav-link ">CV/Resume</a>
-        <a href="/availability/" class="nav-link ">Availability</a>
-    </nav>
-    
-            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
-                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="5"/>
-                    <line x1="12" y1="1" x2="12" y2="3"/>
-                    <line x1="12" y1="21" x2="12" y2="23"/>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                    <line x1="1" y1="12" x2="3" y2="12"/>
-                    <line x1="21" y1="12" x2="23" y2="12"/>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
-        </div>
+      <div class="top-bar container">
+        <nav class="nav-links" aria-label="Primary Navigation">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/projects/" class="nav-link active">Projects</a>
+          <a href="/cv/" class="nav-link">CV/Resume</a>
+          <a href="/availability/" class="nav-link">Availability</a>
+        </nav>
+
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
+          <svg
+            class="sun-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg
+            class="moon-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
     </header>
 
     <!-- Main Wrapper -->
     <div id="main-content">
-        
-        <main class="container">
-            <div class="academic-layout">
-                <aside class="academic-sidebar" aria-label="Author Biography">
-                    
-<div class="author-avatar-wrapper">
-    <img src="/images/profile.png" class="author-avatar" alt="Aadarsha Gopala Reddy">
-    <h2 class="author-name">Aadarsha Gopala Reddy</h2>
-    <p class="author-bio">M.S. Computer Science graduate from Washington University in St. Louis</p>
-    <ul class="author-links">
-        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> St. Louis, Missouri, USA</li>
-        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="#" class="protected-email" data-email-user="YWR1cnMyMDAy" data-email-domain="Z21haWwuY29t" data-email-text="adurs2002 [at] gmail [dot] com">adurs2002 [at] gmail [dot] com</a></li>
-        <li><i class="fab fa-linkedin" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
-        <li><i class="fab fa-github" aria-hidden="true"></i> <a href="https://github.com/agopalareddy" target="_blank" rel="noopener">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
-    </ul>
-</div>
-
-                </aside>
-                <article class="academic-content" aria-label="Project Detail: Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data">
-                    <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data</h1><p style="font-family: var(--font-body); font-size: 0.9rem; font-style: italic; color: var(--text-muted); margin-bottom: 2rem;">Washington University in St. Louis &mdash; Spring 2026</p><section class="page__content" itemprop="text">
-<p>Master’s thesis completed in the Department of Computer Science &amp; Engineering at Washington University in St. Louis (McKelvey School of Engineering), advised by Dr. Alvitta Ottley, with committee members Dr. Ganesh Babulal and Dr. Nathan Jacobs. This work is part of the DRIVES Project at WashU.</p>
-<h3 id="overview">Overview</h3>
-<p>This thesis studies whether naturalistic driving data can help predict binary Clinical Dementia Rating (CDR) status while accounting for differences across vehicles. The final analytic dataset comprised 26,968 participant-weeks from 304 participants (218 healthy, 86 impaired). Weekly driving features were derived from real-world telematics data collected via Azuga dataloggers installed in participants’ personal vehicles, combined with demographic covariates.</p>
-<p>The main comparison includes six model families evaluated under leave-one-participant-out (LOGO) cross-validation: Logistic Regression, XGBoost, Random Forest, MLP, DANN (Domain-Adversarial Neural Network), and GRU-DANN (sequence-aware variant). Performance remained modest overall, with all models falling in a narrow ROC AUC range of 0.50–0.60.</p>
-<p><img alt="Thesis data pipeline: three-stage workflow from Azuga telemetry through trip linkage to weekly feature aggregation" src="/images/thesis-data-flow.png"/></p>
-<h3 id="key-contributions">Key Contributions</h3>
-<ul>
-<li><strong>Technical</strong>: Formulates vehicle heterogeneity as a domain shift problem; implements and compares baseline, domain-adversarial, and sequence-based modeling approaches under a rigorous LOGO evaluation framework; develops a reusable feature-engineering pipeline from raw telematics data.</li>
-<li><strong>Clinical</strong>: Sharpens the question of whether driving-based biomarkers remain credible when vehicle-linked variation is taken seriously, finding that naturalistic driving data may carry limited information about cognitive status under the current pipeline.</li>
-<li><strong>Data</strong>: Procedures for aligning longitudinal driving data with intermittent clinical assessments and incorporating vehicle-level characteristics (make, model, ADAS features) into analytic datasets.</li>
-</ul>
-<h3 id="modeling-approach">Modeling Approach</h3>
-<p>The pipeline processes raw Azuga telemetry through three stages: trip segmentation and cleaning, linkage to participant clinical records, and weekly aggregation into 84 behavioral features spanning speed, acceleration, jerk, route complexity, turning patterns, and time-of-day driving behavior. Vehicle identity is incorporated as a domain label, with 428 unique vehicles clustered into four domain groups based on shared characteristics.</p>
-<p><img alt="Architecture comparison: flat DANN (left) vs sequence-aware GRU-DANN (right) with gradient reversal layer for domain-invariant feature learning" src="/images/thesis-dann-vs-gru-dann.png"/></p>
-<p>Six model families were compared: three classical baselines (Logistic Regression, XGBoost, Random Forest), a multilayer perceptron (MLP), a domain-adversarial neural network (DANN), and a sequence-aware GRU-DANN that processes driving data as weekly sequences while simultaneously learning vehicle-invariant representations.</p>
-<h3 id="results">Results</h3>
-<p>Evaluation used leave-one-participant-out (LOGO) cross-validation, with one individual held out at a time and participant-level metrics pooled as the primary reporting surface. Bootstrap confidence intervals and paired DeLong tests were used for statistical comparison.</p>
-<table>
-<thead>
-<tr>
-<th>Model</th>
-<th>ROC AUC</th>
-<th>PR AUC</th>
-<th>Balanced Accuracy</th>
-<th>Sensitivity</th>
-<th>Specificity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Logistic Regression</td>
-<td>0.586</td>
-<td>0.345</td>
-<td>0.576</td>
-<td><strong>0.523</strong></td>
-<td>0.628</td>
-</tr>
-<tr>
-<td>XGBoost</td>
-<td>0.502</td>
-<td>0.292</td>
-<td>0.506</td>
-<td>0.209</td>
-<td>0.803</td>
-</tr>
-<tr>
-<td>Random Forest</td>
-<td>0.595</td>
-<td><strong>0.355</strong></td>
-<td>0.535</td>
-<td>0.198</td>
-<td><strong>0.872</strong></td>
-</tr>
-<tr>
-<td>MLP</td>
-<td>0.573</td>
-<td>0.337</td>
-<td>0.527</td>
-<td>0.186</td>
-<td>0.867</td>
-</tr>
-<tr>
-<td>DANN</td>
-<td>0.554</td>
-<td>0.327</td>
-<td>0.522</td>
-<td>0.209</td>
-<td>0.835</td>
-</tr>
-<tr>
-<td>GRU-DANN</td>
-<td><strong>0.599</strong></td>
-<td>0.346</td>
-<td><strong>0.584</strong></td>
-<td>0.512</td>
-<td>0.656</td>
-</tr>
-</tbody>
-</table>
-<p>Bold indicates best in column. GRU-DANN achieved the highest ROC AUC (0.599) and balanced accuracy (0.584), while Logistic Regression led on sensitivity (0.523) and Random Forest on specificity (0.872). All 95% confidence intervals overlap substantially; overall discriminative performance is modest.</p>
-<p><img alt="Evaluation protocol: two-stage design with GroupShuffleSplit for ablation studies and LOGO for final model comparison" src="/images/thesis-eval.png"/></p>
-<h3 id="committee">Committee</h3>
-<ul>
-<li><strong>Chair</strong>: Dr. Alvitta Ottley, Department of Computer Science &amp; Engineering</li>
-<li><strong>Member</strong>: Dr. Ganesh Babulal, Department of Neurology</li>
-<li><strong>Member</strong>: Dr. Nathan Jacobs, Department of Computer Science &amp; Engineering</li>
-</ul>
-<h3 id="links">Links</h3>
-<ul>
-<li><a href="/files/thesis-main.pdf">Full Thesis (PDF)</a></li>
-<li><a href="https://openscholarship.wustl.edu/eng_etds/1341/" target="_blank" rel="noopener">WashU Scholarly Repository (OpenScholarship Link)</a></li>
-</ul>
-</section><nav class="pagination" aria-label="Project Pagination">
-  <a href="/projects/hackwashu-databases-workshop" class="pagination--pager" aria-label="Go to previous project: HackWashU Databases Workshop" title="HackWashU Databases Workshop">Previous</a>
-  <a href="/projects/" class="pagination--pager" aria-label="Go to next project: All Projects" title="All Projects">Next</a>
-</nav>
-                </article>
+      <main class="container">
+        <div class="academic-layout">
+          <aside class="academic-sidebar" aria-label="Author Biography">
+            <div class="author-avatar-wrapper">
+              <img src="/images/profile.png" class="author-avatar" alt="Aadarsha Gopala Reddy" />
+              <h2 class="author-name">Aadarsha Gopala Reddy</h2>
+              <p class="author-bio">
+                M.S. Computer Science graduate from Washington University in St. Louis
+              </p>
+              <ul class="author-links">
+                <li>
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> St. Louis, Missouri, USA
+                </li>
+                <li>
+                  <i class="fas fa-envelope" aria-hidden="true"></i>
+                  <a
+                    href="#"
+                    class="protected-email"
+                    data-email-user="YWR1cnMyMDAy"
+                    data-email-domain="Z21haWwuY29t"
+                    data-email-text="adurs2002 [at] gmail [dot] com"
+                    >adurs2002 [at] gmail [dot] com</a
+                  >
+                </li>
+                <li>
+                  <i class="fab fa-linkedin" aria-hidden="true"></i>
+                  <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+                    >LinkedIn <span class="sr-only">(opens in a new tab)</span></a
+                  >
+                </li>
+                <li>
+                  <i class="fab fa-github" aria-hidden="true"></i>
+                  <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
+                    >GitHub <span class="sr-only">(opens in a new tab)</span></a
+                  >
+                </li>
+              </ul>
             </div>
-        </main>
-        
+          </aside>
+          <article
+            class="academic-content"
+            aria-label="Project Detail: Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+          >
+            <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
+              Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from
+              Naturalistic Driving Data
+            </h1>
+            <p
+              style="
+                font-family: var(--font-body);
+                font-size: 0.9rem;
+                font-style: italic;
+                color: var(--text-muted);
+                margin-bottom: 2rem;
+              "
+            >
+              Washington University in St. Louis &mdash; Spring 2026
+            </p>
+            <section class="page__content" itemprop="text">
+              <p>
+                Master’s thesis completed in the Department of Computer Science &amp; Engineering at
+                Washington University in St. Louis (McKelvey School of Engineering), advised by Dr.
+                Alvitta Ottley, with committee members Dr. Ganesh Babulal and Dr. Nathan Jacobs.
+                This work is part of the DRIVES Project at WashU.
+              </p>
+              <h3 id="overview">Overview</h3>
+              <p>
+                This thesis studies whether naturalistic driving data can help predict binary
+                Clinical Dementia Rating (CDR) status while accounting for differences across
+                vehicles. The final analytic dataset comprised 26,968 participant-weeks from 304
+                participants (218 healthy, 86 impaired). Weekly driving features were derived from
+                real-world telematics data collected via Azuga dataloggers installed in
+                participants’ personal vehicles, combined with demographic covariates.
+              </p>
+              <p>
+                The main comparison includes six model families evaluated under
+                leave-one-participant-out (LOGO) cross-validation: Logistic Regression, XGBoost,
+                Random Forest, MLP, DANN (Domain-Adversarial Neural Network), and GRU-DANN
+                (sequence-aware variant). Performance remained modest overall, with all models
+                falling in a narrow ROC AUC range of 0.50–0.60.
+              </p>
+              <p>
+                <img
+                  alt="Thesis data pipeline: three-stage workflow from Azuga telemetry through trip linkage to weekly feature aggregation"
+                  src="/images/thesis-data-flow.png"
+                  width="901"
+                  height="586"
+                  loading="lazy"
+                />
+              </p>
+              <h3 id="key-contributions">Key Contributions</h3>
+              <ul>
+                <li>
+                  <strong>Technical</strong>: Formulates vehicle heterogeneity as a domain shift
+                  problem; implements and compares baseline, domain-adversarial, and sequence-based
+                  modeling approaches under a rigorous LOGO evaluation framework; develops a
+                  reusable feature-engineering pipeline from raw telematics data.
+                </li>
+                <li>
+                  <strong>Clinical</strong>: Sharpens the question of whether driving-based
+                  biomarkers remain credible when vehicle-linked variation is taken seriously,
+                  finding that naturalistic driving data may carry limited information about
+                  cognitive status under the current pipeline.
+                </li>
+                <li>
+                  <strong>Data</strong>: Procedures for aligning longitudinal driving data with
+                  intermittent clinical assessments and incorporating vehicle-level characteristics
+                  (make, model, ADAS features) into analytic datasets.
+                </li>
+              </ul>
+              <h3 id="modeling-approach">Modeling Approach</h3>
+              <p>
+                The pipeline processes raw Azuga telemetry through three stages: trip segmentation
+                and cleaning, linkage to participant clinical records, and weekly aggregation into
+                84 behavioral features spanning speed, acceleration, jerk, route complexity, turning
+                patterns, and time-of-day driving behavior. Vehicle identity is incorporated as a
+                domain label, with 428 unique vehicles clustered into four domain groups based on
+                shared characteristics.
+              </p>
+              <p>
+                <img
+                  alt="Architecture comparison: flat DANN (left) vs sequence-aware GRU-DANN (right) with gradient reversal layer for domain-invariant feature learning"
+                  src="/images/thesis-dann-vs-gru-dann.png"
+                  width="1533"
+                  height="556"
+                  loading="lazy"
+                />
+              </p>
+              <p>
+                Six model families were compared: three classical baselines (Logistic Regression,
+                XGBoost, Random Forest), a multilayer perceptron (MLP), a domain-adversarial neural
+                network (DANN), and a sequence-aware GRU-DANN that processes driving data as weekly
+                sequences while simultaneously learning vehicle-invariant representations.
+              </p>
+              <h3 id="results">Results</h3>
+              <p>
+                Evaluation used leave-one-participant-out (LOGO) cross-validation, with one
+                individual held out at a time and participant-level metrics pooled as the primary
+                reporting surface. Bootstrap confidence intervals and paired DeLong tests were used
+                for statistical comparison.
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>ROC AUC</th>
+                    <th>PR AUC</th>
+                    <th>Balanced Accuracy</th>
+                    <th>Sensitivity</th>
+                    <th>Specificity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Logistic Regression</td>
+                    <td>0.586</td>
+                    <td>0.345</td>
+                    <td>0.576</td>
+                    <td><strong>0.523</strong></td>
+                    <td>0.628</td>
+                  </tr>
+                  <tr>
+                    <td>XGBoost</td>
+                    <td>0.502</td>
+                    <td>0.292</td>
+                    <td>0.506</td>
+                    <td>0.209</td>
+                    <td>0.803</td>
+                  </tr>
+                  <tr>
+                    <td>Random Forest</td>
+                    <td>0.595</td>
+                    <td><strong>0.355</strong></td>
+                    <td>0.535</td>
+                    <td>0.198</td>
+                    <td><strong>0.872</strong></td>
+                  </tr>
+                  <tr>
+                    <td>MLP</td>
+                    <td>0.573</td>
+                    <td>0.337</td>
+                    <td>0.527</td>
+                    <td>0.186</td>
+                    <td>0.867</td>
+                  </tr>
+                  <tr>
+                    <td>DANN</td>
+                    <td>0.554</td>
+                    <td>0.327</td>
+                    <td>0.522</td>
+                    <td>0.209</td>
+                    <td>0.835</td>
+                  </tr>
+                  <tr>
+                    <td>GRU-DANN</td>
+                    <td><strong>0.599</strong></td>
+                    <td>0.346</td>
+                    <td><strong>0.584</strong></td>
+                    <td>0.512</td>
+                    <td>0.656</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>
+                Bold indicates best in column. GRU-DANN achieved the highest ROC AUC (0.599) and
+                balanced accuracy (0.584), while Logistic Regression led on sensitivity (0.523) and
+                Random Forest on specificity (0.872). All 95% confidence intervals overlap
+                substantially; overall discriminative performance is modest.
+              </p>
+              <p>
+                <img
+                  alt="Evaluation protocol: two-stage design with GroupShuffleSplit for ablation studies and LOGO for final model comparison"
+                  src="/images/thesis-eval.png"
+                  width="1603"
+                  height="843"
+                  loading="lazy"
+                />
+              </p>
+              <h3 id="committee">Committee</h3>
+              <ul>
+                <li>
+                  <strong>Chair</strong>: Dr. Alvitta Ottley, Department of Computer Science &amp;
+                  Engineering
+                </li>
+                <li><strong>Member</strong>: Dr. Ganesh Babulal, Department of Neurology</li>
+                <li>
+                  <strong>Member</strong>: Dr. Nathan Jacobs, Department of Computer Science &amp;
+                  Engineering
+                </li>
+              </ul>
+              <h3 id="links">Links</h3>
+              <ul>
+                <li><a href="/files/thesis-main.pdf">Full Thesis (PDF)</a></li>
+                <li>
+                  <a
+                    href="https://openscholarship.wustl.edu/eng_etds/1341/"
+                    target="_blank"
+                    rel="noopener"
+                    >WashU Scholarly Repository (OpenScholarship Link)</a
+                  >
+                </li>
+              </ul>
+            </section>
+            <nav class="pagination" aria-label="Project Pagination">
+              <a
+                href="/projects/hackwashu-databases-workshop"
+                class="pagination--pager"
+                aria-label="Go to previous project: HackWashU Databases Workshop"
+                title="HackWashU Databases Workshop"
+                >Previous</a
+              >
+              <a
+                href="/projects/"
+                class="pagination--pager"
+                aria-label="Go to next project: All Projects"
+                title="All Projects"
+                >Next</a
+              >
+            </nav>
+          </article>
+        </div>
+      </main>
     </div>
 
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="container footer-grid">
-            <div class="footer-col about-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Aadarsha Gopala Reddy</h3>
-                <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">M.S. Computer Science graduate from Washington University in St. Louis. Passionate about solving complex distributed systems problems, building high-throughput data pipelines, and training machine learning models.</p>
-            </div>
-            <div class="footer-col links-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Explore</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Home</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/projects/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Projects Showcase</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/cv/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Curriculum Vitae</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/availability/" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Availability Schedule</a></li>
-                </ul>
-            </div>
-            <div class="footer-col contact-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Connect</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="#" class="protected-email" data-email-user="YWR1cnMyMDAy" data-email-domain="Z21haWwuY29t" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;"><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem;"></i> Email</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;"><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem;"></i> LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="https://github.com/agopalareddy" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;"><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem;"></i> GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
-                </ul>
-            </div>
-            <div class="footer-col resources-col">
-                <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Downloads &amp; Info</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="/files/reddy_cv.pdf" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Curriculum Vitae (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/files/reddy_resume.pdf" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Resume (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/accessibility.html" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Accessibility Statement</a></li>
-                </ul>
-            </div>
+      <div class="container footer-grid">
+        <div class="footer-col about-col">
+          <h3
+            style="
+              font-family: var(--font-heading);
+              color: var(--text-primary);
+              font-size: 1rem;
+              border-bottom: 2px solid var(--accent);
+              padding-bottom: 0.25rem;
+              display: inline-block;
+              margin-bottom: 1rem;
+            "
+          >
+            Aadarsha Gopala Reddy
+          </h3>
+          <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
+            M.S. Computer Science graduate from Washington University in St. Louis. Passionate about
+            solving complex distributed systems problems, building high-throughput data pipelines,
+            and training machine learning models.
+          </p>
         </div>
-        <div class="container footer-bottom" style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 1.5rem;">
-            <p style="margin: 0;">&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
+        <div class="footer-col links-col">
+          <h3
+            style="
+              font-family: var(--font-heading);
+              color: var(--text-primary);
+              font-size: 1rem;
+              border-bottom: 2px solid var(--accent);
+              padding-bottom: 0.25rem;
+              display: inline-block;
+              margin-bottom: 1rem;
+            "
+          >
+            Explore
+          </h3>
+          <ul style="list-style: none; padding: 0; margin: 0">
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Home</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/projects/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Projects Showcase</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/cv/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Curriculum Vitae</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/availability/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Availability Schedule</a
+              >
+            </li>
+          </ul>
         </div>
+        <div class="footer-col contact-col">
+          <h3
+            style="
+              font-family: var(--font-heading);
+              color: var(--text-primary);
+              font-size: 1rem;
+              border-bottom: 2px solid var(--accent);
+              padding-bottom: 0.25rem;
+              display: inline-block;
+              margin-bottom: 1rem;
+            "
+          >
+            Connect
+          </h3>
+          <ul style="list-style: none; padding: 0; margin: 0">
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="#"
+                class="protected-email"
+                data-email-user="YWR1cnMyMDAy"
+                data-email-domain="Z21haWwuY29t"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                Email</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="https://www.linkedin.com/in/agopalareddy"
+                target="_blank"
+                rel="noopener"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                LinkedIn <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="https://github.com/agopalareddy"
+                target="_blank"
+                rel="noopener"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                GitHub <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="footer-col resources-col">
+          <h3
+            style="
+              font-family: var(--font-heading);
+              color: var(--text-primary);
+              font-size: 1rem;
+              border-bottom: 2px solid var(--accent);
+              padding-bottom: 0.25rem;
+              display: inline-block;
+              margin-bottom: 1rem;
+            "
+          >
+            Downloads &amp; Info
+          </h3>
+          <ul style="list-style: none; padding: 0; margin: 0">
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/files/reddy_cv.pdf"
+                target="_blank"
+                rel="noopener"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Curriculum Vitae (PDF) <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/files/reddy_resume.pdf"
+                target="_blank"
+                rel="noopener"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Resume (PDF) <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/accessibility.html"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Accessibility Statement</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="container footer-bottom"
+        style="
+          border-top: 1px solid var(--border-color);
+          padding-top: 1.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          margin-top: 1.5rem;
+        "
+      >
+        <p style="margin: 0">
+          &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
+        </p>
+      </div>
     </footer>
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/email-protection.js"></script>
-</body>
+  </body>
 </html>

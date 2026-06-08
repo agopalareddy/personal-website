@@ -36,6 +36,14 @@
   --cat-web-color: #1e3a8a;
   --cat-tools-bg: rgba(4, 120, 87, 0.08);
   --cat-tools-color: #047857;
+  --cat-professional-bg: rgba(13, 148, 136, 0.08);
+  --cat-professional-color: #0d9488;
+  --cat-education-bg: rgba(217, 119, 6, 0.08);
+  --cat-education-color: #d97706;
+  --cat-leadership-bg: rgba(124, 58, 237, 0.08);
+  --cat-leadership-color: #7c3aed;
+  --cat-awards-bg: rgba(225, 29, 72, 0.08);
+  --cat-awards-color: #e11d48;
 
   /* Document Modal Variables */
   --modal-bg: rgba(255, 255, 255, 0.85);
@@ -73,6 +81,14 @@
     --cat-web-color: #fbbf24;
     --cat-tools-bg: rgba(168, 85, 247, 0.15);
     --cat-tools-color: #c084fc;
+    --cat-professional-bg: rgba(45, 212, 191, 0.15);
+    --cat-professional-color: #2dd4bf;
+    --cat-education-bg: rgba(251, 191, 36, 0.15);
+    --cat-education-color: #fbbf24;
+    --cat-leadership-bg: rgba(167, 139, 250, 0.15);
+    --cat-leadership-color: #a78bfa;
+    --cat-awards-bg: rgba(251, 113, 133, 0.15);
+    --cat-awards-color: #fb7185;
 
     /* Document Modal Variables */
     --modal-bg: rgba(24, 24, 24, 0.85);
@@ -110,6 +126,14 @@
   --cat-web-color: #fbbf24;
   --cat-tools-bg: rgba(168, 85, 247, 0.15);
   --cat-tools-color: #c084fc;
+  --cat-professional-bg: rgba(45, 212, 191, 0.15);
+  --cat-professional-color: #2dd4bf;
+  --cat-education-bg: rgba(251, 191, 36, 0.15);
+  --cat-education-color: #fbbf24;
+  --cat-leadership-bg: rgba(167, 139, 250, 0.15);
+  --cat-leadership-color: #a78bfa;
+  --cat-awards-bg: rgba(251, 113, 133, 0.15);
+  --cat-awards-color: #fb7185;
 
   /* Document Modal Variables */
   --modal-bg: rgba(24, 24, 24, 0.85);
@@ -146,6 +170,14 @@
   --cat-web-color: #1e3a8a;
   --cat-tools-bg: rgba(4, 120, 87, 0.08);
   --cat-tools-color: #047857;
+  --cat-professional-bg: rgba(13, 148, 136, 0.08);
+  --cat-professional-color: #0d9488;
+  --cat-education-bg: rgba(217, 119, 6, 0.08);
+  --cat-education-color: #d97706;
+  --cat-leadership-bg: rgba(124, 58, 237, 0.08);
+  --cat-leadership-color: #7c3aed;
+  --cat-awards-bg: rgba(225, 29, 72, 0.08);
+  --cat-awards-color: #e11d48;
 
   /* Document Modal Variables */
   --modal-bg: rgba(255, 255, 255, 0.85);
@@ -1213,6 +1245,22 @@ main.container {
 .cat-tools {
   background-color: var(--cat-tools-bg);
   color: var(--cat-tools-color);
+}
+.cat-professional {
+  background-color: var(--cat-professional-bg);
+  color: var(--cat-professional-color);
+}
+.cat-education {
+  background-color: var(--cat-education-bg);
+  color: var(--cat-education-color);
+}
+.cat-leadership {
+  background-color: var(--cat-leadership-bg);
+  color: var(--cat-leadership-color);
+}
+.cat-awards {
+  background-color: var(--cat-awards-bg);
+  color: var(--cat-awards-color);
 }
 
 .card-venue {

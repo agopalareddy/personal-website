@@ -2006,9 +2006,10 @@ body.page-loaded {
 
 .timeline-card {
   position: relative;
+  overflow: visible !important;
 }
 
-.timeline-card::before {
+.timeline-card::after {
   content: '';
   position: absolute;
   left: -1.6rem;
@@ -2026,7 +2027,7 @@ body.page-loaded {
   z-index: 2;
 }
 
-.timeline-card:hover::before {
+.timeline-card:hover::after {
   border-color: var(--accent);
   background-color: var(--accent);
   transform: scale(1.25);

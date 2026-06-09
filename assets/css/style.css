@@ -1959,23 +1959,29 @@ body.page-loaded {
   }
 
   /* Make TOC container adapt for mobile page layout and be sticky */
+  /* Make TOC container adapt for mobile page layout as a sticky card modal */
   body:not(.home-page) .toc-container {
     position: sticky;
-    top: 3.5rem; /* Stick below mobile header */
+    top: 4.25rem; /* Stick below mobile header with spacing */
     z-index: 100; /* Float above other content */
-    background: var(--header-bg);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0.6rem 1rem !important;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    margin-top: 0 !important;
-    padding: 0.35rem 1rem !important;
-    border-top: none !important;
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    width: auto !important;
   }
   body:not(.home-page) #tocNav {
     max-height: 50vh;
     overflow-y: auto;
     scrollbar-width: thin;
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
   }
   body:not(.home-page) .toc-list {
     display: grid !important;
@@ -1985,6 +1991,13 @@ body.page-loaded {
   }
   body:not(.home-page) .toc-nested-list {
     margin-bottom: 0 !important;
+  }
+  /* On mobile, before JS initializes, keep the TOC collapsed to avoid layout shift/flashing */
+  .toc-toggle-btn:not([data-initialized='true']) + #tocNav {
+    display: none !important;
+  }
+  .toc-toggle-btn:not([data-initialized='true']) .toc-toggle-icon {
+    transform: rotate(-90deg);
   }
 }
 
@@ -2120,14 +2133,14 @@ body.page-loaded {
   border-top: 1px solid var(--border-color);
   width: 100%;
 }
-.toc-title {
+.toc-container .toc-title {
   font-family: var(--font-heading);
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text-primary);
-  margin: 0;
-  line-height: 1;
+  margin: 0 !important;
+  line-height: 1.2 !important;
 }
 .toc-list {
   list-style: none;
@@ -2205,12 +2218,14 @@ body.page-loaded {
   color: var(--accent);
 }
 .toc-toggle-icon {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   transition:
     transform var(--transition),
     color var(--transition);
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 .toc-toggle-btn[aria-expanded='false'] .toc-toggle-icon {
   transform: rotate(-90deg);

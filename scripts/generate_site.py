@@ -815,7 +815,7 @@ def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
             f'                      <span class="card-venue">{formatted_date}</span>\n'
             f'                    </div>\n'
             f'                    <h3 class="project-title"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h3>\n'
-            f'                    <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem; margin-bottom: 0.8rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">{html_escape(venue_label)}</div>\n'
+            f'                    <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">{html_escape(venue_label)}</div>\n'
             f'                    <p class="project-excerpt">{excerpt}</p>\n'
             f'                    <div class="project-tech">{tags_html}</div>\n'
             f'                    {actions_html}\n'

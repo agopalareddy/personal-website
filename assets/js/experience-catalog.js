@@ -30,6 +30,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var filterButtons = document.querySelectorAll('.filter-btn');
   var emptyState = document.getElementById('emptyState');
 
+  var orgFilter = document.getElementById('orgFilter');
+  var yearFilter = document.getElementById('yearFilter');
+
+  if (orgFilter) {
+    orgFilter.addEventListener('change', function (e) {
+      activeOrg = e.target.value;
+      renderExperiences();
+    });
+  }
+  if (yearFilter) {
+    yearFilter.addEventListener('change', function (e) {
+      activeYear = e.target.value;
+      renderExperiences();
+    });
+  }
+
   // ---------------------------------------------------------------------------
   // Remove SSR fallback (noscript + JSON blob) if present.  Modern browsers
   // re-execute <noscript> contents as DOM nodes when JS is enabled, so we
@@ -47,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var activeFilter = 'all';
   var activeSort = 'date-desc';
   var searchQuery = '';
+  var activeOrg = 'all';
+  var activeYear = 'all';
 
   // ---------------------------------------------------------------------------
   // Helpers
@@ -177,6 +195,39 @@ document.addEventListener('DOMContentLoaded', function () {
     var filtered = experiences.filter(function (exp) {
       var matchesCategory = activeFilter === 'all' || exp.category === activeFilter;
 
+      var matchesOrg = true;
+      if (activeOrg !== 'all') {
+        var orgText = (exp.organization || '').toLowerCase();
+        if (activeOrg === 'WashU') {
+          matchesOrg = orgText.indexOf('washington university') !== -1;
+        } else if (activeOrg === 'OWU') {
+          matchesOrg = orgText.indexOf('ohio wesleyan') !== -1;
+        } else if (activeOrg === 'Corporate') {
+          matchesOrg = orgText.indexOf('crittero') !== -1 || orgText.indexOf('lab714') !== -1;
+        } else if (activeOrg === 'Personal') {
+          matchesOrg =
+            orgText.indexOf('washington university') === -1 &&
+            orgText.indexOf('ohio wesleyan') === -1 &&
+            orgText.indexOf('crittero') === -1 &&
+            orgText.indexOf('lab714') === -1;
+        }
+      }
+
+      var startYear = exp.start_date ? new Date(exp.start_date + 'T00:00:00').getFullYear() : 0;
+      var endYear = exp.end_date
+        ? new Date(exp.end_date + 'T00:00:00').getFullYear()
+        : new Date().getFullYear();
+      var matchesYear = true;
+      if (activeYear !== 'all') {
+        if (activeYear === '2024-2026') {
+          matchesYear = startYear <= 2026 && endYear >= 2024;
+        } else if (activeYear === '2020-2023') {
+          matchesYear = startYear <= 2023 && endYear >= 2020;
+        } else if (activeYear === 'before-2020') {
+          matchesYear = startYear < 2020;
+        }
+      }
+
       var q = searchQuery.toLowerCase();
       var matchesSearch =
         !q ||
@@ -184,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
         (exp.organization && exp.organization.toLowerCase().indexOf(q) !== -1) ||
         (exp.excerpt && exp.excerpt.toLowerCase().indexOf(q) !== -1);
 
-      return matchesCategory && matchesSearch;
+      return matchesCategory && matchesOrg && matchesYear && matchesSearch;
     });
 
     // 2. Sort
@@ -216,7 +267,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (emptyState) emptyState.hidden = true;
 
     // 4. Paint cards
-    grid.innerHTML = filtered.map(createExperienceCard).join('');
+    var html = '';
+    var lastYear = null;
+    filtered.forEach(function (exp) {
+      var year = exp.start_date ? new Date(exp.start_date + 'T00:00:00').getFullYear() : null;
+      if (year && year !== lastYear) {
+        html += '<div class="timeline-year">' + year + '</div>';
+        lastYear = year;
+      }
+      html += createExperienceCard(exp);
+    });
+    grid.innerHTML = html;
 
     // 5. Re-attach spotlight effect to new cards
     setupSpotlight();

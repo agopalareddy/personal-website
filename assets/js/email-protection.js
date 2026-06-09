@@ -21,7 +21,9 @@
       const displayText = el.getAttribute('data-email-text');
       if (displayText) {
         el.textContent = displayText;
-      } else {
+      } else if (!el.children.length) {
+        // Only set raw email as text when there are no child elements (icons etc.)
+        // to avoid destroying icon + label patterns in footers
         el.textContent = email;
       }
 

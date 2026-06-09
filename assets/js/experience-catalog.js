@@ -181,7 +181,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var cardHtml =
-      '<div class="project-card spotlight-card timeline-card experience-card" data-category="' +
+      '<div class="project-card spotlight-card timeline-card experience-card" id="exp-' +
+      escapeHtml(id) +
+      '" data-category="' +
       escapeHtml(category) +
       '">' +
       '<div class="card-meta">' +
@@ -299,6 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (filtered.length === 0) {
       grid.innerHTML = '';
       if (emptyState) emptyState.hidden = false;
+      renderToc([]);
       return;
     }
     if (emptyState) emptyState.hidden = true;
@@ -309,12 +312,15 @@ document.addEventListener('DOMContentLoaded', function () {
     filtered.forEach(function (exp) {
       var year = exp.start_date ? parseInt(exp.start_date.split('-')[0], 10) : null;
       if (year && year !== lastYear) {
-        html += '<div class="timeline-year">' + year + '</div>';
+        html += '<div class="timeline-year" id="year-' + year + '">' + year + '</div>';
         lastYear = year;
       }
       html += createExperienceCard(exp);
     });
     grid.innerHTML = html;
+
+    // Render Table of Contents
+    renderToc(filtered);
 
     // 5. Re-attach spotlight effect to new cards
     setupSpotlight();
@@ -428,6 +434,125 @@ document.addEventListener('DOMContentLoaded', function () {
       renderExperiences();
     });
   });
+
+  // ---------------------------------------------------------------------------
+  // Table of Contents generator
+  // ---------------------------------------------------------------------------
+  function setupTocScrollListeners(tocListElement) {
+    var links = tocListElement.querySelectorAll('a[href^="#"]');
+    links.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href').substring(1);
+        var targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          var headerOffset = 90; // height of sticky top header + some padding
+          var elementPosition = targetElement.getBoundingClientRect().top;
+          var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+
+          // Update URL hash without jump
+          history.pushState(null, null, '#' + targetId);
+        }
+      });
+    });
+  }
+
+  function renderToc(filtered) {
+    var tocContainer = document.getElementById('tocContainer');
+    var tocList = document.getElementById('tocList');
+    if (!tocContainer || !tocList) return;
+
+    if (filtered.length <= 1) {
+      tocContainer.hidden = true;
+      tocList.innerHTML = '';
+      return;
+    }
+
+    var html = '';
+
+    if (activeSort === 'title-asc') {
+      filtered.forEach(function (exp) {
+        var id = exp.id || '';
+        var title = exp.title || '';
+        if (title.length > 32) {
+          title = title.substring(0, 32) + '...';
+        }
+        html +=
+          '<li class="toc-item">' +
+          '<a href="#exp-' +
+          escapeHtml(id) +
+          '" class="toc-link">' +
+          escapeHtml(title) +
+          '</a>' +
+          '</li>';
+      });
+    } else {
+      var currentYear = null;
+      var yearItemsHtml = '';
+
+      filtered.forEach(function (exp) {
+        var year = exp.start_date ? parseInt(exp.start_date.split('-')[0], 10) : null;
+        var id = exp.id || '';
+        var title = exp.title || '';
+        if (title.length > 32) {
+          title = title.substring(0, 32) + '...';
+        }
+
+        if (year && year !== currentYear) {
+          if (currentYear !== null) {
+            html +=
+              '<li class="toc-item">' +
+              '<a href="#year-' +
+              currentYear +
+              '" class="toc-year-header">' +
+              currentYear +
+              '</a>' +
+              '<ul class="toc-nested-list">' +
+              yearItemsHtml +
+              '</ul>' +
+              '</li>';
+          }
+          currentYear = year;
+          yearItemsHtml = '';
+        }
+
+        yearItemsHtml +=
+          '<li class="toc-item">' +
+          '<a href="#exp-' +
+          escapeHtml(id) +
+          '" class="toc-link">' +
+          escapeHtml(title) +
+          '</a>' +
+          '</li>';
+      });
+
+      if (currentYear !== null) {
+        html +=
+          '<li class="toc-item">' +
+          '<a href="#year-' +
+          currentYear +
+          '" class="toc-year-header">' +
+          currentYear +
+          '</a>' +
+          '<ul class="toc-nested-list">' +
+          yearItemsHtml +
+          '</ul>' +
+          '</li>';
+      } else {
+        html = yearItemsHtml;
+      }
+    }
+
+    tocList.innerHTML = html;
+    tocContainer.hidden = false;
+
+    setupTocScrollListeners(tocList);
+  }
 
   // ---------------------------------------------------------------------------
   // Initialization

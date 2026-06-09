@@ -1963,7 +1963,7 @@ body.page-loaded {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     margin-top: 0 !important;
-    padding: 0.75rem 1rem !important;
+    padding: 0.5rem 1rem !important;
     border-top: none !important;
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
@@ -2122,6 +2122,7 @@ body.page-loaded {
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text-primary);
+  margin: 0;
 }
 .toc-list {
   list-style: none;

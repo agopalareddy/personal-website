@@ -467,7 +467,7 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
     # supplied title, so we pass the bare page name to avoid a
     # double-suffix ("Professional Experience — Aadarsha Gopala Reddy
     # - Aadarsha Gopala Reddy") in the final <title>.
-    title = "Professional Experience"
+    title = "Experience"
     description = (
         "Aadarsha Gopala Reddy's professional, research, leadership, "
         "and academic experience."
@@ -494,7 +494,7 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
     noscript_cards = _render_noscript_cards(entries)
 
     body_html = f"""<h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">
-                Professional Experience
+                Experience
             </h1>
             <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 2.5rem;">
                 A curated catalog of my professional, research, leadership, and academic experience. Filter by category, search by keyword, or sort chronologically.
@@ -809,7 +809,7 @@ def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
         actions_html = f'<div class="card-actions">{"".join(actions)}</div>'
 
         cards.append(
-            f'                  <div class="project-card spotlight-card" id="proj-{slug}">\n'
+            f'                  <div class="project-card spotlight-card timeline-card" id="proj-{slug}">\n'
             f'                    <div class="card-meta">\n'
             f'                      <span class="card-category {cat_class}">{html_escape(category)}</span>\n'
             f'                      <span class="card-venue">{formatted_date}</span>\n'

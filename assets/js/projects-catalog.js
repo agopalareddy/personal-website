@@ -462,6 +462,7 @@ let activeFilter = 'all';
 let activeVenue = 'all';
 let activeSort = 'date-desc';
 let searchQuery = '';
+let activeYear = 'all';
 
 function getCategoryClass(cat) {
   if (cat === 'Research & ML') return 'cat-research';
@@ -476,6 +477,16 @@ function renderProjects() {
     const matchesCategory = activeFilter === 'all' || p.category === activeFilter;
     const matchesVenue = activeVenue === 'all' || p.venue_tag === activeVenue;
 
+    const projYear = new Date(p.date + 'T00:00:00').getFullYear();
+    let matchesYear = true;
+    if (activeYear === '2024-2026') {
+      matchesYear = projYear >= 2024 && projYear <= 2026;
+    } else if (activeYear === '2020-2023') {
+      matchesYear = projYear >= 2020 && projYear <= 2023;
+    } else if (activeYear === 'before-2020') {
+      matchesYear = projYear < 2020;
+    }
+
     const q = searchQuery.toLowerCase();
     const matchesSearch =
       !q ||
@@ -485,7 +496,7 @@ function renderProjects() {
       p.venue_tag.toLowerCase().includes(q) ||
       p.technologies.some((t) => t.toLowerCase().includes(q));
 
-    return matchesCategory && matchesVenue && matchesSearch;
+    return matchesCategory && matchesVenue && matchesYear && matchesSearch;
   });
 
   // 2. Sort
@@ -574,6 +585,14 @@ function setupSpotlight() {
 // Listeners
 searchInput.addEventListener('input', (e) => {
   searchQuery = e.target.value;
+  const yearFilter = document.getElementById('yearFilter');
+  if (yearFilter) {
+    yearFilter.addEventListener('change', (e) => {
+      activeYear = e.target.value;
+      renderProjects();
+    });
+  }
+
   renderProjects();
 });
 
@@ -586,18 +605,50 @@ filterButtons.forEach((btn) => {
     btn.classList.add('active');
     btn.setAttribute('aria-pressed', 'true');
     activeFilter = btn.getAttribute('data-filter');
+    const yearFilter = document.getElementById('yearFilter');
+    if (yearFilter) {
+      yearFilter.addEventListener('change', (e) => {
+        activeYear = e.target.value;
+        renderProjects();
+      });
+    }
+
     renderProjects();
   });
 });
 
 venueFilter.addEventListener('change', (e) => {
   activeVenue = e.target.value;
+  const yearFilter = document.getElementById('yearFilter');
+  if (yearFilter) {
+    yearFilter.addEventListener('change', (e) => {
+      activeYear = e.target.value;
+      renderProjects();
+    });
+  }
+
   renderProjects();
 });
 
 projectSort.addEventListener('change', (e) => {
   activeSort = e.target.value;
+  const yearFilter = document.getElementById('yearFilter');
+  if (yearFilter) {
+    yearFilter.addEventListener('change', (e) => {
+      activeYear = e.target.value;
+      renderProjects();
+    });
+  }
+
   renderProjects();
 });
+
+const yearFilter = document.getElementById('yearFilter');
+if (yearFilter) {
+  yearFilter.addEventListener('change', (e) => {
+    activeYear = e.target.value;
+    renderProjects();
+  });
+}
 
 renderProjects();

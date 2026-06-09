@@ -2033,3 +2033,31 @@ body.page-loaded {
   transform: scale(1.25);
   box-shadow: 0 0 8px var(--accent);
 }
+
+/* Timeline Year Header on the left connector line */
+.timeline-year {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  z-index: 2;
+  align-self: flex-start;
+}
+
+.timeline-year::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem; /* Centered exactly on the line: -1.2rem center - 0.3rem half-width */
+  top: 0.45rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: var(--accent);
+  border: 2px solid var(--bg-surface);
+  box-shadow: 0 0 0 2px var(--accent);
+  z-index: 3;
+}

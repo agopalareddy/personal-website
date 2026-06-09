@@ -2118,12 +2118,10 @@ body.page-loaded {
 }
 .toc-title {
   font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--text-primary);
-  margin-bottom: 0.85rem;
 }
 .toc-list {
   list-style: none;
@@ -2186,6 +2184,10 @@ body.page-loaded {
   text-align: left;
   color: inherit;
   font-family: inherit;
+  transition: margin-bottom var(--transition);
+}
+.toc-toggle-btn[aria-expanded='true'] {
+  margin-bottom: 0.6rem;
 }
 .toc-toggle-btn:focus-visible {
   outline: 2px solid var(--accent);
@@ -2197,12 +2199,11 @@ body.page-loaded {
   color: var(--accent);
 }
 .toc-toggle-icon {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   transition:
     transform var(--transition),
     color var(--transition);
-  margin-bottom: 0.85rem;
 }
 .toc-toggle-btn[aria-expanded='false'] .toc-toggle-icon {
   transform: rotate(-90deg);

@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var venueText = org ? org + ' • ' + dateRange : dateRange;
 
     var cardHtml =
-      '<div class="project-card spotlight-card" data-category="' +
+      '<div class="project-card spotlight-card timeline-card" data-category="' +
       escapeHtml(category) +
       '">' +
       '<div class="card-meta">' +

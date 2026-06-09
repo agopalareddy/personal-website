@@ -521,6 +521,7 @@ function renderProjects() {
     return;
   }
 
+  let lastYear = null;
   projectGrid.innerHTML = filtered
     .map((p) => {
       const catClass = getCategoryClass(p.category);
@@ -556,8 +557,16 @@ function renderProjects() {
 
       const actionsHtml = `<div class="card-actions">${actions.join('')}</div>`;
 
+      let yearHeaderHtml = '';
+      const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
+      if (year && year !== lastYear) {
+        yearHeaderHtml = `<div class="timeline-year" id="year-${year}">${year}</div>`;
+        lastYear = year;
+      }
+
       return `
-                    <div class="project-card spotlight-card" id="proj-${p.id}">
+                    ${yearHeaderHtml}
+                    <div class="project-card spotlight-card timeline-card" id="proj-${p.id}">
                         <div class="card-meta">
                             <span class="card-category ${catClass}">${p.category}</span>
                             <span class="card-venue">${p.formatted_date}</span>

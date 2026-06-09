@@ -2049,7 +2049,8 @@ body.page-loaded {
 }
 
 /* ─── Premium Vertical Timeline for Experience Page ─── */
-.experience-timeline {
+.experience-timeline,
+.project-timeline {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -2057,7 +2058,8 @@ body.page-loaded {
   padding-left: 2rem;
 }
 
-.experience-timeline::before {
+.experience-timeline::before,
+.project-timeline::before {
   content: '';
   position: absolute;
   left: 0.8rem;
@@ -2102,7 +2104,7 @@ body.page-loaded {
 .timeline-year {
   position: relative;
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-top: 1.5rem;
@@ -2110,20 +2112,32 @@ body.page-loaded {
   padding-left: 0.5rem;
   z-index: 2;
   align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 .timeline-year::before {
   content: '';
   position: absolute;
-  left: -1.5rem; /* Centered exactly on the line: -1.2rem center - 0.3rem half-width */
-  top: 0.45rem;
-  width: 0.6rem;
-  height: 0.6rem;
+  left: -1.55rem; /* Center = left + width/2 = -1.55 + 0.35 = -1.2rem */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.7rem;
+  height: 0.7rem;
   border-radius: 50%;
   background-color: var(--accent);
   border: 2px solid var(--bg-surface);
   box-shadow: 0 0 0 2px var(--accent);
   z-index: 3;
+}
+
+.timeline-year::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border-color), transparent);
 }
 
 /* Dynamic Table of Contents Sidebar Widget */

@@ -560,9 +560,10 @@ function renderProjects() {
                     <div class="project-card spotlight-card" id="proj-${p.id}">
                         <div class="card-meta">
                             <span class="card-category ${catClass}">${p.category}</span>
-                            <span class="card-venue">${venueLabel} &bull; ${p.formatted_date}</span>
+                            <span class="card-venue">${p.formatted_date}</span>
                         </div>
                         <h3 class="project-title">${titleHtml}</h3>
+                        <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem; margin-bottom: 0.8rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">${venueLabel}</div>
                         <p class="project-excerpt">${p.excerpt}</p>
                         <div class="project-tech">${tagsHtml}</div>
                         ${actionsHtml}

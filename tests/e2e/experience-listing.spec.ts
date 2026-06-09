@@ -145,7 +145,7 @@ test.describe('Experience Listing Page', () => {
 
     // Should be visible initially since we have > 1 cards
     await expect(tocContainer).toBeVisible();
-    
+
     // Check that we have year headers and card links
     const yearHeaders = tocList.locator('.toc-year-header');
     const links = tocList.locator('.toc-link');

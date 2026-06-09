@@ -735,9 +735,98 @@ def generate_project_detail_page(project: dict[str, Any]) -> str:
 # ---------------------------------------------------------------------------
 
 
+def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
+    """Render the static, no-JS fallback card grid for projects."""
+    sorted_projects = sorted(
+        projects,
+        key=lambda x: x.get("date") or "1970-01-01",
+        reverse=True
+    )
+
+    venue_labels = {
+        "WashU": "Washington University in St. Louis",
+        "OWU": "Ohio Wesleyan University",
+        "MITxSureStart": "MITxSureStart",
+        "Personal": "Personal Projects",
+    }
+
+    cards: list[str] = []
+    for p in sorted_projects:
+        title = html_escape((p.get("title") or "").replace("&apos;", "'"))
+        excerpt = html_escape((p.get("excerpt") or "").replace("&apos;", "'"))
+        venue_tag = p.get("venue_tag") or ""
+        venue_label = venue_labels.get(venue_tag, venue_tag)
+        formatted_date = html_escape(p.get("formatted_date") or "")
+        category = p.get("category") or ""
+        slug = p.get("id") or ""
+        permalink = p.get("permalink") or ""
+
+        cat_class = ""
+        if category == "Research & ML":
+            cat_class = "cat-research"
+        elif category == "Web Apps":
+            cat_class = "cat-web"
+        elif category == "Software & Tools":
+            cat_class = "cat-tools"
+
+        tags_html = "".join([f'<span class="tech-tag">{html_escape(t)}</span>' for t in p.get("technologies", [])])
+
+        actions = []
+        actions.append(
+            f'<a href="{permalink}" class="card-btn btn-detail" '
+            f'aria-label="Explore dedicated detail page for {title}">'
+            f'<i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>'
+        )
+
+        if p.get("github"):
+            actions.append(
+                f'<a href="{p["github"]}" target="_blank" rel="noopener" class="card-btn btn-github" '
+                f'aria-label="View {title} codebase on GitHub (opens in a new tab)">'
+                f'<i class="fab fa-github" aria-hidden="true"></i> Code '
+                f'<span class="sr-only">(opens in a new tab)</span></a>'
+            )
+        if p.get("demo"):
+            actions.append(
+                f'<a href="{p["demo"]}" class="card-btn btn-demo" '
+                f'aria-label="Launch live interactive demo for {title}">'
+                f'<i class="fas fa-rocket" aria-hidden="true"></i> Demo</a>'
+            )
+        if p.get("pdf"):
+            actions.append(
+                f'<a href="{p["pdf"]}" target="_blank" rel="noopener" class="card-btn btn-pdf" '
+                f'aria-label="Download {title} PDF paper (opens in a new tab)">'
+                f'<i class="fas fa-file-pdf" aria-hidden="true"></i> PDF '
+                f'<span class="sr-only">(opens in a new tab)</span></a>'
+            )
+        if p.get("presentation"):
+            actions.append(
+                f'<a href="{p["presentation"]}" target="_blank" rel="noopener" class="card-btn btn-pdf" '
+                f'aria-label="Download {title} presentation slides (opens in a new tab)">'
+                f'<i class="fas fa-file-powerpoint" aria-hidden="true"></i> Slide '
+                f'<span class="sr-only">(opens in a new tab)</span></a>'
+            )
+
+        actions_html = f'<div class="card-actions">{"".join(actions)}</div>'
+
+        cards.append(
+            f'                  <div class="project-card spotlight-card" id="proj-{slug}">\n'
+            f'                    <div class="card-meta">\n'
+            f'                      <span class="card-category {cat_class}">{html_escape(category)}</span>\n'
+            f'                      <span class="card-venue">{formatted_date}</span>\n'
+            f'                    </div>\n'
+            f'                    <h3 class="project-title"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h3>\n'
+            f'                    <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem; margin-bottom: 0.8rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">{html_escape(venue_label)}</div>\n'
+            f'                    <p class="project-excerpt">{excerpt}</p>\n'
+            f'                    <div class="project-tech">{tags_html}</div>\n'
+            f'                    {actions_html}\n'
+            f'                  </div>'
+        )
+    return "\n".join(cards)
+
+
 def update_project_catalog_array(projects: list[dict[str, Any]]) -> bool:
     """
-    Regex-replace the embedded catalog array inside
+    Regex-replace the embedded catalog array and <noscript> static cards inside
     `projects/index.html`.  The page stores its data inside a
     `<script type="application/json" class="projects-data">` block; this
     function updates the JSON array inside that block with a lightweight
@@ -784,6 +873,20 @@ def update_project_catalog_array(projects: list[dict[str, Any]]) -> bool:
             file=sys.stderr,
         )
         return False
+
+    noscript_cards = _render_project_noscript_cards(projects)
+    new_content, n_subs_noscript = re.subn(
+        r'(<noscript>)\s*[\s\S]*?\s*(</noscript>)',
+        f"\\1\n{noscript_cards}\n                \\2",
+        new_content,
+        flags=re.DOTALL,
+    )
+
+    if n_subs_noscript == 0:
+        print(
+            f"[generate_site] WARNING: no `<noscript>[...]</noscript>` block found in {catalog_path}; noscript cards not updated.",
+            file=sys.stderr,
+        )
 
     with open(catalog_path, "w", encoding="utf-8") as f:
         f.write(new_content)

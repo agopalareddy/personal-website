@@ -129,10 +129,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var excerpt = escapeHtml(exp.excerpt || '');
     var id = exp.id || '';
     var detailUrl = '/experience/' + category + '/' + id + '.html';
-    var venueText = org ? org + ' \u2022 ' + dateRange : dateRange;
+    var venueText = org ? org + ' • ' + dateRange : dateRange;
 
     var cardHtml =
-      '<article class="card spotlight-card experience-card" data-category="' +
+      '<div class="project-card spotlight-card" data-category="' +
       escapeHtml(category) +
       '">' +
       '<div class="card-meta">' +
@@ -145,24 +145,26 @@ document.addEventListener('DOMContentLoaded', function () {
       venueText +
       '</span>' +
       '</div>' +
-      '<h3 class="experience-title">' +
+      '<h3 class="project-title">' +
       '<a href="' +
       detailUrl +
-      '" aria-label="View details for ' +
+      '" aria-label="Explore dedicated detail page for ' +
       title +
       '">' +
       title +
       '</a>' +
       '</h3>' +
-      '<p class="experience-excerpt">' +
+      '<p class="project-excerpt">' +
       excerpt +
       '</p>' +
       '<div class="card-actions">' +
       '<a href="' +
       detailUrl +
-      '" class="card-btn btn-detail">View Details <span aria-hidden="true">&rarr;</span></a>' +
+      '" class="card-btn btn-detail" aria-label="Explore dedicated detail page for ' +
+      title +
+      '"><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>' +
       '</div>' +
-      '</article>';
+      '</div>';
 
     return cardHtml;
   }

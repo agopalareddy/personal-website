@@ -517,6 +517,7 @@ function renderProjects() {
   if (filtered.length === 0) {
     projectGrid.innerHTML =
       '<div class="no-results">No projects match your search or filter criteria.</div>';
+    renderToc([]);
     return;
   }
 
@@ -556,7 +557,7 @@ function renderProjects() {
       const actionsHtml = `<div class="card-actions">${actions.join('')}</div>`;
 
       return `
-                    <div class="project-card spotlight-card">
+                    <div class="project-card spotlight-card" id="proj-${p.id}">
                         <div class="card-meta">
                             <span class="card-category ${catClass}">${p.category}</span>
                             <span class="card-venue">${venueLabel} &bull; ${p.formatted_date}</span>
@@ -570,6 +571,7 @@ function renderProjects() {
     })
     .join('');
 
+  renderToc(filtered);
   setupSpotlight();
 }
 
@@ -662,6 +664,114 @@ if (yearFilter) {
     activeYear = e.target.value;
     renderProjects();
   });
+}
+
+// Table of Contents generator
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function setupTocScrollListeners(tocListElement) {
+  const links = tocListElement.querySelectorAll('a[href^="#"]');
+  links.forEach((link) => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerOffset = 90; // height of sticky top header + some padding
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+
+        // Update URL hash without jump
+        history.pushState(null, null, '#' + targetId);
+      }
+    });
+  });
+}
+
+function renderToc(filtered) {
+  const tocContainer = document.getElementById('tocContainer');
+  const tocList = document.getElementById('tocList');
+  if (!tocContainer || !tocList) return;
+
+  if (filtered.length <= 1) {
+    tocContainer.hidden = true;
+    tocList.innerHTML = '';
+    return;
+  }
+
+  let html = '';
+
+  if (activeSort === 'title-asc') {
+    filtered.forEach((p) => {
+      let title = p.title || '';
+      if (title.length > 32) {
+        title = title.substring(0, 32) + '...';
+      }
+      html += `
+        <li class="toc-item">
+          <a href="#proj-${p.id}" class="toc-link">${escapeHtml(title)}</a>
+        </li>
+      `;
+    });
+  } else {
+    let currentYear = null;
+    let firstProjIdOfYear = '';
+    let yearItemsHtml = '';
+
+    filtered.forEach((p) => {
+      const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
+      let title = p.title || '';
+      if (title.length > 32) {
+        title = title.substring(0, 32) + '...';
+      }
+
+      if (year && year !== currentYear) {
+        if (currentYear !== null) {
+          html += `
+            <li class="toc-item">
+              <a href="#proj-${firstProjIdOfYear}" class="toc-year-header">${currentYear}</a>
+              <ul class="toc-nested-list">${yearItemsHtml}</ul>
+            </li>
+          `;
+        }
+        currentYear = year;
+        firstProjIdOfYear = p.id;
+        yearItemsHtml = '';
+      }
+
+      yearItemsHtml += `
+        <li class="toc-item">
+          <a href="#proj-${p.id}" class="toc-link">${escapeHtml(title)}</a>
+        </li>
+      `;
+    });
+
+    if (currentYear !== null) {
+      html += `
+        <li class="toc-item">
+          <a href="#proj-${firstProjIdOfYear}" class="toc-year-header">${currentYear}</a>
+          <ul class="toc-nested-list">${yearItemsHtml}</ul>
+        </li>
+      `;
+    } else {
+      html = yearItemsHtml;
+    }
+  }
+
+  tocList.innerHTML = html;
+  tocContainer.hidden = false;
+
+  setupTocScrollListeners(tocList);
 }
 
 // Initialization

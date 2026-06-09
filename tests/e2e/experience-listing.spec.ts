@@ -138,4 +138,40 @@ test.describe('Experience Listing Page', () => {
     await expect(allFilter).toHaveAttribute('aria-pressed', 'true');
     await expect(researchFilter).toHaveAttribute('aria-pressed', 'false');
   });
+
+  test('dynamic Table of Contents renders, updates and is clickable', async ({ page }) => {
+    const tocContainer = page.locator('#tocContainer');
+    const tocList = page.locator('#tocList');
+
+    // Should be visible initially since we have > 1 cards
+    await expect(tocContainer).toBeVisible();
+    
+    // Check that we have year headers and card links
+    const yearHeaders = tocList.locator('.toc-year-header');
+    const links = tocList.locator('.toc-link');
+    await expect(yearHeaders.first()).toBeVisible();
+    await expect(links.first()).toBeVisible();
+
+    // Filter to an option that returns only 0 results
+    const searchInput = page.locator('#experienceSearch');
+    await searchInput.fill('zzzznonexistent');
+    await page.waitForTimeout(300);
+
+    // TOC should be hidden when <= 1 item matches
+    await expect(tocContainer).toBeHidden();
+
+    // Clear search
+    await searchInput.fill('');
+    await page.waitForTimeout(300);
+    await expect(tocContainer).toBeVisible();
+
+    // Verify clicking a link updates URL hash
+    const firstLink = links.first();
+    const href = await firstLink.getAttribute('href');
+    expect(href).toMatch(/^#exp-/);
+
+    await firstLink.click();
+    await page.waitForTimeout(300);
+    expect(page.url()).toContain(href || '');
+  });
 });

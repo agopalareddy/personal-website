@@ -1963,7 +1963,7 @@ body.page-loaded {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     margin-top: 0 !important;
-    padding: 0.5rem 1rem !important;
+    padding: 0.35rem 1rem !important;
     border-top: none !important;
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
@@ -2118,11 +2118,12 @@ body.page-loaded {
 }
 .toc-title {
   font-family: var(--font-heading);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text-primary);
   margin: 0;
+  line-height: 1;
 }
 .toc-list {
   list-style: none;
@@ -2200,11 +2201,12 @@ body.page-loaded {
   color: var(--accent);
 }
 .toc-toggle-icon {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   transition:
     transform var(--transition),
     color var(--transition);
+  line-height: 1;
 }
 .toc-toggle-btn[aria-expanded='false'] .toc-toggle-icon {
   transform: rotate(-90deg);

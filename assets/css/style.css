@@ -1958,7 +1958,8 @@ body.page-loaded {
     display: none !important;
   }
 
-  /* Make TOC sticky on mobile — only #tocContainer, not filter controls */
+  /* Both filter controls and TOC are wrapped in .mobile-sticky-wrapper on mobile */
+  body:not(.home-page) .mobile-sticky-wrapper,
   body:not(.home-page) #tocContainer {
     position: sticky;
     top: 4.25rem;

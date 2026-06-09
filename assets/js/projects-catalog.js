@@ -728,6 +728,50 @@ function positionTocResponsive() {
   }
 }
 
+function wrapMobileStickyPanels() {
+  const isMobile = window.innerWidth < 768;
+  const filterControls = document.getElementById('filterControls');
+  const tocContainer = document.getElementById('tocContainer');
+  const existingWrapper = document.querySelector('.mobile-sticky-wrapper');
+
+  if (isMobile) {
+    if (!filterControls || !tocContainer) return;
+    // Already wrapped correctly — skip
+    if (
+      existingWrapper &&
+      existingWrapper.contains(filterControls) &&
+      existingWrapper.contains(tocContainer)
+    )
+      return;
+
+    // Remove stale wrapper if it exists but doesn't contain both panels
+    if (existingWrapper) {
+      let parent = existingWrapper.parentNode;
+      while (existingWrapper.firstChild) {
+        parent.insertBefore(existingWrapper.firstChild, existingWrapper);
+      }
+      parent.removeChild(existingWrapper);
+    }
+
+    // Both panels should be adjacent siblings in academic-content
+    if (filterControls.parentNode === tocContainer.parentNode) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'mobile-sticky-wrapper';
+      filterControls.parentNode.insertBefore(wrapper, filterControls);
+      wrapper.appendChild(filterControls);
+      wrapper.appendChild(tocContainer);
+    }
+  } else {
+    if (existingWrapper) {
+      let parent = existingWrapper.parentNode;
+      while (existingWrapper.firstChild) {
+        parent.insertBefore(existingWrapper.firstChild, existingWrapper);
+      }
+      parent.removeChild(existingWrapper);
+    }
+  }
+}
+
 function setupTocScrollListeners(tocListElement) {
   const links = tocListElement.querySelectorAll('a[href^="#"]');
   links.forEach((link) => {
@@ -863,7 +907,9 @@ if (filterToggleBtn) {
 
 window.addEventListener('resize', positionFilterControlsResponsive);
 window.addEventListener('resize', positionTocResponsive);
+window.addEventListener('resize', wrapMobileStickyPanels);
 
 positionFilterControlsResponsive();
 populateFilters();
 renderProjects();
+wrapMobileStickyPanels();

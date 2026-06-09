@@ -33,23 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var orgFilter = document.getElementById('orgFilter');
   var yearFilter = document.getElementById('yearFilter');
 
-  if (orgFilter) {
-    orgFilter.addEventListener('change', function (e) {
-      activeOrg = e.target.value;
-      renderExperiences();
-    });
-  }
-  if (yearFilter) {
-    yearFilter.addEventListener('change', function (e) {
-      activeYear = e.target.value;
-      renderExperiences();
-    });
-  }
-
   // ---------------------------------------------------------------------------
-  // Remove SSR fallback (noscript + JSON blob) if present.  Modern browsers
-  // re-execute <noscript> contents as DOM nodes when JS is enabled, so we
-  // must clear them before the first render to avoid double-display.
+  // Remove SSR fallback (noscript + JSON blob) if present.
   // ---------------------------------------------------------------------------
   var ssrJson = grid.querySelector('script.experiences-data');
   if (ssrJson) ssrJson.remove();
@@ -70,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Helpers
   // ---------------------------------------------------------------------------
 
-  /** Escape HTML special characters to prevent XSS in user-provided text. */
+  /** Escape HTML special characters to prevent XSS. */
   function escapeHtml(str) {
     if (!str) return '';
     var div = document.createElement('div');
@@ -84,11 +69,43 @@ document.addEventListener('DOMContentLoaded', function () {
     return slug.charAt(0).toUpperCase() + slug.slice(1);
   }
 
+  /** Get shortened organisation tag for clean layout. */
+  function getOrgShort(org) {
+    if (!org) return '';
+    var lower = org.toLowerCase();
+    if (lower.indexOf('washington university') !== -1) {
+      if (lower.indexOf('drives') !== -1) return 'WashU (DRIVES)';
+      return 'WashU';
+    }
+    if (lower.indexOf('ohio wesleyan') !== -1) return 'OWU';
+    if (lower.indexOf('crittero') !== -1) return 'Crittero';
+    if (lower.indexOf('lab714') !== -1) return 'Lab714';
+    if (lower.indexOf('mitxsurestart') !== -1 || lower.indexOf('mitx') !== -1)
+      return 'MITxSureStart';
+    if (lower.indexOf('denison') !== -1) return 'Denison';
+    if (lower.indexOf('next genius') !== -1) return 'Next Genius';
+    if (lower.indexOf('ages & science coach') !== -1) return 'Science Coach';
+    if (lower.indexOf('spring student symposium') !== -1) return 'OWU Symposium';
+    if (lower.indexOf('patricia belt conrades') !== -1) return 'OWU Symposium';
+    if (lower.indexOf('graduate student affairs') !== -1 || lower.indexOf('gsaab') !== -1)
+      return 'GSAAB';
+    if (lower.indexOf('career engagement') !== -1 || lower.indexOf('cce') !== -1)
+      return 'CCE Board';
+    if (lower.indexOf('gpsc') !== -1 || lower.indexOf('student council') !== -1) return 'GPSC';
+    if (lower.indexOf('umang') !== -1) return 'Umang';
+    if (lower.indexOf('hackwashu') !== -1) return 'HackWashU';
+    if (lower.indexOf('hindu student') !== -1) return 'HSC';
+    if (lower.indexOf('wesleyan council') !== -1 || lower.indexOf('wcsa') !== -1) return 'WCSA';
+    if (lower.indexOf('neurds') !== -1) return 'The Neurds';
+    if (lower.indexOf('programming board') !== -1) return 'CPB';
+    if (lower.indexOf('mathematics, computer science') !== -1) return 'Math/CS Board';
+
+    var parts = org.split(',');
+    return parts[0].trim();
+  }
+
   /**
    * Format a date range for display.
-   *  - Same month & year: "Aug 2024"
-   *  - Different months:  "Aug 2024 – May 2026"
-   *  - End date in the future or missing → "Aug 2024 – Present"
    */
   function formatDateRange(startISO, endISO) {
     var monthNames = [
@@ -118,11 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var endDate = new Date(endISO + 'T00:00:00');
     if (isNaN(endDate.getTime())) return startStr;
 
-    // If end date is in the future, show "Present"
     var now = new Date();
     if (endDate > now) return startStr + ' \u2013 Present';
 
-    // Same month & year → single date
     if (
       startDate.getFullYear() === endDate.getFullYear() &&
       startDate.getMonth() === endDate.getMonth()
@@ -135,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ---------------------------------------------------------------------------
-  // Card renderer — must match the <noscript> fallback structure exactly
+  // Card renderer
   // ---------------------------------------------------------------------------
   function createExperienceCard(exp) {
     var category = exp.category || '';
@@ -147,10 +162,26 @@ document.addEventListener('DOMContentLoaded', function () {
     var excerpt = escapeHtml(exp.excerpt || '');
     var id = exp.id || '';
     var detailUrl = '/experience/' + category + '/' + id + '.html';
-    var venueText = org ? org + ' • ' + dateRange : dateRange;
+
+    var orgShort = getOrgShort(exp.organization);
+    var venueText = orgShort ? orgShort + ' \u2022 ' + dateRange : dateRange;
+
+    var subtitleHtml = '';
+    if (org) {
+      subtitleHtml =
+        '<div class="card-org-context" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; font-family: var(--font-body); font-weight: 500;">' +
+        org +
+        (exp.role_context ? ' \u2022 ' + escapeHtml(exp.role_context) : '') +
+        '</div>';
+    } else if (exp.role_context) {
+      subtitleHtml =
+        '<div class="card-org-context" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; font-family: var(--font-body); font-weight: 500;">' +
+        escapeHtml(exp.role_context) +
+        '</div>';
+    }
 
     var cardHtml =
-      '<div class="project-card spotlight-card timeline-card" data-category="' +
+      '<div class="project-card spotlight-card timeline-card experience-card" data-category="' +
       escapeHtml(category) +
       '">' +
       '<div class="card-meta">' +
@@ -172,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
       title +
       '</a>' +
       '</h3>' +
+      subtitleHtml +
       '<p class="project-excerpt">' +
       excerpt +
       '</p>' +
@@ -204,28 +236,27 @@ document.addEventListener('DOMContentLoaded', function () {
           matchesOrg = orgText.indexOf('ohio wesleyan') !== -1;
         } else if (activeOrg === 'Corporate') {
           matchesOrg = orgText.indexOf('crittero') !== -1 || orgText.indexOf('lab714') !== -1;
+        } else if (activeOrg === 'MITxSureStart') {
+          matchesOrg = orgText.indexOf('mitx') !== -1 || orgText.indexOf('surestart') !== -1;
         } else if (activeOrg === 'Personal') {
           matchesOrg =
             orgText.indexOf('washington university') === -1 &&
             orgText.indexOf('ohio wesleyan') === -1 &&
             orgText.indexOf('crittero') === -1 &&
-            orgText.indexOf('lab714') === -1;
+            orgText.indexOf('lab714') === -1 &&
+            orgText.indexOf('mitx') === -1 &&
+            orgText.indexOf('surestart') === -1;
         }
       }
 
-      var startYear = exp.start_date ? new Date(exp.start_date + 'T00:00:00').getFullYear() : 0;
-      var endYear = exp.end_date
-        ? new Date(exp.end_date + 'T00:00:00').getFullYear()
-        : new Date().getFullYear();
       var matchesYear = true;
       if (activeYear !== 'all') {
-        if (activeYear === '2024-2026') {
-          matchesYear = startYear <= 2026 && endYear >= 2024;
-        } else if (activeYear === '2020-2023') {
-          matchesYear = startYear <= 2023 && endYear >= 2020;
-        } else if (activeYear === 'before-2020') {
-          matchesYear = startYear < 2020;
-        }
+        var selYear = parseInt(activeYear, 10);
+        var startYear = exp.start_date ? parseInt(exp.start_date.split('-')[0], 10) : 0;
+        var endYear = exp.end_date
+          ? parseInt(exp.end_date.split('-')[0], 10)
+          : new Date().getFullYear();
+        matchesYear = selYear >= startYear && selYear <= endYear;
       }
 
       var q = searchQuery.toLowerCase();
@@ -270,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var html = '';
     var lastYear = null;
     filtered.forEach(function (exp) {
-      var year = exp.start_date ? new Date(exp.start_date + 'T00:00:00').getFullYear() : null;
+      var year = exp.start_date ? parseInt(exp.start_date.split('-')[0], 10) : null;
       if (year && year !== lastYear) {
         html += '<div class="timeline-year">' + year + '</div>';
         lastYear = year;
@@ -284,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ---------------------------------------------------------------------------
-  // Spotlight cursor effect (same approach as projects-catalog.js)
+  // Spotlight cursor effect
   // ---------------------------------------------------------------------------
   function setupSpotlight() {
     var cards = grid.querySelectorAll('.spotlight-card');
@@ -300,11 +331,71 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ---------------------------------------------------------------------------
+  // Dynamic filter dropdown generation
+  // ---------------------------------------------------------------------------
+  function populateFilters() {
+    if (orgFilter) {
+      orgFilter.innerHTML =
+        '<option value="all">All Organizations</option>' +
+        '<option value="WashU">WashU (St. Louis)</option>' +
+        '<option value="OWU">Ohio Wesleyan University</option>' +
+        '<option value="Corporate">Corporate / Industry (Crittero, Lab714)</option>' +
+        '<option value="MITxSureStart">MITxSureStart</option>' +
+        '<option value="Personal">Other / Personal Boards</option>';
+    }
+
+    if (yearFilter) {
+      var yearsSet = new Set();
+      experiences.forEach(function (exp) {
+        if (exp.start_date) {
+          var startYear = parseInt(exp.start_date.split('-')[0], 10);
+          var endYear = exp.end_date
+            ? parseInt(exp.end_date.split('-')[0], 10)
+            : new Date().getFullYear();
+          for (var y = startYear; y <= endYear; y++) {
+            yearsSet.add(y);
+          }
+        }
+      });
+      var years = Array.from(yearsSet).sort(function (a, b) {
+        return b - a;
+      });
+
+      var yearOptions = '<option value="all">All Years</option>';
+      years.forEach(function (yr) {
+        yearOptions += '<option value="' + yr + '">' + yr + '</option>';
+      });
+      yearFilter.innerHTML = yearOptions;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
   // Event listeners
   // ---------------------------------------------------------------------------
+  if (orgFilter) {
+    orgFilter.addEventListener('change', function (e) {
+      activeOrg = e.target.value;
+      renderExperiences();
+    });
+  }
+
+  if (yearFilter) {
+    yearFilter.addEventListener('change', function (e) {
+      activeYear = e.target.value;
+      renderExperiences();
+    });
+  }
+
   if (searchInput) {
     searchInput.addEventListener('input', function (e) {
       searchQuery = e.target.value;
+      renderExperiences();
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function (e) {
+      activeSort = e.target.value;
       renderExperiences();
     });
   }
@@ -322,15 +413,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  if (sortSelect) {
-    sortSelect.addEventListener('change', function (e) {
-      activeSort = e.target.value;
-      renderExperiences();
-    });
-  }
-
   // ---------------------------------------------------------------------------
-  // Initial render
+  // Initialization
   // ---------------------------------------------------------------------------
+  populateFilters();
   renderExperiences();
 });

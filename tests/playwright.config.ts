@@ -5,7 +5,7 @@ export default defineConfig({
   timeout: 30000,
   outputDir: './test-results/',
   use: {
-    baseURL: 'https://agreddy.com',
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://agreddy.com',
   },
   projects: [
     {

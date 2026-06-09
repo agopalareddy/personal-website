@@ -457,6 +457,7 @@ const searchInput = document.getElementById('projectSearch');
 const filterButtons = document.querySelectorAll('.filter-btn');
 const venueFilter = document.getElementById('venueFilter');
 const projectSort = document.getElementById('projectSort');
+const yearFilter = document.getElementById('yearFilter');
 
 let activeFilter = 'all';
 let activeVenue = 'all';
@@ -477,15 +478,8 @@ function renderProjects() {
     const matchesCategory = activeFilter === 'all' || p.category === activeFilter;
     const matchesVenue = activeVenue === 'all' || p.venue_tag === activeVenue;
 
-    const projYear = new Date(p.date + 'T00:00:00').getFullYear();
-    let matchesYear = true;
-    if (activeYear === '2024-2026') {
-      matchesYear = projYear >= 2024 && projYear <= 2026;
-    } else if (activeYear === '2020-2023') {
-      matchesYear = projYear >= 2020 && projYear <= 2023;
-    } else if (activeYear === 'before-2020') {
-      matchesYear = projYear < 2020;
-    }
+    const projYear = parseInt(p.date.split('-')[0], 10);
+    const matchesYear = activeYear === 'all' || projYear.toString() === activeYear;
 
     const q = searchQuery.toLowerCase();
     const matchesSearch =
@@ -582,19 +576,45 @@ function setupSpotlight() {
   });
 }
 
-// Listeners
-searchInput.addEventListener('input', (e) => {
-  searchQuery = e.target.value;
-  const yearFilter = document.getElementById('yearFilter');
-  if (yearFilter) {
-    yearFilter.addEventListener('change', (e) => {
-      activeYear = e.target.value;
-      renderProjects();
+// Dynamic dropdown filters generation
+function populateFilters() {
+  if (venueFilter) {
+    const venues = Array.from(new Set(projects.map((p) => p.venue_tag).filter(Boolean))).sort();
+    const venueLabels = {
+      WashU: 'WashU (St. Louis)',
+      OWU: 'Ohio Wesleyan University',
+      MITxSureStart: 'MITxSureStart',
+      Personal: 'Personal Projects',
+    };
+
+    let venueOptions = '<option value="all">All Institutions/Venues</option>';
+    venues.forEach((v) => {
+      const label = venueLabels[v] || v;
+      venueOptions += `<option value="${v}">${label}</option>`;
     });
+    venueFilter.innerHTML = venueOptions;
   }
 
-  renderProjects();
-});
+  if (yearFilter) {
+    const years = Array.from(
+      new Set(projects.map((p) => parseInt(p.date.split('-')[0], 10)).filter(Boolean))
+    ).sort((a, b) => b - a);
+
+    let yearOptions = '<option value="all">All Years</option>';
+    years.forEach((yr) => {
+      yearOptions += `<option value="${yr}">${yr}</option>`;
+    });
+    yearFilter.innerHTML = yearOptions;
+  }
+}
+
+// Bind Listeners
+if (searchInput) {
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    renderProjects();
+  });
+}
 
 filterButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -604,46 +624,25 @@ filterButtons.forEach((btn) => {
     });
     btn.classList.add('active');
     btn.setAttribute('aria-pressed', 'true');
-    activeFilter = btn.getAttribute('data-filter');
-    const yearFilter = document.getElementById('yearFilter');
-    if (yearFilter) {
-      yearFilter.addEventListener('change', (e) => {
-        activeYear = e.target.value;
-        renderProjects();
-      });
-    }
-
+    activeFilter = btn.getAttribute('data-filter') || 'all';
     renderProjects();
   });
 });
 
-venueFilter.addEventListener('change', (e) => {
-  activeVenue = e.target.value;
-  const yearFilter = document.getElementById('yearFilter');
-  if (yearFilter) {
-    yearFilter.addEventListener('change', (e) => {
-      activeYear = e.target.value;
-      renderProjects();
-    });
-  }
+if (venueFilter) {
+  venueFilter.addEventListener('change', (e) => {
+    activeVenue = e.target.value;
+    renderProjects();
+  });
+}
 
-  renderProjects();
-});
+if (projectSort) {
+  projectSort.addEventListener('change', (e) => {
+    activeSort = e.target.value;
+    renderProjects();
+  });
+}
 
-projectSort.addEventListener('change', (e) => {
-  activeSort = e.target.value;
-  const yearFilter = document.getElementById('yearFilter');
-  if (yearFilter) {
-    yearFilter.addEventListener('change', (e) => {
-      activeYear = e.target.value;
-      renderProjects();
-    });
-  }
-
-  renderProjects();
-});
-
-const yearFilter = document.getElementById('yearFilter');
 if (yearFilter) {
   yearFilter.addEventListener('change', (e) => {
     activeYear = e.target.value;
@@ -651,4 +650,6 @@ if (yearFilter) {
   });
 }
 
+// Initialization
+populateFilters();
 renderProjects();

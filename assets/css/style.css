@@ -1131,7 +1131,7 @@ main.container {
   padding: 0.45rem 1rem 0.45rem 2.2rem;
   font-size: 0.9rem;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 20px;
   background-color: var(--bg-surface);
   color: var(--text-primary);
   transition:

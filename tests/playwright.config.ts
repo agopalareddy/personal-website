@@ -6,6 +6,7 @@ export default defineConfig({
   outputDir: './test-results/',
   use: {
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://agreddy.com',
+    ignoreHTTPSErrors: true,
   },
   projects: [
     {

@@ -146,6 +146,12 @@ test.describe('Experience Listing Page', () => {
     // Should be visible initially since we have > 1 cards
     await expect(tocContainer).toBeVisible();
 
+    // On mobile, the TOC is collapsed by default. We need to expand it to make links visible.
+    const toggleBtn = page.locator('#tocToggleBtn');
+    if (await toggleBtn.isVisible() && (await toggleBtn.getAttribute('aria-expanded')) === 'false') {
+      await toggleBtn.click();
+    }
+
     // Check that we have year headers and card links
     const yearHeaders = tocList.locator('.toc-year-header');
     const links = tocList.locator('.toc-link');

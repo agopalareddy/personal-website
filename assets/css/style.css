@@ -1205,7 +1205,7 @@ main.container {
   flex-direction: column;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
   background-color: var(--bg-surface);
   box-shadow: var(--shadow-sm);
   transition:
@@ -1225,7 +1225,7 @@ main.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
   font-size: 0.75rem;
 }
 .card-category {
@@ -1270,7 +1270,7 @@ main.container {
   color: var(--text-muted);
 }
 .project-title {
-  margin: 0 0 0.6rem 0;
+  margin: 0 0 0.4rem 0;
   font-size: 1.15rem;
   font-family: var(--font-heading);
   font-weight: 500;
@@ -1288,7 +1288,7 @@ main.container {
 .project-excerpt {
   font-size: 0.85rem;
   color: var(--text-secondary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   flex-grow: 1;
   line-height: 1.5;
   font-family: var(--font-body);
@@ -1297,7 +1297,7 @@ main.container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 .tech-tag {
   font-size: 0.7rem;
@@ -1314,7 +1314,7 @@ main.container {
   flex-wrap: wrap;
   gap: 0.4rem;
   border-top: 1px solid var(--border-color);
-  padding-top: 0.8rem;
+  padding-top: 0.6rem;
   margin-top: auto;
 }
 .card-btn {
@@ -2031,7 +2031,7 @@ body.page-loaded {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.25rem;
   padding-left: 2rem;
 }
 

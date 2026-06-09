@@ -148,7 +148,10 @@ test.describe('Experience Listing Page', () => {
 
     // On mobile, the TOC is collapsed by default. We need to expand it to make links visible.
     const toggleBtn = page.locator('#tocToggleBtn');
-    if (await toggleBtn.isVisible() && (await toggleBtn.getAttribute('aria-expanded')) === 'false') {
+    if (
+      (await toggleBtn.isVisible()) &&
+      (await toggleBtn.getAttribute('aria-expanded')) === 'false'
+    ) {
       await toggleBtn.click();
     }
 

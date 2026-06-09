@@ -477,15 +477,19 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
+    var toggleBtn = document.getElementById('tocToggleBtn');
+    if (toggleBtn && !toggleBtn.hasAttribute('data-initialized')) {
+      var isMobile = window.innerWidth < 768;
+      toggleBtn.setAttribute('aria-expanded', isMobile ? 'false' : 'true');
+      toggleBtn.setAttribute('data-initialized', 'true');
+    }
+
     var html = '';
 
     if (activeSort === 'title-asc') {
       filtered.forEach(function (exp) {
         var id = exp.id || '';
         var title = exp.title || '';
-        if (title.length > 32) {
-          title = title.substring(0, 32) + '...';
-        }
         html +=
           '<li class="toc-item">' +
           '<a href="#exp-' +
@@ -503,9 +507,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var year = exp.start_date ? parseInt(exp.start_date.split('-')[0], 10) : null;
         var id = exp.id || '';
         var title = exp.title || '';
-        if (title.length > 32) {
-          title = title.substring(0, 32) + '...';
-        }
 
         if (year && year !== currentYear) {
           if (currentYear !== null) {
@@ -561,6 +562,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------------------------------------------------------------------------
   // Initialization
   // ---------------------------------------------------------------------------
+  var toggleBtn = document.getElementById('tocToggleBtn');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function () {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+    });
+  }
+
   populateFilters();
   renderExperiences();
 });

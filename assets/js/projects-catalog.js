@@ -709,14 +709,18 @@ function renderToc(filtered) {
     return;
   }
 
+  const toggleBtn = document.getElementById('tocToggleBtn');
+  if (toggleBtn && !toggleBtn.hasAttribute('data-initialized')) {
+    const isMobile = window.innerWidth < 768;
+    toggleBtn.setAttribute('aria-expanded', isMobile ? 'false' : 'true');
+    toggleBtn.setAttribute('data-initialized', 'true');
+  }
+
   let html = '';
 
   if (activeSort === 'title-asc') {
     filtered.forEach((p) => {
       let title = p.title || '';
-      if (title.length > 32) {
-        title = title.substring(0, 32) + '...';
-      }
       html += `
         <li class="toc-item">
           <a href="#proj-${p.id}" class="toc-link">${escapeHtml(title)}</a>
@@ -731,9 +735,6 @@ function renderToc(filtered) {
     filtered.forEach((p) => {
       const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
       let title = p.title || '';
-      if (title.length > 32) {
-        title = title.substring(0, 32) + '...';
-      }
 
       if (year && year !== currentYear) {
         if (currentYear !== null) {
@@ -775,5 +776,13 @@ function renderToc(filtered) {
 }
 
 // Initialization
+const toggleBtn = document.getElementById('tocToggleBtn');
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.setAttribute('aria-expanded', !expanded);
+  });
+}
+
 populateFilters();
 renderProjects();

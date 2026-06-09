@@ -850,6 +850,11 @@ if (toggleBtn) {
 
 const filterToggleBtn = document.getElementById('filterToggleBtn');
 if (filterToggleBtn) {
+  if (!filterToggleBtn.hasAttribute('data-initialized')) {
+    const isMobile = window.innerWidth < 768;
+    filterToggleBtn.setAttribute('aria-expanded', isMobile ? 'false' : 'true');
+    filterToggleBtn.setAttribute('data-initialized', 'true');
+  }
   filterToggleBtn.addEventListener('click', () => {
     const expanded = filterToggleBtn.getAttribute('aria-expanded') === 'true';
     filterToggleBtn.setAttribute('aria-expanded', !expanded);

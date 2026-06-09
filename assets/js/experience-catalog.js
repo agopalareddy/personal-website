@@ -486,6 +486,50 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function wrapMobileStickyPanels() {
+    var isMobile = window.innerWidth < 768;
+    var filterControls = document.getElementById('filterControls');
+    var tocContainer = document.getElementById('tocContainer');
+    var existingWrapper = document.querySelector('.mobile-sticky-wrapper');
+
+    if (isMobile) {
+      if (!filterControls || !tocContainer) return;
+      // Already wrapped correctly — skip
+      if (
+        existingWrapper &&
+        existingWrapper.contains(filterControls) &&
+        existingWrapper.contains(tocContainer)
+      )
+        return;
+
+      // Remove stale wrapper if it exists but doesn't contain both panels
+      if (existingWrapper) {
+        var parent = existingWrapper.parentNode;
+        while (existingWrapper.firstChild) {
+          parent.insertBefore(existingWrapper.firstChild, existingWrapper);
+        }
+        parent.removeChild(existingWrapper);
+      }
+
+      // Both panels should be adjacent siblings in academic-content
+      if (filterControls.parentNode === tocContainer.parentNode) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'mobile-sticky-wrapper';
+        filterControls.parentNode.insertBefore(wrapper, filterControls);
+        wrapper.appendChild(filterControls);
+        wrapper.appendChild(tocContainer);
+      }
+    } else {
+      if (existingWrapper) {
+        var parent = existingWrapper.parentNode;
+        while (existingWrapper.firstChild) {
+          parent.insertBefore(existingWrapper.firstChild, existingWrapper);
+        }
+        parent.removeChild(existingWrapper);
+      }
+    }
+  }
+
   function setupTocScrollListeners(tocListElement) {
     var links = tocListElement.querySelectorAll('a[href^="#"]');
     links.forEach(function (link) {
@@ -639,8 +683,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   window.addEventListener('resize', positionFilterControlsResponsive);
   window.addEventListener('resize', positionTocResponsive);
+  window.addEventListener('resize', wrapMobileStickyPanels);
 
   positionFilterControlsResponsive();
   populateFilters();
   renderExperiences();
+  wrapMobileStickyPanels();
 });

@@ -74,15 +74,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!org) return '';
     var lower = org.toLowerCase();
     if (lower.indexOf('washington university') !== -1) {
-      if (lower.indexOf('drives') !== -1) return 'WashU (DRIVES)';
-      return 'WashU';
+      if (lower.indexOf('drives') !== -1) return 'Washington University (DRIVES)';
+      return 'Washington University in St. Louis';
     }
-    if (lower.indexOf('ohio wesleyan') !== -1) return 'OWU';
+    if (lower.indexOf('ohio wesleyan') !== -1) return 'Ohio Wesleyan University';
     if (lower.indexOf('crittero') !== -1) return 'Crittero';
     if (lower.indexOf('lab714') !== -1) return 'Lab714';
     if (lower.indexOf('mitxsurestart') !== -1 || lower.indexOf('mitx') !== -1)
       return 'MITxSureStart';
-    if (lower.indexOf('denison') !== -1) return 'Denison';
+    if (lower.indexOf('denison') !== -1) return 'Denison University';
     if (lower.indexOf('next genius') !== -1) return 'Next Genius';
     if (lower.indexOf('ages & science coach') !== -1) return 'Science Coach';
     if (lower.indexOf('spring student symposium') !== -1) return 'OWU Symposium';
@@ -264,6 +264,12 @@ document.addEventListener('DOMContentLoaded', function () {
         !q ||
         (exp.title && exp.title.toLowerCase().indexOf(q) !== -1) ||
         (exp.organization && exp.organization.toLowerCase().indexOf(q) !== -1) ||
+        (exp.organization &&
+          q === 'washu' &&
+          exp.organization.toLowerCase().indexOf('washington university') !== -1) ||
+        (exp.organization &&
+          q === 'owu' &&
+          exp.organization.toLowerCase().indexOf('ohio wesleyan') !== -1) ||
         (exp.excerpt && exp.excerpt.toLowerCase().indexOf(q) !== -1);
 
       return matchesCategory && matchesOrg && matchesYear && matchesSearch;
@@ -327,6 +333,16 @@ document.addEventListener('DOMContentLoaded', function () {
         card.style.setProperty('--mouse-x', x + 'px');
         card.style.setProperty('--mouse-y', y + 'px');
       });
+
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('.card-btn') || e.target.closest('a') || e.target.closest('button')) {
+          return;
+        }
+        var mainLink = card.querySelector('h3.project-title a');
+        if (mainLink) {
+          mainLink.click();
+        }
+      });
     });
   }
 
@@ -337,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (orgFilter) {
       orgFilter.innerHTML =
         '<option value="all">All Organizations</option>' +
-        '<option value="WashU">WashU (St. Louis)</option>' +
+        '<option value="WashU">Washington University in St. Louis</option>' +
         '<option value="OWU">Ohio Wesleyan University</option>' +
         '<option value="Corporate">Corporate / Industry (Crittero, Lab714)</option>' +
         '<option value="MITxSureStart">MITxSureStart</option>' +

@@ -465,6 +465,13 @@ let activeSort = 'date-desc';
 let searchQuery = '';
 let activeYear = 'all';
 
+const venueLabels = {
+  WashU: 'Washington University in St. Louis',
+  OWU: 'Ohio Wesleyan University',
+  MITxSureStart: 'MITxSureStart',
+  Personal: 'Personal Projects',
+};
+
 function getCategoryClass(cat) {
   if (cat === 'Research & ML') return 'cat-research';
   if (cat === 'Web Apps') return 'cat-web';
@@ -488,6 +495,8 @@ function renderProjects() {
       p.excerpt.toLowerCase().includes(q) ||
       p.venue.toLowerCase().includes(q) ||
       p.venue_tag.toLowerCase().includes(q) ||
+      (q === 'washu' && p.venue.toLowerCase().includes('washington university')) ||
+      (q === 'owu' && p.venue.toLowerCase().includes('ohio wesleyan')) ||
       p.technologies.some((t) => t.toLowerCase().includes(q));
 
     return matchesCategory && matchesVenue && matchesYear && matchesSearch;
@@ -514,6 +523,7 @@ function renderProjects() {
   projectGrid.innerHTML = filtered
     .map((p) => {
       const catClass = getCategoryClass(p.category);
+      const venueLabel = venueLabels[p.venue_tag] || p.venue_tag;
       const titleHtml = `<a href="${p.permalink}" aria-label="Explore dedicated detail page for ${p.title}">${p.title}</a>`;
       const tagsHtml = p.technologies.map((t) => `<span class="tech-tag">${t}</span>`).join('');
 
@@ -549,7 +559,7 @@ function renderProjects() {
                     <div class="project-card spotlight-card">
                         <div class="card-meta">
                             <span class="card-category ${catClass}">${p.category}</span>
-                            <span class="card-venue">${p.venue_tag} &bull; ${p.formatted_date}</span>
+                            <span class="card-venue">${venueLabel} &bull; ${p.formatted_date}</span>
                         </div>
                         <h3 class="project-title">${titleHtml}</h3>
                         <p class="project-excerpt">${p.excerpt}</p>
@@ -573,6 +583,16 @@ function setupSpotlight() {
       card.style.setProperty('--mouse-x', `${x}px`);
       card.style.setProperty('--mouse-y', `${y}px`);
     });
+
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.card-btn') || e.target.closest('a') || e.target.closest('button')) {
+        return;
+      }
+      const mainLink = card.querySelector('h3.project-title a');
+      if (mainLink) {
+        mainLink.click();
+      }
+    });
   });
 }
 
@@ -580,12 +600,6 @@ function setupSpotlight() {
 function populateFilters() {
   if (venueFilter) {
     const venues = Array.from(new Set(projects.map((p) => p.venue_tag).filter(Boolean))).sort();
-    const venueLabels = {
-      WashU: 'WashU (St. Louis)',
-      OWU: 'Ohio Wesleyan University',
-      MITxSureStart: 'MITxSureStart',
-      Personal: 'Personal Projects',
-    };
 
     let venueOptions = '<option value="all">All Institutions/Venues</option>';
     venues.forEach((v) => {

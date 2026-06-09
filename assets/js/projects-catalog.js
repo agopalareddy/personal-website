@@ -684,20 +684,42 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+function positionFilterControlsResponsive() {
+  const filterControls = document.getElementById('filterControls');
+  if (!filterControls) return;
+
+  const isMobile = window.innerWidth < 768;
+  const sidebar = document.querySelector('.academic-sidebar');
+  const subtitle = document.querySelector('.academic-content > p');
+
+  if (isMobile && subtitle) {
+    if (
+      filterControls.parentNode !== subtitle.parentNode ||
+      filterControls.previousElementSibling !== subtitle
+    ) {
+      subtitle.parentNode.insertBefore(filterControls, subtitle.nextSibling);
+    }
+  } else if (!isMobile && sidebar) {
+    if (filterControls.parentNode !== sidebar) {
+      sidebar.appendChild(filterControls);
+    }
+  }
+}
+
 function positionTocResponsive() {
   const tocContainer = document.getElementById('tocContainer');
   if (!tocContainer) return;
 
   const isMobile = window.innerWidth < 768;
-  const searchElement = document.querySelector('search');
+  const filterControls = document.getElementById('filterControls');
   const sidebar = document.querySelector('.academic-sidebar');
 
-  if (isMobile && searchElement) {
+  if (isMobile && filterControls) {
     if (
-      tocContainer.parentNode !== searchElement.parentNode ||
-      tocContainer.previousElementSibling !== searchElement
+      tocContainer.parentNode !== filterControls.parentNode ||
+      tocContainer.previousElementSibling !== filterControls
     ) {
-      searchElement.parentNode.insertBefore(tocContainer, searchElement.nextSibling);
+      filterControls.parentNode.insertBefore(tocContainer, filterControls.nextSibling);
     }
   } else if (!isMobile && sidebar) {
     if (tocContainer.parentNode !== sidebar) {
@@ -826,7 +848,17 @@ if (toggleBtn) {
   });
 }
 
+const filterToggleBtn = document.getElementById('filterToggleBtn');
+if (filterToggleBtn) {
+  filterToggleBtn.addEventListener('click', () => {
+    const expanded = filterToggleBtn.getAttribute('aria-expanded') === 'true';
+    filterToggleBtn.setAttribute('aria-expanded', !expanded);
+  });
+}
+
+window.addEventListener('resize', positionFilterControlsResponsive);
 window.addEventListener('resize', positionTocResponsive);
 
+positionFilterControlsResponsive();
 populateFilters();
 renderProjects();

@@ -143,6 +143,134 @@
               </ul>
             </div>
 
+            <div class="toc-container" id="filterControls">
+              <button
+                class="toc-toggle-btn"
+                id="filterToggleBtn"
+                aria-expanded="true"
+                aria-controls="filterNav"
+              >
+                <h3 class="toc-title">Filters &amp; Search</h3>
+                <i class="fas fa-chevron-down toc-toggle-icon" aria-hidden="true"></i>
+              </button>
+              <div id="filterNav">
+                <search>
+                  <div
+                    class="projects-controls"
+                    style="flex-direction: column; align-items: stretch; gap: 1rem"
+                  >
+                    <!-- First Row: Search & Filters -->
+                    <div
+                      style="
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        gap: 1rem;
+                        align-items: center;
+                        width: 100%;
+                      "
+                    >
+                      <div class="filter-pills" role="group" aria-label="Category Filters">
+                        <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                          All
+                        </button>
+                        <button class="filter-btn" data-filter="professional" aria-pressed="false">
+                          Professional
+                        </button>
+                        <button class="filter-btn" data-filter="education" aria-pressed="false">
+                          Education
+                        </button>
+                        <button class="filter-btn" data-filter="research" aria-pressed="false">
+                          Research
+                        </button>
+                        <button class="filter-btn" data-filter="leadership" aria-pressed="false">
+                          Leadership
+                        </button>
+                        <button class="filter-btn" data-filter="awards" aria-pressed="false">
+                          Awards
+                        </button>
+                      </div>
+                      <div class="search-wrapper">
+                        <span class="search-icon"
+                          ><i class="fas fa-search" aria-hidden="true"></i
+                        ></span>
+                        <input
+                          type="text"
+                          class="search-input"
+                          id="experienceSearch"
+                          aria-label="Search experience by title, organization, or keyword"
+                          placeholder="Search experience..."
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Second Row: Sort -->
+                    <div
+                      style="
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        align-items: center;
+                        border-top: 1px solid var(--border-color);
+                        padding-top: 1rem;
+                        width: 100%;
+                      "
+                    >
+                      <!-- Organization Filter -->
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="orgFilter"
+                          aria-label="Filter experience by organization"
+                        >
+                          <option value="all">All Organizations</option>
+                          <option value="WashU">Washington University in St. Louis</option>
+                          <option value="OWU">Ohio Wesleyan University</option>
+                          <option value="Corporate">Corporate / Industry</option>
+                          <option value="Personal">Other / Personal</option>
+                        </select>
+                        <span class="select-icon"
+                          ><i class="fas fa-chevron-down" aria-hidden="true"></i
+                        ></span>
+                      </div>
+
+                      <!-- Year Range Filter -->
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="yearFilter"
+                          aria-label="Filter experience by year range"
+                        >
+                          <option value="all">All Years</option>
+                          <option value="2024-2026">2024 – 2026</option>
+                          <option value="2020-2023">2020 – 2023</option>
+                          <option value="before-2020">Before 2020</option>
+                        </select>
+                        <span class="select-icon"
+                          ><i class="fas fa-chevron-down" aria-hidden="true"></i
+                        ></span>
+                      </div>
+
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="experienceSort"
+                          aria-label="Sort experience chronologically or alphabetically"
+                        >
+                          <option value="date-desc">Newest First</option>
+                          <option value="date-asc">Oldest First</option>
+                          <option value="title-asc">Alphabetical (A-Z)</option>
+                        </select>
+                        <span class="select-icon"
+                          ><i class="fas fa-chevron-down" aria-hidden="true"></i
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </search>
+              </div>
+            </div>
+
             <div class="toc-container" id="tocContainer" hidden>
               <button
                 class="toc-toggle-btn"
@@ -174,121 +302,6 @@
             </p>
 
             <div class="experience-container">
-              <search>
-                <div
-                  class="projects-controls"
-                  style="flex-direction: column; align-items: stretch; gap: 1rem"
-                >
-                  <!-- First Row: Search & Filters -->
-                  <div
-                    style="
-                      display: flex;
-                      flex-wrap: wrap;
-                      justify-content: space-between;
-                      gap: 1rem;
-                      align-items: center;
-                      width: 100%;
-                    "
-                  >
-                    <div class="filter-pills" role="group" aria-label="Category Filters">
-                      <button class="filter-btn active" data-filter="all" aria-pressed="true">
-                        All
-                      </button>
-                      <button class="filter-btn" data-filter="professional" aria-pressed="false">
-                        Professional
-                      </button>
-                      <button class="filter-btn" data-filter="education" aria-pressed="false">
-                        Education
-                      </button>
-                      <button class="filter-btn" data-filter="research" aria-pressed="false">
-                        Research
-                      </button>
-                      <button class="filter-btn" data-filter="leadership" aria-pressed="false">
-                        Leadership
-                      </button>
-                      <button class="filter-btn" data-filter="awards" aria-pressed="false">
-                        Awards
-                      </button>
-                    </div>
-                    <div class="search-wrapper">
-                      <span class="search-icon"
-                        ><i class="fas fa-search" aria-hidden="true"></i
-                      ></span>
-                      <input
-                        type="text"
-                        class="search-input"
-                        id="experienceSearch"
-                        aria-label="Search experience by title, organization, or keyword"
-                        placeholder="Search experience..."
-                      />
-                    </div>
-                  </div>
-
-                  <!-- Second Row: Sort -->
-                  <div
-                    style="
-                      display: flex;
-                      flex-wrap: wrap;
-                      gap: 1rem;
-                      align-items: center;
-                      border-top: 1px solid var(--border-color);
-                      padding-top: 1rem;
-                      width: 100%;
-                    "
-                  >
-                    <!-- Organization Filter -->
-                    <div class="select-wrapper">
-                      <select
-                        class="custom-select"
-                        id="orgFilter"
-                        aria-label="Filter experience by organization"
-                      >
-                        <option value="all">All Organizations</option>
-                        <option value="WashU">Washington University in St. Louis</option>
-                        <option value="OWU">Ohio Wesleyan University</option>
-                        <option value="Corporate">Corporate / Industry</option>
-                        <option value="Personal">Other / Personal</option>
-                      </select>
-                      <span class="select-icon"
-                        ><i class="fas fa-chevron-down" aria-hidden="true"></i
-                      ></span>
-                    </div>
-
-                    <!-- Year Range Filter -->
-                    <div class="select-wrapper">
-                      <select
-                        class="custom-select"
-                        id="yearFilter"
-                        aria-label="Filter experience by year range"
-                      >
-                        <option value="all">All Years</option>
-                        <option value="2024-2026">2024 – 2026</option>
-                        <option value="2020-2023">2020 – 2023</option>
-                        <option value="before-2020">Before 2020</option>
-                      </select>
-                      <span class="select-icon"
-                        ><i class="fas fa-chevron-down" aria-hidden="true"></i
-                      ></span>
-                    </div>
-
-                    <div class="select-wrapper">
-                      <select
-                        class="custom-select"
-                        id="experienceSort"
-                        aria-label="Sort experience chronologically or alphabetically"
-                      >
-                        <option value="date-desc">Newest First</option>
-                        <option value="date-asc">Oldest First</option>
-                        <option value="title-asc">Alphabetical (A-Z)</option>
-                      </select>
-                      <span class="select-icon"
-                        ><i class="fas fa-chevron-down" aria-hidden="true"></i
-                      ></span>
-                    </div>
-                  </div>
-                </div>
-              </search>
-
               <div class="experience-timeline" id="experienceGrid" style="margin-top: 1.5rem">
                 <!--
                       SSR fallback: a static card grid for visitors with

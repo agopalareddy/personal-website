@@ -442,20 +442,42 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------------------------------------------------------------------------
   // Table of Contents generator
   // ---------------------------------------------------------------------------
+  function positionFilterControlsResponsive() {
+    var filterControls = document.getElementById('filterControls');
+    if (!filterControls) return;
+
+    var isMobile = window.innerWidth < 768;
+    var sidebar = document.querySelector('.academic-sidebar');
+    var subtitle = document.querySelector('.academic-content > p');
+
+    if (isMobile && subtitle) {
+      if (
+        filterControls.parentNode !== subtitle.parentNode ||
+        filterControls.previousElementSibling !== subtitle
+      ) {
+        subtitle.parentNode.insertBefore(filterControls, subtitle.nextSibling);
+      }
+    } else if (!isMobile && sidebar) {
+      if (filterControls.parentNode !== sidebar) {
+        sidebar.appendChild(filterControls);
+      }
+    }
+  }
+
   function positionTocResponsive() {
     var tocContainer = document.getElementById('tocContainer');
     if (!tocContainer) return;
 
     var isMobile = window.innerWidth < 768;
-    var searchElement = document.querySelector('search');
+    var filterControls = document.getElementById('filterControls');
     var sidebar = document.querySelector('.academic-sidebar');
 
-    if (isMobile && searchElement) {
+    if (isMobile && filterControls) {
       if (
-        tocContainer.parentNode !== searchElement.parentNode ||
-        tocContainer.previousElementSibling !== searchElement
+        tocContainer.parentNode !== filterControls.parentNode ||
+        tocContainer.previousElementSibling !== filterControls
       ) {
-        searchElement.parentNode.insertBefore(tocContainer, searchElement.nextSibling);
+        filterControls.parentNode.insertBefore(tocContainer, filterControls.nextSibling);
       }
     } else if (!isMobile && sidebar) {
       if (tocContainer.parentNode !== sidebar) {
@@ -602,8 +624,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  var filterToggleBtn = document.getElementById('filterToggleBtn');
+  if (filterToggleBtn) {
+    filterToggleBtn.addEventListener('click', function () {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+    });
+  }
+
+  window.addEventListener('resize', positionFilterControlsResponsive);
   window.addEventListener('resize', positionTocResponsive);
 
+  positionFilterControlsResponsive();
   populateFilters();
   renderExperiences();
 });

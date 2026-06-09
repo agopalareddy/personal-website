@@ -674,6 +674,28 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+function positionTocResponsive() {
+  const tocContainer = document.getElementById('tocContainer');
+  if (!tocContainer) return;
+
+  const isMobile = window.innerWidth < 768;
+  const searchElement = document.querySelector('search');
+  const sidebar = document.querySelector('.academic-sidebar');
+
+  if (isMobile && searchElement) {
+    if (
+      tocContainer.parentNode !== searchElement.parentNode ||
+      tocContainer.previousElementSibling !== searchElement
+    ) {
+      searchElement.parentNode.insertBefore(tocContainer, searchElement.nextSibling);
+    }
+  } else if (!isMobile && sidebar) {
+    if (tocContainer.parentNode !== sidebar) {
+      sidebar.appendChild(tocContainer);
+    }
+  }
+}
+
 function setupTocScrollListeners(tocListElement) {
   const links = tocListElement.querySelectorAll('a[href^="#"]');
   links.forEach((link) => {
@@ -682,7 +704,14 @@ function setupTocScrollListeners(tocListElement) {
       const targetId = this.getAttribute('href').substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        const headerOffset = 90; // height of sticky top header + some padding
+        // Collapse the TOC on mobile first so the height calculation is accurate for the final scroll position
+        const toggleBtn = document.getElementById('tocToggleBtn');
+        const isMobile = window.innerWidth < 768;
+        if (isMobile && toggleBtn && toggleBtn.getAttribute('aria-expanded') === 'true') {
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        const headerOffset = isMobile ? 120 : 90;
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -708,6 +737,9 @@ function renderToc(filtered) {
     tocList.innerHTML = '';
     return;
   }
+
+  // Move TOC element to its correct container depending on viewport width
+  positionTocResponsive();
 
   const toggleBtn = document.getElementById('tocToggleBtn');
   if (toggleBtn && !toggleBtn.hasAttribute('data-initialized')) {
@@ -783,6 +815,8 @@ if (toggleBtn) {
     toggleBtn.setAttribute('aria-expanded', !expanded);
   });
 }
+
+window.addEventListener('resize', positionTocResponsive);
 
 populateFilters();
 renderProjects();

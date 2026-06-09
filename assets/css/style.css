@@ -912,6 +912,20 @@ main.container {
     width: 240px;
     position: sticky;
     top: 5rem; /* Adjusted sticky offset to not be covered by sticky navigation header */
+    max-height: calc(100vh - 6.5rem);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+  }
+  .academic-sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .academic-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .academic-sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
   }
 }
 
@@ -1940,18 +1954,30 @@ body.page-loaded {
     display: none !important;
   }
 
-  /* Make TOC container adapt for mobile page layout */
+  /* Make TOC container adapt for mobile page layout and be sticky */
   body:not(.home-page) .toc-container {
+    position: sticky;
+    top: 3.5rem; /* Stick below mobile header */
+    z-index: 100; /* Float above other content */
+    background: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     margin-top: 0 !important;
-    padding-top: 0 !important;
+    padding: 0.75rem 1rem !important;
     border-top: none !important;
-    padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+  body:not(.home-page) #tocNav {
+    max-height: 50vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
   }
   body:not(.home-page) .toc-list {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 0.75rem 1.5rem !important;
+    padding-right: 0.5rem; /* space for scrollbar if ToC overflows */
   }
   body:not(.home-page) .toc-nested-list {
     margin-bottom: 0 !important;

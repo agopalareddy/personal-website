@@ -442,6 +442,28 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------------------------------------------------------------------------
   // Table of Contents generator
   // ---------------------------------------------------------------------------
+  function positionTocResponsive() {
+    var tocContainer = document.getElementById('tocContainer');
+    if (!tocContainer) return;
+
+    var isMobile = window.innerWidth < 768;
+    var searchElement = document.querySelector('search');
+    var sidebar = document.querySelector('.academic-sidebar');
+
+    if (isMobile && searchElement) {
+      if (
+        tocContainer.parentNode !== searchElement.parentNode ||
+        tocContainer.previousElementSibling !== searchElement
+      ) {
+        searchElement.parentNode.insertBefore(tocContainer, searchElement.nextSibling);
+      }
+    } else if (!isMobile && sidebar) {
+      if (tocContainer.parentNode !== sidebar) {
+        sidebar.appendChild(tocContainer);
+      }
+    }
+  }
+
   function setupTocScrollListeners(tocListElement) {
     var links = tocListElement.querySelectorAll('a[href^="#"]');
     links.forEach(function (link) {
@@ -450,7 +472,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var targetId = this.getAttribute('href').substring(1);
         var targetElement = document.getElementById(targetId);
         if (targetElement) {
-          var headerOffset = 90; // height of sticky top header + some padding
+          // Collapse the TOC on mobile first so the height calculation is accurate for the final scroll position
+          var toggleBtn = document.getElementById('tocToggleBtn');
+          var isMobile = window.innerWidth < 768;
+          if (isMobile && toggleBtn && toggleBtn.getAttribute('aria-expanded') === 'true') {
+            toggleBtn.setAttribute('aria-expanded', 'false');
+          }
+
+          var headerOffset = isMobile ? 120 : 90;
           var elementPosition = targetElement.getBoundingClientRect().top;
           var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -476,6 +505,9 @@ document.addEventListener('DOMContentLoaded', function () {
       tocList.innerHTML = '';
       return;
     }
+
+    // Move TOC element to its correct container depending on viewport width
+    positionTocResponsive();
 
     var toggleBtn = document.getElementById('tocToggleBtn');
     if (toggleBtn && !toggleBtn.hasAttribute('data-initialized')) {
@@ -569,6 +601,8 @@ document.addEventListener('DOMContentLoaded', function () {
       this.setAttribute('aria-expanded', !expanded);
     });
   }
+
+  window.addEventListener('resize', positionTocResponsive);
 
   populateFilters();
   renderExperiences();

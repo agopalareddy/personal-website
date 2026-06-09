@@ -20,12 +20,11 @@
 
       const displayText = el.getAttribute('data-email-text');
       if (displayText) {
+        // Replace with obfuscated display text (top contact section pattern)
         el.textContent = displayText;
-      } else if (!el.children.length) {
-        // Only set raw email as text when there are no child elements (icons etc.)
-        // to avoid destroying icon + label patterns in footers
-        el.textContent = email;
       }
+      // Otherwise leave existing content alone — footer icons, inline
+      // "reach out" text, etc. — never inject raw email as visible text.
 
       el.removeAttribute('data-email-user');
       el.removeAttribute('data-email-domain');

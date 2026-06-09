@@ -406,5 +406,22 @@
     "presentation": null,
     "has_detail": true,
     "formatted_date": "Spring 2026"
+  },
+  {
+    "id": "2026-06-blink-morse-decoder",
+    "title": "Blink Morse Decoder",
+    "excerpt": "An accessibility-focused Android app that translates deliberate eye blinks into Morse code text using real-time camera-based facial landmark tracking and a custom blink state machine \u2014 enabling hands-free communication without extra hardware.",
+    "venue": "CodeTillDawn Hackathon",
+    "venue_tag": "Personal",
+    "permalink": "/projects/blink-morse-decoder",
+    "date": "2026-06-01",
+    "category": "Software & Tools",
+    "technologies": ["Kotlin", "Android", "CameraX", "SmartSpectra", "Material 3"],
+    "github": "https://github.com/agopalareddy/blink-morse-app",
+    "demo": null,
+    "pdf": null,
+    "presentation": null,
+    "has_detail": true,
+    "formatted_date": "Summer 2026"
   }
 ]

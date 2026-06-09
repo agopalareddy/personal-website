@@ -1983,3 +1983,52 @@ body.page-loaded {
     transition: none !important;
   }
 }
+
+/* ─── Premium Vertical Timeline for Experience Page ─── */
+.experience-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-left: 2rem;
+}
+
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.8rem;
+  top: 1rem;
+  bottom: 1rem;
+  width: 2px;
+  background-color: var(--border-color);
+  transition: background-color var(--transition);
+}
+
+.timeline-card {
+  position: relative;
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  left: -1.6rem;
+  top: 1.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  transition:
+    border-color var(--transition),
+    background-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+  z-index: 2;
+}
+
+.timeline-card:hover::before {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  transform: scale(1.25);
+  box-shadow: 0 0 8px var(--accent);
+}

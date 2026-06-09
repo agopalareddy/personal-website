@@ -163,20 +163,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var id = exp.id || '';
     var detailUrl = '/experience/' + category + '/' + id + '.html';
 
-    var orgShort = getOrgShort(exp.organization);
-    var venueText = orgShort ? orgShort + ' \u2022 ' + dateRange : dateRange;
+    var venueText = dateRange;
 
     var subtitleHtml = '';
+    var subtitleParts = [];
     if (org) {
+      subtitleParts.push(org);
+    }
+    if (exp.role_context) {
+      subtitleParts.push(escapeHtml(exp.role_context));
+    }
+    if (exp.location) {
+      subtitleParts.push(escapeHtml(exp.location));
+    }
+
+    if (subtitleParts.length > 0) {
       subtitleHtml =
         '<div class="card-org-context" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; font-family: var(--font-body); font-weight: 500;">' +
-        org +
-        (exp.role_context ? ' \u2022 ' + escapeHtml(exp.role_context) : '') +
-        '</div>';
-    } else if (exp.role_context) {
-      subtitleHtml =
-        '<div class="card-org-context" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; font-family: var(--font-body); font-weight: 500;">' +
-        escapeHtml(exp.role_context) +
+        subtitleParts.join(' \u2022 ') +
         '</div>';
     }
 

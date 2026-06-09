@@ -9,9 +9,11 @@
     />
     <title>Professional Experience - Aadarsha Gopala Reddy</title>
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      crossorigin="anonymous"
     />
 
     <!-- Favicons & Mobile Device Integration -->
@@ -63,7 +65,40 @@
           <a href="/cv/" class="nav-link">CV/Resume</a>
           <a href="/availability/" class="nav-link">Availability</a>
         </nav>
-        <div id="theme-toggle"></div>
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
+          <svg
+            class="sun-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg
+            class="moon-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -84,7 +119,14 @@
                 </li>
                 <li>
                   <i class="fas fa-envelope" aria-hidden="true"></i>
-                  <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a>
+                  <a
+                    href="#"
+                    class="protected-email"
+                    data-email-user="YWR1cnMyMDAy"
+                    data-email-domain="Z21haWwuY29t"
+                    data-email-text="adurs2002 [at] gmail [dot] com"
+                    >adurs2002 [at] gmail [dot] com</a
+                  >
                 </li>
                 <li>
                   <i class="fab fa-linkedin" aria-hidden="true"></i>
@@ -100,9 +142,24 @@
                 </li>
               </ul>
             </div>
+
+            <div class="toc-container" id="tocContainer" hidden>
+              <button
+                class="toc-toggle-btn"
+                id="tocToggleBtn"
+                aria-expanded="true"
+                aria-controls="tocNav"
+              >
+                <h3 class="toc-title">On this page</h3>
+                <i class="fas fa-chevron-down toc-toggle-icon" aria-hidden="true"></i>
+              </button>
+              <nav aria-label="Table of contents" id="tocNav">
+                <ul class="toc-list" id="tocList"></ul>
+              </nav>
+            </div>
           </aside>
 
-          <article class="academic-content">
+          <article class="academic-content" aria-label="Experience Grid Content">
             <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
               Professional Experience
             </h1>
@@ -121,7 +178,7 @@
             <div class="experience-container">
               <search>
                 <div
-                  class="experience-controls"
+                  class="projects-controls"
                   style="flex-direction: column; align-items: stretch; gap: 1rem"
                 >
                   <!-- First Row: Search & Filters -->
@@ -160,7 +217,7 @@
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
-                        type="search"
+                        type="text"
                         class="search-input"
                         id="experienceSearch"
                         aria-label="Search experience by title, organization, or keyword"
@@ -181,6 +238,41 @@
                       width: 100%;
                     "
                   >
+                    <!-- Organization Filter -->
+                    <div class="select-wrapper">
+                      <select
+                        class="custom-select"
+                        id="orgFilter"
+                        aria-label="Filter experience by organization"
+                      >
+                        <option value="all">All Organizations</option>
+                        <option value="WashU">Washington University in St. Louis</option>
+                        <option value="OWU">Ohio Wesleyan University</option>
+                        <option value="Corporate">Corporate / Industry</option>
+                        <option value="Personal">Other / Personal</option>
+                      </select>
+                      <span class="select-icon"
+                        ><i class="fas fa-chevron-down" aria-hidden="true"></i
+                      ></span>
+                    </div>
+
+                    <!-- Year Range Filter -->
+                    <div class="select-wrapper">
+                      <select
+                        class="custom-select"
+                        id="yearFilter"
+                        aria-label="Filter experience by year range"
+                      >
+                        <option value="all">All Years</option>
+                        <option value="2024-2026">2024 – 2026</option>
+                        <option value="2020-2023">2020 – 2023</option>
+                        <option value="before-2020">Before 2020</option>
+                      </select>
+                      <span class="select-icon"
+                        ><i class="fas fa-chevron-down" aria-hidden="true"></i
+                      ></span>
+                    </div>
+
                     <div class="select-wrapper">
                       <select
                         class="custom-select"
@@ -189,7 +281,7 @@
                       >
                         <option value="date-desc">Newest First</option>
                         <option value="date-asc">Oldest First</option>
-                        <option value="title-asc">Title A-Z</option>
+                        <option value="title-asc">Alphabetical (A-Z)</option>
                       </select>
                       <span class="select-icon"
                         ><i class="fas fa-chevron-down" aria-hidden="true"></i
@@ -199,7 +291,7 @@
                 </div>
               </search>
 
-              <div class="project-grid" id="experienceGrid" style="margin-top: 1.5rem">
+              <div class="experience-timeline" id="experienceGrid" style="margin-top: 1.5rem">
                 <!--
                       SSR fallback: a static card grid for visitors with
                       JavaScript disabled.  The runtime catalog script
@@ -1033,200 +1125,109 @@
                   ]
                 </script>
                 <noscript>
-                  <article class="card spotlight-card experience-card" data-category="education">
+                  <div class="timeline-year">2026</div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
-                      <span class="card-category cat-education">Education</span>
+                      <span class="card-category cat-awards">Awards</span>
                       <span class="card-venue"
-                        >Washington University in St. Louis, St. Louis, Missouri &bull; Aug 2024 –
-                        May 2026</span
+                        >Washington University in St. Louis &bull; Apr 2026 – Apr 2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
-                        href="/experience/education/2024-08-m-s-computer-science.html"
-                        aria-label="View details for M.S. Computer Science"
-                        >M.S. Computer Science</a
+                        href="/experience/awards/2026-04-bauer-leaders-academy-bla-leadership-development.html"
+                        aria-label="Explore dedicated detail page for Bauer Leaders Academy (BLA) Leadership Development Badge"
+                        >Bauer Leaders Academy (BLA) Leadership Development Badge</a
                       >
                     </h3>
-                    <p class="experience-excerpt">GPA: 3.67/4.00</p>
+                    <p class="project-excerpt">
+                      Recognized by Washington University in St. Louis for Bauer Leaders Academy
+                      (BLA) Leadership Development.
+                    </p>
                     <div class="card-actions">
                       <a
-                        href="/experience/education/2024-08-m-s-computer-science.html"
+                        href="/experience/awards/2026-04-bauer-leaders-academy-bla-leadership-development.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Bauer Leaders Academy (BLA) Leadership Development Badge"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="education">
-                    <div class="card-meta">
-                      <span class="card-category cat-education">Education</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University, Delaware, Ohio &bull; Aug 2020 – May 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/education/2020-08-b-a-computer-science-data-analytics.html"
-                        aria-label="View details for B.A. Computer Science &amp; Data Analytics"
-                        >B.A. Computer Science &amp; Data Analytics</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">Minor: Economics</p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/education/2020-08-b-a-computer-science-data-analytics.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-research">Research</span>
                       <span class="card-venue"
-                        >DRIVES Project, Washington University in St. Louis &bull; Aug 2025 – May
-                        2026</span
+                        >Washington University in St. Louis &bull; Jan 2026 – Jan 2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
-                        href="/experience/research/2025-08-toward-vehicle-agnostic-driving-signatures-for.html"
-                        aria-label="View details for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+                        href="/experience/research/2026-01-toward-vehicle-agnostic-driving-signatures-for.html"
+                        aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
                         >Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment
                         Prediction from Naturalistic Driving Data</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
-                      Built an end-to-end pipeline processing 26,968 participant-weeks of
-                      naturalistic driving data from 304 participants, deriving weekly driving
-                      features and integrating demographic covariates for CDR status prediction.
+                    <p class="project-excerpt">
+                      Gopala Reddy, A. (2026). Toward Vehicle-Agnostic Driving Signatures for
+                      Cognitive Impairment Prediction from Naturalistic Driving Data (Master's
+                      thesis, Washington University in St. Louis). McKelvey School of Engineering
+                      Graduate Student Theses &amp; Dissertations, 1341.
+                      https://openscholarship.wustl.edu/eng_etds/1341/
                     </p>
                     <div class="card-actions">
                       <a
-                        href="/experience/research/2025-08-toward-vehicle-agnostic-driving-signatures-for.html"
+                        href="/experience/research/2026-01-toward-vehicle-agnostic-driving-signatures-for.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
+                      <span class="card-category cat-professional">Professional</span>
                       <span class="card-venue"
-                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
+                        >Washington University in St. Louis &bull; Jan 2026 – May 2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
-                        href="/experience/research/2024-08-multimodal-prediction-of-alzheimer-s-disease.html"
-                        aria-label="View details for Multimodal Prediction of Alzheimer's Disease"
-                        >Multimodal Prediction of Alzheimer's Disease</a
+                        href="/experience/professional/2026-01-graduate-teaching-assistant-cse-5114-data.html"
+                        aria-label="Explore dedicated detail page for Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale"
+                        >Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at
+                        Scale</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
-                      Developed a multimodal approach for early detection of Alzheimer's Disease
-                      using the OASIS-1 dataset.
+                    <p class="project-excerpt">
+                      Guided students in implementing data pipelines and real-time processing
+                      systems using Python, Snowflake, SQL, Airflow, Spark, Kafka, and Flink.
                     </p>
                     <div class="card-actions">
                       <a
-                        href="/experience/research/2024-08-multimodal-prediction-of-alzheimer-s-disease.html"
+                        href="/experience/professional/2026-01-graduate-teaching-assistant-cse-5114-data.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Jan 2023 – May 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2023-01-opinion-survey-on-artificial-intelligence-in-the.html"
-                        aria-label="View details for Opinion Survey on Artificial Intelligence in the Workplace"
-                        >Opinion Survey on Artificial Intelligence in the Workplace</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Designed, fielded, and investigated a survey experiment on the impact of AI on
-                      250 employees within each of four industries using survey data.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2023-01-opinion-survey-on-artificial-intelligence-in-the.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Aug 2022 – Dec 2022</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2022-08-connect-4-ai.html"
-                        aria-label="View details for Connect 4 AI"
-                        >Connect 4 AI</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Developed a Connect 4 game in Java with a single-player mode against an AI
-                      opponent and a multiplayer mode for two human players.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2022-08-connect-4-ai.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; May 2022 – Jul 2022</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2022-05-artificial-intelligence-in-modern-board-games-lost.html"
-                        aria-label="View details for Artificial Intelligence in Modern Board Games - Lost Cities AI"
-                        >Artificial Intelligence in Modern Board Games - Lost Cities AI</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Developed a digital version of the Lost Cities card game using Java.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2022-05-artificial-intelligence-in-modern-board-games-lost.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="professional">
+                  </div>
+                  <div class="timeline-year">2025</div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-professional">Professional</span>
                       <span class="card-venue"
                         >Washington University in St. Louis &bull; Nov 2025 – May 2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center.html"
-                        aria-label="View details for Graduate Assistant with the Taylor Family Center for Student Success"
+                        aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
                         >Graduate Assistant with the Taylor Family Center for Student Success</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Led data analysis and storytelling initiatives, tracking program impact
                       through SA Tools, survey design, and social media analytics for evidence-based
                       decision-making.
@@ -1235,661 +1236,42 @@
                       <a
                         href="/experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="professional">
-                    <div class="card-meta">
-                      <span class="card-category cat-professional">Professional</span>
-                      <span class="card-venue">Crittero, Inc. &bull; Jun 2025 – Aug 2025</span>
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/professional/2025-06-ai-engineer-intern.html"
-                        aria-label="View details for AI Engineer Intern"
-                        >AI Engineer Intern</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Engineered a full-stack social media simulation and recommendation system,
-                      developing a robust data generation pipeline with persona-based modeling in
-                      TypeScript and a foundational recommendation algorithm using TensorFlow/Keras.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/professional/2025-06-ai-engineer-intern.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="professional">
-                    <div class="card-meta">
-                      <span class="card-category cat-professional">Professional</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; Aug 2024 – May 2025</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html"
-                        aria-label="View details for Graduate Assistant with the Taylor Family Center for Student Success"
-                        >Graduate Assistant with the Taylor Family Center for Student Success</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Led strategic initiatives for First-Generation, Limited-Income (FLI) student
-                      success, planning and executing key community-building programs like ``End of
-                      Week Unwind'' and ``First Gen Week''.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="professional">
-                    <div class="card-meta">
-                      <span class="card-category cat-professional">Professional</span>
-                      <span class="card-venue">Lab714 &bull; Jun 2023 – May 2024</span>
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/professional/2023-06-data-analyst-intern.html"
-                        aria-label="View details for Data Analyst Intern"
-                        >Data Analyst Intern</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Achieved a 20% reduction in costs for clients through data-driven insights.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/professional/2023-06-data-analyst-intern.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="professional">
-                    <div class="card-meta">
-                      <span class="card-category cat-professional">Professional</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Sep 2021 – May 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/professional/2021-09-media-center-assistant.html"
-                        aria-label="View details for Media Center Assistant"
-                        >Media Center Assistant</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Set up and tore down audio-visual equipment, logged equipment movement using
-                      Sierra, and created appointments for use of spaces.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/professional/2021-09-media-center-assistant.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-research">Research</span>
                       <span class="card-venue"
-                        >Washington University in St. Louis &bull; Jan 2026 – Jan 2026</span
+                        >DRIVES Project, Washington University in St. Louis &bull; Aug 2025 – May
+                        2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
-                        href="/experience/research/2026-01-toward-vehicle-agnostic-driving-signatures-for.html"
-                        aria-label="View details for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+                        href="/experience/research/2025-08-toward-vehicle-agnostic-driving-signatures-for.html"
+                        aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
                         >Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment
                         Prediction from Naturalistic Driving Data</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
-                      Gopala Reddy, A. (2026). Toward Vehicle-Agnostic Driving Signatures for
-                      Cognitive Impairment Prediction from Naturalistic Driving Data (Master's
-                      thesis, Washington University in St. Louis). McKelvey School of Engineering
-                      Graduate Student Theses &amp;amp; Dissertations, 1341.
-                      https://openscholarship.wustl.edu/eng_etds/1341/
+                    <p class="project-excerpt">
+                      Built an end-to-end pipeline processing 26,968 participant-weeks of
+                      naturalistic driving data from 304 participants, deriving weekly driving
+                      features and integrating demographic covariates for CDR status prediction.
                     </p>
                     <div class="card-actions">
                       <a
-                        href="/experience/research/2026-01-toward-vehicle-agnostic-driving-signatures-for.html"
+                        href="/experience/research/2025-08-toward-vehicle-agnostic-driving-signatures-for.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
-                    <div class="card-meta">
-                      <span class="card-category cat-leadership">Leadership</span>
-                      <span class="card-venue"
-                        >Engineering Workshop by AGES &amp; Science Coach &bull; Sep 2024 – Sep
-                        2024</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/leadership/2024-09-an-introduction-to-artificial-intelligence-for-high.html"
-                        aria-label="View details for An Introduction to Artificial Intelligence for High School Students"
-                        >An Introduction to Artificial Intelligence for High School Students</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Delivered a talk titled &quot;An Introduction to Artificial Intelligence for
-                      High School Students&quot; at Engineering Workshop by AGES &amp; Science
-                      Coach.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/leadership/2024-09-an-introduction-to-artificial-intelligence-for-high.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
-                    <div class="card-meta">
-                      <span class="card-category cat-leadership">Leadership</span>
-                      <span class="card-venue"
-                        >Spring Student Symposium &bull; Apr 2023 – Apr 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/leadership/2023-04-artificial-intelligence-opinion-survey.html"
-                        aria-label="View details for Artificial Intelligence Opinion Survey"
-                        >Artificial Intelligence Opinion Survey</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Delivered a talk titled &quot;Artificial Intelligence Opinion Survey&quot; at
-                      Spring Student Symposium.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/leadership/2023-04-artificial-intelligence-opinion-survey.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
-                    <div class="card-meta">
-                      <span class="card-category cat-leadership">Leadership</span>
-                      <span class="card-venue"
-                        >Patricia Belt Conrades Summer Science Research Symposium &bull; Sep 2022 –
-                        Sep 2022</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html"
-                        aria-label="View details for Artificial Intelligence in Modern Board Games"
-                        >Artificial Intelligence in Modern Board Games</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Delivered a talk titled &quot;Artificial Intelligence in Modern Board
-                      Games&quot; at Patricia Belt Conrades Summer Science Research Symposium.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2024-08-datacenter-cooling-optimization-using-deep.html"
-                        aria-label="View details for Datacenter Cooling Optimization using Deep Reinforcement Learning"
-                        >Datacenter Cooling Optimization using Deep Reinforcement Learning</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC)
-                      integrated with EnergyPlus simulations to optimize datacenter cooling systems.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2024-08-datacenter-cooling-optimization-using-deep.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2024-08-interactive-storybook.html"
-                        aria-label="View details for Interactive Storybook"
-                        >Interactive Storybook</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Developed an interactive storytelling application using Vue.js, Node.js, and
-                      MongoDB with AI-powered content generation, enabling users to create branching
-                      narrative stories.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2024-08-interactive-storybook.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2024-08-socket-io-multi-room-chat-application.html"
-                        aria-label="View details for Socket.IO Multi-Room Chat Application"
-                        >Socket.IO Multi-Room Chat Application</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Developed a feature-rich multi-room chat application using Node.js and
-                      Socket.IO with password-protected rooms, private messaging, and user
-                      moderation capabilities.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2024-08-socket-io-multi-room-chat-application.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2024-08-php-calendar-application.html"
-                        aria-label="View details for PHP Calendar Application"
-                        >PHP Calendar Application</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Developed a feature-rich personal calendar and event management web
-                      application using PHP, MySQL, HTML5, CSS3, and JavaScript.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2024-08-php-calendar-application.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="research">
-                    <div class="card-meta">
-                      <span class="card-category cat-research">Research</span>
-                      <span class="card-venue"
-                        >MITxSureStart FutureMakers Create-a-Thon Program &bull; Jun 2022 – Jul
-                        2022</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/research/2022-06-parkinson-s-disease-ai-diagnosis-software.html"
-                        aria-label="View details for Parkinson's Disease AI Diagnosis Software"
-                        >Parkinson's Disease AI Diagnosis Software</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Developed AIParkinScan software for Parkinson's diagnosis using neural
-                      networks, spectrograms, and the Random Forest algorithm trained on audio and
-                      image data.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/research/2022-06-parkinson-s-disease-ai-diagnosis-software.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="professional">
-                    <div class="card-meta">
-                      <span class="card-category cat-professional">Professional</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; Jan 2026 – May 2026</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/professional/2026-01-graduate-teaching-assistant-cse-5114-data.html"
-                        aria-label="View details for Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale"
-                        >Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at
-                        Scale</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Guided students in implementing data pipelines and real-time processing
-                      systems using Python, Snowflake, SQL, Airflow, Spark, Kafka, and Flink.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/professional/2026-01-graduate-teaching-assistant-cse-5114-data.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="professional">
-                    <div class="card-meta">
-                      <span class="card-category cat-professional">Professional</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Jan 2022 – May 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/professional/2022-01-computer-science-lab-assistant.html"
-                        aria-label="View details for Computer Science Lab Assistant"
-                        >Computer Science Lab Assistant</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Tutored approximately ten students for over 6 hours per week, assisting with
-                      homework and exam preparation for introductory, intermediate, and advanced
-                      computer science coursework.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/professional/2022-01-computer-science-lab-assistant.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; Apr 2026 – Apr 2026</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2026-04-bauer-leaders-academy-bla-leadership-development.html"
-                        aria-label="View details for Bauer Leaders Academy (BLA) Leadership Development Badge"
-                        >Bauer Leaders Academy (BLA) Leadership Development Badge</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Washington University in St. Louis for Bauer Leaders Academy
-                      (BLA) Leadership Development.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2026-04-bauer-leaders-academy-bla-leadership-development.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Washington University in St. Louis &bull; May 2024 – May 2024</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2024-05-affiliated-school-scholarship.html"
-                        aria-label="View details for Affiliated School Scholarship"
-                        >Affiliated School Scholarship</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Washington University in St. Louis for Affiliated School.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2024-05-affiliated-school-scholarship.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; May 2023 – May 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2023-05-dean-s-list.html"
-                        aria-label="View details for Dean's List"
-                        >Dean's List</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Ohio Wesleyan University for Dean's.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2023-05-dean-s-list.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Apr 2023 – Apr 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2023-04-mortar-board-national-college-senior-honor-society.html"
-                        aria-label="View details for Mortar Board National College Senior Honor Society Membership"
-                        >Mortar Board National College Senior Honor Society Membership</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Ohio Wesleyan University for Mortar Board National College
-                      Senior Honor Society Membership.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2023-04-mortar-board-national-college-senior-honor-society.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Apr 2023 – Apr 2023</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2023-04-golden-bishop-award-wcsa-best-new-member.html"
-                        aria-label="View details for Golden Bishop Award - WCSA Best New Member"
-                        >Golden Bishop Award - WCSA Best New Member</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Ohio Wesleyan University for Golden Bishop Award - WCSA Best New
-                      Member.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2023-04-golden-bishop-award-wcsa-best-new-member.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; May 2022 – May 2022</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2022-05-dean-s-list.html"
-                        aria-label="View details for Dean's List"
-                        >Dean's List</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Ohio Wesleyan University for Dean's.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2022-05-dean-s-list.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Apr 2022 – Apr 2022</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2022-04-florence-leas-sophomore-prize.html"
-                        aria-label="View details for Florence Leas Sophomore Prize"
-                        >Florence Leas Sophomore Prize</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Ohio Wesleyan University for Florence Leas Sophomore.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2022-04-florence-leas-sophomore-prize.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue">Denison University &bull; Mar 2022 – Mar 2022</span>
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2022-03-first-place-32nd-annual-spring-programming-contest.html"
-                        aria-label="View details for First Place - 32nd Annual Spring Programming Contest"
-                        >First Place - 32nd Annual Spring Programming Contest</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Denison University for First Place - 32nd Annual Spring
-                      Programming Contest.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2022-03-first-place-32nd-annual-spring-programming-contest.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Ohio Wesleyan University &bull; Jan 2020 – Jan 2020</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2020-01-international-baccalaureate-scholarship.html"
-                        aria-label="View details for International Baccalaureate Scholarship"
-                        >International Baccalaureate Scholarship</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Ohio Wesleyan University for International Baccalaureate.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/awards/2020-01-international-baccalaureate-scholarship.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="awards">
-                    <div class="card-meta">
-                      <span class="card-category cat-awards">Awards</span>
-                      <span class="card-venue"
-                        >Next Genius Scholarship Foundation &bull; Jan 2020 – Jan 2020</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/awards/2020-01-scholar.html"
-                        aria-label="View details for Scholar"
-                        >Scholar</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Recognized by Next Genius Scholarship Foundation for Scholar.
-                    </p>
-                    <div class="card-actions">
-                      <a href="/experience/awards/2020-01-scholar.html" class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
@@ -1897,14 +1279,14 @@
                         2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2025-08-member.html"
-                        aria-label="View details for Member"
+                        aria-label="Explore dedicated detail page for Member"
                         >Member</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Provided strategic feedback to the Vice Chancellor for Student Affairs on
                       critical issues impacting graduate student life and experience.
                     </p>
@@ -1912,11 +1294,12 @@
                       <a
                         href="/experience/leadership/2025-08-member.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Member"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
@@ -1924,14 +1307,14 @@
                         May 2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2025-08-graduate-student-member.html"
-                        aria-label="View details for Graduate Student Member"
+                        aria-label="Explore dedicated detail page for Graduate Student Member"
                         >Graduate Student Member</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Guided the strategic direction of the Center for Career Engagement to ensure
                       services align with diverse needs of graduate students from all academic
                       backgrounds and career interests.
@@ -1940,11 +1323,66 @@
                       <a
                         href="/experience/leadership/2025-08-graduate-student-member.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Graduate Student Member"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-professional">Professional</span>
+                      <span class="card-venue">Crittero, Inc. &bull; Jun 2025 – Aug 2025</span>
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/professional/2025-06-ai-engineer-intern.html"
+                        aria-label="Explore dedicated detail page for AI Engineer Intern"
+                        >AI Engineer Intern</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Engineered a full-stack social media simulation and recommendation system,
+                      developing a robust data generation pipeline with persona-based modeling in
+                      TypeScript and a foundational recommendation algorithm using TensorFlow/Keras.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/professional/2025-06-ai-engineer-intern.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for AI Engineer Intern"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-leadership">Leadership</span>
+                      <span class="card-venue"
+                        >Umang (Indian Graduate Student Association) &bull; Jun 2025 – Oct
+                        2025</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/leadership/2025-06-treasurer.html"
+                        aria-label="Explore dedicated detail page for Treasurer"
+                        >Treasurer</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Managed club finances, including budgeting, expense tracking, and fundraising
+                      to ensure sustainable operations and successful event planning.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/leadership/2025-06-treasurer.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Treasurer"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
@@ -1952,14 +1390,14 @@
                         2026</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2025-05-vice-president-of-the-graduate-professional-council.html"
-                        aria-label="View details for Vice President of the Graduate-Professional Council (GPC) Chamber"
+                        aria-label="Explore dedicated detail page for Vice President of the Graduate-Professional Council (GPC) Chamber"
                         >Vice President of the Graduate-Professional Council (GPC) Chamber</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Managed the Council's unified Microsoft Teams workspace and website,
                       establishing centralized communication hubs and maintaining up-to-date
                       information on events, governance, and resources.
@@ -1968,50 +1406,25 @@
                       <a
                         href="/experience/leadership/2025-05-vice-president-of-the-graduate-professional-council.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Vice President of the Graduate-Professional Council (GPC) Chamber"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
-                    <div class="card-meta">
-                      <span class="card-category cat-leadership">Leadership</span>
-                      <span class="card-venue"
-                        >Umang (Indian Graduate Student Association) &bull; Jun 2025 – Oct
-                        2025</span
-                      >
-                    </div>
-                    <h3 class="experience-title">
-                      <a
-                        href="/experience/leadership/2025-06-treasurer.html"
-                        aria-label="View details for Treasurer"
-                        >Treasurer</a
-                      >
-                    </h3>
-                    <p class="experience-excerpt">
-                      Managed club finances, including budgeting, expense tracking, and fundraising
-                      to ensure sustainable operations and successful event planning.
-                    </p>
-                    <div class="card-actions">
-                      <a
-                        href="/experience/leadership/2025-06-treasurer.html"
-                        class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
-                      >
-                    </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="timeline-year">2024</div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue">HackWashU &bull; Dec 2024 – Jul 2025</span>
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2024-12-treasurer.html"
-                        aria-label="View details for Treasurer"
+                        aria-label="Explore dedicated detail page for Treasurer"
                         >Treasurer</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Managed the club's finances, including budgeting and expense tracking, to
                       ensure sustainable operations and successful event planning.
                     </p>
@@ -2019,25 +1432,429 @@
                       <a
                         href="/experience/leadership/2024-12-treasurer.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Treasurer"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-leadership">Leadership</span>
+                      <span class="card-venue"
+                        >Engineering Workshop by AGES & Science Coach &bull; Sep 2024 – Sep
+                        2024</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/leadership/2024-09-an-introduction-to-artificial-intelligence-for-high.html"
+                        aria-label="Explore dedicated detail page for An Introduction to Artificial Intelligence for High School Students"
+                        >An Introduction to Artificial Intelligence for High School Students</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Delivered a talk titled "An Introduction to Artificial Intelligence for High
+                      School Students" at Engineering Workshop by AGES & Science Coach.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/leadership/2024-09-an-introduction-to-artificial-intelligence-for-high.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for An Introduction to Artificial Intelligence for High School Students"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-education">Education</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis, St. Louis, Missouri &bull; Aug 2024 –
+                        May 2026</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/education/2024-08-m-s-computer-science.html"
+                        aria-label="Explore dedicated detail page for M.S. Computer Science"
+                        >M.S. Computer Science</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">GPA: 3.67/4.00</p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/education/2024-08-m-s-computer-science.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for M.S. Computer Science"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2024-08-multimodal-prediction-of-alzheimer-s-disease.html"
+                        aria-label="Explore dedicated detail page for Multimodal Prediction of Alzheimer's Disease"
+                        >Multimodal Prediction of Alzheimer's Disease</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Developed a multimodal approach for early detection of Alzheimer's Disease
+                      using the OASIS-1 dataset.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2024-08-multimodal-prediction-of-alzheimer-s-disease.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Multimodal Prediction of Alzheimer's Disease"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-professional">Professional</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis &bull; Aug 2024 – May 2025</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html"
+                        aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
+                        >Graduate Assistant with the Taylor Family Center for Student Success</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Led strategic initiatives for First-Generation, Limited-Income (FLI) student
+                      success, planning and executing key community-building programs like ``End of
+                      Week Unwind'' and ``First Gen Week''.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2024-08-datacenter-cooling-optimization-using-deep.html"
+                        aria-label="Explore dedicated detail page for Datacenter Cooling Optimization using Deep Reinforcement Learning"
+                        >Datacenter Cooling Optimization using Deep Reinforcement Learning</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC)
+                      integrated with EnergyPlus simulations to optimize datacenter cooling systems.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2024-08-datacenter-cooling-optimization-using-deep.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Datacenter Cooling Optimization using Deep Reinforcement Learning"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2024-08-interactive-storybook.html"
+                        aria-label="Explore dedicated detail page for Interactive Storybook"
+                        >Interactive Storybook</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Developed an interactive storytelling application using Vue.js, Node.js, and
+                      MongoDB with AI-powered content generation, enabling users to create branching
+                      narrative stories.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2024-08-interactive-storybook.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Interactive Storybook"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2024-08-socket-io-multi-room-chat-application.html"
+                        aria-label="Explore dedicated detail page for Socket.IO Multi-Room Chat Application"
+                        >Socket.IO Multi-Room Chat Application</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Developed a feature-rich multi-room chat application using Node.js and
+                      Socket.IO with password-protected rooms, private messaging, and user
+                      moderation capabilities.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2024-08-socket-io-multi-room-chat-application.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Socket.IO Multi-Room Chat Application"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis &bull; Aug 2024 – Dec 2024</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2024-08-php-calendar-application.html"
+                        aria-label="Explore dedicated detail page for PHP Calendar Application"
+                        >PHP Calendar Application</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Developed a feature-rich personal calendar and event management web
+                      application using PHP, MySQL, HTML5, CSS3, and JavaScript.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2024-08-php-calendar-application.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for PHP Calendar Application"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Washington University in St. Louis &bull; May 2024 – May 2024</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2024-05-affiliated-school-scholarship.html"
+                        aria-label="Explore dedicated detail page for Affiliated School Scholarship"
+                        >Affiliated School Scholarship</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Washington University in St. Louis for Affiliated School.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2024-05-affiliated-school-scholarship.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Affiliated School Scholarship"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-year">2023</div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-professional">Professional</span>
+                      <span class="card-venue">Lab714 &bull; Jun 2023 – May 2024</span>
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/professional/2023-06-data-analyst-intern.html"
+                        aria-label="Explore dedicated detail page for Data Analyst Intern"
+                        >Data Analyst Intern</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Achieved a 20% reduction in costs for clients through data-driven insights.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/professional/2023-06-data-analyst-intern.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Data Analyst Intern"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; May 2023 – May 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2023-05-dean-s-list.html"
+                        aria-label="Explore dedicated detail page for Dean's List"
+                        >Dean's List</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Ohio Wesleyan University for Dean's.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2023-05-dean-s-list.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Dean's List"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-leadership">Leadership</span>
+                      <span class="card-venue"
+                        >Spring Student Symposium &bull; Apr 2023 – Apr 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/leadership/2023-04-artificial-intelligence-opinion-survey.html"
+                        aria-label="Explore dedicated detail page for Artificial Intelligence Opinion Survey"
+                        >Artificial Intelligence Opinion Survey</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Delivered a talk titled "Artificial Intelligence Opinion Survey" at Spring
+                      Student Symposium.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/leadership/2023-04-artificial-intelligence-opinion-survey.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Artificial Intelligence Opinion Survey"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Apr 2023 – Apr 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2023-04-mortar-board-national-college-senior-honor-society.html"
+                        aria-label="Explore dedicated detail page for Mortar Board National College Senior Honor Society Membership"
+                        >Mortar Board National College Senior Honor Society Membership</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Ohio Wesleyan University for Mortar Board National College
+                      Senior Honor Society Membership.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2023-04-mortar-board-national-college-senior-honor-society.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Mortar Board National College Senior Honor Society Membership"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Apr 2023 – Apr 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2023-04-golden-bishop-award-wcsa-best-new-member.html"
+                        aria-label="Explore dedicated detail page for Golden Bishop Award - WCSA Best New Member"
+                        >Golden Bishop Award - WCSA Best New Member</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Ohio Wesleyan University for Golden Bishop Award - WCSA Best New
+                      Member.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2023-04-golden-bishop-award-wcsa-best-new-member.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Golden Bishop Award - WCSA Best New Member"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Jan 2023 – May 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2023-01-opinion-survey-on-artificial-intelligence-in-the.html"
+                        aria-label="Explore dedicated detail page for Opinion Survey on Artificial Intelligence in the Workplace"
+                        >Opinion Survey on Artificial Intelligence in the Workplace</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Designed, fielded, and investigated a survey experiment on the impact of AI on
+                      250 employees within each of four industries using survey data.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2023-01-opinion-survey-on-artificial-intelligence-in-the.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Opinion Survey on Artificial Intelligence in the Workplace"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
                         >Hindu Student Council &bull; Jan 2023 – May 2023</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2023-01-treasurer-and-founding-member.html"
-                        aria-label="View details for Treasurer and Founding Member"
+                        aria-label="Explore dedicated detail page for Treasurer and Founding Member"
                         >Treasurer and Founding Member</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Co-established the council and organized events promoting Hindu cultural
                       heritage, fostering youth leadership skills, and creating volunteer
                       opportunities.
@@ -2046,25 +1863,82 @@
                       <a
                         href="/experience/leadership/2023-01-treasurer-and-founding-member.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Treasurer and Founding Member"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="timeline-year">2022</div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-leadership">Leadership</span>
+                      <span class="card-venue"
+                        >Patricia Belt Conrades Summer Science Research Symposium &bull; Sep 2022 –
+                        Sep 2022</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html"
+                        aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games"
+                        >Artificial Intelligence in Modern Board Games</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Delivered a talk titled "Artificial Intelligence in Modern Board Games" at
+                      Patricia Belt Conrades Summer Science Research Symposium.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Aug 2022 – Dec 2022</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2022-08-connect-4-ai.html"
+                        aria-label="Explore dedicated detail page for Connect 4 AI"
+                        >Connect 4 AI</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Developed a Connect 4 game in Java with a single-player mode against an AI
+                      opponent and a multiplayer mode for two human players.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2022-08-connect-4-ai.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Connect 4 AI"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
                         >Wesleyan Council on Student Affairs (WCSA) &bull; Aug 2022 – May 2023</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2022-08-budget-committee-senator.html"
-                        aria-label="View details for Budget Committee Senator"
+                        aria-label="Explore dedicated detail page for Budget Committee Senator"
                         >Budget Committee Senator</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Actively contributed to the Budget Committee's process of proposing,
                       discussing, and deciding on senate bills, while overseeing the allocation of
                       an annual budget exceeding $350,000 to campus individuals and organizations.
@@ -2073,25 +1947,26 @@
                       <a
                         href="/experience/leadership/2022-08-budget-committee-senator.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Budget Committee Senator"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
                         >The Neurds (Neuroscience Club) &bull; Aug 2022 – May 2023</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2022-08-member.html"
-                        aria-label="View details for Member"
+                        aria-label="Explore dedicated detail page for Member"
                         >Member</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Presented on AI at Brain Fair 2023 during Brain Awareness Week, bridging
                       neuroscience and technology.
                     </p>
@@ -2099,25 +1974,186 @@
                       <a
                         href="/experience/leadership/2022-08-member.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Member"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >MITxSureStart FutureMakers Create-a-Thon Program &bull; Jun 2022 – Jul
+                        2022</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2022-06-parkinson-s-disease-ai-diagnosis-software.html"
+                        aria-label="Explore dedicated detail page for Parkinson's Disease AI Diagnosis Software"
+                        >Parkinson's Disease AI Diagnosis Software</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Developed AIParkinScan software for Parkinson's diagnosis using neural
+                      networks, spectrograms, and the Random Forest algorithm trained on audio and
+                      image data.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2022-06-parkinson-s-disease-ai-diagnosis-software.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Parkinson's Disease AI Diagnosis Software"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-research">Research</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; May 2022 – Jul 2022</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/research/2022-05-artificial-intelligence-in-modern-board-games-lost.html"
+                        aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games - Lost Cities AI"
+                        >Artificial Intelligence in Modern Board Games - Lost Cities AI</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Developed a digital version of the Lost Cities card game using Java.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/research/2022-05-artificial-intelligence-in-modern-board-games-lost.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games - Lost Cities AI"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; May 2022 – May 2022</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2022-05-dean-s-list.html"
+                        aria-label="Explore dedicated detail page for Dean's List"
+                        >Dean's List</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Ohio Wesleyan University for Dean's.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2022-05-dean-s-list.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Dean's List"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Apr 2022 – Apr 2022</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2022-04-florence-leas-sophomore-prize.html"
+                        aria-label="Explore dedicated detail page for Florence Leas Sophomore Prize"
+                        >Florence Leas Sophomore Prize</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Ohio Wesleyan University for Florence Leas Sophomore.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2022-04-florence-leas-sophomore-prize.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Florence Leas Sophomore Prize"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue">Denison University &bull; Mar 2022 – Mar 2022</span>
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2022-03-first-place-32nd-annual-spring-programming-contest.html"
+                        aria-label="Explore dedicated detail page for First Place - 32nd Annual Spring Programming Contest"
+                        >First Place - 32nd Annual Spring Programming Contest</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Denison University for First Place - 32nd Annual Spring
+                      Programming Contest.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2022-03-first-place-32nd-annual-spring-programming-contest.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for First Place - 32nd Annual Spring Programming Contest"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-professional">Professional</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Jan 2022 – May 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/professional/2022-01-computer-science-lab-assistant.html"
+                        aria-label="Explore dedicated detail page for Computer Science Lab Assistant"
+                        >Computer Science Lab Assistant</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Tutored approximately ten students for over 6 hours per week, assisting with
+                      homework and exam preparation for introductory, intermediate, and advanced
+                      computer science coursework.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/professional/2022-01-computer-science-lab-assistant.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Computer Science Lab Assistant"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
                         >Campus Programming Board &bull; Jan 2022 – Dec 2022</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2022-01-vice-president-of-finance.html"
-                        aria-label="View details for Vice President of Finance"
+                        aria-label="Explore dedicated detail page for Vice President of Finance"
                         >Vice President of Finance</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Successfully planned, created, and implemented budgets totaling over $86,000
                       for campus events.
                     </p>
@@ -2125,26 +2161,55 @@
                       <a
                         href="/experience/leadership/2022-01-vice-president-of-finance.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Vice President of Finance"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
-                  <article class="card spotlight-card experience-card" data-category="leadership">
+                  </div>
+                  <div class="timeline-year">2021</div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-professional">Professional</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Sep 2021 – May 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/professional/2021-09-media-center-assistant.html"
+                        aria-label="Explore dedicated detail page for Media Center Assistant"
+                        >Media Center Assistant</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Set up and tore down audio-visual equipment, logged equipment movement using
+                      Sierra, and created appointments for use of spaces.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/professional/2021-09-media-center-assistant.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Media Center Assistant"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
                     <div class="card-meta">
                       <span class="card-category cat-leadership">Leadership</span>
                       <span class="card-venue"
-                        >Mathematics, Computer Science &amp; Data Analytics Student Board &bull; Aug
+                        >Mathematics, Computer Science & Data Analytics Student Board &bull; Aug
                         2021 – May 2023</span
                       >
                     </div>
-                    <h3 class="experience-title">
+                    <h3 class="project-title">
                       <a
                         href="/experience/leadership/2021-08-member.html"
-                        aria-label="View details for Member"
+                        aria-label="Explore dedicated detail page for Member"
                         >Member</a
                       >
                     </h3>
-                    <p class="experience-excerpt">
+                    <p class="project-excerpt">
                       Analyzed faculty evaluations to provide actionable insights for departmental
                       improvements.
                     </p>
@@ -2152,10 +2217,88 @@
                       <a
                         href="/experience/leadership/2021-08-member.html"
                         class="card-btn btn-detail"
-                        >View Details <span aria-hidden="true">&rarr;</span></a
+                        aria-label="Explore dedicated detail page for Member"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
                       >
                     </div>
-                  </article>
+                  </div>
+                  <div class="timeline-year">2020</div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-education">Education</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University, Delaware, Ohio &bull; Aug 2020 – May 2023</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/education/2020-08-b-a-computer-science-data-analytics.html"
+                        aria-label="Explore dedicated detail page for B.A. Computer Science & Data Analytics"
+                        >B.A. Computer Science & Data Analytics</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">Minor: Economics</p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/education/2020-08-b-a-computer-science-data-analytics.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for B.A. Computer Science & Data Analytics"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Ohio Wesleyan University &bull; Jan 2020 – Jan 2020</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2020-01-international-baccalaureate-scholarship.html"
+                        aria-label="Explore dedicated detail page for International Baccalaureate Scholarship"
+                        >International Baccalaureate Scholarship</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Ohio Wesleyan University for International Baccalaureate.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2020-01-international-baccalaureate-scholarship.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for International Baccalaureate Scholarship"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
+                  <div class="project-card spotlight-card timeline-card">
+                    <div class="card-meta">
+                      <span class="card-category cat-awards">Awards</span>
+                      <span class="card-venue"
+                        >Next Genius Scholarship Foundation &bull; Jan 2020 – Jan 2020</span
+                      >
+                    </div>
+                    <h3 class="project-title">
+                      <a
+                        href="/experience/awards/2020-01-scholar.html"
+                        aria-label="Explore dedicated detail page for Scholar"
+                        >Scholar</a
+                      >
+                    </h3>
+                    <p class="project-excerpt">
+                      Recognized by Next Genius Scholarship Foundation for Scholar.
+                    </p>
+                    <div class="card-actions">
+                      <a
+                        href="/experience/awards/2020-01-scholar.html"
+                        class="card-btn btn-detail"
+                        aria-label="Explore dedicated detail page for Scholar"
+                        ><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a
+                      >
+                    </div>
+                  </div>
                 </noscript>
               </div>
 
@@ -3042,116 +3185,44 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div class="footer-col about-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Aadarsha Gopala Reddy
-          </h3>
-          <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
+          <h3 class="footer-col-heading">Aadarsha Gopala Reddy</h3>
+          <p>
             M.S. Computer Science graduate from Washington University in St. Louis. Interested in
             solving complex distributed systems problems, building high-throughput data pipelines,
             and training machine learning models.
           </p>
         </div>
         <div class="footer-col links-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Explore
-          </h3>
-          <ul style="list-style: none; padding: 0; margin: 0">
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Home</a
-              >
-            </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/experience/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Experience</a
-              >
-            </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/projects/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Projects Showcase</a
-              >
-            </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/cv/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Curriculum Vitae</a
-              >
-            </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/availability/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Availability Schedule</a
-              >
-            </li>
+          <h3 class="footer-col-heading">Explore</h3>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/experience/">Experience</a></li>
+            <li><a href="/projects/">Projects Showcase</a></li>
+            <li><a href="/cv/">Curriculum Vitae</a></li>
+            <li><a href="/availability/">Availability Schedule</a></li>
           </ul>
         </div>
         <div class="footer-col contact-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Connect
-          </h3>
-          <ul style="list-style: none; padding: 0; margin: 0">
-            <li style="margin-bottom: 0.5rem">
+          <h3 class="footer-col-heading">Connect</h3>
+          <ul>
+            <li>
               <a
-                href="mailto:adurs2002@gmail.com"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                href="#"
+                class="protected-email"
+                data-email-user="YWR1cnMyMDAy"
+                data-email-domain="Z21haWwuY29t"
                 ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
                 Email</a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="https://www.linkedin.com/in/agopalareddy"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+            <li>
+              <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
                 ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
                 LinkedIn <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="https://github.com/agopalareddy"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+            <li>
+              <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
                 ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
                 GitHub <span class="sr-only">(opens in a new tab)</span></a
               >
@@ -3159,61 +3230,23 @@
           </ul>
         </div>
         <div class="footer-col resources-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Downloads &amp; Info
-          </h3>
-          <ul style="list-style: none; padding: 0; margin: 0">
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/files/reddy_cv.pdf"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+          <h3 class="footer-col-heading">Downloads &amp; Info</h3>
+          <ul>
+            <li>
+              <a href="/files/reddy_cv.pdf" target="_blank" rel="noopener"
                 >Curriculum Vitae (PDF) <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/files/reddy_resume.pdf"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+            <li>
+              <a href="/files/reddy_resume.pdf" target="_blank" rel="noopener"
                 >Resume (PDF) <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/accessibility.html"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Accessibility Statement</a
-              >
-            </li>
+            <li><a href="/accessibility.html">Accessibility Statement</a></li>
           </ul>
         </div>
       </div>
-      <div
-        class="container footer-bottom"
-        style="
-          border-top: 1px solid var(--border-color);
-          padding-top: 1.5rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          margin-top: 1.5rem;
-        "
-      >
+      <div class="container footer-bottom">
         <p style="margin: 0">
           &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
         </p>
@@ -3223,5 +3256,6 @@
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/email-protection.js"></script>
   </body>
 </html>

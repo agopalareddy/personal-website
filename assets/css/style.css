@@ -1989,7 +1989,8 @@ body.page-loaded {
     margin-bottom: 0 !important;
   }
   /* On mobile, before JS initializes, keep the TOC collapsed to avoid layout shift/flashing */
-  .toc-toggle-btn:not([data-initialized='true']) + #tocNav {
+  .toc-toggle-btn:not([data-initialized='true']) + #tocNav,
+  .toc-toggle-btn:not([data-initialized='true']) + #filterNav {
     display: none !important;
   }
   .toc-toggle-btn:not([data-initialized='true']) .toc-toggle-icon {
@@ -2280,6 +2281,7 @@ body.page-loaded {
 .toc-toggle-btn[aria-expanded='false'] .toc-toggle-icon {
   transform: rotate(-90deg);
 }
-.toc-toggle-btn[aria-expanded='false'] + #tocNav {
+.toc-toggle-btn[aria-expanded='false'] + #tocNav,
+.toc-toggle-btn[aria-expanded='false'] + #filterNav {
   display: none !important;
 }

@@ -1332,6 +1332,15 @@ main.container {
   padding-top: 0.6rem;
   margin-top: auto;
 }
+
+.card-actions--stretch {
+  gap: var(--space-sm);
+}
+
+.card-actions--stretch .card-btn {
+  flex: 1;
+  justify-content: center;
+}
 .card-btn {
   display: inline-flex;
   align-items: center;
@@ -1339,12 +1348,19 @@ main.container {
   padding: 0.3rem 0.6rem;
   font-size: 0.75rem;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   text-decoration: none !important;
   font-family: var(--font-body);
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  line-height: 1.4;
   transition:
     background-color var(--transition),
-    color var(--transition);
+    color var(--transition),
+    border-color var(--transition);
 }
 .btn-github {
   background-color: var(--text-primary);
@@ -1355,7 +1371,7 @@ main.container {
 }
 .btn-demo {
   background-color: var(--accent);
-  color: #fff !important;
+  color: var(--accent-on-accent) !important;
 }
 .btn-demo:hover {
   background-color: var(--accent-hover);

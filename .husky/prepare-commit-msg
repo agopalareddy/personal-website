@@ -1,0 +1,5 @@
+# Strip AI agent co-author trailers before the message is finalized.
+if [ -n "$1" ] && [ -f "$1" ]; then
+  sed -i '/^Co-authored-by: Cursor <cursoragent@cursor.com>$/d' "$1"
+  sed -i '/^Co-authored-by:.*cursoragent@cursor\.com>$/d' "$1"
+fi

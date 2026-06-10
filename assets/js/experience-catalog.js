@@ -178,10 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (subtitleParts.length > 0) {
-      subtitleHtml =
-        '<div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">' +
-        subtitleParts.join(' \u2022 ') +
-        '</div>';
+      subtitleHtml = '<div class="card-org-context">' + subtitleParts.join(' \u2022 ') + '</div>';
     }
 
     var cardHtml =

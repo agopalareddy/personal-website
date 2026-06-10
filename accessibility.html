@@ -8,8 +8,9 @@
       content="Accessibility compliance details and standards commitment for Aadarsha Gopala Reddy's academic engineering portfolio."
     />
     <title>Accessibility Statement - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0" />
     <link rel="stylesheet" href="/assets/fonts/fonts.css" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
@@ -24,7 +25,8 @@
     <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#0a0a16" />
+    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
@@ -196,11 +198,13 @@
             <h3>3. Visual &amp; Responsive Design</h3>
             <ul>
               <li>
-                <strong>Color Contrast:</strong> Light and dark theme color tokens meet WCAG 2.1 AA
-                contrast ratios of at least <strong>4.5:1</strong> for normal text and
-                <strong>3:1</strong> for large text. The <code>color-scheme: light dark</code>
-                declaration ensures browser UI elements (scrollbars, form controls) match the
-                selected theme.
+                <strong>Color Contrast:</strong> Light and dark theme color tokens use a unified
+                academic navy palette and meet WCAG 2.1 AA contrast ratios of at least
+                <strong>4.5:1</strong> for normal text and <strong>3:1</strong> for large text.
+                Category badges use solid foreground/background token pairs verified against AA
+                thresholds. The <code>color-scheme: light dark</code> declaration and
+                <code>theme-color</code> meta tags ensure browser UI elements match the selected
+                theme.
               </li>
               <li>
                 <strong>Responsive Layout:</strong> The layout adapts across device sizes using CSS

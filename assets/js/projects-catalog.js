@@ -572,7 +572,7 @@ function renderProjects() {
                             <span class="card-venue">${p.formatted_date}</span>
                         </div>
                         <h3 class="project-title">${titleHtml}</h3>
-                        <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">${venueLabel}</div>
+                        <div class="card-org-context">${venueLabel}</div>
                         <p class="project-excerpt">${p.excerpt}</p>
                         <div class="project-tech">${tagsHtml}</div>
                         ${actionsHtml}

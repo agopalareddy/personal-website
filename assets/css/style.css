@@ -1,190 +1,181 @@
-:root {
-  color-scheme: light dark;
+/*
+ * Design System — agreddy.com
+ * Tokens: typography, spacing, radii, z-index, semantic colors (light/dark).
+ * Theme resolution: data-resolved-theme (set by theme.js) + class fallbacks.
+ */
 
-  /* Typographic Families */
-  --font-heading: 'Lora', 'Cambria', 'Georgia', serif;
-  --font-body:
-    'Aptos', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+@layer tokens {
+  :root {
+    color-scheme: light dark;
 
-  /* Light Theme Custom Properties (Default) */
-  --bg-base: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f1f5f9;
-  --border-color: #e2e8f0;
-  --border-hover: #cbd5e1;
+    /* Typographic families */
+    --font-heading: 'Lora', 'Cambria', 'Georgia', serif;
+    --font-body:
+      'Aptos', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+      Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+    /* Spacing scale (4px base) */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 2.5rem;
+    --space-3xl: 4rem;
 
-  --accent: #1e3a8a; /* Deep academic navy */
-  --accent-hover: #1e40af;
-  --accent-soft: #eff6ff;
+    /* Border radii */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-pill: 999px;
 
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03);
+    /* Z-index stack */
+    --z-sticky: 100;
+    --z-header: 1000;
+    --z-skip: 1010;
+    --z-modal: 9999;
 
-  --transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-  --header-bg: rgba(248, 250, 252, 0.85);
+  /* Light theme (default) */
+  :root,
+  :root[data-resolved-theme='light'],
+  :root.theme-light {
+    --bg-base: #f7f8fa;
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #eef1f5;
+    --border-color: #e2e8f0;
+    --border-hover: #cbd5e1;
 
-  --cat-research-bg: var(--accent-soft);
-  --cat-research-color: var(--accent);
-  --cat-web-bg: rgba(30, 58, 138, 0.08);
-  --cat-web-color: #1e3a8a;
-  --cat-tools-bg: rgba(6, 95, 70, 0.08);
-  --cat-tools-color: #065f46;
-  --cat-professional-bg: rgba(15, 118, 110, 0.08);
-  --cat-professional-color: #0f766e;
-  --cat-education-bg: rgba(180, 83, 9, 0.08);
-  --cat-education-color: #b45309;
-  --cat-leadership-bg: rgba(109, 40, 217, 0.08);
-  --cat-leadership-color: #6d28d9;
-  --cat-awards-bg: rgba(190, 18, 60, 0.08);
-  --cat-awards-color: #be123c;
+    --text-primary: #0c1222;
+    --text-secondary: #3d4a5c;
+    --text-muted: #5c6b7f;
 
-  /* Document Modal Variables */
-  --modal-bg: rgba(255, 255, 255, 0.85);
-  --modal-border: rgba(255, 255, 255, 0.4);
-  --modal-header-bg: rgba(255, 255, 255, 0.35);
-  --modal-close-bg: rgba(15, 23, 42, 0.05);
-  --modal-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
-}
+    --accent: #1a3478;
+    --accent-hover: #254aa3;
+    --accent-soft: #e8eef8;
+    --accent-on-accent: #ffffff;
 
-/* Dark Theme variables applied via media query if no explicit class is set */
-@media (prefers-color-scheme: dark) {
-  :root:not(.theme-light) {
-    --bg-base: #151515; /* Cozy warm monochrome slate grey */
-    --bg-surface: #1e1e1e;
-    --bg-surface-hover: #2b2b2b;
-    --border-color: #2c2c2c;
-    --border-hover: #444444;
+    --shadow-sm: 0 1px 3px rgba(12, 18, 34, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(12, 18, 34, 0.05), 0 2px 4px -1px rgba(12, 18, 34, 0.03);
 
-    --text-primary: #f5f5f5;
-    --text-secondary: #d4d4d4;
-    --text-muted: #8e8e8e;
+    --header-bg: rgba(247, 248, 250, 0.85);
 
-    --accent: #f59e0b; /* Elegant reading-yellow warm amber */
-    --accent-hover: #fbbf24;
-    --accent-soft: #352510;
+    --cat-research-bg: var(--accent-soft);
+    --cat-research-color: var(--accent);
+    --cat-web-bg: #e8eef8;
+    --cat-web-color: #1a3478;
+    --cat-tools-bg: #d9f3ef;
+    --cat-tools-color: #065f46;
+    --cat-professional-bg: #d9f3f0;
+    --cat-professional-color: #0f5c55;
+    --cat-education-bg: #fde8d8;
+    --cat-education-color: #9a3412;
+    --cat-leadership-bg: #ede9fe;
+    --cat-leadership-color: #5b21b6;
+    --cat-awards-bg: #fce7ef;
+    --cat-awards-color: #9f1239;
+
+    --modal-bg: rgba(255, 255, 255, 0.85);
+    --modal-border: rgba(255, 255, 255, 0.4);
+    --modal-header-bg: rgba(255, 255, 255, 0.35);
+    --modal-close-bg: rgba(12, 18, 34, 0.05);
+    --modal-shadow: 0 20px 50px rgba(12, 18, 34, 0.15);
+  }
+
+  /* Dark theme — explicit override or JS-resolved */
+  :root[data-resolved-theme='dark'],
+  :root.theme-dark {
+    --bg-base: #12141a;
+    --bg-surface: #1a1d26;
+    --bg-surface-hover: #252a36;
+    --border-color: #2e3440;
+    --border-hover: #3d4454;
+
+    --text-primary: #f2f4f8;
+    --text-secondary: #c5ccd8;
+    --text-muted: #9aa3b2;
+
+    --accent: #6b9fff;
+    --accent-hover: #8bb4ff;
+    --accent-soft: #1e2a42;
+    --accent-on-accent: #0c1222;
 
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
 
-    --header-bg: rgba(21, 21, 21, 0.85);
+    --header-bg: rgba(18, 20, 26, 0.85);
 
     --cat-research-bg: var(--accent-soft);
-    --cat-research-color: var(--text-primary);
-    --cat-web-bg: rgba(245, 158, 11, 0.15);
-    --cat-web-color: #fbbf24;
-    --cat-tools-bg: rgba(168, 85, 247, 0.15);
-    --cat-tools-color: #c084fc;
-    --cat-professional-bg: rgba(45, 212, 191, 0.15);
-    --cat-professional-color: #2dd4bf;
-    --cat-education-bg: rgba(251, 191, 36, 0.15);
-    --cat-education-color: #fbbf24;
-    --cat-leadership-bg: rgba(167, 139, 250, 0.15);
-    --cat-leadership-color: #a78bfa;
-    --cat-awards-bg: rgba(251, 113, 133, 0.15);
-    --cat-awards-color: #fb7185;
+    --cat-research-color: #c5d9ff;
+    --cat-web-bg: #1e2a42;
+    --cat-web-color: #8bb4ff;
+    --cat-tools-bg: #1a2e28;
+    --cat-tools-color: #6ee7b7;
+    --cat-professional-bg: #1a2e2c;
+    --cat-professional-color: #5eead4;
+    --cat-education-bg: #2e2218;
+    --cat-education-color: #fdba74;
+    --cat-leadership-bg: #261e3a;
+    --cat-leadership-color: #c4b5fd;
+    --cat-awards-bg: #2e1a22;
+    --cat-awards-color: #fda4af;
 
-    /* Document Modal Variables */
-    --modal-bg: rgba(24, 24, 24, 0.85);
+    --modal-bg: rgba(26, 29, 38, 0.85);
     --modal-border: rgba(255, 255, 255, 0.08);
-    --modal-header-bg: rgba(24, 24, 24, 0.35);
+    --modal-header-bg: rgba(26, 29, 38, 0.35);
     --modal-close-bg: rgba(255, 255, 255, 0.08);
     --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   }
-}
 
-/* Explicit Dark Theme class overrides */
-:root.theme-dark {
-  --bg-base: #151515;
-  --bg-surface: #1e1e1e;
-  --bg-surface-hover: #2b2b2b;
-  --border-color: #2c2c2c;
-  --border-hover: #444444;
+  /* Pre-JS fallback: device preference before theme.js sets data-resolved-theme */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.theme-light):not(.theme-dark):not([data-resolved-theme]) {
+      --bg-base: #12141a;
+      --bg-surface: #1a1d26;
+      --bg-surface-hover: #252a36;
+      --border-color: #2e3440;
+      --border-hover: #3d4454;
 
-  --text-primary: #f5f5f5;
-  --text-secondary: #d4d4d4;
-  --text-muted: #8e8e8e;
+      --text-primary: #f2f4f8;
+      --text-secondary: #c5ccd8;
+      --text-muted: #9aa3b2;
 
-  --accent: #f59e0b;
-  --accent-hover: #fbbf24;
-  --accent-soft: #352510;
+      --accent: #6b9fff;
+      --accent-hover: #8bb4ff;
+      --accent-soft: #1e2a42;
+      --accent-on-accent: #0c1222;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
 
-  --header-bg: rgba(21, 21, 21, 0.85);
+      --header-bg: rgba(18, 20, 26, 0.85);
 
-  --cat-research-bg: var(--accent-soft);
-  --cat-research-color: var(--text-primary);
-  --cat-web-bg: rgba(245, 158, 11, 0.15);
-  --cat-web-color: #fbbf24;
-  --cat-tools-bg: rgba(168, 85, 247, 0.15);
-  --cat-tools-color: #c084fc;
-  --cat-professional-bg: rgba(45, 212, 191, 0.15);
-  --cat-professional-color: #2dd4bf;
-  --cat-education-bg: rgba(251, 191, 36, 0.15);
-  --cat-education-color: #fbbf24;
-  --cat-leadership-bg: rgba(167, 139, 250, 0.15);
-  --cat-leadership-color: #a78bfa;
-  --cat-awards-bg: rgba(251, 113, 133, 0.15);
-  --cat-awards-color: #fb7185;
+      --cat-research-bg: var(--accent-soft);
+      --cat-research-color: #c5d9ff;
+      --cat-web-bg: #1e2a42;
+      --cat-web-color: #8bb4ff;
+      --cat-tools-bg: #1a2e28;
+      --cat-tools-color: #6ee7b7;
+      --cat-professional-bg: #1a2e2c;
+      --cat-professional-color: #5eead4;
+      --cat-education-bg: #2e2218;
+      --cat-education-color: #fdba74;
+      --cat-leadership-bg: #261e3a;
+      --cat-leadership-color: #c4b5fd;
+      --cat-awards-bg: #2e1a22;
+      --cat-awards-color: #fda4af;
 
-  /* Document Modal Variables */
-  --modal-bg: rgba(24, 24, 24, 0.85);
-  --modal-border: rgba(255, 255, 255, 0.08);
-  --modal-header-bg: rgba(24, 24, 24, 0.35);
-  --modal-close-bg: rgba(255, 255, 255, 0.08);
-  --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-}
-
-/* Explicit Light Theme class overrides */
-:root.theme-light {
-  --bg-base: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f1f5f9;
-  --border-color: #e2e8f0;
-  --border-hover: #cbd5e1;
-
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-
-  --accent: #1e3a8a;
-  --accent-hover: #1e40af;
-  --accent-soft: #eff6ff;
-
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03);
-
-  --header-bg: rgba(248, 250, 252, 0.85);
-
-  --cat-research-bg: var(--accent-soft);
-  --cat-research-color: var(--accent);
-  --cat-web-bg: rgba(30, 58, 138, 0.08);
-  --cat-web-color: #1e3a8a;
-  --cat-tools-bg: rgba(6, 95, 70, 0.08);
-  --cat-tools-color: #065f46;
-  --cat-professional-bg: rgba(15, 118, 110, 0.08);
-  --cat-professional-color: #0f766e;
-  --cat-education-bg: rgba(180, 83, 9, 0.08);
-  --cat-education-color: #b45309;
-  --cat-leadership-bg: rgba(109, 40, 217, 0.08);
-  --cat-leadership-color: #6d28d9;
-  --cat-awards-bg: rgba(190, 18, 60, 0.08);
-  --cat-awards-color: #be123c;
-
-  /* Document Modal Variables */
-  --modal-bg: rgba(255, 255, 255, 0.85);
-  --modal-border: rgba(255, 255, 255, 0.4);
-  --modal-header-bg: rgba(255, 255, 255, 0.35);
-  --modal-close-bg: rgba(15, 23, 42, 0.05);
-  --modal-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
+      --modal-bg: rgba(26, 29, 38, 0.85);
+      --modal-border: rgba(255, 255, 255, 0.08);
+      --modal-header-bg: rgba(26, 29, 38, 0.35);
+      --modal-close-bg: rgba(255, 255, 255, 0.08);
+      --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+  }
 }
 
 /* Base Styles — targeted resets instead of global * (global resets break web components & cascade layers) */
@@ -237,7 +228,7 @@ body {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--space-xl);
 }
 
 /* Skip Link */
@@ -247,10 +238,10 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background: var(--accent);
-  color: #ffffff;
+  color: var(--accent-on-accent);
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  z-index: 1010;
+  z-index: var(--z-skip);
   transition: top var(--transition);
   font-weight: 500;
   text-decoration: none;
@@ -583,13 +574,14 @@ main.container {
   background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 1000;
+  z-index: var(--z-header);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition);
+  overscroll-behavior: contain;
 }
 
 .modal-overlay.active {
@@ -680,7 +672,10 @@ main.container {
   font-weight: 500;
   padding: 0.5rem 0;
   cursor: pointer;
-  transition: all var(--transition);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
 }
 
 .tab-btn:hover {
@@ -811,12 +806,16 @@ main.container {
 
 .footer-bottom {
   border-top: 1px solid var(--border-color);
-  padding-top: 1.5rem;
+  padding-top: var(--space-lg);
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.8rem;
   color: var(--text-muted);
+}
+
+.footer-bottom p {
+  margin: 0;
 }
 
 @media (max-width: 992px) {
@@ -1008,9 +1007,10 @@ main.container {
   font-family: var(--font-heading);
   font-weight: 400;
   color: var(--text-primary);
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
   margin-bottom: 0.75rem;
   text-wrap: balance;
+  scroll-margin-top: 5rem;
 }
 .academic-content h1 {
   font-size: 2.2rem;
@@ -1156,9 +1156,12 @@ main.container {
     box-shadow var(--transition);
 }
 .search-input:focus {
-  outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 .search-icon {
   position: absolute;
@@ -1181,7 +1184,10 @@ main.container {
   background-color: var(--bg-surface);
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all var(--transition);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
   font-weight: 600;
   font-family: var(--font-body);
 }
@@ -1230,10 +1236,10 @@ main.container {
 }
 .card-category {
   padding: 0.15rem 0.5rem;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   letter-spacing: 0.05em;
 }
 .cat-research {
@@ -1429,7 +1435,10 @@ main.container {
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  transition: all var(--transition);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
   font-family: var(--font-body);
 }
 .custom-select:hover {
@@ -1438,8 +1447,11 @@ main.container {
   background-color: var(--bg-surface-hover);
 }
 .custom-select:focus {
-  outline: none;
   border-color: var(--accent);
+}
+.custom-select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 .select-icon {
   position: absolute;
@@ -1455,7 +1467,7 @@ main.container {
 .top-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: var(--z-header);
   background: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -1577,7 +1589,10 @@ main.container {
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  transition: all var(--transition);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
   text-decoration: none;
   font-family: var(--font-body);
   white-space: nowrap;
@@ -1586,7 +1601,7 @@ main.container {
 
 .doc-row-btn.btn-primary {
   background: var(--accent);
-  color: var(--bg-surface);
+  color: var(--accent-on-accent);
   border: 1px solid var(--accent);
 }
 
@@ -1731,7 +1746,8 @@ main.container {
   border: none;
   background: transparent;
   color: var(--text-primary);
-  z-index: 9999;
+  z-index: var(--z-modal);
+  overscroll-behavior: contain;
 }
 
 /* Layout & sizing: only apply when dialog is open (showModal).
@@ -1803,14 +1819,17 @@ dialog[open].document-modal {
   justify-content: center;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all var(--transition);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
   font-size: 1rem;
   padding: 0;
 }
 
 .document-modal .modal-close:hover {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--accent-on-accent);
   transform: scale(1.05);
 }
 
@@ -1851,7 +1870,10 @@ dialog[open].document-modal {
   padding: 3px;
   position: relative;
   user-select: none;
-  transition: all var(--transition);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
 }
 
 .theme-slider-track {
@@ -1963,7 +1985,7 @@ body.page-loaded {
   body:not(.home-page) #tocContainer {
     position: sticky;
     top: 4.25rem;
-    z-index: 100;
+    z-index: var(--z-sticky);
   }
 
   /* All TOC containers get these mobile spacing overrides */
@@ -2071,6 +2093,8 @@ body.page-loaded {
 .timeline-card {
   position: relative;
   overflow: visible !important;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
 }
 
 .timeline-card::after {
@@ -2285,4 +2309,67 @@ body.page-loaded {
 .toc-toggle-btn[aria-expanded='false'] + #tocNav,
 .toc-toggle-btn[aria-expanded='false'] + #filterNav {
   display: none !important;
+}
+
+/* ─── Catalog page utilities ─── */
+.page-intro-title {
+  font-family: var(--font-heading);
+  margin-bottom: var(--space-sm);
+}
+
+.page-intro-lead {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2xl);
+}
+
+.timeline-section {
+  margin-top: var(--space-lg);
+}
+
+.projects-controls--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-md);
+}
+
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-md);
+  align-items: center;
+  width: 100%;
+}
+
+.controls-row--bordered {
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--space-md);
+}
+
+.card-org-context {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.academic-content [id],
+.timeline-card[id] {
+  scroll-margin-top: 5rem;
+}
+
+button,
+.nav-link,
+.filter-btn,
+.card-action,
+.doc-row-btn,
+.theme-slider-btn,
+.toc-toggle-btn,
+.toc-link {
+  touch-action: manipulation;
 }

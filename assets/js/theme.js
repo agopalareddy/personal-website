@@ -4,9 +4,25 @@
  */
 (function () {
   const htmlEl = document.documentElement;
+  const THEME_COLORS = { light: '#f7f8fa', dark: '#12141a' };
 
-  // 1. Instantly read and apply theme from localStorage to prevent Flash of Unthemed Content (FOUC)
   const savedTheme = localStorage.getItem('theme') || 'device';
+
+  function getResolvedTheme(theme) {
+    if (theme === 'dark') return 'dark';
+    if (theme === 'light') return 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function updateThemeColorMeta(resolved) {
+    let meta = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      document.head.appendChild(meta);
+    }
+    meta.content = THEME_COLORS[resolved];
+  }
 
   function applyTheme(theme) {
     htmlEl.setAttribute('data-active-theme', theme);
@@ -18,14 +34,23 @@
       htmlEl.classList.remove('theme-dark');
       htmlEl.classList.add('theme-light');
     } else {
-      // 'device' mode - respect system settings
       htmlEl.classList.remove('theme-light', 'theme-dark');
     }
+
+    const resolved = getResolvedTheme(theme);
+    htmlEl.setAttribute('data-resolved-theme', resolved);
+    updateThemeColorMeta(resolved);
   }
 
   applyTheme(savedTheme);
 
-  // 2. Initialize the 3-state slider UI once the DOM is ready
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    const current = localStorage.getItem('theme') || 'device';
+    if (current === 'device') {
+      applyTheme('device');
+    }
+  });
+
   function initSlider() {
     const placeholders = [
       document.getElementById('theme-toggle'),
@@ -34,7 +59,7 @@
 
     if (placeholders.length === 0) return;
 
-    placeholders.forEach((placeholder, index) => {
+    placeholders.forEach((placeholder) => {
       const sliderContainer = document.createElement('div');
       sliderContainer.className = 'theme-slider';
       if (placeholder.id === 'theme-toggle-footer') {
@@ -77,7 +102,6 @@
       placeholder.parentNode.replaceChild(sliderContainer, placeholder);
     });
 
-    // Sync slider state globally
     function updateAllSlidersUI(activeTheme) {
       const allSliders = document.querySelectorAll('.theme-slider');
       allSliders.forEach((slider) => {
@@ -92,7 +116,6 @@
     const currentTheme = localStorage.getItem('theme') || 'device';
     updateAllSlidersUI(currentTheme);
 
-    // Bind event listeners to all sliders
     const allSliders = document.querySelectorAll('.theme-slider');
     allSliders.forEach((slider) => {
       const buttons = slider.querySelectorAll('.theme-slider-btn');
@@ -110,39 +133,31 @@
       });
     });
 
-    // Auto-update copyright year dynamically
     const currentYearElements = document.querySelectorAll('.current-year');
     currentYearElements.forEach((el) => {
       el.textContent = new Date().getFullYear();
     });
   }
 
-  // Initialize as soon as DOM Content is Loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSlider);
   } else {
     initSlider();
   }
 
-  // 3. Premium Page Transitions (fade-in & fade-out)
-  // Respect user's motion preference — skip transitions entirely if reduced motion is preferred
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  window.addEventListener('pageshow', (event) => {
-    // Always force page-loaded class on show, resolving FOUC and bfcache (back-forward cache) blank pages
+  window.addEventListener('pageshow', () => {
     document.body.classList.add('page-loaded');
   });
 
-  // Intercept navigation links for smooth fade-out
   window.addEventListener('load', () => {
-    // Skip transition interception when user prefers reduced motion
     if (prefersReducedMotion) return;
 
     document.querySelectorAll('a').forEach((link) => {
       const href = link.getAttribute('href');
       if (!href) return;
 
-      // Filter only local page links
       const isLocalLink =
         link.hostname === window.location.hostname &&
         !link.hash &&
@@ -157,7 +172,7 @@
           document.body.classList.remove('page-loaded');
           setTimeout(() => {
             window.location.href = href;
-          }, 220); // Sync with CSS transition (0.22s)
+          }, 220);
         });
       }
     });

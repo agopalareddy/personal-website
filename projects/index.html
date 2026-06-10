@@ -8,8 +8,9 @@
       content="Academic and engineering projects by Aadarsha Gopala Reddy, featuring research on cognitive driving signatures for early Alzheimer's prediction, reinforcement learning for datacenter cooling, and modern systems."
     />
     <title>Academic &amp; Engineering Projects - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.0.1" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0" />
     <link rel="stylesheet" href="/assets/fonts/fonts.css" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
@@ -24,7 +25,8 @@
     <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#0a0a16" />
+    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
@@ -162,21 +164,9 @@
               </button>
               <div id="filterNav">
                 <search>
-                  <div
-                    class="projects-controls"
-                    style="flex-direction: column; align-items: stretch; gap: 1rem"
-                  >
+                  <div class="projects-controls projects-controls--stacked">
                     <!-- First Row: Search & Filters -->
-                    <div
-                      style="
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: space-between;
-                        gap: 1rem;
-                        align-items: center;
-                        width: 100%;
-                      "
-                    >
+                    <div class="controls-row">
                       <div class="filter-pills" role="group" aria-label="Category Filters">
                         <button class="filter-btn active" data-filter="all" aria-pressed="true">
                           All
@@ -210,17 +200,7 @@
                     </div>
 
                     <!-- Second Row: Extra filters and Sorting -->
-                    <div
-                      style="
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 1rem;
-                        align-items: center;
-                        border-top: 1px solid var(--border-color);
-                        padding-top: 1rem;
-                        width: 100%;
-                      "
-                    >
+                    <div class="controls-row controls-row--bordered">
                       <!-- Institution / Venue Filter -->
                       <div class="select-wrapper">
                         <select
@@ -292,24 +272,15 @@
             </div>
           </aside>
           <article class="academic-content" aria-label="Projects Grid Content">
-            <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
-              Academic &amp; Engineering Projects
-            </h1>
-            <p
-              style="
-                font-family: var(--font-body);
-                font-size: 0.95rem;
-                color: var(--text-secondary);
-                margin-bottom: 2.5rem;
-              "
-            >
+            <h1 class="page-intro-title">Academic &amp; Engineering Projects</h1>
+            <p class="page-intro-lead">
               A curation of academic, full-stack applications, machine learning research, and
               systems engineering projects. Filter by category, institution/venue, search tags, or
               sort chronologically.
             </p>
 
             <div class="projects-container">
-              <div class="project-timeline" id="projectGrid" style="margin-top: 1.5rem">
+              <div class="project-timeline timeline-section" id="projectGrid">
                 <!--
                   SSR fallback: rendered server-side (well, statically-baked) so
                   that search engines and visitors with JavaScript disabled can
@@ -775,20 +746,7 @@
                         >Blink Morse Decoder</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Personal Projects
-                    </div>
+                    <div class="card-org-context">Personal Projects</div>
                     <p class="project-excerpt">
                       An accessibility-focused Android app that translates deliberate eye blinks
                       into Morse code text using real-time camera-based facial landmark tracking and
@@ -834,20 +792,7 @@
                         Prediction from Naturalistic Driving Data</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Master's thesis investigating whether naturalistic driving data can help
                       predict cognitive impairment status while accounting for differences across
@@ -894,20 +839,7 @@
                         >HackWashU Databases Workshop</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Developed and facilitated a hands-on databases workshop teaching SQLite,
                       Supabase, API integration, and full-stack web development through two complete
@@ -953,20 +885,7 @@
                         Explainable Defenses</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Built a Red-Blue teaming system for VLM security that automatically generates
                       visual jailbreak attacks and explainable, code-based defenses using OCR and
@@ -1012,20 +931,7 @@
                         >MLB Statcast Real-Time Data Pipeline</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Built a real-time data pipeline for MLB pitch data using Apache Airflow,
                       Snowflake, and Kafka, with an interactive Streamlit dashboard for pitch
@@ -1071,20 +977,7 @@
                         >Google Calendar Availability Sync</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Personal Projects
-                    </div>
+                    <div class="card-org-context">Personal Projects</div>
                     <p class="project-excerpt">
                       A Google Apps Script that automatically syncs events from multiple source
                       calendars to a single 'Availability' calendar, creating customizable
@@ -1127,20 +1020,7 @@
                         >Bayesian Optimization for Material and Product Optimization</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Personal Projects
-                    </div>
+                    <div class="card-org-context">Personal Projects</div>
                     <p class="project-excerpt">
                       Applied Bayesian optimization techniques for hyperparameter tuning and feature
                       optimization across superconductivity, concrete strength, and wine quality
@@ -1187,20 +1067,7 @@
                         >Instagram Unfollow Checker</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Personal Projects
-                    </div>
+                    <div class="card-org-context">Personal Projects</div>
                     <p class="project-excerpt">
                       A cross-platform GUI application that identifies Instagram accounts you follow
                       that don't follow you back, with session management and 2FA support.
@@ -1242,20 +1109,7 @@
                         >Desperate Housewives Monologues Dataset</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Personal Projects
-                    </div>
+                    <div class="card-org-context">Personal Projects</div>
                     <p class="project-excerpt">
                       Extracted and organized monologues from Desperate Housewives for NLP analysis,
                       sentiment analysis, and text-based machine learning projects.
@@ -1296,20 +1150,7 @@
                         >Datacenter Cooling Optimization using Deep Reinforcement Learning</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC)
                       integrated with EnergyPlus simulations to optimize datacenter cooling systems
@@ -1354,20 +1195,7 @@
                         >Interactive Storybook</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Developed an interactive storytelling application using Vue.js, Node.js, and
                       MongoDB with AI-powered content generation, enabling users to create and
@@ -1420,20 +1248,7 @@
                         >Multimodal Prediction of Alzheimer's Disease</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Developed a multimodal approach for early detection of Alzheimer's Disease
                       using the OASIS-1 dataset, combining imaging and clinical data analysis
@@ -1482,20 +1297,7 @@
                         >PHP Calendar Application</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Developed a feature-rich personal calendar and event management web
                       application using PHP and MySQL, implementing secure user authentication,
@@ -1547,20 +1349,7 @@
                         >Socket.IO Multi-Room Chat Application</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Washington University in St. Louis
-                    </div>
+                    <div class="card-org-context">Washington University in St. Louis</div>
                     <p class="project-excerpt">
                       Developed a feature-rich multi-room chat application using Node.js and
                       Socket.IO with password-protected rooms, private messaging, and user
@@ -1611,20 +1400,7 @@
                         >Artificial Intelligence Opinion Survey</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Ohio Wesleyan University
-                    </div>
+                    <div class="card-org-context">Ohio Wesleyan University</div>
                     <p class="project-excerpt">
                       Designed, fielded, and investigated a survey research of 1000 employees to
                       analyze AI's impact on work efficiency and attitudes. Found AI improved
@@ -1669,20 +1445,7 @@
                         >Connect 4 AI</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Ohio Wesleyan University
-                    </div>
+                    <div class="card-org-context">Ohio Wesleyan University</div>
                     <p class="project-excerpt">
                       Co-developed an AI opponent for Connect 4 using alpha-beta pruning algorithm.
                     </p>
@@ -1728,20 +1491,7 @@
                         >AIParkinScan</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      MITxSureStart
-                    </div>
+                    <div class="card-org-context">MITxSureStart</div>
                     <p class="project-excerpt">
                       Co-developed AIParkinScan software for Parkinson's diagnosis using audio and
                       image data. Utilized neural networks, spectrograms, and Random Forest
@@ -1793,20 +1543,7 @@
                         >Artificial Intelligence in Modern Board Games</a
                       >
                     </h3>
-                    <div
-                      class="card-org-context"
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        margin-top: 0rem;
-                        margin-bottom: 0.5rem;
-                        font-family: var(--font-body);
-                        font-weight: 500;
-                        line-height: 1.4;
-                      "
-                    >
-                      Ohio Wesleyan University
-                    </div>
+                    <div class="card-org-context">Ohio Wesleyan University</div>
                     <p class="project-excerpt">
                       Developed an AI opponent for the card game Lost Cities using object oriented
                       principles in Java.
@@ -1860,7 +1597,7 @@
         </div>
         <div class="footer-col links-col">
           <h3 class="footer-col-heading">Explore</h3>
-          <ul style="list-style: none; padding: 0; margin: 0">
+          <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/projects/">Projects Showcase</a></li>
             <li><a href="/cv/">Curriculum Vitae</a></li>
@@ -1869,34 +1606,33 @@
         </div>
         <div class="footer-col contact-col">
           <h3 class="footer-col-heading">Connect</h3>
-          <ul style="list-style: none; padding: 0; margin: 0">
+          <ul>
             <li>
               <a
                 href="#"
                 class="protected-email"
                 data-email-user="YWR1cnMyMDAy"
                 data-email-domain="Z21haWwuY29t"
-                ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
-                Email</a
+                ><i class="fas fa-envelope" aria-hidden="true"></i> Email</a
               >
             </li>
             <li>
               <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
-                ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
-                LinkedIn <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+                <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
             <li>
               <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
-                ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
-                GitHub <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
+                <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
           </ul>
         </div>
         <div class="footer-col resources-col">
           <h3 class="footer-col-heading">Downloads &amp; Info</h3>
-          <ul style="list-style: none; padding: 0; margin: 0">
+          <ul>
             <li>
               <a href="/files/reddy_cv.pdf" target="_blank" rel="noopener"
                 >Curriculum Vitae (PDF) <span class="sr-only">(opens in a new tab)</span></a
@@ -1912,9 +1648,7 @@
         </div>
       </div>
       <div class="container footer-bottom">
-        <p style="margin: 0">
-          &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
-        </p>
+        <p>&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
         <div id="theme-toggle-footer"></div>
       </div>
     </footer>

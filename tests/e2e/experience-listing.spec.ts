@@ -1,10 +1,27 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
+
+/**
+ * On mobile viewports the filter panel (category pills, search, sort) boots
+ * collapsed behind #filterToggleBtn. Expand it the way a real visitor would
+ * so the tests below can interact with the controls on every project.
+ */
+async function expandFilterPanelIfCollapsed(page: Page) {
+  const toggleBtn = page.locator('#filterToggleBtn');
+  if (
+    (await toggleBtn.isVisible()) &&
+    (await toggleBtn.getAttribute('aria-expanded')) === 'false'
+  ) {
+    await toggleBtn.click();
+    await expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
+  }
+}
 
 test.describe('Experience Listing Page', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/experience/');
     // Wait for JS-rendered cards to appear
     await expect(page.locator('.experience-card').first()).toBeVisible({ timeout: 10000 });
+    await expandFilterPanelIfCollapsed(page);
   });
 
   test('loads and renders 30+ cards', async ({ page }) => {

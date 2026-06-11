@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Co-developed an AI opponent for Connect 4 using alpha-beta pruning algorithm."
     />
     <title>Connect 4 AI - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0" />
-    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
 
     <!-- Favicons & Mobile Device Integration -->
@@ -25,8 +22,7 @@
     <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a16" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="article" />
@@ -34,7 +30,7 @@
     <meta property="og:title" content="Connect 4 AI - Aadarsha Gopala Reddy" />
     <meta
       property="og:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Co-developed an AI opponent for Connect 4 using alpha-beta pruning algorithm."
     />
     <meta property="og:image" content="https://agreddy.com/images/profile.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
@@ -45,7 +41,7 @@
     <meta name="twitter:title" content="Connect 4 AI - Aadarsha Gopala Reddy" />
     <meta
       name="twitter:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Co-developed an AI opponent for Connect 4 using alpha-beta pruning algorithm."
     />
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
@@ -67,41 +63,7 @@
           <a href="/cv/" class="nav-link">CV/Resume</a>
           <a href="/availability/" class="nav-link">Availability</a>
         </nav>
-
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
-          <svg
-            class="sun-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-          <svg
-            class="moon-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
+        <div id="theme-toggle"></div>
       </div>
     </header>
 
@@ -122,14 +84,7 @@
                 </li>
                 <li>
                   <i class="fas fa-envelope" aria-hidden="true"></i>
-                  <a
-                    href="#"
-                    class="protected-email"
-                    data-email-user="YWR1cnMyMDAy"
-                    data-email-domain="Z21haWwuY29t"
-                    data-email-text="adurs2002 [at] gmail [dot] com"
-                    >adurs2002 [at] gmail [dot] com</a
-                  >
+                  <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a>
                 </li>
                 <li>
                   <i class="fab fa-linkedin" aria-hidden="true"></i>
@@ -146,7 +101,8 @@
               </ul>
             </div>
           </aside>
-          <article class="academic-content" aria-label="Project Detail: Connect 4 AI">
+
+          <article class="academic-content">
             <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">Connect 4 AI</h1>
             <p
               style="
@@ -159,53 +115,79 @@
             >
               Ohio Wesleyan University &mdash; Fall 2022
             </p>
-            <section class="page__content" itemprop="text">
+            <section class="page__content">
               <p>
-                A team of 3 students, we developed a Connect 4 game in Java with both single player
-                and multiplayer modes. The single player mode allows a human to play against an AI
-                opponent that uses the alpha-beta pruning algorithm to make strategic moves at
-                various difficulty levels. The multiplayer mode enables two human players to compete
-                against each other.
+                A Java implementation of Connect 4 supporting both two-player and single-player (vs.
+                AI) modes, built as a final project for an Ohio Wesleyan University course with
+                collaborators Alex Casper and Jose Mancilla. The AI opponent uses alpha-beta
+                pruning, an optimization of the minimax search algorithm that prunes branches of the
+                game tree that cannot affect the final decision, allowing it to look further ahead
+                without exploring the full tree. A browser-playable version is available via the
+                live demo below.
               </p>
-              <h3 id="skillstechnologies">Skills/Technologies</h3>
+              <p>
+                Game logic and the core implementation were led by Aadarsha Gopala Reddy, the AI
+                opponent by Alex Casper, with extensive testing and debugging of the alpha-beta
+                search by Jose Mancilla.
+              </p>
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-top: 1.5rem;
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                Highlights
+              </h4>
               <ul>
-                <li>Teamwork</li>
-                <li>Java</li>
-                <li>Object Oriented Programming</li>
-                <li>Artificial Intelligence</li>
-                <li>Board Games</li>
-                <li>Git</li>
-              </ul>
-              <h3 id="links">Links</h3>
-              <ul>
-                <li>
-                  <a
-                    href="https://github.com/agopalareddy/CS340Final-Connect4"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="External Link (opens in a new tab)"
-                    >GitHub Repository</a
-                  >
-                </li>
-                <li><a href="/connect4/">Live Demo</a></li>
+                <li>Full Connect 4 rules with win/draw detection in Java</li>
+                <li>AI opponent using alpha-beta pruning (minimax-based search)</li>
+                <li>Single-player (vs. AI) and two-player modes, with choice of who moves first</li>
+                <li>Browser-playable demo alongside the Java implementation</li>
               </ul>
             </section>
-            <nav class="pagination" aria-label="Project Pagination">
-              <a
-                href="/projects/aiparkinscan"
-                class="pagination--pager"
-                aria-label="Go to previous project: AIParkinScan"
-                title="AIParkinScan"
-                >Previous</a
+
+            <div
+              style="
+                margin-top: 2rem;
+                border-top: 1px solid var(--border-color);
+                padding-top: 1.5rem;
+              "
+            >
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
               >
+                Technologies Applied
+              </h4>
+              <div class="project-tech">
+                <span class="tech-tag">Java</span><span class="tech-tag">HTML</span
+                ><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span
+                ><span class="tech-tag">OOP</span
+                ><span class="tech-tag">Artificial Intelligence</span
+                ><span class="tech-tag">Git</span>
+              </div>
+            </div>
+
+            <div
+              class="card-actions"
+              style="margin-top: 2rem; justify-content: flex-start; gap: 1rem"
+            >
               <a
-                href="/projects/artificial-intelligence-opinion-survey"
-                class="pagination--pager"
-                aria-label="Go to next project: Artificial Intelligence Opinion Survey"
-                title="Artificial Intelligence Opinion Survey"
-                >Next</a
+                href="https://github.com/agopalareddy/CS340Final-Connect4"
+                target="_blank"
+                rel="noopener"
+                class="card-btn btn-github"
+                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
+                <span class="sr-only">(opens in a new tab)</span></a
+              ><a href="/connect4/" class="card-btn btn-demo"
+                ><i class="fas fa-rocket" aria-hidden="true"></i> Demo</a
               >
-            </nav>
+            </div>
           </article>
         </div>
       </main>
@@ -229,7 +211,7 @@
             Aadarsha Gopala Reddy
           </h3>
           <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
-            M.S. Computer Science graduate from Washington University in St. Louis. Passionate about
+            M.S. Computer Science graduate from Washington University in St. Louis. Interested in
             solving complex distributed systems problems, building high-throughput data pipelines,
             and training machine learning models.
           </p>
@@ -248,12 +230,19 @@
           >
             Explore
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
                 >Home</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/experience/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Experience</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -293,15 +282,13 @@
           >
             Connect
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
-                href="#"
-                class="protected-email"
-                data-email-user="YWR1cnMyMDAy"
-                data-email-domain="Z21haWwuY29t"
+                href="mailto:adurs2002@gmail.com"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fas fa-envelope" aria-hidden="true"></i> Email</a
+                ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                Email</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -310,8 +297,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                LinkedIn <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -320,8 +307,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                GitHub <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
           </ul>
@@ -340,7 +327,7 @@
           >
             Downloads &amp; Info
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/files/reddy_cv.pdf"
@@ -382,12 +369,14 @@
           margin-top: 1.5rem;
         "
       >
-        <p>&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
+        <p style="margin: 0">
+          &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
+        </p>
+        <div id="theme-toggle-footer"></div>
       </div>
     </footer>
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
-    <script src="/assets/js/email-protection.js"></script>
   </body>
 </html>

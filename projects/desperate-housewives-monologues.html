@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Extracted and organized monologues from Desperate Housewives for NLP analysis, sentiment analysis, and text-based machine learning projects."
     />
     <title>Desperate Housewives Monologues Dataset - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0" />
-    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
 
     <!-- Favicons & Mobile Device Integration -->
@@ -25,8 +22,7 @@
     <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a16" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="article" />
@@ -40,7 +36,7 @@
     />
     <meta
       property="og:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Extracted and organized monologues from Desperate Housewives for NLP analysis, sentiment analysis, and text-based machine learning projects."
     />
     <meta property="og:image" content="https://agreddy.com/images/profile.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
@@ -57,7 +53,7 @@
     />
     <meta
       name="twitter:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Extracted and organized monologues from Desperate Housewives for NLP analysis, sentiment analysis, and text-based machine learning projects."
     />
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
@@ -82,41 +78,7 @@
           <a href="/cv/" class="nav-link">CV/Resume</a>
           <a href="/availability/" class="nav-link">Availability</a>
         </nav>
-
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
-          <svg
-            class="sun-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-          <svg
-            class="moon-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
+        <div id="theme-toggle"></div>
       </div>
     </header>
 
@@ -137,14 +99,7 @@
                 </li>
                 <li>
                   <i class="fas fa-envelope" aria-hidden="true"></i>
-                  <a
-                    href="#"
-                    class="protected-email"
-                    data-email-user="YWR1cnMyMDAy"
-                    data-email-domain="Z21haWwuY29t"
-                    data-email-text="adurs2002 [at] gmail [dot] com"
-                    >adurs2002 [at] gmail [dot] com</a
-                  >
+                  <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a>
                 </li>
                 <li>
                   <i class="fab fa-linkedin" aria-hidden="true"></i>
@@ -161,10 +116,8 @@
               </ul>
             </div>
           </aside>
-          <article
-            class="academic-content"
-            aria-label="Project Detail: Desperate Housewives Monologues Dataset"
-          >
+
+          <article class="academic-content">
             <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
               Desperate Housewives Monologues Dataset
             </h1>
@@ -179,92 +132,75 @@
             >
               Personal Project &mdash; Spring 2025
             </p>
-            <section class="page__content" itemprop="text">
+            <section class="page__content">
               <p>
-                A dataset of extracted monologues and narrator dialogue from the TV show “Desperate
-                Housewives,” organized by season and episode. The project includes scripts for
-                processing subtitles and analyzing the show’s unique narrative structure.
+                This project extracts and organizes the recurring narrator monologues from Desperate
+                Housewives &mdash; primarily Mary Alice Young&apos;s voiceovers &mdash; from episode
+                subtitle (.srt) files into per-season, per-episode Markdown files with clear
+                headers. A subtitle-to-text conversion script handles the initial extraction, with
+                AI assistance used to isolate the monologues from the surrounding dialogue given the
+                volume of text.
               </p>
-              <h3 id="project-overview">Project Overview</h3>
               <p>
-                The monologues, primarily narrated by the character Mary Alice Young, are a
-                distinctive storytelling device in “Desperate Housewives.” Each episode begins and
-                ends with a monologue that frames the story, providing insight, foreshadowing, or
-                thematic commentary on suburban life, relationships, and morality.
+                These monologues function as a recurring structural device that frames each
+                episode&apos;s themes, making the resulting corpus useful for sentiment analysis,
+                motif tracking, or other text-based NLP and machine learning projects. The README
+                notes the dataset may contain occasional transcription or extraction inaccuracies
+                and is offered as a best-effort, community-correctable resource.
               </p>
-              <h3 id="features">Features</h3>
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-top: 1.5rem;
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                Highlights
+              </h4>
               <ul>
-                <li>
-                  <strong>Complete Dataset</strong>: Monologues extracted from all seasons,
-                  organized by episode
-                </li>
-                <li>
-                  <strong>Processing Scripts</strong>: Tools to convert SRT subtitle files to plain
-                  text
-                </li>
-                <li>
-                  <strong>Text Combination</strong>: Scripts to merge episode files with clear
-                  season/episode headers
-                </li>
-                <li><strong>Markdown Exports</strong>: Cleaned monologue text for each season</li>
+                <li>Per-season, per-episode Markdown corpus of narrator monologues</li>
+                <li>Subtitle-to-text conversion and episode-combination scripts</li>
+                <li>AI-assisted extraction of monologues from raw subtitle text</li>
+                <li>Documented limitations for transparency and community correction</li>
               </ul>
-              <h3 id="use-cases">Use Cases</h3>
-              <ul>
-                <li>
-                  <strong>NLP Analysis</strong>: Study language patterns, recurring motifs, and
-                  narrative structure
-                </li>
-                <li>
-                  <strong>Sentiment Analysis</strong>: Track emotional tones and thematic evolution
-                  across seasons
-                </li>
-                <li>
-                  <strong>Machine Learning</strong>: Training data for text generation or
-                  classification models
-                </li>
-                <li>
-                  <strong>Academic Research</strong>: Analyze the show’s approach to social
-                  commentary
-                </li>
-                <li>
-                  <strong>Creative Reference</strong>: Inspiration for writers, educators, and
-                  content creators
-                </li>
-              </ul>
-              <h3 id="technologies-used">Technologies Used</h3>
-              <ul>
-                <li>Python</li>
-                <li>Natural Language Processing</li>
-                <li>Subtitle (SRT) parsing</li>
-                <li>Text processing and extraction</li>
-              </ul>
-              <h3 id="github-repository">GitHub Repository</h3>
-              <p>
-                <a
-                  href="https://github.com/agopalareddy/Desperate-Housewives-Monologues"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="External Link (opens in a new tab)"
-                  >View the project on GitHub</a
-                >
-              </p>
             </section>
-            <nav class="pagination" aria-label="Project Pagination">
-              <a
-                href="/projects/multimodal-alzheimers"
-                class="pagination--pager"
-                aria-label="Go to previous project: Multimodal Prediction of Alzheimer's Disease"
-                title="Multimodal Prediction of Alzheimer's Disease"
-                >Previous</a
+
+            <div
+              style="
+                margin-top: 2rem;
+                border-top: 1px solid var(--border-color);
+                padding-top: 1.5rem;
+              "
+            >
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
               >
+                Technologies Applied
+              </h4>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span><span class="tech-tag">NLP</span
+                ><span class="tech-tag">Text Processing</span>
+              </div>
+            </div>
+
+            <div
+              class="card-actions"
+              style="margin-top: 2rem; justify-content: flex-start; gap: 1rem"
+            >
               <a
-                href="/projects/instagram-unfollow-checker"
-                class="pagination--pager"
-                aria-label="Go to next project: Instagram Unfollow Checker"
-                title="Instagram Unfollow Checker"
-                >Next</a
+                href="https://github.com/agopalareddy/Desperate-Housewives-Monologues"
+                target="_blank"
+                rel="noopener"
+                class="card-btn btn-github"
+                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
+                <span class="sr-only">(opens in a new tab)</span></a
               >
-            </nav>
+            </div>
           </article>
         </div>
       </main>
@@ -288,7 +224,7 @@
             Aadarsha Gopala Reddy
           </h3>
           <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
-            M.S. Computer Science graduate from Washington University in St. Louis. Passionate about
+            M.S. Computer Science graduate from Washington University in St. Louis. Interested in
             solving complex distributed systems problems, building high-throughput data pipelines,
             and training machine learning models.
           </p>
@@ -307,12 +243,19 @@
           >
             Explore
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
                 >Home</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/experience/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Experience</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -352,15 +295,13 @@
           >
             Connect
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
-                href="#"
-                class="protected-email"
-                data-email-user="YWR1cnMyMDAy"
-                data-email-domain="Z21haWwuY29t"
+                href="mailto:adurs2002@gmail.com"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fas fa-envelope" aria-hidden="true"></i> Email</a
+                ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                Email</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -369,8 +310,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                LinkedIn <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -379,8 +320,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                GitHub <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
           </ul>
@@ -399,7 +340,7 @@
           >
             Downloads &amp; Info
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/files/reddy_cv.pdf"
@@ -441,12 +382,14 @@
           margin-top: 1.5rem;
         "
       >
-        <p>&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
+        <p style="margin: 0">
+          &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
+        </p>
+        <div id="theme-toggle-footer"></div>
       </div>
     </footer>
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
-    <script src="/assets/js/email-protection.js"></script>
   </body>
 </html>

@@ -804,8 +804,8 @@ def generate_project_detail_page(project: dict[str, Any]) -> str:
     """
     clean_title = project["title"]
     desc_escaped = project["excerpt"].replace('"', "&quot;").replace("'", "&apos;")
-    filename = f"{project['id']}.html"
-    canonical_url = f"https://agreddy.com/projects/{filename}"
+    slug = project["permalink"].rsplit("/", 1)[-1]
+    canonical_url = f"https://agreddy.com/projects/{slug}.html"
     tech_tags_html = "".join(
         f'<span class="tech-tag">{t}</span>' for t in project["technologies"]
     )
@@ -1161,14 +1161,15 @@ def _write_project_detail_pages(projects: list[dict[str, Any]]) -> int:
     for project in projects:
         if not project.get("has_detail"):
             continue
-        slug = project.get("id")
-        if not slug:
+        permalink = project.get("permalink")
+        if not permalink:
             print(
-                f"[generate_site] skipping project without id: "
+                f"[generate_site] skipping project without permalink: "
                 f"{project.get('title')!r}",
                 file=sys.stderr,
             )
             continue
+        slug = permalink.rsplit("/", 1)[-1]
         out_path = os.path.join(PROJECTS_DIR, f"{slug}.html")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(generate_project_detail_page(project))

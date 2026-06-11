@@ -91,10 +91,10 @@ document.addEventListener('DOMContentLoaded', function () {
       return 'GSAAB';
     if (lower.indexOf('career engagement') !== -1 || lower.indexOf('cce') !== -1)
       return 'CCE Board';
-    if (lower.indexOf('gpsc') !== -1 || lower.indexOf('student council') !== -1) return 'GPSC';
     if (lower.indexOf('umang') !== -1) return 'Umang';
     if (lower.indexOf('hackwashu') !== -1) return 'HackWashU';
     if (lower.indexOf('hindu student') !== -1) return 'HSC';
+    if (lower.indexOf('gpsc') !== -1 || lower.indexOf('student council') !== -1) return 'GPSC';
     if (lower.indexOf('wesleyan council') !== -1 || lower.indexOf('wcsa') !== -1) return 'WCSA';
     if (lower.indexOf('neurds') !== -1) return 'The Neurds';
     if (lower.indexOf('programming board') !== -1) return 'CPB';
@@ -162,6 +162,22 @@ document.addEventListener('DOMContentLoaded', function () {
     return orderDate ? parseInt(orderDate.split('-')[0], 10) : null;
   }
 
+  function getExperienceDisplayTitle(exp) {
+    var title = (exp.title || '').trim();
+    if (!title || exp.category !== 'leadership') return title;
+
+    var org = (exp.organization || '').trim();
+    var orgShort = getOrgShort(org);
+    if (!orgShort) return title;
+    if (orgShort === 'Science Coach' || orgShort === 'OWU Symposium') return title;
+
+    var titleLower = title.toLowerCase();
+    if (titleLower.indexOf(orgShort.toLowerCase()) !== -1) return title;
+    if (org && titleLower.indexOf(org.toLowerCase()) !== -1) return title;
+
+    return title + ' - ' + orgShort;
+  }
+
   // ---------------------------------------------------------------------------
   // Card renderer
   // ---------------------------------------------------------------------------
@@ -169,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var category = exp.category || '';
     var catClass = 'cat-' + category;
     var catLabel = formatCategory(category);
-    var title = escapeHtml(exp.title || '');
+    var title = escapeHtml(getExperienceDisplayTitle(exp));
     var org = escapeHtml(exp.organization || '');
     var dateRange = formatDateRange(exp.start_date, exp.end_date);
     var excerpt = escapeHtml(exp.excerpt || '');
@@ -591,7 +607,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (activeSort === 'title-asc') {
       filtered.forEach(function (exp) {
         var id = exp.id || '';
-        var title = exp.title || '';
+        var title = getExperienceDisplayTitle(exp);
         html +=
           '<li class="toc-item">' +
           '<a href="#exp-' +
@@ -608,7 +624,7 @@ document.addEventListener('DOMContentLoaded', function () {
       filtered.forEach(function (exp) {
         var year = getOrderYear(exp);
         var id = exp.id || '';
-        var title = exp.title || '';
+        var title = getExperienceDisplayTitle(exp);
 
         if (year && year !== currentYear) {
           if (currentYear !== null) {

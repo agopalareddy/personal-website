@@ -108,6 +108,22 @@ test.describe('Experience Listing Page', () => {
     expect(msHeaderYear).toBe('2026');
   });
 
+  test('leadership cards and TOC include organization context in titles', async ({ page }) => {
+    await expect(page.locator('#exp-2025-08-member .project-title a')).toHaveText('Member - GSAAB');
+
+    const toggleBtn = page.locator('#tocToggleBtn');
+    if (
+      (await toggleBtn.isVisible()) &&
+      (await toggleBtn.getAttribute('aria-expanded')) === 'false'
+    ) {
+      await toggleBtn.click();
+    }
+
+    await expect(page.locator('#tocList .toc-link[href="#exp-2025-08-member"]')).toHaveText(
+      'Member - GSAAB'
+    );
+  });
+
   test('clicking a card navigates to detail page', async ({ page }) => {
     // Click the first card's detail link
     const firstLink = page.locator('.experience-card a').first();

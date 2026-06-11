@@ -199,6 +199,76 @@ def experience_order_year(entry: dict[str, Any]) -> str:
     return experience_order_date(entry)[:4]
 
 
+def organization_short_label(org: str | None) -> str:
+    """Short organization label used where role titles need more context."""
+    if not org:
+        return ""
+    lower = org.lower()
+    if "washington university" in lower:
+        if "drives" in lower:
+            return "Washington University (DRIVES)"
+        return "Washington University in St. Louis"
+    if "ohio wesleyan" in lower:
+        return "Ohio Wesleyan University"
+    if "crittero" in lower:
+        return "Crittero"
+    if "lab714" in lower:
+        return "Lab714"
+    if "mitxsurestart" in lower or "mitx" in lower:
+        return "MITxSureStart"
+    if "denison" in lower:
+        return "Denison University"
+    if "next genius" in lower:
+        return "Next Genius"
+    if "ages & science coach" in lower:
+        return "Science Coach"
+    if "spring student symposium" in lower:
+        return "OWU Symposium"
+    if "patricia belt conrades" in lower:
+        return "OWU Symposium"
+    if "graduate student affairs" in lower or "gsaab" in lower:
+        return "GSAAB"
+    if "career engagement" in lower or "cce" in lower:
+        return "CCE Board"
+    if "umang" in lower:
+        return "Umang"
+    if "hackwashu" in lower:
+        return "HackWashU"
+    if "hindu student" in lower:
+        return "HSC"
+    if "gpsc" in lower or "student council" in lower:
+        return "GPSC"
+    if "wesleyan council" in lower or "wcsa" in lower:
+        return "WCSA"
+    if "neurds" in lower:
+        return "The Neurds"
+    if "programming board" in lower:
+        return "CPB"
+    if "mathematics, computer science" in lower:
+        return "Math/CS Board"
+    return org.split(",", 1)[0].strip()
+
+
+def experience_display_title(entry: dict[str, Any]) -> str:
+    """Title shown on cards and in the listing TOC."""
+    title = (entry.get("title") or "").strip()
+    if not title or entry.get("category") != "leadership":
+        return title
+
+    org = (entry.get("organization") or "").strip()
+    org_short = organization_short_label(org)
+    if not org_short:
+        return title
+    if org_short in {"Science Coach", "OWU Symposium"}:
+        return title
+
+    title_lower = title.lower()
+    if org_short.lower() in title_lower or (org and org.lower() in title_lower):
+        return title
+
+    return f"{title} - {org_short}"
+
+
 def category_label(cat: str) -> str:
     """Friendly display label for a category, falling back to the raw slug."""
     return CATEGORY_LABELS.get(cat, cat.replace("-", " ").title() if cat else "")
@@ -435,7 +505,8 @@ def _render_noscript_card(e: dict[str, Any]) -> str:
     """Render one static, no-JS fallback card in the committed listing style
     (`project-card spotlight-card timeline-card`, matching the JS renderer)."""
     cat = e.get("category") or ""
-    title = html_escape((e.get("title") or "").strip())
+    display_title = experience_display_title(e)
+    title = html_escape(display_title)
     org = html_escape((e.get("organization") or "").strip())
     date_range_esc = html_escape(
         format_date_range(e.get("start_date"), e.get("end_date"))
@@ -445,7 +516,7 @@ def _render_noscript_card(e: dict[str, Any]) -> str:
     label = category_label(cat)
     permalink = f"/experience/{cat}/{slug}.html" if cat and slug else "/experience/"
     venue_txt = f"{org} &bull; {date_range_esc}" if org else date_range_esc
-    aria = html_escape(f"Explore dedicated detail page for {(e.get('title') or '').strip()}")
+    aria = html_escape(f"Explore dedicated detail page for {display_title}")
 
     return (
         f'                  <div class="project-card spotlight-card timeline-card">\n'

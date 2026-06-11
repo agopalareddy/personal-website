@@ -9,14 +9,17 @@ Reads `scripts/experience_database.json` (produced by `cv_parser.py`) and
   * Writes one detail HTML file per Experience entry into
     `experience/{category}/{slug}.html`, sharing the same `<head>`, nav,
     sidebar, and footer chrome as the rest of the site via `scripts.chrome`.
-  * Writes the listing page `experience/index.html` containing filter
-    pills, search, sort, an embedded `const experiences = [...]` array
-    (for the runtime `experience-catalog.js`), and a `<noscript>` fallback
-    of static cards so search engines and JS-disabled visitors still see
-    all entries.
-  * Re-runs the `update_experience_catalog_array()` pass to regex-replace
-    the embedded JS array inside `experience/index.html` after a fresh
-    render, so the array stays authoritative.
+  * Splices the experience data into the existing `experience/index.html`
+    via `sync_experience_listing_page()`: the `<script type="application/json"
+    class="experiences-data">` payload and the `<noscript>` fallback cards
+    are regenerated in place, while the hand-evolved page chrome (TOC
+    sidebar, org/year filter controls, Font Awesome version, inline
+    `JSON.parse` bootstrap for the runtime `experience-catalog.js`) is
+    preserved untouched.  The full-page template
+    (`generate_experience_listing_page`) is only used as a bootstrap
+    fallback when `experience/index.html` does not exist at all.
+  * Writes `sitemap.xml` at the repo root covering every public page
+    (referenced by `robots.txt`).
   * Writes one detail HTML file per project (with `has_detail=True`) into
     `projects/{id}.html`, using the shared chrome and a body identical in
     structure to the original `generate_portfolio.py` output.
@@ -33,9 +36,10 @@ Public API (importable):
     from scripts.generate_site import (
         generate_experience_detail_page,
         generate_experience_listing_page,
-        update_experience_catalog_array,
+        sync_experience_listing_page,
         generate_project_detail_page,
         update_project_catalog_array,
+        generate_sitemap,
     )
 """
 
@@ -175,7 +179,7 @@ def format_date_range(start_date: str | None, end_date: str | None) -> str:
     if end_date is None:
         return f"{start} \u2013 Present"
     end = format_month_year(end_date)
-    if not end:
+    if not end or end == start:
         return start
     return f"{start} \u2013 {end}"
 
@@ -289,8 +293,14 @@ def generate_experience_detail_page(entry: dict[str, Any]) -> str:
         else ""
     )
 
-    # Responsibilities list
+    # Responsibilities list (heading adapts to the entry kind)
     if responsibilities:
+        if entry.get("is_presentation") or category == "awards":
+            section_heading = "About"
+        elif category == "education":
+            section_heading = "Highlights"
+        else:
+            section_heading = "Responsibilities &amp; Contributions"
         items = "\n".join(
             f"            <li>{html_escape(r)}</li>" for r in responsibilities if r
         )
@@ -298,7 +308,7 @@ def generate_experience_detail_page(entry: dict[str, Any]) -> str:
             '<section class="page__content" style="margin-bottom: 2rem;">\n'
             '            <h2 style="font-family: var(--font-heading); '
             "font-size: 1.25rem; margin-bottom: 0.75rem; "
-            'color: var(--text-primary);">Responsibilities &amp; Contributions</h2>\n'
+            f'color: var(--text-primary);">{section_heading}</h2>\n'
             f"            <ul>\n{items}\n            </ul>\n"
             "        </section>"
         )
@@ -406,46 +416,60 @@ def _render_filter_pills() -> str:
     return "\n                    ".join(parts)
 
 
-def _render_noscript_cards(entries: list[dict[str, Any]]) -> str:
-    """Render the static, no-JS fallback card grid."""
-    cards: list[str] = []
-    for e in entries:
-        if not e:
-            continue
-        cat = e.get("category") or ""
-        title = html_escape((e.get("title") or "").strip())
-        org = html_escape((e.get("organization") or "").strip())
-        date_range = format_date_range(e.get("start_date"), e.get("end_date"))
-        date_range_esc = html_escape(date_range)
-        excerpt = html_escape((e.get("excerpt") or "").strip())
-        slug = e.get("id") or ""
-        label = category_label(cat)
-        permalink = f"/experience/{cat}/{slug}.html" if cat and slug else "/experience/"
+def _render_noscript_card(e: dict[str, Any]) -> str:
+    """Render one static, no-JS fallback card in the committed listing style
+    (`project-card spotlight-card timeline-card`, matching the JS renderer)."""
+    cat = e.get("category") or ""
+    title = html_escape((e.get("title") or "").strip())
+    org = html_escape((e.get("organization") or "").strip())
+    date_range_esc = html_escape(
+        format_date_range(e.get("start_date"), e.get("end_date"))
+    )
+    excerpt = html_escape((e.get("excerpt") or "").strip())
+    slug = e.get("id") or ""
+    label = category_label(cat)
+    permalink = f"/experience/{cat}/{slug}.html" if cat and slug else "/experience/"
+    venue_txt = f"{org} &bull; {date_range_esc}" if org else date_range_esc
+    aria = html_escape(f"Explore dedicated detail page for {(e.get('title') or '').strip()}")
 
-        cards.append(
-            f'                  <article class="card spotlight-card '
-            f'experience-card" data-category="{html_escape(cat)}">\n'
-            f'                    <div class="card-meta">\n'
-            f'                      <span class="card-category '
-            f'cat-{html_escape(cat)}">{html_escape(label)}</span>'
-            f'                      <span class="card-venue">{org}'
-            f" &bull; {date_range_esc}</span>\n"
-            f"                    </div>\n"
-            f'                    <h3 class="experience-title">\n'
-            f'                      <a href="{html_escape(permalink)}" '
-            f'aria-label="View details for {title}">'
-            f"{title}</a>\n"
-            f"                    </h3>\n"
-            f'                    <p class="experience-excerpt">'
-            f"{excerpt}</p>\n"
-            f'                    <div class="card-actions">\n'
-            f'                      <a href="{html_escape(permalink)}" '
-            f'class="card-btn btn-detail">View Details '
-            f'<span aria-hidden="true">&rarr;</span></a>\n'
-            f"                    </div>\n"
-            f"                  </article>"
-        )
-    return "\n".join(cards)
+    return (
+        f'                  <div class="project-card spotlight-card timeline-card">\n'
+        f'                    <div class="card-meta">\n'
+        f'                      <span class="card-category cat-{html_escape(cat)}">'
+        f"{html_escape(label)}</span>\n"
+        f'                      <span class="card-venue">{venue_txt}</span>\n'
+        f"                    </div>\n"
+        f'                    <h3 class="project-title">\n'
+        f'                      <a href="{html_escape(permalink)}" '
+        f'aria-label="{aria}">{title}</a>\n'
+        f"                    </h3>\n"
+        f'                    <p class="project-excerpt">{excerpt}</p>\n'
+        f'                    <div class="card-actions">\n'
+        f'                      <a href="{html_escape(permalink)}" '
+        f'class="card-btn btn-detail" aria-label="{aria}"'
+        f'><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>\n'
+        f"                    </div>\n"
+        f"                  </div>"
+    )
+
+
+def _render_noscript_cards(entries: list[dict[str, Any]]) -> str:
+    """Render the static, no-JS fallback card list: newest first, grouped
+    under `timeline-year` headers by start year (mirrors the JS renderer)."""
+    entries_sorted = sorted(
+        (e for e in entries if e),
+        key=lambda e: (e.get("start_date") or "", e.get("end_date") or ""),
+        reverse=True,
+    )
+    parts: list[str] = []
+    year: str | None = None
+    for e in entries_sorted:
+        y = (e.get("start_date") or "")[:4]
+        if y != year:
+            year = y
+            parts.append(f'                  <div class="timeline-year">{y}</div>')
+        parts.append(_render_noscript_card(e))
+    return "\n".join(parts)
 
 
 def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
@@ -459,9 +483,16 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
       * `<div class="project-grid" id="experienceGrid">` populated with a
         `<noscript>` fallback of static cards
       * Empty-state div
-      * Embedded `const experiences = [...]` JS array (with `content_html`
-        stripped for the runtime consumer)
+      * Embedded `application/json` "experiences-data" payload (with
+        `content_html` stripped) plus a `JSON.parse` bootstrap that exposes
+        it as `const experiences` for the runtime consumer
       * `<script src="/assets/js/experience-catalog.js"></script>` include
+
+    NOTE: this template is a *bootstrap fallback* only — the committed
+    `experience/index.html` has hand-evolved chrome (TOC sidebar, org/year
+    filters, Font Awesome upgrades) that this template does not reproduce.
+    Routine regeneration must go through `sync_experience_listing_page()`,
+    which splices data into the existing file instead.
     """
     # chrome.render_head appends " - Aadarsha Gopala Reddy" to the
     # supplied title, so we pass the bare page name to avoid a
@@ -544,7 +575,7 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
                       JavaScript disabled.  The runtime catalog script
                       (assets/js/experience-catalog.js) clears and re-renders
                       this container when JS is enabled.  The embedded
-                      `const experiences` array below is the authoritative
+                      application/json payload below is the authoritative
                       data source.
                     -->
                     <script type="application/json" class="experiences-data">
@@ -561,10 +592,13 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
             </div>
 
             <script>
-                // Authoritative data for the runtime catalog renderer.
-                // Mirrors the <script type="application/json"> payload above
-                // and is the array updated by update_experience_catalog_array().
-                const experiences = {serialized_array};
+                // Authoritative data for the runtime catalog renderer — parsed
+                // from the application/json "experiences-data" payload embedded
+                // in #experienceGrid above (single source of truth, spliced in
+                // place by scripts/generate_site.py --experiences).
+                const experiences = JSON.parse(
+                    document.querySelector('#experienceGrid script.experiences-data').textContent
+                );
             </script>
             <script src="/assets/js/experience-catalog.js"></script>"""
 
@@ -576,25 +610,41 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Embedded-JS-array sync (regex replace)
+# Listing page sync (in-place splice into the committed index.html)
 # ---------------------------------------------------------------------------
 
 
-def update_experience_catalog_array(entries: list[dict[str, Any]]) -> bool:
+def sync_experience_listing_page(entries: list[dict[str, Any]]) -> bool:
     """
-    Regex-replace the `const experiences = [...]` block inside
-    `experience/index.html` with a lightweight copy of `entries` (no
-    `content_html`).  Returns True on a successful write, False if the
-    listing page is missing or no replacement happened.
+    Splice the experience data into the existing `experience/index.html`
+    without touching the rest of the page:
+
+      1. Replace the `<script type="application/json"
+         class="experiences-data">` payload with a lightweight copy of
+         `entries` (no `content_html`).
+      2. Rebuild the `<noscript>` fallback card list (newest first, grouped
+         by start year).
+
+    The hand-evolved chrome around those two islands (TOC sidebar, org/year
+    filter controls, the inline `JSON.parse` bootstrap, Font Awesome
+    version) is preserved verbatim.  Returns True on a successful write.
+
+    If the listing page does not exist at all, falls back to writing the
+    bootstrap template via `generate_experience_listing_page()` (with a
+    warning, since the template lacks the hand-evolved chrome).
     """
     listing_path = os.path.join(EXPERIENCE_DIR, "index.html")
     if not os.path.exists(listing_path):
         print(
-            f"[generate_site] listing page not found at {listing_path}; "
-            "run with --experiences first to generate it.",
+            f"[generate_site] WARNING: {listing_path} missing — writing the "
+            "bootstrap template. It lacks the hand-evolved chrome (TOC, "
+            "org/year filters); restore the committed file from git if "
+            "possible.",
             file=sys.stderr,
         )
-        return False
+        with open(listing_path, "w", encoding="utf-8") as f:
+            f.write(generate_experience_listing_page(entries))
+        return True
 
     with open(listing_path, "r", encoding="utf-8") as f:
         content = f.read()
@@ -604,26 +654,42 @@ def update_experience_catalog_array(entries: list[dict[str, Any]]) -> bool:
     ]
     serialized = json.dumps(lightweight, indent=2, ensure_ascii=False)
 
-    new_content, n_subs = re.subn(
-        r"const experiences = \[.*?\];",
-        f"const experiences = {serialized};",
+    content, n_json = re.subn(
+        r'(<script\s+type="application/json"\s+class="experiences-data"\s*>).*?(</script>)',
+        lambda m: m.group(1) + "\n" + serialized + "\n                " + m.group(2),
         content,
+        count=1,
         flags=re.DOTALL,
     )
-
-    if n_subs == 0:
+    if n_json != 1:
         print(
-            "[generate_site] WARNING: no `const experiences = [...]` block "
-            f"found in {listing_path}; nothing replaced.",
+            "[generate_site] ERROR: experiences-data JSON block not found in "
+            f"{listing_path}; aborting sync (page left untouched).",
+            file=sys.stderr,
+        )
+        return False
+
+    noscript = "<noscript>\n" + _render_noscript_cards(entries) + "\n                </noscript>"
+    content, n_noscript = re.subn(
+        r"<noscript>.*?</noscript>",
+        lambda _m: noscript,
+        content,
+        count=1,
+        flags=re.DOTALL,
+    )
+    if n_noscript != 1:
+        print(
+            f"[generate_site] ERROR: <noscript> block not found in "
+            f"{listing_path}; aborting sync (page left untouched).",
             file=sys.stderr,
         )
         return False
 
     with open(listing_path, "w", encoding="utf-8") as f:
-        f.write(new_content)
+        f.write(content)
     print(
-        f"[generate_site] synchronized {len(entries)} experience entries "
-        f"inside {listing_path}"
+        f"[generate_site] spliced {len(entries)} experience entries into "
+        f"{listing_path} (JSON payload + noscript cards)"
     )
     return True
 
@@ -935,18 +1001,33 @@ def _write_experience_detail_pages(entries: list[dict[str, Any]]) -> int:
     return written
 
 
-def _write_experience_listing_page(entries: list[dict[str, Any]]) -> str:
-    os.makedirs(EXPERIENCE_DIR, exist_ok=True)
-    out_path = os.path.join(EXPERIENCE_DIR, "index.html")
-    with open(out_path, "w", encoding="utf-8") as f:
-        f.write(generate_experience_listing_page(entries))
-    return out_path
+def _prettier_format(paths: list[str]) -> None:
+    """Best-effort `npx prettier --write` so regenerated files match the
+    repo's committed formatting.  Skipped silently if npx is unavailable."""
+    import subprocess
+
+    try:
+        subprocess.run(
+            ["npx", "--no-install", "prettier", "--write", *paths],
+            cwd=BASE_DIR,
+            check=True,
+            capture_output=True,
+            timeout=120,
+        )
+        print(f"[generate_site] prettier formatted {len(paths)} path(s)")
+    except (OSError, subprocess.SubprocessError):
+        print(
+            "[generate_site] NOTE: prettier not run — format manually with "
+            f"`npx prettier --write {' '.join(paths)}` before committing.",
+            file=sys.stderr,
+        )
 
 
 def generate_all_experiences() -> None:
     """
-    End-to-end experience generation: load DB, write detail pages, write
-    listing page, then sync the embedded JS array.
+    End-to-end experience generation: load DB, write detail pages, splice
+    the data into the committed listing page, then prettier-format the
+    touched files.
     """
     print(f"[generate_site] BASE_DIR = {BASE_DIR}")
     entries = _load_experience_database()
@@ -957,14 +1038,13 @@ def generate_all_experiences() -> None:
         os.makedirs(os.path.join(EXPERIENCE_DIR, cat), exist_ok=True)
 
     n_detail = _write_experience_detail_pages(entries)
-    listing_path = _write_experience_listing_page(entries)
-    update_experience_catalog_array(entries)
+    sync_experience_listing_page(entries)
+    _prettier_format(["experience"])
 
     print(
         f"[generate_site] wrote {n_detail} detail page(s) into "
         f"{EXPERIENCE_DIR}/<category>/"
     )
-    print(f"[generate_site] wrote listing page to {listing_path}")
 
 
 # ---------------------------------------------------------------------------
@@ -1027,6 +1107,60 @@ def generate_all_projects() -> None:
     )
 
 
+# ---------------------------------------------------------------------------
+# Sitemap (referenced by robots.txt)
+# ---------------------------------------------------------------------------
+
+SITE_ROOT = "https://agreddy.com"
+
+# Hand-maintained top-level pages.  Detail-page URLs are derived from the
+# experience and project databases below, so they never go stale.
+SITEMAP_STATIC_PAGES = (
+    f"{SITE_ROOT}/",
+    f"{SITE_ROOT}/accessibility.html",
+    f"{SITE_ROOT}/availability/",
+    f"{SITE_ROOT}/cv/",
+    f"{SITE_ROOT}/experience/",
+    f"{SITE_ROOT}/projects/",
+)
+
+
+def generate_sitemap() -> str:
+    """
+    Write `sitemap.xml` at the repo root (the URL advertised by
+    `robots.txt`).  Covers the static top-level pages plus every
+    experience detail page and every project detail page with
+    `has_detail=True`.  URLs match each page's `<link rel="canonical">`.
+    Returns the output path.
+    """
+    urls: list[str] = list(SITEMAP_STATIC_PAGES)
+
+    for e in _load_experience_database():
+        cat = e.get("category")
+        slug = e.get("id")
+        if cat and slug:
+            urls.append(f"{SITE_ROOT}/experience/{cat}/{slug}.html")
+
+    for p in _load_projects_database():
+        permalink = p.get("permalink")
+        if p.get("has_detail") and permalink:
+            urls.append(f"{SITE_ROOT}{permalink}.html")
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for url in urls:
+        lines.append(f"  <url>\n    <loc>{html_escape(url)}</loc>\n  </url>")
+    lines.append("</urlset>")
+
+    out_path = os.path.join(BASE_DIR, "sitemap.xml")
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    print(f"[generate_site] wrote {len(urls)} URLs to {out_path}")
+    return out_path
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
@@ -1047,9 +1181,14 @@ def main(argv: list[str] | None = None) -> int:
             "and sync the embedded catalog array in projects/index.html."
         ),
     )
+    parser.add_argument(
+        "--sitemap",
+        action="store_true",
+        help="Regenerate sitemap.xml only (also runs after --experiences/--projects).",
+    )
     args = parser.parse_args(argv)
 
-    if not (args.experiences or args.projects):
+    if not (args.experiences or args.projects or args.sitemap):
         parser.print_help()
         return 0
 
@@ -1069,6 +1208,14 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as exc:  # noqa: BLE001
             print(f"[generate_site] ERROR generating projects: {exc}", file=sys.stderr)
             rc = 1
+
+    # Any content regeneration may add or remove pages — keep the sitemap
+    # advertised by robots.txt in lockstep.
+    try:
+        generate_sitemap()
+    except Exception as exc:  # noqa: BLE001
+        print(f"[generate_site] ERROR generating sitemap: {exc}", file=sys.stderr)
+        rc = 1
 
     return rc
 

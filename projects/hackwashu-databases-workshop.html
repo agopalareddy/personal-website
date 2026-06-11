@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Developed and facilitated a hands-on databases workshop teaching SQLite, Supabase, API integration, and full-stack web development through two complete projects."
     />
     <title>HackWashU Databases Workshop - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0" />
-    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
 
     <!-- Favicons & Mobile Device Integration -->
@@ -25,8 +22,7 @@
     <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a16" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="article" />
@@ -37,7 +33,7 @@
     <meta property="og:title" content="HackWashU Databases Workshop - Aadarsha Gopala Reddy" />
     <meta
       property="og:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Developed and facilitated a hands-on databases workshop teaching SQLite, Supabase, API integration, and full-stack web development through two complete projects."
     />
     <meta property="og:image" content="https://agreddy.com/images/profile.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
@@ -51,7 +47,7 @@
     <meta name="twitter:title" content="HackWashU Databases Workshop - Aadarsha Gopala Reddy" />
     <meta
       name="twitter:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Developed and facilitated a hands-on databases workshop teaching SQLite, Supabase, API integration, and full-stack web development through two complete projects."
     />
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
@@ -73,41 +69,7 @@
           <a href="/cv/" class="nav-link">CV/Resume</a>
           <a href="/availability/" class="nav-link">Availability</a>
         </nav>
-
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
-          <svg
-            class="sun-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-          <svg
-            class="moon-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
+        <div id="theme-toggle"></div>
       </div>
     </header>
 
@@ -128,14 +90,7 @@
                 </li>
                 <li>
                   <i class="fas fa-envelope" aria-hidden="true"></i>
-                  <a
-                    href="#"
-                    class="protected-email"
-                    data-email-user="YWR1cnMyMDAy"
-                    data-email-domain="Z21haWwuY29t"
-                    data-email-text="adurs2002 [at] gmail [dot] com"
-                    >adurs2002 [at] gmail [dot] com</a
-                  >
+                  <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a>
                 </li>
                 <li>
                   <i class="fab fa-linkedin" aria-hidden="true"></i>
@@ -152,10 +107,8 @@
               </ul>
             </div>
           </aside>
-          <article
-            class="academic-content"
-            aria-label="Project Detail: HackWashU Databases Workshop"
-          >
+
+          <article class="academic-content">
             <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
               HackWashU Databases Workshop
             </h1>
@@ -170,92 +123,82 @@
             >
               Washington University in St. Louis - HackWashU &mdash; Fall 2025
             </p>
-            <section class="page__content" itemprop="text">
+            <section class="page__content">
               <p>
-                A comprehensive hands-on workshop teaching practical database concepts, API
-                integration, and modern web development. Developed for HackWashU, the workshop
-                guides participants through building two complete projects from scratch.
+                This repository contains the materials for a hands-on databases workshop designed
+                and facilitated at Washington University in St. Louis, aimed at
+                beginner-to-intermediate developers and taught through two complete projects rather
+                than abstract lectures.
               </p>
-              <h3 id="workshop-projects">Workshop Projects</h3>
-              <h4 id="project-1-python-music-library-">Project 1: Python Music Library 🎵</h4>
-              <p>Build a relational SQLite database populated from the iTunes Search API:</p>
-              <ul>
-                <li>
-                  <strong>Relational Schema</strong>: Artists, Albums, and Songs tables with foreign
-                  key relationships
-                </li>
-                <li>
-                  <strong>API Integration</strong>: Fetch real music data from iTunes Search API
-                </li>
-                <li>
-                  <strong>Data Deduplication</strong>: Use dictionary caching to prevent duplicates
-                </li>
-                <li><strong>CSV Exports</strong>: Generate exportable data for analysis</li>
-                <li>
-                  <strong>SQL Practice</strong>: Query real music data with hands-on exercises
-                </li>
-              </ul>
-              <h4 id="project-2-supabase-todo-app-">Project 2: Supabase Todo App ✅</h4>
-              <p>Create a full-stack web application with user authentication:</p>
-              <ul>
-                <li><strong>Cloud Database</strong>: PostgreSQL hosted on Supabase</li>
-                <li>
-                  <strong>User Authentication</strong>: Complete sign up, login, and logout flow
-                </li>
-                <li><strong>Row Level Security</strong>: Users only see their own todos</li>
-                <li>
-                  <strong>Full CRUD Operations</strong>: Create, read, update, and delete todos
-                </li>
-                <li>
-                  <strong>Modern UI</strong>: Active/completed task separation with clean interface
-                </li>
-              </ul>
-              <h3 id="workshop-materials">Workshop Materials</h3>
-              <ul>
-                <li>Step-by-step workshop guide with detailed instructions</li>
-                <li>Code walkthroughs with explanations</li>
-                <li>SQL query examples and exercises</li>
-                <li>Troubleshooting guide for common issues</li>
-                <li>Challenge exercises for advanced learners</li>
-                <li>Discussion questions with comprehensive answers</li>
-              </ul>
-              <h3 id="technologies-used">Technologies Used</h3>
-              <ul>
-                <li>Python</li>
-                <li>SQLite</li>
-                <li>Supabase (PostgreSQL)</li>
-                <li>JavaScript (ES6+)</li>
-                <li>HTML5/CSS3</li>
-                <li>iTunes Search API</li>
-                <li>Row Level Security (RLS)</li>
-              </ul>
-              <h3 id="github-repository">GitHub Repository</h3>
               <p>
-                <a
-                  href="https://github.com/agopalareddy/HackWashU-Databases-Workshop"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="External Link (opens in a new tab)"
-                  >View the project on GitHub</a
-                >
+                In the first part, participants build a Python application that queries the iTunes
+                Search API and constructs a normalized SQLite database with related artists, albums,
+                and songs tables connected by foreign keys, covering schema design, deduplication,
+                and CSV export. In the second part, participants build a full-stack Todo app on
+                Supabase (managed PostgreSQL) with sign-up/login/logout authentication and Row Level
+                Security policies that ensure each user can only access their own data.
               </p>
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-top: 1.5rem;
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                Highlights
+              </h4>
+              <ul>
+                <li>
+                  SQLite schema design with foreign-key relationships using real iTunes API data
+                </li>
+                <li>Data deduplication strategies and CSV export</li>
+                <li>Full-stack Supabase Todo app with authentication and Row Level Security</li>
+                <li>
+                  End-to-end coverage of relational databases, APIs, cloud Postgres, and access
+                  control
+                </li>
+              </ul>
             </section>
-            <nav class="pagination" aria-label="Project Pagination">
-              <a
-                href="/projects/google-calendar-sync"
-                class="pagination--pager"
-                aria-label="Go to previous project: Google Calendar Availability Sync"
-                title="Google Calendar Availability Sync"
-                >Previous</a
+
+            <div
+              style="
+                margin-top: 2rem;
+                border-top: 1px solid var(--border-color);
+                padding-top: 1.5rem;
+              "
+            >
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
               >
+                Technologies Applied
+              </h4>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span><span class="tech-tag">SQLite</span
+                ><span class="tech-tag">Supabase</span><span class="tech-tag">PostgreSQL</span
+                ><span class="tech-tag">JavaScript</span><span class="tech-tag">HTML</span
+                ><span class="tech-tag">CSS</span><span class="tech-tag">APIs</span
+                ><span class="tech-tag">Database Design</span>
+              </div>
+            </div>
+
+            <div
+              class="card-actions"
+              style="margin-top: 2rem; justify-content: flex-start; gap: 1rem"
+            >
               <a
-                href="/projects/ms-thesis"
-                class="pagination--pager"
-                aria-label="Go to next project: Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
-                title="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
-                >Next</a
+                href="https://github.com/agopalareddy/HackWashU-Databases-Workshop"
+                target="_blank"
+                rel="noopener"
+                class="card-btn btn-github"
+                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
+                <span class="sr-only">(opens in a new tab)</span></a
               >
-            </nav>
+            </div>
           </article>
         </div>
       </main>
@@ -279,7 +222,7 @@
             Aadarsha Gopala Reddy
           </h3>
           <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
-            M.S. Computer Science graduate from Washington University in St. Louis. Passionate about
+            M.S. Computer Science graduate from Washington University in St. Louis. Interested in
             solving complex distributed systems problems, building high-throughput data pipelines,
             and training machine learning models.
           </p>
@@ -298,12 +241,19 @@
           >
             Explore
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
                 >Home</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/experience/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Experience</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -343,15 +293,13 @@
           >
             Connect
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
-                href="#"
-                class="protected-email"
-                data-email-user="YWR1cnMyMDAy"
-                data-email-domain="Z21haWwuY29t"
+                href="mailto:adurs2002@gmail.com"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fas fa-envelope" aria-hidden="true"></i> Email</a
+                ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                Email</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -360,8 +308,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                LinkedIn <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -370,8 +318,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                GitHub <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
           </ul>
@@ -390,7 +338,7 @@
           >
             Downloads &amp; Info
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/files/reddy_cv.pdf"
@@ -432,12 +380,14 @@
           margin-top: 1.5rem;
         "
       >
-        <p>&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
+        <p style="margin: 0">
+          &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
+        </p>
+        <div id="theme-toggle-footer"></div>
       </div>
     </footer>
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
-    <script src="/assets/js/email-protection.js"></script>
   </body>
 </html>

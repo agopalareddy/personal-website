@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Built a multimodal machine learning pipeline combining MRI imaging and clinical data from the OASIS-1 dataset for early Alzheimer's disease detection."
     />
     <title>Multimodal Prediction of Alzheimer's Disease - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0" />
-    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
 
     <!-- Favicons & Mobile Device Integration -->
@@ -25,8 +22,7 @@
     <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a16" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="article" />
@@ -37,7 +33,7 @@
     />
     <meta
       property="og:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Built a multimodal machine learning pipeline combining MRI imaging and clinical data from the OASIS-1 dataset for early Alzheimer's disease detection."
     />
     <meta property="og:image" content="https://agreddy.com/images/profile.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
@@ -51,7 +47,7 @@
     />
     <meta
       name="twitter:description"
-      content="Aadarsha Gopala Reddy M.S. Computer Science graduate from Washington University in St. Louis"
+      content="Built a multimodal machine learning pipeline combining MRI imaging and clinical data from the OASIS-1 dataset for early Alzheimer's disease detection."
     />
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
@@ -73,41 +69,7 @@
           <a href="/cv/" class="nav-link">CV/Resume</a>
           <a href="/availability/" class="nav-link">Availability</a>
         </nav>
-
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
-          <svg
-            class="sun-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-          <svg
-            class="moon-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
+        <div id="theme-toggle"></div>
       </div>
     </header>
 
@@ -128,14 +90,7 @@
                 </li>
                 <li>
                   <i class="fas fa-envelope" aria-hidden="true"></i>
-                  <a
-                    href="#"
-                    class="protected-email"
-                    data-email-user="YWR1cnMyMDAy"
-                    data-email-domain="Z21haWwuY29t"
-                    data-email-text="adurs2002 [at] gmail [dot] com"
-                    >adurs2002 [at] gmail [dot] com</a
-                  >
+                  <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a>
                 </li>
                 <li>
                   <i class="fab fa-linkedin" aria-hidden="true"></i>
@@ -152,10 +107,8 @@
               </ul>
             </div>
           </aside>
-          <article
-            class="academic-content"
-            aria-label="Project Detail: Multimodal Prediction of Alzheimer's Disease"
-          >
+
+          <article class="academic-content">
             <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
               Multimodal Prediction of Alzheimer's Disease
             </h1>
@@ -170,73 +123,80 @@
             >
               Washington University in St. Louis &mdash; Fall 2024
             </p>
-            <section class="page__content" itemprop="text">
+            <section class="page__content">
               <p>
-                This project implements a comprehensive multimodal approach for predicting
-                Alzheimer’s Disease using machine learning and deep learning techniques. Developed
-                as part of Washington University in St. Louis’s CSE 419A: Introduction to AI for
-                Health course, the project utilizes the OASIS-1 dataset to analyze various imaging
-                and clinical data for early detection and prediction of Alzheimer’s Disease.
+                This project, developed for Washington University&apos;s CSE 419A (AI for Health)
+                course, explores early detection of Alzheimer&apos;s disease by combining two data
+                modalities from the OASIS-1 dataset: brain MRI scans and clinical/demographic
+                features. A convolutional neural network handles the imaging data, while classical
+                machine learning models (scikit-learn, XGBoost) handle the clinical/tabular data,
+                with predictions from both modalities combined into a final classifier.
               </p>
-              <h3 id="key-features">Key Features</h3>
+              <p>
+                The work is documented in a NeurIPS-format report with architecture diagrams for
+                both the CNN and the combined classifier, and was presented as a final project demo
+                for the course.
+              </p>
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-top: 1.5rem;
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                Highlights
+              </h4>
               <ul>
-                <li>Multimodal data integration from OASIS-1 dataset</li>
-                <li>Deep learning models for image analysis</li>
-                <li>Machine learning models for clinical data analysis</li>
-                <li>Comprehensive performance evaluation metrics</li>
-                <li>Visual analysis of model predictions</li>
-                <li>Combined classifier leveraging both imaging and clinical data</li>
-              </ul>
-              <h3 id="technologies--tools">Technologies &amp; Tools</h3>
-              <ul>
-                <li>Python 3.12</li>
-                <li>Deep Learning Frameworks: TensorFlow/Keras, PyTorch</li>
-                <li>Machine Learning: Scikit-learn, XGBoost</li>
-                <li>Data Analysis: Pandas &amp; NumPy</li>
-                <li>Visualization: Matplotlib &amp; Seaborn</li>
-                <li>Development Environment: Jupyter Notebooks</li>
-              </ul>
-              <h3 id="project-components">Project Components</h3>
-              <ul>
+                <li>Multimodal fusion of MRI imaging and clinical/demographic data</li>
                 <li>
-                  Main implementation notebook with data processing, model training, and evaluation
+                  CNN for imaging analysis alongside scikit-learn/XGBoost models for tabular data
                 </li>
-                <li>Detailed project report in NeurIPS format</li>
-                <li>CNN architecture visualization and implementation</li>
-                <li>Final classifier architecture combining multiple modalities</li>
-                <li>Comprehensive performance analysis and visualization</li>
-              </ul>
-              <h3 id="project-documentation">Project Documentation</h3>
-              <ul>
-                <li>
-                  <a
-                    href="https://github.com/agopalareddy/CSE419A_Multimodal_Prediction_of_Alzheimers"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="External Link (opens in a new tab)"
-                    >GitHub Repository</a
-                  >
-                </li>
-                <li>Project Report: Available in NeurIPS format</li>
-                <li>Presentation: Final Demo slides covering methodology and results</li>
+                <li>Combined classifier integrating both modalities</li>
+                <li>NeurIPS-format written report and presentation</li>
               </ul>
             </section>
-            <nav class="pagination" aria-label="Project Pagination">
-              <a
-                href="/projects/interactive-storybook"
-                class="pagination--pager"
-                aria-label="Go to previous project: Interactive Storybook"
-                title="Interactive Storybook"
-                >Previous</a
+
+            <div
+              style="
+                margin-top: 2rem;
+                border-top: 1px solid var(--border-color);
+                padding-top: 1.5rem;
+              "
+            >
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
               >
+                Technologies Applied
+              </h4>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span><span class="tech-tag">Deep Learning</span
+                ><span class="tech-tag">TensorFlow</span><span class="tech-tag">Keras</span
+                ><span class="tech-tag">PyTorch</span><span class="tech-tag">Machine Learning</span
+                ><span class="tech-tag">Scikit-learn</span><span class="tech-tag">XGBoost</span
+                ><span class="tech-tag">Pandas</span><span class="tech-tag">NumPy</span
+                ><span class="tech-tag">Matplotlib</span><span class="tech-tag">Seaborn</span
+                ><span class="tech-tag">Jupyter Notebooks</span>
+              </div>
+            </div>
+
+            <div
+              class="card-actions"
+              style="margin-top: 2rem; justify-content: flex-start; gap: 1rem"
+            >
               <a
-                href="/projects/desperate-housewives-monologues"
-                class="pagination--pager"
-                aria-label="Go to next project: Desperate Housewives Monologues Dataset"
-                title="Desperate Housewives Monologues Dataset"
-                >Next</a
+                href="https://github.com/agopalareddy/CSE419A_Multimodal_Prediction_of_Alzheimers"
+                target="_blank"
+                rel="noopener"
+                class="card-btn btn-github"
+                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
+                <span class="sr-only">(opens in a new tab)</span></a
               >
-            </nav>
+            </div>
           </article>
         </div>
       </main>
@@ -260,7 +220,7 @@
             Aadarsha Gopala Reddy
           </h3>
           <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
-            M.S. Computer Science graduate from Washington University in St. Louis. Passionate about
+            M.S. Computer Science graduate from Washington University in St. Louis. Interested in
             solving complex distributed systems problems, building high-throughput data pipelines,
             and training machine learning models.
           </p>
@@ -279,12 +239,19 @@
           >
             Explore
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
                 >Home</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/experience/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Experience</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -324,15 +291,13 @@
           >
             Connect
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
-                href="#"
-                class="protected-email"
-                data-email-user="YWR1cnMyMDAy"
-                data-email-domain="Z21haWwuY29t"
+                href="mailto:adurs2002@gmail.com"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fas fa-envelope" aria-hidden="true"></i> Email</a
+                ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                Email</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -341,8 +306,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                LinkedIn <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -351,8 +316,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                GitHub <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
           </ul>
@@ -371,7 +336,7 @@
           >
             Downloads &amp; Info
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/files/reddy_cv.pdf"
@@ -413,12 +378,14 @@
           margin-top: 1.5rem;
         "
       >
-        <p>&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
+        <p style="margin: 0">
+          &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
+        </p>
+        <div id="theme-toggle-footer"></div>
       </div>
     </footer>
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
-    <script src="/assets/js/email-protection.js"></script>
   </body>
 </html>

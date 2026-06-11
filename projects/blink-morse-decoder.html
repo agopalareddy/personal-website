@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="An accessibility-focused Android app that translates deliberate eye blinks into Morse code text using real-time camera-based facial landmark tracking and a custom blink state machine."
+      content="An accessibility-focused Android app that translates deliberate eye blinks into Morse code text using real-time camera-based facial landmark tracking and a custom blink state machine — enabling hands-free communication without extra hardware."
     />
     <title>Blink Morse Decoder - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0" />
-    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-      crossorigin="anonymous"
     />
 
     <!-- Favicons & Mobile Device Integration -->
@@ -26,39 +22,32 @@
     <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a16" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://agreddy.com/projects/2026-06-blink-morse-decoder.html"
-    />
+    <meta property="og:url" content="https://agreddy.com/projects/blink-morse-decoder.html" />
     <meta property="og:title" content="Blink Morse Decoder - Aadarsha Gopala Reddy" />
     <meta
       property="og:description"
-      content="An accessibility-focused Android app that translates deliberate eye blinks into Morse code text using real-time camera-based facial landmark tracking and a custom blink state machine."
+      content="An accessibility-focused Android app that translates deliberate eye blinks into Morse code text using real-time camera-based facial landmark tracking and a custom blink state machine — enabling hands-free communication without extra hardware."
     />
     <meta property="og:image" content="https://agreddy.com/images/profile.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:url"
-      content="https://agreddy.com/projects/2026-06-blink-morse-decoder.html"
-    />
+    <meta name="twitter:url" content="https://agreddy.com/projects/blink-morse-decoder.html" />
     <meta name="twitter:title" content="Blink Morse Decoder - Aadarsha Gopala Reddy" />
     <meta
       name="twitter:description"
-      content="An accessibility-focused Android app that translates deliberate eye blinks into Morse code text using real-time camera-based facial landmark tracking and a custom blink state machine."
+      content="An accessibility-focused Android app that translates deliberate eye blinks into Morse code text using real-time camera-based facial landmark tracking and a custom blink state machine — enabling hands-free communication without extra hardware."
     />
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
 
     <!-- Canonical Link -->
-    <link rel="canonical" href="https://agreddy.com/projects/2026-06-blink-morse-decoder.html" />
+    <link rel="canonical" href="https://agreddy.com/projects/blink-morse-decoder.html" />
   </head>
   <body>
     <!-- Skip Link -->
@@ -95,14 +84,7 @@
                 </li>
                 <li>
                   <i class="fas fa-envelope" aria-hidden="true"></i>
-                  <a
-                    href="#"
-                    class="protected-email"
-                    data-email-user="YWR1cnMyMDAy"
-                    data-email-domain="Z21haWwuY29t"
-                    data-email-text="adurs2002 [at] gmail [dot] com"
-                    >adurs2002 [at] gmail [dot] com</a
-                  >
+                  <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a>
                 </li>
                 <li>
                   <i class="fab fa-linkedin" aria-hidden="true"></i>
@@ -120,7 +102,7 @@
             </div>
           </aside>
 
-          <article class="academic-content" aria-label="Project Detail: Blink Morse Decoder">
+          <article class="academic-content">
             <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
               Blink Morse Decoder
             </h1>
@@ -137,61 +119,42 @@
             </p>
             <section class="page__content">
               <p>
-                <strong>Blink Morse Decoder</strong> is an accessibility-focused Android application
-                that enables hands-free, silent communication by translating deliberate eye blinks
-                into Morse code and then into readable text. Built for the
-                <em>CodeTillDawn</em> hackathon, the app uses the phone&apos;s front-facing camera
-                and the SmartSpectra SDK to track facial landmarks in real time — no external
-                hardware, switches, or sensors required.
-              </p>
-
-              <h3>How It Works</h3>
-              <p>
-                The core pipeline runs at 30 Hz through the Android CameraX API. Each frame is
-                processed by SmartSpectra to extract 68 facial landmarks, from which a custom
-                <strong>Eye Aspect Ratio (EAR)</strong> metric is computed — a dimensionless ratio
-                of vertical to horizontal eye-opening distances. When EAR drops below an adaptive
-                threshold for a calibrated duration, the app registers a blink.
+                Built during the CodeTillDawn hackathon, Blink Morse Decoder turns an Android
+                phone&apos;s front-facing camera into a hands-free input device for people with
+                motor disabilities. The SmartSpectra SDK extracts facial landmarks at roughly 30Hz,
+                and the app computes the eye aspect ratio in real time to detect eye closures. A
+                blink state machine filters out involuntary micro-blinks &mdash; requiring a minimum
+                duration with frame-stabilization and hysteresis-based debouncing &mdash; so only
+                deliberate blinks register as input.
               </p>
               <p>
-                A blink state machine with hysteresis filtering and configurable debounce windows
-                then classifies each blink as either a
-                <strong>dot</strong> (quick blink, &lt; 400 ms) or a <strong>dash</strong> (held
-                blink, &gt; 400 ms). Sequences of dots and dashes are mapped to letters using the
-                international Morse code table, with inter-letter and inter-word gap timers to
-                segment the stream into coherent text.
+                A six-blink calibration routine (three short, three prolonged) establishes
+                personalized timing thresholds before use. From there, short blinks act as Morse
+                &ldquo;dots&rdquo; and long blinks as &ldquo;dashes,&rdquo; with the gap between
+                blinks classified by duration to mark letter and word boundaries. The app also
+                includes a real-time bio-vitals dashboard (heart rate, respiration rate, and
+                simulated galvanic skin response) in a glassmorphic Material Design 3 interface.
               </p>
-
-              <h3>Calibration Engine</h3>
-              <p>
-                Since every user has different resting eye aperture and blink dynamics, the app
-                includes a
-                <strong>6-blink calibration routine</strong>: three normal blinks followed by three
-                deliberately long blinks. An interactive rhythm guide — with visual pulsing
-                indicators — walks the user through each calibration blink, and the collected
-                samples feed into adaptive threshold computation for personalized dot/dash
-                discrimination.
-              </p>
-
-              <h3>Bio-Vitals Dashboard</h3>
-              <p>
-                Beyond blink decoding, the SmartSpectra SDK extracts photoplethysmographic (PPG)
-                signals from the same facial video stream. The app surfaces a live
-                <strong>bio-vitals dashboard</strong> displaying heart rate (BPM), respiration rate,
-                and galvanic skin response (GSR/EDA) — all derived non-invasively from the camera
-                feed. The dashboard uses a glassmorphic Material Design 3 layout with real-time
-                updating cards.
-              </p>
-
-              <h3>Architecture</h3>
-              <p>
-                The codebase follows clean architecture principles with a strict separation of
-                concerns. Core engines — the blink state machine, Morse codec, EAR calculator, and
-                calibration logic — are written in <strong>pure Kotlin</strong> with zero Android
-                framework imports, making them testable on any JVM without an emulator. The UI layer
-                is a single-activity Android app using Material Design 3 components, CameraX for
-                frame acquisition, and sealed-class state management for reactive UI updates.
-              </p>
+              <h4
+                style="
+                  font-family: var(--font-heading);
+                  margin-top: 1.5rem;
+                  margin-bottom: 0.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                Highlights
+              </h4>
+              <ul>
+                <li>
+                  Real-time, camera-based blink detection via the SmartSpectra SDK and eye aspect
+                  ratio
+                </li>
+                <li>Debounced blink state machine that filters involuntary micro-blinks</li>
+                <li>Personalized 6-blink calibration flow with an interactive rhythm guide</li>
+                <li>Timing-based Morse decoding for letters and word breaks</li>
+                <li>Live bio-vitals dashboard in a glassmorphic Material Design 3 UI</li>
+              </ul>
             </section>
 
             <div
@@ -211,8 +174,9 @@
                 Technologies Applied
               </h4>
               <div class="project-tech">
-                <span class="tech-tag">Python</span><span class="tech-tag">Tkinter</span
-                ><span class="tech-tag">Instaloader</span><span class="tech-tag">PyInstaller</span>
+                <span class="tech-tag">Kotlin</span><span class="tech-tag">Android</span
+                ><span class="tech-tag">CameraX</span><span class="tech-tag">SmartSpectra</span
+                ><span class="tech-tag">Material 3</span>
               </div>
             </div>
 
@@ -252,7 +216,7 @@
             Aadarsha Gopala Reddy
           </h3>
           <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
-            M.S. Computer Science graduate from Washington University in St. Louis. Passionate about
+            M.S. Computer Science graduate from Washington University in St. Louis. Interested in
             solving complex distributed systems problems, building high-throughput data pipelines,
             and training machine learning models.
           </p>
@@ -271,12 +235,19 @@
           >
             Explore
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
                 >Home</a
+              >
+            </li>
+            <li style="margin-bottom: 0.5rem">
+              <a
+                href="/experience/"
+                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+                >Experience</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -316,15 +287,13 @@
           >
             Connect
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
-                href="#"
-                class="protected-email"
-                data-email-user="YWR1cnMyMDAy"
-                data-email-domain="Z21haWwuY29t"
+                href="mailto:adurs2002@gmail.com"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fas fa-envelope" aria-hidden="true"></i> Email</a
+                ><i class="fas fa-envelope" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                Email</a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -333,8 +302,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-linkedin" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                LinkedIn <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
             <li style="margin-bottom: 0.5rem">
@@ -343,8 +312,8 @@
                 target="_blank"
                 rel="noopener"
                 style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
-                <span class="sr-only">(opens in a new tab)</span></a
+                ><i class="fab fa-github" aria-hidden="true" style="margin-right: 0.4rem"></i>
+                GitHub <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
           </ul>
@@ -363,7 +332,7 @@
           >
             Downloads &amp; Info
           </h3>
-          <ul>
+          <ul style="list-style: none; padding: 0; margin: 0">
             <li style="margin-bottom: 0.5rem">
               <a
                 href="/files/reddy_cv.pdf"
@@ -405,13 +374,14 @@
           margin-top: 1.5rem;
         "
       >
-        <p>&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
+        <p style="margin: 0">
+          &copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.
+        </p>
         <div id="theme-toggle-footer"></div>
       </div>
     </footer>
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
-    <script src="/assets/js/email-protection.js"></script>
   </body>
 </html>

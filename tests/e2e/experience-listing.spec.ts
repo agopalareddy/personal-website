@@ -91,6 +91,23 @@ test.describe('Experience Listing Page', () => {
     expect(firstYear).toBeLessThanOrEqual(lastYear);
   });
 
+  test('timeline groups experiences by completion or receipt year', async ({ page }) => {
+    const msHeaderYear = await page
+      .locator('.experience-card', { hasText: 'M.S. Computer Science' })
+      .evaluate((card) => {
+        let node = card.previousElementSibling;
+        while (node) {
+          if (node.classList.contains('timeline-year')) {
+            return node.textContent?.trim();
+          }
+          node = node.previousElementSibling;
+        }
+        return null;
+      });
+
+    expect(msHeaderYear).toBe('2026');
+  });
+
   test('clicking a card navigates to detail page', async ({ page }) => {
     // Click the first card's detail link
     const firstLink = page.locator('.experience-card a').first();

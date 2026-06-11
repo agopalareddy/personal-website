@@ -149,6 +149,19 @@ document.addEventListener('DOMContentLoaded', function () {
     return startStr + ' \u2013 ' + endStr;
   }
 
+  /**
+   * Date used for chronological ordering and timeline grouping.
+   * Completed entries should appear by completion/receipt date, not by start date.
+   */
+  function getOrderDate(exp) {
+    return exp.end_date || exp.start_date || '1970-01-01';
+  }
+
+  function getOrderYear(exp) {
+    var orderDate = getOrderDate(exp);
+    return orderDate ? parseInt(orderDate.split('-')[0], 10) : null;
+  }
+
   // ---------------------------------------------------------------------------
   // Card renderer
   // ---------------------------------------------------------------------------
@@ -281,16 +294,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // 2. Sort
     filtered.sort(function (a, b) {
       if (activeSort === 'date-desc') {
-        return (
-          new Date((b.start_date || '1970-01-01') + 'T00:00:00') -
-          new Date((a.start_date || '1970-01-01') + 'T00:00:00')
-        );
+        return new Date(getOrderDate(b) + 'T00:00:00') - new Date(getOrderDate(a) + 'T00:00:00');
       }
       if (activeSort === 'date-asc') {
-        return (
-          new Date((a.start_date || '1970-01-01') + 'T00:00:00') -
-          new Date((b.start_date || '1970-01-01') + 'T00:00:00')
-        );
+        return new Date(getOrderDate(a) + 'T00:00:00') - new Date(getOrderDate(b) + 'T00:00:00');
       }
       if (activeSort === 'title-asc') {
         return (a.title || '').localeCompare(b.title || '');
@@ -311,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var html = '';
     var lastYear = null;
     filtered.forEach(function (exp) {
-      var year = exp.start_date ? parseInt(exp.start_date.split('-')[0], 10) : null;
+      var year = getOrderYear(exp);
       if (year && year !== lastYear) {
         html += '<div class="timeline-year" id="year-' + year + '">' + year + '</div>';
         lastYear = year;
@@ -599,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var yearItemsHtml = '';
 
       filtered.forEach(function (exp) {
-        var year = exp.start_date ? parseInt(exp.start_date.split('-')[0], 10) : null;
+        var year = getOrderYear(exp);
         var id = exp.id || '';
         var title = exp.title || '';
 

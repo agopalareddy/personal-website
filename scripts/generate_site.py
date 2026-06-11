@@ -184,6 +184,21 @@ def format_date_range(start_date: str | None, end_date: str | None) -> str:
     return f"{start} \u2013 {end}"
 
 
+def experience_order_date(entry: dict[str, Any]) -> str:
+    """
+    Date used for chronological ordering and timeline grouping.
+
+    For completed credentials, awards, roles, and projects, the relevant
+    timeline date is completion/receipt time (`end_date`), not start time.
+    """
+    return entry.get("end_date") or entry.get("start_date") or "1970-01-01"
+
+
+def experience_order_year(entry: dict[str, Any]) -> str:
+    """Four-digit year derived from `experience_order_date()`."""
+    return experience_order_date(entry)[:4]
+
+
 def category_label(cat: str) -> str:
     """Friendly display label for a category, falling back to the raw slug."""
     return CATEGORY_LABELS.get(cat, cat.replace("-", " ").title() if cat else "")
@@ -455,16 +470,17 @@ def _render_noscript_card(e: dict[str, Any]) -> str:
 
 def _render_noscript_cards(entries: list[dict[str, Any]]) -> str:
     """Render the static, no-JS fallback card list: newest first, grouped
-    under `timeline-year` headers by start year (mirrors the JS renderer)."""
+    under `timeline-year` headers by completion/receipt year (mirrors the JS
+    renderer)."""
     entries_sorted = sorted(
         (e for e in entries if e),
-        key=lambda e: (e.get("start_date") or "", e.get("end_date") or ""),
+        key=lambda e: (experience_order_date(e), e.get("start_date") or ""),
         reverse=True,
     )
     parts: list[str] = []
     year: str | None = None
     for e in entries_sorted:
-        y = (e.get("start_date") or "")[:4]
+        y = experience_order_year(e)
         if y != year:
             year = y
             parts.append(f'                  <div class="timeline-year">{y}</div>')

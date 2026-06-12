@@ -87,7 +87,7 @@
 % 2. RESEARCH EXPERIENCE SECTION
 % ----------------------------------------------------------------------
 % \needspace{6\baselineskip} % Optional
-\section{RESEARCH EXPERIENCE}
+\section{\sectionlink{https://agreddy.com/experience/}{RESEARCH EXPERIENCE}}
 
 % \vspace{\entrySpacing} % Optional
 \begin{researchentry}
@@ -152,7 +152,7 @@
 % ----------------------------------------------------------------------
 % INDUSTRY EXPERIENCE SECTION (Retained without losing/modifying contents)
 % ----------------------------------------------------------------------
-\section{INDUSTRY EXPERIENCE}
+\section{\sectionlink{https://agreddy.com/experience/}{INDUSTRY EXPERIENCE}}
 
 \begin{experienceentry}
 	{Graduate Assistant with the Taylor Family Center for Student Success} % Position Title
@@ -254,7 +254,54 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 % ----------------------------------------------------------------------
 % PROJECTS SECTION (Retained without losing/modifying contents)
 % ----------------------------------------------------------------------
-\section{PROJECTS}
+\section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
+
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/blink-morse-app}{Blink Morse Decoder}} % Project Title
+	{CodeTillDawn Hackathon} % Affiliation/Context
+	{Remote} % Location
+	{June 2026} % Date Range
+	\item Built an Android accessibility app that translates deliberate eye blinks into Morse code using the SmartSpectra SDK for real-time facial landmark tracking and a debounced blink state machine to filter involuntary micro-blinks.
+	\item Designed a six-blink calibration routine to set personalized timing thresholds, with short/long blinks mapped to Morse dots/dashes, in a glassmorphic Material Design 3 interface that also includes a live bio-vitals dashboard.
+\end{projectentry}
+
+% \vspace{\entrySpacing} % Optional
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE-5114-Project}{MLB Statcast Real-Time Data Pipeline}} % Project Title
+	{Washington University in St. Louis} % Affiliation/Context
+	{St. Louis, Missouri, USA} % Location
+	{September 2025 - October 2025} % Date Range
+	\item Built a lambda-architecture pipeline for MLB Statcast pitch-level data with co-author Eddy Sul for the CSE 5114 (Data Manipulation and Management at Scale) course, using Apache Airflow for historical batch ingestion into Snowflake and a Kafka/Spark Streaming path for live, simulated data.
+	\item Developed a Streamlit dashboard with three views: pitch-by-pitch historical game replay with interactive strike-zone visualization, pitcher analytics (velocity, spin rate, strikeout rate), and team head-to-head matchups.
+\end{projectentry}
+
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/CSE5519-Project}{Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses}} % Project Title
+	{Washington University in St. Louis} % Affiliation/Context
+	{St. Louis, Missouri, USA} % Location
+	{September 2025 - October 2025} % Date Range
+	\item Built an automated red-blue teaming pipeline for vision-language model (VLM) security with teammates Stuart Aldrich and Mohammad Rouie Miab, addressing visual prompt injection (VPI) attacks against VLM-based agents.
+	\item Generated visual jailbreak attack images by overlaying malicious instructions onto benign images and evaluated them against a target VLM (Gemma-3-4b-it) using semantic response analysis.
+	\item Auto-generated deterministic, OCR-based Python defenses for each successful attack, validated with accuracy, precision, and recall metrics in an iterative refinement loop.
+\end{projectentry}
+
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/GoogleCalendarSync}{Google Calendar Availability Sync}} % Project Title
+	{Personal Project} % Affiliation/Context
+	{Remote} % Location
+	{August 2025} % Date Range
+	\item Built a Google Apps Script that runs as a state-based reconciliation pipeline, syncing events from multiple source calendars into a single privacy-preserving ``Availability'' calendar for scheduling tools.
+	\item Implemented event splitting for multi-day/all-day events, overlap merging across calendars, and metadata-tagged diffing with exponential backoff for API rate limits; powers the \href{https://agreddy.com/availability/}{Availability page} on agreddy.com.
+\end{projectentry}
+
+\begin{projectentry}
+	{\href{https://github.com/agopalareddy/BayesianOptimizationPractice}{Bayesian Optimization for Material and Product Optimization}} % Project Title
+	{Personal Project} % Affiliation/Context
+	{Remote} % Location
+	{July 2025} % Date Range
+	\item Applied Bayesian optimization to three regression problems from the UCI Machine Learning Repository -- superconductor critical temperature, concrete compressive strength, and wine quality -- tuning Random Forest and XGBoost models with scikit-optimize.
+	\item Applied Bayesian optimization a second time to search the input feature space itself for material and mix compositions that maximize the target property, using the same technique for both model tuning and inverse design.
+\end{projectentry}
 
 \begin{projectentry}
 	{\href{https://github.com/agopalareddy/CSE510A_Datacenter_Cooling}{Datacenter Cooling Optimization using Deep Reinforcement Learning}} % Project Title
@@ -296,53 +343,6 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 	\item Created an interactive calendar interface with comprehensive event management capabilities for creation, editing, and tracking.
 \end{projectentry}
 
-% \vspace{\entrySpacing} % Optional
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/CSE-5114-Project}{MLB Statcast Real-Time Data Pipeline}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{September 2025 - October 2025} % Date Range
-	\item Built a lambda-architecture pipeline for MLB Statcast pitch-level data with co-author Eddy Sul for the CSE 5114 (Data Manipulation and Management at Scale) course, using Apache Airflow for historical batch ingestion into Snowflake and a Kafka/Spark Streaming path for live, simulated data.
-	\item Developed a Streamlit dashboard with three views: pitch-by-pitch historical game replay with interactive strike-zone visualization, pitcher analytics (velocity, spin rate, strikeout rate), and team head-to-head matchups.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/CSE5519-Project}{Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{September 2025 - October 2025} % Date Range
-	\item Built an automated red-blue teaming pipeline for vision-language model (VLM) security with teammates Stuart Aldrich and Mohammad Rouie Miab, addressing visual prompt injection (VPI) attacks against VLM-based agents.
-	\item Generated visual jailbreak attack images by overlaying malicious instructions onto benign images and evaluated them against a target VLM (Gemma-3-4b-it) using semantic response analysis.
-	\item Auto-generated deterministic, OCR-based Python defenses for each successful attack, validated with accuracy, precision, and recall metrics in an iterative refinement loop.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/BayesianOptimizationPractice}{Bayesian Optimization for Material and Product Optimization}} % Project Title
-	{Personal Project} % Affiliation/Context
-	{Remote} % Location
-	{July 2025} % Date Range
-	\item Applied Bayesian optimization to three regression problems from the UCI Machine Learning Repository -- superconductor critical temperature, concrete compressive strength, and wine quality -- tuning Random Forest and XGBoost models with scikit-optimize.
-	\item Applied Bayesian optimization a second time to search the input feature space itself for material and mix compositions that maximize the target property, using the same technique for both model tuning and inverse design.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/GoogleCalendarSync}{Google Calendar Availability Sync}} % Project Title
-	{Personal Project} % Affiliation/Context
-	{Remote} % Location
-	{August 2025} % Date Range
-	\item Built a Google Apps Script that runs as a state-based reconciliation pipeline, syncing events from multiple source calendars into a single privacy-preserving ``Availability'' calendar for scheduling tools.
-	\item Implemented event splitting for multi-day/all-day events, overlap merging across calendars, and metadata-tagged diffing with exponential backoff for API rate limits; powers the \href{https://agreddy.com/availability/}{Availability page} on agreddy.com.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/blink-morse-app}{Blink Morse Decoder}} % Project Title
-	{CodeTillDawn Hackathon} % Affiliation/Context
-	{Remote} % Location
-	{June 2026} % Date Range
-	\item Built an Android accessibility app that translates deliberate eye blinks into Morse code using the SmartSpectra SDK for real-time facial landmark tracking and a debounced blink state machine to filter involuntary micro-blinks.
-	\item Designed a six-blink calibration routine to set personalized timing thresholds, with short/long blinks mapped to Morse dots/dashes, in a glassmorphic Material Design 3 interface that also includes a live bio-vitals dashboard.
-\end{projectentry}
-
 \begin{projectentry}
 	{\href{https://github.com/agopalareddy/AIPS}{Parkinson's Disease AI Diagnosis Software}} % Project Title
 	{MITxSureStart FutureMakers Create-a-Thon Program} % Affiliation/Context
@@ -357,7 +357,7 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 % ----------------------------------------------------------------------
 % 4. TEACHING \& MENTORSHIP EXPERIENCE SECTION
 % ----------------------------------------------------------------------
-\section{TEACHING \& MENTORSHIP EXPERIENCE}
+\section{\sectionlink{https://agreddy.com/experience/}{TEACHING \& MENTORSHIP EXPERIENCE}}
 
 \begin{experienceentry}
 	{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale} % Position Title
@@ -369,6 +369,7 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 \end{experienceentry}
 
 % \vspace{\entrySpacing} % Optional
+\needspace{11\baselineskip}
 \begin{experienceentry}
 	{HackWashU Databases Workshop} % Position Title
 	{Washington University in St. Louis - HackWashU} % Organization
@@ -488,6 +489,17 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 	\end{positionentry}
 \end{leadershipentry}
 
+\begin{leadershipentry}
+	{Umang (Indian Graduate Student Association)} % Organization Name
+	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
+	\begin{positionentry}
+		{Treasurer} % Position Title
+		{June 2025 - October 2025} % Date Range
+		\item Managed club finances, including budgeting, expense tracking, and fundraising to ensure sustainable operations and successful event planning.
+		\item Collaborated with members to organize cultural events and festivals, promoting cultural awareness and fostering community among Indian graduate students.
+	\end{positionentry}
+\end{leadershipentry}
+
 % \vspace{\entrySpacing} % Optional
 \begin{leadershipentry}
 	{Graduate and Professional Student Council (GPSC)} % Organization Name
@@ -500,17 +512,6 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 		\item Oversaw information architecture for the Council's documentation repository.
 		\item Represented the graduate student body to university leadership and supported the GPC President in advancing strategic council priorities.
 		\item Chaired the Constitution Committee (August 2025 - February 2026), coordinating stakeholder input to draft and ratify GPSC governing documents aligned with the Council's mission and university policies.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}
-	{Umang (Indian Graduate Student Association)} % Organization Name
-	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
-	\begin{positionentry}
-		{Treasurer} % Position Title
-		{June 2025 - October 2025} % Date Range
-		\item Managed club finances, including budgeting, expense tracking, and fundraising to ensure sustainable operations and successful event planning.
-		\item Collaborated with members to organize cultural events and festivals, promoting cultural awareness and fostering community among Indian graduate students.
 	\end{positionentry}
 \end{leadershipentry}
 

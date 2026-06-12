@@ -84,7 +84,7 @@
 \setlength{\kernSpacing}{2.5pt}
 
 \newlength{\datecolumnwidth}    % Width of the date column in two-column entries
-\setlength{\datecolumnwidth}{4.6cm}
+\setlength{\datecolumnwidth}{5.1cm}
 
 % -----------------------------------------------------------------
 % Color Definitions
@@ -178,6 +178,10 @@
 {0pt} % Left margin
 {0.1cm} % Space before title (vertical)
 {0.1cm} % Space after title (vertical) - before text or rule
+
+% --- Hyperlinked Section Heading ---
+% Wraps a section title in a link while preserving the accent color.
+\newcommand{\sectionlink}[2]{\href{#1}{\textcolor{accentColor}{#2}}}
 
 % -----------------------------------------------------------------
 % Custom List Environments
@@ -361,7 +365,7 @@
         \gdef\thisEntryDate{#4}%
         \setcolumnwidth{\fill, \datecolumnwidth}
         \begin{paracol}{2}
-            \mbox{\textbf{#1}}%
+            \textbf{#1}%
             \kern\kernSpacing\AND\kern\kernSpacing
             \mbox{#2, #3} \\
             \vspace{\highlightSpacing}

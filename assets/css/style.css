@@ -1638,6 +1638,146 @@ main.container {
   color: var(--text-primary);
 }
 
+.cv-content {
+  max-width: 100%;
+}
+
+.cv-hero {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.section-kicker {
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cv-hero h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1.05;
+}
+
+.cv-hero p:not(.section-kicker) {
+  max-width: 42rem;
+  margin: var(--space-md) 0 0 0;
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.cv-document-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.cv-document-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 21rem;
+  overflow: hidden;
+  padding: var(--space-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.cv-document-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.cv-document-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+
+.cv-document-copy {
+  min-width: 0;
+}
+
+.cv-document-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.cv-document-card h2,
+.cv-summary-panel h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+
+.cv-document-card p,
+.cv-summary-panel p {
+  margin: var(--space-sm) 0 0 0;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.cv-document-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin-top: var(--space-xl);
+}
+
+.cv-document-actions .doc-row-btn {
+  justify-content: center;
+  min-height: 2.65rem;
+}
+
+.cv-summary-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.cv-summary-panel .doc-row-btn {
+  flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
   /* Main Layout Spacing on Mobile */
   .academic-layout {
@@ -1753,6 +1893,32 @@ main.container {
     padding: 0.55rem 0.75rem;
     font-size: 0.8rem;
   }
+
+  .cv-hero {
+    padding: var(--space-lg);
+  }
+
+  .cv-document-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-document-card {
+    min-height: auto;
+    padding: var(--space-lg);
+  }
+
+  .cv-document-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-summary-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cv-summary-panel .doc-row-btn {
+    justify-content: center;
+  }
 }
 
 /* Glassmorphic Document Modal — native <dialog> with ::backdrop */
@@ -1788,16 +1954,17 @@ dialog[open].document-modal {
 
 .modal-window {
   position: relative;
-  width: 94dvw;
-  height: 92dvh;
+  width: min(92rem, 94dvw);
+  height: min(58rem, 92dvh);
   background: var(--modal-bg);
   border: 1px solid var(--modal-border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--modal-shadow);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   display: flex;
   flex-direction: column;
+  contain: layout style paint;
   overflow: hidden;
   transform: scale(0.95);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1811,25 +1978,57 @@ dialog[open].document-modal {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.5rem;
-  border-bottom: none;
+  gap: var(--space-md);
+  min-height: 4.5rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
   background: var(--modal-header-bg);
 }
 
 .modal-header h2 {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--text-primary);
   margin: 0;
+}
+
+.modal-header .section-kicker {
+  margin-bottom: 0.15rem;
+  font-size: 0.68rem;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.modal-open-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.35rem 0.75rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.modal-open-link:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface-hover);
+  border-color: var(--border-hover);
 }
 
 /* Document modal close button */
 .document-modal .modal-close {
   background: var(--modal-close-bg);
-  border: none;
+  border: 1px solid transparent;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1846,7 +2045,6 @@ dialog[open].document-modal {
 .document-modal .modal-close:hover {
   background: var(--accent);
   color: var(--accent-on-accent);
-  transform: scale(1.05);
 }
 
 .modal-body {
@@ -1861,6 +2059,30 @@ dialog[open].document-modal {
   height: 100%;
   border: none;
   background: #ffffff;
+}
+
+@media (max-width: 768px) {
+  dialog[open].document-modal {
+    align-items: stretch;
+  }
+
+  .modal-window {
+    width: 100dvw;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .modal-header {
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .modal-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 /* ==========================================================================

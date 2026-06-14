@@ -1,99 +1,85 @@
-// CV / Resume preview modal — native HTML <dialog> implementation
-// Provides: showModal()/close() with built-in focus trap, Escape handling, and
-// ::backdrop overlay. Adds backdrop-click dismissal (native <dialog> does not
-// close on backdrop click by default — we detect clicks on the dialog element
-// itself, which is the only area outside the inner .modal-window).
-
+// CV / Resume PDF preview modal.
 (function () {
   'use strict';
 
-  // Resolve dark mode state (used for PDF iframe color-scheme)
   function isDarkMode() {
     const root = document.documentElement;
     if (root.classList.contains('theme-dark')) return true;
-    if (
+    if (root.getAttribute('data-resolved-theme') === 'dark') return true;
+    return (
       root.getAttribute('data-active-theme') === 'device' &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 
-  // Mobile fallback: open PDF in a new tab instead of embedding the iframe
-  function getPdfUrl(id) {
-    return id === 'cv-modal' ? '/files/reddy_cv.pdf' : '/files/reddy_resume.pdf';
+  function wireSpotlightCards() {
+    document.querySelectorAll('.spotlight-card').forEach(function (card) {
+      card.addEventListener('mousemove', function (event) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
+      });
+    });
   }
 
-  function openModal(id) {
-    if (window.innerWidth <= 768) {
-      window.open(getPdfUrl(id), '_blank');
+  function openDocument(dialog, trigger) {
+    const title = trigger.getAttribute('data-doc-title') || 'Document preview';
+    const src = trigger.getAttribute('data-doc-src');
+    if (!src) return;
+
+    if (window.innerWidth <= 640 || typeof dialog.showModal !== 'function') {
+      window.open(src, '_blank', 'noopener');
       return;
     }
 
-    const dialog = document.getElementById(id);
-    if (!dialog || typeof dialog.showModal !== 'function') return;
-
+    const heading = dialog.querySelector('#document-modal-title');
     const iframe = dialog.querySelector('iframe');
+    const openLink = dialog.querySelector('#document-modal-open');
+
+    if (heading) heading.textContent = title;
+    if (openLink) {
+      openLink.href = src;
+      openLink.setAttribute('aria-label', `Open ${title} PDF in a new tab`);
+    }
     if (iframe) {
+      iframe.title = `${title} PDF preview`;
       iframe.style.colorScheme = isDarkMode() ? 'dark' : 'light';
-      if (iframe.getAttribute('src') === 'about:blank') {
-        iframe.setAttribute('src', iframe.getAttribute('data-src'));
-      }
+      iframe.src = src;
     }
 
     if (!dialog.open) dialog.showModal();
   }
 
-  function closeModal(id) {
-    const dialog = document.getElementById(id);
+  function closeDocument(dialog) {
     if (dialog && dialog.open) dialog.close();
   }
 
-  // Reset iframe src when dialog finishes closing (also fires via Escape / backdrop)
   function resetIframe(dialog) {
-    if (!dialog) return;
     const iframe = dialog.querySelector('iframe');
-    if (iframe) iframe.setAttribute('src', 'about:blank');
+    if (iframe) iframe.src = 'about:blank';
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    // 1) Open / close triggers (cards + close buttons)
-    document.addEventListener('click', function (e) {
-      const trigger = e.target.closest('[data-modal][data-action]');
+    const dialog = document.getElementById('document-modal');
+    if (!dialog) return;
+
+    document.addEventListener('click', function (event) {
+      const trigger = event.target.closest('[data-action]');
       if (!trigger) return;
-      const id = trigger.getAttribute('data-modal');
+
       const action = trigger.getAttribute('data-action');
-      if (action === 'open') openModal(id);
-      else if (action === 'close') closeModal(id);
+      if (action === 'open') openDocument(dialog, trigger);
+      if (action === 'close') closeDocument(dialog);
     });
 
-    // 2) Per-dialog wiring: backdrop click + iframe reset on close
-    document.querySelectorAll('dialog.document-modal').forEach(function (dialog) {
-      // Backdrop click — native <dialog> doesn't dismiss on backdrop click,
-      // so close when the click target is the dialog element itself (i.e. the
-      // user clicked outside .modal-window).
-      dialog.addEventListener('click', function (e) {
-        if (e.target === dialog) dialog.close();
-      });
-
-      // Native Escape closes the dialog — reset iframe when it finishes.
-      dialog.addEventListener('close', function () {
-        resetIframe(dialog);
-      });
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) dialog.close();
     });
 
-    // 3) Spotlight cursor glow on preview cards (unrelated to modal logic)
-    function setupSpotlight() {
-      const cards = document.querySelectorAll('.spotlight-card');
-      cards.forEach(function (card) {
-        card.addEventListener('mousemove', function (e) {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-        });
-      });
-    }
-    setupSpotlight();
+    dialog.addEventListener('close', function () {
+      resetIframe(dialog);
+    });
+
+    wireSpotlightCards();
   });
 })();

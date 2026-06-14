@@ -19,7 +19,7 @@
       content="Aadarsha Gopala Reddy's Curriculum Vitae. M.S. Computer Science graduate from Washington University in St. Louis. Specialized in Machine Learning, Distributed Data Systems, and Software Development."
     />
     <title>Curriculum Vitae - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.2" />
     <link rel="stylesheet" href="/assets/fonts/fonts.css" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
@@ -64,7 +64,7 @@
     <!-- Canonical Link -->
     <link rel="canonical" href="https://agreddy.com/cv/" />
   </head>
-  <body>
+  <body class="cv-page">
     <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Skip to Content</a>
 
@@ -122,7 +122,13 @@
         <div class="academic-layout">
           <aside class="academic-sidebar" aria-label="Author Biography">
             <div class="author-avatar-wrapper">
-              <img src="/images/profile.png" class="author-avatar" alt="Aadarsha Gopala Reddy" />
+              <img
+                src="/images/profile.png"
+                class="author-avatar"
+                alt="Aadarsha Gopala Reddy"
+                width="150"
+                height="150"
+              />
               <h2 class="author-name">Aadarsha Gopala Reddy</h2>
               <p class="author-bio">
                 M.S. Computer Science graduate from Washington University in St. Louis
@@ -157,54 +163,38 @@
               </ul>
             </div>
           </aside>
-          <article class="academic-content" aria-label="Curriculum Vitae and Resume Document Panel">
-            <h1 style="font-family: var(--font-heading); margin-bottom: 2rem">
-              Curriculum Vitae &amp; Resume
-            </h1>
+          <article class="academic-content cv-content" aria-label="CV and resume downloads">
+            <section class="cv-hero" aria-labelledby="cv-title">
+              <p class="section-kicker">Documents</p>
+              <h1 id="cv-title">CV &amp; Resume</h1>
+              <p>
+                Pick the format that fits the conversation: academic history, or a focused industry
+                resume.
+              </p>
+            </section>
 
-            <div
-              class="project-grid"
-              style="
-                margin-top: 1.5rem;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 1.5rem;
-              "
-            >
-              <!-- CV Card -->
-              <div class="project-card spotlight-card">
-                <div class="card-meta">
-                  <span class="card-category cat-research">Curriculum Vitae</span>
-                  <span class="card-venue">Academic &bull; Updated May 2026</span>
+            <section class="cv-document-grid" aria-label="Available documents">
+              <article class="cv-document-card spotlight-card">
+                <div class="cv-document-icon" aria-hidden="true">
+                  <i class="fas fa-scroll"></i>
                 </div>
-                <h3 class="project-title" style="margin-top: 0.5rem; margin-bottom: 0.75rem">
-                  Curriculum Vitae
-                </h3>
-                <p
-                  class="project-excerpt"
-                  style="
-                    font-size: 0.9rem;
-                    line-height: 1.6;
-                    margin-bottom: 1.5rem;
-                    color: var(--text-secondary);
-                  "
-                >
-                  Comprehensive record of academic achievements, research works, graduate teaching
-                  credentials, publication reviews, and detailed course benchmarks.
-                </p>
-                <div class="project-tech" style="margin-bottom: 1.5rem">
-                  <span class="tech-tag">Research</span>
-                  <span class="tech-tag">Teaching</span>
-                  <span class="tech-tag">Publications</span>
+                <div class="cv-document-copy">
+                  <div class="cv-document-meta">
+                    <span class="card-category cat-research">Academic</span>
+                    <span>Updated May 2026</span>
+                  </div>
+                  <h2>Curriculum Vitae</h2>
+                  <p>Research, teaching, publications, awards, and full academic record.</p>
                 </div>
-                <div class="card-actions card-actions--stretch">
+                <div class="cv-document-actions">
                   <button
                     type="button"
-                    class="card-btn btn-demo modal-trigger"
-                    data-modal="cv-modal"
+                    class="doc-row-btn btn-primary modal-trigger"
+                    data-doc-title="Curriculum Vitae"
+                    data-doc-src="/files/reddy_cv.pdf"
                     data-action="open"
                     aria-haspopup="dialog"
-                    aria-controls="cv-modal"
+                    aria-controls="document-modal"
                   >
                     <i class="far fa-eye" aria-hidden="true"></i> Preview
                   </button>
@@ -212,49 +202,36 @@
                     href="/files/reddy_cv.pdf"
                     target="_blank"
                     rel="noopener"
-                    class="card-btn btn-pdf"
-                    aria-label="Download Curriculum Vitae PDF (opens in a new tab)"
+                    class="doc-row-btn btn-secondary"
+                    aria-label="Open Curriculum Vitae PDF in a new tab"
                   >
-                    <i class="fas fa-download" aria-hidden="true"></i> PDF
+                    <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Open PDF
                     <span class="sr-only">(opens in a new tab)</span>
                   </a>
                 </div>
-              </div>
+              </article>
 
-              <!-- Resume Card -->
-              <div class="project-card spotlight-card">
-                <div class="card-meta">
-                  <span class="card-category cat-tools">Resume</span>
-                  <span class="card-venue">Industry &bull; Updated May 2026</span>
+              <article class="cv-document-card spotlight-card">
+                <div class="cv-document-icon" aria-hidden="true">
+                  <i class="fas fa-file-lines"></i>
                 </div>
-                <h3 class="project-title" style="margin-top: 0.5rem; margin-bottom: 0.75rem">
-                  Resume
-                </h3>
-                <p
-                  class="project-excerpt"
-                  style="
-                    font-size: 0.9rem;
-                    line-height: 1.6;
-                    margin-bottom: 1.5rem;
-                    color: var(--text-secondary);
-                  "
-                >
-                  Industry-focused experience summary, software engineering stack, distributed
-                  systems architectures, real-time data pipelines, and technical skills highlights.
-                </p>
-                <div class="project-tech" style="margin-bottom: 1.5rem">
-                  <span class="tech-tag">Systems</span>
-                  <span class="tech-tag">Software Engineering</span>
-                  <span class="tech-tag">Data Engineering</span>
+                <div class="cv-document-copy">
+                  <div class="cv-document-meta">
+                    <span class="card-category cat-tools">Industry</span>
+                    <span>Updated May 2026</span>
+                  </div>
+                  <h2>Resume</h2>
+                  <p>Software engineering, ML, data systems, leadership, and selected projects.</p>
                 </div>
-                <div class="card-actions card-actions--stretch">
+                <div class="cv-document-actions">
                   <button
                     type="button"
-                    class="card-btn btn-demo modal-trigger"
-                    data-modal="resume-modal"
+                    class="doc-row-btn btn-primary modal-trigger"
+                    data-doc-title="Resume"
+                    data-doc-src="/files/reddy_resume.pdf"
                     data-action="open"
                     aria-haspopup="dialog"
-                    aria-controls="resume-modal"
+                    aria-controls="document-modal"
                   >
                     <i class="far fa-eye" aria-hidden="true"></i> Preview
                   </button>
@@ -262,59 +239,57 @@
                     href="/files/reddy_resume.pdf"
                     target="_blank"
                     rel="noopener"
-                    class="card-btn btn-pdf"
-                    aria-label="Download Resume PDF (opens in a new tab)"
+                    class="doc-row-btn btn-secondary"
+                    aria-label="Open Resume PDF in a new tab"
                   >
-                    <i class="fas fa-download" aria-hidden="true"></i> PDF
+                    <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Open PDF
                     <span class="sr-only">(opens in a new tab)</span>
                   </a>
                 </div>
-              </div>
-            </div>
+              </article>
+            </section>
 
-            <!-- Glassmorphic Preview Modals (native <dialog> for focus management + ::backdrop) -->
-            <dialog id="cv-modal" class="document-modal" aria-label="Curriculum Vitae Preview">
+            <section class="cv-summary-panel" aria-label="Document guidance">
+              <div>
+                <h2>Which one should I send?</h2>
+                <p>
+                  Use the resume for recruiters and hiring managers. Use the CV for academic,
+                  research, teaching, or fellowship contexts.
+                </p>
+              </div>
+              <a href="/experience/" class="doc-row-btn btn-secondary">
+                <i class="fas fa-list-ul" aria-hidden="true"></i> Browse experience
+              </a>
+            </section>
+
+            <dialog
+              id="document-modal"
+              class="document-modal"
+              aria-labelledby="document-modal-title"
+            >
               <div class="modal-window">
                 <div class="modal-header">
-                  <h2>Curriculum Vitae</h2>
-                  <button
-                    class="modal-close"
-                    data-modal="cv-modal"
-                    data-action="close"
-                    aria-label="Close Preview"
-                  >
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                  </button>
+                  <div>
+                    <p class="section-kicker">PDF Preview</p>
+                    <h2 id="document-modal-title">Document preview</h2>
+                  </div>
+                  <div class="modal-actions">
+                    <a
+                      href="/files/reddy_resume.pdf"
+                      target="_blank"
+                      rel="noopener"
+                      class="modal-open-link"
+                      id="document-modal-open"
+                    >
+                      Open PDF <span class="sr-only">(opens in a new tab)</span>
+                    </a>
+                    <button class="modal-close" data-action="close" aria-label="Close preview">
+                      <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                  </div>
                 </div>
                 <div class="modal-body">
-                  <iframe
-                    src="about:blank"
-                    data-src="/files/reddy_cv.pdf"
-                    title="Curriculum Vitae Fullscreen Preview"
-                  ></iframe>
-                </div>
-              </div>
-            </dialog>
-
-            <dialog id="resume-modal" class="document-modal" aria-label="Resume Preview">
-              <div class="modal-window">
-                <div class="modal-header">
-                  <h2>Resume</h2>
-                  <button
-                    class="modal-close"
-                    data-modal="resume-modal"
-                    data-action="close"
-                    aria-label="Close Preview"
-                  >
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <iframe
-                    src="about:blank"
-                    data-src="/files/reddy_resume.pdf"
-                    title="Resume Fullscreen Preview"
-                  ></iframe>
+                  <iframe src="about:blank" title="Document PDF preview" loading="lazy"></iframe>
                 </div>
               </div>
             </dialog>

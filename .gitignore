@@ -5,6 +5,9 @@
 *.swo
 *~
 
+# Agent worktrees (full git checkouts of feature branches; should never be committed)
+.claude/worktrees/
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -36,3 +39,10 @@ pnpm-lock.yaml
 
 # Playwright
 tests/test-results/
+
+# GCP / Google Cloud — service account keys must NEVER be committed
+# They are stored outside the repo at ~/.config/gcp/*.json
+gcp-*-key.json
+*-verifier-key.json
+*-credentials.json
+service-account*.json

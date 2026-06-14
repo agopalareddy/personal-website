@@ -19,7 +19,7 @@
       content="View the weekly calendar or book an appointment directly with Aadarsha Gopala Reddy."
     />
     <title>Availability - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.4" />
     <link rel="stylesheet" href="/assets/fonts/fonts.css" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
@@ -122,7 +122,13 @@
         <div class="academic-layout">
           <aside class="academic-sidebar" aria-label="Author Biography">
             <div class="author-avatar-wrapper">
-              <img src="/images/profile.png" class="author-avatar" alt="Aadarsha Gopala Reddy" />
+              <img
+                src="/images/profile.png"
+                class="author-avatar"
+                alt="Aadarsha Gopala Reddy"
+                width="150"
+                height="150"
+              />
               <h2 class="author-name">Aadarsha Gopala Reddy</h2>
               <p class="author-bio">
                 M.S. Computer Science graduate from Washington University in St. Louis
@@ -157,51 +163,30 @@
               </ul>
             </div>
           </aside>
-          <article
-            class="academic-content"
-            aria-label="Weekly Scheduling and Calendar availability"
-          >
-            <h1 style="font-family: var(--font-heading); margin-bottom: 1.5rem">Availability</h1>
-            <p
-              style="
-                font-family: var(--font-body);
-                font-size: 0.95rem;
-                color: var(--text-secondary);
-                margin-bottom: 1.5rem;
-              "
-            >
-              Below is my up-to-date availability calendar. Feel free to pick a time that works or
-              book an appointment directly.
-            </p>
-            <p style="margin-bottom: 2rem">
+          <article class="academic-content" aria-label="Weekly scheduling availability">
+            <h1 class="page-intro-title">Availability</h1>
+            <p class="page-intro-lead">View the weekly calendar or book a meeting directly.</p>
+            <div class="availability-actions">
               <a
-                class="filter-btn active"
+                class="site-action-btn"
                 href="https://calendar.app.google/rbrkCokvTAM6tb7i7"
                 target="_blank"
                 rel="noopener"
                 aria-label="Book an appointment on Google Calendar (opens in a new tab)"
-                style="display: inline-block; text-decoration: none"
               >
                 <i class="far fa-calendar-check" aria-hidden="true"></i>
                 Book an appointment <span class="sr-only">(opens in a new tab)</span>
               </a>
-            </p>
+            </div>
 
             <iframe
+              class="availability-calendar-frame"
               src="https://calendar.google.com/calendar/embed?src=90e3e7baecc6c8fb063ea0e230c0040bfe5ce8d086c944a9351720d1e9d72b9e%40group.calendar.google.com&ctz=America%2FChicago&mode=WEEK"
-              style="
-                border: 1px solid var(--border-color);
-                width: 100%;
-                height: 800px;
-                border-radius: 8px;
-                box-shadow: var(--shadow-sm);
-                background-color: #fff;
-              "
               frameborder="0"
               scrolling="no"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              title="Academic Availability Calendar Matrix"
+              title="Weekly availability calendar"
             ></iframe>
           </article>
         </div>
@@ -212,111 +197,43 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div class="footer-col about-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Aadarsha Gopala Reddy
-          </h3>
-          <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0">
+          <h3 class="footer-col-heading">Aadarsha Gopala Reddy</h3>
+          <p>
             M.S. Computer Science graduate from Washington University in St. Louis. Passionate about
             solving complex distributed systems problems, building high-throughput data pipelines,
             and training machine learning models.
           </p>
         </div>
         <div class="footer-col links-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Explore
-          </h3>
+          <h3 class="footer-col-heading">Explore</h3>
           <ul>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Home</a
-              >
-            </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/projects/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Projects Showcase</a
-              >
-            </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/cv/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Curriculum Vitae</a
-              >
-            </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/availability/"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Availability Schedule</a
-              >
-            </li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/experience/">Experience</a></li>
+            <li><a href="/projects/">Projects Showcase</a></li>
+            <li><a href="/cv/">Curriculum Vitae</a></li>
+            <li><a href="/availability/">Availability Schedule</a></li>
           </ul>
         </div>
         <div class="footer-col contact-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Connect
-          </h3>
+          <h3 class="footer-col-heading">Connect</h3>
           <ul>
-            <li style="margin-bottom: 0.5rem">
+            <li>
               <a
                 href="#"
                 class="protected-email"
                 data-email-user="YWR1cnMyMDAy"
                 data-email-domain="Z21haWwuY29t"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
                 ><i class="fas fa-envelope" aria-hidden="true"></i> Email</a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="https://www.linkedin.com/in/agopalareddy"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+            <li>
+              <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
                 ><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
                 <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="https://github.com/agopalareddy"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+            <li>
+              <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
                 ><i class="fab fa-github" aria-hidden="true"></i> GitHub
                 <span class="sr-only">(opens in a new tab)</span></a
               >
@@ -324,61 +241,23 @@
           </ul>
         </div>
         <div class="footer-col resources-col">
-          <h3
-            style="
-              font-family: var(--font-heading);
-              color: var(--text-primary);
-              font-size: 1rem;
-              border-bottom: 2px solid var(--accent);
-              padding-bottom: 0.25rem;
-              display: inline-block;
-              margin-bottom: 1rem;
-            "
-          >
-            Downloads &amp; Info
-          </h3>
+          <h3 class="footer-col-heading">Downloads &amp; Info</h3>
           <ul>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/files/reddy_cv.pdf"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+            <li>
+              <a href="/files/reddy_cv.pdf" target="_blank" rel="noopener"
                 >Curriculum Vitae (PDF) <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/files/reddy_resume.pdf"
-                target="_blank"
-                rel="noopener"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
+            <li>
+              <a href="/files/reddy_resume.pdf" target="_blank" rel="noopener"
                 >Resume (PDF) <span class="sr-only">(opens in a new tab)</span></a
               >
             </li>
-            <li style="margin-bottom: 0.5rem">
-              <a
-                href="/accessibility.html"
-                style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none"
-                >Accessibility Statement</a
-              >
-            </li>
+            <li><a href="/accessibility.html">Accessibility Statement</a></li>
           </ul>
         </div>
       </div>
-      <div
-        class="container footer-bottom"
-        style="
-          border-top: 1px solid var(--border-color);
-          padding-top: 1.5rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          margin-top: 1.5rem;
-        "
-      >
+      <div class="container footer-bottom">
         <p>&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy.</p>
         <div id="theme-toggle-footer"></div>
       </div>

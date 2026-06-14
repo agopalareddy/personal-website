@@ -1,0 +1,390 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name _;
+    root /opt/personal-website;
+    server_tokens off;
+    more_clear_headers Server;
+
+    # Block access to hidden files/directories (.git, .env, etc.)
+    location ~ /\.(git|env|htaccess|htpasswd|svn|hg) {
+        deny all;
+        return 404;
+    }
+
+    # ── Academic site pages ──
+    location / {
+        try_files $uri $uri/ $uri.html =404;
+    }
+
+    # Static assets — aggressive caching
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+    location /images/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+    location /files/ {
+        expires 1w;
+        add_header Cache-Control "public";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+
+    # Legacy redirects
+    location = /about/          { return 301 /; }
+    location = /about.html      { return 301 /; }
+    location = /wordpress/cv/   { return 301 /cv/; }
+    location = /wordpress/blog-posts/ { return 301 /; }
+    location = /publications      { return 301 /cv/; }
+    location = /publications/     { return 301 /cv/; }
+    location = /publications.html { return 301 /cv/; }
+    location = /talks             { return 301 /cv/; }
+    location = /talks/            { return 301 /cv/; }
+    location = /talks.html        { return 301 /cv/; }
+    location = /teaching          { return 301 /cv/; }
+    location = /teaching/         { return 301 /cv/; }
+    location = /teaching.html     { return 301 /cv/; }
+    location = /talkmap           { return 301 /; }
+    location = /talkmap/          { return 301 /; }
+    location = /talkmap.html      { return 301 /; }
+
+    # Redirect legacy Jekyll project dates to modern extension-based pages
+    rewrite "^/projects/[0-9]{4}-[0-9]{2}-(.*)/?$" /projects/$1.html permanent;
+    rewrite "^/projects/[0-9]{4}-[0-9]{2}-(.*)\.html$" /projects/$1.html permanent;
+
+    # ── Storybook Frontend (built Vue app) ──
+    location /storybook/ {
+        alias /opt/storybook-full/interactive-storybook/dist/;
+        try_files $uri $uri/ /storybook/index.html;
+
+        # Cache static assets
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+            include /etc/nginx/conf.d/security-headers.conf;
+        }
+    }
+
+    # ── Storybook Backend API ──
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 90;
+    }
+
+    # ── Chat App (Socket.IO + static) ──
+    location /chat/ {
+        proxy_pass http://127.0.0.1:3456/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # Socket.IO needs a separate location for WebSocket
+    location /socket.io/ {
+        proxy_pass http://127.0.0.1:3456/socket.io/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # ── Connect 4 Web Wrapper ──
+    location /connect4/ {
+        proxy_pass http://127.0.0.1:8081/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /connect4/socket.io {
+        proxy_pass http://127.0.0.1:8081/connect4/socket.io;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # ── Lost Cities Web Wrapper ──
+    location /lost-cities/ {
+        proxy_pass http://127.0.0.1:8082/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /lost-cities/socket.io {
+        proxy_pass http://127.0.0.1:8082/lost-cities/socket.io;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # ── PHP Calendar App ──
+    location /calendar/ {
+        alias /opt/calendar/public/;
+        index index.php;
+
+        location ~ \.php$ {
+            fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $request_filename;
+            include fastcgi_params;
+        }
+    }
+
+    include /etc/nginx/conf.d/security-headers.conf;
+}
+
+server {
+    server_name www.agreddy.com;
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/letsencrypt/live/agreddy.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/agreddy.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    return 301 https://agreddy.com$request_uri;
+}
+
+server {
+    server_name 34-68-198-196.nip.io agreddy.com; # managed by Certbot
+    root /opt/personal-website;
+    server_tokens off;
+    more_clear_headers Server;
+
+    # Block access to hidden files/directories (.git, .env, etc.)
+    location ~ /\.(git|env|htaccess|htpasswd|svn|hg) {
+        deny all;
+        return 404;
+    }
+
+    # ── Academic site pages ──
+    location / {
+        try_files $uri $uri/ $uri.html =404;
+    }
+
+    # Static assets — aggressive caching
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+    location /images/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+    location /files/ {
+        expires 1w;
+        add_header Cache-Control "public";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+
+    # Legacy redirects
+    location = /about/          { return 301 /; }
+    location = /about.html      { return 301 /; }
+    location = /wordpress/cv/   { return 301 /cv/; }
+    location = /wordpress/blog-posts/ { return 301 /; }
+    location = /publications      { return 301 /cv/; }
+    location = /publications/     { return 301 /cv/; }
+    location = /publications.html { return 301 /cv/; }
+    location = /talks             { return 301 /cv/; }
+    location = /talks/            { return 301 /cv/; }
+    location = /talks.html        { return 301 /cv/; }
+    location = /teaching          { return 301 /cv/; }
+    location = /teaching/         { return 301 /cv/; }
+    location = /teaching.html     { return 301 /cv/; }
+    location = /talkmap           { return 301 /; }
+    location = /talkmap/          { return 301 /; }
+    location = /talkmap.html      { return 301 /; }
+
+    # Redirect legacy Jekyll project dates to modern extension-based pages
+    rewrite "^/projects/[0-9]{4}-[0-9]{2}-(.*)/?$" /projects/$1.html permanent;
+    rewrite "^/projects/[0-9]{4}-[0-9]{2}-(.*)\.html$" /projects/$1.html permanent;
+
+    # ── Storybook Frontend (built Vue app) ──
+    location /storybook/ {
+        alias /opt/storybook-full/interactive-storybook/dist/;
+        try_files $uri $uri/ /storybook/index.html;
+
+        # Cache static assets
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+            include /etc/nginx/conf.d/security-headers.conf;
+        }
+    }
+
+    # ── Storybook Backend API ──
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 90;
+    }
+
+    # ── Chat App (Socket.IO + static) ──
+    location /chat/ {
+        proxy_pass http://127.0.0.1:3456/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # Socket.IO needs a separate location for WebSocket
+    location /socket.io/ {
+        proxy_pass http://127.0.0.1:3456/socket.io/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # ── Connect 4 Web Wrapper ──
+    location /connect4/ {
+        proxy_pass http://127.0.0.1:8081/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /connect4/socket.io {
+        proxy_pass http://127.0.0.1:8081/connect4/socket.io;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # ── Lost Cities Web Wrapper ──
+    location /lost-cities/ {
+        proxy_pass http://127.0.0.1:8082/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /lost-cities/socket.io {
+        proxy_pass http://127.0.0.1:8082/lost-cities/socket.io;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 86400;
+    }
+
+    # ── PHP Calendar App ──
+    location /calendar/ {
+        alias /opt/calendar/public/;
+        index index.php;
+
+        location ~ \.php$ {
+            fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $request_filename;
+            include fastcgi_params;
+        }
+    }
+
+    include /etc/nginx/conf.d/security-headers.conf;
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/agreddy.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/agreddy.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+
+server {
+    if ($host = www.agreddy.com) {
+        return 301 https://agreddy.com$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = agreddy.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = 34-68-198-196.nip.io) {
+        return 301 https://$host$request_uri;
+    }
+
+    listen 80 ;
+    listen [::]:80 ;
+    server_name 34-68-198-196.nip.io agreddy.com www.agreddy.com;
+    return 301 https://$host$request_uri;
+
+
+
+
+}

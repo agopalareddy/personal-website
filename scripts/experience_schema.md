@@ -359,7 +359,7 @@ The top-level artifact produced by `cv_parser.py` is a JSON array of
 {
   "id": "2024-08-ms-computer-science", // string, slug, unique (Section 5)
   "title": "M.S. Computer Science", // string, non-empty
-  "category": "education", // enum: professional|education|research|leadership|awards
+  "category": "education", // enum: professional|education|research|leadership|presentations|awards
   "organization": "Washington University in St. Louis", // string, non-empty
   "location": "St. Louis, Missouri, USA", // string | null
   "role_context": null, // string | null
@@ -391,7 +391,7 @@ The top-level artifact produced by `cv_parser.py` is a JSON array of
 | ------------------ | ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`               | `string`                  | yes      | Matches `^[a-z0-9-]{1,80}$`. Globally unique across the experience array. Algorithm in Section 5.                                                                                                      |
 | `title`            | `string`                  | yes      | 1–200 chars. Trimmed. No leading/trailing whitespace. The displayed headline.                                                                                                                          |
-| `category`         | `string` (enum)           | yes      | One of: `professional`, `education`, `research`, `leadership`, `awards`. See Section 3 for mapping.                                                                                                    |
+| `category`         | `string` (enum)           | yes      | One of: `professional`, `education`, `research`, `leadership`, `presentations`, `awards`. See Section 3 for mapping.                                                                                   |
 | `organization`     | `string`                  | yes      | 1–200 chars. For `experienceentry` and `leadershipentry` this is the org; for `presentationentry` this is the venue/event; for `honorentry` this is the awarding institution (split from the 2nd arg). |
 | `location`         | `string \| null`          | no       | Free-form. `null` when the env does not supply one (rare — every env in the CV does supply one).                                                                                                       |
 | `role_context`     | `string \| null`          | no       | For `researchentry` only, this carries the course/mentor context string. For all other envs, set to `null`.                                                                                            |

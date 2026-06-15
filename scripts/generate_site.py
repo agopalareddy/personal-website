@@ -80,7 +80,14 @@ EXPERIENCE_DIR = os.path.join(BASE_DIR, "experience")
 PROJECTS_JSON = os.path.join(SCRIPT_DIR, "projects_database.json")
 PROJECTS_DIR = os.path.join(BASE_DIR, "projects")
 
-VALID_CATEGORIES = ("professional", "education", "research", "leadership", "awards")
+VALID_CATEGORIES = (
+    "professional",
+    "education",
+    "research",
+    "leadership",
+    "awards",
+    "presentations",
+)
 
 # Canonical filter order in the listing page.  "all" is the synthetic
 # "show everything" filter and must be first.
@@ -90,6 +97,7 @@ FILTER_PILLS = (
     ("education", "Education"),
     ("research", "Research"),
     ("leadership", "Leadership"),
+    ("presentations", "Presentations"),
     ("awards", "Awards"),
 )
 
@@ -101,6 +109,7 @@ CATEGORY_LABELS: dict[str, str] = {
     "research": "Research",
     "leadership": "Leadership",
     "awards": "Awards",
+    "presentations": "Presentations",
 }
 
 # Map link type -> FontAwesome 5 icon class.  Falls back to "external-link-alt".

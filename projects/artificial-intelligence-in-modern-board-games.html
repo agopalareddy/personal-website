@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Developed an AI opponent for the card game Lost Cities using object oriented principles in Java."
+      content="Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes."
     />
     <title>Artificial Intelligence in Modern Board Games - Aadarsha Gopala Reddy</title>
     <link rel="stylesheet" href="/assets/css/style.css?v=1.1.4" />
@@ -47,7 +47,7 @@
     />
     <meta
       property="og:description"
-      content="Developed an AI opponent for the card game Lost Cities using object oriented principles in Java."
+      content="Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes."
     />
     <meta property="og:image" content="https://agreddy.com/images/profile.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
@@ -64,7 +64,7 @@
     />
     <meta
       name="twitter:description"
-      content="Developed an AI opponent for the card game Lost Cities using object oriented principles in Java."
+      content="Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes."
     />
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
@@ -145,10 +145,16 @@
             </p>
             <section class="page__content">
               <p>
-                This project implements an AI opponent for Lost Cities, a two-player card game, as
-                part of a Summer Science Research Program with Dr. Sean McCulloch at Ohio Wesleyan
-                University. The game logic and AI opponent were built in Java using object-oriented
-                design, with a browser-playable version available via the live demo below.
+                This project implements Lost Cities, a two-player expedition card game, as part of a
+                Summer Science Research Program with Dr. Sean McCulloch at Ohio Wesleyan University.
+                The core game logic is written in Java and wrapped by a Node.js and Socket.IO web
+                interface so the game can be played in the browser.
+              </p>
+              <p>
+                The AI layer supports greedy, minimax, and alpha-beta agents. The search agents
+                evaluate complete turns by simulating both the outgoing card and incoming draw, then
+                scoring the best reachable expedition outcome from the cards actually available in
+                hand. That keeps the agents adaptable without hard-coded opening thresholds.
               </p>
               <h4
                 style="
@@ -162,9 +168,13 @@
               </h4>
               <ul>
                 <li>Java implementation of full Lost Cities rules and scoring</li>
-                <li>AI opponent built with object-oriented design principles</li>
-                <li>Browser-playable demo built alongside the core Java logic</li>
-                <li>Completed as part of an OWU summer research program</li>
+                <li>Greedy, minimax, and alpha-beta AI modes for human-vs-AI and AI-vs-AI play</li>
+                <li>
+                  Known-card search evaluation that avoids weak expedition starts without tuned
+                  thresholds
+                </li>
+                <li>Browser-playable Node.js and Socket.IO wrapper around the Java engine</li>
+                <li>Regression self-check for fixed-seed AI-vs-AI termination</li>
               </ul>
             </section>
 

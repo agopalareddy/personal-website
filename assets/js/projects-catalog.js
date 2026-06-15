@@ -29,7 +29,7 @@ const projects = [
     id: '2022-07-artificial-intelligence-in-modern-board-games',
     title: 'Artificial Intelligence in Modern Board Games',
     excerpt:
-      'Developed an AI opponent for the card game Lost Cities using object oriented principles in Java.',
+      'Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes.',
     venue: 'Ohio Wesleyan University',
     venue_tag: 'OWU',
     permalink: '/projects/artificial-intelligence-in-modern-board-games',

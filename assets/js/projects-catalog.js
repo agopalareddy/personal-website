@@ -457,6 +457,24 @@ const projects = [
     has_detail: true,
     formatted_date: 'Summer 2026',
   },
+  {
+    id: '2026-06-speedtest',
+    title: 'Speed Test',
+    excerpt:
+      'A simple, single-page network speed test measuring download speed, upload speed, and ping against the server hosting this site, with live-updating results and connection details.',
+    venue: 'Personal Project',
+    venue_tag: 'Personal',
+    permalink: '/projects/speedtest',
+    date: '2026-06-15',
+    category: 'Software & Tools',
+    technologies: ['Node.js', 'Express', 'JavaScript', 'Streams API'],
+    github: 'https://github.com/agopalareddy/speedtest',
+    demo: '/speedtest/',
+    pdf: null,
+    presentation: null,
+    has_detail: true,
+    formatted_date: 'Summer 2026',
+  },
 ];
 const projectGrid = document.getElementById('projectGrid');
 // Clear SSR fallback (noscript + JSON blob) if present. Modern

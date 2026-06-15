@@ -80,6 +80,8 @@
     --cat-leadership-color: #5b21b6;
     --cat-awards-bg: #fce7ef;
     --cat-awards-color: #9f1239;
+    --cat-presentations-bg: #dbeafe;
+    --cat-presentations-color: #1e40af;
 
     --modal-bg: rgba(255, 255, 255, 0.85);
     --modal-border: rgba(255, 255, 255, 0.4);
@@ -125,6 +127,8 @@
     --cat-leadership-color: #c4b5fd;
     --cat-awards-bg: #2e1a22;
     --cat-awards-color: #fda4af;
+    --cat-presentations-bg: #1e2a4a;
+    --cat-presentations-color: #93c5fd;
 
     --modal-bg: rgba(26, 29, 38, 0.85);
     --modal-border: rgba(255, 255, 255, 0.08);
@@ -1273,6 +1277,10 @@ main.container {
 .cat-awards {
   background-color: var(--cat-awards-bg);
   color: var(--cat-awards-color);
+}
+.cat-presentations {
+  background-color: var(--cat-presentations-bg);
+  color: var(--cat-presentations-color);
 }
 
 .card-venue {

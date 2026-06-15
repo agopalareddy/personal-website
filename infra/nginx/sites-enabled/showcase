@@ -53,6 +53,17 @@ server {
     location = /talkmap/          { return 301 /; }
     location = /talkmap.html      { return 301 /; }
 
+    # Re-categorized leadership -> presentations entries
+    location = /experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html {
+        return 301 /experience/presentations/2022-09-artificial-intelligence-in-modern-board-games.html;
+    }
+    location = /experience/leadership/2023-04-artificial-intelligence-opinion-survey.html {
+        return 301 /experience/presentations/2023-04-artificial-intelligence-opinion-survey.html;
+    }
+    location = /experience/leadership/2024-09-an-introduction-to-artificial-intelligence-for-high.html {
+        return 301 /experience/presentations/2024-09-an-introduction-to-artificial-intelligence-for-high.html;
+    }
+
     # Redirect legacy Jekyll project dates to modern extension-based pages
     rewrite "^/projects/[0-9]{4}-[0-9]{2}-(.*)/?$" /projects/$1.html permanent;
     rewrite "^/projects/[0-9]{4}-[0-9]{2}-(.*)\.html$" /projects/$1.html permanent;
@@ -245,6 +256,17 @@ server {
     location = /talkmap           { return 301 /; }
     location = /talkmap/          { return 301 /; }
     location = /talkmap.html      { return 301 /; }
+
+    # Re-categorized leadership -> presentations entries
+    location = /experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html {
+        return 301 /experience/presentations/2022-09-artificial-intelligence-in-modern-board-games.html;
+    }
+    location = /experience/leadership/2023-04-artificial-intelligence-opinion-survey.html {
+        return 301 /experience/presentations/2023-04-artificial-intelligence-opinion-survey.html;
+    }
+    location = /experience/leadership/2024-09-an-introduction-to-artificial-intelligence-for-high.html {
+        return 301 /experience/presentations/2024-09-an-introduction-to-artificial-intelligence-for-high.html;
+    }
 
     # Redirect legacy Jekyll project dates to modern extension-based pages
     rewrite "^/projects/[0-9]{4}-[0-9]{2}-(.*)/?$" /projects/$1.html permanent;

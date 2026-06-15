@@ -345,35 +345,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Render Table of Contents
     renderToc(filtered);
-
-    // 5. Re-attach spotlight effect to new cards
-    setupSpotlight();
-  }
-
-  // ---------------------------------------------------------------------------
-  // Spotlight cursor effect
-  // ---------------------------------------------------------------------------
-  function setupSpotlight() {
-    var cards = grid.querySelectorAll('.spotlight-card');
-    cards.forEach(function (card) {
-      card.addEventListener('mousemove', function (e) {
-        var rect = card.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', x + 'px');
-        card.style.setProperty('--mouse-y', y + 'px');
-      });
-
-      card.addEventListener('click', function (e) {
-        if (e.target.closest('.card-btn') || e.target.closest('a') || e.target.closest('button')) {
-          return;
-        }
-        var mainLink = card.querySelector('h3.project-title a');
-        if (mainLink) {
-          mainLink.click();
-        }
-      });
-    });
   }
 
   // ---------------------------------------------------------------------------

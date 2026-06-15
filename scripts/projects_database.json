@@ -454,5 +454,23 @@
     "has_detail": true,
     "formatted_date": "Summer 2026",
     "content_html": "<p>Built during the CodeTillDawn hackathon, Blink Morse Decoder turns an Android phone&apos;s front-facing camera into a hands-free input device for people with motor disabilities. The SmartSpectra SDK extracts facial landmarks at roughly 30Hz, and the app computes the eye aspect ratio in real time to detect eye closures. A blink state machine filters out involuntary micro-blinks &mdash; requiring a minimum duration with frame-stabilization and hysteresis-based debouncing &mdash; so only deliberate blinks register as input.</p><p>A six-blink calibration routine (three short, three prolonged) establishes personalized timing thresholds before use. From there, short blinks act as Morse &ldquo;dots&rdquo; and long blinks as &ldquo;dashes,&rdquo; with the gap between blinks classified by duration to mark letter and word boundaries. The app also includes a real-time bio-vitals dashboard (heart rate, respiration rate, and simulated galvanic skin response) in a glassmorphic Material Design 3 interface.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Real-time, camera-based blink detection via the SmartSpectra SDK and eye aspect ratio</li><li>Debounced blink state machine that filters involuntary micro-blinks</li><li>Personalized 6-blink calibration flow with an interactive rhythm guide</li><li>Timing-based Morse decoding for letters and word breaks</li><li>Live bio-vitals dashboard in a glassmorphic Material Design 3 UI</li></ul>"
+  },
+  {
+    "id": "2026-06-speedtest",
+    "title": "Speed Test",
+    "excerpt": "A simple, single-page network speed test measuring download speed, upload speed, and ping against the server hosting this site, with live-updating results and connection details.",
+    "venue": "Personal Project",
+    "venue_tag": "Personal",
+    "permalink": "/projects/speedtest",
+    "date": "2026-06-15",
+    "category": "Software & Tools",
+    "technologies": ["Node.js", "Express", "JavaScript", "Streams API"],
+    "github": "https://github.com/agopalareddy/speedtest",
+    "demo": "/speedtest/",
+    "pdf": null,
+    "presentation": null,
+    "has_detail": true,
+    "formatted_date": "Summer 2026",
+    "content_html": "<p>A self-hosted alternative to third-party speed test services, this single-page app measures download speed, upload speed, and ping directly against the server hosting this site &mdash; with live-updating results and connection details (visitor IP and server identity) so you know exactly what you&apos;re testing against.</p><p>Ping is measured via five sequential requests, discarding the warm-up request and reporting the median round-trip time. Download throughput streams a generated payload via the Streams API, reading it incrementally for live progress; upload throughput sends a generated payload via <code>XMLHttpRequest</code>, using <code>upload.onprogress</code> for live readings. An Express server serves the page and API from the same origin.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Download, upload, and ping measurements (Mbps / ms) against this site&apos;s own server</li><li>Live progress updates at least once per second during transfer phases</li><li>Connection details: visitor public IP and server location/identity</li><li>Responsive layout from 320px and up, with clear error/retry handling</li></ul>"
   }
 ]

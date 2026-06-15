@@ -613,30 +613,6 @@ function renderProjects() {
     .join('');
 
   renderToc(filtered);
-  setupSpotlight();
-}
-
-function setupSpotlight() {
-  const cards = document.querySelectorAll('.spotlight-card');
-  cards.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
-
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.card-btn') || e.target.closest('a') || e.target.closest('button')) {
-        return;
-      }
-      const mainLink = card.querySelector('h3.project-title a');
-      if (mainLink) {
-        mainLink.click();
-      }
-    });
-  });
 }
 
 // Dynamic dropdown filters generation

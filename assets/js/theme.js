@@ -132,49 +132,50 @@
         });
       });
     });
+  }
 
+  function initYear() {
     const currentYearElements = document.querySelectorAll('.current-year');
     currentYearElements.forEach((el) => {
       el.textContent = new Date().getFullYear();
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSlider);
-  } else {
-    initSlider();
-  }
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  window.addEventListener('pageshow', () => {
-    document.body.classList.add('page-loaded');
-  });
-
-  window.addEventListener('load', () => {
-    if (prefersReducedMotion) return;
-
-    document.querySelectorAll('a').forEach((link) => {
-      const href = link.getAttribute('href');
-      if (!href) return;
-
-      const isLocalLink =
-        link.hostname === window.location.hostname &&
-        !link.hash &&
-        link.target !== '_blank' &&
-        !href.startsWith('mailto:') &&
-        !href.startsWith('tel:') &&
-        !href.startsWith('javascript:');
-
-      if (isLocalLink) {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          document.body.classList.remove('page-loaded');
-          setTimeout(() => {
-            window.location.href = href;
-          }, 220);
-        });
+  function initSpotlight() {
+    document.addEventListener('mousemove', (e) => {
+      const card = e.target.closest('.spotlight-card');
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
       }
     });
-  });
+
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.spotlight-card');
+      if (card) {
+        if (e.target.closest('.card-btn') || e.target.closest('a') || e.target.closest('button')) {
+          return;
+        }
+        const mainLink = card.querySelector('h3.project-title a');
+        if (mainLink) {
+          mainLink.click();
+        }
+      }
+    });
+  }
+
+  function init() {
+    initSlider();
+    initYear();
+    initSpotlight();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

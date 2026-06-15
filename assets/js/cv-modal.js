@@ -12,16 +12,6 @@
     );
   }
 
-  function wireSpotlightCards() {
-    document.querySelectorAll('.spotlight-card').forEach(function (card) {
-      card.addEventListener('mousemove', function (event) {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
-        card.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
-      });
-    });
-  }
-
   function openDocument(dialog, trigger) {
     const title = trigger.getAttribute('data-doc-title') || 'Document preview';
     const src = trigger.getAttribute('data-doc-src');
@@ -79,7 +69,5 @@
     dialog.addEventListener('close', function () {
       resetIframe(dialog);
     });
-
-    wireSpotlightCards();
   });
 })();

@@ -33,17 +33,36 @@ After CSS changes, bump `style.css?v=` in HTML heads when cache invalidation is 
 
 ## Key paths
 
-| Path                              | Purpose                                                            |
-| --------------------------------- | ------------------------------------------------------------------ |
-| `assets/css/style.css`            | Design tokens, components, layouts (`@layer tokens`)               |
-| `assets/js/theme.js`              | 3-state theme slider, `data-resolved-theme`, dynamic `theme-color` |
-| `assets/js/projects-catalog.js`   | Projects listing renderer                                          |
-| `assets/js/experience-catalog.js` | Experience listing renderer                                        |
-| `accessibility.html`              | WCAG statement — update when a11y-affecting changes ship           |
-| `infra/nginx/`                    | Tracked snapshots of VM nginx configs + deploy script (see below)  |
-| `scripts/verify_ga4.py`           | GA4 Realtime API smoke test (see below)                            |
+| Path                              | Purpose                                                                                                                      |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `assets/css/style.css`            | Design tokens, components, layouts (`@layer tokens`)                                                                         |
+| `assets/js/theme.js`              | 3-state theme slider, `data-resolved-theme`, dynamic `theme-color`                                                           |
+| `assets/js/projects-catalog.js`   | Projects listing renderer — **has its own hardcoded `projects` array, separate from the JSON blob in `projects/index.html`** |
+| `assets/js/experience-catalog.js` | Experience listing renderer                                                                                                  |
+| `accessibility.html`              | WCAG statement — update when a11y-affecting changes ship                                                                     |
+| `infra/nginx/`                    | Tracked snapshots of VM nginx configs + deploy script (see below)                                                            |
+| `scripts/verify_ga4.py`           | GA4 Realtime API smoke test (see below)                                                                                      |
 
 See workspace [`AGENTS.md`](../AGENTS.md) §12–13 for accessibility statement and email obfuscation rules.
+
+---
+
+## Adding a new project (two catalogs!)
+
+The `/projects/` page has **two independent copies of the project list** — both must be updated or the new project won't show up for JS-enabled visitors:
+
+1. **`scripts/projects_database.json`** — source of truth. Add an entry, then run:
+
+   ```bash
+   cd scripts && python3 generate_site.py --projects
+   ```
+
+   This regenerates `projects/index.html` (embedded JSON + noscript fallback cards), the detail page `projects/<slug>.html`, and `sitemap.xml`.
+   ⚠️ The generator currently rewrites _all_ project detail pages to an older template (missing GA tag, wrong CSS version). After running, `git diff` and revert any detail pages you didn't intend to touch — only keep the new page and `projects/index.html`/`sitemap.xml` changes.
+
+2. **`assets/js/projects-catalog.js`** — the _actual_ renderer for JS-enabled browsers. It has its own hardcoded `const projects = [...]` array that the generator does **not** touch. Manually append the same entry here (same fields/shape) or the card silently won't render even though the SSR HTML and curl output look correct.
+
+If a project includes a live demo app reachable via an nginx reverse-proxy path (e.g. `/speedtest/`), see "Nginx infrastructure" below for adding the proxy `location` block and `infra/nginx/deploy.sh`.
 
 ---
 

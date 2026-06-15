@@ -171,6 +171,7 @@
     initSlider();
     initYear();
     initSpotlight();
+    document.body.classList.add('page-loaded');
   }
 
   if (document.readyState === 'loading') {
@@ -178,4 +179,8 @@
   } else {
     init();
   }
+
+  window.addEventListener('pageshow', () => {
+    document.body.classList.add('page-loaded');
+  });
 })();

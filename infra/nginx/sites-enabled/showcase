@@ -30,8 +30,8 @@ server {
         include /etc/nginx/conf.d/security-headers.conf;
     }
     location /files/ {
-        expires 1w;
-        add_header Cache-Control "public";
+        expires -1;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
         include /etc/nginx/conf.d/security-headers.conf;
     }
 
@@ -236,8 +236,8 @@ server {
         include /etc/nginx/conf.d/security-headers.conf;
     }
     location /files/ {
-        expires 1w;
-        add_header Cache-Control "public";
+        expires -1;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
         include /etc/nginx/conf.d/security-headers.conf;
     }
 

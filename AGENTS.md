@@ -29,6 +29,30 @@ ssh gcp-showcase "cd /opt/personal-website && git fetch origin && git reset --ha
 
 After CSS changes, bump `style.css?v=` in HTML heads when cache invalidation is needed.
 
+### Updating the resume PDF
+
+The resume PDF lives in **two places** in the repo — both must be identical or the served file will be stale:
+
+| Repo path                           | Served URL                                              |
+| ----------------------------------- | ------------------------------------------------------- |
+| `files/reddy_resume.pdf`            | `https://agreddy.com/files/reddy_resume.pdf`            |
+| `files/resume_tex/reddy_resume.pdf` | `https://agreddy.com/files/resume_tex/reddy_resume.pdf` |
+
+After recompiling the `.tex`, copy the PDF to the flat path before committing:
+
+```bash
+cp files/resume_tex/reddy_resume.pdf files/reddy_resume.pdf
+git add files/reddy_resume.pdf files/resume_tex/reddy_resume.pdf
+```
+
+**Root-ownership gotcha:** if `files/reddy_resume.pdf` ever becomes `root`-owned on the VM (e.g. from a past scp-as-root), `git reset --hard` silently skips it. Fix with:
+
+```bash
+ssh gcp-showcase "sudo chown adurs:adurs /opt/personal-website/files/reddy_resume.pdf"
+```
+
+Then re-run the deploy command and the correct file will land.
+
 ---
 
 ## Key paths

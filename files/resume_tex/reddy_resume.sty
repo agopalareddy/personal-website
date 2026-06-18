@@ -59,6 +59,7 @@
 \RequirePackage{lastpage}       % For referencing the last page number (if needed)
 \RequirePackage{needspace}      % To ensure space before sections/environments
 \RequirePackage{etoolbox}      % For \patchcmd and \ifblank
+\RequirePackage{ragged2e}       % For \justifying (used in summary env)
 \RequirePackage{eso-pic}        % For adding content to background
 \RequirePackage{bookmark}       % For PDF bookmarks
 
@@ -79,7 +80,7 @@
 \setlength{\kernSpacing}{2.5pt}
 
 \newlength{\datecolumnwidth}    % Width of the date column in two-column entries
-\setlength{\datecolumnwidth}{5.1cm}
+\setlength{\datecolumnwidth}{9.0cm}
 
 % -----------------------------------------------------------------
 % Color Definitions
@@ -235,6 +236,19 @@
     \end{adjustwidth}
 }
 
+% --- `summary` Environment ---
+% A single-column block with full justification (override of global \raggedright).
+% Used for the profile summary paragraph at the top of the resume.
+\newenvironment{summary}{%
+    \par
+    \noindent
+    \begingroup
+    \justifying
+}{%
+    \par
+    \endgroup
+}
+
 % --- `twocolentry` Environment ---
 % Creates a two-column layout.
 % #1 (optional): Content for the first column. Default is empty.
@@ -319,21 +333,17 @@
 %   #2: Institution & Location (e.g., "University of Example, City, State")
 %   #3: Date Range (e.g., "Aug 2020 -- May 2022")
 % Content: Bullet points for achievements, coursework, thesis, etc.
-\newenvironment{educationentry}[3]{%
+\newenvironment{educationentry}[4]{%
     \vspace{\entrySpacing}
-    \ensurevspace{7\baselineskip}% Paracol-aware space check
-    \gdef\thisEntryDate{#3}%
-    \setcolumnwidth{\fill, \datecolumnwidth}
-    \begin{paracol}{2}
-        {\textbf{#1}} \\
-        {#2} \\
-        \vspace{\highlightSpacing}
-        \begin{highlightsforbulletentries}
+    \needspace{7\baselineskip}%
+    \noindent\begin{tabular}{@{}p{0.5\linewidth}@{}p{0.5\linewidth}@{}}
+    {\raggedright\textbf{#1}} & \\[\entrySpacing]
+    {\raggedright\textit{#3}} & \hfill\textit{#4} \textnormal{ · } \textbf{#2} \\
+    \end{tabular}\par
+    \vspace{\highlightSpacing}
+    \noindent\ignorespaces
 }{%
-        \end{highlightsforbulletentries}
-    \switchcolumn
-    \raggedleft \thisEntryDate
-    \end{paracol}
+    \par
 }
 
 % --- 2. `experienceentry` Environment ---
@@ -388,9 +398,8 @@
 \newenvironment{leadershipentry}[2]{%
     \vspace{\entrySpacing}
     \needspace{4\baselineskip}% Keep org header with following position(s)
-    \mbox{\textbf{#1}}%
-    \kern\kernSpacing\AND\kern\kernSpacing
-    \mbox{#2}%
+    \textbf{#1}%
+    \ifblank{#2}{}{\kern\kernSpacing\AND\kern\kernSpacing\textit{#2}}%
 }{}
 
 % --- 5a. `positionentry` Environment (Role within an organization) ---
@@ -398,19 +407,18 @@
 %   #1: Position Title (e.g., "President")
 %   #2: Date Range (e.g., "Sep 2020 -- May 2021")
 % Content: Bullet points for responsibilities and achievements in that role.
-\newenvironment{positionentry}[2]{%
+\newenvironment{positionentry}[3]{%
     \vspace{\highlightSpacing}
-    \ensurevspace{5\baselineskip}% Paracol-aware space check
-    \gdef\thisEntryDate{#2}%
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}
-        \textit{#1}
-        \begin{highlightsforbulletentries}
-}{%
-        \end{highlightsforbulletentries}
-    \switchcolumn
-    \raggedleft \thisEntryDate
+        \raggedright\textit{#1}%
+        \switchcolumn
+        \raggedleft\textit{#2}\textnormal{ · }\textbf{#3}%
     \end{paracol}
+    \vspace{\highlightSpacing}
+    \begin{highlightsforbulletentries}
+}{%
+    \end{highlightsforbulletentries}
 }
 
 % --- 4. `skillcategory` Environment ---

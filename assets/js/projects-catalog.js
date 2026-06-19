@@ -698,13 +698,15 @@ function positionFilterControlsResponsive() {
   const isMobile = window.innerWidth < 768;
   const sidebar = document.querySelector('.academic-sidebar');
   const subtitle = document.querySelector('.academic-content > p');
+  const stickyWrapper = document.querySelector('.mobile-sticky-wrapper');
 
   if (isMobile && subtitle) {
+    const layoutBlock = stickyWrapper || filterControls;
     if (
-      filterControls.parentNode !== subtitle.parentNode ||
-      filterControls.previousElementSibling !== subtitle
+      layoutBlock.parentNode !== subtitle.parentNode ||
+      layoutBlock.previousElementSibling !== subtitle
     ) {
-      subtitle.parentNode.insertBefore(filterControls, subtitle.nextSibling);
+      subtitle.parentNode.insertBefore(layoutBlock, subtitle.nextSibling);
     }
   } else if (!isMobile && sidebar) {
     if (filterControls.parentNode !== sidebar) {
@@ -912,9 +914,15 @@ if (filterToggleBtn) {
   });
 }
 
-window.addEventListener('resize', positionFilterControlsResponsive);
-window.addEventListener('resize', positionTocResponsive);
-window.addEventListener('resize', wrapMobileStickyPanels);
+function repositionCatalogLayout() {
+  positionFilterControlsResponsive();
+  positionTocResponsive();
+  wrapMobileStickyPanels();
+}
+
+// ponytail: breakpoint-only — window resize also fires when the mobile keyboard
+// opens and must not reparent filter controls (that blurs the search input).
+window.matchMedia('(max-width: 767px)').addEventListener('change', repositionCatalogLayout);
 
 positionFilterControlsResponsive();
 populateFilters();

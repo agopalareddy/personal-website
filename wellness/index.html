@@ -32,9 +32,19 @@
           <span class="subtitle">Ambient Wellness Companion</span>
         </div>
       </div>
-      <div class="system-status">
-        <span class="status-indicator online"></span>
-        <span class="status-label">GCP Agent Node: Connected</span>
+      <div class="header-controls">
+        <div class="patient-selector-container">
+          <label for="patient-selector"><i class="fa-solid fa-user-md"></i> Patient Account:</label>
+          <select id="patient-selector" class="patient-dropdown">
+            <option value="arthur" selected>Arthur Pendelton</option>
+            <option value="beatrice">Beatrice Vance</option>
+            <option value="charles">Charles Darwin</option>
+          </select>
+        </div>
+        <div class="system-status">
+          <span class="status-indicator online"></span>
+          <span class="status-label">GCP Node: Connected</span>
+        </div>
       </div>
     </header>
 
@@ -44,15 +54,20 @@
         <!-- Patient profile -->
         <div class="card profile-card">
           <div class="profile-header">
-            <div class="profile-avatar">AP</div>
+            <div class="profile-avatar" id="avatar-initials">--</div>
             <div class="profile-meta">
-              <h2>Arthur Pendelton</h2>
-              <p class="patient-id">Patient ID: #APT-1428</p>
+              <h2 id="patient-name">Loading...</h2>
+              <p class="patient-id" id="patient-id-display">Patient ID: #---</p>
             </div>
           </div>
           <ul class="profile-details">
-            <li><span class="label">Address:</span> <span class="value">1428 Elm Street</span></li>
-            <li><span class="label">Phone:</span> <span class="value">555-0199</span></li>
+            <li>
+              <span class="label">Address:</span>
+              <span class="value" id="patient-address">...</span>
+            </li>
+            <li>
+              <span class="label">Phone:</span> <span class="value" id="patient-phone">...</span>
+            </li>
             <li>
               <span class="label">Status:</span>
               <span class="value badge status-active">Active Monitoring</span>
@@ -63,33 +78,10 @@
         <!-- Medication Log -->
         <div class="card med-card">
           <h3><i class="fa-solid fa-pills"></i> Medication Schedule</h3>
-          <div class="med-list">
-            <div class="med-item" id="med-cardiovascular">
-              <div class="med-info">
-                <span class="med-time">Morning (08:00 AM)</span>
-                <span class="med-name">Cardiovascular Support (1x)</span>
-              </div>
-              <span class="med-status pending" id="status-cardiovascular"
-                ><i class="fa-solid fa-circle-notch fa-spin"></i> Checking...</span
-              >
-            </div>
-            <div class="med-item" id="med-multivitamin">
-              <div class="med-info">
-                <span class="med-time">Noon (12:00 PM)</span>
-                <span class="med-name">Daily Multivitamin (1x)</span>
-              </div>
-              <span class="med-status pending" id="status-multivitamin"
-                ><i class="fa-solid fa-circle-notch fa-spin"></i> Checking...</span
-              >
-            </div>
-            <div class="med-item" id="med-sleep-aid">
-              <div class="med-info">
-                <span class="med-time">Night (09:00 PM)</span>
-                <span class="med-name">Gentle Sleep Aid (1x)</span>
-              </div>
-              <span class="med-status pending" id="status-sleep-aid"
-                ><i class="fa-solid fa-circle-notch fa-spin"></i> Checking...</span
-              >
+          <div class="med-list" id="medication-list-container">
+            <!-- Populated dynamically via JS -->
+            <div class="loading-placeholder">
+              <i class="fa-solid fa-circle-notch fa-spin"></i> Loading schedule...
             </div>
           </div>
         </div>
@@ -135,7 +127,7 @@
         <div class="messages-container" id="chat-messages">
           <!-- System status intro -->
           <div class="message system-msg">
-            <p>Aura Wellness Agent initialized. Ready to begin empathetic check-in with Arthur.</p>
+            <p>Aura Wellness Agent initialized. Ready to begin empathetic check-in.</p>
           </div>
         </div>
 
@@ -160,7 +152,7 @@
             <input
               type="text"
               id="chat-input"
-              placeholder="Type Arthur's check-in response here..."
+              placeholder="Type patient check-in response here..."
               required
               autocomplete="off"
             />
@@ -172,27 +164,7 @@
       </section>
     </main>
 
-    <!-- Demo controller at the bottom -->
-    <footer class="demo-controller">
-      <div class="demo-title">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-        <span>Judge Demo Scenarios:</span>
-      </div>
-      <div class="demo-buttons">
-        <button class="demo-btn" data-scenario="healthy">
-          <i class="fa-solid fa-circle-check text-success"></i> Normal Check-in (Healthy &
-          Compliant)
-        </button>
-        <button class="demo-btn btn-danger" data-scenario="missed">
-          <i class="fa-solid fa-circle-exclamation text-danger"></i> Compliance Alert (Misses Meds,
-          Hurts Stomach)
-        </button>
-        <button class="demo-btn btn-warning" data-scenario="depression">
-          <i class="fa-solid fa-triangle-exclamation text-warning"></i> Mood Alert (Feeling
-          Depressed/Down)
-        </button>
-      </div>
-    </footer>
+    <!-- Demo controller removed for production -->
 
     <script src="script.js"></script>
   </body>

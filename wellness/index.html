@@ -164,7 +164,53 @@
       </section>
     </main>
 
-    <!-- Demo controller removed for production -->
+    <!-- Security Passcode Verification Modal -->
+    <dialog
+      id="security-dialog"
+      class="security-modal"
+      closedby="any"
+      aria-labelledby="security-title"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="security-icon"><i class="fa-solid fa-shield-halved"></i></span>
+          <h2 id="security-title">Security Verification</h2>
+        </div>
+        <p class="modal-desc">
+          Accessing patient health telemetry records. Enter caregiver PIN or patient passcode to
+          unlock profile.
+        </p>
+        <form method="dialog" id="security-form">
+          <div class="pin-input-container">
+            <input
+              type="password"
+              id="security-pin"
+              placeholder="••••"
+              maxlength="4"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              required
+              autocomplete="off"
+              autofocus
+            />
+          </div>
+          <div class="pin-hint">
+            <i class="fa-solid fa-circle-info"></i>
+            <span
+              >Hint: Caregiver PIN is <strong>1234</strong>. Patient passcodes: Arthur: 1111,
+              Beatrice: 2222, Charles: 3333.</span
+            >
+          </div>
+          <div id="security-error" class="error-msg" style="display: none"></div>
+          <div class="modal-buttons">
+            <button type="button" id="security-cancel" class="btn btn-secondary">Cancel</button>
+            <button type="submit" id="security-submit" class="btn btn-primary">
+              Verify & Unlock
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
 
     <script src="script.js"></script>
   </body>

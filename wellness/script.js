@@ -88,7 +88,7 @@ function renderMedications(medications) {
     const medItem = document.createElement('div');
 
     let statusClass = 'pending';
-    let statusText = '<i class="fa-solid fa-circle-notch fa-spin"></i> Checking...';
+    let statusText = '<i class="fa-regular fa-clock"></i> Pending';
 
     if (med.status === 'taken') {
       statusClass = 'taken';
@@ -139,12 +139,98 @@ async function initializeSession() {
   }
 }
 
-// Patient Selector Dropdown Change Handler
-patientSelector.addEventListener('change', async function () {
+// Security verification interface elements
+const securityDialog = document.getElementById('security-dialog');
+const securityForm = document.getElementById('security-form');
+const securityPin = document.getElementById('security-pin');
+const securityCancel = document.getElementById('security-cancel');
+const securityError = document.getElementById('security-error');
+let targetPatientId = null;
+
+// Patient Selector Dropdown Change Handler with Passcode Verification
+patientSelector.addEventListener('change', function () {
   const newPatient = this.value;
-  appendSystemMessage(`Switching account profile to ${this.options[this.selectedIndex].text}...`);
-  await loadPatientProfile(newPatient);
-  await initializeSession();
+  if (newPatient === currentPatientId) return;
+
+  targetPatientId = newPatient;
+
+  // Temporarily revert dropdown selection until successfully verified
+  patientSelector.value = currentPatientId;
+
+  // Reset modal values
+  securityPin.value = '';
+  securityError.style.display = 'none';
+
+  // Show standard modal dialog
+  securityDialog.showModal();
+});
+
+// Cancel button closes security modal
+securityCancel.addEventListener('click', () => {
+  securityDialog.close();
+});
+
+// Fallback click outside listener for older browsers (from web guidance!)
+if (!('closedBy' in HTMLDialogElement.prototype)) {
+  securityDialog.addEventListener('click', (event) => {
+    if (event.target !== securityDialog) return;
+    const rect = securityDialog.getBoundingClientRect();
+    const isDialogContent =
+      rect.top <= event.clientY &&
+      event.clientY <= rect.top + rect.height &&
+      rect.left <= event.clientX &&
+      event.clientX <= rect.left + rect.width;
+    if (!isDialogContent) {
+      securityDialog.close();
+    }
+  });
+}
+
+// Reset dropdown if dialog is dismissed without success
+securityDialog.addEventListener('close', () => {
+  patientSelector.value = currentPatientId;
+});
+
+// Form submit verification handler
+securityForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pin = securityPin.value;
+  securityError.style.display = 'none';
+
+  try {
+    const response = await fetch(`/api/patient/${targetPatientId}/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passcode: pin }),
+    });
+
+    if (!response.ok) throw new Error('Verification failed.');
+
+    const result = await response.json();
+    if (result.success) {
+      // Success! Update currentPatientId and dropdown, load profile and start session
+      currentPatientId = targetPatientId;
+      patientSelector.value = currentPatientId;
+
+      appendSystemMessage(
+        `Secure session opened for ${patientSelector.options[patientSelector.selectedIndex].text}.`
+      );
+
+      await loadPatientProfile(currentPatientId);
+      await initializeSession();
+
+      securityDialog.close();
+    } else {
+      securityError.textContent = result.error || 'Access Denied: Incorrect passcode.';
+      securityError.style.display = 'block';
+      securityPin.value = '';
+      securityPin.focus();
+    }
+  } catch (err) {
+    console.error(err);
+    securityError.textContent = 'Server error during security check. Please try again.';
+    securityError.style.display = 'block';
+  }
 });
 
 // Form Submission

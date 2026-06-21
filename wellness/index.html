@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AURA: Ambient Wellness Companion for Elderly Care</title>
+    <meta
+      name="description"
+      content="An ambient, privacy-first wellness companion designed for elderly care using the Google Agent Development Kit (ADK 2.0) and Gemini."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dark-theme">
+    <div class="glass-bg"></div>
+
+    <header class="app-header">
+      <div class="header-logo">
+        <span class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></span>
+        <div class="logo-text">
+          <h1>AURA</h1>
+          <span class="subtitle">Ambient Wellness Companion</span>
+        </div>
+      </div>
+      <div class="system-status">
+        <span class="status-indicator online"></span>
+        <span class="status-label">GCP Agent Node: Connected</span>
+      </div>
+    </header>
+
+    <main class="app-container" id="main-content">
+      <!-- Dashboard Left Panel -->
+      <section class="dashboard-panel" aria-label="Patient Dashboard">
+        <!-- Patient profile -->
+        <div class="card profile-card">
+          <div class="profile-header">
+            <div class="profile-avatar">AP</div>
+            <div class="profile-meta">
+              <h2>Arthur Pendelton</h2>
+              <p class="patient-id">Patient ID: #APT-1428</p>
+            </div>
+          </div>
+          <ul class="profile-details">
+            <li><span class="label">Address:</span> <span class="value">1428 Elm Street</span></li>
+            <li><span class="label">Phone:</span> <span class="value">555-0199</span></li>
+            <li>
+              <span class="label">Status:</span>
+              <span class="value badge status-active">Active Monitoring</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Medication Log -->
+        <div class="card med-card">
+          <h3><i class="fa-solid fa-pills"></i> Medication Schedule</h3>
+          <div class="med-list">
+            <div class="med-item" id="med-cardiovascular">
+              <div class="med-info">
+                <span class="med-time">Morning (08:00 AM)</span>
+                <span class="med-name">Cardiovascular Support (1x)</span>
+              </div>
+              <span class="med-status pending" id="status-cardiovascular"
+                ><i class="fa-solid fa-circle-notch fa-spin"></i> Checking...</span
+              >
+            </div>
+            <div class="med-item" id="med-multivitamin">
+              <div class="med-info">
+                <span class="med-time">Noon (12:00 PM)</span>
+                <span class="med-name">Daily Multivitamin (1x)</span>
+              </div>
+              <span class="med-status pending" id="status-multivitamin"
+                ><i class="fa-solid fa-circle-notch fa-spin"></i> Checking...</span
+              >
+            </div>
+            <div class="med-item" id="med-sleep-aid">
+              <div class="med-info">
+                <span class="med-time">Night (09:00 PM)</span>
+                <span class="med-name">Gentle Sleep Aid (1x)</span>
+              </div>
+              <span class="med-status pending" id="status-sleep-aid"
+                ><i class="fa-solid fa-circle-notch fa-spin"></i> Checking...</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics and Telemetry Status -->
+        <div class="card analytics-card">
+          <h3><i class="fa-solid fa-chart-line"></i> Daily Wellness Analytics</h3>
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <span class="metric-val" id="mood-val">5<span class="small">/10</span></span>
+              <span class="metric-lbl">Mood Score</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-val" id="compliance-val">--</span>
+              <span class="metric-lbl">Med Compliance</span>
+            </div>
+          </div>
+          <!-- Privacy Badge -->
+          <div class="privacy-notice">
+            <div class="privacy-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="privacy-text">
+              <h4>PII Anonymized Telemetry</h4>
+              <p>
+                Speech context is stripped by the Anonymizer Agent before logging metrics to the
+                database.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Conversational Center/Right Panel -->
+      <section class="chat-panel" aria-label="Conversation Companion">
+        <div class="chat-header">
+          <h3><i class="fa-regular fa-comment-dots"></i> Companion Check-in</h3>
+          <div class="session-actions">
+            <button id="reset-session-btn" title="Reset Session">
+              <i class="fa-solid fa-rotate-right"></i> Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="messages-container" id="chat-messages">
+          <!-- System status intro -->
+          <div class="message system-msg">
+            <p>Aura Wellness Agent initialized. Ready to begin empathetic check-in with Arthur.</p>
+          </div>
+        </div>
+
+        <!-- Agent Thinking indicator -->
+        <div class="thinking-stages" id="thinking-stages" style="display: none">
+          <div class="stage-item active" id="stage-companion">
+            <span class="stage-dot"></span>
+            <span class="stage-name">Companion: Evaluating conversation & schedules...</span>
+          </div>
+          <div class="stage-item" id="stage-anonymizer">
+            <span class="stage-dot"></span>
+            <span class="stage-name">Anonymizer: Stripping raw text & PII telemetry...</span>
+          </div>
+          <div class="stage-item" id="stage-escalation">
+            <span class="stage-dot"></span>
+            <span class="stage-name">Escalation: Evaluating safety rules...</span>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <form id="chat-form" class="chat-form-container">
+            <input
+              type="text"
+              id="chat-input"
+              placeholder="Type Arthur's check-in response here..."
+              required
+              autocomplete="off"
+            />
+            <button type="submit" id="send-btn" class="send-button">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Demo controller at the bottom -->
+    <footer class="demo-controller">
+      <div class="demo-title">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>Judge Demo Scenarios:</span>
+      </div>
+      <div class="demo-buttons">
+        <button class="demo-btn" data-scenario="healthy">
+          <i class="fa-solid fa-circle-check text-success"></i> Normal Check-in (Healthy &
+          Compliant)
+        </button>
+        <button class="demo-btn btn-danger" data-scenario="missed">
+          <i class="fa-solid fa-circle-exclamation text-danger"></i> Compliance Alert (Misses Meds,
+          Hurts Stomach)
+        </button>
+        <button class="demo-btn btn-warning" data-scenario="depression">
+          <i class="fa-solid fa-triangle-exclamation text-warning"></i> Mood Alert (Feeling
+          Depressed/Down)
+        </button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

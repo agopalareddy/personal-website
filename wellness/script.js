@@ -1,8 +1,8 @@
 // Aura: Ambient Wellness Companion Frontend Controller
 
 let sessionId = null;
-let currentMood = 5;
-let consecutiveMissed = 0;
+let currentPatientId = 'arthur';
+let patientData = null;
 let isPending = false;
 
 // DOM Elements
@@ -12,19 +12,114 @@ const chatInput = document.getElementById('chat-input');
 const sendBtn = document.getElementById('send-btn');
 const resetBtn = document.getElementById('reset-session-btn');
 const thinkingStages = document.getElementById('thinking-stages');
+const patientSelector = document.getElementById('patient-selector');
+
+// Dynamic Profile Elements
+const avatarInitials = document.getElementById('avatar-initials');
+const patientName = document.getElementById('patient-name');
+const patientIdDisplay = document.getElementById('patient-id-display');
+const patientAddress = document.getElementById('patient-address');
+const patientPhone = document.getElementById('patient-phone');
+const medicationListContainer = document.getElementById('medication-list-container');
 const moodVal = document.getElementById('mood-val');
 const complianceVal = document.getElementById('compliance-val');
 
-// Medication indicators
-const statusCardiovascular = document.getElementById('status-cardiovascular');
-const statusMultivitamin = document.getElementById('status-multivitamin');
-const statusSleepAid = document.getElementById('status-sleep-aid');
+// Load Patient Data from Backend API
+async function loadPatientProfile(patientId) {
+  try {
+    const response = await fetch(`/api/patient/${patientId}`);
+    if (!response.ok) throw new Error('Failed to load patient data');
+    const data = await response.json();
 
-// Initialize Session
+    if (data.error) {
+      console.error(data.error);
+      return;
+    }
+
+    patientData = data;
+    currentPatientId = patientId;
+
+    // Update Profile UI
+    patientName.textContent = data.name;
+    patientIdDisplay.textContent = `Patient ID: #PT-${patientId.toUpperCase()}`;
+    patientAddress.textContent = data.address;
+    patientPhone.textContent = data.phone;
+
+    // Calculate Avatar Initials
+    const names = data.name.split(' ');
+    const initials = names
+      .map((n) => n[0])
+      .join('')
+      .substring(0, 2)
+      .toUpperCase();
+    avatarInitials.textContent = initials;
+
+    // Render Medication List dynamically
+    renderMedications(data.medications);
+
+    // Load historical scores
+    const lastMood =
+      data.mood_history && data.mood_history.length > 0
+        ? data.mood_history[data.mood_history.length - 1]
+        : 5;
+    const lastCompliance =
+      data.compliance_history && data.compliance_history.length > 0
+        ? data.compliance_history[data.compliance_history.length - 1]
+          ? 'Compliant'
+          : 'Missed'
+        : '--';
+
+    updateDashboard(lastMood, lastCompliance);
+  } catch (err) {
+    console.error('Error fetching patient profile:', err);
+  }
+}
+
+// Render Medications schedule list
+function renderMedications(medications) {
+  medicationListContainer.innerHTML = '';
+
+  if (!medications || Object.keys(medications).length === 0) {
+    medicationListContainer.innerHTML = '<div class="no-meds">No medications scheduled.</div>';
+    return;
+  }
+
+  for (const [medId, med] of Object.entries(medications)) {
+    const medItem = document.createElement('div');
+
+    let statusClass = 'pending';
+    let statusText = '<i class="fa-solid fa-circle-notch fa-spin"></i> Checking...';
+
+    if (med.status === 'taken') {
+      statusClass = 'taken';
+      statusText = '<i class="fa-solid fa-check"></i> Taken';
+      medItem.className = 'med-item compliant';
+    } else if (med.status === 'missed') {
+      statusClass = 'not-taken';
+      statusText = '<i class="fa-solid fa-xmark"></i> Missed';
+      medItem.className = 'med-item missed';
+    } else {
+      medItem.className = 'med-item';
+    }
+
+    medItem.innerHTML = `
+            <div class="med-info">
+                <span class="med-time">${escapeHtml(med.time)}</span>
+                <span class="med-name">${escapeHtml(med.name)}</span>
+            </div>
+            <span class="med-status ${statusClass}" id="status-${medId}">${statusText}</span>
+        `;
+    medicationListContainer.appendChild(medItem);
+  }
+}
+
+// Initialize Session for Patient
 async function initializeSession() {
   try {
-    appendSystemMessage('Connecting to GCP agent node...');
-    const response = await fetch('/apps/app/users/user/sessions', {
+    appendSystemMessage(
+      `Connecting to GCP agent node for ${patientData ? patientData.name : 'patient'}...`
+    );
+    const response = await fetch(`/apps/app/users/${currentPatientId}/sessions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -32,16 +127,25 @@ async function initializeSession() {
 
     const data = await response.json();
     sessionId = data.id;
-    console.log('Initialized Session ID:', sessionId);
+    console.log('Active Session ID:', sessionId);
 
-    appendSystemMessage('Aura Wellness Agent connected. Session: active.');
-    updateMedicationUI('pending', 'pending', 'pending');
-    updateDashboard(5, '--');
+    chatMessages.innerHTML = '';
+    appendSystemMessage(
+      `Aura Wellness Agent initialized. Ready to begin empathetic check-in with ${patientData.name}.`
+    );
   } catch (err) {
     console.error(err);
     appendSystemMessage('Connection error: Unable to load agent session. Please try again.');
   }
 }
+
+// Patient Selector Dropdown Change Handler
+patientSelector.addEventListener('change', async function () {
+  const newPatient = this.value;
+  appendSystemMessage(`Switching account profile to ${this.options[this.selectedIndex].text}...`);
+  await loadPatientProfile(newPatient);
+  await initializeSession();
+});
 
 // Form Submission
 chatForm.addEventListener('submit', async (e) => {
@@ -55,17 +159,16 @@ chatForm.addEventListener('submit', async (e) => {
 
 // Reset Session Button
 resetBtn.addEventListener('click', () => {
-  chatMessages.innerHTML = '';
   initializeSession();
 });
 
-// Appending Messages
+// Messaging UI helpers
 function appendUserMessage(text) {
   const msgDiv = document.createElement('div');
   msgDiv.className = 'message user';
   msgDiv.innerHTML = `
         <div class="msg-bubble">${escapeHtml(text)}</div>
-        <div class="msg-meta">Arthur • Just now</div>
+        <div class="msg-meta">${escapeHtml(patientData ? patientData.name.split(' ')[0] : 'Arthur')} • Just now</div>
     `;
   chatMessages.appendChild(msgDiv);
   scrollToBottom();
@@ -105,7 +208,7 @@ function scrollToBottom() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Thinking Indicator Stages Control
+// Thinking Indicator stages
 function showThinking(stage) {
   thinkingStages.style.display = 'flex';
   document.querySelectorAll('.stage-item').forEach((item) => {
@@ -128,11 +231,10 @@ function hideThinking() {
   thinkingStages.style.display = 'none';
 }
 
-// UI State Updates
+// Dashboard Score animation
 function updateDashboard(mood, complianceText) {
   moodVal.innerHTML = `${mood}<span class="small">/10</span>`;
 
-  // Animate color based on score
   if (mood < 4) {
     moodVal.style.color = 'var(--danger)';
   } else if (mood < 7) {
@@ -151,31 +253,7 @@ function updateDashboard(mood, complianceText) {
   }
 }
 
-function updateMedicationUI(cardiovascular, multivitamin, sleepAid) {
-  const items = [
-    { el: statusCardiovascular, state: cardiovascular },
-    { el: statusMultivitamin, state: multivitamin },
-    { el: statusSleepAid, state: sleepAid },
-  ];
-
-  items.forEach((item) => {
-    if (item.state === 'taken') {
-      item.el.className = 'med-status taken';
-      item.el.innerHTML = '<i class="fa-solid fa-check"></i> Taken';
-      item.el.parentElement.className = 'med-item compliant';
-    } else if (item.state === 'missed') {
-      item.el.className = 'med-status not-taken';
-      item.el.innerHTML = '<i class="fa-solid fa-xmark"></i> Missed';
-      item.el.parentElement.className = 'med-item missed';
-    } else {
-      item.el.className = 'med-status pending';
-      item.el.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Checking...';
-      item.el.parentElement.className = 'med-item';
-    }
-  });
-}
-
-// API Communication with Agent (Readable Stream / SSE Parsing)
+// API Communication and stream parsing
 async function sendMessageToAgent(inputText) {
   if (!sessionId) {
     appendSystemMessage('Session not initialized. Reconnecting...');
@@ -194,7 +272,7 @@ async function sendMessageToAgent(inputText) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         appName: 'app',
-        userId: 'user',
+        userId: currentPatientId,
         sessionId: sessionId,
         newMessage: {
           role: 'user',
@@ -205,7 +283,7 @@ async function sendMessageToAgent(inputText) {
       }),
     });
 
-    if (!response.ok) throw new Error('Agent node error');
+    if (!response.ok) throw new Error('Agent node communication failure.');
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
@@ -226,13 +304,12 @@ async function sendMessageToAgent(inputText) {
         if (cleanLine.startsWith('data: ')) {
           try {
             const eventData = JSON.parse(cleanLine.substring(6));
-            console.log('Node Event:', eventData);
 
             if (eventData.errorCode) {
               throw new Error(eventData.errorMessage || 'Agent error');
             }
 
-            // Track pipeline progress
+            // Track active execution node progress
             const nodePath = eventData.nodeInfo?.path || '';
             if (nodePath.includes('CompanionNode')) {
               showThinking('anonymizer');
@@ -240,28 +317,12 @@ async function sendMessageToAgent(inputText) {
               showThinking('escalation');
             }
 
-            // Extract state changes (state delta)
             const stateDelta = eventData.actions?.stateDelta || {};
-
-            if (stateDelta.current_mood_score !== undefined) {
-              currentMood = stateDelta.current_mood_score;
-            }
-            if (stateDelta.medication_compliance_flag !== undefined) {
-              const isCompliant = stateDelta.medication_compliance_flag;
-              updateDashboard(currentMood, isCompliant ? 'Compliant' : 'Missed');
-
-              // Map compliance to the morning card for demo purposes
-              updateMedicationUI(
-                isCompliant ? 'taken' : 'missed',
-                isCompliant ? 'taken' : 'pending',
-                isCompliant ? 'taken' : 'pending'
-              );
-            }
             if (stateDelta.escalation_triggered !== undefined) {
               isEscalated = stateDelta.escalation_triggered;
             }
 
-            // Extract output from leaf nodes
+            // Extract output from final nodes
             if (
               nodePath.includes('alert_node') ||
               nodePath.includes('normal_end_node') ||
@@ -272,7 +333,7 @@ async function sendMessageToAgent(inputText) {
               }
             }
           } catch (parseErr) {
-            console.warn('Could not parse SSE event:', parseErr, cleanLine);
+            console.warn('Could not parse SSE line:', parseErr);
           }
         }
       }
@@ -282,8 +343,11 @@ async function sendMessageToAgent(inputText) {
     if (finalResponseText) {
       appendAgentMessage(finalResponseText, isEscalated);
     } else {
-      appendAgentMessage('I checked in and logged your telemetry to the dashboard.', isEscalated);
+      appendAgentMessage('Logs and compliance telemetry updated successfully.', isEscalated);
     }
+
+    // Fetch fresh database record to reload medications, compliance, and score history
+    await loadPatientProfile(currentPatientId);
   } catch (err) {
     console.error(err);
     hideThinking();
@@ -293,25 +357,6 @@ async function sendMessageToAgent(inputText) {
     sendBtn.disabled = false;
   }
 }
-
-// Demo Presets Controllers
-const presets = {
-  healthy: 'Hi, I feel energetic and happy today. I took my morning pills right after breakfast.',
-  missed:
-    "Hello, my name is Arthur Pendelton. I live at 1428 Elm Street and my phone number is 555-0199. I'm feeling incredibly down today, and honestly, I completely skipped taking my morning cardiovascular support tablet because my stomach hurts.",
-  depression:
-    "I'm feeling really down and lonely today. The weather is gloomy and I didn't want to get out of bed. I took my pills but I just feel awful.",
-};
-
-document.querySelectorAll('.demo-btn').forEach((btn) => {
-  btn.addEventListener('click', function () {
-    const scenario = this.getAttribute('data-scenario');
-    if (presets[scenario] && !isPending) {
-      chatInput.value = presets[scenario];
-      chatForm.dispatchEvent(new Event('submit'));
-    }
-  });
-});
 
 function escapeHtml(text) {
   const map = {
@@ -324,5 +369,10 @@ function escapeHtml(text) {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
-// Start
-initializeSession();
+// Startup Initialization
+async function start() {
+  await loadPatientProfile('arthur');
+  await initializeSession();
+}
+
+start();

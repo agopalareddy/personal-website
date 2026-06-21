@@ -179,7 +179,7 @@ server {
     }
 
     # ── Wellness Companion API Endpoints ──
-    location ~ ^/(list-apps|apps/|run|run_sse|run_live|dev/|builder/|feedback|openapi.json|docs|redoc|health|version) {
+    location ~ ^/(list-apps|apps/|run|run_sse|run_live|dev/|builder/|feedback|openapi.json|docs|redoc|health|version|api/patient/) {
         proxy_pass http://127.0.0.1:8090;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -420,7 +420,7 @@ server {
     }
 
     # ── Wellness Companion API Endpoints ──
-    location ~ ^/(list-apps|apps/|run|run_sse|run_live|dev/|builder/|feedback|openapi.json|docs|redoc|health|version) {
+    location ~ ^/(list-apps|apps/|run|run_sse|run_live|dev/|builder/|feedback|openapi.json|docs|redoc|health|version|api/patient/) {
         proxy_pass http://127.0.0.1:8090;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;

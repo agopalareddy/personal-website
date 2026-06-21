@@ -475,6 +475,34 @@ const projects = [
     has_detail: true,
     formatted_date: 'Summer 2026',
   },
+  {
+    id: '2026-06-wellness-companion',
+    title: 'AURA: Ambient Wellness Companion',
+    excerpt:
+      'Built AURA, a privacy-first elderly wellness companion using Google ADK 2.0 multi-agent orchestration and Gemini. Empathetic check-ins, medication compliance tracking, anonymized telemetry, and automatic escalation for critical wellness drops.',
+    venue: 'Kaggle Agents for Good Hackathon',
+    venue_tag: 'Kaggle',
+    permalink: '/projects/wellness-companion',
+    date: '2026-06-21',
+    category: 'Web Apps',
+    technologies: [
+      'Python',
+      'FastAPI',
+      'Google ADK',
+      'Gemini',
+      'MCP',
+      'Multi-agent Systems',
+      'JavaScript',
+      'HTML',
+      'CSS',
+    ],
+    github: 'https://github.com/agopalareddy/wellness-companion',
+    demo: '/wellness/',
+    pdf: null,
+    presentation: null,
+    has_detail: true,
+    formatted_date: 'Summer 2026',
+  },
 ];
 const projectGrid = document.getElementById('projectGrid');
 // Clear SSR fallback (noscript + JSON blob) if present. Modern

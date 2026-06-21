@@ -472,5 +472,33 @@
     "has_detail": true,
     "formatted_date": "Summer 2026",
     "content_html": "<p>A self-hosted alternative to third-party speed test services, this single-page app measures download speed, upload speed, and ping directly against the server hosting this site &mdash; with live-updating results and connection details (visitor IP and server identity) so you know exactly what you&apos;re testing against.</p><p>Ping is measured via five sequential requests, discarding the warm-up request and reporting the median round-trip time. Download throughput streams a generated payload via the Streams API, reading it incrementally for live progress; upload throughput sends a generated payload via <code>XMLHttpRequest</code>, using <code>upload.onprogress</code> for live readings. An Express server serves the page and API from the same origin.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Download, upload, and ping measurements (Mbps / ms) against this site&apos;s own server</li><li>Live progress updates at least once per second during transfer phases</li><li>Connection details: visitor public IP and server location/identity</li><li>Responsive layout from 320px and up, with clear error/retry handling</li></ul>"
+  },
+  {
+    "id": "2026-06-wellness-companion",
+    "title": "AURA: Ambient Wellness Companion",
+    "excerpt": "Built AURA, a privacy-first elderly wellness companion using Google ADK 2.0 multi-agent orchestration and Gemini. Empathetic check-ins, medication compliance tracking, anonymized telemetry, and automatic escalation for critical wellness drops.",
+    "venue": "Kaggle Agents for Good Hackathon",
+    "venue_tag": "Kaggle",
+    "permalink": "/projects/wellness-companion",
+    "date": "2026-06-21",
+    "category": "Web Apps",
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "Google ADK",
+      "Gemini",
+      "MCP",
+      "Multi-agent Systems",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "github": "https://github.com/agopalareddy/wellness-companion",
+    "demo": "/wellness/",
+    "pdf": null,
+    "presentation": null,
+    "has_detail": true,
+    "formatted_date": "Summer 2026",
+    "content_html": "<p>AURA (Ambient Wellness Companion) is a Kaggle Agents for Good capstone that runs ambient wellness check-ins for elderly patients. Built on Google&apos;s Agent Development Kit (ADK 2.0), the system orchestrates a state-driven multi-agent graph: a medication extractor maps patient language to schedule IDs, an empathetic companion agent scores mood and replies in natural language, a deterministic privacy guard persists only allowlisted telemetry fields, and a rule-based escalation engine routes critical cases to caregiver alerts.</p><p>The demo UI includes a passcode-gated patient dashboard with live JSON and agent activity, a provider view for roster management and alert triage, and an architecture overview page. Tool access follows least privilege via filtered MCP toolsets &mdash; LLM agents cannot write directly to the secure mock database; persistence happens only in the deterministic privacy node after structured output is available.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>ADK 2.0 multi-agent workflow: medication extraction, empathetic companion, privacy guard, and escalation routing</li><li>Deterministic <code>persist_metrics_node</code> with allowlist-validated writes (mood, compliance, per-med status)</li><li>Escalation when consecutive missed medication cycles reach 2 or mood score drops below 3</li><li>Patient, provider, and about views with passcode-gated sessions and live activity sidebar</li><li>Filtered MCP toolsets enforcing least-privilege boundaries between agents and the secure store</li></ul>"
   }
 ]

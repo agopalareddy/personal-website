@@ -296,30 +296,33 @@
 % --- 2. `leadershipentry` Environment (Header for a leadership role) ---
 % Parameters:
 %   #1: Organization Name (e.g., "Student Coding Club")
-%   #2: Location (e.g., "University of Example") - leave empty if location is per-position
+%   #2: Location (e.g., "University of Example, City, State") — appears right-aligned, regular font.
 % Content: Typically followed by one or more `positionentry` environments.
 \newenvironment{leadershipentry}[2]{%
     \vspace{\entrySpacing}
     \needspace{4\baselineskip}% Keep org header with following position(s)
-    \textbf{#1}%
-    \ifblank{#2}{}{\kern\kernSpacing\AND\kern\kernSpacing #2}%
+    \setcolumnwidth{\fill, \datecolumnwidth}
+    \begin{paracol}{2}
+        \textbf{#1}%
+        \switchcolumn
+        \raggedleft #2%
+    \end{paracol}
 }{}
 
 % --- 2a. `positionentry` Environment (Details for a role within an organization) ---
 % Nested within `leadershipentry`.
 % Parameters:
-%   #1: Position Title (e.g., "President", "Treasurer") - italic by env
-%   #2: Location (e.g., "St. Louis, Missouri, USA")
-%   #3: Date Range (e.g., "Sep 2020 -- May 2021")
+%   #1: Position Title (e.g., "President", "Treasurer") — italic by env
+%   #2: Date Range (e.g., "Sep 2020 -- May 2021") — bold on right
 % Content: Bullet points for responsibilities and achievements in that role.
-% Layout: paracol, like resume. Title on left (can wrap), location . date on right.
-\newenvironment{positionentry}[3]{%
+% Layout: paracol, like resume. Title on left (can wrap), date on right.
+\newenvironment{positionentry}[2]{%
     \par\vspace{\highlightSpacing}
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}
         \raggedright\textit{#1}%
         \switchcolumn
-        \raggedleft #2\textnormal{ · }\textbf{#3}%
+        \raggedleft \textbf{#2}%
     \end{paracol}
     \vspace{\highlightSpacing}
     \begin{highlightsforbulletentries}
@@ -355,18 +358,17 @@
 % --- 8. `presentationentry` Environment ---
 % Parameters:
 %   #1: Event Title (e.g., "Spring Student Symposium") — italic by env
-%   #2: Location (e.g., "Delaware, Ohio, USA")
-%   #3: Date (e.g., "April 2023")
+%   #2: Date (e.g., "April 2023") — bold on right
 % Body: Presentation Title (regular, non-bullet paragraph).
-% Layout: mirrors positionentry paracol — event title on left, location . date on right.
+% Layout: mirrors positionentry paracol — event title on left, date on right.
 % Presentation title on next line as regular text.
-\newenvironment{presentationentry}[3]{%
+\newenvironment{presentationentry}[2]{%
     \par\vspace{\highlightSpacing}
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}
         \raggedright\textit{#1}%
         \switchcolumn
-        \raggedleft #2\textnormal{ · }\textbf{#3}%
+        \raggedleft \textbf{#2}%
     \end{paracol}
     \vspace{\highlightSpacing}
     \par\noindent\ignorespaces

@@ -392,28 +392,32 @@
 
 % --- 5. `leadershipentry` Environment (Organization header) ---
 % Parameters:
-%   #1: Organization Name (e.g., "Student Coding Club")
-%   #2: Location (e.g., "University of Example, City, State")
+%   #1: Organization Name (e.g., "Office of XYZ")
+%   #2: Location (e.g., "City, State, USA") — appears right-aligned, regular font.
 % Content: Typically followed by one or more `positionentry` environments.
 \newenvironment{leadershipentry}[2]{%
     \vspace{\entrySpacing}
     \needspace{4\baselineskip}% Keep org header with following position(s)
-    \textbf{#1}%
-    \ifblank{#2}{}{\kern\kernSpacing\AND\kern\kernSpacing\textit{#2}}%
+    \setcolumnwidth{\fill, \datecolumnwidth}
+    \begin{paracol}{2}
+        \textbf{#1}%
+        \switchcolumn
+        \raggedleft #2%
+    \end{paracol}
 }{}
 
 % --- 5a. `positionentry` Environment (Role within an organization) ---
 % Parameters:
-%   #1: Position Title (e.g., "President")
-%   #2: Date Range (e.g., "Sep 2020 -- May 2021")
+%   #1: Position Title (e.g., "President") — italic by env
+%   #2: Date Range (e.g., "Sep 2020 -- May 2021") — bold on right
 % Content: Bullet points for responsibilities and achievements in that role.
-\newenvironment{positionentry}[3]{%
+\newenvironment{positionentry}[2]{%
     \vspace{\highlightSpacing}
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}
         \raggedright\textit{#1}%
         \switchcolumn
-        \raggedleft #2\textnormal{ · }\textbf{#3}%
+        \raggedleft \textbf{#2}%
     \end{paracol}
     \vspace{\highlightSpacing}
     \begin{highlightsforbulletentries}

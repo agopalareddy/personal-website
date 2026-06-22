@@ -72,7 +72,7 @@
 % -----------------------------------------------------------------
 % These lengths are used for consistent vertical spacing throughout the document.
 \newlength{\headerSpacing}      % Base spacing, e.g., around section titles or major blocks
-\setlength{\headerSpacing}{10pt}
+\setlength{\headerSpacing}{3pt}
 
 \newlength{\entrySpacing}       % Spacing before a new entry (e.g., education, experience)
 \setlength{\entrySpacing}{0.5\headerSpacing} % Proportional to headerSpacing
@@ -84,7 +84,7 @@
 \setlength{\kernSpacing}{2.5pt}
 
 \newlength{\datecolumnwidth}    % Width of the date column in two-column entries
-\setlength{\datecolumnwidth}{5.1cm}
+\setlength{\datecolumnwidth}{9.0cm}
 
 % -----------------------------------------------------------------
 % Color Definitions
@@ -169,7 +169,7 @@
 % -----------------------------------------------------------------
 % Defines the appearance of \section titles.
 \titleformat{\section}
-{\needspace{9\baselineskip}\bfseries\large\color{accentColor}} % Format: needs space, bold, large, accent color
+{\needspace{3\baselineskip}\bfseries\large\color{accentColor}} % Format: needs space, bold, large, accent color
 {} % Label: no section number
 {0pt} % Separation between label and title
 {} % Code before title
@@ -200,7 +200,7 @@
             parsep=0.05cm,
             partopsep=0pt,
             itemsep=0pt,
-            leftmargin=20pt
+            leftmargin=15pt
         ]
         \interlinepenalty=10000  % Prevent page breaks between lines within items
         \@itempenalty=10000      % Prevent page breaks between bullet items
@@ -275,26 +275,22 @@
 
 % --- 1. `educationentry` Environment ---
 % Parameters:
-%   #1: Degree Name (e.g., "M.S. in Computer Science")
-%   #2: Institution (e.g., "University of Example")
-%   #3: Date Range (e.g., "Aug 2020 -- May 2022")
+%   #1: Institution (e.g., "Washington University in St. Louis")
+%   #2: Date Range (e.g., "August 2024 - May 2026")
+%   #3: Degree Name (e.g., "M.S. in Computer Science")
+%   #4: Location (e.g., "St. Louis, Missouri, USA")
 % Content: Bullet points for GPA, coursework, honors, etc.
-\newenvironment{educationentry}[3]{%
-        \vspace{\entrySpacing}
-        \ensurevspace{5\baselineskip}% Paracol-aware space check
-        \gdef\thisEntryDate{#3}%
-        \setcolumnwidth{\fill, \datecolumnwidth}
-        \begin{paracol}{2}
-            \mbox{\textbf{#1}}%
-            \kern\kernSpacing\AND\kern\kernSpacing
-            \mbox{#2} \\
-            \vspace{\highlightSpacing}
-            \begin{highlightsforbulletentries}
-                }{%
-            \end{highlightsforbulletentries}
-        \switchcolumn
-        \raggedleft \thisEntryDate
-        \end{paracol}
+\newenvironment{educationentry}[4]{%
+    \vspace{\entrySpacing}
+    \needspace{7\baselineskip}%
+    \noindent\begin{tabular}{@{}p{0.5\linewidth}@{}p{0.5\linewidth}@{}}
+    {\raggedright\textbf{#1}} & \\[\entrySpacing]
+    {\raggedright\textit{#3}} & \hfill #4 \textnormal{ · } \textbf{#2} \\
+    \end{tabular}\par
+    \vspace{\highlightSpacing}
+    \noindent\ignorespaces
+}{%
+    \par
 }
 
 % --- 2. `experienceentry` Environment (General Purpose) ---

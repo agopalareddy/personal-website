@@ -78,7 +78,7 @@
 \setlength{\entrySpacing}{0.5\headerSpacing} % Proportional to headerSpacing
 
 \newlength{\highlightSpacing}   % Spacing before a list of highlights/bullet points within an entry
-\setlength{\highlightSpacing}{0.25\headerSpacing} % Proportional to headerSpacing
+\setlength{\highlightSpacing}{0.5\headerSpacing} % Proportional to headerSpacing - bumped from 0.25 for more breathing room between entries
 
 \newlength{\kernSpacing}        % A small, fixed kerning space for inline elements
 \setlength{\kernSpacing}{2.5pt}
@@ -308,12 +308,13 @@
 % --- 2a. `positionentry` Environment (Details for a role within an organization) ---
 % Nested within `leadershipentry`.
 % Parameters:
-%   #1: Position Title (e.g., "President", "Treasurer") - italic by env, override with \textbf{} inline
+%   #1: Position Title (e.g., "President", "Treasurer") - italic by env
 %   #2: Location (e.g., "St. Louis, Missouri, USA")
 %   #3: Date Range (e.g., "Sep 2020 -- May 2021")
 % Content: Bullet points for responsibilities and achievements in that role.
+% Layout: paracol, like resume. Title on left (can wrap), location . date on right.
 \newenvironment{positionentry}[3]{%
-    \vspace{\highlightSpacing}
+    \par\vspace{\highlightSpacing}
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}
         \raggedright\textit{#1}%
@@ -353,14 +354,16 @@
 
 % --- 8. `presentationentry` Environment ---
 % Parameters:
-%   #1: Date of Presentation (e.g., "Mar 2021")
+%   #1: Date of Presentation (e.g., "September 2024")
 %   #2: Title of Presentation
 %   #3: Venue/Event (e.g., "Annual Research Symposium")
-%   #4: University/Location (e.g., "University of Example, City, State")
+%   #4: University/Org (e.g., "Washington University in St. Louis")
+%   #5: Location (e.g., "St. Louis, Missouri, USA")
 % Content: None (this is a single-line entry, details are in parameters).
-\newenvironment{presentationentry}[4]{%
+% Layout: mirrors positionentry - right col has "Location . Date", left col has title + venue.
+\newenvironment{presentationentry}[5]{%
         \vspace{\highlightSpacing}
-        \begin{twocolentry}{#1}
+        \begin{twocolentry}{#5 \textnormal{ · } \textbf{#1}}
             \mbox{\textit{#2}} \\
             \textbf{#3}, #4
         \end{twocolentry}

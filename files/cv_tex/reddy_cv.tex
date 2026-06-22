@@ -223,100 +223,61 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 % ----------------------------------------------------------------------
 \section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
 
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/blink-morse-app}{Blink Morse Decoder}} % Project Title
-	{CodeTillDawn Hackathon} % Affiliation/Context
-	{Remote} % Location
-	{June 2026} % Date Range
-	\item Built an Android accessibility app that translates deliberate eye blinks into Morse code using the SmartSpectra SDK for real-time facial landmark tracking and a debounced blink state machine to filter involuntary micro-blinks.
-	\item Designed a six-blink calibration routine to set personalized timing thresholds, with short/long blinks mapped to Morse dots/dashes, in a glassmorphic Material Design 3 interface that also includes a live bio-vitals dashboard.
-\end{projectentry}
+\begin{leadershipentry}{CodeTillDawn Hackathon}{}
+	\begin{positionentry}{\textbf{\href{https://github.com/agopalareddy/blink-morse-app}{Blink Morse Decoder}}}{Remote}{June 2026}
+		\item Built an Android accessibility app that translates deliberate eye blinks into Morse code using the SmartSpectra SDK for real-time facial landmark tracking and a debounced blink state machine to filter involuntary micro-blinks.
+		\item Designed a six-blink calibration routine to set personalized timing thresholds, with short/long blinks mapped to Morse dots/dashes, in a glassmorphic Material Design 3 interface that also includes a live bio-vitals dashboard.
+	\end{positionentry}
+\end{leadershipentry}
 
-% \vspace{\entrySpacing} % Optional
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/CSE-5114-Project}{MLB Statcast Real-Time Data Pipeline}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{September 2025 - October 2025} % Date Range
-	\item Built a lambda-architecture pipeline for MLB Statcast pitch-level data with co-author Eddy Sul for the CSE 5114 (Data Manipulation and Management at Scale) course, using Apache Airflow for historical batch ingestion into Snowflake and a Kafka/Spark Streaming path for live, simulated data.
-	\item Developed a Streamlit dashboard with three views: pitch-by-pitch historical game replay with interactive strike-zone visualization, pitcher analytics (velocity, spin rate, strikeout rate), and team head-to-head matchups.
-\end{projectentry}
+\begin{leadershipentry}{Washington University in St. Louis}{}
+	\begin{positionentry}{\textbf{\href{https://github.com/agopalareddy/CSE-5114-Project}{MLB Statcast Real-Time Data Pipeline}}}{St. Louis, Missouri, USA}{September 2025 - October 2025}
+		\item Built a lambda-architecture pipeline for MLB Statcast pitch-level data with co-author Eddy Sul for the CSE 5114 (Data Manipulation and Management at Scale) course, using Apache Airflow for historical batch ingestion into Snowflake and a Kafka/Spark Streaming path for live, simulated data.
+		\item Developed a Streamlit dashboard with three views: pitch-by-pitch historical game replay with interactive strike-zone visualization, pitcher analytics (velocity, spin rate, strikeout rate), and team head-to-head matchups.
+	\end{positionentry}
+	\begin{positionentry}{\textbf{\href{https://github.com/agopalareddy/CSE5519-Project}{Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses}}}{St. Louis, Missouri, USA}{September 2025 - October 2025}
+		\item Built an automated red-blue teaming pipeline for vision-language model (VLM) security with teammates Stuart Aldrich and Mohammad Rouie Miab, addressing visual prompt injection (VPI) attacks against VLM-based agents.
+		\item Generated visual jailbreak attack images by overlaying malicious instructions onto benign images and evaluated them against a target VLM (Gemma-3-4b-it) using semantic response analysis.
+		\item Auto-generated deterministic, OCR-based Python defenses for each successful attack, validated with accuracy, precision, and recall metrics in an iterative refinement loop.
+	\end{positionentry}
+	\begin{positionentry}{\textbf{\href{https://github.com/agopalareddy/CSE510A_Datacenter_Cooling}{Datacenter Cooling Optimization using Deep Reinforcement Learning}}}{St. Louis, Missouri, USA}{August 2024 - December 2024}
+		\item Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC) integrated with EnergyPlus simulations to optimize datacenter cooling systems.
+		\item Achieved 35.8\% energy efficiency improvement over baseline using DDQN, addressing the underserved small to mid-sized datacenter market.
+		\item Created a comprehensive framework integrating building energy simulation with reinforcement learning for dynamic thermal management.
+	\end{positionentry}
+	\begin{positionentry}{\textbf{\href{https://agreddy.com/storybook/}{Interactive Storybook}}}{St. Louis, Missouri, USA}{August 2024 - December 2024}
+		\item Developed an interactive storytelling application using Vue.js, Node.js, and MongoDB with AI-powered content generation, enabling users to create branching narrative stories.
+		\item Implemented Google Gemini API and fal.ai integration for dynamic story text and contextual image generation based on user choices.
+		\item Created a visual path tracking interface to help users navigate complex branching narratives and story progression.
+	\end{positionentry}
+	\begin{positionentry}{\textbf{\href{https://agreddy.com/chat/}{Socket.IO Multi-Room Chat Application}}}{St. Louis, Missouri, USA}{August 2024 - December 2024}
+		\item Developed a feature-rich multi-room chat application using Node.js and Socket.IO with password-protected rooms, private messaging, and user moderation capabilities.
+		\item Implemented room management features including creator privileges, user tracking, and persistent nickname storage.
+		\item Created real-time bidirectional event-based communication with responsive design for optimal user experience.
+	\end{positionentry}
+	\begin{positionentry}{\textbf{\href{https://agreddy.com/calendar/}{PHP Calendar Application}}}{St. Louis, Missouri, USA}{August 2024 - December 2024}
+		\item Developed a feature-rich personal calendar and event management web application using PHP, MySQL, HTML5, CSS3, and JavaScript.
+		\item Implemented secure user authentication, CSRF protection, SQL injection prevention, and input sanitization.
+		\item Created an interactive calendar interface with comprehensive event management capabilities for creation, editing, and tracking.
+	\end{positionentry}
+\end{leadershipentry}
 
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/CSE5519-Project}{Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{September 2025 - October 2025} % Date Range
-	\item Built an automated red-blue teaming pipeline for vision-language model (VLM) security with teammates Stuart Aldrich and Mohammad Rouie Miab, addressing visual prompt injection (VPI) attacks against VLM-based agents.
-	\item Generated visual jailbreak attack images by overlaying malicious instructions onto benign images and evaluated them against a target VLM (Gemma-3-4b-it) using semantic response analysis.
-	\item Auto-generated deterministic, OCR-based Python defenses for each successful attack, validated with accuracy, precision, and recall metrics in an iterative refinement loop.
-\end{projectentry}
+\begin{leadershipentry}{Personal Project}{}
+	\begin{positionentry}{\textbf{\href{https://github.com/agopalareddy/GoogleCalendarSync}{Google Calendar Availability Sync}}}{Remote}{August 2025}
+		\item Built a Google Apps Script that runs as a state-based reconciliation pipeline, syncing events from multiple source calendars into a single privacy-preserving ``Availability'' calendar for scheduling tools.
+		\item Implemented event splitting for multi-day/all-day events, overlap merging across calendars, and metadata-tagged diffing with exponential backoff for API rate limits; powers the \href{https://agreddy.com/availability/}{Availability page} on agreddy.com.
+	\end{positionentry}
+	\begin{positionentry}{\textbf{\href{https://github.com/agopalareddy/BayesianOptimizationPractice}{Bayesian Optimization for Material and Product Optimization}}}{Remote}{July 2025}
+		\item Applied Bayesian optimization to three regression problems from the UCI Machine Learning Repository -- superconductor critical temperature, concrete compressive strength, and wine quality -- tuning Random Forest and XGBoost models with scikit-optimize.
+		\item Applied Bayesian optimization a second time to search the input feature space itself for material and mix compositions that maximize the target property, using the same technique for both model tuning and inverse design.
+	\end{positionentry}
+\end{leadershipentry}
 
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/GoogleCalendarSync}{Google Calendar Availability Sync}} % Project Title
-	{Personal Project} % Affiliation/Context
-	{Remote} % Location
-	{August 2025} % Date Range
-	\item Built a Google Apps Script that runs as a state-based reconciliation pipeline, syncing events from multiple source calendars into a single privacy-preserving ``Availability'' calendar for scheduling tools.
-	\item Implemented event splitting for multi-day/all-day events, overlap merging across calendars, and metadata-tagged diffing with exponential backoff for API rate limits; powers the \href{https://agreddy.com/availability/}{Availability page} on agreddy.com.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/BayesianOptimizationPractice}{Bayesian Optimization for Material and Product Optimization}} % Project Title
-	{Personal Project} % Affiliation/Context
-	{Remote} % Location
-	{July 2025} % Date Range
-	\item Applied Bayesian optimization to three regression problems from the UCI Machine Learning Repository -- superconductor critical temperature, concrete compressive strength, and wine quality -- tuning Random Forest and XGBoost models with scikit-optimize.
-	\item Applied Bayesian optimization a second time to search the input feature space itself for material and mix compositions that maximize the target property, using the same technique for both model tuning and inverse design.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/CSE510A_Datacenter_Cooling}{Datacenter Cooling Optimization using Deep Reinforcement Learning}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{August 2024 - December 2024} % Date Range
-	\item Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC) integrated with EnergyPlus simulations to optimize datacenter cooling systems.
-	\item Achieved 35.8\% energy efficiency improvement over baseline using DDQN, addressing the underserved small to mid-sized datacenter market.
-	\item Created a comprehensive framework integrating building energy simulation with reinforcement learning for dynamic thermal management.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://agreddy.com/storybook/}{Interactive Storybook}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{August 2024 - December 2024} % Date Range
-	\item Developed an interactive storytelling application using Vue.js, Node.js, and MongoDB with AI-powered content generation, enabling users to create branching narrative stories.
-	\item Implemented Google Gemini API and fal.ai integration for dynamic story text and contextual image generation based on user choices.
-	\item Created a visual path tracking interface to help users navigate complex branching narratives and story progression.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://agreddy.com/chat/}{Socket.IO Multi-Room Chat Application}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{August 2024 - December 2024} % Date Range
-	\item Developed a feature-rich multi-room chat application using Node.js and Socket.IO with password-protected rooms, private messaging, and user moderation capabilities.
-	\item Implemented room management features including creator privileges, user tracking, and persistent nickname storage.
-	\item Created real-time bidirectional event-based communication with responsive design for optimal user experience.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://agreddy.com/calendar/}{PHP Calendar Application}} % Project Title
-	{Washington University in St. Louis} % Affiliation/Context
-	{St. Louis, Missouri, USA} % Location
-	{August 2024 - December 2024} % Date Range
-	\item Developed a feature-rich personal calendar and event management web application using PHP, MySQL, HTML5, CSS3, and JavaScript.
-	\item Implemented secure user authentication, CSRF protection, SQL injection prevention, and input sanitization.
-	\item Created an interactive calendar interface with comprehensive event management capabilities for creation, editing, and tracking.
-\end{projectentry}
-
-\begin{projectentry}
-	{\href{https://github.com/agopalareddy/AIPS}{Parkinson's Disease AI Diagnosis Software}} % Project Title
-	{MITxSureStart FutureMakers Create-a-Thon Program} % Affiliation/Context
-	{Remote} % Location
-	{June 2022 - July 2022} % Date Range
-	\item Developed AIParkinScan software for Parkinson's diagnosis using neural networks, spectrograms, and the Random Forest algorithm trained on audio and image data.
-\end{projectentry}
+\begin{leadershipentry}{MITxSureStart FutureMakers Create-a-Thon Program}{}
+	\begin{positionentry}{\textbf{\href{https://github.com/agopalareddy/AIPS}{Parkinson's Disease AI Diagnosis Software}}}{Remote}{June 2022 - July 2022}
+		\item Developed AIParkinScan software for Parkinson's diagnosis using neural networks, spectrograms, and the Random Forest algorithm trained on audio and image data.
+	\end{positionentry}
+\end{leadershipentry}
 
 % --- Vertical Space After Section ---
 \vspace{\headerSpacing}
@@ -326,35 +287,24 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 % ----------------------------------------------------------------------
 \section{\sectionlink{https://agreddy.com/experience/}{TEACHING \& MENTORSHIP EXPERIENCE}}
 
-\begin{experienceentry}
-	{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale} % Position Title
-	{Washington University in St. Louis} % Organization
-	{St. Louis, Missouri, USA} % Location
-	{January 2026 - May 2026} % Date Range
-	\item Guided students in implementing data pipelines and real-time processing systems using Python, Snowflake, SQL, Airflow, Spark, Kafka, and Flink.
-	\item Conducted oral midterm exams simulating technical interviews on distributed storage, fault tolerance, and scaling; mentored capstone project groups on data architecture.
-\end{experienceentry}
+\begin{leadershipentry}{Washington University in St. Louis}{}
+	\begin{positionentry}{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale}{St. Louis, Missouri, USA}{January 2026 - May 2026}
+		\item Guided students in implementing data pipelines and real-time processing systems using Python, Snowflake, SQL, Airflow, Spark, Kafka, and Flink.
+		\item Conducted oral midterm exams simulating technical interviews on distributed storage, fault tolerance, and scaling; mentored capstone project groups on data architecture.
+	\end{positionentry}
+	\needspace{11\baselineskip}
+	\begin{positionentry}{HackWashU Databases Workshop}{St. Louis, Missouri, USA}{October 2025}
+		\item Designed and facilitated a hands-on databases workshop for beginner-to-intermediate developers, teaching through two complete projects rather than lectures.
+		\item Guided participants through building a normalized SQLite database from the iTunes Search API (schema design, deduplication, CSV export) and a full-stack Supabase Todo app with authentication and Row Level Security.
+	\end{positionentry}
+\end{leadershipentry}
 
-% \vspace{\entrySpacing} % Optional
-\needspace{11\baselineskip}
-\begin{experienceentry}
-	{HackWashU Databases Workshop} % Position Title
-	{Washington University in St. Louis - HackWashU} % Organization
-	{St. Louis, Missouri, USA} % Location
-	{October 2025} % Date Range
-	\item Designed and facilitated a hands-on databases workshop for beginner-to-intermediate developers, teaching through two complete projects rather than lectures.
-	\item Guided participants through building a normalized SQLite database from the iTunes Search API (schema design, deduplication, CSV export) and a full-stack Supabase Todo app with authentication and Row Level Security.
-\end{experienceentry}
-
-% \vspace{\entrySpacing} % Optional
-\begin{experienceentry}
-	{Computer Science Lab Assistant} % Position Title
-	{Ohio Wesleyan University} % Organization
-	{Delaware, Ohio, USA} % Location
-	{January 2022 - May 2023} % Date Range
-	\item Tutored approximately ten students for over 6 hours per week, assisting with homework and exam preparation for introductory, intermediate, and advanced computer science coursework.
-	\item Tested and graded assignments of around 35 students in introductory and intermediate computer science classes.
-\end{experienceentry}
+\begin{leadershipentry}{Ohio Wesleyan University}{}
+	\begin{positionentry}{Computer Science Lab Assistant}{Delaware, Ohio, USA}{January 2022 - May 2023}
+		\item Tutored approximately ten students for over 6 hours per week, assisting with homework and exam preparation for introductory, intermediate, and advanced computer science coursework.
+		\item Tested and graded assignments of around 35 students in introductory and intermediate computer science classes.
+	\end{positionentry}
+\end{leadershipentry}
 
 % --- Vertical Space After Section ---
 \vspace{\headerSpacing}
@@ -432,48 +382,32 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 % ----------------------------------------------------------------------
 \section{PROFESSIONAL SERVICE \& LEADERSHIP}
 
-\begin{leadershipentry}
-	{Graduate Student Affairs Advisory Board (GSAAB)} % Organization Name
-	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
-	\begin{positionentry}
-		{Member} % Position Title
-		{August 2025 - May 2026} % Date Range
+\begin{leadershipentry}{Graduate Student Affairs Advisory Board (GSAAB)}{}
+	\begin{positionentry}{Member}{St. Louis, Missouri, USA}{August 2025 - May 2026}
 		\item Provided strategic feedback to the Vice Chancellor for Student Affairs on critical issues impacting graduate student life and experience.
 		\item Engaged in critical dialogue with senior university leaders, including the Dean of Students, to advocate for improvements to the graduate student experience across all academic programs.
 		\item Contributed to monthly discussions on student affairs policies and initiatives to enhance support systems and resources for the graduate student community.
 	\end{positionentry}
 \end{leadershipentry}
 
-\begin{leadershipentry}
-	{Center for Career Engagement (CCE) Student Advisory Board} % Organization Name
-	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
-	\begin{positionentry}
-		{Graduate Student Member} % Position Title
-		{August 2025 - May 2026} % Date Range
+\begin{leadershipentry}{Center for Career Engagement (CCE) Student Advisory Board}{}
+	\begin{positionentry}{Graduate Student Member}{St. Louis, Missouri, USA}{August 2025 - May 2026}
 		\item Guided the strategic direction of the Center for Career Engagement to ensure services align with diverse needs of graduate students from all academic backgrounds and career interests.
 		\item Provided insights on career engagement programs, workshops, and resources to enhance accessibility and effectiveness for the WashU graduate student community.
 		\item Built community around career development initiatives and fostered collaboration between the CCE and graduate student body.
 	\end{positionentry}
 \end{leadershipentry}
 
-\begin{leadershipentry}
-	{Umang (Indian Graduate Student Association)} % Organization Name
-	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
-	\begin{positionentry}
-		{Treasurer} % Position Title
-		{June 2025 - October 2025} % Date Range
+\begin{leadershipentry}{Umang (Indian Graduate Student Association)}{}
+	\begin{positionentry}{Treasurer}{St. Louis, Missouri, USA}{June 2025 - October 2025}
 		\item Managed club finances, including budgeting, expense tracking, and fundraising to ensure sustainable operations and successful event planning.
 		\item Collaborated with members to organize cultural events and festivals, promoting cultural awareness and fostering community among Indian graduate students.
 	\end{positionentry}
 \end{leadershipentry}
 
 % \vspace{\entrySpacing} % Optional
-\begin{leadershipentry}
-	{Graduate and Professional Student Council (GPSC)} % Organization Name
-	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
-	\begin{positionentry}
-		{Vice President of the Graduate-Professional Council (GPC) Chamber} % Position Title
-		{May 2025 - May 2026} % Date Range
+\begin{leadershipentry}{Graduate and Professional Student Council (GPSC)}{}
+	\begin{positionentry}{Vice President of the Graduate-Professional Council (GPC) Chamber}{St. Louis, Missouri, USA}{May 2025 - May 2026}
 		\item Managed the Council's unified Microsoft Teams workspace and website, establishing centralized communication hubs and maintaining up-to-date information on events, governance, and resources.
 		\item Built and maintained committee membership rosters using ranked-choice preference allocation to balance workload and ensure efficient cross-committee coordination.
 		\item Oversaw information architecture for the Council's documentation repository.
@@ -482,46 +416,30 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 	\end{positionentry}
 \end{leadershipentry}
 
-\begin{leadershipentry}
-	{HackWashU} % Organization Name
-	{Washington University in St. Louis, St. Louis, Missouri, USA} % Location
-	\begin{positionentry}
-		{Treasurer} % Position Title
-		{December 2024 - July 2025} % Date Range
+\begin{leadershipentry}{HackWashU}{}
+	\begin{positionentry}{Treasurer}{St. Louis, Missouri, USA}{December 2024 - July 2025}
 		\item Managed the club's finances, including budgeting and expense tracking, to ensure sustainable operations and successful event planning.
 		\item Coordinated fundraising efforts and sponsorship outreach to support club activities and initiatives.
 		\item Collaborated with club members to organize hackathons and coding events, fostering a culture of innovation and teamwork among participants.
 	\end{positionentry}
 \end{leadershipentry}
 
-\begin{leadershipentry}
-	{Hindu Student Council} % Organization Name
-	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
-	\begin{positionentry}
-		{Treasurer and Founding Member} % Position Title
-		{January 2023 - May 2023} % Date Range
+\begin{leadershipentry}{Hindu Student Council}{}
+	\begin{positionentry}{Treasurer and Founding Member}{Delaware, Ohio, USA}{January 2023 - May 2023}
 		\item Co-established the council and organized events promoting Hindu cultural heritage, fostering youth leadership skills, and creating volunteer opportunities.
 		\item Managed organizational finances, developing and submitting formal budget requests to secure funding for council activities and events.
 	\end{positionentry}
 \end{leadershipentry}
 
-\begin{leadershipentry}
-	{Wesleyan Council on Student Affairs (WCSA)} % Organization Name
-	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
-	\begin{positionentry}
-		{Budget Committee Senator} % Position Title
-		{August 2022 - May 2023} % Date Range
+\begin{leadershipentry}{Wesleyan Council on Student Affairs (WCSA)}{}
+	\begin{positionentry}{Budget Committee Senator}{Delaware, Ohio, USA}{August 2022 - May 2023}
 		\item Actively contributed to the Budget Committee's process of proposing, discussing, and deciding on senate bills, while overseeing the allocation of an annual budget exceeding \$350,000 to campus individuals and organizations.
 		\item Recipient of the Golden Bishop Award for WCSA Best New Member, recognized for making the greatest overall contribution to WCSA's mission through drive, high achievement on the Budget Committee, and providing unique, valuable perspectives.
 	\end{positionentry}
 \end{leadershipentry}
 
-\begin{leadershipentry}
-	{The Neurds (Neuroscience Club)} % Organization Name
-	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
-	\begin{positionentry}
-		{Member} % Position Title
-		{August 2022 - May 2023} % Date Range
+\begin{leadershipentry}{The Neurds (Neuroscience Club)}{}
+	\begin{positionentry}{Member}{Delaware, Ohio, USA}{August 2022 - May 2023}
 		\item Presented on AI at Brain Fair 2023 during Brain Awareness Week, bridging neuroscience and technology.
 		\item Contributed to the planning and marketing of club events, directly supporting educational enrichment and networking opportunities for members.
 		\item Participated in initiatives promoting neuroscience awareness and community service, aiming to enhance members' intellectual and career development pathways.
@@ -529,24 +447,16 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 \end{leadershipentry}
 
 % \vspace{\entrySpacing} % Optional
-\begin{leadershipentry}
-	{Campus Programming Board} % Organization Name
-	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
-	\begin{positionentry}
-		{Vice President of Finance} % Position Title
-		{January 2022 - December 2022} % Date Range
+\begin{leadershipentry}{Campus Programming Board}{}
+	\begin{positionentry}{Vice President of Finance}{Delaware, Ohio, USA}{January 2022 - December 2022}
 		\item Successfully planned, created, and implemented budgets totaling over \$86,000 for campus events.
 		\item Initiated and led revamp of organization's governing documents, implementing efficient practices.
 		\item Negotiated an additional \$10,000 per year with the Wesleyan Council on Student Affairs.
 	\end{positionentry}
 \end{leadershipentry}
 
-\begin{leadershipentry}
-	{Mathematics, Computer Science \& Data Analytics Student Board} % Organization Name
-	{Ohio Wesleyan University, Delaware, Ohio, USA} % Location
-	\begin{positionentry}
-		{Member} % Position Title
-		{August 2021 - May 2023} % Date Range
+\begin{leadershipentry}{Mathematics, Computer Science \& Data Analytics Student Board}{}
+	\begin{positionentry}{Member}{Delaware, Ohio, USA}{August 2021 - May 2023}
 		\item Analyzed faculty evaluations to provide actionable insights for departmental improvements.
 		\item Gathered and synthesized student feedback on course offerings to recommend enhancements to the department.
 	\end{positionentry}

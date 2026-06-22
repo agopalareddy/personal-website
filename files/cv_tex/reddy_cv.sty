@@ -354,19 +354,24 @@
 
 % --- 8. `presentationentry` Environment ---
 % Parameters:
-%   #1: Date of Presentation (e.g., "September 2024")
-%   #2: Title of Presentation
-%   #3: Venue/Event (e.g., "Annual Research Symposium")
-%   #4: University/Org (e.g., "Washington University in St. Louis")
-%   #5: Location (e.g., "St. Louis, Missouri, USA")
-% Content: None (this is a single-line entry, details are in parameters).
-% Layout: mirrors positionentry - right col has "Location . Date", left col has title + venue.
-\newenvironment{presentationentry}[5]{%
-        \vspace{\highlightSpacing}
-        \begin{twocolentry}{#5 \textnormal{ · } \textbf{#1}}
-            \mbox{\textit{#2}} \\
-            \textbf{#3}, #4
-        \end{twocolentry}
+%   #1: Event Title (e.g., "Spring Student Symposium") — italic by env
+%   #2: Location (e.g., "Delaware, Ohio, USA")
+%   #3: Date (e.g., "April 2023")
+% Body: Presentation Title (regular, non-bullet paragraph).
+% Layout: mirrors positionentry paracol — event title on left, location . date on right.
+% Presentation title on next line as regular text.
+\newenvironment{presentationentry}[3]{%
+    \par\vspace{\highlightSpacing}
+    \setcolumnwidth{\fill, \datecolumnwidth}
+    \begin{paracol}{2}
+        \raggedright\textit{#1}%
+        \switchcolumn
+        \raggedleft #2\textnormal{ · }\textbf{#3}%
+    \end{paracol}
+    \vspace{\highlightSpacing}
+    \par\noindent\ignorespaces
+}{%
+    \par
 }
 
 % -----------------------------------------------------------------

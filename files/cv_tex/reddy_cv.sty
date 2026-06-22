@@ -283,10 +283,19 @@
 \newenvironment{educationentry}[4]{%
     \vspace{\entrySpacing}
     \needspace{7\baselineskip}%
-    \noindent\begin{tabular}{@{}p{\dimexpr\linewidth-\datecolumnwidth-\tabcolsep\relax}@{}p{\datecolumnwidth}@{}}
-    {\raggedright\textbf{#1}} & \raggedleft #4 \\[\entrySpacing]
-    {\raggedright\textit{#3}} & \raggedleft \textbf{#2} \\
-    \end{tabular}\par
+    \setcolumnwidth{\fill, \datecolumnwidth}
+    \begin{paracol}{2}
+        \raggedright\textbf{#1}%
+        \switchcolumn
+        \raggedleft #4%
+    \end{paracol}
+    \vspace{\highlightSpacing}
+    \setcolumnwidth{\fill, \datecolumnwidth}
+    \begin{paracol}{2}
+        \raggedright\textit{#3}%
+        \switchcolumn
+        \raggedleft \textbf{#2}%
+    \end{paracol}
     \vspace{\highlightSpacing}
     \noindent\ignorespaces
 }{%

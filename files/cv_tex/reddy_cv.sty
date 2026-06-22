@@ -330,6 +330,28 @@
     \end{highlightsforbulletentries}
 }
 
+% --- 2b. `researchentry` Environment (Research project within an organization) ---
+% Nested within `leadershipentry`.
+% Parameters:
+%   #1: Project Title (e.g., "\href{url}{Project Name}") — italic by env
+%   #2: Date Range (e.g., "August 2025 - May 2026") — bold on right
+% Content: Free-form body. Typically: context line (regular text), then
+%   \begin{highlightsforbulletentries} \item ... \end{highlightsforbulletentries}.
+% Layout: paracol title+date, then body as regular paragraph.
+\newenvironment{researchentry}[2]{%
+    \par\vspace{\highlightSpacing}
+    \setcolumnwidth{\fill, \datecolumnwidth}
+    \begin{paracol}{2}
+        \raggedright\textit{#1}%
+        \switchcolumn
+        \raggedleft \textbf{#2}%
+    \end{paracol}
+    \vspace{\highlightSpacing}
+    \par\noindent\ignorespaces
+}{%
+    \par
+}
+
 % --- 6. `skillcategory` Environment ---
 % Parameters:
 %   #1: Skill Category Name (e.g., "Programming Languages")

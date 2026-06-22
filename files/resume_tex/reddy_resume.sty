@@ -336,9 +336,9 @@
 \newenvironment{educationentry}[4]{%
     \vspace{\entrySpacing}
     \needspace{7\baselineskip}%
-    \noindent\begin{tabular}{@{}p{0.5\linewidth}@{}p{0.5\linewidth}@{}}
-    {\raggedright\textbf{#1}} & \\[\entrySpacing]
-    {\raggedright\textit{#3}} & \hfill #4 \textnormal{ · } \textbf{#2} \\
+    \noindent\begin{tabular}{@{}p{\dimexpr\linewidth-\datecolumnwidth-\tabcolsep\relax}@{}p{\datecolumnwidth}@{}}
+    {\raggedright\textbf{#1}} & \raggedleft #4 \\[\entrySpacing]
+    {\raggedright\textit{#3}} & \raggedleft \textbf{#2} \\
     \end{tabular}\par
     \vspace{\highlightSpacing}
     \noindent\ignorespaces

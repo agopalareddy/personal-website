@@ -293,118 +293,37 @@
     \par
 }
 
-% --- 2. `experienceentry` Environment (General Purpose) ---
-% Used for Teaching, Industry, Volunteer, etc.
-% Parameters:
-%   #1: Position Title (e.g., "Software Engineer Intern")
-%   #2: Organization (e.g., "Tech Company Inc.")
-%   #3: Location (e.g., "City, State")
-%   #4: Date Range (e.g., "Jun 2021 -- Aug 2021")
-% Content: Bullet points for responsibilities and accomplishments.
-\newenvironment{experienceentry}[4]{%
-        \vspace{\entrySpacing}
-        \ensurevspace{7\baselineskip}% Paracol-aware space check
-        \gdef\thisEntryDate{#4}%
-        \setcolumnwidth{\fill, \datecolumnwidth}
-        \begin{paracol}{2}
-            \mbox{\textbf{#1}}%
-            \kern\kernSpacing\AND\kern\kernSpacing
-            \mbox{#2, #3} \\
-            \vspace{\highlightSpacing}
-            \begin{highlightsforbulletentries}
-                }{%
-            \end{highlightsforbulletentries}
-        \switchcolumn
-        \raggedleft \thisEntryDate
-        \end{paracol}
-}
-
-% --- 3. `researchentry` Environment ---
-% Parameters:
-%   #1: Project Title (can include \href for links)
-%   #2: Organization/Lab (e.g., "AI Research Lab")
-%   #3: Location (e.g., "University of Example")
-%   #4: Course/Context (e.g., "Under Prof. X" or "Independent Study")
-%   #5: Date Range (e.g., "Spring 2021")
-% Content: Bullet points describing the research.
-\newenvironment{researchentry}[5]{%
-        \vspace{\entrySpacing}
-        \needspace{8\baselineskip}% Guard full-width title + org + context + bullets
-        \mbox{\textbf{#1}}%
-        \kern\kernSpacing\AND\kern\kernSpacing
-        \mbox{#2, #3}
-        \vspace{\highlightSpacing}
-        \gdef\thisEntryDate{#5}%
-        \ensurevspace{6\baselineskip}% Guard paracol context + bullets
-        \setcolumnwidth{\fill, \datecolumnwidth}
-        \begin{paracol}{2}
-            \mbox{\textit{#4}}
-            \vspace{\highlightSpacing}
-            \begin{highlightsforbulletentries}
-                }{%
-            \end{highlightsforbulletentries}
-        \switchcolumn
-        \raggedleft \thisEntryDate
-        \end{paracol}
-}
-
-% --- 4. `projectentry` Environment ---
-% Parameters:
-%   #1: Project Title (can include \href for links)
-%   #2: Affiliation/Context (e.g., "Personal Project", "Course Project")
-%   #3: Location (if applicable, or leave empty/combine with #2)
-%   #4: Date Range (e.g., "Fall 2020")
-% Content: Bullet points describing the project.
-\newenvironment{projectentry}[4]{%
-        \vspace{\entrySpacing}
-        \ensurevspace{7\baselineskip}% Paracol-aware space check
-        \gdef\thisEntryDate{#4}%
-        \setcolumnwidth{\fill, \datecolumnwidth}
-        \begin{paracol}{2}
-            \textbf{#1}%
-            \kern\kernSpacing\AND\kern\kernSpacing
-            \mbox{#2, #3} \\
-            \vspace{\highlightSpacing}
-            \begin{highlightsforbulletentries}
-                }{%
-            \end{highlightsforbulletentries}
-        \switchcolumn
-        \raggedleft \thisEntryDate
-        \end{paracol}
-}
-
-% --- 5. `leadershipentry` Environment (Header for a leadership role) ---
+% --- 2. `leadershipentry` Environment (Header for a leadership role) ---
 % Parameters:
 %   #1: Organization Name (e.g., "Student Coding Club")
-%   #2: Location (e.g., "University of Example")
+%   #2: Location (e.g., "University of Example") - leave empty if location is per-position
 % Content: Typically followed by one or more `positionentry` environments.
 \newenvironment{leadershipentry}[2]{%
-        \vspace{\entrySpacing}
-        \needspace{8\baselineskip}% Keep org header with following position(s)
-        \mbox{\textbf{#1}}%
-        \kern\kernSpacing\AND\kern\kernSpacing
-        \mbox{#2}
-        }{}
+    \vspace{\entrySpacing}
+    \needspace{4\baselineskip}% Keep org header with following position(s)
+    \textbf{#1}%
+    \ifblank{#2}{}{\kern\kernSpacing\AND\kern\kernSpacing #2}%
+}{}
 
-% --- 5a. `positionentry` Environment (Details for a role within an organization) ---
+% --- 2a. `positionentry` Environment (Details for a role within an organization) ---
 % Nested within `leadershipentry`.
 % Parameters:
-%   #1: Position Title (e.g., "President", "Treasurer")
-%   #2: Date Range (e.g., "Sep 2020 -- May 2021")
+%   #1: Position Title (e.g., "President", "Treasurer") - italic by env, override with \textbf{} inline
+%   #2: Location (e.g., "St. Louis, Missouri, USA")
+%   #3: Date Range (e.g., "Sep 2020 -- May 2021")
 % Content: Bullet points for responsibilities and achievements in that role.
-\newenvironment{positionentry}[2]{%
+\newenvironment{positionentry}[3]{%
     \vspace{\highlightSpacing}
-    \ensurevspace{5\baselineskip}% Paracol-aware space check
-    \gdef\thisEntryDate{#2}%
     \setcolumnwidth{\fill, \datecolumnwidth}
     \begin{paracol}{2}
-        \textit{#1}
-        \begin{highlightsforbulletentries}
-            }{%
-        \end{highlightsforbulletentries}
-    \switchcolumn
-    \raggedleft \thisEntryDate
+        \raggedright\textit{#1}%
+        \switchcolumn
+        \raggedleft #2\textnormal{ · }\textbf{#3}%
     \end{paracol}
+    \vspace{\highlightSpacing}
+    \begin{highlightsforbulletentries}
+}{%
+    \end{highlightsforbulletentries}
 }
 
 % --- 6. `skillcategory` Environment ---

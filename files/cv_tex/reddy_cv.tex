@@ -15,7 +15,7 @@
 % HEADER SECTION
 % ----------------------------------------------------------------------
 \begin{header}
-	\begin{minipage}[t]{0.85\textwidth}
+	\begin{minipage}[t]{1.0\textwidth}
 		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
 		\normalsize
 		% Phone
@@ -30,11 +30,6 @@
 		\kern \kernSpacing\AND\kern \kernSpacing
 		\href{https://agreddy.com}{agreddy.com}%
 	\end{minipage}
-	\hfill
-	\begin{minipage}[t]{0.11\textwidth}
-		\raggedleft
-		\qrcode{https://agreddy.com}
-	\end{minipage}
 \end{header}
 
 % --- Vertical Space After Header ---
@@ -43,23 +38,19 @@
 % ----------------------------------------------------------------------
 % 1. EDUCATION SECTION
 % ----------------------------------------------------------------------
-% \needspace{5\baselineskip} % Optional: Ensure space if section is close to page bottom
 \section{EDUCATION}
 
-% \vspace{\entrySpacing} % Optional: Add space before the first entry if desired
 \begin{educationentry}
 	{Washington University in St. Louis} % Institution
 	{August 2024 - May 2026} % Date Range
 	{M.S. Computer Science} % Degree
 	{St. Louis, Missouri, USA} % Location
 \begin{highlightsforbulletentries}
-\item \textbf{GPA:} 3.67/4.00
 \item \textbf{Thesis:} \href{https://openscholarship.wustl.edu/eng_etds/1341/}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data} (Advisor: Dr. Alvitta Ottley)
-\item \textbf{Coursework:}  Neurobiology of Learning \& Memory, Advanced Neuroscience Research Methods, Computational Biology, Computer Vision, Data Manipulation \& Management at Scale, Artificial Intelligence for Health, Deep Learning, Systems Security, Software Development, and Quantum Computing.
+\item \textbf{Coursework:} Deep Learning, Computer Vision, Computational Biology, Data Manipulation \& Management at Scale, Artificial Intelligence for Health, Systems Security.
 \end{highlightsforbulletentries}
 \end{educationentry}
 
-% \vspace{\entrySpacing} % Optional: Add space between education entries if desired
 \begin{educationentry}
 	{Ohio Wesleyan University} % Institution
 	{August 2020 - May 2023} % Date Range
@@ -67,8 +58,6 @@
 	{Delaware, Ohio, USA} % Location
 \begin{highlightsforbulletentries}
 \item \textbf{Minor:} Economics
-\item \textbf{GPA:} 3.42/4.00
-\item \textbf{Coursework:} Computer Architecture, Theory of Computation, Algorithms, Big Data, Data Visualization, Data Analytics, Databases, Machine Learning, Artificial Intelligence, Applied Statistics.
 \end{highlightsforbulletentries}
 \end{educationentry}
 
@@ -76,48 +65,42 @@
 \vspace{\headerSpacing}
 
 % ----------------------------------------------------------------------
-% 2. RESEARCH EXPERIENCE SECTION
+% 2. SCHOLARLY WORK SECTION
 % ----------------------------------------------------------------------
-% \needspace{6\baselineskip} % Optional
+\section{SCHOLARLY WORK}
+
+\begin{onecolentry}
+Gopala Reddy, Aadarsha, ``Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data'' (2026). M.S. thesis, Washington University in St. Louis. \href{https://doi.org/10.7936/g95n-fv35}{https://doi.org/10.7936/g95n-fv35}
+\end{onecolentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% 3. RESEARCH EXPERIENCE SECTION
+% ----------------------------------------------------------------------
 \section{\sectionlink{https://agreddy.com/experience/}{RESEARCH EXPERIENCE}}
 
 \begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
 	\begin{researchentry}{\href{https://openscholarship.wustl.edu/eng_etds/1341/}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data}}{August 2025 - May 2026}
-		Master's Thesis with the DRIVES Lab (PI: Dr. Ganesh Babulal)
+		Master's Thesis with the DRIVES Project (PI: Dr. Ganesh Babulal; Advisors: Dr. Alvitta Ottley, Dr. Nathan Jacobs)
 		\begin{highlightsforbulletentries}
-		\item Built an end-to-end pipeline processing 26,968 participant-weeks of naturalistic driving data from 304 participants, deriving weekly driving features and integrating demographic covariates for CDR status prediction.
-		\item Compared six CDR prediction models (GRU-DANN, DANN, logistic regression, random forest, XGBoost, MLP) under leave-one-group-out cross-validation; GRU-DANN achieved highest participant-level ROC AUC (0.599) and balanced accuracy (0.584).
-		\end{highlightsforbulletentries}
-	\end{researchentry}
-	\begin{researchentry}{\href{https://github.com/agopalareddy/CSE419A_Multimodal_Prediction_of_Alzheimers}{Multimodal Prediction of Alzheimer's Disease}}{August 2024 - December 2024}
-		CSE 419A: Introduction to AI for Health
-		\begin{highlightsforbulletentries}
-		\item Developed a multimodal approach for early detection of Alzheimer's Disease using the OASIS-1 dataset.
-		\item Implemented deep learning models (CNNs) using TensorFlow/Keras for MRI image analysis and machine learning techniques (XGBoost, Random Forest Regression) for clinical data processing.
-		\item Created a combined classifier leveraging both imaging and clinical data.
-		\item Documented the project in NeurIPS format with comprehensive performance evaluation metrics and visualizations.
+		\item Built an end-to-end pipeline processing 26,968 participant-weeks of naturalistic driving data from 304 participants, deriving vehicle-agnostic weekly behavioral features and integrating demographic covariates for CDR status prediction.
+		\item Compared six CDR prediction models (GRU-DANN, DANN, logistic regression, random forest, XGBoost, MLP) under leave-one-participant-out cross-validation; GRU-DANN achieved highest participant-level ROC AUC (0.599) and balanced accuracy (0.584).
 		\end{highlightsforbulletentries}
 	\end{researchentry}
 \end{leadershipentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{leadershipentry}{Ohio Wesleyan University}{Delaware, Ohio, USA}
 	\begin{researchentry}{\href{https://github.com/agopalareddy/DATA490}{Opinion Survey on Artificial Intelligence in the Workplace}}{January 2023 - May 2023}
-		DATA 490: Independent Study (Mentor: Dr. Nicholas Dietrich)
+		Independent Study (Mentor: Dr. Nicholas Dietrich)
 		\begin{highlightsforbulletentries}
 		\item Designed, fielded, and investigated a survey experiment on the impact of AI on 250 employees within each of four industries using survey data.
 		\item Analyzed data using Tableau dashboards and R to identify trends and common opinions.
 		\item Presented preliminary results on AI's positive impact on employee work at the OWU Spring Student Symposium.
 		\end{highlightsforbulletentries}
 	\end{researchentry}
-	\begin{researchentry}{\href{https://agreddy.com/connect4/}{Connect 4 AI}}{August 2022 - December 2022}
-		CS 340: Artificial Intelligence
-		\begin{highlightsforbulletentries}
-		\item Developed a Connect 4 game in Java with a single-player mode against an AI opponent and a multiplayer mode for two human players.
-		\item Used the alpha-beta pruning algorithm to create a challenging AI opponent that can test players of all skill levels.
-		\end{highlightsforbulletentries}
-	\end{researchentry}
-	\begin{researchentry}{\href{https://agreddy.com/lost-cities/}{Artificial Intelligence in Modern Board Games — Lost Cities AI}}{May 2022 - July 2022}
+	\begin{researchentry}{\href{https://agreddy.com/lost-cities/}{Artificial Intelligence in Modern Board Games --- Lost Cities AI}}{May 2022 - July 2022}
 		Summer Science Research Program (Mentor: Dr. Sean McCulloch)
 		\begin{highlightsforbulletentries}
 		\item Developed a digital version of the Lost Cities card game using Java.
@@ -130,60 +113,30 @@
 \vspace{\headerSpacing}
 
 % ----------------------------------------------------------------------
-% INDUSTRY EXPERIENCE SECTION (Retained without losing/modifying contents)
+% 4. TEACHING \& MENTORSHIP EXPERIENCE SECTION
 % ----------------------------------------------------------------------
-\section{\sectionlink{https://agreddy.com/experience/}{INDUSTRY EXPERIENCE}}
-
-\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
-	\begin{positionentry}{Graduate Assistant with the Taylor Family Center for Student Success}{August 2024 - May 2026}
-		\item Planned and ran three recurring engagement programs for first-generation, limited-income (FLI) students — Welcome Dinner, First-Gen Week, and End of Week Unwind — coordinating logistics, promotion, and on-the-day operations.
-		\item Authored FERPA-compliant process manuals for engagement data collection and evaluation, giving center staff a standardized, repeatable framework for measuring FLI student participation.
-		\item Analyzed semester survey responses and event attendance data, producing reports that directly informed the following cycle's programming decisions and outreach priorities.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}{Crittero, Inc.}{Remote}
-	\begin{positionentry}{AI Engineer Intern}{June 2025 - August 2025}
-		\item Engineered a full-stack social media simulation and recommendation system, developing a robust data generation pipeline with persona-based modeling in TypeScript and a foundational recommendation algorithm using TensorFlow/Keras.
-		\item Created an extensive testing infrastructure in Python, featuring a configurable CLI for performance validation and reproducibility, which established critical debugging practices for complex ML systems.
-		\item Gained hands-on experience in the end-to-end ML lifecycle, from synthetic data generation and preprocessing to model training and debugging, while establishing Git workflows for collaborative development.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}{Lab714}{Boca Raton, Florida, USA}
-	\begin{positionentry}{Data Analyst Intern}{June 2023 - May 2024}
-		\item Achieved a 20\% reduction in costs for clients through data-driven insights.
-		\item Engineered a software using React and AWS to extract, organize, and analyze data from IoT devices.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}{Ohio Wesleyan University}{Delaware, Ohio, USA}
-	\begin{positionentry}{Media Center Assistant}{September 2021 - May 2023}
-		\item Set up and tore down audio-visual equipment, logged equipment movement using Sierra, and created appointments for use of spaces.
-		\item Assisted with providing AV systems and support for events, ensuring successful setup and execution.
-	\end{positionentry}
-\end{leadershipentry}
-
-% --- Vertical Space After Section ---
-\vspace{\headerSpacing}
-
-% ----------------------------------------------------------------------
-% 3. TEACHING \& MENTORSHIP EXPERIENCE SECTION
-% ----------------------------------------------------------------------
+\needspace{16\baselineskip}
 \section{\sectionlink{https://agreddy.com/experience/}{TEACHING \& MENTORSHIP EXPERIENCE}}
 
 \begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
 	\begin{positionentry}{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale}{January 2026 - May 2026}
-		\item Guided students in implementing data pipelines and real-time processing systems using Python, Snowflake, SQL, Airflow, Spark, Kafka, and Flink.
-		\item Conducted oral midterm exams simulating technical interviews on distributed storage, fault tolerance, and scaling; mentored capstone project groups on data architecture.
+		\item Taught large-scale data pipeline concepts (Snowflake, Airflow, Spark, Kafka, Flink) to a graduate cohort, covering fault-tolerant design, streaming windowing strategies, and query optimization.
+		\item Designed oral midterms as mock technical interviews, requiring students to reason through pipeline architecture decisions and troubleshoot system failures under real-world constraints.
+		\item Mentored three capstone teams from raw open datasets to production-grade dashboards, providing weekly feedback that kept all teams on schedule through final presentations.
+		\item Held weekly office hours to debug student pipeline implementations across Snowflake schema design, Airflow DAG failures, and Kafka consumer configuration.
 	\end{positionentry}
-	\needspace{11\baselineskip}
+	\needspace{4\baselineskip}
+	\begin{positionentry}{Engineering Workshop by AGES \& Science Coach}{September 2024}
+		\item Delivered an introductory workshop on artificial intelligence to high school students, covering core AI concepts with hands-on demonstrations.
+	\end{positionentry}
+	\needspace{6\baselineskip}
 	\begin{positionentry}{HackWashU Databases Workshop}{October 2025}
 		\item Designed and facilitated a hands-on databases workshop for beginner-to-intermediate developers, teaching through two complete projects rather than lectures.
-		\item Guided participants through building a normalized SQLite database from the iTunes Search API (schema design, deduplication, CSV export) and a full-stack Supabase Todo app with authentication and Row Level Security.
+		\item Guided participants through building a normalized SQLite database from the iTunes Search API and a full-stack Supabase Todo app with Row Level Security — covering relational databases, APIs, cloud Postgres, and access control.
 	\end{positionentry}
 \end{leadershipentry}
 
+\needspace{8\baselineskip}
 \begin{leadershipentry}{Ohio Wesleyan University}{Delaware, Ohio, USA}
 	\begin{positionentry}{Computer Science Lab Assistant}{January 2022 - May 2023}
 		\item Tutored approximately ten students for over 6 hours per week, assisting with homework and exam preparation for introductory, intermediate, and advanced computer science coursework.
@@ -195,28 +148,10 @@
 \vspace{\headerSpacing}
 
 % ----------------------------------------------------------------------
-% 4. PUBLICATIONS SECTION
+% 5. PRESENTATIONS SECTION
 % ----------------------------------------------------------------------
-\section{PUBLICATIONS}
-
-\begin{onecolentry}
-Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data} (Master's thesis, Washington University in St. Louis). McKelvey School of Engineering Graduate Student Theses \& Dissertations, 1341. \href{https://openscholarship.wustl.edu/eng_etds/1341/}{https://openscholarship.wustl.edu/eng\_etds/1341/}
-\end{onecolentry}
-
-% --- Vertical Space After Section ---
-\vspace{\headerSpacing}
-
-% ----------------------------------------------------------------------
-% PRESENTATIONS SECTION
-% ----------------------------------------------------------------------
-\needspace{6\baselineskip}
+\needspace{5\baselineskip}
 \section{PRESENTATIONS}
-
-\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
-	\begin{presentationentry}{Engineering Workshop by AGES \& Science Coach}{September 2024}
-		An Introduction to Artificial Intelligence for High School Students
-	\end{presentationentry}
-\end{leadershipentry}
 
 \begin{leadershipentry}{Ohio Wesleyan University}{Delaware, Ohio, USA}
 	\begin{presentationentry}{Spring Student Symposium}{April 2023}
@@ -231,141 +166,55 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 \vspace{\headerSpacing}
 
 % ----------------------------------------------------------------------
-% PROJECTS SECTION (Retained without losing/modifying contents)
-% ----------------------------------------------------------------------
-\section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
-
-\begin{leadershipentry}{CodeTillDawn Hackathon}{St. Louis, Missouri, USA}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/blink-morse-app}{Blink Morse Decoder}}{June 2026}
-		\item Built an Android accessibility app that translates deliberate eye blinks into Morse code using the SmartSpectra SDK for real-time facial landmark tracking and a debounced blink state machine to filter involuntary micro-blinks.
-		\item Designed a six-blink calibration routine to set personalized timing thresholds, with short/long blinks mapped to Morse dots/dashes, in a glassmorphic Material Design 3 interface that also includes a live bio-vitals dashboard.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}{Kaggle Agents for Good Hackathon}{Remote}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/wellness-companion}{AURA: Ambient Wellness Companion}}{June 2026}
-		\item Built a privacy-first elderly wellness companion using Google ADK 2.0, orchestrating a multi-agent graph with medication extraction, empathetic check-in, privacy filtering, and escalation routing agents.
-		\item Implemented deterministic privacy guard enforcing allowlist-only telemetry persistence and rule-based escalation for missed medication cycles or critical mood drops.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/CSE-5114-Project}{MLB Statcast Real-Time Data Pipeline}}{September 2025 - October 2025}
-		\item Built a lambda-architecture pipeline for MLB Statcast pitch-level data with co-author Eddy Sul for the CSE 5114 (Data Manipulation and Management at Scale) course, using Apache Airflow for historical batch ingestion into Snowflake and a Kafka/Spark Streaming path for live, simulated data.
-		\item Developed a Streamlit dashboard with three views: pitch-by-pitch historical game replay with interactive strike-zone visualization, pitcher analytics (velocity, spin rate, strikeout rate), and team head-to-head matchups.
-	\end{positionentry}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/CSE5519-Project}{Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses}}{September 2025 - October 2025}
-		\item Built an automated red-blue teaming pipeline for vision-language model (VLM) security with teammates Stuart Aldrich and Mohammad Rouie Miab, addressing visual prompt injection (VPI) attacks against VLM-based agents.
-		\item Generated visual jailbreak attack images by overlaying malicious instructions onto benign images and evaluated them against a target VLM (Gemma-3-4b-it) using semantic response analysis.
-		\item Auto-generated deterministic, OCR-based Python defenses for each successful attack, validated with accuracy, precision, and recall metrics in an iterative refinement loop.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}{Personal Project}{Remote}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/GoogleCalendarSync}{Google Calendar Availability Sync}}{August 2025}
-		\item Built a Google Apps Script that runs as a state-based reconciliation pipeline, syncing events from multiple source calendars into a single privacy-preserving ``Availability'' calendar for scheduling tools.
-		\item Implemented event splitting for multi-day/all-day events, overlap merging across calendars, and metadata-tagged diffing with exponential backoff for API rate limits; powers the \href{https://agreddy.com/availability/}{Availability page} on agreddy.com.
-	\end{positionentry}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/BayesianOptimizationPractice}{Bayesian Optimization for Material and Product Optimization}}{July 2025}
-		\item Applied Bayesian optimization to three regression problems from the UCI Machine Learning Repository -- superconductor critical temperature, concrete compressive strength, and wine quality -- tuning Random Forest and XGBoost models with scikit-optimize.
-		\item Applied Bayesian optimization a second time to search the input feature space itself for material and mix compositions that maximize the target property, using the same technique for both model tuning and inverse design.
-	\end{positionentry}
-\end{leadershipentry}
-
-\needspace{10\baselineskip}
-\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/CSE510A_Datacenter_Cooling}{Datacenter Cooling Optimization using Deep Reinforcement Learning}}{August 2024 - December 2024}
-		\item Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC) integrated with EnergyPlus simulations to optimize datacenter cooling systems.
-		\item Achieved 35.8\% energy efficiency improvement over baseline using DDQN, addressing the underserved small to mid-sized datacenter market.
-		\item Created a comprehensive framework integrating building energy simulation with reinforcement learning for dynamic thermal management.
-	\end{positionentry}
-	\needspace{6\baselineskip}
-	\begin{positionentry}{\href{https://agreddy.com/storybook/}{Interactive Storybook}}{August 2024 - December 2024}
-		\item Developed an interactive storytelling application using Vue.js, Node.js, and MongoDB with AI-powered content generation, enabling users to create branching narrative stories.
-		\item Implemented Google Gemini API and fal.ai integration for dynamic story text and contextual image generation based on user choices.
-		\item Created a visual path tracking interface to help users navigate complex branching narratives and story progression.
-	\end{positionentry}
-	\begin{positionentry}{\href{https://agreddy.com/chat/}{Socket.IO Multi-Room Chat Application}}{August 2024 - December 2024}
-		\item Developed a feature-rich multi-room chat application using Node.js and Socket.IO with password-protected rooms, private messaging, and user moderation capabilities.
-		\item Implemented room management features including creator privileges, user tracking, and persistent nickname storage.
-		\item Created real-time bidirectional event-based communication with responsive design for optimal user experience.
-	\end{positionentry}
-	\begin{positionentry}{\href{https://agreddy.com/calendar/}{PHP Calendar Application}}{August 2024 - December 2024}
-		\item Developed a feature-rich personal calendar and event management web application using PHP, MySQL, HTML5, CSS3, and JavaScript.
-		\item Implemented secure user authentication, CSRF protection, SQL injection prevention, and input sanitization.
-		\item Created an interactive calendar interface with comprehensive event management capabilities for creation, editing, and tracking.
-	\end{positionentry}
-\end{leadershipentry}
-
-\begin{leadershipentry}{MITxSureStart FutureMakers Create-a-Thon Program}{Remote}
-	\begin{positionentry}{\href{https://github.com/agopalareddy/AIPS}{Parkinson's Disease AI Diagnosis Software}}{June 2022 - July 2022}
-		\item Developed AIParkinScan software for Parkinson's diagnosis using neural networks, spectrograms, and the Random Forest algorithm trained on audio and image data.
-	\end{positionentry}
-\end{leadershipentry}
-
-% --- Vertical Space After Section ---
-\vspace{\headerSpacing}
-
-% ----------------------------------------------------------------------
-% 5. GRANTS, FELLOWSHIPS, \& AWARDS SECTION
+% 6. GRANTS, FELLOWSHIPS, \& AWARDS SECTION
 % ----------------------------------------------------------------------
 \section{GRANTS, FELLOWSHIPS, \& AWARDS}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{April 2026} % Date/Year
 	{\textbf{Bauer Leaders Academy (BLA) Leadership Development Badge}, Washington University in St. Louis} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{May 2024} % Date/Year
 	{\textbf{Affiliated School Scholarship}, Washington University in St. Louis} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{May 2023} % Date/Year
 	{\textbf{Dean's List}, Ohio Wesleyan University} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{April 2023} % Date/Year
 	{\textbf{Mortar Board National College Senior Honor Society Membership}, Ohio Wesleyan University} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{April 2023} % Date/Year
 	{\textbf{Golden Bishop Award - WCSA Best New Member}, Ohio Wesleyan University} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{May 2022} % Date/Year
 	{\textbf{Dean's List}, Ohio Wesleyan University} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{April 2022} % Date/Year
 	{\textbf{Florence Leas Sophomore Prize}, Ohio Wesleyan University} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{March 2022} % Date/Year
 	{\textbf{First Place - 32nd Annual Spring Programming Contest}, Denison University} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{January 2020} % Date/Year
 	{\textbf{International Baccalaureate Scholarship}, Ohio Wesleyan University} % Honor Name & Institution
 \end{honorentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{honorentry}
 	{January 2020} % Date/Year
 	{\textbf{Scholar}, Next Genius Scholarship Foundation} % Honor Name & Institution
@@ -375,7 +224,7 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 \vspace{\headerSpacing}
 
 % ----------------------------------------------------------------------
-% 6. PROFESSIONAL SERVICE \& LEADERSHIP SECTION
+% 7. PROFESSIONAL SERVICE \& LEADERSHIP SECTION
 % ----------------------------------------------------------------------
 \section{PROFESSIONAL SERVICE \& LEADERSHIP}
 
@@ -385,7 +234,7 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 		\item Engaged in critical dialogue with senior university leaders, including the Dean of Students, to advocate for improvements to the graduate student experience across all academic programs.
 		\item Contributed to monthly discussions on student affairs policies and initiatives to enhance support systems and resources for the graduate student community.
 	\end{positionentry}
-	\needspace{6\baselineskip}
+	\needspace{8\baselineskip}
 	\begin{positionentry}{Graduate Student Member, Center for Career Engagement (CCE) Student Advisory Board}{August 2025 - May 2026}
 		\item Guided the strategic direction of the Center for Career Engagement to ensure services align with diverse needs of graduate students from all academic backgrounds and career interests.
 		\item Provided insights on career engagement programs, workshops, and resources to enhance accessibility and effectiveness for the WashU graduate student community.
@@ -393,15 +242,13 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 	\end{positionentry}
 	\needspace{9\baselineskip}
 	\begin{positionentry}{Vice President of the Graduate-Professional Council (GPC) Chamber, Graduate and Professional Student Council (GPSC)}{May 2025 - May 2026}
-		\item Managed the Council's unified Microsoft Teams workspace and website, establishing centralized communication hubs and maintaining up-to-date information on events, governance, and resources.
 		\item Built and maintained committee membership rosters using ranked-choice preference allocation to balance workload and ensure efficient cross-committee coordination.
 		\item Oversaw information architecture for the Council's documentation repository.
 		\item Represented the graduate student body to university leadership and supported the GPC President in advancing strategic council priorities.
 		\item Chaired the Constitution Committee (August 2025 - February 2026), coordinating stakeholder input to draft and ratify GPSC governing documents aligned with the Council's mission and university policies.
 	\end{positionentry}
 	\begin{positionentry}{Treasurer, Umang (Indian Graduate Student Association)}{June 2025 - October 2025}
-		\item Managed club finances, including budgeting, expense tracking, and fundraising to ensure sustainable operations and successful event planning.
-		\item Collaborated with members to organize cultural events and festivals, promoting cultural awareness and fostering community among Indian graduate students.
+		\item Managed club finances and organized cultural events and festivals, promoting cultural awareness and fostering community among Indian graduate students.
 	\end{positionentry}
 	\begin{positionentry}{Treasurer, HackWashU}{December 2024 - July 2025}
 		\item Managed the club's finances, including budgeting and expense tracking, to ensure sustainable operations and successful event planning.
@@ -410,29 +257,20 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 	\end{positionentry}
 \end{leadershipentry}
 
-% \vspace{\entrySpacing} % Optional
 \begin{leadershipentry}{Ohio Wesleyan University}{Delaware, Ohio, USA}
-	\begin{positionentry}{Treasurer and Founding Member, Hindu Student Council}{January 2023 - May 2023}
-		\item Co-established the council and organized events promoting Hindu cultural heritage, fostering youth leadership skills, and creating volunteer opportunities.
-		\item Managed organizational finances, developing and submitting formal budget requests to secure funding for council activities and events.
-	\end{positionentry}
 	\begin{positionentry}{Budget Committee Senator, Wesleyan Council on Student Affairs (WCSA)}{August 2022 - May 2023}
-		\item Actively contributed to the Budget Committee's process of proposing, discussing, and deciding on senate bills, while overseeing the allocation of an annual budget exceeding \$350,000 to campus individuals and organizations.
-		\item Recipient of the Golden Bishop Award for WCSA Best New Member, recognized for making the greatest overall contribution to WCSA's mission through drive, high achievement on the Budget Committee, and providing unique, valuable perspectives.
+		\item Proposed and voted on senate bills while overseeing allocation of an annual budget exceeding \$350,000 to campus individuals and organizations.
+		\item Received the Golden Bishop Award for WCSA Best New Member for overall contribution to WCSA's mission and service on the Budget Committee.
+	\end{positionentry}
+	\begin{positionentry}{Member, Mathematics, Computer Science \& Data Analytics Student Board}{August 2021 - May 2023}
+		\item Analyzed faculty evaluations and synthesized student feedback on course offerings to recommend departmental improvements.
 	\end{positionentry}
 	\begin{positionentry}{Member, The Neurds (Neuroscience Club)}{August 2022 - May 2023}
 		\item Presented on AI at Brain Fair 2023 during Brain Awareness Week, bridging neuroscience and technology.
-		\item Contributed to the planning and marketing of club events, directly supporting educational enrichment and networking opportunities for members.
-		\item Participated in initiatives promoting neuroscience awareness and community service, aiming to enhance members' intellectual and career development pathways.
-	\end{positionentry}
-	\begin{positionentry}{Member, Mathematics, Computer Science \& Data Analytics Student Board}{August 2021 - May 2023}
-		\item Analyzed faculty evaluations to provide actionable insights for departmental improvements.
-		\item Gathered and synthesized student feedback on course offerings to recommend enhancements to the department.
 	\end{positionentry}
 	\begin{positionentry}{Vice President of Finance, Campus Programming Board}{January 2022 - December 2022}
-		\item Successfully planned, created, and implemented budgets totaling over \$86,000 for campus events.
-		\item Initiated and led revamp of organization's governing documents, implementing efficient practices.
-		\item Negotiated an additional \$10,000 per year with the Wesleyan Council on Student Affairs.
+		\item Managed annual budgets exceeding \$86,000 for campus-wide programming and secured \$10,000 in additional annual funding through negotiation with WCSA.
+		\item Revised the organization's governing documents, codifying financial and operational practices.
 	\end{positionentry}
 \end{leadershipentry}
 
@@ -440,46 +278,95 @@ Gopala Reddy, A. (2026). \textit{Toward Vehicle-Agnostic Driving Signatures for 
 \vspace{\headerSpacing}
 
 % ----------------------------------------------------------------------
-% 7. TECHNICAL SKILLS \& AFFILIATIONS SECTION
+% 8. PROJECTS SECTION
 % ----------------------------------------------------------------------
-\section{TECHNICAL SKILLS \& AFFILIATIONS}
+\needspace{10\baselineskip}
+\section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
 
-% \vspace{\entrySpacing} % Optional
-\begin{skillcategory}{Programming Languages}
-	Java, C++, Python, R, JavaScript/TypeScript, PHP, C\#, SQL, Rust.
-\end{skillcategory}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/CSE419A_Multimodal_Prediction_of_Alzheimers}{Multimodal Prediction of Alzheimer's Disease}}{August 2024 - December 2024}
+		\item Developed a multimodal fusion approach for early detection of Alzheimer's Disease, combining MRI imaging and clinical/demographic data from the OASIS-1 dataset.
+		\item Implemented CNNs using TensorFlow/Keras for brain MRI analysis alongside XGBoost and Random Forest models for tabular clinical data.
+		\item Created a combined classifier integrating both modalities and documented the project in NeurIPS format with comprehensive performance evaluation metrics and visualizations.
+	\end{positionentry}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/CSE5519-Project}{Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses}}{September 2025 - October 2025}
+		\item Built an automated red-blue teaming pipeline for vision-language model (VLM) security with teammates Stuart Aldrich and Mohammad Rouie Miab, addressing visual prompt injection (VPI) attacks against VLM-based agents.
+		\item Generated visual jailbreak attack images by overlaying malicious instructions onto benign images and evaluated them against a target VLM (Gemma-3-4b-it) using semantic response analysis.
+		\item Auto-generated deterministic, OCR-based Python defenses for each successful attack, validated with accuracy, precision, and recall metrics in an iterative refinement loop.
+	\end{positionentry}
+	\needspace{15\baselineskip}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/CSE510A_Datacenter_Cooling}{Datacenter Cooling Optimization using Deep Reinforcement Learning}}{August 2024 - December 2024}
+		\item Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC) integrated with EnergyPlus simulations to optimize datacenter cooling systems.
+		\item Achieved 35.8\% energy efficiency improvement over baseline using DDQN, addressing the underserved small to mid-sized datacenter market.
+		\item Created a comprehensive framework integrating building energy simulation with reinforcement learning for dynamic thermal management.
+	\end{positionentry}
+\end{leadershipentry}
 
-% \vspace{\entrySpacing} % Optional
-\begin{skillcategory}{Frameworks \& Libraries}
-	TensorFlow, PyTorch, Scikit-learn, Keras, NumPy, Pandas, Matplotlib, Seaborn, Node.js, Express.js, Vue.js, React, Socket.IO, Gemini API, OpenAI API, fal.ai.
-\end{skillcategory}
-
-% \vspace{\entrySpacing} % Optional
-\begin{skillcategory}{Tools \& Technologies}
-	\LaTeX, Git, Tableau, Power BI, MySQL, AWS, MongoDB, Snowflake, Apache Airflow, Spark, Kafka, Flink, Microsoft 365, Google Workspace.
-\end{skillcategory}
-
-% \vspace{\entrySpacing} % Optional
-\begin{skillcategory}{Core Competencies}
-	Analytical Skills, Problem Solving, Critical Thinking, Communication, Team Collaboration, Leadership, Adaptability, Project Management.
-\end{skillcategory}
-
-% \vspace{\entrySpacing} % Optional
-\begin{skillcategory}{Languages}
-	Proficient in English, Kannada, Telugu; Conversational in Hindi.
-\end{skillcategory}
+\begin{leadershipentry}{MITxSureStart FutureMakers Create-a-Thon Program}{Remote}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/AIPS}{Parkinson's Disease AI Diagnosis Software}}{June 2022 - July 2022}
+		\item Built a dual-input pipeline combining audio spectrograms (custom CNN for vocal tremor detection) and spiral-drawing images (Random Forest classifier with augmentation for micrographia detection).
+		\item Implemented a weighted ensemble combining both modalities into a single Parkinson's diagnosis score.
+		\item Designed a Flask web interface for user submissions of audio and drawing samples for real-time risk assessment.
+	\end{positionentry}
+\end{leadershipentry}
 
 % --- Vertical Space After Section ---
 \vspace{\headerSpacing}
 
 % ----------------------------------------------------------------------
-% REFERENCES SECTION
+% 9. PROFESSIONAL EXPERIENCE SECTION
 % ----------------------------------------------------------------------
-\section{REFERENCES}
-\vspace{\entrySpacing}
-\begin{onecolentry}
-	Available upon request.
-\end{onecolentry}
+\section{\sectionlink{https://agreddy.com/experience/}{OTHER PROFESSIONAL EXPERIENCE}}
+
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{Graduate Assistant, Taylor Family Center for Student Success}{August 2024 - May 2026}
+		\item Planned and ran three recurring engagement programs for first-generation, limited-income (FLI) students — Welcome Dinner, First-Gen Week, and End of Week Unwind — coordinating logistics, promotion, and on-the-day operations.
+		\item Authored FERPA-compliant process manuals for engagement data collection and evaluation, giving center staff a standardized, repeatable framework for measuring FLI student participation.
+		\item Analyzed semester survey responses and event attendance data, producing reports that directly informed the following cycle's programming decisions and outreach priorities.
+		\item Managed the center's weekly newsletter; represented the department at off-campus excursions and FLI student trips.
+	\end{positionentry}
+\end{leadershipentry}
+
+\begin{leadershipentry}{Crittero, Inc.}{Remote}
+	\begin{positionentry}{AI Engineer Intern}{June 2025 - August 2025}
+		\item Generated labeled social media training data for seven user personas via time-series behavioral modeling in TypeScript, capturing post sequences, engagement timings, and content preferences.
+		\item Trained a TensorFlow/Keras recommendation model with persona-type, content-category, and temporal embeddings, plus a collaborative-filtering cold-start fallback for new users.
+		\item Built a configurable Python CLI for reproducible model evaluation, enabling systematic comparison across hyperparameter settings, embedding dimensions, and fallback thresholds.
+	\end{positionentry}
+\end{leadershipentry}
+
+\begin{leadershipentry}{Lab714}{Boca Raton, Florida, USA}
+	\begin{positionentry}{Data Analyst Intern}{June 2023 - May 2024}
+		\item Analyzed IoT environmental sensor data streams on AWS, building dashboards that surfaced chemical imbalances and equipment anomalies through automated threshold detection and trend analysis.
+		\item Built AWS data ingestion pipelines to normalize and store continuous sensor telemetry from deployed devices, supporting real-time operational monitoring of deployed IoT fleets.
+		\item Wrote SQL queries to aggregate historical sensor data by pool, date range, and chemical parameter, powering the trend analytics and anomaly detection shown in client dashboards.
+		\item Designed and engineered the Figma-to-React UI for an all-in-one environmental sensor device, delivering a pixel-perfect, production-ready interface from initial wireframes.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% 10. TECHNICAL SKILLS \& AFFILIATIONS SECTION
+% ----------------------------------------------------------------------
+\section{TECHNICAL SKILLS \& LANGUAGES}
+
+\begin{skillcategory}{Programming Languages}
+	Java, C++, Python, R, JavaScript/TypeScript, PHP, C\#, SQL, Rust.
+\end{skillcategory}
+
+\begin{skillcategory}{Frameworks \& Libraries}
+	TensorFlow, PyTorch, Scikit-learn, Keras, NumPy, Pandas, Matplotlib, Seaborn, Node.js, Express.js, Vue.js, React.
+\end{skillcategory}
+
+\begin{skillcategory}{Tools \& Technologies}
+	\LaTeX, Git, Tableau, Power BI, MySQL, AWS, MongoDB, Snowflake, Apache Airflow, Spark, Kafka, Flink.
+\end{skillcategory}
+
+\begin{skillcategory}{Languages}
+	Proficient in English, Kannada, Telugu; Conversational in Hindi.
+\end{skillcategory}
 
 % ----------------------------------------------------------------------
 % End of Document

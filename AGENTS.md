@@ -7,14 +7,7 @@
 
 ## Git commit authorship (required)
 
-**Never add Cursor or any AI tool as author or co-author on commits.**
-
-- Do **not** append `Co-authored-by: Cursor <cursoragent@cursor.com>` (or similar) to commit messages.
-- Do **not** set git `user.name` / `user.email` to Cursor or agent identities.
-- Commits must list only the repository owner as author. The human user owns all authorship.
-- Before pushing, verify with: `git log -1 --format='%B'` — the body must not contain `Co-authored-by:` lines for agents.
-- If co-author trailers were added by mistake, rewrite history to remove them before pushing (or force-push after user approval if already on remote).
-- **Enforced locally:** `.husky/commit-msg` and `.husky/prepare-commit-msg` strip `Co-authored-by: Cursor <cursoragent@cursor.com>` on every commit. Do not disable these hooks.
+Never add Cursor or any AI tool as author or co-author on commits. Enforced by `.husky/commit-msg` and `.husky/prepare-commit-msg`. Verify: `git log -1 --format='%B'`.
 
 ---
 
@@ -29,173 +22,72 @@ ssh gcp-showcase "cd /opt/personal-website && git fetch origin && git reset --ha
 
 After CSS changes, bump `style.css?v=` in HTML heads when cache invalidation is needed.
 
-### Updating the resume PDF
+Root-owned PDF on VM? `ssh gcp-showcase "sudo chown adurs:adurs /opt/personal-website/files/<name>.pdf"`
 
-The resume PDF lives in **two places** in the repo — both must be identical or the served file will be stale:
+### Updating TeX PDFs (resume, CV, cover letter)
 
-| Repo path                           | Served URL                                              |
-| ----------------------------------- | ------------------------------------------------------- |
-| `files/reddy_resume.pdf`            | `https://agreddy.com/files/reddy_resume.pdf`            |
-| `files/resume_tex/reddy_resume.pdf` | `https://agreddy.com/files/resume_tex/reddy_resume.pdf` |
-
-After recompiling the `.tex`, copy the PDF to the flat path before committing:
-
-```bash
-cp files/resume_tex/reddy_resume.pdf files/reddy_resume.pdf
-git add files/reddy_resume.pdf files/resume_tex/reddy_resume.pdf
-```
-
-**Root-ownership gotcha:** if `files/reddy_resume.pdf` ever becomes `root`-owned on the VM (e.g. from a past scp-as-root), `git reset --hard` silently skips it. Fix with:
-
-```bash
-ssh gcp-showcase "sudo chown adurs:adurs /opt/personal-website/files/reddy_resume.pdf"
-```
-
-Then re-run the deploy command and the correct file will land.
-
-### Updating the CV PDF
-
-Same pattern as resume — the CV PDF must exist at `files/reddy_cv.pdf` (flat path) for the site to serve it:
+Tex source in `files/*_tex/`. Flat copy required in `files/` for serving:
 
 ```bash
 cp files/cv_tex/reddy_cv.pdf files/reddy_cv.pdf
-git add files/reddy_cv.pdf files/cv_tex/reddy_cv.pdf
+cp files/resume_tex/reddy_resume.pdf files/reddy_resume.pdf
+cp files/cover_tex/reddy_cover.pdf files/reddy_cover.pdf
+git add files/reddy_*.pdf files/*_tex/reddy_*.pdf
 ```
 
-### LaTeX compilation rule
+### LaTeX compilation
 
-**Always recompile after any `.tex` or `.sty` edit** unless the user explicitly says otherwise. Use two-pass `pdflatex` for cross-references, then clean artifacts:
+Always recompile after `.tex`/`.sty` edits. Two-pass `pdflatex`, clean artifacts:
 
 ```bash
-cd files/cv_tex  # or files/resume_tex, files/cover_tex
+cd files/cv_tex  # or resume_tex, cover_tex
 pdflatex reddy_cv.tex && pdflatex reddy_cv.tex
 rm -f *.aux *.log *.out *.fls *.fdb_latexmk *.synctex.gz
 ```
 
-### Fixing orphaned entries (widow/orphan control)
+### Fixing orphaned entries
 
-Do **not** blindly sprinkle `\needspace` in the `.tex` source and call it done. The PDF is the ground truth — orphans are only visible in the rendered output.
-
-**Process:**
-
-1. **Compile the PDF** after edits.
-2. **Read and inspect the PDF** — page by page — to identify entries where a heading/date appears at the bottom of one page and its body/bullets fall on the next page.
-3. **Add `\needspace{N\baselineskip}`** before the orphaned entry. Start conservative (e.g. 5-6), recompile, re-inspect.
-4. **Iterate** — compile → inspect → adjust → repeat until no orphans remain.
-5. Only then commit and push.
-
-Guessing needspace values from the `.tex` source alone is unreliable because page breaks depend on the accumulated vertical space of all preceding content, not just the local entry.
+Orphans visible only in rendered PDF — never guess from `.tex`. Compile → inspect PDF page-by-page → add `\needspace{N\baselineskip}` → iterate until clean.
 
 ---
 
 ## Key paths
 
-| Path                              | Purpose                                                                                                                      |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `assets/css/style.css`            | Design tokens, components, layouts (`@layer tokens`)                                                                         |
-| `assets/js/theme.js`              | 3-state theme slider, `data-resolved-theme`, dynamic `theme-color`                                                           |
-| `assets/js/projects-catalog.js`   | Projects listing renderer — **has its own hardcoded `projects` array, separate from the JSON blob in `projects/index.html`** |
-| `assets/js/experience-catalog.js` | Experience listing renderer                                                                                                  |
-| `accessibility.html`              | WCAG statement — update when a11y-affecting changes ship                                                                     |
-| `infra/nginx/`                    | Tracked snapshots of VM nginx configs + deploy script (see below)                                                            |
-| `scripts/verify_ga4.py`           | GA4 Realtime API smoke test (see below)                                                                                      |
-
-See workspace [`AGENTS.md`](../AGENTS.md) §12–13 for accessibility statement and email obfuscation rules.
+| Path                              | Purpose                                              |
+| --------------------------------- | ---------------------------------------------------- |
+| `assets/css/style.css`            | Design tokens, components, layouts (`@layer tokens`) |
+| `assets/js/theme.js`              | 3-state theme slider                                 |
+| `assets/js/projects-catalog.js`   | Projects renderer — **separate hardcoded array**     |
+| `assets/js/experience-catalog.js` | Experience renderer                                  |
+| `accessibility.html`              | WCAG statement — update on a11y changes              |
+| `infra/nginx/`                    | VM nginx config snapshots + `deploy.sh`              |
+| `scripts/verify_ga4.py`           | GA4 Realtime API smoke test                          |
 
 ---
 
 ## Adding a new project (two catalogs!)
 
-The `/projects/` page has **two independent copies of the project list** — both must be updated or the new project won't show up for JS-enabled visitors:
+`/projects/` page has two independent copies of the project list. Both must be updated:
 
-1. **`scripts/projects_database.json`** — source of truth. Add an entry, then run:
-
-   ```bash
-   cd scripts && python3 generate_site.py --projects
-   ```
-
-   This regenerates `projects/index.html` (embedded JSON + noscript fallback cards), the detail page `projects/<slug>.html`, and `sitemap.xml`.
-   ⚠️ The generator currently rewrites _all_ project detail pages to an older template (missing GA tag, wrong CSS version). After running, `git diff` and revert any detail pages you didn't intend to touch — only keep the new page and `projects/index.html`/`sitemap.xml` changes.
-
-2. **`assets/js/projects-catalog.js`** — the _actual_ renderer for JS-enabled browsers. It has its own hardcoded `const projects = [...]` array that the generator does **not** touch. Manually append the same entry here (same fields/shape) or the card silently won't render even though the SSR HTML and curl output look correct.
-
-If a project includes a live demo app reachable via an nginx reverse-proxy path (e.g. `/speedtest/`), see "Nginx infrastructure" below for adding the proxy `location` block and `infra/nginx/deploy.sh`.
+1. `scripts/projects_database.json` — source of truth. Run `cd scripts && python3 generate_site.py --projects`. **After:** `git diff` and revert unintended detail-page rewrites.
+2. `assets/js/projects-catalog.js` — JS renderer. Manually append the same entry.
 
 ---
 
-## Nginx infrastructure (tracked in repo)
+## Nginx & CSP
 
-The VM's nginx config for agreshow.com lives in **`infra/nginx/`** (snapshotted from the live VM).
+Nginx config lives in `infra/nginx/`. Deploy: `./infra/nginx/deploy.sh`.
 
-| File / dir                                 | Live VM path                              | Notes                                       |
-| ------------------------------------------ | ----------------------------------------- | ------------------------------------------- |
-| `infra/nginx/conf.d/security-headers.conf` | `/etc/nginx/conf.d/security-headers.conf` | CSP, HSTS, X-Frame-Options, etc.            |
-| `infra/nginx/sites-enabled/showcase`       | `/etc/nginx/sites-enabled/showcase`       | Server block + reverse proxies for sub-apps |
-
-**Deploy** after editing:
-
-```bash
-./infra/nginx/deploy.sh
-```
-
-The script:
-
-1. `scp`'s both files to the VM.
-2. Uses `sudo install -m 644` to drop them in place (idempotent).
-3. Runs `sudo nginx -t` (refuses to reload on syntax error).
-4. Reloads with `sudo nginx -s reload`.
-5. Verifies the live CSP includes `google-analytics.com` — catches the GA4 regression that bit us in 2026-06.
-
-Certbot-managed blocks (TLS certs) are **not** in the repo; they're auto-regenerated by certbot and would only add noise.
-
-### CSP & GA4 (important)
-
-The CSP `connect-src` directive **must** include the GA4 endpoints, otherwise the gtag load succeeds but `g/collect` is silently blocked:
+CSP `connect-src` **must** include GA4 endpoints or `g/collect` is silently blocked:
 
 ```
 connect-src 'self' https://www.google-analytics.com https://www.google.com https://*.analytics.google.com https://www.googletagmanager.com
 ```
 
-If you ever tighten CSP, re-run `./scripts/verify_ga4.py` to confirm hits still flow.
+If you tighten CSP, re-run `./scripts/verify_ga4.py`.
 
 ---
 
 ## GA4 smoke test
 
-`scripts/verify_ga4.py` hits the GA4 Realtime API to confirm the tag is firing live.
-
-**Auth:** uses a service-account key at `~/.config/gcp/ga-verifier.json` (chmod 600, gitignored). Mints a short-lived JWT with `analytics.readonly` scope and exchanges it for an OAuth token. **No application-default credentials needed.**
-
-**Property:** defaults to GA4 property `539267802` (Project Showcase, G-QWNGSMS0LY, agreshow.com data stream). Override with `--property-id` or `GA4_PROPERTY_ID` env var.
-
-**Usage:**
-
-```bash
-# Default: check agreshow.com property, fail if no active users
-./scripts/verify_ga4.py
-
-# Quiet mode for cron / CI
-./scripts/verify_ga4.py --quiet
-
-# Different property / key file
-./scripts/verify_ga4.py --property-id 123456789 --key-file ~/.config/gcp/other.json
-
-# Wait for at least 2 active users (e.g. after announcing on socials)
-./scripts/verify_ga4.py --expect-min-users 2
-```
-
-**Exit codes:**
-
-| Code  | Meaning                                                    |
-| ----- | ---------------------------------------------------------- |
-| 0     | OK — at least `--expect-min-users` (default 1) active user |
-| 2     | Realtime API returned zero rows                            |
-| 3     | Active users below expected threshold                      |
-| other | Fatal (auth, network, API error)                           |
-
-### Service account details
-
-- SA email: `ga-verifier@projects-showcase-495903.iam.gserviceaccount.com`
-- Roles: **Viewer** on the GA4 property (added manually in GA4 UI), and **Service Account Token Creator** granted to `adurs2002@gmail.com` so we can mint scoped tokens via JWT.
-- Key file: `~/.config/gcp/ga-verifier.json` (chmod 600, **never commit**).
-- Project: `projects-showcase-495903`. APIs enabled: `analyticsadmin.googleapis.com`, `analyticsdata.googleapis.com`.
+`./scripts/verify_ga4.py` — GA4 Realtime API smoke test. Auth via service account key at `~/.config/gcp/ga-verifier.json` (gitignored). Exit 0 = OK. Run with `--help` for options.

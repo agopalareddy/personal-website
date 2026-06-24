@@ -72,6 +72,20 @@ pdflatex reddy_cv.tex && pdflatex reddy_cv.tex
 rm -f *.aux *.log *.out *.fls *.fdb_latexmk *.synctex.gz
 ```
 
+### Fixing orphaned entries (widow/orphan control)
+
+Do **not** blindly sprinkle `\needspace` in the `.tex` source and call it done. The PDF is the ground truth — orphans are only visible in the rendered output.
+
+**Process:**
+
+1. **Compile the PDF** after edits.
+2. **Read and inspect the PDF** — page by page — to identify entries where a heading/date appears at the bottom of one page and its body/bullets fall on the next page.
+3. **Add `\needspace{N\baselineskip}`** before the orphaned entry. Start conservative (e.g. 5-6), recompile, re-inspect.
+4. **Iterate** — compile → inspect → adjust → repeat until no orphans remain.
+5. Only then commit and push.
+
+Guessing needspace values from the `.tex` source alone is unreliable because page breaks depend on the accumulated vertical space of all preceding content, not just the local entry.
+
 ---
 
 ## Key paths

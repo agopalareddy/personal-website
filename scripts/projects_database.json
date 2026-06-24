@@ -500,5 +500,23 @@
     "has_detail": true,
     "formatted_date": "Summer 2026",
     "content_html": "<p>AURA (Ambient Wellness Companion) is a Kaggle Agents for Good capstone that runs ambient wellness check-ins for elderly patients. Built on Google&apos;s Agent Development Kit (ADK 2.0), the system orchestrates a state-driven multi-agent graph: a medication extractor maps patient language to schedule IDs, an empathetic companion agent scores mood and replies in natural language, a deterministic privacy guard persists only allowlisted telemetry fields, and a rule-based escalation engine routes critical cases to caregiver alerts.</p><p>The demo UI includes a passcode-gated patient dashboard with live JSON and agent activity, a provider view for roster management and alert triage, and an architecture overview page. Tool access follows least privilege via filtered MCP toolsets &mdash; LLM agents cannot write directly to the secure mock database; persistence happens only in the deterministic privacy node after structured output is available.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>ADK 2.0 multi-agent workflow: medication extraction, empathetic companion, privacy guard, and escalation routing</li><li>Deterministic <code>persist_metrics_node</code> with allowlist-validated writes (mood, compliance, per-med status)</li><li>Escalation when consecutive missed medication cycles reach 2 or mood score drops below 3</li><li>Patient, provider, and about views with passcode-gated sessions and live activity sidebar</li><li>Filtered MCP toolsets enforcing least-privilege boundaries between agents and the secure store</li></ul>"
+  },
+  {
+    "id": "2026-06-env-monitor",
+    "title": "Environment Monitor",
+    "excerpt": "An Arduino-based continuous environment monitor using a DHT11 sensor and LCD 1602 display, with rolling EEPROM buffer, dew point calculation, and ambient light sensing.",
+    "venue": "Personal Project",
+    "venue_tag": "Personal",
+    "permalink": "/projects/env-monitor",
+    "date": "2026-06-23",
+    "category": "Software & Tools",
+    "technologies": ["Arduino", "C++", "DHT11", "LCD 1602", "EEPROM", "Embedded Systems"],
+    "github": "https://github.com/agopalareddy/env-monitor",
+    "demo": null,
+    "pdf": null,
+    "presentation": null,
+    "has_detail": true,
+    "formatted_date": "Summer 2026",
+    "content_html": "<p>A self-contained Arduino environment monitor that continuously reads temperature and humidity from a DHT11 sensor every two minutes, displays live readings on a 1602 LCD, and stores a rolling 255-sample buffer in EEPROM for offline data retrieval over serial.</p><p>The device supports three temperature units (&deg;C, &deg;F, K) and two humidity modes (relative humidity and dew point via the Magnus formula), toggled with a hardware button. A second button forces an immediate sensor read. A photoresistor (LDR) on an analog pin provides ambient light readings on a secondary display page. EEPROM persistence preserves the buffer index and user-selected unit preferences across power cycles. The full rolling buffer can be dumped over serial on command for analysis.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Continuous DHT11 sensing (temp &amp; humidity) every 2 minutes, displayed on 1602 LCD</li><li>Three temperature units (&deg;C, &deg;F, K) and dew point calculation (Magnus formula)</li><li>255-sample rolling EEPROM buffer with serial dump command for offline retrieval</li><li>Ambient light sensing via photoresistor with live raw and percentage display</li><li>Two-button interface: force-refresh and unit/page cycling with long-press detection</li><li>Unit preferences and buffer index persist across power cycles via EEPROM</li></ul>"
   }
 ]

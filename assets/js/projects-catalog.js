@@ -503,6 +503,24 @@ const projects = [
     has_detail: true,
     formatted_date: 'Summer 2026',
   },
+  {
+    id: '2026-06-env-monitor',
+    title: 'Environment Monitor',
+    excerpt:
+      'An Arduino-based continuous environment monitor using a DHT11 sensor and LCD 1602 display, with rolling EEPROM buffer, dew point calculation, and ambient light sensing.',
+    venue: 'Personal Project',
+    venue_tag: 'Personal',
+    permalink: '/projects/env-monitor',
+    date: '2026-06-23',
+    category: 'Software & Tools',
+    technologies: ['Arduino', 'C++', 'DHT11', 'LCD 1602', 'EEPROM', 'Embedded Systems'],
+    github: 'https://github.com/agopalareddy/env-monitor',
+    demo: null,
+    pdf: null,
+    presentation: null,
+    has_detail: true,
+    formatted_date: 'Summer 2026',
+  },
 ];
 const projectGrid = document.getElementById('projectGrid');
 // Clear SSR fallback (noscript + JSON blob) if present. Modern

@@ -53,6 +53,25 @@ ssh gcp-showcase "sudo chown adurs:adurs /opt/personal-website/files/reddy_resum
 
 Then re-run the deploy command and the correct file will land.
 
+### Updating the CV PDF
+
+Same pattern as resume — the CV PDF must exist at `files/reddy_cv.pdf` (flat path) for the site to serve it:
+
+```bash
+cp files/cv_tex/reddy_cv.pdf files/reddy_cv.pdf
+git add files/reddy_cv.pdf files/cv_tex/reddy_cv.pdf
+```
+
+### LaTeX compilation rule
+
+**Always recompile after any `.tex` or `.sty` edit** unless the user explicitly says otherwise. Use two-pass `pdflatex` for cross-references, then clean artifacts:
+
+```bash
+cd files/cv_tex  # or files/resume_tex, files/cover_tex
+pdflatex reddy_cv.tex && pdflatex reddy_cv.tex
+rm -f *.aux *.log *.out *.fls *.fdb_latexmk *.synctex.gz
+```
+
 ---
 
 ## Key paths

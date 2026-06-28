@@ -738,7 +738,7 @@ main.container {
   background: var(--bg-base);
   border: 1px solid var(--border-color);
   padding: 0.1rem 0.3rem;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   font-size: 0.8rem;
   color: var(--accent);
 }
@@ -933,6 +933,7 @@ main.container {
   .academic-layout {
     flex-direction: row;
     align-items: flex-start;
+    gap: 2.5rem;
   }
 }
 
@@ -942,12 +943,13 @@ main.container {
 }
 @media (min-width: 48em) {
   .academic-sidebar {
-    width: 240px;
+    width: 280px;
     position: sticky;
     top: 5rem; /* Adjusted sticky offset to not be covered by sticky navigation header */
     max-height: calc(100vh - 6.5rem);
     overflow-y: auto;
-    padding-right: 0.5rem;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--border-color);
     scrollbar-width: thin;
   }
   .academic-sidebar::-webkit-scrollbar {
@@ -959,6 +961,17 @@ main.container {
   .academic-sidebar::-webkit-scrollbar-thumb {
     background-color: var(--border-color);
     border-radius: 4px;
+  }
+}
+@media (min-width: 64em) {
+  .academic-layout {
+    gap: 3.5rem;
+  }
+  .academic-sidebar {
+    width: 300px;
+    padding-right: 2.5rem;
+    top: 5.5rem;
+    max-height: calc(100vh - 7rem);
   }
 }
 
@@ -2022,7 +2035,7 @@ dialog[open].document-modal {
 .theme-toggle-btn {
   width: 96px;
   height: 34px;
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   background: transparent;
   border: 1px solid transparent;
   opacity: 0;
@@ -2034,7 +2047,7 @@ dialog[open].document-modal {
   display: inline-flex;
   background: var(--bg-surface-hover);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   padding: 3px;
   position: relative;
   user-select: none;
@@ -2401,13 +2414,13 @@ body.page-loaded {
   text-decoration: none;
   transition:
     color var(--transition),
-    padding-left var(--transition);
+    transform var(--transition);
   display: inline-block;
   line-height: 1.4;
 }
 .toc-link:hover {
   color: var(--accent);
-  padding-left: 4px;
+  transform: translateX(4px);
 }
 .toc-year-header {
   font-size: 0.825rem;
@@ -2445,7 +2458,7 @@ body.page-loaded {
   text-align: left;
   color: inherit;
   font-family: inherit;
-  transition: padding-bottom var(--transition);
+  transition: color var(--transition);
 }
 .toc-toggle-btn[aria-expanded='true'] {
   padding-bottom: 0.6rem;

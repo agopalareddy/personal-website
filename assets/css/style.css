@@ -1673,7 +1673,7 @@ main.container {
 
 .document-row:hover {
   transform: translateY(-2px);
-  border-color: var(--accent);
+  border-color: var(--border-hover);
   box-shadow: var(--shadow-md);
 }
 
@@ -2363,8 +2363,9 @@ body.page-loaded {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     gap: 0.5rem !important;
-    padding: 0.25rem 0.5rem 0.5rem 0.5rem !important;
-    margin: 0 -0.5rem !important;
+    padding: 0.25rem 0 0.5rem 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
     scrollbar-width: none !important;
   }
   .filter-pills::-webkit-scrollbar {

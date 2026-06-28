@@ -853,6 +853,23 @@ main.container {
   }
 }
 
+/* ─── Homepage: 3-column footer (sidebar owns contact links) ─── */
+.home-page .footer-grid {
+  grid-template-columns: 2fr 1fr 1.5fr;
+}
+
+@media (max-width: 992px) {
+  .home-page .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ─── Status badge: bump size on small screens for recruiter readability ─── */
+@media (max-width: 48em) {
+  .status-badge {
+    font-size: 0.8rem;
+  }
+}
 /* Global Outline resets for accessibility */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -1875,8 +1892,6 @@ dialog[open].document-modal {
   border: 1px solid var(--modal-border);
   border-radius: var(--radius-surface);
   box-shadow: var(--modal-shadow);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
   display: flex;
   flex-direction: column;
   contain: layout style paint;
@@ -2323,8 +2338,6 @@ body.page-loaded {
   border-radius: var(--radius-surface);
   padding: 0.6rem 1rem;
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   transition:
     border-color var(--transition),
     box-shadow var(--transition);
@@ -2432,10 +2445,10 @@ body.page-loaded {
   text-align: left;
   color: inherit;
   font-family: inherit;
-  transition: margin-bottom var(--transition);
+  transition: padding-bottom var(--transition);
 }
 .toc-toggle-btn[aria-expanded='true'] {
-  margin-bottom: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 .toc-toggle-btn:focus-visible {
   outline: 2px solid var(--accent);
@@ -2579,6 +2592,21 @@ body.page-loaded {
   margin-bottom: var(--space-xl);
 }
 
+/* ─── Home actions: demote Book a Meeting to text-link weight ─── */
+.home-actions .doc-row-btn.btn-secondary {
+  border-color: transparent;
+  background: transparent;
+  padding-inline: 0.35rem;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.home-actions .doc-row-btn.btn-secondary:hover {
+  border-color: transparent;
+  background: transparent;
+  color: var(--accent);
+  box-shadow: none;
+}
 /* ─── 404 error page ─── */
 .error-page-content {
   text-align: center;

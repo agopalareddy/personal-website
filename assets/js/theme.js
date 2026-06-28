@@ -129,6 +129,13 @@
           }
           applyTheme(theme);
           updateAllSlidersUI(theme);
+          const labels = {
+            light: 'Light theme active',
+            device: 'Following system theme',
+            dark: 'Dark theme active',
+          };
+          const announcer = document.getElementById('a11y-announcer');
+          if (announcer) announcer.textContent = labels[theme] || '';
         });
       });
     });

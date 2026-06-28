@@ -116,7 +116,7 @@ def render_footer():
         <div class="container footer-grid">
             <div class="footer-col about-col">
                 <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Aadarsha Gopala Reddy</h3>
-                <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">M.S. Computer Science graduate from Washington University in St. Louis. Interested in solving complex distributed systems problems, building high-throughput data pipelines, and training machine learning models.</p>
+                <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">Software, data, and ML engineer focused on applied research systems: reliable data pipelines, distributed services, and models that hold up outside the notebook.</p>
             </div>
             <div class="footer-col links-col">
                 <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 1rem;">Explore</h3>

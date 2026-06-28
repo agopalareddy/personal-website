@@ -1112,6 +1112,59 @@ main.container {
   margin: 2rem 0;
 }
 
+.home-skill-groups {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.home-skill-summary.home-skill-tags.project-tech {
+  margin: -0.25rem 0 0.6rem;
+  padding-left: 0;
+}
+
+.home-skill-details {
+  margin: 0 0 1.25rem;
+}
+
+.home-skill-details summary {
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.home-skill-group {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, max-content) 1fr;
+  gap: 0.5rem 1rem;
+  align-items: start;
+}
+
+.home-skill-group dt {
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.home-skill-group dd {
+  margin: 0;
+}
+
+.home-skill-tags.project-tech {
+  margin: 0;
+  padding-left: 0;
+}
+
+@media (max-width: 560px) {
+  .home-skill-group {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* CV page embeds */
 .cv-embed-container {
   margin-top: 1.5rem;
@@ -1365,7 +1418,9 @@ main.container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  padding-left: 0;
   margin-bottom: 0.75rem;
+  list-style: none;
 }
 .tech-tag {
   font-size: 0.7rem;

@@ -1637,25 +1637,29 @@ main.container {
   flex-shrink: 0;
 }
 
-.doc-row-btn {
+/* ─── Unified button base — shared by doc-row-btn and site-action-btn ─── */
+.doc-row-btn,
+.site-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  min-height: 2.5rem;
   padding: 0.5rem 1rem;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
+  line-height: 1.4;
   border-radius: var(--radius-control);
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none !important;
   cursor: pointer;
   transition:
     color var(--transition),
     background-color var(--transition),
     border-color var(--transition),
     box-shadow var(--transition);
-  text-decoration: none !important;
-  font-family: var(--font-body);
-  white-space: nowrap;
-  text-align: center;
 }
 
 .doc-row-btn.btn-primary {
@@ -1684,28 +1688,11 @@ main.container {
   box-shadow: var(--shadow-sm);
 }
 
+/* site-action-btn: primary fill variant of the unified button base */
 .site-action-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 2.65rem;
-  padding: 0.55rem 1rem;
   color: var(--accent-on-accent) !important;
   background: var(--accent);
   border: 1px solid var(--accent);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.4;
-  text-align: center;
-  text-decoration: none !important;
-  transition:
-    color var(--transition),
-    background-color var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
 }
 
 .site-action-btn:hover {

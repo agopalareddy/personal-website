@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
     filtered.forEach(function (exp) {
       var year = getOrderYear(exp);
       if (year && year !== lastYear) {
-        html += '<div class="timeline-year" id="year-' + year + '">' + year + '</div>';
+        html += '<h2 class="timeline-year" id="year-' + year + '">' + year + '</h2>';
         lastYear = year;
       }
       html += createExperienceCard(exp);

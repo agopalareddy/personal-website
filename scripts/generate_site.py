@@ -563,7 +563,7 @@ def _render_noscript_cards(entries: list[dict[str, Any]]) -> str:
         y = experience_order_year(e)
         if y != year:
             year = y
-            parts.append(f'                  <div class="timeline-year">{y}</div>')
+            parts.append(f'                  <h2 class="timeline-year">{y}</h2>')
         parts.append(_render_noscript_card(e))
     return "\n".join(parts)
 
@@ -976,7 +976,7 @@ def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
             f'                      <span class="card-category {cat_class}">{html_escape(category)}</span>\n'
             f'                      <span class="card-venue">{formatted_date}</span>\n'
             f'                    </div>\n'
-            f'                    <h3 class="project-title" style="font-family: var(--font-heading); margin-top: 0.75rem; margin-bottom: 0.25rem;"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h3>\n'
+            f'                    <h2 class="project-title" style="font-family: var(--font-heading); margin-top: 0.75rem; margin-bottom: 0.25rem;"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h2>\n'
             f'                    <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">{html_escape(venue_label)}</div>\n'
             f'                    <p class="project-excerpt" style="margin-bottom: 1rem;">{excerpt}</p>\n'
             f'                    <div class="project-tech" style="margin-bottom: 0.75rem;">{tags_html}</div>\n'

@@ -118,43 +118,18 @@
 
     <!-- Main Wrapper -->
     <div id="main-content">
-      <main class="container" style="padding-top: 3rem; padding-bottom: 5rem">
-        <div style="text-align: center; padding: 4rem 1rem; font-family: var(--font-body)">
-          <h1
-            style="
-              font-family: var(--font-heading);
-              font-size: 4rem;
-              margin-bottom: 1.5rem;
-              color: var(--text-primary);
-            "
-          >
-            404
-          </h1>
-          <h2
-            style="
-              font-family: var(--font-heading);
-              font-size: 1.8rem;
-              margin-bottom: 1rem;
-              color: var(--text-secondary);
-            "
-          >
-            Page Not Found
-          </h2>
-          <p
-            style="
-              color: var(--text-muted);
-              margin-bottom: 2.5rem;
-              max-width: 480px;
-              margin-left: auto;
-              margin-right: auto;
-            "
-          >
-            The page you are looking for does not exist, has been removed, or has changed its
-            address.
+      <main class="container">
+        <div class="error-page-content">
+          <p class="error-code" aria-hidden="true">404</p>
+          <h1>Page not found</h1>
+          <p class="error-message">
+            The page you're looking for doesn't exist, has been removed, or has changed its address.
           </p>
-          <a href="/" class="filter-btn active" style="text-decoration: none; display: inline-block"
-            >Back to Homepage</a
-          >
+          <div class="error-recovery">
+            <a href="/" class="site-action-btn">Go home</a>
+            <a href="/projects/" class="doc-row-btn btn-secondary">View projects</a>
+            <a href="/cv/" class="doc-row-btn btn-secondary">CV &amp; Resume</a>
+          </div>
         </div>
       </main>
     </div>

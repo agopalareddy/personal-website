@@ -2559,6 +2559,67 @@ body.page-loaded {
   scroll-margin-top: 5rem;
 }
 
+/* ─── Status badge (open to work indicator) ─── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--cat-tools-color);
+  background: var(--cat-tools-bg);
+  border-radius: var(--radius-pill);
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ─── Home page action strip ─── */
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+/* ─── 404 error page ─── */
+.error-page-content {
+  text-align: center;
+  padding: 4rem 1rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.error-code {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.error-message {
+  color: var(--text-secondary);
+  max-width: 420px;
+  margin: 0 auto var(--space-2xl);
+}
+.error-recovery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+
 button,
 .nav-link,
 .filter-btn,

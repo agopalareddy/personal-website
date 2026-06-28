@@ -971,15 +971,15 @@ def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
         actions_html = f'<div class="card-actions">{"".join(actions)}</div>'
 
         cards.append(
-            f'                  <div class="project-card spotlight-card timeline-card" id="proj-{slug}">\n'
-            f'                    <div class="card-meta">\n'
+            f'                  <div class="project-card spotlight-card timeline-card" id="proj-{slug}" style="margin-bottom: 1.5rem; padding: 1.25rem;">\n'
+            f'                    <div class="card-meta" style="margin-bottom: 0.5rem;">\n'
             f'                      <span class="card-category {cat_class}">{html_escape(category)}</span>\n'
             f'                      <span class="card-venue">{formatted_date}</span>\n'
             f'                    </div>\n'
-            f'                    <h3 class="project-title"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h3>\n'
+            f'                    <h3 class="project-title" style="font-family: var(--font-heading); margin-top: 0.75rem; margin-bottom: 0.25rem;"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h3>\n'
             f'                    <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">{html_escape(venue_label)}</div>\n'
-            f'                    <p class="project-excerpt">{excerpt}</p>\n'
-            f'                    <div class="project-tech">{tags_html}</div>\n'
+            f'                    <p class="project-excerpt" style="margin-bottom: 1rem;">{excerpt}</p>\n'
+            f'                    <div class="project-tech" style="margin-bottom: 0.75rem;">{tags_html}</div>\n'
             f'                    {actions_html}\n'
             f'                  </div>'
         )

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A premium, highly responsive, glassmorphic portfolio and academic showcase website highlighting academic achievements, computer science research, distributed systems engineering, and TA/leadership credentials.",
   "scripts": {
+    "dev": "python3 -m http.server 8080",
     "format": "prettier --write .",
     "prepare": "husky"
   },

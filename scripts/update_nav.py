@@ -22,14 +22,14 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent  # personal-website/
 
-# Ordered nav links (href → label) for the new 5-item bar.
+# Ordered nav links (href → label, icon) for the new 5-item bar.
 # The active class is preserved from the original nav.
 NAV_LINKS = [
-    ("/", "Home"),
-    ("/experience/", "Experience"),
-    ("/projects/", "Projects"),
-    ("/cv/", "CV/Resume"),
-    ("/availability/", "Availability"),
+    ("/", "Home", '<i class="fas fa-home" aria-hidden="true"></i>'),
+    ("/experience/", "Experience", '<i class="fas fa-briefcase" aria-hidden="true"></i>'),
+    ("/projects/", "Projects", '<i class="fas fa-code" aria-hidden="true"></i>'),
+    ("/cv/", "CV/Resume", '<i class="fas fa-file-alt" aria-hidden="true"></i>'),
+    ("/availability/", "Availability", '<i class="fas fa-calendar-alt" aria-hidden="true"></i>'),
 ]
 
 # Regex: capture the entire <nav class="nav-links" …> block, incl. its
@@ -94,9 +94,9 @@ def _build_nav(indent: str, active_href: str | None) -> str:
     """Return a complete ``<nav>…</nav>`` block for the 5-item bar."""
     inner_indent = indent + "  "
     lines = [f'{indent}<nav class="nav-links" aria-label="Primary Navigation">']
-    for href, label in NAV_LINKS:
+    for href, label, icon in NAV_LINKS:
         cls = "nav-link active" if href == active_href else "nav-link"
-        lines.append(f'{inner_indent}<a href="{href}" class="{cls}">{label}</a>')
+        lines.append(f'{inner_indent}<a href="{href}" class="{cls}">{icon}<span>{label}</span></a>')
     lines.append(f"{indent}</nav>")
     return "\n".join(lines)
 

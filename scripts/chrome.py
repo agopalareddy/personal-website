@@ -11,14 +11,14 @@ generator and the new experience generator can share a single source of
 truth for navigation, metadata, sidebar biography, and footer.
 """
 
-# Map active_page identifier to the (href, label) shown in the top nav.
+# Map active_page identifier to the (href, label, icon) shown in the top nav.
 # Order in the dict literal IS the rendered order in the nav bar.
 NAV_ITEMS = (
-    ("home", "/", "Home"),
-    ("experience", "/experience/", "Experience"),
-    ("projects", "/projects/", "Projects"),
-    ("cv", "/cv/", "CV/Resume"),
-    ("availability", "/availability/", "Availability"),
+    ("home", "/", "Home", '<i class="fas fa-home" aria-hidden="true"></i>'),
+    ("experience", "/experience/", "Experience", '<i class="fas fa-briefcase" aria-hidden="true"></i>'),
+    ("projects", "/projects/", "Projects", '<i class="fas fa-code" aria-hidden="true"></i>'),
+    ("cv", "/cv/", "CV/Resume", '<i class="fas fa-file-alt" aria-hidden="true"></i>'),
+    ("availability", "/availability/", "Availability", '<i class="fas fa-calendar-alt" aria-hidden="true"></i>'),
 )
 
 
@@ -33,7 +33,7 @@ def render_head(title, description, canonical_url, og_type="article"):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{description}">
     <title>{title} - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.1.1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.2.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Favicons & Mobile Device Integration -->
@@ -73,9 +73,9 @@ def render_nav(active_page):
     Unknown keys simply produce no active highlight.
     """
     links = []
-    for key, href, label in NAV_ITEMS:
+    for key, href, label, icon in NAV_ITEMS:
         active_class = " nav-link active" if key == active_page else " nav-link"
-        links.append(f'<a href="{href}" class="{active_class.strip()}">{label}</a>')
+        links.append(f'<a href="{href}" class="{active_class.strip()}">{icon}<span>{label}</span></a>')
     nav_links_html = "\n                ".join(links)
     return f"""<header class="top-header">
         <div class="top-bar container">

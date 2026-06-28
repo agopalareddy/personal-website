@@ -637,7 +637,7 @@ function renderProjects() {
       let yearHeaderHtml = '';
       const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
       if (year && year !== lastYear) {
-        yearHeaderHtml = `<div class="timeline-year" id="year-${year}">${year}</div>`;
+        yearHeaderHtml = `<h2 class="timeline-year" id="year-${year}">${year}</h2>`;
         lastYear = year;
       }
 

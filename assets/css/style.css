@@ -2455,21 +2455,24 @@ body.page-loaded {
 
   /* Stack home page actions vertically and make buttons full-width */
   .home-actions {
-    flex-direction: column !important;
-    align-items: stretch !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
     gap: 0.75rem !important;
     width: 100% !important;
     margin-top: var(--space-md) !important;
   }
   .home-actions .site-action-btn,
-  .home-actions .doc-row-btn.btn-secondary {
+  .home-actions .doc-row-btn {
+    flex: 1 !important;
     display: inline-flex !important;
     justify-content: center !important;
     align-items: center !important;
-    width: 100% !important;
-    min-height: 2.75rem !important;
-    padding: 0.75rem 1rem !important;
+    min-width: 0 !important;
+    height: 2.75rem !important;
+    padding: 0.5rem 0.5rem !important;
     font-size: 0.85rem !important;
+    box-sizing: border-box !important;
   }
 }
 
@@ -2852,6 +2855,15 @@ body.page-loaded {
   align-items: center;
   margin-top: var(--space-lg);
   margin-bottom: var(--space-xl);
+}
+.home-actions .site-action-btn,
+.home-actions .doc-row-btn {
+  min-width: 160px;
+  height: 2.5rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
 }
 
 /* ─── 404 error page ─── */

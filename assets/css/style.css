@@ -40,6 +40,9 @@
     --z-modal: 9999;
 
     --transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Body line-height — bumped in dark mode (light type reads lighter, needs room) */
+    --line-height-body: 1.6;
   }
 
   /* Light theme (default) */
@@ -135,6 +138,7 @@
     --modal-header-bg: rgba(26, 29, 38, 0.35);
     --modal-close-bg: rgba(255, 255, 255, 0.08);
     --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --line-height-body: 1.65;
   }
 
   /* Pre-JS fallback: device preference before theme.js sets data-resolved-theme */
@@ -180,6 +184,7 @@
       --modal-header-bg: rgba(26, 29, 38, 0.35);
       --modal-close-bg: rgba(255, 255, 255, 0.08);
       --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      --line-height-body: 1.65;
     }
   }
 }
@@ -220,13 +225,15 @@ body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   min-height: 100dvh;
-  line-height: 1.6;
+  line-height: var(--line-height-body);
   display: flex;
   flex-direction: column;
   transition:
     background-color var(--transition),
     color var(--transition);
   -webkit-font-smoothing: antialiased;
+  font-kerning: normal;
+  font-optical-sizing: auto;
 }
 
 /* Container */
@@ -324,12 +331,13 @@ header:not(.top-header) {
 
 h1 {
   font-family: var(--font-heading);
-  font-size: 2.75rem;
+  font-size: clamp(1.75rem, 2.2vw + 1.23rem, 2.75rem);
   font-weight: 400;
   line-height: 1.2;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .subtitle {
@@ -339,6 +347,7 @@ h1 {
   margin: 0 auto 2rem;
   font-weight: 400;
   line-height: 1.5;
+  text-wrap: pretty;
 }
 
 /* Meta Pills */
@@ -455,6 +464,7 @@ main.container {
   font-weight: 400;
   color: var(--text-primary);
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 .card-body {
@@ -653,6 +663,7 @@ main.container {
   font-size: 1.75rem;
   font-weight: 400;
   color: var(--text-primary);
+  text-wrap: balance;
 }
 
 .modal-body {
@@ -2282,7 +2293,7 @@ body.page-loaded {
   position: relative;
   font-family: var(--font-heading);
   font-size: 1.35rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text-primary);
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;

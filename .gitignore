@@ -46,3 +46,8 @@ gcp-*-key.json
 *-verifier-key.json
 *-credentials.json
 service-account*.json
+
+# Local agent tool directories
+.impeccable/
+.omo/
+.playwright-cli/

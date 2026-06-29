@@ -87,22 +87,21 @@
     };
   }
 
-  // Insertion point: inside .author-avatar-wrapper, before .author-links.
-  // The wrapper is the glassmorphic "profile" card — it owns the
-  // badge's grid-area on mobile and gets display: none on non-home
-  // mobile (so the badge travels with it). Falls back to appending
-  // to the sidebar if the wrapper is missing. Ponytail: the bio's
-  // parent is almost always the wrapper, so insert before
-  // .author-links inside the wrapper — this puts the badge in the
-  // wrapper's `badge` grid cell on mobile and as a flow child on
-  // desktop, and hides it whenever the wrapper is hidden.
+  // Returns { parent, anchor } where anchor is the node to insertBefore
+  // and parent is the container. Insertion point: inside
+  // .author-avatar-wrapper, before .author-links. The wrapper is the
+  // glassmorphic "profile" card — it owns the badge's grid-area on
+  // mobile and gets display: none on non-home mobile (so the badge
+  // travels with it). Falls back to the sidebar if the wrapper is
+  // missing.
   function findInsertionPoint(sidebar) {
     var wrapper = sidebar.querySelector('.author-avatar-wrapper');
     if (wrapper) {
       var links = wrapper.querySelector('.author-links');
-      if (links) return links;
+      if (links) return { parent: wrapper, anchor: links };
+      return { parent: wrapper, anchor: null };
     }
-    return null;
+    return { parent: sidebar, anchor: null };
   }
 
   function mount(sidebar, overrides) {
@@ -115,11 +114,11 @@
     if (!options) return null;
 
     var badge = createBadge(options);
-    var anchor = findInsertionPoint(sidebar);
-    if (anchor) {
-      sidebar.insertBefore(badge, anchor);
+    var point = findInsertionPoint(sidebar);
+    if (point.anchor) {
+      point.parent.insertBefore(badge, point.anchor);
     } else {
-      sidebar.appendChild(badge);
+      point.parent.appendChild(badge);
     }
     MOUNTED.add(sidebar);
     return badge;

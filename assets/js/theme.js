@@ -66,7 +66,7 @@
     // site-wide) rather than hand-rolled SVGs.
     const iconDefs = [
       ['light', 'Light mode', 'Light Theme', 'fa-solid fa-sun'],
-      ['device', 'System mode', 'Follow System Theme', 'fa-solid fa-display'],
+      ['device', 'System mode', 'Follow System Theme', 'fa-solid fa-desktop'],
       ['dark', 'Dark mode', 'Dark Theme', 'fa-solid fa-moon'],
     ];
 

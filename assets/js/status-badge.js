@@ -87,16 +87,23 @@
     };
   }
 
-  // Insertion point: after .author-bio, before .author-links. Falls back
-  // to appending to the sidebar if neither landmark exists.
+  // Insertion point: after .author-bio (or its wrapper, if the bio is
+  // nested inside .author-avatar-wrapper as on the catalog pages), before
+  // .author-links. Falls back to appending to the sidebar if neither
+  // landmark exists. Ponytail: the bio's direct parent is usually the
+  // wrapper on catalog pages and the sidebar on the home page, so
+  // handle both — insert after whatever element actually contains the
+  // bio, which keeps the badge just below the bio on every layout.
   function findInsertionPoint(sidebar) {
     var bio = sidebar.querySelector('.author-bio');
-    if (bio && bio.parentNode === sidebar) {
-      return bio.nextSibling;
+    if (bio) {
+      var anchor = bio.parentNode === sidebar ? bio : bio.parentElement;
+      return anchor.nextSibling;
     }
     var links = sidebar.querySelector('.author-links');
-    if (links && links.parentNode === sidebar) {
-      return links;
+    if (links) {
+      var anchor = links.parentNode === sidebar ? links : links.parentElement;
+      return anchor.nextSibling;
     }
     return null;
   }

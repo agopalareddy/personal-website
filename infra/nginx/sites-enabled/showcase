@@ -7,6 +7,9 @@ server {
     server_tokens off;
     more_clear_headers Server;
 
+    # Serve the styled 404 page for missing paths (not the nginx default).
+    error_page 404 /404.html;
+
     # Block access to hidden files/directories (.git, .env, etc.)
     location ~ /\.(git|env|htaccess|htpasswd|svn|hg) {
         deny all;
@@ -247,6 +250,9 @@ server {
     root /opt/personal-website;
     server_tokens off;
     more_clear_headers Server;
+
+    # Serve the styled 404 page for missing paths (not the nginx default).
+    error_page 404 /404.html;
 
     # Block access to hidden files/directories (.git, .env, etc.)
     location ~ /\.(git|env|htaccess|htpasswd|svn|hg) {

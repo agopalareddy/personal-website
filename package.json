@@ -23,10 +23,10 @@
     "*.{html,css,js,json,md}": "prettier --write"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.11.3",
+    "@axe-core/playwright": "^4.12.1",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.7",
-    "playwright": "^1.60.0",
-    "prettier": "^3.8.3"
+    "lint-staged": "^17.0.8",
+    "playwright": "^1.61.1",
+    "prettier": "^3.9.0"
   }
 }

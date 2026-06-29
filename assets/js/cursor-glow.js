@@ -212,14 +212,8 @@
   }
 
   function initCollapsibles() {
-    // <details> widgets (home-skill-details on the index page).
-    var detailsList = document.querySelectorAll('details.home-skill-details');
-    for (var i = 0; i < detailsList.length; i++) {
-      var d = detailsList[i];
-      setCollapseHeight(d, d.querySelector('.home-skill-groups'));
-    }
-
-    // aria-expanded toggle widgets (filters + TOC on projects/experience).
+    // aria-expanded toggle widgets (filter/TOC on projects/experience,
+    // and the home-skill-toggle on the index page).
     var btnList = document.querySelectorAll('.toc-toggle-btn');
     for (var j = 0; j < btnList.length; j++) {
       var btn = btnList[j];
@@ -228,6 +222,18 @@
       var panel = document.getElementById(id);
       if (!panel) continue;
       setCollapseHeight(btn.parentElement, panel);
+      // The sidebar catalog scripts already wire click handlers for the
+      // filter/TOC buttons. The home-skill-toggle on the index page has
+      // no such script, so wire the click here — but only if no other
+      // listener will fire. We detect that by checking for a data attr
+      // the catalog scripts set.
+      if (!btn.hasAttribute('data-toggle-bound')) {
+        btn.setAttribute('data-toggle-bound', '1');
+        btn.addEventListener('click', () => {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        });
+      }
     }
   }
 

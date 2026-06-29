@@ -19,7 +19,7 @@
       content="M.S. Computer Science graduate from Washington University in St. Louis. Specializing in machine learning, distributed data pipelines, and vehicle-agnostic cognitive signatures."
     />
     <title>About Me - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.7.5" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.7.7" />
     <link rel="stylesheet" href="/assets/fonts/fonts.css" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
@@ -213,9 +213,20 @@
                 development, gained through research, teaching, and industry internships, and I’m
                 seeking software, data, or ML engineering roles.
               </p>
-              <details class="home-skill-details card-surface">
-                <summary>Technical stack by area</summary>
-                <dl class="home-skill-groups" aria-label="Technical stack by area">
+              <div class="home-skill-details card-surface">
+                <button
+                  class="home-skill-toggle toc-toggle-btn"
+                  type="button"
+                  aria-expanded="true"
+                  aria-controls="homeSkillGroups"
+                >
+                  Technical stack by area
+                </button>
+                <dl
+                  class="home-skill-groups"
+                  id="homeSkillGroups"
+                  aria-label="Technical stack by area"
+                >
                   <div class="home-skill-group">
                     <dt>Languages</dt>
                     <dd>
@@ -316,7 +327,7 @@
                     </dd>
                   </div>
                 </dl>
-              </details>
+              </div>
               <div class="home-actions">
                 <a
                   href="/files/reddy_resume.pdf"
@@ -457,6 +468,6 @@
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js?v=1.0"></script>
     <script src="/assets/js/email-protection.js"></script>
-    <script src="/assets/js/cursor-glow.js?v=1.5"></script>
+    <script src="/assets/js/cursor-glow.js?v=1.6"></script>
   </body>
 </html>

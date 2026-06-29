@@ -62,64 +62,12 @@
     // Build the slider DOM programmatically. Using innerHTML with a
     // static template is technically safe here, but the linter doesn't
     // know that and flags it as a potential XSS sink. createElement is
-    // verbose but unambiguous.
-    // Icons are defined as plain data (not pre-built DOM) and built fresh
-    // per slider instance — otherwise appending the same icon to two
-    // sliders (header + footer) would *move* it from the first to the
-    // second, leaving the first empty.
-    function svg(viewBox, extraClass, children) {
-      const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      el.setAttribute('class', 'slider-icon ' + extraClass);
-      el.setAttribute('viewBox', viewBox);
-      el.setAttribute('fill', 'none');
-      el.setAttribute('stroke', 'currentColor');
-      el.setAttribute('stroke-width', '2');
-      el.setAttribute('stroke-linecap', 'round');
-      el.setAttribute('stroke-linejoin', 'round');
-      for (const [tag, attrs] of children) {
-        const child = document.createElementNS('http://www.w3.org/2000/svg', tag);
-        for (const k in attrs) child.setAttribute(k, attrs[k]);
-        el.appendChild(child);
-      }
-      return el;
-    }
-
+    // verbose but unambiguous. Icons use Font Awesome (already loaded
+    // site-wide) rather than hand-rolled SVGs.
     const iconDefs = [
-      [
-        'light',
-        'Light mode',
-        'Light Theme',
-        'sun-icon-svg',
-        [
-          ['circle', { cx: '12', cy: '12', r: '5' }],
-          ['line', { x1: '12', y1: '1', x2: '12', y2: '3' }],
-          ['line', { x1: '12', y1: '21', x2: '12', y2: '23' }],
-          ['line', { x1: '4.22', y1: '4.22', x2: '5.64', y2: '5.64' }],
-          ['line', { x1: '18.36', y1: '18.36', x2: '19.78', y2: '19.78' }],
-          ['line', { x1: '1', y1: '12', x2: '3', y2: '12' }],
-          ['line', { x1: '21', y1: '12', x2: '23', y2: '12' }],
-          ['line', { x1: '4.22', y1: '19.78', x2: '5.64', y2: '18.36' }],
-          ['line', { x1: '18.36', y1: '5.64', x2: '19.78', y2: '4.22' }],
-        ],
-      ],
-      [
-        'device',
-        'System mode',
-        'Follow System Theme',
-        'monitor-icon-svg',
-        [
-          ['rect', { x: '2', y: '3', width: '20', height: '14', rx: '2', ry: '2' }],
-          ['line', { x1: '8', y1: '21', x2: '16', y2: '21' }],
-          ['line', { x1: '12', y1: '17', x2: '12', y2: '21' }],
-        ],
-      ],
-      [
-        'dark',
-        'Dark mode',
-        'Dark Theme',
-        'moon-icon-svg',
-        [['path', { d: 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' }]],
-      ],
+      ['light', 'Light mode', 'Light Theme', 'fa-solid fa-sun'],
+      ['device', 'System mode', 'Follow System Theme', 'fa-solid fa-display'],
+      ['dark', 'Dark mode', 'Dark Theme', 'fa-solid fa-moon'],
     ];
 
     placeholders.forEach((placeholder) => {
@@ -138,7 +86,7 @@
       thumb.className = 'theme-slider-thumb';
       track.appendChild(thumb);
 
-      for (const [theme, ariaLabel, title, iconClass, iconChildren] of iconDefs) {
+      for (const [theme, ariaLabel, title, iconClass] of iconDefs) {
         const btn = document.createElement('button');
         btn.className = 'theme-slider-btn';
         btn.setAttribute('data-theme', theme);
@@ -146,8 +94,10 @@
         btn.setAttribute('aria-checked', 'false');
         btn.setAttribute('aria-label', ariaLabel);
         btn.setAttribute('title', title);
-        // Fresh icon per slider — see comment above.
-        btn.appendChild(svg('0 0 24 24', iconClass, iconChildren));
+        const icon = document.createElement('i');
+        icon.className = 'slider-icon ' + iconClass;
+        icon.setAttribute('aria-hidden', 'true');
+        btn.appendChild(icon);
         track.appendChild(btn);
       }
 

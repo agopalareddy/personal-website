@@ -52,6 +52,7 @@
     --bg-base: #f7f8fa;
     --bg-surface: #ffffff;
     --bg-surface-hover: #eef1f5;
+    --bg-content: #fafbfd;
     --border-color: #e2e8f0;
     --border-hover: #cbd5e1;
 
@@ -99,6 +100,7 @@
     --bg-base: #12141a;
     --bg-surface: #1a1d26;
     --bg-surface-hover: #252a36;
+    --bg-content: #181a22;
     --border-color: #2e3440;
     --border-hover: #3d4454;
 
@@ -435,7 +437,9 @@ main.container {
 .card:hover {
   transform: translateY(-2px);
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
+  box-shadow:
+    var(--shadow-md),
+    0 0 0 1px var(--border-hover);
 }
 
 .card-header {
@@ -496,6 +500,17 @@ main.container {
   font-weight: 500;
   color: var(--text-secondary);
   font-family: var(--font-body);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+.tech-tag:hover {
+  background: var(--bg-content);
+  border-color: var(--accent-soft);
+  color: var(--accent);
+  transform: translateY(-1px);
 }
 
 /* Call to Action Button */
@@ -1185,7 +1200,7 @@ details[open].home-skill-details summary::after {
   margin: 0;
   padding: 0.85rem;
   border-top: 1px solid var(--border-color);
-  background: var(--bg-base);
+  background: var(--bg-content);
 }
 
 .home-skill-summary.home-skill-tags.project-tech {
@@ -1359,10 +1374,11 @@ details[open].home-skill-details summary::after {
   font-family: var(--font-body);
 }
 .filter-btn:hover {
-  background-color: var(--bg-surface-hover);
-  border-color: var(--border-hover);
-  color: var(--text-primary);
+  background-color: var(--bg-content);
+  border-color: var(--accent);
+  color: var(--accent);
   box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
 }
 .filter-btn.active {
   background-color: var(--accent-soft);
@@ -1392,8 +1408,10 @@ details[open].home-skill-details summary::after {
 }
 .project-card:hover {
   transform: translateY(-3px);
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  box-shadow:
+    var(--shadow-md),
+    0 0 0 1px var(--accent-soft);
 }
 .card-meta {
   display: flex;
@@ -2610,11 +2628,23 @@ body.page-loaded {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-surface);
-  padding: 0.6rem 1rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
   transition:
     border-color var(--transition),
     box-shadow var(--transition);
+}
+.toc-container:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+/* Content area inside a toc-container (nav list / filter controls). */
+.toc-container > #tocNav,
+.toc-container > #filterNav,
+.toc-container > #tocContainer {
+  background: var(--bg-content);
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 /* Stacked TOC containers (filters + TOC) in sidebar */
@@ -2650,13 +2680,14 @@ body.page-loaded {
   padding: 0.35rem 1.8rem 0.35rem 0.6rem;
 }
 .toc-container .toc-title {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   color: var(--text-primary);
   margin: 0 !important;
-  line-height: 1.2 !important;
+  line-height: 1.45 !important;
+  transition: color var(--transition);
 }
 .toc-list {
   list-style: none;
@@ -2706,11 +2737,11 @@ body.page-loaded {
   border-left: 1px solid var(--border-color);
 }
 
-/* Collapsible Table of Contents Trigger */
+/* Collapsible Table of Contents Trigger — header of the widget */
 .toc-toggle-btn {
-  background: none;
+  background: var(--bg-surface);
   border: none;
-  padding: 0;
+  padding: 0.65rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2718,16 +2749,25 @@ body.page-loaded {
   cursor: pointer;
   text-align: left;
   color: inherit;
-  font-family: inherit;
-  transition: color var(--transition);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+  user-select: none;
+  list-style: none;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
 }
 .toc-toggle-btn[aria-expanded='true'] {
-  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-color);
 }
 .toc-toggle-btn:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 4px;
-  border-radius: 4px;
+  outline-offset: 2px;
+}
+.toc-toggle-btn:hover {
+  background: var(--bg-surface-hover);
 }
 .toc-toggle-btn:hover .toc-title,
 .toc-toggle-btn:hover .toc-toggle-icon {

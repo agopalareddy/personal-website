@@ -1151,11 +1151,21 @@ main.container {
    state so there's no <details> native animation to fight. */
 .home-skill-details > .home-skill-groups {
   max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top-color: transparent;
   overflow: hidden;
-  transition: max-height 0.25s cubic-bezier(0, 0, 0.2, 1);
+  /* max-height + overflow:hidden clips the content, but the padding and
+     border-top still show through unless we zero them too. */
+  transition:
+    max-height 0.25s cubic-bezier(0, 0, 0.2, 1),
+    padding 0.25s cubic-bezier(0, 0, 0.2, 1),
+    border-top-color 0.25s ease-out;
 }
 .home-skill-toggle[aria-expanded='true'] + .home-skill-groups {
   max-height: var(--collapse-h, 2000px);
+  padding: 0.85rem;
+  border-top-color: var(--border-color);
 }
 
 .home-skill-details:hover {
@@ -1765,18 +1775,24 @@ main.container {
 /* ─── Press state — tactile feedback while the mouse/finger is held down ───
    Applied by cursor-glow.js on pointerdown, removed on pointerup/pointercancel.
    Scale is snappy (80ms in, default 150ms out for a slight spring-back feel). */
+/* Press state — subtle vertical nudge (1px) + brighter halo. No scale:
+   scale(0.98) reads as a bounce on any card wider than a few hundred
+   pixels, and the spring-back to 1.0 is especially jarring on
+   collapsible widgets and the document modal. The 1px translateY
+   gives just enough tactile feedback without the bounce. */
 .card-surface.is-pressed {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(1px);
   transition-duration: 80ms;
   box-shadow: var(--shadow-sm);
 }
 
-/* Collapsible widgets (home-skill-details, toc-container) should not
-   scale on press — the scale competes with the content's collapse/
-   expand animation and reads as a "bounce" (shrink → content move →
-   grow back). Keep the brighter halo but drop the transform. */
+/* Collapsible widgets and the document modal should not move on press
+   at all — they have their own open/close or scale-in animations that
+   would compete with the 1px translateY. The brighter halo from the
+   press state still applies. */
 .home-skill-details.is-pressed,
-.toc-container.is-pressed {
+.toc-container.is-pressed,
+.modal-window.is-pressed {
   transform: none;
 }
 .card-surface.is-pressed::after {

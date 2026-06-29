@@ -190,6 +190,47 @@
     }
   }
 
+  // Smooth collapse/expand for <details> and aria-expanded toggle widgets.
+  // The CSS handles the transition (max-height: 0 → var(--collapse-h)).
+  // We just measure each content panel's natural height once and write it
+  // to --collapse-h. The browser-native <details> animation in Chrome 131+
+  // (which was producing the bouncy feel) is overridden by our CSS.
+  function measureHeight(el) {
+    var prev = el.style.maxHeight;
+    el.style.maxHeight = 'none';
+    var h = el.scrollHeight;
+    el.style.maxHeight = prev;
+    return h;
+  }
+
+  function setCollapseHeight(scope, content) {
+    if (!content) return;
+    var h = measureHeight(content);
+    // Pad by 8px so sub-pixel rounding at the end of the animation
+    // doesn't leave a sliver clipped.
+    scope.style.setProperty('--collapse-h', h + 8 + 'px');
+  }
+
+  function initCollapsibles() {
+    // <details> widgets (home-skill-details on the index page).
+    var detailsList = document.querySelectorAll('details.home-skill-details');
+    for (var i = 0; i < detailsList.length; i++) {
+      var d = detailsList[i];
+      setCollapseHeight(d, d.querySelector('.home-skill-groups'));
+    }
+
+    // aria-expanded toggle widgets (filters + TOC on projects/experience).
+    var btnList = document.querySelectorAll('.toc-toggle-btn');
+    for (var j = 0; j < btnList.length; j++) {
+      var btn = btnList[j];
+      var id = btn.getAttribute('aria-controls');
+      if (!id) continue;
+      var panel = document.getElementById(id);
+      if (!panel) continue;
+      setCollapseHeight(btn.parentElement, panel);
+    }
+  }
+
   var io = null;
   function init() {
     scan(document);
@@ -219,6 +260,7 @@
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize, { passive: true });
     watchScrollAncestors();
+    initCollapsibles();
 
     // Cards rendered after init (catalog scripts) get picked up by the
     // MutationObserver below.

@@ -1140,28 +1140,23 @@ main.container {
 
 .home-skill-details {
   margin: 1rem 0;
-  /* Smooth collapse/expand: grid-template-rows 0fr → 1fr on [open].
-     The summary is the auto-sized first row; the .home-skill-groups
-     content lives in the 0fr/1fr second row. This is the standard
-     grid-row trick for animating to an unknown natural height without
-     measuring with JS. */
-  display: grid;
-  grid-template-rows: auto 0fr;
   transition:
-    grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     border-color var(--transition),
     box-shadow var(--transition);
 }
 
-.home-skill-details[open] {
-  grid-template-rows: auto 1fr;
-}
-
+/* Collapsible content — CSS handles the transition, JS just measures
+   the natural height once and writes it to --collapse-h. This avoids
+   the browser-native <details> open/close animation in Chrome 131+
+   (which was producing the bouncy feel) and the grid-template-rows
+   trick (which doesn't reliably interpolate across browsers). */
 .home-skill-details > .home-skill-groups {
-  /* min-height: 0 lets the grid row shrink below its content's natural
-     size; overflow: hidden then clips what's visually rendered. */
-  min-height: 0;
+  max-height: 0;
   overflow: hidden;
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.home-skill-details[open] > .home-skill-groups {
+  max-height: var(--collapse-h, 2000px);
 }
 
 .home-skill-details:hover {
@@ -2789,9 +2784,21 @@ body.page-loaded {
 .toc-container > #tocNav,
 .toc-container > #filterNav,
 .toc-container > #tocContainer {
+  max-height: 0;
+  overflow: hidden;
   background: var(--bg-content);
+  padding: 0 1rem;
+  border-top: 1px solid transparent;
+  transition:
+    max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-top-color 0.25s ease-out;
+}
+.toc-toggle-btn[aria-expanded='true'] + #tocNav,
+.toc-toggle-btn[aria-expanded='true'] + #filterNav {
+  max-height: var(--collapse-h, 2000px);
   padding: 0.85rem 1rem;
-  border-top: 1px solid var(--border-color);
+  border-top-color: var(--border-color);
 }
 
 /* Stacked TOC containers (filters + TOC) in sidebar */
@@ -2935,7 +2942,8 @@ body.page-loaded {
 }
 .toc-toggle-btn[aria-expanded='false'] + #tocNav,
 .toc-toggle-btn[aria-expanded='false'] + #filterNav {
-  display: none !important;
+  /* Hide from a11y tree while still in the layout for the animation */
+  visibility: hidden;
 }
 
 /* ─── Catalog page utilities ─── */

@@ -87,6 +87,17 @@
     --cat-presentations-bg: #dbeafe;
     --cat-presentations-color: #1e40af;
 
+    /* Status badge palette — light theme. The dark block below mirrors these. */
+    --status-available-bg: #d1fae5;
+    --status-available-color: #047857;
+    --status-available-border: #a7f3d0;
+    --status-busy-bg: #fef3c7;
+    --status-busy-color: #b45309;
+    --status-busy-border: #fde68a;
+    --status-unavailable-bg: #fee2e2;
+    --status-unavailable-color: #b91c1c;
+    --status-unavailable-border: #fecaca;
+
     --modal-bg: rgba(255, 255, 255, 0.85);
     --modal-border: rgba(255, 255, 255, 0.4);
     --modal-header-bg: rgba(255, 255, 255, 0.35);
@@ -135,6 +146,17 @@
     --cat-presentations-bg: #1e2a4a;
     --cat-presentations-color: #93c5fd;
 
+    /* Status badge palette — dark theme. Saturated foreground, deep tinted bg. */
+    --status-available-bg: #0f2e23;
+    --status-available-color: #6ee7b7;
+    --status-available-border: #1a5a44;
+    --status-busy-bg: #2e2218;
+    --status-busy-color: #fdba74;
+    --status-busy-border: #5a4220;
+    --status-unavailable-bg: #2e1a1a;
+    --status-unavailable-color: #fca5a5;
+    --status-unavailable-border: #5a2828;
+
     --modal-bg: rgba(26, 29, 38, 0.85);
     --modal-border: rgba(255, 255, 255, 0.08);
     --modal-header-bg: rgba(26, 29, 38, 0.35);
@@ -180,6 +202,17 @@
       --cat-leadership-color: #c4b5fd;
       --cat-awards-bg: #2e1a22;
       --cat-awards-color: #fda4af;
+
+      /* Status badge palette — pre-JS dark (prefers-color-scheme). */
+      --status-available-bg: #0f2e23;
+      --status-available-color: #6ee7b7;
+      --status-available-border: #1a5a44;
+      --status-busy-bg: #2e2218;
+      --status-busy-color: #fdba74;
+      --status-busy-border: #5a4220;
+      --status-unavailable-bg: #2e1a1a;
+      --status-unavailable-color: #fca5a5;
+      --status-unavailable-border: #5a2828;
 
       --modal-bg: rgba(26, 29, 38, 0.85);
       --modal-border: rgba(255, 255, 255, 0.08);
@@ -3136,21 +3169,22 @@ body.page-loaded {
   animation: status-pulse-ring 2.4s ease-out infinite;
 }
 
-/* Variant palettes — override the color tokens above. */
+/* Variant palettes — read from the theme palette so dark mode swaps
+   to a saturated foreground + deep tinted background automatically. */
 .status-badge--available {
-  --status-color: #047857;
-  --status-bg: #d1fae5;
-  --status-border: #a7f3d0;
+  --status-color: var(--status-available-color);
+  --status-bg: var(--status-available-bg);
+  --status-border: var(--status-available-border);
 }
 .status-badge--busy {
-  --status-color: #b45309;
-  --status-bg: #fef3c7;
-  --status-border: #fde68a;
+  --status-color: var(--status-busy-color);
+  --status-bg: var(--status-busy-bg);
+  --status-border: var(--status-busy-border);
 }
 .status-badge--unavailable {
-  --status-color: #b91c1c;
-  --status-bg: #fee2e2;
-  --status-border: #fecaca;
+  --status-color: var(--status-unavailable-color);
+  --status-bg: var(--status-unavailable-bg);
+  --status-border: var(--status-unavailable-border);
 }
 .status-badge--custom {
   --status-color: var(--accent);

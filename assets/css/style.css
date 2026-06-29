@@ -1120,7 +1120,7 @@ main.container {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-surface);
   background: var(--bg-surface);
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   overflow: hidden;
   transition:
     border-color var(--transition),
@@ -1136,10 +1136,10 @@ main.container {
 .home-skill-details summary {
   color: var(--text-primary);
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   line-height: 1.45;
-  padding: 0.85rem 1.25rem;
+  padding: 0.65rem 1rem;
   user-select: none;
   list-style: none;
   display: flex;
@@ -1172,9 +1172,9 @@ details[open].home-skill-details summary::after {
 
 .home-skill-groups {
   display: grid;
-  gap: 1rem;
+  gap: 0.6rem;
   margin: 0;
-  padding: 1.25rem;
+  padding: 0.85rem;
   border-top: 1px solid var(--border-color);
   background: var(--bg-base);
 }
@@ -1187,10 +1187,10 @@ details[open].home-skill-details summary::after {
 .home-skill-group {
   display: grid;
   grid-template-columns: minmax(7.5rem, max-content) 1fr;
-  gap: 0.5rem 1rem;
+  gap: 0.35rem 0.75rem;
   align-items: start;
   border-bottom: 1px dashed var(--border-color);
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.45rem;
 }
 
 .home-skill-group:last-child {

@@ -172,6 +172,24 @@
     spawnRipple(card, e.clientX, e.clientY);
   }
 
+  // Press state — subtle scale + brighter halo while the pointer is held
+  // down. Released on pointerup/pointercancel anywhere on the document, so
+  // dragging off the card and releasing still cleans up properly.
+  var pressedCard = null;
+  function onPointerDown(e) {
+    var card = e.target.closest(SELECTOR);
+    if (!card) return;
+    if (pressedCard && pressedCard !== card) pressedCard.classList.remove('is-pressed');
+    card.classList.add('is-pressed');
+    pressedCard = card;
+  }
+  function releasePressed() {
+    if (pressedCard) {
+      pressedCard.classList.remove('is-pressed');
+      pressedCard = null;
+    }
+  }
+
   var io = null;
   function init() {
     scan(document);
@@ -195,6 +213,9 @@
 
     document.addEventListener('mousemove', onMove, { passive: true });
     document.addEventListener('click', onClick, { passive: true });
+    document.addEventListener('pointerdown', onPointerDown, { passive: true });
+    document.addEventListener('pointerup', releasePressed, { passive: true });
+    document.addEventListener('pointercancel', releasePressed, { passive: true });
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize, { passive: true });
     watchScrollAncestors();

@@ -2515,9 +2515,9 @@ body.page-loaded {
     max-height: 50vh;
     overflow-y: auto;
     scrollbar-width: thin;
-    margin-top: 0.75rem;
+    margin-top: 0;
     border-top: 1px solid var(--border-color);
-    padding-top: 0.75rem;
+    padding-top: 0.5rem;
   }
   body:not(.home-page) .toc-list {
     display: grid !important;
@@ -2916,7 +2916,7 @@ body.page-loaded {
   font-size: 0.825rem;
   font-weight: 700;
   color: var(--accent);
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   font-family: var(--font-heading);
   text-decoration: none;

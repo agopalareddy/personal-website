@@ -87,23 +87,20 @@
     };
   }
 
-  // Insertion point: after .author-bio (or its wrapper, if the bio is
-  // nested inside .author-avatar-wrapper as on the catalog pages), before
-  // .author-links. Falls back to appending to the sidebar if neither
-  // landmark exists. Ponytail: the bio's direct parent is usually the
-  // wrapper on catalog pages and the sidebar on the home page, so
-  // handle both — insert after whatever element actually contains the
-  // bio, which keeps the badge just below the bio on every layout.
+  // Insertion point: inside .author-avatar-wrapper, before .author-links.
+  // The wrapper is the glassmorphic "profile" card — it owns the
+  // badge's grid-area on mobile and gets display: none on non-home
+  // mobile (so the badge travels with it). Falls back to appending
+  // to the sidebar if the wrapper is missing. Ponytail: the bio's
+  // parent is almost always the wrapper, so insert before
+  // .author-links inside the wrapper — this puts the badge in the
+  // wrapper's `badge` grid cell on mobile and as a flow child on
+  // desktop, and hides it whenever the wrapper is hidden.
   function findInsertionPoint(sidebar) {
-    var bio = sidebar.querySelector('.author-bio');
-    if (bio) {
-      var anchor = bio.parentNode === sidebar ? bio : bio.parentElement;
-      return anchor.nextSibling;
-    }
-    var links = sidebar.querySelector('.author-links');
-    if (links) {
-      var anchor = links.parentNode === sidebar ? links : links.parentElement;
-      return anchor.nextSibling;
+    var wrapper = sidebar.querySelector('.author-avatar-wrapper');
+    if (wrapper) {
+      var links = wrapper.querySelector('.author-links');
+      if (links) return links;
     }
     return null;
   }

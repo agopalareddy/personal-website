@@ -984,18 +984,6 @@ main.container {
   min-width: 0;
 }
 
-/* Cap prose width inside the home content area so wide viewports stay readable;
-   block-level widgets (<details>, .home-actions) still stretch to fill. */
-.academic-content .page__content > p,
-.academic-content .page__content > h1,
-.academic-content .page__content > h2,
-.academic-content .page__content > h3,
-.academic-content .page__content > h4,
-.academic-content .page__content > ul,
-.academic-content .page__content > ol {
-  max-width: 75ch;
-}
-
 /* Sidebar Avatar & Bio Details */
 .author-avatar-wrapper {
   margin-bottom: 1.5rem;

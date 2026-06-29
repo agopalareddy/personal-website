@@ -2507,7 +2507,11 @@ body.page-loaded {
     margin-bottom: 1.5rem !important;
     width: auto !important;
   }
-  body:not(.home-page) #tocNav {
+  /* ponytail: scope 50vh cap to expanded state — otherwise the global
+     aria-expanded="false" collapse (max-height: 0) loses to this higher-
+     specificity rule, leaving a tall empty panel with visibility:hidden
+     content (the "expanded modal with no content" bug on mobile). */
+  body:not(.home-page) .toc-toggle-btn[aria-expanded='true'] + #tocNav {
     max-height: 50vh;
     overflow-y: auto;
     scrollbar-width: thin;

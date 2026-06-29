@@ -52,13 +52,23 @@
     pendingRectRefresh = false;
     var x = lastX;
     var y = lastY;
+    var vh = window.innerHeight;
     for (var i = 0; i < allCards.length; i++) {
       var card = allCards[i];
       if (!visibleCards.has(card)) continue;
       var rect = rectCache.get(card);
       if (!rect) continue;
+      // ponytail: gate against the card's visible portion, not its full
+      // rect. A tall card scrolled into view (e.g. the 1700px Experience
+      // TOC) has its geometric center off-screen, so the old distance
+      // check rejected the cursor anywhere in the upper half of the
+      // visible area and --mouse-y froze at the gate boundary.
+      var visTop = rect.top < 0 ? 0 : rect.top;
+      var visBottom = rect.bottom > vh ? vh : rect.bottom;
+      var visHeight = visBottom - visTop;
+      if (visHeight <= 0) continue;
       var cx = rect.left + rect.width * 0.5;
-      var cy = rect.top + rect.height * 0.5;
+      var cy = visTop + visHeight * 0.5;
       var dx = x - cx;
       var dy = y - cy;
       if (dx * dx + dy * dy > MAX_DIST_SQ) continue;

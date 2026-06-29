@@ -1660,6 +1660,18 @@ main.container {
   z-index: 1;
 }
 
+/* The document modal is ~95dvw wide — 1500-1800px on a desktop — so a
+   500px halo only covers ~30% of it and the glow visibly stops short
+   of the close button on the far side. Scale the halo up to reach
+   across the full modal surface. */
+.modal-window::after {
+  background: radial-gradient(
+    1500px circle at var(--mouse-x) var(--mouse-y),
+    color-mix(in oklch, var(--accent) 12%, transparent),
+    transparent 70%
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card-surface {
     transition: none;
@@ -2229,7 +2241,7 @@ dialog[open].document-modal {
   min-height: 4.5rem;
   padding: 0.85rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
-  background: var(--modal-header-bg);
+  background: transparent;
 }
 
 .modal-header h2 {

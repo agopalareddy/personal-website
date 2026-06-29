@@ -558,7 +558,7 @@ function getCategoryClass(cat) {
 
 function renderProjects() {
   // 1. Filter
-  let filtered = projects.filter((p) => {
+  const filtered = projects.filter((p) => {
     const matchesCategory = activeFilter === 'all' || p.category === activeFilter;
     const matchesVenue = activeVenue === 'all' || p.venue_tag === activeVenue;
 
@@ -606,7 +606,7 @@ function renderProjects() {
       const titleHtml = `<a href="${p.permalink}" aria-label="Explore dedicated detail page for ${p.title}">${p.title}</a>`;
       const tagsHtml = p.technologies.map((t) => `<span class="tech-tag">${t}</span>`).join('');
 
-      let actions = [];
+      const actions = [];
       actions.push(
         `<a href="${p.permalink}" class="card-btn btn-detail" aria-label="Explore dedicated detail page for ${p.title}"><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>`
       );
@@ -801,7 +801,7 @@ function wrapMobileStickyPanels() {
 
     // Remove stale wrapper if it exists but doesn't contain both panels
     if (existingWrapper) {
-      let parent = existingWrapper.parentNode;
+      const parent = existingWrapper.parentNode;
       while (existingWrapper.firstChild) {
         parent.insertBefore(existingWrapper.firstChild, existingWrapper);
       }
@@ -818,7 +818,7 @@ function wrapMobileStickyPanels() {
     }
   } else {
     if (existingWrapper) {
-      let parent = existingWrapper.parentNode;
+      const parent = existingWrapper.parentNode;
       while (existingWrapper.firstChild) {
         parent.insertBefore(existingWrapper.firstChild, existingWrapper);
       }
@@ -883,7 +883,7 @@ function renderToc(filtered) {
 
   if (activeSort === 'title-asc') {
     filtered.forEach((p) => {
-      let title = p.title || '';
+      const title = p.title || '';
       html += `
         <li class="toc-item">
           <a href="#proj-${p.id}" class="toc-link">${escapeHtml(title)}</a>
@@ -897,7 +897,7 @@ function renderToc(filtered) {
 
     filtered.forEach((p) => {
       const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
-      let title = p.title || '';
+      const title = p.title || '';
 
       if (year && year !== currentYear) {
         if (currentYear !== null) {
@@ -941,9 +941,10 @@ function renderToc(filtered) {
 // Initialization
 const toggleBtn = document.getElementById('tocToggleBtn');
 if (toggleBtn) {
-  toggleBtn.addEventListener('click', () => {
-    const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-    toggleBtn.setAttribute('aria-expanded', !expanded);
+  toggleBtn.setAttribute('data-toggle-bound', 'true');
+  toggleBtn.addEventListener('click', function () {
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !expanded);
   });
 }
 
@@ -954,9 +955,10 @@ if (filterToggleBtn) {
     filterToggleBtn.setAttribute('aria-expanded', isMobile ? 'false' : 'true');
     filterToggleBtn.setAttribute('data-initialized', 'true');
   }
-  filterToggleBtn.addEventListener('click', () => {
-    const expanded = filterToggleBtn.getAttribute('aria-expanded') === 'true';
-    filterToggleBtn.setAttribute('aria-expanded', !expanded);
+  filterToggleBtn.setAttribute('data-toggle-bound', 'true');
+  filterToggleBtn.addEventListener('click', function () {
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !expanded);
   });
 }
 

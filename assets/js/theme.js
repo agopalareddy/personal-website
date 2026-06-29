@@ -2,7 +2,7 @@
  * Premium 3-State Theme Slider System
  * Supporting: Light, Device (System), and Dark modes.
  */
-(function () {
+(() => {
   const htmlEl = document.documentElement;
   const THEME_COLORS = { light: '#f7f8fa', dark: '#12141a' };
 
@@ -148,28 +148,19 @@
     });
   }
 
-  function initSpotlight() {
-    document.addEventListener('mousemove', (e) => {
-      const card = e.target.closest('.spotlight-card');
-      if (card) {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      }
-    });
-
+  // Click delegation: clicking a card body (not a button/link) follows the
+  // main link. The cursor-following spotlight is handled by cursor-glow.js
+  // (global tracking across all .card-surface elements).
+  function initCardLinks() {
     document.addEventListener('click', (e) => {
-      const card = e.target.closest('.spotlight-card');
-      if (card) {
-        if (e.target.closest('.card-btn') || e.target.closest('a') || e.target.closest('button')) {
-          return;
-        }
-        const mainLink = card.querySelector('h3.project-title a');
-        if (mainLink) {
-          mainLink.click();
-        }
+      const card = e.target.closest('.card-surface');
+      if (!card) return;
+      if (e.target.closest('.card-btn') || e.target.closest('a') || e.target.closest('button')) {
+        return;
+      }
+      const mainLink = card.querySelector('h3.project-title a');
+      if (mainLink) {
+        mainLink.click();
       }
     });
   }
@@ -177,7 +168,7 @@
   function init() {
     initSlider();
     initYear();
-    initSpotlight();
+    initCardLinks();
     document.body.classList.add('page-loaded');
   }
 

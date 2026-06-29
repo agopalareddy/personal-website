@@ -39,7 +39,7 @@
     --z-skip: 1010;
     --z-modal: 9999;
 
-    --transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 0.15s cubic-bezier(0, 0, 0.2, 1);
 
     /* Body line-height — bumped in dark mode (light type reads lighter, needs room) */
     --line-height-body: 1.6;
@@ -1138,6 +1138,13 @@ main.container {
   margin: 2rem 0;
 }
 
+/* Disable the browser's native <details> open/close animation (Chrome
+   131+). Our CSS owns the transition on the inner content instead. */
+details > .home-skill-groups,
+details > *:not(summary) {
+  interpolate-size: none;
+}
+
 .home-skill-details {
   margin: 1rem 0;
   transition:
@@ -1153,7 +1160,7 @@ main.container {
 .home-skill-details > .home-skill-groups {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: max-height 0.25s cubic-bezier(0, 0, 0.2, 1);
 }
 .home-skill-details[open] > .home-skill-groups {
   max-height: var(--collapse-h, 2000px);
@@ -2200,7 +2207,7 @@ dialog[open].document-modal {
   opacity: 0;
   transform: scale(0.97);
   transition:
-    transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.18s cubic-bezier(0, 0, 0.2, 1),
     opacity 0.18s ease-out;
 }
 
@@ -2790,8 +2797,8 @@ body.page-loaded {
   padding: 0 1rem;
   border-top: 1px solid transparent;
   transition:
-    max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    padding 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    max-height 0.25s cubic-bezier(0, 0, 0.2, 1),
+    padding 0.25s cubic-bezier(0, 0, 0.2, 1),
     border-top-color 0.25s ease-out;
 }
 .toc-toggle-btn[aria-expanded='true'] + #tocNav,

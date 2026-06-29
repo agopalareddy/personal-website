@@ -239,7 +239,7 @@ body {
 
 /* Container */
 .container {
-  max-width: 1100px;
+  max-width: 1600px;
   width: 100%;
   margin: 0 auto;
   padding: 0 var(--space-xl);
@@ -273,7 +273,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 0;
+  padding: 0.8rem var(--space-xl);
   margin-bottom: 0;
 }
 
@@ -982,6 +982,18 @@ main.container {
 .academic-content {
   flex-grow: 1;
   min-width: 0;
+}
+
+/* Cap prose width inside the home content area so wide viewports stay readable;
+   block-level widgets (<details>, .home-actions) still stretch to fill. */
+.academic-content .page__content > p,
+.academic-content .page__content > h1,
+.academic-content .page__content > h2,
+.academic-content .page__content > h3,
+.academic-content .page__content > h4,
+.academic-content .page__content > ul,
+.academic-content .page__content > ol {
+  max-width: 75ch;
 }
 
 /* Sidebar Avatar & Bio Details */

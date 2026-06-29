@@ -1071,6 +1071,10 @@ main.container {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.5rem;
 }
+.academic-content h2.timeline-year {
+  border-bottom: none;
+  padding-bottom: 0;
+}
 .academic-content h3 {
   font-size: 1.4rem;
 }

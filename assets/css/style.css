@@ -1644,10 +1644,17 @@ main.container {
     var(--accent),
     transparent 55%
   );
+  /* ponytail: layer order matters under the new `mask-composite: exclude`
+     spec (result = first AND NOT second). The full-white layer must come
+     first so the padding ring is what's left after the content-box is
+     subtracted out. The old WebKit `xor` was order-independent. */
   -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(#fff 0 0),
+    linear-gradient(#fff 0 0) content-box;
   -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0),
+    linear-gradient(#fff 0 0) content-box;
   mask-composite: exclude;
   pointer-events: none;
   z-index: 2;

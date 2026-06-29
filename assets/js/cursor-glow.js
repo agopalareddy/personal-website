@@ -229,9 +229,12 @@
       // the catalog scripts set.
       if (!btn.hasAttribute('data-toggle-bound')) {
         btn.setAttribute('data-toggle-bound', '1');
-        btn.addEventListener('click', () => {
-          var expanded = btn.getAttribute('aria-expanded') === 'true';
-          btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        // ponytail: `this` (the clicked element), not closure `btn` — the
+        // loop-scoped `var btn` ends up as the last iterated .toc-toggle-btn
+        // and would toggle the wrong button on any earlier sibling.
+        btn.addEventListener('click', function () {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         });
       }
     }

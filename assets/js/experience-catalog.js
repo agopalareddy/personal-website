@@ -9,7 +9,7 @@
  *
  * Scoped inside DOMContentLoaded — no globals are leaked.
  */
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // ---------------------------------------------------------------------------
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------------------------------------------------------------------------
   function renderExperiences() {
     // 1. Filter
-    var filtered = experiences.filter(function (exp) {
+    var filtered = experiences.filter((exp) => {
       var matchesCategory = activeFilter === 'all' || exp.category === activeFilter;
 
       var matchesOrg = true;
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // 2. Sort
-    filtered.sort(function (a, b) {
+    filtered.sort((a, b) => {
       if (activeSort === 'date-desc') {
         return new Date(getOrderDate(b) + 'T00:00:00') - new Date(getOrderDate(a) + 'T00:00:00');
       }
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 4. Paint cards
     var html = '';
     var lastYear = null;
-    filtered.forEach(function (exp) {
+    filtered.forEach((exp) => {
       var year = getOrderYear(exp);
       if (year && year !== lastYear) {
         html += '<h2 class="timeline-year" id="year-' + year + '">' + year + '</h2>';
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (yearFilter) {
       var yearsSet = new Set();
-      experiences.forEach(function (exp) {
+      experiences.forEach((exp) => {
         if (exp.start_date) {
           var startYear = parseInt(exp.start_date.split('-')[0], 10);
           var endYear = exp.end_date
@@ -374,12 +374,10 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }
       });
-      var years = Array.from(yearsSet).sort(function (a, b) {
-        return b - a;
-      });
+      var years = Array.from(yearsSet).sort((a, b) => b - a);
 
       var yearOptions = '<option value="all">All Years</option>';
-      years.forEach(function (yr) {
+      years.forEach((yr) => {
         yearOptions += '<option value="' + yr + '">' + yr + '</option>';
       });
       yearFilter.innerHTML = yearOptions;
@@ -390,36 +388,36 @@ document.addEventListener('DOMContentLoaded', function () {
   // Event listeners
   // ---------------------------------------------------------------------------
   if (orgFilter) {
-    orgFilter.addEventListener('change', function (e) {
+    orgFilter.addEventListener('change', (e) => {
       activeOrg = e.target.value;
       renderExperiences();
     });
   }
 
   if (yearFilter) {
-    yearFilter.addEventListener('change', function (e) {
+    yearFilter.addEventListener('change', (e) => {
       activeYear = e.target.value;
       renderExperiences();
     });
   }
 
   if (searchInput) {
-    searchInput.addEventListener('input', function (e) {
+    searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderExperiences();
     });
   }
 
   if (sortSelect) {
-    sortSelect.addEventListener('change', function (e) {
+    sortSelect.addEventListener('change', (e) => {
       activeSort = e.target.value;
       renderExperiences();
     });
   }
 
-  filterButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      filterButtons.forEach(function (b) {
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach((b) => {
         b.classList.remove('active');
         b.setAttribute('aria-pressed', 'false');
       });
@@ -525,7 +523,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setupTocScrollListeners(tocListElement) {
     var links = tocListElement.querySelectorAll('a[href^="#"]');
-    links.forEach(function (link) {
+    links.forEach((link) => {
       link.addEventListener('click', function (e) {
         e.preventDefault();
         var targetId = this.getAttribute('href').substring(1);
@@ -578,7 +576,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var html = '';
 
     if (activeSort === 'title-asc') {
-      filtered.forEach(function (exp) {
+      filtered.forEach((exp) => {
         var id = exp.id || '';
         var title = getExperienceDisplayTitle(exp);
         html +=
@@ -594,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var currentYear = null;
       var yearItemsHtml = '';
 
-      filtered.forEach(function (exp) {
+      filtered.forEach((exp) => {
         var year = getOrderYear(exp);
         var id = exp.id || '';
         var title = getExperienceDisplayTitle(exp);
@@ -655,6 +653,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------------------------------------------------------------------------
   var toggleBtn = document.getElementById('tocToggleBtn');
   if (toggleBtn) {
+    toggleBtn.setAttribute('data-toggle-bound', 'true');
     toggleBtn.addEventListener('click', function () {
       var expanded = this.getAttribute('aria-expanded') === 'true';
       this.setAttribute('aria-expanded', !expanded);
@@ -668,6 +667,7 @@ document.addEventListener('DOMContentLoaded', function () {
       filterToggleBtn.setAttribute('aria-expanded', isMobile ? 'false' : 'true');
       filterToggleBtn.setAttribute('data-initialized', 'true');
     }
+    filterToggleBtn.setAttribute('data-toggle-bound', 'true');
     filterToggleBtn.addEventListener('click', function () {
       var expanded = this.getAttribute('aria-expanded') === 'true';
       this.setAttribute('aria-expanded', !expanded);

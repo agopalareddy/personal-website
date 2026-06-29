@@ -211,11 +211,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var cardHtml =
-      '<div class="project-card spotlight-card timeline-card experience-card" id="exp-' +
+      '<div class="project-card card-surface timeline-card experience-card" id="exp-' +
       escapeHtml(id) +
       '" data-category="' +
       escapeHtml(category) +
-      '">' +
+      '"><span class="timeline-marker"></span>' +
       '<div class="card-meta">' +
       '<span class="card-category ' +
       catClass +

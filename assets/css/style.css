@@ -437,9 +437,7 @@ main.container {
 .card:hover {
   transform: translateY(-2px);
   border-color: var(--border-hover);
-  box-shadow:
-    var(--shadow-md),
-    0 0 0 1px var(--border-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .card-header {
@@ -1141,18 +1139,14 @@ main.container {
 }
 
 .home-skill-details {
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-surface);
-  background: var(--bg-surface);
   margin: 1rem 0;
-  overflow: hidden;
   transition:
     border-color var(--transition),
     box-shadow var(--transition);
-  box-shadow: var(--shadow-sm);
 }
 
 .home-skill-details:hover {
+  transform: none;
   border-color: var(--border-hover);
   box-shadow: var(--shadow-md);
 }
@@ -1393,25 +1387,11 @@ details[open].home-skill-details summary::after {
 .project-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-surface);
   padding: 1rem 1.25rem;
-  background-color: var(--bg-surface);
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-  position: relative;
-  overflow: hidden;
   cursor: pointer;
 }
 .project-card:hover {
   transform: translateY(-3px);
-  border-color: var(--accent);
-  box-shadow:
-    var(--shadow-md),
-    0 0 0 1px var(--accent-soft);
 }
 .card-meta {
   display: flex;
@@ -1590,20 +1570,52 @@ details[open].home-skill-details summary::after {
   box-shadow: var(--shadow-sm);
 }
 
-/* Spotlight cursor card highlight (interactive glow) */
-.spotlight-card::before {
+/* ─── Card surface base ───
+   Shared by .project-card, .document-row, .modal-window, .home-skill-details,
+   .toc-container. Provides the base look (bg, border, radius, shadow) and
+   the cursor-following spotlight (border edge + soft halo). The spotlight
+   tracks the cursor globally (see cursor-glow.js): --mouse-x/--mouse-y are
+   set on every card based on the cursor's screen position projected onto
+   that card, so the glow is visible on cards near the cursor even when
+   the cursor is outside them. The gradient's natural falloff handles
+   visibility — no opacity transition needed. */
+.card-surface {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  position: relative;
+  isolation: isolate;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+  will-change: transform;
+}
+.card-surface:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Border edge highlight — tight radial gradient masked to a 1.5px ring
+   at the card's outer edge. Negative offset extends the pseudo past the
+   card's padding box so the ring sits on the visible border, not inside it. */
+.card-surface::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
   border-radius: inherit;
   padding: 1.5px;
   background: radial-gradient(
-    250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    120px circle at var(--mouse-x) var(--mouse-y),
     var(--accent),
-    transparent 80%
+    transparent 55%
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -1611,11 +1623,114 @@ details[open].home-skill-details summary::after {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s;
+  z-index: 2;
 }
-.spotlight-card:hover::before {
+
+/* Wide soft halo — a large, low-opacity radial gradient that follows the
+   cursor across the card. Clipped to the card by overflow: hidden, so it
+   never bleeds into the page background. */
+.card-surface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    500px circle at var(--mouse-x) var(--mouse-y),
+    color-mix(in oklch, var(--accent) 12%, transparent),
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-surface {
+    transition: none;
+  }
+  .card-surface:hover {
+    transform: none;
+  }
+}
+
+/* ─── Card glow — for header/footer and other glassmorphic surfaces ───
+   Same cursor spotlight as .card-surface but without the opaque background,
+   border, or shadow. This lets the glassmorphic translucency (backdrop-filter
+   blur) on the header/footer show through. The cursor halo (::after) and
+   the tight border highlight (::before) both work, but the border highlight
+   is most visible where the element has a visible border (header border-bottom,
+   footer border-top). */
+.card-glow {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    120px circle at var(--mouse-x) var(--mouse-y),
+    var(--accent),
+    transparent 55%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+.card-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    color-mix(in oklch, var(--accent) 10%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Click ripple — Material You style shimmer on click ───
+   A child element is created at the click point by cursor-glow.js,
+   animates outward, then removes itself on animationend. Uses transform
+   + opacity (GPU-accelerated), so it stays cheap even on slow machines. */
+.click-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--accent) 28%, transparent),
+    transparent 65%
+  );
+  transform: scale(0);
   opacity: 1;
+  pointer-events: none;
+  z-index: 3;
+  animation: click-ripple 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes click-ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .click-ripple {
+    animation-duration: 200ms;
+  }
 }
 
 /* Fix first-child spacing mismatch between sidebar and content */
@@ -1739,22 +1854,12 @@ details[open].home-skill-details summary::after {
 .document-row {
   display: flex;
   align-items: center;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-surface);
   padding: 1.25rem 1.5rem;
   gap: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
 }
 
 .document-row:hover {
-  transform: translateY(-2px);
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
 }
 
 .doc-icon-wrapper {
@@ -2050,13 +2155,11 @@ dialog[open].document-modal {
   max-width: 95dvw;
   max-height: 95dvh;
   background: var(--modal-bg);
-  border: 1px solid var(--modal-border);
-  border-radius: var(--radius-surface);
+  border-color: var(--modal-border);
   box-shadow: var(--modal-shadow);
   display: flex;
   flex-direction: column;
   contain: layout style paint;
-  overflow: hidden;
   transform: scale(0.95);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -2557,8 +2660,9 @@ body.page-loaded {
   contain-intrinsic-size: auto 120px;
 }
 
-.timeline-card::after {
-  content: '';
+/* Timeline connector dot — a real child element so it doesn't compete
+   with the card-surface ::before/::after spotlight. */
+.timeline-marker {
   position: absolute;
   left: -1.6rem;
   top: 1.5rem;
@@ -2573,9 +2677,10 @@ body.page-loaded {
     transform var(--transition),
     box-shadow var(--transition);
   z-index: 2;
+  pointer-events: none;
 }
 
-.timeline-card:hover::after {
+.timeline-card:hover > .timeline-marker {
   border-color: var(--accent);
   background-color: var(--accent);
   transform: scale(1.25);
@@ -2625,16 +2730,12 @@ body.page-loaded {
 /* Dynamic Table of Contents Sidebar Widget */
 .toc-container {
   width: 100%;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-surface);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
   transition:
     border-color var(--transition),
     box-shadow var(--transition);
 }
 .toc-container:hover {
+  transform: none;
   border-color: var(--border-hover);
   box-shadow: var(--shadow-md);
 }

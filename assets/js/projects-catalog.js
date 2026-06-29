@@ -643,7 +643,7 @@ function renderProjects() {
 
       return `
                     ${yearHeaderHtml}
-                    <div class="project-card spotlight-card timeline-card" id="proj-${p.id}">
+                    <div class="project-card card-surface timeline-card" id="proj-${p.id}"><span class="timeline-marker"></span>
                         <div class="card-meta">
                             <span class="card-category ${catClass}">${p.category}</span>
                             <span class="card-venue">${p.formatted_date}</span>

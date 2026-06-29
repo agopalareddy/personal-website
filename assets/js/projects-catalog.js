@@ -542,6 +542,32 @@ let activeSort = 'date-desc';
 let searchQuery = '';
 let activeYear = 'all';
 
+// ponytail: tiny DOM helper — keeps the catalog renderers off innerHTML
+// (the `no-inner-html-js` linter rule) without dragging in a framework.
+// `attrs` keys: class, text, html (only for static fragments), and any
+// standard attribute name. Children are nodes or strings.
+function el(tag, attrs, ...children) {
+  const node = document.createElement(tag);
+  if (attrs) {
+    for (const k in attrs) {
+      const v = attrs[k];
+      if (v == null || v === false) continue;
+      if (k === 'class') node.className = v;
+      else if (k === 'text') node.textContent = v;
+      else node.setAttribute(k, v);
+    }
+  }
+  for (const c of children.flat()) {
+    if (c == null || c === false) continue;
+    node.append(c.nodeType ? c : document.createTextNode(String(c)));
+  }
+  return node;
+}
+
+function faIcon(classes) {
+  return el('i', { class: classes, 'aria-hidden': 'true' });
+}
+
 const venueLabels = {
   WashU: 'Washington University in St. Louis',
   OWU: 'Ohio Wesleyan University',
@@ -592,73 +618,149 @@ function renderProjects() {
   });
 
   if (filtered.length === 0) {
-    projectGrid.innerHTML =
-      '<div class="no-results">No projects match your search or filter criteria.</div>';
+    projectGrid.replaceChildren(
+      el('div', { class: 'no-results' }, 'No projects match your search or filter criteria.')
+    );
     renderToc([]);
     return;
   }
 
   let lastYear = null;
-  projectGrid.innerHTML = filtered
-    .map((p) => {
-      const catClass = getCategoryClass(p.category);
-      const venueLabel = venueLabels[p.venue_tag] || p.venue_tag;
-      const titleHtml = `<a href="${p.permalink}" aria-label="Explore dedicated detail page for ${p.title}">${p.title}</a>`;
-      const tagsHtml = p.technologies.map((t) => `<span class="tech-tag">${t}</span>`).join('');
-
-      const actions = [];
-      actions.push(
-        `<a href="${p.permalink}" class="card-btn btn-detail" aria-label="Explore dedicated detail page for ${p.title}"><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>`
-      );
-
-      if (p.github) {
-        actions.push(
-          `<a href="${p.github}" target="_blank" rel="noopener" class="card-btn btn-github" aria-label="View ${p.title} codebase on GitHub (opens in a new tab)"><i class="fab fa-github" aria-hidden="true"></i> Code <span class="sr-only">(opens in a new tab)</span></a>`
-        );
-      }
-      if (p.demo) {
-        actions.push(
-          `<a href="${p.demo}" class="card-btn btn-demo" aria-label="Launch live interactive demo for ${p.title}"><i class="fas fa-rocket" aria-hidden="true"></i> Demo</a>`
-        );
-      }
-      if (p.pdf) {
-        actions.push(
-          `<a href="${p.pdf}" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download ${p.title} PDF paper (opens in a new tab)"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF <span class="sr-only">(opens in a new tab)</span></a>`
-        );
-      }
-      if (p.presentation) {
-        actions.push(
-          `<a href="${p.presentation}" target="_blank" rel="noopener" class="card-btn btn-pdf" aria-label="Download ${p.title} presentation slides (opens in a new tab)"><i class="fas fa-file-powerpoint" aria-hidden="true"></i> Slide <span class="sr-only">(opens in a new tab)</span></a>`
-        );
-      }
-
-      const actionsHtml = `<div class="card-actions">${actions.join('')}</div>`;
-
-      let yearHeaderHtml = '';
-      const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
-      if (year && year !== lastYear) {
-        yearHeaderHtml = `<h2 class="timeline-year" id="year-${year}">${year}</h2>`;
-        lastYear = year;
-      }
-
-      return `
-                    ${yearHeaderHtml}
-                    <div class="project-card card-surface timeline-card" id="proj-${p.id}"><span class="timeline-marker"></span>
-                        <div class="card-meta">
-                            <span class="card-category ${catClass}">${p.category}</span>
-                            <span class="card-venue">${p.formatted_date}</span>
-                        </div>
-                        <h3 class="project-title">${titleHtml}</h3>
-                        <div class="card-org-context">${venueLabel}</div>
-                        <p class="project-excerpt">${p.excerpt}</p>
-                        <div class="project-tech">${tagsHtml}</div>
-                        ${actionsHtml}
-                    </div>
-                `;
-    })
-    .join('');
+  const fragment = document.createDocumentFragment();
+  filtered.forEach((p) => {
+    const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
+    if (year && year !== lastYear) {
+      fragment.append(el('h2', { class: 'timeline-year', id: `year-${year}`, text: String(year) }));
+      lastYear = year;
+    }
+    fragment.append(buildProjectCard(p));
+  });
+  projectGrid.replaceChildren(fragment);
 
   renderToc(filtered);
+}
+
+function buildProjectCard(p) {
+  const catClass = getCategoryClass(p.category);
+  const venueLabel = venueLabels[p.venue_tag] || p.venue_tag;
+
+  const card = el(
+    'div',
+    {
+      class: 'project-card card-surface timeline-card',
+      id: `proj-${p.id}`,
+    },
+    el('span', { class: 'timeline-marker' }),
+    el(
+      'div',
+      { class: 'card-meta' },
+      el('span', { class: `card-category ${catClass}`, text: p.category }),
+      el('span', { class: 'card-venue', text: p.formatted_date })
+    ),
+    el(
+      'h3',
+      { class: 'project-title' },
+      el('a', {
+        href: p.permalink,
+        'aria-label': `Explore dedicated detail page for ${p.title}`,
+        text: p.title,
+      })
+    ),
+    el('div', { class: 'card-org-context', text: venueLabel }),
+    el('p', { class: 'project-excerpt', text: p.excerpt }),
+    el(
+      'div',
+      { class: 'project-tech' },
+      p.technologies.map((t) => el('span', { class: 'tech-tag', text: t }))
+    ),
+    buildProjectActions(p)
+  );
+  return card;
+}
+
+function buildProjectActions(p) {
+  const actions = el('div', { class: 'card-actions' });
+
+  actions.append(
+    el(
+      'a',
+      {
+        href: p.permalink,
+        class: 'card-btn btn-detail',
+        'aria-label': `Explore dedicated detail page for ${p.title}`,
+      },
+      faIcon('fas fa-info-circle'),
+      ' Details'
+    )
+  );
+
+  if (p.github) {
+    actions.append(
+      el(
+        'a',
+        {
+          href: p.github,
+          target: '_blank',
+          rel: 'noopener',
+          class: 'card-btn btn-github',
+          'aria-label': `View ${p.title} codebase on GitHub (opens in a new tab)`,
+        },
+        faIcon('fab fa-github'),
+        ' Code ',
+        el('span', { class: 'sr-only', text: '(opens in a new tab)' })
+      )
+    );
+  }
+  if (p.demo) {
+    actions.append(
+      el(
+        'a',
+        {
+          href: p.demo,
+          class: 'card-btn btn-demo',
+          'aria-label': `Launch live interactive demo for ${p.title}`,
+        },
+        faIcon('fas fa-rocket'),
+        ' Demo'
+      )
+    );
+  }
+  if (p.pdf) {
+    actions.append(
+      el(
+        'a',
+        {
+          href: p.pdf,
+          target: '_blank',
+          rel: 'noopener',
+          class: 'card-btn btn-pdf',
+          'aria-label': `Download ${p.title} PDF paper (opens in a new tab)`,
+        },
+        faIcon('fas fa-file-pdf'),
+        ' PDF ',
+        el('span', { class: 'sr-only', text: '(opens in a new tab)' })
+      )
+    );
+  }
+  if (p.presentation) {
+    actions.append(
+      el(
+        'a',
+        {
+          href: p.presentation,
+          target: '_blank',
+          rel: 'noopener',
+          class: 'card-btn btn-pdf',
+          'aria-label': `Download ${p.title} presentation slides (opens in a new tab)`,
+        },
+        faIcon('fas fa-file-powerpoint'),
+        ' Slide ',
+        el('span', { class: 'sr-only', text: '(opens in a new tab)' })
+      )
+    );
+  }
+
+  return actions;
 }
 
 // Dynamic dropdown filters generation
@@ -666,12 +768,11 @@ function populateFilters() {
   if (venueFilter) {
     const venues = Array.from(new Set(projects.map((p) => p.venue_tag).filter(Boolean))).sort();
 
-    let venueOptions = '<option value="all">All Institutions/Venues</option>';
+    const venueOptions = [el('option', { value: 'all', text: 'All Institutions/Venues' })];
     venues.forEach((v) => {
-      const label = venueLabels[v] || v;
-      venueOptions += `<option value="${v}">${label}</option>`;
+      venueOptions.push(el('option', { value: v, text: venueLabels[v] || v }));
     });
-    venueFilter.innerHTML = venueOptions;
+    venueFilter.replaceChildren(...venueOptions);
   }
 
   if (yearFilter) {
@@ -679,11 +780,11 @@ function populateFilters() {
       new Set(projects.map((p) => parseInt(p.date.split('-')[0], 10)).filter(Boolean))
     ).sort((a, b) => b - a);
 
-    let yearOptions = '<option value="all">All Years</option>';
+    const yearOptions = [el('option', { value: 'all', text: 'All Years' })];
     years.forEach((yr) => {
-      yearOptions += `<option value="${yr}">${yr}</option>`;
+      yearOptions.push(el('option', { value: String(yr), text: String(yr) }));
     });
-    yearFilter.innerHTML = yearOptions;
+    yearFilter.replaceChildren(...yearOptions);
   }
 }
 
@@ -729,14 +830,7 @@ if (yearFilter) {
   });
 }
 
-// Table of Contents generator
-function escapeHtml(str) {
-  if (!str) return '';
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
+// Dynamic responsive layout helpers
 function positionFilterControlsResponsive() {
   const filterControls = document.getElementById('filterControls');
   if (!filterControls) return;
@@ -865,7 +959,7 @@ function renderToc(filtered) {
 
   if (filtered.length <= 1) {
     tocContainer.hidden = true;
-    tocList.innerHTML = '';
+    tocList.replaceChildren();
     return;
   }
 
@@ -879,63 +973,65 @@ function renderToc(filtered) {
     toggleBtn.setAttribute('data-initialized', 'true');
   }
 
-  let html = '';
+  const fragment = document.createDocumentFragment();
 
   if (activeSort === 'title-asc') {
     filtered.forEach((p) => {
-      const title = p.title || '';
-      html += `
-        <li class="toc-item">
-          <a href="#proj-${p.id}" class="toc-link">${escapeHtml(title)}</a>
-        </li>
-      `;
+      fragment.append(buildTocItem(p, null));
     });
   } else {
     let currentYear = null;
     let firstProjIdOfYear = '';
-    let yearItemsHtml = '';
+    let yearItems = [];
+
+    const flushYear = () => {
+      if (currentYear === null) return;
+      fragment.append(
+        el(
+          'li',
+          { class: 'toc-item' },
+          el('a', {
+            href: `#proj-${firstProjIdOfYear}`,
+            class: 'toc-year-header',
+            text: String(currentYear),
+          }),
+          el('ul', { class: 'toc-nested-list' }, yearItems)
+        )
+      );
+    };
 
     filtered.forEach((p) => {
       const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
-      const title = p.title || '';
 
       if (year && year !== currentYear) {
-        if (currentYear !== null) {
-          html += `
-            <li class="toc-item">
-              <a href="#proj-${firstProjIdOfYear}" class="toc-year-header">${currentYear}</a>
-              <ul class="toc-nested-list">${yearItemsHtml}</ul>
-            </li>
-          `;
-        }
+        flushYear();
         currentYear = year;
         firstProjIdOfYear = p.id;
-        yearItemsHtml = '';
+        yearItems = [];
       }
 
-      yearItemsHtml += `
-        <li class="toc-item">
-          <a href="#proj-${p.id}" class="toc-link">${escapeHtml(title)}</a>
-        </li>
-      `;
+      yearItems.push(buildTocItem(p, null));
     });
 
-    if (currentYear !== null) {
-      html += `
-        <li class="toc-item">
-          <a href="#proj-${firstProjIdOfYear}" class="toc-year-header">${currentYear}</a>
-          <ul class="toc-nested-list">${yearItemsHtml}</ul>
-        </li>
-      `;
-    } else {
-      html = yearItemsHtml;
-    }
+    flushYear();
   }
 
-  tocList.innerHTML = html;
+  tocList.replaceChildren(fragment);
   tocContainer.hidden = false;
 
   setupTocScrollListeners(tocList);
+}
+
+function buildTocItem(p) {
+  return el(
+    'li',
+    { class: 'toc-item' },
+    el('a', {
+      href: `#proj-${p.id}`,
+      class: 'toc-link',
+      text: p.title || '',
+    })
+  );
 }
 
 // Initialization

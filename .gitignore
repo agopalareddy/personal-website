@@ -52,3 +52,10 @@ service-account*.json
 .omo/
 .playwright-cli/
 .firecrawl/
+
+# AI agent files (local-only, not for deployment)
+.claude/
+.husky/
+AGENTS.md
+CLAUDE.md
+openwiki/

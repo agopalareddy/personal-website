@@ -21,7 +21,7 @@
     "pdf": null,
     "presentation": "https://docs.google.com/presentation/d/10910WNa3CjiXIcH_T5OIXyOuOTiVKFHr/export/pptx",
     "has_detail": true,
-    "formatted_date": "Summer 2022",
+    "formatted_date": "Jun 2022 – Aug 2022",
     "content_html": "<p>AIParkinScan combines two independent diagnostic signals &mdash; handwritten spiral drawings and short voice recordings &mdash; to flag early indicators of Parkinson&apos;s disease, namely micrographia (abnormally small, cramped handwriting) and vocal tremor. Audio clips are converted into spectrograms and classified with a custom convolutional neural network, while spiral drawing images are augmented and classified with a Random Forest model trained on a Kaggle spiral-drawing dataset. The two model outputs are combined into a single weighted assessment.</p><p>The project includes a Flask web front end where users can submit a drawing and a recording and receive a combined risk assessment, with all model development carried out in Jupyter notebooks. It was built during the MITxSureStart FutureMakers Create-a-Thon, with the goal of making early Parkinson&apos;s screening more accessible and affordable.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Dual-input pipeline combining audio spectrograms and spiral-drawing images</li><li>Custom CNN for spectrogram-based vocal tremor detection</li><li>Random Forest classifier with image augmentation for micrographia detection</li><li>Weighted ensemble combining both modalities into one diagnosis score</li><li>Flask web interface for user submissions</li></ul>"
   },
   {
@@ -48,7 +48,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2022",
+    "formatted_date": "Jun 2022 – Aug 2022",
     "content_html": "<p>This project implements Lost Cities, a two-player expedition card game, as part of a Summer Science Research Program with Dr. Sean McCulloch at Ohio Wesleyan University. The core game logic is written in Java and wrapped by a Node.js and Socket.IO web interface so the game can be played in the browser.</p><p>The AI layer supports greedy, minimax, and alpha-beta agents. The search agents evaluate complete turns by simulating both the outgoing card and incoming draw, then scoring the best reachable expedition outcome from the cards actually available in hand. That keeps the agents adaptable without hard-coded opening thresholds.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Java implementation of full Lost Cities rules and scoring</li><li>Greedy, minimax, and alpha-beta AI modes for human-vs-AI and AI-vs-AI play</li><li>Known-card search evaluation that avoids weak expedition starts without tuned thresholds</li><li>Browser-playable Node.js and Socket.IO wrapper around the Java engine</li><li>Regression self-check for fixed-seed AI-vs-AI termination</li></ul>"
   },
   {
@@ -66,7 +66,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2022",
+    "formatted_date": "Aug 2022 – Dec 2022",
     "content_html": "<p>A Java implementation of Connect 4 supporting both two-player and single-player (vs. AI) modes, built as a final project for an Ohio Wesleyan University course with collaborators Alex Casper and Jose Mancilla. The AI opponent uses alpha-beta pruning, an optimization of the minimax search algorithm that prunes branches of the game tree that cannot affect the final decision, allowing it to look further ahead without exploring the full tree. A browser-playable version is available via the live demo below.</p><p>Game logic and the core implementation were led by Aadarsha Gopala Reddy, the AI opponent by Alex Casper, with extensive testing and debugging of the alpha-beta search by Jose Mancilla.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Full Connect 4 rules with win/draw detection in Java</li><li>AI opponent using alpha-beta pruning (minimax-based search)</li><li>Single-player (vs. AI) and two-player modes, with choice of who moves first</li><li>Browser-playable demo alongside the Java implementation</li></ul>"
   },
   {
@@ -93,7 +93,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Spring 2023",
+    "formatted_date": "Jan 2023 – May 2023",
     "content_html": "<p>This research project, conducted under the mentorship of Dr. Nicholas Dietrich at Ohio Wesleyan University, surveyed 1,000 employees &mdash; 250 each across education, IT/STEM, retail, and healthcare &mdash; to understand how artificial intelligence was affecting their work. Participants were recruited through Prolific and surveyed via Qualtrics, answering questions about AI&apos;s impact on their efficiency, its ability to replicate parts of their job, and their overall attitudes toward AI in the workplace.</p><p>Results were analyzed in R and visualized with Tableau dashboards, comparing AI&apos;s perceived impact across industries and demographic factors such as education, gender, and salary. Across all four industries, employees reported that AI improved their work efficiency and saved them time and effort. Findings were presented at the OWU Spring Science Symposium.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Survey of 1,000 employees across four industries (education, IT/STEM, retail, healthcare)</li><li>Participant recruitment via Prolific, survey design and delivery via Qualtrics</li><li>Statistical analysis in R with Tableau dashboards for cross-industry comparison</li><li>Presented at the OWU Spring Science Symposium</li></ul>"
   },
   {
@@ -121,7 +121,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2024",
+    "formatted_date": "Aug 2024 – Dec 2024",
     "content_html": "<p>Chronos is a personal calendar and event management web application built for Washington University&apos;s CSE 503S rapid-prototyping course. It centers on an interactive month-view dashboard where users can create, edit, and categorize appointments (Work, Personal, Social, Other), with client-side filtering for instant views without page reloads, plus a profile page with productivity analytics over past events.</p><p>The backend runs on PHP 8.4 with a MySQL database, using prepared statements throughout to prevent SQL injection, alongside CSRF protection, password hashing, and hardened sessions. The frontend is vanilla HTML, CSS, and ES6 JavaScript with a dark, glassmorphic visual style.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Interactive month-view calendar with categorized event management</li><li>Instant client-side filtering by event category</li><li>CSRF protection, prepared statements, and hashed/session-hardened authentication</li><li>Glassmorphic, responsive dark-theme UI</li><li>Productivity analytics on a user profile dashboard</li></ul>"
   },
   {
@@ -149,7 +149,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2024",
+    "formatted_date": "Aug 2024 – Dec 2024",
     "content_html": "<p>ChatSphere is a real-time, multi-room chat application built for Washington University&apos;s CSE 503S course to demonstrate bidirectional, event-driven communication. Users can join multiple lobbies &mdash; some password-protected &mdash; send group and private messages with persistent history, and reply in threads for contextual discussion.</p><p>The app pairs a Node.js/Express backend with Socket.IO 4.x for real-time messaging, and a vanilla HTML5/ES6 JavaScript frontend. It also includes typing indicators, online presence, toast and audio notifications, emoji shortcodes, auto-linked URLs, message deletion, and admin moderation tools (kick/ban), all backed by in-memory storage.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Multi-room chat with optional password-protected lobbies</li><li>Private messaging with persistent conversation history and threaded replies</li><li>Typing indicators, presence, and toast/audio notifications</li><li>Admin moderation tools (kick/ban) and message deletion</li></ul>"
   },
   {
@@ -176,7 +176,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2024",
+    "formatted_date": "Aug 2024 – Dec 2024",
     "content_html": "<p>This project, built for Washington University&apos;s CSE 510A (Deep Reinforcement Learning) course, tackles cooling optimization for small- and mid-sized datacenters &mdash; a segment that makes up most of the market but is far less studied than hyperscale facilities. Using the Sinergym wrapper around EnergyPlus, the project simulates a two-zone datacenter under stochastic summer weather and trains three deep RL agents &mdash; Dueling Double DQN (DDQN), PPO with generalized advantage estimation, and SAC with automatic entropy tuning &mdash; to control HVAC cooling against random and rules-based baselines.</p><p>DDQN with a discretized action space was the strongest performer, improving energy efficiency by 35.8% over a rules-based incremental controller, compared to 10.9% for PPO and a negligible gain for SAC. Adding weather-forecast inputs generally hurt performance. The results show that lightweight, model-free RL can meaningfully reduce cooling energy use even on the limited compute budgets typical of smaller facilities.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Three DRL agents (DDQN, PPO, SAC) trained against a realistic EnergyPlus simulation</li><li>Custom Sinergym environment modeling a two-zone datacenter under stochastic weather</li><li>DDQN achieved a 35.8% energy-efficiency improvement over a rules-based controller</li><li>Benchmarked against random, rules-based, and rules-based-incremental baselines</li></ul>"
   },
   {
@@ -208,7 +208,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2024",
+    "formatted_date": "Aug 2024 – Dec 2024",
     "content_html": "<p>Tales We Weave is an AI-powered, branching &ldquo;choose your own adventure&rdquo; platform built for Washington University&apos;s CSE 503S course. Authors create nonlinear stories with branching choice points and configurable visual styles (e.g. anime, oil painting); readers navigate the branches while the app tracks and bookmarks their progress. A custom zoomable, pannable SVG canvas visualizes the entire story tree and highlights the reader&apos;s active and previously visited paths.</p><p>The frontend is built with Vue 3, Pinia, and Vue Router; the backend is Express.js with session-based authentication and MongoDB (via Mongoose) storing stories as sparse-array models for large narrative trees. Google Gemini generates branching narrative text, while fal.ai&apos;s Flux Schnell model generates matching illustrations for each branch. The app also supports a searchable story catalog and GDPR-compliant account deletion with cascading cleanup of orphaned branches and files.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>AI-generated branching narrative text (Google Gemini) and illustrations (fal.ai Flux Schnell)</li><li>Interactive, zoomable SVG visualization of the full story tree</li><li>Reader progress bookmarking and a searchable story catalog</li><li>Session-based auth with GDPR-compliant account deletion</li></ul>"
   },
   {
@@ -240,7 +240,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2024",
+    "formatted_date": "Aug 2024 – Dec 2024",
     "content_html": "<p>This project, developed for Washington University&apos;s CSE 419A (AI for Health) course, explores early detection of Alzheimer&apos;s disease by combining two data modalities from the OASIS-1 dataset: brain MRI scans and clinical/demographic features. A convolutional neural network handles the imaging data, while classical machine learning models (scikit-learn, XGBoost) handle the clinical/tabular data, with predictions from both modalities combined into a final classifier.</p><p>The work is documented in a NeurIPS-format report with architecture diagrams for both the CNN and the combined classifier, and was presented as a final project demo for the course.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Multimodal fusion of MRI imaging and clinical/demographic data</li><li>CNN for imaging analysis alongside scikit-learn/XGBoost models for tabular data</li><li>Combined classifier integrating both modalities</li><li>NeurIPS-format written report and presentation</li></ul>"
   },
   {
@@ -258,7 +258,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Spring 2025",
+    "formatted_date": "Jan 2025 – May 2025",
     "content_html": "<p>This project extracts and organizes the recurring narrator monologues from Desperate Housewives &mdash; primarily Mary Alice Young&apos;s voiceovers &mdash; from episode subtitle (.srt) files into per-season, per-episode Markdown files with clear headers. A subtitle-to-text conversion script handles the initial extraction, with AI assistance used to isolate the monologues from the surrounding dialogue given the volume of text.</p><p>These monologues function as a recurring structural device that frames each episode&apos;s themes, making the resulting corpus useful for sentiment analysis, motif tracking, or other text-based NLP and machine learning projects. The README notes the dataset may contain occasional transcription or extraction inaccuracies and is offered as a best-effort, community-correctable resource.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Per-season, per-episode Markdown corpus of narrator monologues</li><li>Subtitle-to-text conversion and episode-combination scripts</li><li>AI-assisted extraction of monologues from raw subtitle text</li><li>Documented limitations for transparency and community correction</li></ul>"
   },
   {
@@ -286,7 +286,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2025",
+    "formatted_date": "Jun 2025 – Aug 2025",
     "content_html": "<p>This project applies Bayesian optimization to three regression problems from the UCI Machine Learning Repository: predicting the critical temperature of superconductors, the compressive strength of concrete mixtures, and wine quality from physicochemical properties. Each notebook follows the same pipeline &mdash; data loading and exploratory analysis, then Random Forest and XGBoost models tuned via Bayesian optimization with scikit-optimize.</p><p>Beyond hyperparameter tuning, each notebook applies Bayesian optimization a second time to search the input feature space itself, looking for material or mix compositions that maximize the target property &mdash; using the same technique for both model tuning and inverse design.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Three case studies across materials science, civil engineering, and food science</li><li>Bayesian hyperparameter tuning of Random Forest and XGBoost models with scikit-optimize</li><li>A second application of Bayesian optimization for inverse feature/design optimization</li><li>Consistent explore &rarr; tune &rarr; predict &rarr; optimize pipeline across all three datasets</li></ul>"
   },
   {
@@ -304,7 +304,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2025",
+    "formatted_date": "Jun 2025 – Aug 2025",
     "content_html": "<p>This Google Apps Script solves a common scheduling problem: sharing real-time availability without exposing the details of personal or work calendars. It pulls events from multiple source calendars, strips out titles, descriptions, and guest lists, and writes consolidated, generically-labeled busy blocks to a single &ldquo;Availability&rdquo; calendar that can be shared with scheduling tools like Calendly &mdash; including the <a href=\"/availability/\">availability page</a> on this site.</p><p>Under the hood, it runs as a state-based reconciliation pipeline on a time-driven trigger: it filters out declined and free/transparent events, splits multi-day or all-day events into per-day timed segments so booking tools treat them as busy, merges overlapping slots from different calendars, and diffs the result against the destination calendar using metadata tags to create, update, or delete events &mdash; with exponential backoff for API rate limits and dynamic timezone detection.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Privacy-preserving sync: real event details are replaced with generic availability labels</li><li>Merges and consolidates overlapping events across multiple source calendars</li><li>Splits multi-day/all-day events into per-day busy blocks for booking-tool compatibility</li><li>State-based reconciliation with rate-limit backoff and dynamic timezone handling</li><li>Powers the <a href=\"/availability/\">Availability page</a> on this site</li></ul>"
   },
   {
@@ -331,7 +331,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2025",
+    "formatted_date": "Aug 2025 – Dec 2025",
     "content_html": "<p>Built with co-author Eddy Sul for Washington University&apos;s CSE 5114 (Data Manipulation and Management at Scale) course, this project implements a lambda-architecture pipeline for MLB Statcast pitch-level data sourced via pybaseball. Apache Airflow DAGs handle historical batch ingestion into Snowflake, while a Kafka producer paired with Spark Streaming handles live, simulated data.</p><p>The result is a Streamlit dashboard with three views: a Game Simulation mode that replays historical games pitch-by-pitch with adjustable playback speed and interactive strike-zone visualizations, a Game Explorer for pitcher analytics (velocity, spin rate, strikeout rate), and a Team Matchups view for head-to-head historical comparisons.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Lambda architecture combining Airflow batch ingestion with Kafka/Spark streaming</li><li>Pitch-by-pitch historical game replay with interactive strike-zone visualization</li><li>Pitcher analytics: velocity, spin rate, and strikeout rate</li><li>Team head-to-head matchup comparisons across seasons</li></ul>"
   },
   {
@@ -359,7 +359,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2025",
+    "formatted_date": "Aug 2025 – Dec 2025",
     "content_html": "<p>This project, built for Washington University&apos;s CSE 5519 course, addresses visual prompt injection (VPI) &mdash; image-embedded text instructions that can hijack vision-language models used as agent cores, such as an email assistant. Rather than relying on another ML model as a defense, which is itself attackable and hard to interpret, I built an automated red-blue pipeline: it generates attack images by overlaying malicious instructions onto benign images, tests them against a target VLM (Gemma-3-4b-it), and uses semantic analysis of the model&apos;s responses to determine whether an attack succeeded.</p><p>For each successful attack, the pipeline automatically generates a deterministic, OCR-based Python defense script &mdash; auditable, rule-based code rather than another opaque model &mdash; and validates it with accuracy, precision, and recall metrics in an iterative refinement loop. The approach was demonstrated on a realistic email-agent attack scenario.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Automated generation of visual prompt-injection (jailbreak) attack images</li><li>Attack evaluation against Gemma-3-4b-it with semantic response analysis</li><li>Auto-generated, deterministic OCR-based Python defenses instead of black-box ML</li><li>Iterative red-blue refinement loop with accuracy/precision/recall validation</li></ul>"
   },
   {
@@ -387,7 +387,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Fall 2025",
+    "formatted_date": "Aug 2025 – Dec 2025",
     "content_html": "<p>This repository contains the materials for a hands-on databases workshop designed and facilitated at Washington University in St. Louis, aimed at beginner-to-intermediate developers and taught through two complete projects rather than abstract lectures.</p><p>In the first part, participants build a Python application that queries the iTunes Search API and constructs a normalized SQLite database with related artists, albums, and songs tables connected by foreign keys, covering schema design, deduplication, and CSV export. In the second part, participants build a full-stack Todo app on Supabase (managed PostgreSQL) with sign-up/login/logout authentication and Row Level Security policies that ensure each user can only access their own data.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>SQLite schema design with foreign-key relationships using real iTunes API data</li><li>Data deduplication strategies and CSV export</li><li>Full-stack Supabase Todo app with authentication and Row Level Security</li><li>End-to-end coverage of relational databases, APIs, cloud Postgres, and access control</li></ul>"
   },
   {
@@ -405,7 +405,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2025",
+    "formatted_date": "Jun 2025 – Aug 2025",
     "content_html": "<p>This desktop GUI application uses the instaloader library to log into Instagram, fetch a user&apos;s followers and following lists, and report accounts they follow that don&apos;t follow back. Results are saved to a text file as a list of profile URLs, with status updates streamed to the GUI in real time.</p><p>The app supports session persistence to avoid repeated logins, handles two-factor authentication prompts, and falls back to password entry if a saved session expires. It&apos;s distributed as prebuilt executables for Windows, macOS, and Linux via GitHub Releases, and emphasizes privacy: credentials are never stored, only session cookies are cached locally, and all processing happens on-device.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Identifies accounts you follow that don&apos;t follow back</li><li>Session persistence with 2FA and expired-session handling</li><li>Cross-platform prebuilt binaries for Windows, macOS, and Linux</li><li>Privacy-first: no credentials stored, all processing local</li></ul>"
   },
   {
@@ -434,7 +434,7 @@
     "pdf": "/files/thesis-main.pdf",
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Spring 2026",
+    "formatted_date": "Jan 2026 – May 2026",
     "content_html": "<p>This thesis, completed as part of the DRIVES Project at Washington University in St. Louis under the advisement of Dr. Alvitta Ottley (chair), Dr. Ganesh Babulal, and Dr. Nathan Jacobs, asks whether everyday driving behavior &mdash; captured passively through in-vehicle telematics &mdash; can help predict cognitive impairment in older adults, while accounting for differences across the many makes and models of vehicles people actually drive. Prior driving-based screening approaches often rely on signatures tuned to a single vehicle or sensor configuration, which limits their use across a real-world population.</p><p>The analysis used a final dataset of 790,000 naturalistic driving trips (26,968 participant-weeks) from 304 participants, combined with demographic covariates, evaluated under leave-one-participant-out cross-validation across six modeling approaches &mdash; including baseline classifiers, a domain-adversarial neural network (DANN), and a sequence-based GRU-DANN model. The best model (GRU-DANN) reached a participant-level ROC AUC of 0.599, with Random Forest close behind as the strongest non-deep baseline. The thesis&apos;s main contribution is a rigorous, vehicle-agnostic comparison of these modeling choices, alongside a candid account of the limits of naturalistic driving data alone as a cognitive-status signal &mdash; tempering optimistic claims in prior driving-based dementia-screening work while laying out a framework for future, likely multimodal, research.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Final dataset of 790,000 naturalistic driving trips (26,968 participant-weeks) from 304 participants, with demographic covariates</li><li>Six modeling approaches compared under leave-one-participant-out cross-validation</li><li>Best model (GRU-DANN) achieved a participant-level ROC AUC of 0.599</li><li>Vehicle-agnostic framing designed to generalize across heterogeneous vehicles and sensors</li><li>Conducted with the DRIVES Lab (PI: Dr. Ganesh Babulal), advised by Dr. Alvitta Ottley and Dr. Nathan Jacobs</li></ul><p><a href=\"https://openscholarship.wustl.edu/eng_etds/1341/\" target=\"_blank\" rel=\"noopener\">Read the full thesis on WashU Open Scholarship</a> <span class=\"sr-only\">(opens in a new tab)</span>.</p>"
   },
   {
@@ -452,7 +452,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2026",
+    "formatted_date": "Jun 2026 – Aug 2026",
     "content_html": "<p>Built during the CodeTillDawn hackathon, Blink Morse Decoder turns an Android phone&apos;s front-facing camera into a hands-free input device for people with motor disabilities. The SmartSpectra SDK extracts facial landmarks at roughly 30Hz, and the app computes the eye aspect ratio in real time to detect eye closures. A blink state machine filters out involuntary micro-blinks &mdash; requiring a minimum duration with frame-stabilization and hysteresis-based debouncing &mdash; so only deliberate blinks register as input.</p><p>A six-blink calibration routine (three short, three prolonged) establishes personalized timing thresholds before use. From there, short blinks act as Morse &ldquo;dots&rdquo; and long blinks as &ldquo;dashes,&rdquo; with the gap between blinks classified by duration to mark letter and word boundaries. The app also includes a real-time bio-vitals dashboard (heart rate, respiration rate, and simulated galvanic skin response) in a glassmorphic Material Design 3 interface.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Real-time, camera-based blink detection via the SmartSpectra SDK and eye aspect ratio</li><li>Debounced blink state machine that filters involuntary micro-blinks</li><li>Personalized 6-blink calibration flow with an interactive rhythm guide</li><li>Timing-based Morse decoding for letters and word breaks</li><li>Live bio-vitals dashboard in a glassmorphic Material Design 3 UI</li></ul>"
   },
   {
@@ -470,7 +470,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2026",
+    "formatted_date": "Jun 2026 – Aug 2026",
     "content_html": "<p>A self-hosted alternative to third-party speed test services, this single-page app measures download speed, upload speed, and ping directly against the server hosting this site &mdash; with live-updating results and connection details (visitor IP and server identity) so you know exactly what you&apos;re testing against.</p><p>Ping is measured via five sequential requests, discarding the warm-up request and reporting the median round-trip time. Download throughput streams a generated payload via the Streams API, reading it incrementally for live progress; upload throughput sends a generated payload via <code>XMLHttpRequest</code>, using <code>upload.onprogress</code> for live readings. An Express server serves the page and API from the same origin.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Download, upload, and ping measurements (Mbps / ms) against this site&apos;s own server</li><li>Live progress updates at least once per second during transfer phases</li><li>Connection details: visitor public IP and server location/identity</li><li>Responsive layout from 320px and up, with clear error/retry handling</li></ul>"
   },
   {
@@ -498,7 +498,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2026",
+    "formatted_date": "Jun 2026 – Aug 2026",
     "content_html": "<p>AURA (Ambient Wellness Companion) is a Kaggle Agents for Good capstone that runs ambient wellness check-ins for elderly patients. Built on Google&apos;s Agent Development Kit (ADK 2.0), the system orchestrates a state-driven multi-agent graph: a medication extractor maps patient language to schedule IDs, an empathetic companion agent scores mood and replies in natural language, a deterministic privacy guard persists only allowlisted telemetry fields, and a rule-based escalation engine routes critical cases to caregiver alerts.</p><p>The demo UI includes a passcode-gated patient dashboard with live JSON and agent activity, a provider view for roster management and alert triage, and an architecture overview page. Tool access follows least privilege via filtered MCP toolsets &mdash; LLM agents cannot write directly to the secure mock database; persistence happens only in the deterministic privacy node after structured output is available.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>ADK 2.0 multi-agent workflow: medication extraction, empathetic companion, privacy guard, and escalation routing</li><li>Deterministic <code>persist_metrics_node</code> with allowlist-validated writes (mood, compliance, per-med status)</li><li>Escalation when consecutive missed medication cycles reach 2 or mood score drops below 3</li><li>Patient, provider, and about views with passcode-gated sessions and live activity sidebar</li><li>Filtered MCP toolsets enforcing least-privilege boundaries between agents and the secure store</li></ul>"
   },
   {
@@ -516,7 +516,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Summer 2026",
+    "formatted_date": "Jun 2026 – Aug 2026",
     "content_html": "<p>A self-contained Arduino environment monitor that continuously reads temperature and humidity from a DHT11 sensor every two minutes, displays live readings on a 1602 LCD, and stores a rolling 255-sample buffer in EEPROM for offline data retrieval over serial.</p><p>The device supports three temperature units (&deg;C, &deg;F, K) and two humidity modes (relative humidity and dew point via the Magnus formula), toggled with a hardware button. A second button forces an immediate sensor read. A photoresistor (LDR) on an analog pin provides ambient light readings on a secondary display page. EEPROM persistence preserves the buffer index and user-selected unit preferences across power cycles. The full rolling buffer can be dumped over serial on command for analysis.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Continuous DHT11 sensing (temp &amp; humidity) every 2 minutes, displayed on 1602 LCD</li><li>Three temperature units (&deg;C, &deg;F, K) and dew point calculation (Magnus formula)</li><li>255-sample rolling EEPROM buffer with serial dump command for offline retrieval</li><li>Ambient light sensing via photoresistor with live raw and percentage display</li><li>Two-button interface: force-refresh and unit/page cycling with long-press detection</li><li>Unit preferences and buffer index persist across power cycles via EEPROM</li></ul>"
   }
 ]

@@ -23,7 +23,7 @@ const projects = [
     presentation:
       'https://docs.google.com/presentation/d/10910WNa3CjiXIcH_T5OIXyOuOTiVKFHr/export/pptx',
     has_detail: true,
-    formatted_date: 'Summer 2022',
+    formatted_date: 'Jun 2022 – Aug 2022',
   },
   {
     id: '2022-07-artificial-intelligence-in-modern-board-games',
@@ -50,7 +50,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2022',
+    formatted_date: 'Jun 2022 – Aug 2022',
   },
   {
     id: '2022-11-connect-4-ai',
@@ -67,7 +67,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2022',
+    formatted_date: 'Aug 2022 – Dec 2022',
   },
   {
     id: '2023-04-artificial-intelligence-opinion-survey',
@@ -94,7 +94,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Spring 2023',
+    formatted_date: 'Jan 2023 – May 2023',
   },
   {
     id: '2024-11-php-calendar-app',
@@ -122,7 +122,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2024',
+    formatted_date: 'Aug 2024 – Dec 2024',
   },
   {
     id: '2024-11-socketio-chat-app',
@@ -150,7 +150,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2024',
+    formatted_date: 'Aug 2024 – Dec 2024',
   },
   {
     id: '2024-12-datacenter-cooling',
@@ -177,7 +177,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2024',
+    formatted_date: 'Aug 2024 – Dec 2024',
   },
   {
     id: '2024-12-interactive-storybook',
@@ -209,7 +209,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2024',
+    formatted_date: 'Aug 2024 – Dec 2024',
   },
   {
     id: '2024-12-multimodal-alzheimers',
@@ -241,7 +241,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2024',
+    formatted_date: 'Aug 2024 – Dec 2024',
   },
   {
     id: '2025-05-desperate-housewives-monologues',
@@ -259,7 +259,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Spring 2025',
+    formatted_date: 'Jan 2025 – May 2025',
   },
   {
     id: '2025-07-bayesian-optimization',
@@ -287,7 +287,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2025',
+    formatted_date: 'Jun 2025 – Aug 2025',
   },
   {
     id: '2025-08-google-calendar-sync',
@@ -305,7 +305,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2025',
+    formatted_date: 'Jun 2025 – Aug 2025',
   },
   {
     id: '2025-08-mlb-statcast-pipeline',
@@ -332,7 +332,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2025',
+    formatted_date: 'Aug 2025 – Dec 2025',
   },
   {
     id: '2025-08-vlm-security',
@@ -361,7 +361,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2025',
+    formatted_date: 'Aug 2025 – Dec 2025',
   },
   {
     id: '2025-10-hackwashu-databases-workshop',
@@ -389,7 +389,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Fall 2025',
+    formatted_date: 'Aug 2025 – Dec 2025',
   },
   {
     id: '2025-11-instagram-unfollow-checker',
@@ -407,7 +407,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2025',
+    formatted_date: 'Jun 2025 – Aug 2025',
   },
   {
     id: '2026-04-ms-thesis',
@@ -437,7 +437,7 @@ const projects = [
     pdf: '/files/thesis-main.pdf',
     presentation: null,
     has_detail: true,
-    formatted_date: 'Spring 2026',
+    formatted_date: 'Jan 2026 – May 2026',
   },
   {
     id: '2026-06-blink-morse-decoder',
@@ -455,7 +455,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2026',
+    formatted_date: 'Jun 2026 – Aug 2026',
   },
   {
     id: '2026-06-speedtest',
@@ -473,7 +473,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2026',
+    formatted_date: 'Jun 2026 – Aug 2026',
   },
   {
     id: '2026-06-wellness-companion',
@@ -501,7 +501,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2026',
+    formatted_date: 'Jun 2026 – Aug 2026',
   },
   {
     id: '2026-06-env-monitor',
@@ -519,7 +519,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Summer 2026',
+    formatted_date: 'Jun 2026 – Aug 2026',
   },
 ];
 const projectGrid = document.getElementById('projectGrid');

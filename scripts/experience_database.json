@@ -54,7 +54,7 @@
     "start_date": "2025-08-01",
     "end_date": "2026-05-31",
     "responsibilities": [
-      "Built an end-to-end pipeline processing 26,968 participant-weeks of naturalistic driving data from 304 older adults, deriving weekly driving features and integrating demographic covariates to predict Clinical Dementia Rating (CDR) status.",
+      "Built an end-to-end pipeline processing 790,000 naturalistic driving trips (26,968 participant-weeks) from 304 older adults, deriving vehicle-agnostic weekly driving features and integrating demographic covariates to predict Clinical Dementia Rating (CDR) status.",
       "Benchmarked six model families (logistic regression, random forest, XGBoost, MLP, DANN, GRU-DANN) under leave-one-participant-out cross-validation; GRU-DANN achieved the highest participant-level ROC AUC (0.599) and balanced accuracy (0.584).",
       "Defended April 2026; published as no. 1341 in the McKelvey School of Engineering Graduate Student Theses & Dissertations."
     ],
@@ -159,8 +159,8 @@
     "start_date": "2025-06-01",
     "end_date": "2025-08-31",
     "responsibilities": [
-      "Built a social media simulation system for CritterCircle, Crittero's social platform for pet owners and animal rescues, generating realistic training data across seven persona types with seeded random generation and time-series activity modeling (1,700+ lines of TypeScript).",
-      "Developed a foundational recommendation framework pairing a TensorFlow/Keras neural network with a collaborative-filtering fallback, alongside a data ingestion pipeline for CSV exports and interaction matrices.",
+      "Built a social media simulation system for CritterCircle, Crittero's social platform for pet owners and animal rescues, generating 100,000 labeled posts across seven persona types with seeded random generation and time-series activity modeling (1,700+ lines of TypeScript).",
+      "Developed a TensorFlow/Keras recommendation model achieving 80% accuracy — a 30-percentage-point gain over a random-posts baseline — with persona-type, content-category, and temporal embeddings, plus a collaborative-filtering cold-start fallback for new users.",
       "Created a configurable CLI testing framework in Python (700+ lines) with performance metrics and reproducibility validation, enabling systematic, repeatable evaluation of recommendation algorithms."
     ],
     "related_projects": [],
@@ -173,7 +173,7 @@
     ],
     "has_detail": true,
     "id": "2025-06-ai-engineer-intern",
-    "excerpt": "Built a persona-based social media simulation and a TensorFlow/Keras recommendation framework for CritterCircle, Crittero's social platform for pet owners and animal rescues."
+    "excerpt": "Generated 100,000 labeled social media posts across seven personas and trained a TensorFlow/Keras recommendation model achieving 80% accuracy for CritterCircle, Crittero's social platform."
   },
   {
     "title": "Graduate Assistant with the Taylor Family Center for Student Success",
@@ -209,14 +209,15 @@
     "start_date": "2023-06-01",
     "end_date": "2024-05-31",
     "responsibilities": [
-      "Analyzed environmental sensor data from IoT devices on AWS and built dashboards that helped clients cut swimming pool maintenance costs by at least 20%.",
-      "Designed the UI of an upcoming all-in-one environmental sensor device in Figma and engineered it in React."
+      "Designed and engineered the UI of an all-in-one environmental sensor device in Figma and React, delivering a pixel-perfect, production-ready interface from initial wireframes.",
+      "Analyzed environmental sensor data from IoT devices on AWS, building client-facing dashboards that surfaced chemical imbalances and equipment alerts — helping clients cut swimming pool maintenance costs by at least 20%.",
+      "Built AWS data ingestion pipelines to normalize and store continuous sensor telemetry from deployed devices, enabling live dashboard readings for client operational decisions."
     ],
     "related_projects": [],
     "links": [],
     "has_detail": true,
     "id": "2023-06-data-analyst-intern",
-    "excerpt": "Analyzed IoT environmental sensor data on AWS and built dashboards that helped clients cut pool maintenance costs by at least 20%."
+    "excerpt": "Designed and engineered a Figma-to-React UI for an environmental sensor device; analyzed IoT sensor data on AWS, building dashboards that cut client pool maintenance costs by 20%."
   },
   {
     "title": "Media Center Assistant",

@@ -11,7 +11,7 @@
       Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses
       - Aadarsha Gopala Reddy
     </title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.7.15" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.2.4" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -139,15 +139,14 @@
             </p>
             <section class="page__content">
               <p>
-                This project, built for Washington University&apos;s CSE 5519 course with teammates
-                Stuart Aldrich and Mohammad Rouie Miab, addresses visual prompt injection (VPI)
-                &mdash; image-embedded text instructions that can hijack vision-language models used
-                as agent cores, such as an email assistant. Rather than relying on another ML model
-                as a defense, which is itself attackable and hard to interpret, the team built an
-                automated red-blue pipeline: it generates attack images by overlaying malicious
-                instructions onto benign images, tests them against a target VLM (Gemma-3-4b-it),
-                and uses semantic analysis of the model&apos;s responses to determine whether an
-                attack succeeded.
+                This project, built for Washington University&apos;s CSE 5519 course, addresses
+                visual prompt injection (VPI) &mdash; image-embedded text instructions that can
+                hijack vision-language models used as agent cores, such as an email assistant.
+                Rather than relying on another ML model as a defense, which is itself attackable and
+                hard to interpret, I built an automated red-blue pipeline: it generates attack
+                images by overlaying malicious instructions onto benign images, tests them against a
+                target VLM (Gemma-3-4b-it), and uses semantic analysis of the model&apos;s responses
+                to determine whether an attack succeeded.
               </p>
               <p>
                 For each successful attack, the pipeline automatically generates a deterministic,
@@ -405,6 +404,5 @@
 
     <!-- Theme Switcher Persistence Script -->
     <script src="/assets/js/theme.js"></script>
-    <script src="/assets/js/status-badge.js?v=1.3"></script>
   </body>
 </html>

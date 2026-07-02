@@ -543,6 +543,13 @@ main.container {
   color: var(--accent);
   transform: translateY(-1px);
 }
+.tech-tag a {
+  display: block;
+  margin: -0.15rem -0.45rem;
+  padding: 0.15rem 0.45rem;
+  color: inherit;
+  text-decoration: none;
+}
 
 /* Call to Action Button */
 .card-action {

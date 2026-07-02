@@ -12,11 +12,11 @@
 % --- Geometry and Page Layout ---
 \RequirePackage[
     ignoreheadfoot,
-    top=1.2cm,
-    bottom=1.2cm,
+    top=0.85cm,
+    bottom=0.85cm,
     left=1.2cm,
     right=1.3cm,
-    footskip=0.8cm
+    footskip=0.5cm
 ]{geometry}
 \RequirePackage{titlesec}       % For customizing section titles
 \RequirePackage{paracol}        % For multi-column layouts
@@ -68,13 +68,13 @@
 % -----------------------------------------------------------------
 % These lengths are used for consistent vertical spacing throughout the document.
 \newlength{\headerSpacing}      % Base spacing, e.g., around section titles or major blocks
-\setlength{\headerSpacing}{3pt}
+\setlength{\headerSpacing}{1.5pt}
 
 \newlength{\entrySpacing}       % Spacing before a new entry (e.g., education, experience)
-\setlength{\entrySpacing}{0.5\headerSpacing} % Proportional to headerSpacing
+\setlength{\entrySpacing}{0.5pt}
 
 \newlength{\highlightSpacing}   % Spacing before a list of highlights/bullet points within an entry
-\setlength{\highlightSpacing}{0.25\headerSpacing} % Proportional to headerSpacing
+\setlength{\highlightSpacing}{0.15pt}
 
 \newlength{\kernSpacing}        % A small, fixed kerning space
 \setlength{\kernSpacing}{2.5pt}
@@ -172,8 +172,8 @@
   [\vspace{0.5pt}\color{accentColor}\titlerule] % Code after title: small space, then a rule in accent color
 \titlespacing{\section}
   {0pt} % Left margin
-  {0.1cm} % Space before title (vertical)
-  {0.1cm} % Space after title (vertical) - before text or rule
+  {0.05cm} % Space before title (vertical)
+  {0.05cm} % Space after title (vertical) - before text or rule
 
 % --- Hyperlinked Section Heading ---
 % Wraps a section title in a link while preserving the accent color.

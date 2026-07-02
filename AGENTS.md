@@ -5,6 +5,26 @@
 
 ---
 
+## OpenWiki documentation (required reading)
+
+This repo has auto-generated documentation under **`openwiki/`**. It covers architecture,
+design system, interactive components, content pipelines, operations, testing, and common
+workflows. **Read `openwiki/quickstart.md` first** — it links to every major section.
+
+If you are an agent, start at `openwiki/quickstart.md` before making code changes.
+
+**Keep OpenWiki updated.** After any significant change (new component, modified pipeline,
+CSS token change, nginx config change, new test), run:
+
+```bash
+openwiki --update "brief description of what changed"
+```
+
+This will re-scan the diff and update only the affected pages. If you don't have the
+`openwiki` CLI, review the changed files and update the relevant `openwiki/` pages manually.
+
+---
+
 ## Git commit authorship (required)
 
 Never add Cursor or any AI tool as author or co-author on commits. Enforced by `.husky/commit-msg` and `.husky/prepare-commit-msg`. Verify: `git log -1 --format='%B'`.

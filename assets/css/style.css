@@ -2306,8 +2306,9 @@ dialog[open].document-modal {
   justify-content: space-between;
   align-items: center;
   gap: var(--space-md);
-  min-height: 4.5rem;
-  padding: 0.85rem 1.25rem;
+  min-height: 3rem;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-color);
   background: transparent;
 }

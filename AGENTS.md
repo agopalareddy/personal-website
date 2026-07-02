@@ -3,6 +3,21 @@
 > Agent reference for the static personal site at `https://agreddy.com/`.
 > GitHub: `agopalareddy/personal-website` · GCP path: `/opt/personal-website/` · Branch: `main`
 
+## Editing experience or project content
+
+**Never edit generated HTML pages directly.** The source of truth is the JSON databases
+in `scripts/`. Generated pages in `experience/` and `projects/` will be overwritten on
+the next regeneration without warning.
+
+1. Edit `scripts/experience_database.json` or `scripts/projects_database.json`
+2. Run `cd scripts && python3 generate_site.py --experience --projects`
+3. Review the diff: `git diff -- experience/ projects/`
+4. Commit the JSON changes + regenerated HTML together
+
+The detail page chrome (stylesheets, scripts, nav, sidebar, footer) lives in
+`scripts/chrome.py`. Version bumps for `style.css`, `font-awesome`, `theme.js`, and
+`status-badge.js` must happen there — not in individual HTML files.
+
 ---
 
 ## OpenWiki documentation (required reading)

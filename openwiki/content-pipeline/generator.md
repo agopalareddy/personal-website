@@ -48,6 +48,14 @@ Also exports `NAV_ITEMS` — a tuple of `(page_id, href, label, icon_html)` — 
 
 ### Change guidance
 
+- **⚠️ Never edit generated HTML pages directly.** All `experience/` and `projects/` detail
+  pages are regenerated from JSON databases and will silently overwrite manual edits. Always
+  update `scripts/experience_database.json` or `scripts/projects_database.json` first, then
+  regenerate. The single exception is the listing pages (`experience/index.html`,
+  `projects/index.html`) which contain hand-authored TOC/filter chrome that the generator
+  must preserve — changes to those pages' body content still go through the JSON databases.
+- Version bumps for `style.css`, `font-awesome`, `theme.js`, and `status-badge.js` must
+  happen in `scripts/chrome.py` — not in individual HTML files.
 - After running the generator, always `git diff` to catch unintended rewrites (e.g. whitespace, version bumps).
 - The generator must be run whenever the JSON databases change.
 - If you change the HTML template in `chrome.py` or the generator, regenerate all pages and check for regressions.

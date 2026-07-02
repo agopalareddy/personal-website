@@ -33,8 +33,8 @@ def render_head(title, description, canonical_url, og_type="article"):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{description}">
     <title>{title} - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.2.4">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.7.16">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" crossorigin="anonymous">
 
     <!-- Favicons & Mobile Device Integration -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/mstile-150x150.png">
@@ -191,6 +191,7 @@ def render_page_wrapper(head_html, body_html, active_page):
     {render_footer()}
 
     <!-- Theme Switcher Persistence Script -->
-    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/theme.js?v=1.1"></script>
+    <script src="/assets/js/status-badge.js?v=1.3"></script>
 </body>
 </html>"""

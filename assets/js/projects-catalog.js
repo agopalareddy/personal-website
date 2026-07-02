@@ -1070,5 +1070,13 @@ window.matchMedia('(max-width: 767px)').addEventListener('change', repositionCat
 
 positionFilterControlsResponsive();
 populateFilters();
+
+// ponytail: lets index.html tech-stack tags deep-link into a prefilled search
+const qParam = new URLSearchParams(window.location.search).get('q');
+if (qParam && searchInput) {
+  searchQuery = qParam;
+  searchInput.value = qParam;
+}
+
 renderProjects();
 wrapMobileStickyPanels();

@@ -15,10 +15,19 @@
   function openDocument(dialog, trigger) {
     const title = trigger.getAttribute('data-doc-title') || 'Document preview';
     const src = trigger.getAttribute('data-doc-src');
-    if (!src) return;
+    const ALLOWED = {
+      '/files/reddy_cv.pdf': '/files/reddy_cv.pdf',
+      '/files/reddy_resume.pdf': '/files/reddy_resume.pdf',
+    };
+    const resolved = src && ALLOWED[src];
+    if (!resolved) return;
 
     if (window.innerWidth <= 640 || typeof dialog.showModal !== 'function') {
-      window.open(src, '_blank', 'noopener');
+      const a = document.createElement('a');
+      a.href = resolved;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.click();
       return;
     }
 

@@ -1,5 +1,5 @@
 // CV / Resume PDF preview modal.
-(function () {
+(() => {
   'use strict';
 
   function isDarkMode() {
@@ -49,11 +49,14 @@
     if (iframe) iframe.src = 'about:blank';
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', () => {
     const dialog = document.getElementById('document-modal');
     if (!dialog) return;
 
-    document.addEventListener('click', function (event) {
+    document.addEventListener('click', (event) => {
+      // Skip if the click landed on a link — let the link do its own thing.
+      if (event.target.closest('a')) return;
+
       const trigger = event.target.closest('[data-action]');
       if (!trigger) return;
 
@@ -62,11 +65,11 @@
       if (action === 'close') closeDocument(dialog);
     });
 
-    dialog.addEventListener('click', function (event) {
+    dialog.addEventListener('click', (event) => {
       if (event.target === dialog) dialog.close();
     });
 
-    dialog.addEventListener('close', function () {
+    dialog.addEventListener('close', () => {
       resetIframe(dialog);
     });
   });

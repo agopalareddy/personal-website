@@ -1,6 +1,0 @@
-{
-  "signature": "assets/js/cv-modal.js::Unresolved from this turn — assets/js/cv-modal.js:\n🔴 STOP — 1 issue(s) must be fixed:\n  L22: Potential open redirect vulnerability — validate redirect URLs",
-  "sessionId": "019f24f4-50b4-7707-bd52-b4d68cc72046",
-  "projectSeqStart": 47,
-  "projectSeqEnd": 48
-}

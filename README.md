@@ -18,8 +18,8 @@ databases in `scripts/`; end-to-end coverage lives under `tests/` using Playwrig
 - [Testing](#testing)
 - [Deployment](#deployment)
 - [Nginx and Analytics](#nginx-and-analytics)
-- [Maintainers](#maintainers)
 - [Thanks](#thanks)
+- [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -202,15 +202,15 @@ Re-run the verifier after tightening CSP:
 ./scripts/verify_ga4.py
 ```
 
-## Maintainers
-
-[@agopalareddy](https://github.com/agopalareddy)
-
 ## Thanks
 
 - [Font Awesome](https://fontawesome.com/) for iconography.
 - [Playwright](https://playwright.dev/) and [Axe](https://github.com/dequelabs/axe-core)
   for end-to-end and accessibility testing.
+
+## Maintainers
+
+[@agopalareddy](https://github.com/agopalareddy)
 
 ## Contributing
 

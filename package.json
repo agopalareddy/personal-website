@@ -1,7 +1,7 @@
 {
   "name": "personal-website",
   "version": "1.0.0",
-  "description": "A premium, highly responsive, glassmorphic portfolio and academic showcase website highlighting academic achievements, computer science research, distributed systems engineering, and TA/leadership credentials.",
+  "description": "Static personal website and project archive for agreddy.com, built with HTML, CSS, and JavaScript.",
   "scripts": {
     "dev": "python3 -m http.server 8080",
     "format": "prettier --write .",
@@ -13,7 +13,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/agopalareddy/personal-website/issues"

@@ -52,7 +52,7 @@
     "location": "St. Louis, Missouri, USA",
     "role_context": "Master's Thesis (Thesis Supervisor & Lab PI: Dr. Ganesh Babulal; Thesis Advisor & Committee Chair: Dr. Alvitta Ottley)",
     "start_date": "2025-08-01",
-    "end_date": "2026-05-31",
+    "end_date": "2026-04-30",
     "responsibilities": [
       "Built an end-to-end pipeline processing 790,000 naturalistic driving trips (26,968 participant-weeks) from 304 older adults, deriving vehicle-agnostic weekly driving features and integrating demographic covariates to predict Clinical Dementia Rating (CDR) status.",
       "Benchmarked six model families (logistic regression, random forest, XGBoost, MLP, DANN, GRU-DANN) under leave-one-participant-out cross-validation; GRU-DANN achieved the highest participant-level ROC AUC (0.599) and balanced accuracy (0.584).",

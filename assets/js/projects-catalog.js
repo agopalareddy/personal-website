@@ -434,7 +434,7 @@ const projects = [
     ],
     github: null,
     demo: null,
-    pdf: '/files/thesis-main.pdf',
+    pdf: 'https://openscholarship.wustl.edu/cgi/viewcontent.cgi?article=2429&context=eng_etds',
     presentation: null,
     has_detail: true,
     formatted_date: 'Aug 2025 – Apr 2026',

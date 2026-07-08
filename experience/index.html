@@ -2087,9 +2087,14 @@
               // from the application/json "experiences-data" payload embedded
               // in #experienceGrid above (single source of truth, spliced in
               // place by scripts/generate_site.py --experiences).
-              const experiences = JSON.parse(
-                document.querySelector('#experienceGrid script.experiences-data').textContent
-              );
+              let experiences = [];
+              try {
+                experiences = JSON.parse(
+                  document.querySelector('#experienceGrid script.experiences-data').textContent
+                );
+              } catch (e) {
+                console.error('Failed to parse experiences data:', e);
+              }
             </script>
             <script src="/assets/js/experience-catalog.js?v=1.0.5"></script>
           </article>

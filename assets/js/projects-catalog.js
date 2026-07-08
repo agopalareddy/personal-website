@@ -455,7 +455,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Jun 2026 – Aug 2026',
+    formatted_date: 'Jun 2026',
   },
   {
     id: '2026-06-speedtest',
@@ -473,7 +473,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Jun 2026 – Aug 2026',
+    formatted_date: 'Jun 2026',
   },
   {
     id: '2026-06-wellness-companion',
@@ -501,7 +501,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Jun 2026 – Aug 2026',
+    formatted_date: 'Jun 2026',
   },
   {
     id: '2026-06-env-monitor',
@@ -519,7 +519,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Jun 2026 – Aug 2026',
+    formatted_date: 'Jun 2026',
   },
 ];
 const projectGrid = document.getElementById('projectGrid');

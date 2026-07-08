@@ -103,7 +103,7 @@
     "venue": "Washington University in St. Louis",
     "venue_tag": "WashU",
     "permalink": "/projects/php-calendar-app",
-    "date": "2024-11-2",
+    "date": "2025-07-15",
     "category": "Web Apps",
     "technologies": [
       "PHP",
@@ -121,7 +121,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Aug 2024 – Dec 2024",
+    "formatted_date": "Jul 2025",
     "content_html": "<p>Chronos is a personal calendar and event management web application built for Washington University&apos;s CSE 503S rapid-prototyping course. It centers on an interactive month-view dashboard where users can create, edit, and categorize appointments (Work, Personal, Social, Other), with client-side filtering for instant views without page reloads, plus a profile page with productivity analytics over past events.</p><p>The backend runs on PHP 8.4 with a MySQL database, using prepared statements throughout to prevent SQL injection, alongside CSRF protection, password hashing, and hardened sessions. The frontend is vanilla HTML, CSS, and ES6 JavaScript with a dark, glassmorphic visual style.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Interactive month-view calendar with categorized event management</li><li>Instant client-side filtering by event category</li><li>CSRF protection, prepared statements, and hashed/session-hardened authentication</li><li>Glassmorphic, responsive dark-theme UI</li><li>Productivity analytics on a user profile dashboard</li></ul>"
   },
   {
@@ -369,7 +369,7 @@
     "venue": "Washington University in St. Louis - HackWashU",
     "venue_tag": "WashU",
     "permalink": "/projects/hackwashu-databases-workshop",
-    "date": "2025-10-12",
+    "date": "2025-09-15",
     "category": "Software & Tools",
     "technologies": [
       "Python",
@@ -387,7 +387,7 @@
     "pdf": null,
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Aug 2025 – Dec 2025",
+    "formatted_date": "Sep 2025",
     "content_html": "<p>This repository contains the materials for a hands-on databases workshop designed and facilitated at Washington University in St. Louis, aimed at beginner-to-intermediate developers and taught through two complete projects rather than abstract lectures.</p><p>In the first part, participants build a Python application that queries the iTunes Search API and constructs a normalized SQLite database with related artists, albums, and songs tables connected by foreign keys, covering schema design, deduplication, and CSV export. In the second part, participants build a full-stack Todo app on Supabase (managed PostgreSQL) with sign-up/login/logout authentication and Row Level Security policies that ensure each user can only access their own data.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>SQLite schema design with foreign-key relationships using real iTunes API data</li><li>Data deduplication strategies and CSV export</li><li>Full-stack Supabase Todo app with authentication and Row Level Security</li><li>End-to-end coverage of relational databases, APIs, cloud Postgres, and access control</li></ul>"
   },
   {
@@ -434,7 +434,7 @@
     "pdf": "/files/thesis-main.pdf",
     "presentation": null,
     "has_detail": true,
-    "formatted_date": "Jan 2026 – May 2026",
+    "formatted_date": "Aug 2025 – Apr 2026",
     "content_html": "<p>This thesis, completed as part of the DRIVES Project at Washington University in St. Louis under the advisement of Dr. Alvitta Ottley (chair), Dr. Ganesh Babulal, and Dr. Nathan Jacobs, asks whether everyday driving behavior &mdash; captured passively through in-vehicle telematics &mdash; can help predict cognitive impairment in older adults, while accounting for differences across the many makes and models of vehicles people actually drive. Prior driving-based screening approaches often rely on signatures tuned to a single vehicle or sensor configuration, which limits their use across a real-world population.</p><p>The analysis used a final dataset of 790,000 naturalistic driving trips (26,968 participant-weeks) from 304 participants, combined with demographic covariates, evaluated under leave-one-participant-out cross-validation across six modeling approaches &mdash; including baseline classifiers, a domain-adversarial neural network (DANN), and a sequence-based GRU-DANN model. The best model (GRU-DANN) reached a participant-level ROC AUC of 0.599, with Random Forest close behind as the strongest non-deep baseline. The thesis&apos;s main contribution is a rigorous, vehicle-agnostic comparison of these modeling choices, alongside a candid account of the limits of naturalistic driving data alone as a cognitive-status signal &mdash; tempering optimistic claims in prior driving-based dementia-screening work while laying out a framework for future, likely multimodal, research.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Final dataset of 790,000 naturalistic driving trips (26,968 participant-weeks) from 304 participants, with demographic covariates</li><li>Six modeling approaches compared under leave-one-participant-out cross-validation</li><li>Best model (GRU-DANN) achieved a participant-level ROC AUC of 0.599</li><li>Vehicle-agnostic framing designed to generalize across heterogeneous vehicles and sensors</li><li>Conducted with the DRIVES Lab (PI: Dr. Ganesh Babulal), advised by Dr. Alvitta Ottley and Dr. Nathan Jacobs</li></ul><p><a href=\"https://openscholarship.wustl.edu/eng_etds/1341/\" target=\"_blank\" rel=\"noopener\">Read the full thesis on WashU Open Scholarship</a> <span class=\"sr-only\">(opens in a new tab)</span>.</p>"
   },
   {

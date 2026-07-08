@@ -104,7 +104,7 @@ const projects = [
     venue: 'Washington University in St. Louis',
     venue_tag: 'WashU',
     permalink: '/projects/php-calendar-app',
-    date: '2024-11-2',
+    date: '2025-07-15',
     category: 'Web Apps',
     technologies: [
       'PHP',
@@ -122,7 +122,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Aug 2024 – Dec 2024',
+    formatted_date: 'Jul 2025',
   },
   {
     id: '2024-11-socketio-chat-app',
@@ -371,7 +371,7 @@ const projects = [
     venue: 'Washington University in St. Louis - HackWashU',
     venue_tag: 'WashU',
     permalink: '/projects/hackwashu-databases-workshop',
-    date: '2025-10-12',
+    date: '2025-09-15',
     category: 'Software & Tools',
     technologies: [
       'Python',
@@ -389,7 +389,7 @@ const projects = [
     pdf: null,
     presentation: null,
     has_detail: true,
-    formatted_date: 'Aug 2025 – Dec 2025',
+    formatted_date: 'Sep 2025',
   },
   {
     id: '2025-11-instagram-unfollow-checker',
@@ -437,7 +437,7 @@ const projects = [
     pdf: '/files/thesis-main.pdf',
     presentation: null,
     has_detail: true,
-    formatted_date: 'Jan 2026 – May 2026',
+    formatted_date: 'Aug 2025 – Apr 2026',
   },
   {
     id: '2026-06-blink-morse-decoder',

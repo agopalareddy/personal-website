@@ -160,14 +160,19 @@
     var details = document.createElement('details');
     details.className = 'theme-picker';
 
-    // Summary with mode icon + chevron
+    // Summary: mode icon + "Theme" label + chevron
     var summary = document.createElement('summary');
     summary.setAttribute('aria-label', 'Theme: ' + currentObj.label);
-    // Parse SVGs via text/html (needs body for multiple elements)
-    var svgDoc = new DOMParser().parseFromString(modeIcon(currentMode) + chevronIcon, 'text/html');
-    while (svgDoc.body && svgDoc.body.firstChild) {
-      summary.appendChild(svgDoc.body.firstChild);
-    }
+    // Mode icon
+    var sIconDoc = new DOMParser().parseFromString(modeIcon(currentMode), 'text/html');
+    if (sIconDoc.body && sIconDoc.body.firstChild) summary.appendChild(sIconDoc.body.firstChild);
+    // "Theme" label
+    var labelSpan = document.createElement('span');
+    labelSpan.textContent = 'Theme';
+    summary.appendChild(labelSpan);
+    // Chevron
+    var chDoc = new DOMParser().parseFromString(chevronIcon, 'text/html');
+    if (chDoc.body && chDoc.body.firstChild) summary.appendChild(chDoc.body.firstChild);
     details.appendChild(summary);
 
     // Menu

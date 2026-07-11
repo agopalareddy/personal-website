@@ -16,20 +16,23 @@ import re
 import sys
 from pathlib import Path
 
+# Allow imports from scripts/ directory
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from icons import ICONS  # noqa: E402
+
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent.parent  # personal-website/
 
-# Ordered nav links (href → label, icon) for the new 5-item bar.
-# The active class is preserved from the original nav.
+# Ordered nav links (href → label, octicon_key)
 NAV_LINKS = [
-    ("/", "Home", '<i class="fas fa-home" aria-hidden="true"></i>'),
-    ("/experience/", "Experience", '<i class="fas fa-briefcase" aria-hidden="true"></i>'),
-    ("/projects/", "Projects", '<i class="fas fa-code" aria-hidden="true"></i>'),
-    ("/cv/", "CV/Resume", '<i class="fas fa-file-alt" aria-hidden="true"></i>'),
-    ("/availability/", "Availability", '<i class="fas fa-calendar-alt" aria-hidden="true"></i>'),
+    ("/", "Home", "HOME_16"),
+    ("/experience/", "Experience", "BRIEFCASE_16"),
+    ("/projects/", "Projects", "CODE_16"),
+    ("/cv/", "CV/Resume", "FILE_16"),
+    ("/availability/", "Availability", "CALENDAR_16"),
 ]
 
 # Regex: capture the entire <nav class="nav-links" …> block, incl. its
@@ -94,9 +97,13 @@ def _build_nav(indent: str, active_href: str | None) -> str:
     """Return a complete ``<nav>…</nav>`` block for the 5-item bar."""
     inner_indent = indent + "  "
     lines = [f'{indent}<nav class="nav-links" aria-label="Primary Navigation">']
-    for href, label, icon in NAV_LINKS:
+    for href, label, icon_key in NAV_LINKS:
         cls = "nav-link active" if href == active_href else "nav-link"
-        lines.append(f'{inner_indent}<a href="{href}" class="{cls}">{icon}<span>{label}</span></a>')
+        aria = ' aria-current="page"' if href == active_href else ""
+        icon_svg = ICONS.get(icon_key, "")
+        lines.append(
+            f'{inner_indent}<a href="{href}" class="{cls}"{aria}>{icon_svg}<span>{label}</span></a>'
+        )
     lines.append(f"{indent}</nav>")
     return "\n".join(lines)
 

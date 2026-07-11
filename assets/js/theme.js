@@ -163,11 +163,8 @@
     // Summary with mode icon + chevron
     var summary = document.createElement('summary');
     summary.setAttribute('aria-label', 'Theme: ' + currentObj.label);
-    // Safe: hardcoded SVG constants, no user data
-    var svgDoc = new DOMParser().parseFromString(
-      modeIcon(currentMode) + chevronIcon,
-      'image/svg+xml'
-    );
+    // Parse SVGs via text/html (needs body for multiple elements)
+    var svgDoc = new DOMParser().parseFromString(modeIcon(currentMode) + chevronIcon, 'text/html');
     while (svgDoc.body && svgDoc.body.firstChild) {
       summary.appendChild(svgDoc.body.firstChild);
     }

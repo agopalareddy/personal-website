@@ -564,11 +564,13 @@ function el(tag, attrs, ...children) {
   return node;
 }
 
-function octiconSvg(key) {
+function octiconNode(key) {
   if (typeof OCTICONS !== 'undefined' && OCTICONS[key]) {
-    return OCTICONS[key];
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(OCTICONS[key], 'image/svg+xml');
+    return doc.documentElement;
   }
-  return '';
+  return document.createTextNode('');
 }
 
 const venueLabels = {
@@ -692,7 +694,7 @@ function buildProjectActions(p) {
         class: 'card-btn btn-detail',
         'aria-label': `Explore dedicated detail page for ${p.title}`,
       },
-      octiconSvg('INFO_16'),
+      octiconNode('INFO_16'),
       ' Details'
     )
   );
@@ -708,7 +710,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-github',
           'aria-label': `View ${p.title} codebase on GitHub (opens in a new tab)`,
         },
-        octiconSvg('MARK_GITHUB_16'),
+        octiconNode('MARK_GITHUB_16'),
         ' Code ',
         el('span', { class: 'sr-only', text: '(opens in a new tab)' })
       )
@@ -723,7 +725,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-demo',
           'aria-label': `Launch live interactive demo for ${p.title}`,
         },
-        octiconSvg('ROCKET_16'),
+        octiconNode('ROCKET_16'),
         ' Demo'
       )
     );
@@ -739,7 +741,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-pdf',
           'aria-label': `Download ${p.title} PDF paper (opens in a new tab)`,
         },
-        octiconSvg('FILE_16'),
+        octiconNode('FILE_16'),
         ' PDF ',
         el('span', { class: 'sr-only', text: '(opens in a new tab)' })
       )
@@ -756,7 +758,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-pdf',
           'aria-label': `Download ${p.title} presentation slides (opens in a new tab)`,
         },
-        octiconSvg('FILE_16'),
+        octiconNode('FILE_16'),
         ' Slide ',
         el('span', { class: 'sr-only', text: '(opens in a new tab)' })
       )

@@ -564,8 +564,11 @@ function el(tag, attrs, ...children) {
   return node;
 }
 
-function faIcon(classes) {
-  return el('i', { class: classes, 'aria-hidden': 'true' });
+function octiconSvg(key) {
+  if (typeof OCTICONS !== 'undefined' && OCTICONS[key]) {
+    return OCTICONS[key];
+  }
+  return '';
 }
 
 const venueLabels = {
@@ -689,7 +692,7 @@ function buildProjectActions(p) {
         class: 'card-btn btn-detail',
         'aria-label': `Explore dedicated detail page for ${p.title}`,
       },
-      faIcon('fas fa-info-circle'),
+      octiconSvg('INFO_16'),
       ' Details'
     )
   );
@@ -705,7 +708,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-github',
           'aria-label': `View ${p.title} codebase on GitHub (opens in a new tab)`,
         },
-        faIcon('fab fa-github'),
+        octiconSvg('MARK_GITHUB_16'),
         ' Code ',
         el('span', { class: 'sr-only', text: '(opens in a new tab)' })
       )
@@ -720,7 +723,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-demo',
           'aria-label': `Launch live interactive demo for ${p.title}`,
         },
-        faIcon('fas fa-rocket'),
+        octiconSvg('ROCKET_16'),
         ' Demo'
       )
     );
@@ -736,7 +739,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-pdf',
           'aria-label': `Download ${p.title} PDF paper (opens in a new tab)`,
         },
-        faIcon('fas fa-file-pdf'),
+        octiconSvg('FILE_16'),
         ' PDF ',
         el('span', { class: 'sr-only', text: '(opens in a new tab)' })
       )
@@ -753,7 +756,7 @@ function buildProjectActions(p) {
           class: 'card-btn btn-pdf',
           'aria-label': `Download ${p.title} presentation slides (opens in a new tab)`,
         },
-        faIcon('fas fa-file-powerpoint'),
+        octiconSvg('FILE_16'),
         ' Slide ',
         el('span', { class: 'sr-only', text: '(opens in a new tab)' })
       )

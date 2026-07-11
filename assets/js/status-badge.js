@@ -15,7 +15,7 @@
  *   data-status-variant      "available" (default) | "busy" | "unavailable" | "custom".
  *                            Drives the color palette.
  *   data-status-pulse        "true" (default) | "false". Animated dot.
- *   data-status-icon         Optional Font Awesome class, e.g. "fas fa-briefcase".
+ *   data-status-icon         Optional octicon key, e.g. "BRIEFCASE_16".
  *
  * Programmatic API:
  *
@@ -67,7 +67,11 @@
     }
 
     if (options.icon) {
-      badge.appendChild(el('i', { class: options.icon, 'aria-hidden': 'true' }));
+      var octiconKey = options.icon;
+      if (typeof OCTICONS !== 'undefined' && OCTICONS[octiconKey]) {
+        var parsed = new DOMParser().parseFromString(OCTICONS[octiconKey], 'image/svg+xml');
+        badge.appendChild(parsed.documentElement);
+      }
     }
 
     badge.appendChild(document.createTextNode(options.text || ''));

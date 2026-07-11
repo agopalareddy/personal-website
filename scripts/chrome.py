@@ -83,7 +83,7 @@ def render_nav(active_page):
         active_class = " nav-link active" if key == active_page else " nav-link"
         icon_svg = ICONS.get(icon_key, "")
         links.append(
-            f'<a href="{href}" class="{active_class.strip()}"{" aria-current=\"page\"" if key == active_page else ""}>{icon_svg}<span>{label}</span></a>'
+            f'<a href="{href}" class="{active_class.strip()}"{' aria-current="page"' if key == active_page else ""}>{icon_svg}<span>{label}</span></a>'
         )
     nav_links_html = "\n                ".join(links)
     return f"""<header class="top-header">
@@ -104,10 +104,10 @@ def render_sidebar():
                         <h2 class="author-name">Aadarsha Gopala Reddy</h2>
                         <p class="author-bio">M.S. Computer Science graduate from Washington University in St. Louis</p>
                         <ul class="author-links">
-                            <li>{ICONS.get('LOCATION_16', '')} St. Louis, Missouri, USA</li>
-                            <li>{ICONS.get('MAIL_16', '')} <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a></li>
-                            <li>{ICONS.get('LINKEDIN_16', '')} <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
-                            <li>{ICONS.get('MARK_GITHUB_16', '')} <a href="https://github.com/agopalareddy" target="_blank" rel="noopener">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
+                            <li>{ICONS.get("LOCATION_16", "")} St. Louis, Missouri, USA</li>
+                            <li>{ICONS.get("MAIL_16", "")} <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a></li>
+                            <li>{ICONS.get("LINKEDIN_16", "")} <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
+                            <li>{ICONS.get("MARK_GITHUB_16", "")} <a href="https://github.com/agopalareddy" target="_blank" rel="noopener">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
                         </ul>
                     </div>
                 </aside>"""
@@ -134,9 +134,9 @@ def render_footer():
             <div class="footer-col contact-col">
                 <h3 class="footer-col-heading">Connect</h3>
                 <ul>
-                    <li><a href="mailto:adurs2002@gmail.com">{ICONS.get('MAIL_16', '')} Email</a></li>
-                    <li><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">{ICONS.get('LINKEDIN_16', '')} LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
-                    <li><a href="https://github.com/agopalareddy" target="_blank" rel="noopener">{ICONS.get('MARK_GITHUB_16', '')} GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="mailto:adurs2002@gmail.com">{ICONS.get("MAIL_16", "")} Email</a></li>
+                    <li><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">{ICONS.get("LINKEDIN_16", "")} LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="https://github.com/agopalareddy" target="_blank" rel="noopener">{ICONS.get("MARK_GITHUB_16", "")} GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
                 </ul>
             </div>
             <div class="footer-col resources-col">

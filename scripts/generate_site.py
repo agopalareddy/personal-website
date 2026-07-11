@@ -772,7 +772,11 @@ def sync_experience_listing_page(entries: list[dict[str, Any]]) -> bool:
         )
         return False
 
-    noscript = "<noscript>\n" + _render_noscript_cards(entries) + "\n                </noscript>"
+    noscript = (
+        "<noscript>\n"
+        + _render_noscript_cards(entries)
+        + "\n                </noscript>"
+    )
     content, n_noscript = re.subn(
         r"<noscript>.*?</noscript>",
         lambda _m: noscript,
@@ -909,9 +913,7 @@ def generate_project_detail_page(project: dict[str, Any]) -> str:
 def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
     """Render the static, no-JS fallback card grid for projects."""
     sorted_projects = sorted(
-        projects,
-        key=lambda x: x.get("date") or "1970-01-01",
-        reverse=True
+        projects, key=lambda x: x.get("date") or "1970-01-01", reverse=True
     )
 
     venue_labels = {
@@ -940,7 +942,12 @@ def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
         elif category == "Software & Tools":
             cat_class = "cat-tools"
 
-        tags_html = "".join([f'<span class="tech-tag">{html_escape(t)}</span>' for t in p.get("technologies", [])])
+        tags_html = "".join(
+            [
+                f'<span class="tech-tag">{html_escape(t)}</span>'
+                for t in p.get("technologies", [])
+            ]
+        )
 
         actions = []
         info_icon = ICONS.get("INFO_16", "")
@@ -989,13 +996,13 @@ def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
             f'                    <div class="card-meta">\n'
             f'                      <span class="card-category {cat_class}">{html_escape(category)}</span>\n'
             f'                      <span class="card-venue">{formatted_date}</span>\n'
-            f'                    </div>\n'
+            f"                    </div>\n"
             f'                    <h2 class="project-title"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h2>\n'
             f'                    <div class="card-org-context">{html_escape(venue_label)}</div>\n'
             f'                    <p class="project-excerpt">{excerpt}</p>\n'
             f'                    <div class="project-tech">{tags_html}</div>\n'
-            f'                    {actions_html}\n'
-            f'                  </div>'
+            f"                    {actions_html}\n"
+            f"                  </div>"
         )
     return "\n".join(cards)
 
@@ -1052,7 +1059,7 @@ def update_project_catalog_array(projects: list[dict[str, Any]]) -> bool:
 
     noscript_cards = _render_project_noscript_cards(projects)
     new_content, n_subs_noscript = re.subn(
-        r'(<noscript>)\s*[\s\S]*?\s*(</noscript>)',
+        r"(<noscript>)\s*[\s\S]*?\s*(</noscript>)",
         f"\\1\n{noscript_cards}\n                \\2",
         new_content,
         flags=re.DOTALL,

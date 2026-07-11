@@ -11,9 +11,13 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const PRIMER_DIR = join(ROOT, 'assets', 'css', 'primer');
-const PKG = JSON.parse(readFileSync(join(ROOT, 'node_modules', '@primer', 'primitives', 'package.json'), 'utf8'));
+const PKG = JSON.parse(
+  readFileSync(join(ROOT, 'node_modules', '@primer', 'primitives', 'package.json'), 'utf8')
+);
 const DIST = join(ROOT, 'node_modules', '@primer', 'primitives', 'dist', 'css');
-const OCTICONS_DATA = JSON.parse(readFileSync(join(ROOT, 'node_modules', '@primer', 'octicons', 'build', 'data.json'), 'utf8'));
+const OCTICONS_DATA = JSON.parse(
+  readFileSync(join(ROOT, 'node_modules', '@primer', 'octicons', 'build', 'data.json'), 'utf8')
+);
 
 const VERSION = PKG.version;
 const HEADER = `/* vendored from @primer/primitives v${VERSION} — do not edit; run npm run vendor:primer */\n`;
@@ -52,41 +56,42 @@ const CONCAT_ORDER = [
 
 // Octicon whitelist (name → used sizes)
 const ICON_WHITELIST = {
-  'home': [16],
-  'briefcase': [16],
-  'code': [16],
-  'file': [16],
-  'calendar': [16],
-  'location': [16],
-  'mail': [16],
+  home: [16],
+  briefcase: [16],
+  code: [16],
+  file: [16],
+  calendar: [16],
+  location: [16],
+  mail: [16],
   'mark-github': [16],
-  'sun': [16],
-  'moon': [16],
+  sun: [16],
+  moon: [16],
   'device-desktop': [16],
-  'check': [16],
+  check: [16],
   'chevron-down': [16],
   'link-external': [16],
-  'search': [16],
-  'organization': [16],
-  'rocket': [16],
-  'trophy': [16],
-  'info': [16],
-  'eye': [16],
-  'download': [16],
-  'x': [16],
-  'clock': [16],
-  'alert': [24],
+  search: [16],
+  organization: [16],
+  rocket: [16],
+  trophy: [16],
+  info: [16],
+  eye: [16],
+  download: [16],
+  x: [16],
+  clock: [16],
+  alert: [24],
   'shield-check': [24],
-  'sync': [16],
-  'tools': [16],
-  'checklist': [16],
-  'comment': [16],
+  sync: [16],
+  tools: [16],
+  checklist: [16],
+  comment: [16],
   'paper-airplane': [16],
-  'rss': [16],
-  'log': [16],
+  rss: [16],
+  log: [16],
 };
 // LinkedIn has no octicon — we vendor a simple-icons inline path
-const LINKEDIN_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
+const LINKEDIN_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
 
 // --- 1. Copy and prepend headers ---
 mkdirSync(PRIMER_DIR, { recursive: true });
@@ -108,7 +113,10 @@ writeFileSync(join(PRIMER_DIR, 'primer.css'), concat);
 // --- 3. Generate icons.py ---
 function indent(s, n) {
   const pad = ' '.repeat(n);
-  return s.split('\n').map(l => l ? pad + l : l).join('\n');
+  return s
+    .split('\n')
+    .map((l) => (l ? pad + l : l))
+    .join('\n');
 }
 
 let py = `#!/usr/bin/env python3
@@ -168,7 +176,7 @@ Vendored from \`@primer/primitives\` v${VERSION}.
 
 | File | Source |
 |------|--------|
-${CONCAT_ORDER.map(f => `| ${f} | \`@primer/primitives/dist/css/${Object.entries(FILES).find(([,d]) => d === f)?.[0]}\` |`).join('\n')}
+${CONCAT_ORDER.map((f) => `| ${f} | \`@primer/primitives/dist/css/${Object.entries(FILES).find(([, d]) => d === f)?.[0]}\` |`).join('\n')}
 | **primer.css** | concatenation of all above, in order |
 
 ## Update procedure
@@ -194,6 +202,8 @@ writeFileSync(join(PRIMER_DIR, 'README.md'), readme);
 
 console.log(`✅ Vendored @primer/primitives v${VERSION}`);
 console.log(`   → ${CONCAT_ORDER.length} token files + primer.css concatenated`);
-console.log(`✅ Generated scripts/icons.py (${Object.keys(ICON_WHITELIST).length} icons + linkedin)`);
+console.log(
+  `✅ Generated scripts/icons.py (${Object.keys(ICON_WHITELIST).length} icons + linkedin)`
+);
 console.log(`✅ Generated assets/js/icons.js`);
 console.log(`✅ Wrote assets/css/primer/README.md`);

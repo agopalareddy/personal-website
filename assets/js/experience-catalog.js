@@ -244,7 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
       detailUrl +
       '" class="card-btn btn-detail" aria-label="Explore dedicated detail page for ' +
       title +
-      '"><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>' +
+      '">' +
+      (typeof OCTICONS !== 'undefined' && OCTICONS['INFO_16'] ? OCTICONS['INFO_16'] : '') +
+      ' Details</a>' +
       '</div>' +
       '</div>';
 

@@ -48,9 +48,14 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
 import sys
+
+# Allow imports from scripts/ directory
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import re
 from typing import Any
+
+from icons import ICONS  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Path bootstrap: allow `from scripts.chrome import ...` to work whether the
@@ -112,16 +117,16 @@ CATEGORY_LABELS: dict[str, str] = {
     "presentations": "Presentations",
 }
 
-# Map link type -> FontAwesome 5 icon class.  Falls back to "external-link-alt".
+# Map link type -> Octicon key. Falls back to LINK_EXTERNAL_16.
 LINK_TYPE_ICONS: dict[str, str] = {
-    "publication": "fa-file-alt",
-    "github": "fa-github",
-    "demo": "fa-rocket",
-    "paper": "fa-file-pdf",
-    "talk": "fa-file-powerpoint",
-    "award": "fa-trophy",
-    "organization": "fa-building",
-    "other": "fa-external-link-alt",
+    "publication": "FILE_16",
+    "github": "MARK_GITHUB_16",
+    "demo": "ROCKET_16",
+    "paper": "FILE_16",
+    "talk": "FILE_16",
+    "award": "TROPHY_16",
+    "organization": "ORGANIZATION_16",
+    "other": "LINK_EXTERNAL_16",
 }
 
 # Map month number -> short English month name used by the date range helper.
@@ -285,7 +290,7 @@ def category_label(cat: str) -> str:
 
 def link_icon(link_type: str | None) -> str:
     """FontAwesome 5 class for a link type, with safe fallback."""
-    return LINK_TYPE_ICONS.get(link_type or "", "fa-external-link-alt")
+    return LINK_TYPE_ICONS.get(link_type or "", "LINK_EXTERNAL_16")
 
 
 # ---------------------------------------------------------------------------
@@ -359,9 +364,9 @@ def generate_experience_detail_page(entry: dict[str, Any]) -> str:
     # and produce a malformed HTML structure).
     meta_html = (
         (
-            f'<p class="entry-meta" '
-            f'style="font-family: var(--font-body); font-size: 0.95rem; '
-            f'color: var(--text-secondary); margin: 0 0 0.5rem 0;">'
+            '<p class="entry-meta" '
+            'style="font-family: var(--font-body); font-size: 0.95rem; '
+            'color: var(--text-secondary); margin: 0 0 0.5rem 0;">'
             + (" &mdash; ".join(meta_bits))
             + "</p>"
         )
@@ -376,7 +381,7 @@ def generate_experience_detail_page(entry: dict[str, Any]) -> str:
             f'<p class="entry-location" '
             f'style="font-family: var(--font-body); font-size: 0.85rem; '
             f'color: var(--text-muted); margin: 0 0 1.25rem 0;">'
-            f'<i class="fas fa-map-marker-alt" aria-hidden="true"></i> '
+            f"{ICONS.get('LOCATION_16', '')} "
             f"{html_escape(location)}</p>"
         )
 
@@ -447,10 +452,11 @@ def generate_experience_detail_page(entry: dict[str, Any]) -> str:
                 if is_external
                 else ""
             )
+            icon_svg = ICONS.get(icon, "")
             link_items.append(
                 f"            <li>"
                 f'<a href="{html_escape(url)}"{extra}>'
-                f'<i class="fas {html_escape(icon)}" aria-hidden="true"></i> '
+                f"{icon_svg} "
                 f"{html_escape(label_text)}"
                 f"{sr_only}</a></li>"
             )
@@ -527,8 +533,9 @@ def _render_noscript_card(e: dict[str, Any]) -> str:
     venue_txt = f"{org} &bull; {date_range_esc}" if org else date_range_esc
     aria = html_escape(f"Explore dedicated detail page for {display_title}")
 
+    info_icon = ICONS.get("INFO_16", "")
     return (
-        f'                  <div class="project-card spotlight-card timeline-card">\n'
+        f'                  <div class="project-card timeline-card">\n'
         f'                    <div class="card-meta">\n'
         f'                      <span class="card-category cat-{html_escape(cat)}">'
         f"{html_escape(label)}</span>\n"
@@ -542,7 +549,7 @@ def _render_noscript_card(e: dict[str, Any]) -> str:
         f'                    <div class="card-actions">\n'
         f'                      <a href="{html_escape(permalink)}" '
         f'class="card-btn btn-detail" aria-label="{aria}"'
-        f'><i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>\n'
+        f">{info_icon} Details</a>\n"
         f"                    </div>\n"
         f"                  </div>"
     )
@@ -636,7 +643,7 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
                     {pills_html}
                             </div>
                             <div class="search-wrapper">
-                                <span class="search-icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <span class="search-icon">{ICONS.get("SEARCH_16", "")}</span>
                                 <input
                                     type="search"
                                     class="search-input"
@@ -659,7 +666,7 @@ def generate_experience_listing_page(entries: list[dict[str, Any]]) -> str:
                                     <option value="date-asc">Oldest First</option>
                                     <option value="title-asc">Title A-Z</option>
                                 </select>
-                                <span class="select-icon"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+                                <span class="select-icon">{ICONS.get("CHEVRON_DOWN_16", "")}</span>
                             </div>
                         </div>
                     </div>
@@ -819,34 +826,36 @@ def generate_project_detail_page(project: dict[str, Any]) -> str:
         f'<span class="tech-tag">{t}</span>' for t in project["technologies"]
     )
 
-    # Action buttons: GitHub, Demo, PDF Paper, Slides — same icons and
-    # `sr-only` new-tab hints as the original `generate_portfolio.py`.
+    # Action buttons: GitHub, Demo, PDF Paper, Slides — Octicons
+    gh_icon = ICONS.get("MARK_GITHUB_16", "")
+    demo_icon = ICONS.get("ROCKET_16", "")
+    file_icon = ICONS.get("FILE_16", "")
     action_buttons: list[str] = []
     if project.get("github"):
         action_buttons.append(
             f'<a href="{project["github"]}" target="_blank" rel="noopener" '
-            f'class="card-btn btn-github"><i class="fab fa-github" '
-            f'aria-hidden="true"></i> GitHub <span class="sr-only">'
+            f'class="card-btn btn-github">{gh_icon}'
+            f' GitHub <span class="sr-only">'
             f"(opens in a new tab)</span></a>"
         )
     if project.get("demo"):
         action_buttons.append(
             f'<a href="{project["demo"]}" class="card-btn btn-demo">'
-            f'<i class="fas fa-rocket" aria-hidden="true"></i> Demo</a>'
+            f"{demo_icon} Demo</a>"
         )
     if project.get("pdf"):
         action_buttons.append(
             f'<a href="{project["pdf"]}" target="_blank" rel="noopener" '
-            f'class="card-btn btn-pdf"><i class="fas fa-file-pdf" '
-            f'aria-hidden="true"></i> PDF Paper <span class="sr-only">'
+            f'class="card-btn btn-pdf">{file_icon}'
+            f' PDF Paper <span class="sr-only">'
             f"(opens in a new tab)</span></a>"
         )
     if project.get("presentation"):
         action_buttons.append(
             f'<a href="{project["presentation"]}" target="_blank" '
             f'rel="noopener" class="card-btn btn-pdf">'
-            f'<i class="fas fa-file-powerpoint" aria-hidden="true"></i> '
-            f'Slides <span class="sr-only">(opens in a new tab)</span></a>'
+            f"{file_icon}"
+            f' Slides <span class="sr-only">(opens in a new tab)</span></a>'
         )
 
     actions_bar = (
@@ -934,52 +943,57 @@ def _render_project_noscript_cards(projects: list[dict[str, Any]]) -> str:
         tags_html = "".join([f'<span class="tech-tag">{html_escape(t)}</span>' for t in p.get("technologies", [])])
 
         actions = []
+        info_icon = ICONS.get("INFO_16", "")
+        gh_icon = ICONS.get("MARK_GITHUB_16", "")
+        demo_icon = ICONS.get("ROCKET_16", "")
+        file_icon = ICONS.get("FILE_16", "")
+
         actions.append(
             f'<a href="{permalink}" class="card-btn btn-detail" '
             f'aria-label="Explore dedicated detail page for {title}">'
-            f'<i class="fas fa-info-circle" aria-hidden="true"></i> Details</a>'
+            f"{info_icon} Details</a>"
         )
 
         if p.get("github"):
             actions.append(
                 f'<a href="{p["github"]}" target="_blank" rel="noopener" class="card-btn btn-github" '
                 f'aria-label="View {title} codebase on GitHub (opens in a new tab)">'
-                f'<i class="fab fa-github" aria-hidden="true"></i> Code '
+                f"{gh_icon} Code "
                 f'<span class="sr-only">(opens in a new tab)</span></a>'
             )
         if p.get("demo"):
             actions.append(
                 f'<a href="{p["demo"]}" class="card-btn btn-demo" '
                 f'aria-label="Launch live interactive demo for {title}">'
-                f'<i class="fas fa-rocket" aria-hidden="true"></i> Demo</a>'
+                f"{demo_icon} Demo</a>"
             )
         if p.get("pdf"):
             actions.append(
                 f'<a href="{p["pdf"]}" target="_blank" rel="noopener" class="card-btn btn-pdf" '
                 f'aria-label="Download {title} PDF paper (opens in a new tab)">'
-                f'<i class="fas fa-file-pdf" aria-hidden="true"></i> PDF '
+                f"{file_icon} PDF "
                 f'<span class="sr-only">(opens in a new tab)</span></a>'
             )
         if p.get("presentation"):
             actions.append(
                 f'<a href="{p["presentation"]}" target="_blank" rel="noopener" class="card-btn btn-pdf" '
                 f'aria-label="Download {title} presentation slides (opens in a new tab)">'
-                f'<i class="fas fa-file-powerpoint" aria-hidden="true"></i> Slide '
+                f"{file_icon} Slide "
                 f'<span class="sr-only">(opens in a new tab)</span></a>'
             )
 
         actions_html = f'<div class="card-actions">{"".join(actions)}</div>'
 
         cards.append(
-            f'                  <div class="project-card spotlight-card timeline-card" id="proj-{slug}" style="margin-bottom: 1.5rem; padding: 1.25rem;">\n'
-            f'                    <div class="card-meta" style="margin-bottom: 0.5rem;">\n'
+            f'                  <div class="project-card timeline-card" id="proj-{slug}">\n'
+            f'                    <div class="card-meta">\n'
             f'                      <span class="card-category {cat_class}">{html_escape(category)}</span>\n'
             f'                      <span class="card-venue">{formatted_date}</span>\n'
             f'                    </div>\n'
-            f'                    <h2 class="project-title" style="font-family: var(--font-heading); margin-top: 0.75rem; margin-bottom: 0.25rem;"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h2>\n'
-            f'                    <div class="card-org-context" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 500; line-height: 1.4;">{html_escape(venue_label)}</div>\n'
-            f'                    <p class="project-excerpt" style="margin-bottom: 1rem;">{excerpt}</p>\n'
-            f'                    <div class="project-tech" style="margin-bottom: 0.75rem;">{tags_html}</div>\n'
+            f'                    <h2 class="project-title"><a href="{permalink}" aria-label="Explore dedicated detail page for {title}">{title}</a></h2>\n'
+            f'                    <div class="card-org-context">{html_escape(venue_label)}</div>\n'
+            f'                    <p class="project-excerpt">{excerpt}</p>\n'
+            f'                    <div class="project-tech">{tags_html}</div>\n'
             f'                    {actions_html}\n'
             f'                  </div>'
         )

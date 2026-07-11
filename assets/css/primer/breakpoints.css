@@ -1,0 +1,9 @@
+/* vendored from @primer/primitives v11.9.0 — do not edit; run npm run vendor:primer */
+:root {
+  --breakpoint-large: 63.25rem;
+  --breakpoint-medium: 48rem;
+  --breakpoint-small: 34rem;
+  --breakpoint-xlarge: 80rem;
+  --breakpoint-xsmall: 20rem;
+  --breakpoint-xxlarge: 87.5rem;
+}

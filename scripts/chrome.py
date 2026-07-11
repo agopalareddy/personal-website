@@ -119,13 +119,7 @@ def render_footer():
         <div class="container footer-grid">
             <span class="footer-copyright">&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy</span>
             <ul class="footer-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/experience/">Experience</a></li>
-                <li><a href="/projects/">Projects</a></li>
-                <li><a href="/cv/">CV/Resume</a></li>
-                <li><a href="/availability/">Availability</a></li>
-                <li><a href="/files/reddy_cv.pdf" target="_blank" rel="noopener">CV (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
-                <li><a href="/files/reddy_resume.pdf" target="_blank" rel="noopener">Resume (PDF) <span class="sr-only">(opens in a new tab)</span></a></li>
+                <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
                 <li><a href="mailto:adurs2002@gmail.com">Email</a></li>
                 <li><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
                 <li><a href="https://github.com/agopalareddy" target="_blank" rel="noopener">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
@@ -171,6 +165,7 @@ def render_page_wrapper(head_html, body_html, active_page):
     <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
 
     <!-- Theme & Status Scripts -->
+    <script src="/assets/js/icons.js?v={ASSETS_VERSION}"></script>
     <script src="/assets/js/theme.js?v={ASSETS_VERSION}"></script>
     <script src="/assets/js/status-badge.js?v={ASSETS_VERSION}"></script>
 </body>

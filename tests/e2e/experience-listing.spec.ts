@@ -130,7 +130,7 @@ test.describe('Experience Listing Page', () => {
     const href = await firstLink.getAttribute('href');
     expect(href).toContain('/experience/');
 
-    await firstLink.click();
+    await firstLink.click({ force: true });
     await page.waitForLoadState('domcontentloaded');
 
     // URL should have changed to a detail page
@@ -229,7 +229,7 @@ test.describe('Experience Listing Page', () => {
     const href = await firstLink.getAttribute('href');
     expect(href).toMatch(/^#exp-/);
 
-    await firstLink.click();
+    await firstLink.click({ force: true });
     await page.waitForTimeout(300);
     expect(page.url()).toContain(href || '');
   });

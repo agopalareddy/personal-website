@@ -70,7 +70,7 @@
     <a href="#main-content" class="skip-link">Skip to Content</a>
 
     <!-- Top Navigation Bar -->
-    <header class="top-header card-glow">
+    <header class="top-header">
       <div class="top-bar container">
         <nav class="nav-links" aria-label="Primary Navigation">
           <a href="/" class="nav-link"
@@ -155,40 +155,7 @@
           >
         </nav>
 
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
-          <svg
-            class="sun-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-          <svg
-            class="moon-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
+        <div id="theme-toggle"></div>
       </div>
     </header>
 
@@ -294,7 +261,7 @@
                 aria-controls="filterNav"
               >
                 <h3 class="toc-title">Filters &amp; Search</h3>
-                <i class="fas fa-chevron-down toc-toggle-icon" aria-hidden="true"></i>
+                <span class="toc-toggle-icon" aria-hidden="true"></span>
               </button>
               <div id="filterNav">
                 <search>
@@ -398,7 +365,7 @@
                 aria-controls="tocNav"
               >
                 <h3 class="toc-title">On this page</h3>
-                <i class="fas fa-chevron-down toc-toggle-icon" aria-hidden="true"></i>
+                <span class="toc-toggle-icon" aria-hidden="true"></span>
               </button>
               <nav aria-label="Table of contents" id="tocNav">
                 <ul class="toc-list" id="tocList"></ul>
@@ -2598,7 +2565,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="site-footer card-glow">
+    <footer class="site-footer">
       <div class="container footer-grid">
         <div class="footer-col about-col">
           <h3 class="footer-col-heading">Aadarsha Gopala Reddy</h3>

@@ -49,45 +49,13 @@
   ];
 
   // --- SVG helpers ---
-  function makeSvg(pathD, size) {
-    return (
-      '<svg xmlns="http://www.w3.org/2000/svg" width="' +
-      size +
-      '" height="' +
-      size +
-      '" viewBox="0 0 ' +
-      size +
-      ' ' +
-      size +
-      '" fill="currentColor"><path d="' +
-      pathD +
-      '"/></svg>'
-    );
-  }
-
-  // Vendored @primer/octicons paths (from scripts/icons.py ICONS dict).
-  // Use these instead of hand-drawn SVGs to ensure visual consistency
-  // across the site. Source: node_modules/@primer/octicons/build/data.json
-  // via scripts/vendor-primer.mjs.
-  var sunPath =
-    'M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z';
-  var sunIcon = makeSvg(sunPath, 16);
-
-  var moonPath =
-    'M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z';
-  var moonIcon = makeSvg(moonPath, 16);
-
-  var desktopPath =
-    'M14.25 1c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 12h-3.727c.099 1.041.52 1.872 1.292 2.757A.752.752 0 0 1 11.25 16h-6.5a.75.75 0 0 1-.565-1.243c.772-.885 1.192-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5C0 1.784.784 1 1.75 1ZM1.75 2.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25ZM9.018 12H6.982a5.72 5.72 0 0 1-.765 2.5h3.566a5.72 5.72 0 0 1-.765-2.5Z';
-  var desktopIcon = makeSvg(desktopPath, 16);
-
-  var checkPath =
-    'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z';
-  var checkIcon = makeSvg(checkPath, 16);
-
-  var chevronPath =
-    'M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z';
-  var chevronIcon = makeSvg(chevronPath, 16);
+  // Fetch SVGs from globally defined OCTICONS object (loaded via assets/js/icons.js)
+  // to avoid hand-typing or duplication.
+  var sunIcon = typeof OCTICONS !== 'undefined' ? OCTICONS['SUN_16'] : '';
+  var moonIcon = typeof OCTICONS !== 'undefined' ? OCTICONS['MOON_16'] : '';
+  var desktopIcon = typeof OCTICONS !== 'undefined' ? OCTICONS['DEVICE_DESKTOP_16'] : '';
+  var checkIcon = typeof OCTICONS !== 'undefined' ? OCTICONS['CHECK_16'] : '';
+  var chevronIcon = typeof OCTICONS !== 'undefined' ? OCTICONS['CHEVRON_DOWN_16'] : '';
 
   function modeIcon(mode) {
     if (mode === 'light' || mode === 'light_high_contrast') return sunIcon;
@@ -319,10 +287,21 @@
     });
   }
 
+  function initHomeSkillToggle() {
+    var toggle = document.querySelector('.home-skill-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+      });
+    }
+  }
+
   function init() {
     initPickers();
     initYear();
     initCardLinks();
+    initHomeSkillToggle();
     document.body.classList.add('page-loaded');
   }
 

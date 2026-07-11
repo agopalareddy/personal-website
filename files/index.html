@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
@@ -12,8 +12,58 @@
 
       gtag('config', 'G-QWNGSMS0LY');
     </script>
+    <script>
+      (function () {
+        var e = document.documentElement,
+          a = localStorage.getItem('color-scheme');
+        if (!a) {
+          var t = localStorage.getItem('theme');
+          if (t) {
+            var r = { light: 'light', dark: 'dark', device: 'auto' };
+            a = r[t] || 'auto';
+            localStorage.removeItem('theme');
+            localStorage.setItem('color-scheme', a);
+          } else a = 'auto';
+        }
+        var m = {
+          auto: {
+            'data-color-mode': 'auto',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark',
+          },
+          light: {
+            'data-color-mode': 'light',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark',
+          },
+          light_high_contrast: {
+            'data-color-mode': 'light',
+            'data-light-theme': 'light_high_contrast',
+            'data-dark-theme': 'dark',
+          },
+          dark: {
+            'data-color-mode': 'dark',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark',
+          },
+          dark_dimmed: {
+            'data-color-mode': 'dark',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark_dimmed',
+          },
+          dark_high_contrast: {
+            'data-color-mode': 'dark',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark_high_contrast',
+          },
+        };
+        var s = m[a] || m.auto;
+        for (var k in s) e.setAttribute(k, s[k]);
+      })();
+    </script>
     <meta charset="utf-8" />
-
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=2.0.0" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=2.0.0" />
     <!-- begin SEO -->
 
     <title>CV, Resume, and Cover Letter TeX Templates - Aadarsha Gopala Reddy</title>
@@ -69,7 +119,8 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117" />
     <script>
       document.documentElement.className =
         document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
@@ -177,7 +228,7 @@
   </head>
 
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <!--[if lt IE 9]>
       <div class="notice--danger align-center" style="margin: 0">
@@ -241,12 +292,39 @@
             <button class="btn btn--inverse">Follow</button>
             <ul class="author__urls social-icons">
               <li>
-                <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> St. Louis, Missouri, USA
+                <svg
+                  class="octicon octicon-location"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"
+                  ></path>
+                </svg>
+                St. Louis, Missouri, USA
               </li>
 
               <li>
-                <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Washington University in
-                St. Louis
+                <svg
+                  class="octicon octicon-location"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"
+                  ></path>
+                </svg>
+                Washington University in St. Louis
               </li>
 
               <li>
@@ -255,20 +333,61 @@
                   class="protected-email"
                   data-email-user="YWR1cnMyMDAy"
                   data-email-domain="Z21haWwuY29t"
-                  ><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> adurs2002 [at] gmail
-                  [dot] com</a
+                  ><svg
+                    class="octicon octicon-mail"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"
+                    ></path>
+                  </svg>
+                  adurs2002 [at] gmail [dot] com</a
                 >
               </li>
 
               <li>
                 <a href="https://www.linkedin.com/in/agopalareddy"
-                  ><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a
+                  ><svg
+                    class="octicon octicon-linkedin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                    />
+                  </svg>
+                  LinkedIn</a
                 >
               </li>
 
               <li>
                 <a href="https://github.com/agopalareddy"
-                  ><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a
+                  ><svg
+                    class="octicon octicon-mark-github"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
+                    ></path>
+                  </svg>
+                  Github</a
                 >
               </li>
             </ul>
@@ -1225,23 +1344,65 @@ pdflatex your_file_name.tex
 
             <li>
               <a href="https://twitter.com/aadarsha2002"
-                ><i class="fab fa-twitter-square" aria-hidden="true"></i> Twitter</a
+                ><svg
+                  class="octicon octicon-x"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"
+                  ></path>
+                </svg>
+                Twitter</a
               >
             </li>
 
             <li>
               <a href="http://github.com/agopalareddy"
-                ><i class="fab fa-github" aria-hidden="true"></i> GitHub</a
+                ><svg
+                  class="octicon octicon-mark-github"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
+                  ></path>
+                </svg>
+                GitHub</a
               >
             </li>
 
             <li>
               <a href="https://www.linkedin.com/in/agopalareddy"
-                ><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a
+                ><svg
+                  class="octicon octicon-linkedin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+                LinkedIn</a
               >
             </li>
 
-            <!-- <li><a href="/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li> -->
+            <!-- <li><a href="/feed.xml"><svg class="octicon octicon-rss" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098 10.502 10.502 0 0 0-9.776-9.776.747.747 0 0 1-.7-.798ZM2.84 7.05h-.002a7.002 7.002 0 0 1 6.113 6.111.75.75 0 0 1-1.49.178 5.503 5.503 0 0 0-4.8-4.8.75.75 0 0 1 .179-1.489ZM2 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"></path></svg> Feed</a></li> -->
           </ul>
         </div>
 
@@ -1264,5 +1425,11 @@ pdflatex your_file_name.tex
     </div>
 
     <script src="/assets/js/email-protection.js"></script>
+    <script src="/assets/js/theme.js?v=2.0.0"></script>
+    <script src="/assets/js/status-badge.js?v=2.0.0"></script>
+    <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
+    <script src="/assets/js/theme.js?v=2.0.0"></script>
+    <script src="/assets/js/status-badge.js?v=2.0.0"></script>
+    <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
   </body>
 </html>

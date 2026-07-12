@@ -629,7 +629,7 @@
   .experience-card {
     display: flex;
     flex-direction: column;
-    padding: 0.75rem 1.25rem;
+    padding: 1.25rem 1.25rem 0.75rem 1.25rem;
     cursor: pointer;
   }
 
@@ -743,7 +743,7 @@
     flex-wrap: wrap;
     gap: 0.4rem;
     border-top: 1px solid var(--borderColor-muted);
-    padding-top: 0.35rem;
+    padding-top: 0.75rem;
     margin-top: auto;
   }
 
@@ -2519,6 +2519,8 @@
       gap: 0.5rem !important;
       padding: 0.25rem 0 0.5rem 0 !important;
       scrollbar-width: none !important;
+      min-width: 0 !important;
+      width: 100% !important;
     }
 
     .filter-pills::-webkit-scrollbar {

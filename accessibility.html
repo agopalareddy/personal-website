@@ -258,10 +258,18 @@
 
             <p>
               This website is committed to ensuring digital accessibility for people with
-              disabilities. The user experience is continually improved for everyone and the site
-              aims to conform to the
+              disabilities. The user experience is continually improved for everyone, and the site
+              conforms to the
               <strong>Web Content Accessibility Guidelines (WCAG) 2.1 Level AA</strong>
               specification.
+            </p>
+
+            <p>
+              To achieve this commitment, this site is built upon GitHub's open-source
+              <a href="https://primer.style/accessibility/" target="_blank" rel="noopener"
+                >Primer Design System <span class="sr-only">(opens in a new tab)</span></a
+              >, inheriting its robust accessibility foundations, design primitives, and interactive
+              guidelines.
             </p>
 
             <hr aria-hidden="true" />
@@ -314,77 +322,56 @@
               </li>
             </ul>
 
-            <h3>2. Keyboard &amp; Interactive Element Support</h3>
+            <h3>2. Keyboard &amp; Focus Management</h3>
             <ul>
               <li>
-                <strong>Focus Indicators:</strong> All interactive elements display a visible,
-                high-contrast focus outline during keyboard navigation.
+                <strong>Visible Focus Rings:</strong> Following Primer's interactive guidelines, all
+                keyboard-focusable elements display a highly visible, high-contrast custom focus
+                ring during keyboard navigation.
               </li>
               <li>
-                <strong>Native Dialog Modals:</strong> CV and resume preview modals use the native
-                <code>&lt;dialog&gt;</code> element with <code>showModal()</code>, providing
-                built-in focus trapping and <kbd>Escape</kbd>-to-close behavior without custom
-                JavaScript.
+                <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the
+                navigation headers, accordion detail menus, and search filters without becoming
+                trapped or lost.
               </li>
               <li>
-                <strong>Dynamic Filter Controls:</strong> Category filter buttons on the projects
-                page use <code>aria-pressed</code> states so screen readers are notified when
-                filters are toggled. Dropdowns for sorting and institution filtering carry explicit
-                <code>aria-label</code> attributes.
+                <strong>Interactive Controls:</strong> Tab order is managed dynamically for
+                collapsed states (such as the theme selector popup or accordion card panels),
+                updating their focusability states when expanded.
               </li>
               <li>
-                <strong>Decorative Icons:</strong> All Font Awesome icons (<code>&lt;i&gt;</code>
-                elements) are marked <code>aria-hidden="true"</code> so they are bypassed by screen
-                readers.
+                <strong>Decorative Icons:</strong> Decorative icons use Primer Octicons which are
+                either dynamically labeled or cleanly ignored via
+                <code>aria-hidden="true"</code> depending on their context.
               </li>
             </ul>
 
-            <h3>3. Visual &amp; Responsive Design</h3>
+            <h3>3. Visual Standards &amp; Design Tokens</h3>
             <ul>
               <li>
-                <strong>Color Contrast:</strong> Light and dark theme color tokens use a unified
-                academic navy palette and meet WCAG 2.1 AA contrast ratios of at least
-                <strong>4.5:1</strong> for normal text and <strong>3:1</strong> for large text.
-                Category badges use solid foreground/background token pairs verified against AA
-                thresholds. The <code>color-scheme: light dark</code> declaration and
-                <code>theme-color</code> meta tags ensure browser UI elements match the selected
-                theme.
+                <strong>Color Contrast:</strong> By utilizing Primer primitives design tokens, all
+                text, headings, and interactive elements maintain a contrast ratio of at least
+                <strong>4.5:1</strong> for normal body text and <strong>3:1</strong> for large
+                headings.
               </li>
               <li>
-                <strong>Responsive Layout:</strong> The layout adapts across device sizes using CSS
-                media queries and container-based sizing. Dynamic viewport units (<code>dvh</code>,
-                <code>dvw</code>) are used instead of static <code>vh</code>/<code>vw</code> to
-                avoid layout issues on mobile browsers with dynamic toolbars.
+                <strong>High Contrast Modes:</strong> Conformance is maintained across all color
+                modes—including the specialized Light High Contrast and Dark High Contrast
+                themes—specifically designed to support users with low vision.
               </li>
               <li>
-                <strong>Scrollbar Stability:</strong> <code>scrollbar-gutter: stable</code> is
-                applied to prevent content layout shift when scrollbars appear or disappear across
-                pages.
+                <strong>Text Resizing:</strong> All text uses relative units (<code>rem</code>)
+                which adapt to the browser's root font-size configurations. The layout supports
+                zooming up to 200% without layout disruption or clipping.
               </li>
               <li>
-                <strong>Text Readability:</strong> Headings use <code>text-wrap: balance</code> to
-                prevent orphans, and body text uses <code>text-wrap: pretty</code> for improved
-                line-breaking. Text is sized in relative units and respects user font-size
-                preferences.
+                <strong>Reduced Motion Support:</strong> Theme transitions and interactive accordion
+                toggles respect the user's operating system setting for
+                <code>prefers-reduced-motion</code>, disabling animations automatically.
               </li>
             </ul>
 
-            <h3>4. Motion &amp; Performance</h3>
-            <ul>
-              <li>
-                <strong>Reduced Motion:</strong> The theme toggle and page transitions respect the
-                user's <code>prefers-reduced-motion</code> operating system setting, skipping
-                animation when requested.
-              </li>
-              <li>
-                <strong>Image Loading:</strong> Below-fold images use
-                <code>loading="lazy"</code> for deferred loading. All images include explicit
-                <code>width</code> and <code>height</code> attributes to reserve space and prevent
-                layout shifts during loading.
-              </li>
-            </ul>
-
-            <h3>5. External Links &amp; New Tabs</h3>
+            <h3>4. Modern Web Standards &amp; Links</h3>
             <ul>
               <li>
                 <strong>New Tab Warnings:</strong> All links that open in a new tab
@@ -421,16 +408,17 @@
             </h2>
             <ul>
               <li>
-                <strong>Automated Audits:</strong> Pages are checked with link validators, HTML
-                conformance tools, and accessibility linting to catch structural issues.
+                <strong>Automated Audits:</strong> Pages are continuously audited programmatically
+                using Axe-core (via Playwright and programmatic accessibility runners) to confirm
+                WCAG 2.1 AA compliance with zero violations.
               </li>
               <li>
                 <strong>Keyboard Walkthroughs:</strong> Focus trapping, tab order, and skip-link
-                functionality are tested manually in modern browsers.
+                functionality are manually tested in modern browsers.
               </li>
               <li>
-                <strong>Screen Reader Testing:</strong> Page outline structures are verified with
-                screen readers to confirm logical heading hierarchy and landmark navigation.
+                <strong>Screen Reader Testing:</strong> Outline structures are verified with screen
+                readers to confirm logical heading hierarchy.
               </li>
             </ul>
 

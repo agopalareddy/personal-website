@@ -1330,6 +1330,26 @@ def generate_sitemap() -> str:
     return out_path
 
 
+def generate_api_json() -> None:
+    """
+    Mirror the project and experience catalogs as read-only JSON at
+    `/api/projects.json` and `/api/experience.json`, so agents and tools
+    can consume the data directly instead of scraping the rendered HTML.
+    """
+    api_dir = os.path.join(BASE_DIR, "api")
+    os.makedirs(api_dir, exist_ok=True)
+
+    for name, loader in (
+        ("projects.json", _load_projects_database),
+        ("experience.json", _load_experience_database),
+    ):
+        out_path = os.path.join(api_dir, name)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(loader(), f, indent=2, ensure_ascii=False)
+            f.write("\n")
+        print(f"[generate_site] wrote {out_path}")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
@@ -1384,6 +1404,12 @@ def main(argv: list[str] | None = None) -> int:
         generate_sitemap()
     except Exception as exc:  # noqa: BLE001
         print(f"[generate_site] ERROR generating sitemap: {exc}", file=sys.stderr)
+        rc = 1
+
+    try:
+        generate_api_json()
+    except Exception as exc:  # noqa: BLE001
+        print(f"[generate_site] ERROR generating API JSON: {exc}", file=sys.stderr)
         rc = 1
 
     return rc

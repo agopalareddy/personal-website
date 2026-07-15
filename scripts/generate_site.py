@@ -806,6 +806,46 @@ def sync_experience_listing_page(entries: list[dict[str, Any]]) -> bool:
 # ---------------------------------------------------------------------------
 
 
+def build_project_json_ld(project: dict[str, Any], canonical_url: str, og_image: str) -> str:
+    """
+    Build a JSON-LD structured-data block for a project detail page.
+
+    The MS thesis gets `ScholarlyArticle`; everything else gets
+    `SoftwareApplication` (if it has a live demo) or `SoftwareSourceCode`
+    (source-only projects) so search engines and LLM crawlers can tell
+    written research apart from shipped code.
+    """
+    author = {"@type": "Person", "name": "Aadarsha Gopala Reddy"}
+    base = {
+        "@context": "https://schema.org",
+        "name": project["title"],
+        "description": project["excerpt"].replace("&apos;", "'"),
+        "url": canonical_url,
+        "image": og_image,
+        "author": author,
+    }
+
+    if project["id"] == "2026-04-ms-thesis":
+        base["@type"] = "ScholarlyArticle"
+        base["datePublished"] = project["date"]
+        if project.get("pdf"):
+            base["sameAs"] = project["pdf"]
+    elif project.get("demo"):
+        base["@type"] = "SoftwareApplication"
+        base["applicationCategory"] = "WebApplication"
+        base["installUrl"] = f"https://agreddy.com{project['demo']}"
+        if project.get("technologies"):
+            base["operatingSystem"] = "Any (web-based)"
+    else:
+        base["@type"] = "SoftwareSourceCode"
+        if project.get("github"):
+            base["codeRepository"] = project["github"]
+        if project.get("technologies"):
+            base["programmingLanguage"] = project["technologies"]
+
+    return json.dumps(base)
+
+
 def generate_project_detail_page(project: dict[str, Any]) -> str:
     """
     Render a single project record (from `projects_database.json`) as a
@@ -871,11 +911,22 @@ def generate_project_detail_page(project: dict[str, Any]) -> str:
     )
 
     # ---- Head -------------------------------------------------------------
+    # Per-project OG image: falls back to the site avatar until a screenshot
+    # is dropped at images/projects/<slug>.png — no code change needed then.
+    og_image = "https://agreddy.com/images/profile.png"
+    project_image_path = os.path.join(BASE_DIR, "images", "projects", f"{slug}.png")
+    if os.path.exists(project_image_path):
+        og_image = f"https://agreddy.com/images/projects/{slug}.png"
+
+    json_ld = build_project_json_ld(project, canonical_url, og_image)
+
     head_html = render_head(
         title=clean_title,
         description=desc_escaped,
         canonical_url=canonical_url,
         og_type="article",
+        og_image=og_image,
+        json_ld=json_ld,
     )
 
     # ---- Body -------------------------------------------------------------

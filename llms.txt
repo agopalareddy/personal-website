@@ -14,8 +14,8 @@
 
 ## Structured Data
 
-- [Projects (JSON)](https://agreddy.com/api/projects.json): Full project catalog, machine-readable
-- [Experience (JSON)](https://agreddy.com/api/experience.json): Full work/research/education history, machine-readable
+- [Projects (JSON)](https://agreddy.com/data/projects.json): Full project catalog, machine-readable
+- [Experience (JSON)](https://agreddy.com/data/experience.json): Full work/research/education history, machine-readable
 
 ## Contact
 

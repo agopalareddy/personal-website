@@ -1333,10 +1333,14 @@ def generate_sitemap() -> str:
 def generate_api_json() -> None:
     """
     Mirror the project and experience catalogs as read-only JSON at
-    `/api/projects.json` and `/api/experience.json`, so agents and tools
+    `/data/projects.json` and `/data/experience.json`, so agents and tools
     can consume the data directly instead of scraping the rendered HTML.
+
+    Deliberately not `/api/` — that prefix is already an nginx proxy to the
+    Storybook backend (infra/nginx/sites-enabled/showcase), which would
+    shadow static files placed there.
     """
-    api_dir = os.path.join(BASE_DIR, "api")
+    api_dir = os.path.join(BASE_DIR, "data")
     os.makedirs(api_dir, exist_ok=True)
 
     for name, loader in (

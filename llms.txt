@@ -1,0 +1,19 @@
+# Aadarsha Gopala Reddy
+
+> M.S. Computer Science graduate from Washington University in St. Louis, specializing in
+> machine learning, distributed data pipelines, and applied AI systems. Seeking software,
+> data, or ML engineering roles.
+
+## Pages
+
+- [Home](https://agreddy.com/): Bio, technical stack, featured projects
+- [Experience](https://agreddy.com/experience/): Research, teaching, and industry work history
+- [Projects](https://agreddy.com/projects/): Portfolio of ML, data, and full-stack projects
+- [CV/Resume](https://agreddy.com/cv/): Downloadable CV, resume, and cover letter
+- [Availability](https://agreddy.com/availability/): Book a meeting
+
+## Contact
+
+- Email: adurs2002@gmail.com
+- LinkedIn: https://www.linkedin.com/in/agopalareddy
+- GitHub: https://github.com/agopalareddy

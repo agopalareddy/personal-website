@@ -46,6 +46,18 @@
     scroll-padding-top: 80px;
   }
 
+  html[data-color-mode='light'] {
+    color-scheme: light;
+  }
+
+  html[data-color-mode='dark'] {
+    color-scheme: dark;
+  }
+
+  html[data-color-mode='auto'] {
+    color-scheme: light dark;
+  }
+
   body {
     font-family: var(
       --fontStack-system,

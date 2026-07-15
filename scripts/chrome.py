@@ -100,7 +100,7 @@ def render_sidebar():
     """Render profile sidebar with octicons."""
     return f"""<aside class="academic-sidebar" aria-label="Author Biography">
                     <div class="author-avatar-wrapper">
-                        <img src="/images/profile.png" class="author-avatar" alt="Aadarsha Gopala Reddy">
+                        <img src="/images/profile.png" class="author-avatar" alt="Aadarsha Gopala Reddy" fetchpriority="high">
                         <h2 class="author-name">Aadarsha Gopala Reddy</h2>
                         <p class="author-bio">M.S. Computer Science graduate from Washington University in St. Louis</p>
                         <ul class="author-links">
@@ -118,13 +118,15 @@ def render_footer():
     return """<footer class="site-footer">
         <div class="container footer-grid">
             <span class="footer-copyright">&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy</span>
-            <ul class="footer-links">
-                <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
-                <li><a href="mailto:adurs2002@gmail.com">Email</a></li>
-                <li><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
-                <li><a href="https://github.com/agopalareddy" target="_blank" rel="noopener">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
-                <li><a href="/accessibility.html">Accessibility</a></li>
-            </ul>
+            <nav aria-label="Footer Navigation">
+                <ul class="footer-links">
+                    <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
+                    <li><a href="mailto:adurs2002@gmail.com">Email</a></li>
+                    <li><a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">LinkedIn <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="https://github.com/agopalareddy" target="_blank" rel="noopener">GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
+                    <li><a href="/accessibility.html">Accessibility</a></li>
+                </ul>
+            </nav>
             <div id="theme-toggle-footer"></div>
         </div>
     </footer>"""
@@ -146,7 +148,7 @@ def render_page_wrapper(head_html, body_html, active_page):
     {render_nav(active_page)}
 
     <!-- Main Wrapper -->
-    <div id="main-content">
+    <div id="main-content" tabindex="-1">
         <main class="container">
             <div class="academic-layout">
                 {render_sidebar()}

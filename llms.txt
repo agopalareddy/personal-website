@@ -12,6 +12,11 @@
 - [CV/Resume](https://agreddy.com/cv/): Downloadable CV, resume, and cover letter
 - [Availability](https://agreddy.com/availability/): Book a meeting
 
+## Structured Data
+
+- [Projects (JSON)](https://agreddy.com/api/projects.json): Full project catalog, machine-readable
+- [Experience (JSON)](https://agreddy.com/api/experience.json): Full work/research/education history, machine-readable
+
 ## Contact
 
 - Email: adurs2002@gmail.com

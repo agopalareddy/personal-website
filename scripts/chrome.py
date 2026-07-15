@@ -180,5 +180,6 @@ def render_page_wrapper(head_html, body_html, active_page):
     <script src="/assets/js/icons.js?v={ASSETS_VERSION}"></script>
     <script src="/assets/js/theme.js?v={ASSETS_VERSION}"></script>
     <script src="/assets/js/status-badge.js?v={ASSETS_VERSION}"></script>
+    <script src="/assets/js/sw-register.js?v={ASSETS_VERSION}"></script>
 </body>
 </html>"""

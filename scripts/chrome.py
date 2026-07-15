@@ -30,9 +30,19 @@ NAV_ITEMS = (
 )
 
 
-def render_head(title, description, canonical_url, og_type="article"):
+def render_head(
+    title,
+    description,
+    canonical_url,
+    og_type="article",
+    og_image="https://agreddy.com/images/profile.png",
+    json_ld=None,
+):
     """Render the full <head> block with Primer stylesheets, inline theme snippet."""
     desc = description.replace('"', "&quot;").replace("'", "&apos;")
+    json_ld_html = (
+        f'\n\n    <script type="application/ld+json">{json_ld}</script>' if json_ld else ""
+    )
     return f"""{THEME_INLINE_SNIPPET}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,7 +71,7 @@ def render_head(title, description, canonical_url, og_type="article"):
     <meta property="og:url" content="{canonical_url}">
     <meta property="og:title" content="{title} - Aadarsha Gopala Reddy">
     <meta property="og:description" content="{desc}">
-    <meta property="og:image" content="https://agreddy.com/images/profile.png">
+    <meta property="og:image" content="{og_image}">
     <meta property="og:site_name" content="Aadarsha Gopala Reddy">
 
     <!-- Twitter Cards -->
@@ -69,11 +79,11 @@ def render_head(title, description, canonical_url, og_type="article"):
     <meta name="twitter:url" content="{canonical_url}">
     <meta name="twitter:title" content="{title} - Aadarsha Gopala Reddy">
     <meta name="twitter:description" content="{desc}">
-    <meta name="twitter:image" content="https://agreddy.com/images/profile.png">
+    <meta name="twitter:image" content="{og_image}">
     <meta name="twitter:site" content="@aadarsha2002">
 
     <!-- Canonical Link -->
-    <link rel="canonical" href="{canonical_url}">"""
+    <link rel="canonical" href="{canonical_url}">{json_ld_html}"""
 
 
 def render_nav(active_page):

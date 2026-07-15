@@ -624,8 +624,19 @@ function renderProjects() {
 
   if (filtered.length === 0) {
     projectGrid.replaceChildren(
-      el('div', { class: 'no-results' }, 'No projects match your search or filter criteria.')
+      el(
+        'div',
+        { class: 'no-results' },
+        'No projects match your search or filter criteria.',
+        el(
+          'button',
+          { type: 'button', id: 'clearFiltersBtn', class: 'card-btn btn-detail' },
+          'Clear Filters'
+        )
+      )
     );
+    const clearBtn = document.getElementById('clearFiltersBtn');
+    if (clearBtn) clearBtn.addEventListener('click', clearAllFilters);
     renderToc([]);
     return;
   }
@@ -793,10 +804,45 @@ function populateFilters() {
   }
 }
 
+// Sync filter/search state to the URL so a filtered view is shareable.
+// replaceState (not pushState) keeps every keystroke off the back-button history.
+function updateUrlParams() {
+  const params = new URLSearchParams();
+  if (activeFilter !== 'all') params.set('category', activeFilter);
+  if (activeVenue !== 'all') params.set('venue', activeVenue);
+  if (activeYear !== 'all') params.set('year', activeYear);
+  if (activeSort !== 'date-desc') params.set('sort', activeSort);
+  if (searchQuery) params.set('q', searchQuery);
+  const qs = params.toString();
+  history.replaceState(null, '', qs ? `?${qs}${location.hash}` : location.pathname + location.hash);
+}
+
+function clearAllFilters() {
+  activeFilter = 'all';
+  activeVenue = 'all';
+  activeYear = 'all';
+  activeSort = 'date-desc';
+  searchQuery = '';
+
+  filterButtons.forEach((b) => {
+    const isAll = b.getAttribute('data-filter') === 'all';
+    b.classList.toggle('active', isAll);
+    b.setAttribute('aria-pressed', String(isAll));
+  });
+  if (venueFilter) venueFilter.value = 'all';
+  if (yearFilter) yearFilter.value = 'all';
+  if (projectSort) projectSort.value = 'date-desc';
+  if (searchInput) searchInput.value = '';
+
+  updateUrlParams();
+  renderProjects();
+}
+
 // Bind Listeners
 if (searchInput) {
   searchInput.addEventListener('input', (e) => {
     searchQuery = e.target.value;
+    updateUrlParams();
     renderProjects();
   });
 }
@@ -810,6 +856,7 @@ filterButtons.forEach((btn) => {
     btn.classList.add('active');
     btn.setAttribute('aria-pressed', 'true');
     activeFilter = btn.getAttribute('data-filter') || 'all';
+    updateUrlParams();
     renderProjects();
   });
 });
@@ -817,6 +864,7 @@ filterButtons.forEach((btn) => {
 if (venueFilter) {
   venueFilter.addEventListener('change', (e) => {
     activeVenue = e.target.value;
+    updateUrlParams();
     renderProjects();
   });
 }
@@ -824,6 +872,7 @@ if (venueFilter) {
 if (projectSort) {
   projectSort.addEventListener('change', (e) => {
     activeSort = e.target.value;
+    updateUrlParams();
     renderProjects();
   });
 }
@@ -831,6 +880,7 @@ if (projectSort) {
 if (yearFilter) {
   yearFilter.addEventListener('change', (e) => {
     activeYear = e.target.value;
+    updateUrlParams();
     renderProjects();
   });
 }
@@ -1076,11 +1126,43 @@ window.matchMedia('(max-width: 767px)').addEventListener('change', repositionCat
 positionFilterControlsResponsive();
 populateFilters();
 
-// ponytail: lets index.html tech-stack tags deep-link into a prefilled search
-const qParam = new URLSearchParams(window.location.search).get('q');
+// Read initial filter state from the URL so filtered views are shareable/bookmarkable.
+// ponytail: also lets index.html tech-stack tags deep-link into a prefilled search via ?q=
+const initParams = new URLSearchParams(window.location.search);
+const qParam = initParams.get('q');
 if (qParam && searchInput) {
   searchQuery = qParam;
   searchInput.value = qParam;
+}
+const categoryParam = initParams.get('category');
+if (categoryParam) {
+  const matchBtn = Array.from(filterButtons).find(
+    (b) => b.getAttribute('data-filter') === categoryParam
+  );
+  if (matchBtn) {
+    filterButtons.forEach((b) => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    matchBtn.classList.add('active');
+    matchBtn.setAttribute('aria-pressed', 'true');
+    activeFilter = categoryParam;
+  }
+}
+const venueParam = initParams.get('venue');
+if (venueParam && venueFilter) {
+  activeVenue = venueParam;
+  venueFilter.value = venueParam;
+}
+const yearParam = initParams.get('year');
+if (yearParam && yearFilter) {
+  activeYear = yearParam;
+  yearFilter.value = yearParam;
+}
+const sortParam = initParams.get('sort');
+if (sortParam && projectSort) {
+  activeSort = sortParam;
+  projectSort.value = sortParam;
 }
 
 renderProjects();

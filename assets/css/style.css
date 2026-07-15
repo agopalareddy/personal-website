@@ -1075,6 +1075,18 @@
     transform: scale(1.25);
   }
 
+  /* ─── Empty search/filter state ─── */
+  .empty-state,
+  .no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--fgColor-muted);
+  }
+
   .timeline-year {
     position: relative;
     font-size: var(--text-title-size-medium, 1.25rem);
@@ -2541,6 +2553,9 @@
 
     .filter-btn {
       flex-shrink: 0 !important;
+      min-height: 2.75rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
     }
 
     .controls-row {
@@ -2553,6 +2568,17 @@
     .custom-select {
       width: 100% !important;
       max-width: none !important;
+    }
+
+    .search-input,
+    .custom-select {
+      min-height: 2.75rem !important;
+    }
+
+    /* WCAG 2.1 44x44px touch target for the theme toggle */
+    .theme-picker summary,
+    .theme-picker-option {
+      min-height: 2.75rem !important;
     }
 
     .card {

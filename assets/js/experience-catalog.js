@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var orgFilter = document.getElementById('orgFilter');
   var yearFilter = document.getElementById('yearFilter');
+  var clearFiltersBtn = document.getElementById('clearFiltersBtn');
 
   // ---------------------------------------------------------------------------
   // Remove SSR fallback (noscript + JSON blob) if present.
@@ -387,11 +388,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------------------------------------------------------------------------
+  // URL param sync — makes a filtered view shareable/bookmarkable.
+  // replaceState (not pushState) keeps every keystroke off the back-button history.
+  // ---------------------------------------------------------------------------
+  function updateUrlParams() {
+    var params = new URLSearchParams();
+    if (activeFilter !== 'all') params.set('category', activeFilter);
+    if (activeOrg !== 'all') params.set('org', activeOrg);
+    if (activeYear !== 'all') params.set('year', activeYear);
+    if (activeSort !== 'date-desc') params.set('sort', activeSort);
+    if (searchQuery) params.set('q', searchQuery);
+    var qs = params.toString();
+    history.replaceState(
+      null,
+      '',
+      qs ? '?' + qs + location.hash : location.pathname + location.hash
+    );
+  }
+
+  function clearAllFilters() {
+    activeFilter = 'all';
+    activeOrg = 'all';
+    activeYear = 'all';
+    activeSort = 'date-desc';
+    searchQuery = '';
+
+    filterButtons.forEach((b) => {
+      var isAll = b.getAttribute('data-filter') === 'all';
+      b.classList.toggle('active', isAll);
+      b.setAttribute('aria-pressed', String(isAll));
+    });
+    if (orgFilter) orgFilter.value = 'all';
+    if (yearFilter) yearFilter.value = 'all';
+    if (sortSelect) sortSelect.value = 'date-desc';
+    if (searchInput) searchInput.value = '';
+
+    updateUrlParams();
+    renderExperiences();
+  }
+
+  // ---------------------------------------------------------------------------
   // Event listeners
   // ---------------------------------------------------------------------------
   if (orgFilter) {
     orgFilter.addEventListener('change', (e) => {
       activeOrg = e.target.value;
+      updateUrlParams();
       renderExperiences();
     });
   }
@@ -399,6 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearFilter) {
     yearFilter.addEventListener('change', (e) => {
       activeYear = e.target.value;
+      updateUrlParams();
       renderExperiences();
     });
   }
@@ -406,6 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value;
+      updateUrlParams();
       renderExperiences();
     });
   }
@@ -413,6 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sortSelect) {
     sortSelect.addEventListener('change', (e) => {
       activeSort = e.target.value;
+      updateUrlParams();
       renderExperiences();
     });
   }
@@ -426,9 +471,14 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       btn.setAttribute('aria-pressed', 'true');
       activeFilter = btn.getAttribute('data-filter') || 'all';
+      updateUrlParams();
       renderExperiences();
     });
   });
+
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', clearAllFilters);
+  }
 
   // ---------------------------------------------------------------------------
   // Table of Contents generator
@@ -686,8 +736,48 @@ document.addEventListener('DOMContentLoaded', () => {
   // opens and must not reparent filter controls (that blurs the search input).
   window.matchMedia('(max-width: 767px)').addEventListener('change', repositionCatalogLayout);
 
+  // Read initial filter state from the URL so filtered views are shareable/bookmarkable.
   positionFilterControlsResponsive();
   populateFilters();
+
+  var initParams = new URLSearchParams(window.location.search);
+  var categoryParam = initParams.get('category');
+  if (categoryParam) {
+    var matchBtn = Array.prototype.find.call(
+      filterButtons,
+      (b) => b.getAttribute('data-filter') === categoryParam
+    );
+    if (matchBtn) {
+      filterButtons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      matchBtn.classList.add('active');
+      matchBtn.setAttribute('aria-pressed', 'true');
+      activeFilter = categoryParam;
+    }
+  }
+  var orgParam = initParams.get('org');
+  if (orgParam && orgFilter) {
+    activeOrg = orgParam;
+    orgFilter.value = orgParam;
+  }
+  var yearParam = initParams.get('year');
+  if (yearParam && yearFilter) {
+    activeYear = yearParam;
+    yearFilter.value = yearParam;
+  }
+  var sortParam = initParams.get('sort');
+  if (sortParam && sortSelect) {
+    activeSort = sortParam;
+    sortSelect.value = sortParam;
+  }
+  var qParam = initParams.get('q');
+  if (qParam && searchInput) {
+    searchQuery = qParam;
+    searchInput.value = qParam;
+  }
+
   renderExperiences();
   wrapMobileStickyPanels();
 });

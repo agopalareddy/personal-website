@@ -535,6 +535,7 @@ const filterButtons = document.querySelectorAll('.filter-btn');
 const venueFilter = document.getElementById('venueFilter');
 const projectSort = document.getElementById('projectSort');
 const yearFilter = document.getElementById('yearFilter');
+const a11yAnnouncer = document.getElementById('a11y-announcer');
 
 let activeFilter = 'all';
 let activeVenue = 'all';
@@ -638,6 +639,7 @@ function renderProjects() {
     const clearBtn = document.getElementById('clearFiltersBtn');
     if (clearBtn) clearBtn.addEventListener('click', clearAllFilters);
     renderToc([]);
+    if (a11yAnnouncer) a11yAnnouncer.textContent = 'Showing 0 projects.';
     return;
   }
 
@@ -654,6 +656,9 @@ function renderProjects() {
   projectGrid.replaceChildren(fragment);
 
   renderToc(filtered);
+  if (a11yAnnouncer) {
+    a11yAnnouncer.textContent = `Showing ${filtered.length} project${filtered.length === 1 ? '' : 's'}.`;
+  }
 }
 
 function buildProjectCard(p) {

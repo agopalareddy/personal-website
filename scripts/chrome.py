@@ -13,7 +13,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from icons import ICONS
 
-ASSETS_VERSION = "2.0.0"
+ASSETS_VERSION = "fae21a1b"
 
 # Inline theme snippet — placed BEFORE stylesheet links to prevent FOUC.
 THEME_INLINE_SNIPPET = """<script>

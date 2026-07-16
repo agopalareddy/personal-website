@@ -1,0 +1,44 @@
+name: Build CV/Resume PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'files/cv_tex/**'
+      - 'files/resume_tex/**'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: reddy_cv.tex
+          working_directory: files/cv_tex
+
+      - name: Compile Resume
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: reddy_resume.tex
+          working_directory: files/resume_tex
+
+      - name: Sync public PDFs
+        run: |
+          cp files/cv_tex/reddy_cv.pdf files/reddy_cv.pdf
+          cp files/resume_tex/reddy_resume.pdf files/reddy_resume.pdf
+
+      - name: Commit compiled PDFs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add files/cv_tex/reddy_cv.pdf files/reddy_cv.pdf \
+                  files/resume_tex/reddy_resume.pdf files/reddy_resume.pdf
+          git diff --cached --quiet || git commit -m "chore: recompile CV/resume PDFs from LaTeX source"
+          git push

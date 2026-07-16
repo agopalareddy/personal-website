@@ -1087,6 +1087,10 @@
     color: var(--fgColor-muted);
   }
 
+  .empty-state[hidden] {
+    display: none;
+  }
+
   .timeline-year {
     position: relative;
     font-size: var(--text-title-size-medium, 1.25rem);

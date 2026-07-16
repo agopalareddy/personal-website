@@ -2273,6 +2273,12 @@
     margin-top: 1.5rem;
   }
 
+  .results-count {
+    font-size: var(--text-body-size-small, 0.8125rem);
+    color: var(--fgColor-muted);
+    margin: 0 0 0.75rem;
+  }
+
   /* Scroll margins for anchor targets */
   .academic-content [id],
   .timeline-card[id] {

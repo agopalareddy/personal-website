@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var sortSelect = document.getElementById('experienceSort');
   var filterButtons = document.querySelectorAll('.filter-btn');
   var emptyState = document.getElementById('emptyState');
+  var a11yAnnouncer = document.getElementById('a11y-announcer');
 
   var orgFilter = document.getElementById('orgFilter');
   var yearFilter = document.getElementById('yearFilter');
@@ -329,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.innerHTML = '';
       if (emptyState) emptyState.hidden = false;
       renderToc([]);
+      if (a11yAnnouncer) a11yAnnouncer.textContent = 'Showing 0 entries.';
       return;
     }
     if (emptyState) emptyState.hidden = true;
@@ -348,6 +350,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render Table of Contents
     renderToc(filtered);
+    if (a11yAnnouncer) {
+      a11yAnnouncer.textContent =
+        'Showing ' + filtered.length + (filtered.length === 1 ? ' entry.' : ' entries.');
+    }
   }
 
   // ---------------------------------------------------------------------------

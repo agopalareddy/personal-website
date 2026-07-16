@@ -184,8 +184,10 @@ ssh gcp-showcase "cd /opt/personal-website && git fetch origin && git reset --ha
 ```
 
 There is no build step for the public site — Nginx serves files directly from the
-checked-out repository. After changing CSS, bump the `style.css?v=` query string in
-HTML files when browser cache invalidation is needed.
+checked-out repository. Cache busting is automated: `npm run cache:bump` (or the
+`pre-commit` hook, which runs it whenever a shared chrome asset or catalog script is
+staged) rewrites every `?v=` query string to a content hash of the changed file, so
+there's nothing to bump by hand.
 
 ## Nginx and Analytics
 

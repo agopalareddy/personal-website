@@ -2680,3 +2680,42 @@
     }
   }
 }
+
+/* ==========================================================================
+   Print — force light mode, strip chrome, keep cards intact across pages
+   ========================================================================== */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #767676 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .top-header,
+  .site-footer,
+  .skip-link,
+  #theme-toggle,
+  #theme-toggle-footer,
+  .status-badge,
+  .search-wrapper,
+  .toc-container,
+  #a11y-announcer {
+    display: none !important;
+  }
+
+  .project-card,
+  .experience-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}

@@ -40,7 +40,7 @@
     "@primer/octicons": "^19.29.2",
     "@primer/primitives": "^11.9.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.8",
+    "lint-staged": "^17.1.0",
     "playwright": "^1.61.1",
     "prettier": "^3.9.5",
     "remark-cli": "^12.0.1",

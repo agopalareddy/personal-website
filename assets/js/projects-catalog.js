@@ -891,50 +891,40 @@ if (yearFilter) {
 }
 
 // Dynamic responsive layout helpers
+function moveElementResponsive(el, mobileAnchor, desktopContainer) {
+  const isMobile = window.innerWidth < 768;
+
+  if (isMobile && mobileAnchor) {
+    if (el.parentNode !== mobileAnchor.parentNode || el.previousElementSibling !== mobileAnchor) {
+      mobileAnchor.parentNode.insertBefore(el, mobileAnchor.nextSibling);
+    }
+  } else if (!isMobile && desktopContainer) {
+    if (el.parentNode !== desktopContainer) {
+      desktopContainer.appendChild(el);
+    }
+  }
+}
+
 function positionFilterControlsResponsive() {
   const filterControls = document.getElementById('filterControls');
   if (!filterControls) return;
 
-  const isMobile = window.innerWidth < 768;
   const sidebar = document.querySelector('.academic-sidebar');
   const subtitle = document.querySelector('.academic-content > p');
   const stickyWrapper = document.querySelector('.mobile-sticky-wrapper');
 
-  if (isMobile && subtitle) {
-    const layoutBlock = stickyWrapper || filterControls;
-    if (
-      layoutBlock.parentNode !== subtitle.parentNode ||
-      layoutBlock.previousElementSibling !== subtitle
-    ) {
-      subtitle.parentNode.insertBefore(layoutBlock, subtitle.nextSibling);
-    }
-  } else if (!isMobile && sidebar) {
-    if (filterControls.parentNode !== sidebar) {
-      sidebar.appendChild(filterControls);
-    }
-  }
+  const el = window.innerWidth < 768 && stickyWrapper ? stickyWrapper : filterControls;
+  moveElementResponsive(el, subtitle, sidebar);
 }
 
 function positionTocResponsive() {
   const tocContainer = document.getElementById('tocContainer');
   if (!tocContainer) return;
 
-  const isMobile = window.innerWidth < 768;
   const filterControls = document.getElementById('filterControls');
   const sidebar = document.querySelector('.academic-sidebar');
 
-  if (isMobile && filterControls) {
-    if (
-      tocContainer.parentNode !== filterControls.parentNode ||
-      tocContainer.previousElementSibling !== filterControls
-    ) {
-      filterControls.parentNode.insertBefore(tocContainer, filterControls.nextSibling);
-    }
-  } else if (!isMobile && sidebar) {
-    if (tocContainer.parentNode !== sidebar) {
-      sidebar.appendChild(tocContainer);
-    }
-  }
+  moveElementResponsive(tocContainer, filterControls, sidebar);
 }
 
 function wrapMobileStickyPanels() {

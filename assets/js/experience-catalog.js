@@ -489,50 +489,40 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------------------------------------------------------------------------
   // Table of Contents generator
   // ---------------------------------------------------------------------------
+  function moveElementResponsive(el, mobileAnchor, desktopContainer) {
+    var isMobile = window.innerWidth < 768;
+
+    if (isMobile && mobileAnchor) {
+      if (el.parentNode !== mobileAnchor.parentNode || el.previousElementSibling !== mobileAnchor) {
+        mobileAnchor.parentNode.insertBefore(el, mobileAnchor.nextSibling);
+      }
+    } else if (!isMobile && desktopContainer) {
+      if (el.parentNode !== desktopContainer) {
+        desktopContainer.appendChild(el);
+      }
+    }
+  }
+
   function positionFilterControlsResponsive() {
     var filterControls = document.getElementById('filterControls');
     if (!filterControls) return;
 
-    var isMobile = window.innerWidth < 768;
     var sidebar = document.querySelector('.academic-sidebar');
     var subtitle = document.querySelector('.academic-content > p');
     var stickyWrapper = document.querySelector('.mobile-sticky-wrapper');
 
-    if (isMobile && subtitle) {
-      var layoutBlock = stickyWrapper || filterControls;
-      if (
-        layoutBlock.parentNode !== subtitle.parentNode ||
-        layoutBlock.previousElementSibling !== subtitle
-      ) {
-        subtitle.parentNode.insertBefore(layoutBlock, subtitle.nextSibling);
-      }
-    } else if (!isMobile && sidebar) {
-      if (filterControls.parentNode !== sidebar) {
-        sidebar.appendChild(filterControls);
-      }
-    }
+    var el = window.innerWidth < 768 && stickyWrapper ? stickyWrapper : filterControls;
+    moveElementResponsive(el, subtitle, sidebar);
   }
 
   function positionTocResponsive() {
     var tocContainer = document.getElementById('tocContainer');
     if (!tocContainer) return;
 
-    var isMobile = window.innerWidth < 768;
     var filterControls = document.getElementById('filterControls');
     var sidebar = document.querySelector('.academic-sidebar');
 
-    if (isMobile && filterControls) {
-      if (
-        tocContainer.parentNode !== filterControls.parentNode ||
-        tocContainer.previousElementSibling !== filterControls
-      ) {
-        filterControls.parentNode.insertBefore(tocContainer, filterControls.nextSibling);
-      }
-    } else if (!isMobile && sidebar) {
-      if (tocContainer.parentNode !== sidebar) {
-        sidebar.appendChild(tocContainer);
-      }
-    }
+    moveElementResponsive(tocContainer, filterControls, sidebar);
   }
 
   function wrapMobileStickyPanels() {

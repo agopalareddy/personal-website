@@ -60,9 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
   /** Escape HTML special characters to prevent XSS. */
   function escapeHtml(str) {
     if (!str) return '';
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
+    var map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;',
+    };
+    return String(str).replace(/[&<>"']/g, function (m) {
+      return map[m];
+    });
   }
 
   /** Capitalise first letter of a category slug. */

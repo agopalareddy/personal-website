@@ -46,6 +46,7 @@ Public API (importable):
 from __future__ import annotations
 
 import argparse
+import functools
 import json
 import os
 import sys
@@ -1135,6 +1136,7 @@ def update_project_catalog_array(projects: list[dict[str, Any]]) -> bool:
 # ---------------------------------------------------------------------------
 
 
+@functools.lru_cache(maxsize=None)
 def _load_experience_database() -> list[dict[str, Any]]:
     if not os.path.exists(EXPERIENCE_JSON):
         print(
@@ -1220,6 +1222,7 @@ def generate_all_experiences() -> None:
 # ---------------------------------------------------------------------------
 
 
+@functools.lru_cache(maxsize=None)
 def _load_projects_database() -> list[dict[str, Any]]:
     """Load the project catalog from `projects_database.json`."""
     if not os.path.exists(PROJECTS_JSON):

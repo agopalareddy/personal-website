@@ -448,6 +448,9 @@ def parse_date_range(raw: str) -> tuple[Optional[str], Optional[str]]:
 # ---------------------------------------------------------------------------
 
 
+_ORG_TOKENS_RE = re.compile(r"[a-z0-9]+")
+
+
 def classify_link(url: str, organization: Optional[str] = None) -> str:
     """
     Classify a URL into a link type using hostname/path heuristics.
@@ -490,7 +493,7 @@ def classify_link(url: str, organization: Optional[str] = None) -> str:
         return "talk"
     # organization — domain matches organization
     if organization:
-        org_tokens = re.findall(r"[a-z0-9]+", organization.lower())
+        org_tokens = _ORG_TOKENS_RE.findall(organization.lower())
         if org_tokens and any(tok in host for tok in org_tokens if len(tok) > 3):
             return "organization"
     return "other"

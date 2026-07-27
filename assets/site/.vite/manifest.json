@@ -3,6 +3,13 @@
     "file": "assets/rolldown-runtime-Czjbc987.js",
     "name": "rolldown-runtime"
   },
+  "src/islands/catalog-filter.ts": {
+    "file": "assets/catalog-filter-CRJqc_i6.js",
+    "name": "catalog-filter",
+    "src": "src/islands/catalog-filter.ts",
+    "isEntry": true,
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
+  },
   "src/islands/cv-modal.ts": {
     "file": "assets/cv-modal-CjCNaDg0.js",
     "name": "cv-modal",

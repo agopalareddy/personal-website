@@ -1,6 +1,12 @@
-import { Icon } from "../common/Icon";
-import type { ExperienceEntry } from "../../content/types";
-import { experienceDisplayTitle, formatDateRange, categoryLabel } from "../../content/experienceDisplay";
+import { Icon } from '../common/Icon';
+import type { ExperienceEntry } from '../../content/types';
+import {
+  experienceDisplayTitle,
+  formatDateRange,
+  categoryLabel,
+  experienceOrderDate,
+  orgGroup,
+} from '../../content/experienceDisplay';
 
 /**
  * Ported from assets/js/experience-catalog.js's createExperienceCard().
@@ -13,14 +19,31 @@ export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
   const dateRange = formatDateRange(e.start_date, e.end_date);
 
   const subtitleParts = [e.organization, e.role_context, e.location].filter(
-    (v): v is string => !!v,
+    (v): v is string => !!v
   );
+
+  const orderDate = experienceOrderDate(e);
+  const year = orderDate ? orderDate.split('-')[0] : '';
+  const orgLower = (e.organization || '').toLowerCase();
+  const aliases = [
+    orgLower.includes('washington university') ? 'washu' : '',
+    orgLower.includes('ohio wesleyan') ? 'owu' : '',
+  ];
+  const search = [title, e.excerpt, e.organization, e.role_context, e.location, ...aliases]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
 
   return (
     <div
       className="project-card card-surface timeline-card experience-card"
       id={`exp-${e.id}`}
       data-category={e.category}
+      data-group={orgGroup(e.organization)}
+      data-year={year}
+      data-date={orderDate}
+      data-title={title}
+      data-search={search}
     >
       <span className="timeline-marker" />
       <div className="card-meta">
@@ -33,7 +56,7 @@ export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
         </a>
       </h3>
       {subtitleParts.length > 0 && (
-        <div className="card-org-context">{subtitleParts.join(" • ")}</div>
+        <div className="card-org-context">{subtitleParts.join(' • ')}</div>
       )}
       <p className="project-excerpt">{e.excerpt}</p>
       <div className="card-actions">

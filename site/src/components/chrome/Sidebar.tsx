@@ -46,7 +46,15 @@ export function Sidebar() {
           </li>
           <li>
             <Icon name="MAIL_16" />{" "}
-            <a href="mailto:adurs2002@gmail.com">adurs2002 [at] gmail [dot] com</a>
+            <a
+              href="#"
+              className="protected-email"
+              data-email-user="YWR1cnMyMDAy"
+              data-email-domain="Z21haWwuY29t"
+              data-email-text="adurs2002 [at] gmail [dot] com"
+            >
+              adurs2002 [at] gmail [dot] com
+            </a>
           </li>
           <li>
             <Icon name="LINKEDIN_16" />{" "}

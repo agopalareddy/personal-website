@@ -9,6 +9,7 @@ import { resolve } from 'node:path';
 // 1y cache) serves it with no config change (FR-010).
 export default defineConfig({
   root: resolve(__dirname, 'site'),
+  base: '/assets/site/',
   plugins: [react()],
   build: {
     outDir: resolve(__dirname, 'assets/site'),

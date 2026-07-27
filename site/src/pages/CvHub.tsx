@@ -133,7 +133,12 @@ export function CvHubPage() {
             </div>
           </div>
           <div className="modal-body">
-            <iframe src="about:blank" title="Document PDF preview" loading="lazy" />
+            <div
+              id="document-modal-viewer"
+              className="pdf-viewer"
+              role="group"
+              aria-label="Document preview"
+            />
           </div>
         </div>
       </dialog>

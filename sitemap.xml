@@ -13,10 +13,73 @@
     <loc>https://agreddy.com/cv/</loc>
   </url>
   <url>
-    <loc>https://agreddy.com/experience/</loc>
+    <loc>https://agreddy.com/projects/</loc>
   </url>
   <url>
-    <loc>https://agreddy.com/projects/</loc>
+    <loc>https://agreddy.com/projects/aiparkinscan.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/artificial-intelligence-in-modern-board-games.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/connect-4-ai.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/artificial-intelligence-opinion-survey.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/php-calendar-app.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/socketio-chat-app.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/datacenter-cooling.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/interactive-storybook.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/multimodal-alzheimers.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/desperate-housewives-monologues.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/bayesian-optimization.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/google-calendar-sync.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/mlb-statcast-pipeline.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/vlm-security.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/hackwashu-databases-workshop.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/instagram-unfollow-checker.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/ms-thesis.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/blink-morse-decoder.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/speedtest.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/wellness-companion.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/projects/env-monitor.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/experience/</loc>
   </url>
   <url>
     <loc>https://agreddy.com/experience/education/2024-08-m-s-computer-science.html</loc>
@@ -122,68 +185,5 @@
   </url>
   <url>
     <loc>https://agreddy.com/experience/leadership/2021-08-member.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/aiparkinscan.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/artificial-intelligence-in-modern-board-games.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/connect-4-ai.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/artificial-intelligence-opinion-survey.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/php-calendar-app.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/socketio-chat-app.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/datacenter-cooling.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/interactive-storybook.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/multimodal-alzheimers.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/desperate-housewives-monologues.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/bayesian-optimization.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/google-calendar-sync.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/mlb-statcast-pipeline.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/vlm-security.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/hackwashu-databases-workshop.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/instagram-unfollow-checker.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/ms-thesis.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/blink-morse-decoder.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/speedtest.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/wellness-companion.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/projects/env-monitor.html</loc>
   </url>
 </urlset>

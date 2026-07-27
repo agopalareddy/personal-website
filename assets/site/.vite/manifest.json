@@ -1,4 +1,8 @@
 {
+  "../node_modules/pdfjs-dist/build/pdf.worker.mjs": {
+    "file": "assets/pdf.worker-CPbhI6B3.mjs",
+    "src": "../node_modules/pdfjs-dist/build/pdf.worker.mjs"
+  },
   "_rolldown-runtime-Czjbc987.js": {
     "file": "assets/rolldown-runtime-Czjbc987.js",
     "name": "rolldown-runtime"
@@ -11,11 +15,12 @@
     "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/cv-modal.ts": {
-    "file": "assets/cv-modal-CjCNaDg0.js",
+    "file": "assets/cv-modal-BgqYJH8W.js",
     "name": "cv-modal",
     "src": "src/islands/cv-modal.ts",
     "isEntry": true,
-    "imports": ["_rolldown-runtime-Czjbc987.js"]
+    "imports": ["_rolldown-runtime-Czjbc987.js"],
+    "assets": ["assets/pdf.worker-CPbhI6B3.mjs"]
   },
   "src/islands/email-protection.ts": {
     "file": "assets/email-protection-BSRvsOKy.js",

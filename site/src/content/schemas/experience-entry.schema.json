@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "experience-entry.schema.json",
+  "title": "Experience Entry",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "title",
+    "category",
+    "organization",
+    "location",
+    "role_context",
+    "start_date",
+    "end_date",
+    "responsibilities",
+    "related_projects",
+    "links",
+    "has_detail",
+    "excerpt"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "category": {
+      "type": "string",
+      "enum": ["education", "research", "professional", "leadership", "presentations", "awards"]
+    },
+    "organization": { "type": "string" },
+    "location": { "type": ["string", "null"] },
+    "role_context": { "type": ["string", "null"] },
+    "start_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "end_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "responsibilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "related_projects": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "url", "type"],
+        "properties": {
+          "label": { "type": "string" },
+          "url": { "type": "string" },
+          "type": { "type": "string" }
+        }
+      }
+    },
+    "has_detail": { "type": "boolean" },
+    "excerpt": { "type": "string" },
+    "is_presentation": { "type": "boolean" }
+  }
+}

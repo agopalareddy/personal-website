@@ -1,0 +1,182 @@
+\documentclass[10pt, letterpaper]{article}
+% ----------------------------------------------------------------------
+% LaTeX Preamble
+% ----------------------------------------------------------------------
+
+% --- Required Packages ---
+\usepackage{reddy_resume}   % Custom resume style package
+
+% ----------------------------------------------------------------------
+% Document Body
+% ----------------------------------------------------------------------
+\begin{document}
+
+% ----------------------------------------------------------------------
+% HEADER SECTION
+% ----------------------------------------------------------------------
+\begin{header}
+	\begin{minipage}[t]{1.0\textwidth}
+		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
+		\normalsize
+		% Phone
+		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		% Email
+		\mbox{\hrefWithoutArrow{mailto:adurs2002@gmail.com}{adurs2002@gmail.com}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://www.linkedin.com/in/agopalareddy}{linkedin.com/in/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://github.com/agopalareddy}{github.com/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://agreddy.com}{agreddy.com}%
+	\end{minipage}
+\end{header}
+
+% --- Vertical Space After Header ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SUMMARY SECTION
+% ----------------------------------------------------------------------
+
+\section{SUMMARY}
+
+\vspace{\entrySpacing}
+\begin{samepage}
+	\begin{summary}
+		Data analyst who pairs Python/SQL data pipelines with Tableau/Power BI dashboarding and audience-segmentation modeling, translating complex datasets into stakeholder-ready insights --- seeking to bring that analytical rigor to marketing performance measurement.
+	\end{summary}
+\end{samepage}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SKILLS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com}{SKILLS}}
+\needspace{10\baselineskip}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Programming \& Data Analysis}
+	Python, SQL, R, Pandas, NumPy.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Dashboards \& Visualization}
+	Tableau, Power BI, Streamlit.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Data Engineering \& Warehousing}
+	Snowflake, Apache Airflow, Spark, Kafka, Flink, PostgreSQL, AWS.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{AI \& LLM Tooling}
+	Gemini/OpenAI APIs, agentic coding workflows with Claude Code.
+\end{skillcategory}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience/}{EXPERIENCE}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale}{January 2026 - May 2026}
+		\item Taught large-scale data pipeline and warehousing concepts (Snowflake, Airflow, Spark, Kafka, Flink) to a graduate cohort, covering fault-tolerant design, streaming windowing, and query optimization.
+		\item Mentored 3 capstone teams from raw datasets to production dashboards, reviewing metric definitions and visualization choices for stakeholder clarity.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Crittero, Inc.}{Remote}
+	\begin{positionentry}{AI Engineer Intern}{June 2025 - August 2025}
+		\item Generated 100,000 labeled social media posts across seven user personas via time-series behavioral modeling, capturing post sequences, engagement timings, and content preferences by segment.
+		\item Trained a TensorFlow/Keras recommendation model achieving 80\% accuracy (30-percentage-point gain over random baseline) with persona-type, content-category, and temporal embeddings, quantifying which content and timing patterns drove engagement by audience segment.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Lab714}{Boca Raton, Florida, USA}
+	\begin{positionentry}{Data Analyst Intern}{June 2023 - May 2024}
+		\item Wrote SQL queries and built AWS data ingestion pipelines to process and aggregate IoT sensor telemetry into client-facing dashboards, surfacing trends and anomalies that helped clients cut maintenance costs by 20\%.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% PROJECTS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{\href{https://agreddy.com/projects/ms-thesis}{Master's Thesis Research}}{August 2025 - May 2026}
+		\item Designed a leave-one-participant-out cross-validation framework to rigorously benchmark six model architectures on 790,000 driving trips from 304 participants, applying the same hypothesis-driven evaluation rigor used in experimental design to select the best-performing approach.
+	\end{positionentry}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/visual-jailbreak-defense}{Red-Blue Visual Auto Defender}}{August 2025 - December 2025}
+		\item Built an automated red-blue teaming pipeline using Claude Code for agentic coding workflows, generating visual jailbreak attacks against vision-language models and auto-generating deterministic OCR-based Python defenses, validated with accuracy, precision, and recall metrics.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EDUCATION SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience}{EDUCATION}}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Washington University in St. Louis}
+	{August 2024 - May 2026}
+	{M.S. in Computer Science}
+	{St. Louis, Missouri, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Thesis:} \href{https://doi.org/10.7936/g95n-fv35}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data}
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Ohio Wesleyan University}
+	{August 2020 - May 2023}
+	{B.A. in Computer Science and Data Analytics}
+	{Delaware, Ohio, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Minor:} Economics \textbar{} \textit{Honors:} Golden Bishop Award, Mortar Board, Florence Leas Prize, Dean's List
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% LEADERSHIP SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience}{LEADERSHIP}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{Vice President of the Graduate-Professional Council (GPC) Chamber, GPSC}{May 2025 - May 2026}
+		\item Chaired the Constitution Committee to draft and ratify founding governing documents; built committee rosters via ranked-choice preference allocation; represented graduate students to university leadership --- communicating priorities and progress to senior stakeholders.
+	\end{positionentry}
+\end{leadershipentry}
+
+% ----------------------------------------------------------------------
+% End of Document
+% ----------------------------------------------------------------------
+\end{document}

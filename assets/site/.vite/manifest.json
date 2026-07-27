@@ -1,0 +1,34 @@
+{
+  "_rolldown-runtime-Czjbc987.js": {
+    "file": "assets/rolldown-runtime-Czjbc987.js",
+    "name": "rolldown-runtime"
+  },
+  "src/islands/catalog-filter.ts": {
+    "file": "assets/catalog-filter-BtNdS-5u.js",
+    "name": "catalog-filter",
+    "src": "src/islands/catalog-filter.ts",
+    "isEntry": true,
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
+  },
+  "src/islands/cv-modal.ts": {
+    "file": "assets/cv-modal-CjCNaDg0.js",
+    "name": "cv-modal",
+    "src": "src/islands/cv-modal.ts",
+    "isEntry": true,
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
+  },
+  "src/islands/email-protection.ts": {
+    "file": "assets/email-protection-BSRvsOKy.js",
+    "name": "email-protection",
+    "src": "src/islands/email-protection.ts",
+    "isEntry": true,
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
+  },
+  "src/islands/theme.tsx": {
+    "file": "assets/theme-D_rgo2Xr.js",
+    "name": "theme",
+    "src": "src/islands/theme.tsx",
+    "isEntry": true,
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
+  }
+}

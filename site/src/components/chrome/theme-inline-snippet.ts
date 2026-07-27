@@ -1,0 +1,7 @@
+// Ported verbatim from scripts/chrome.py's THEME_INLINE_SNIPPET — sets the
+// theme data-attributes on <html> BEFORE stylesheets load, so there's no
+// flash of the wrong theme. Must run with no dependency on React hydrating
+// (FR-006: works with JavaScript disabled means "absent," not "broken" —
+// this snippet is the one script that MUST still run even when the rest of
+// the page's JS never loads, since it's inline and blocking, not an island).
+export const THEME_INLINE_SNIPPET = `(function(){var e=document.documentElement,a=localStorage.getItem('color-scheme');if(!a){var t=localStorage.getItem('theme');if(t){var r={'light':'light','dark':'dark','device':'auto'};a=r[t]||'auto';localStorage.removeItem('theme');localStorage.setItem('color-scheme',a)}else a='auto'}var m={'auto':{'data-color-mode':'auto','data-light-theme':'light','data-dark-theme':'dark'},'light':{'data-color-mode':'light','data-light-theme':'light','data-dark-theme':'dark'},'light_high_contrast':{'data-color-mode':'light','data-light-theme':'light_high_contrast','data-dark-theme':'dark'},'dark':{'data-color-mode':'dark','data-light-theme':'light','data-dark-theme':'dark'},'dark_dimmed':{'data-color-mode':'dark','data-light-theme':'light','data-dark-theme':'dark_dimmed'},'dark_high_contrast':{'data-color-mode':'dark','data-light-theme':'light','data-dark-theme':'dark_high_contrast'}};var s=m[a]||m.auto;for(var k in s)e.setAttribute(k,s[k])})();`;

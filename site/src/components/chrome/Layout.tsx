@@ -5,8 +5,11 @@ import { Sidebar } from "./Sidebar";
 import { Footer } from "./Footer";
 
 export interface LayoutProps extends HeadProps {
-  activePage: ActivePage;
+  activePage?: ActivePage;
   contentAriaLabel?: string;
+  bodyClassName?: string;
+  /** 404.html and similarly plain pages skip the academic-layout sidebar entirely. */
+  hideSidebar?: boolean;
   children: ReactNode;
 }
 
@@ -16,11 +19,18 @@ export interface LayoutProps extends HeadProps {
  * (site/build/render.mjs); render.mjs prepends "<!doctype html>" since JSX
  * has no doctype node.
  */
-export function Layout({ activePage, contentAriaLabel, children, ...headProps }: LayoutProps) {
+export function Layout({
+  activePage,
+  contentAriaLabel,
+  bodyClassName,
+  hideSidebar,
+  children,
+  ...headProps
+}: LayoutProps) {
   return (
     <html lang="en" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
       <Head {...headProps} />
-      <body>
+      <body className={bodyClassName}>
         <a href="#main-content" className="skip-link">
           Skip to Content
         </a>
@@ -29,12 +39,16 @@ export function Layout({ activePage, contentAriaLabel, children, ...headProps }:
 
         <div id="main-content">
           <main className="container">
-            <div className="academic-layout">
-              <Sidebar />
-              <article className="academic-content" aria-label={contentAriaLabel}>
-                {children}
-              </article>
-            </div>
+            {hideSidebar ? (
+              children
+            ) : (
+              <div className="academic-layout">
+                <Sidebar />
+                <article className="academic-content" aria-label={contentAriaLabel}>
+                  {children}
+                </article>
+              </div>
+            )}
           </main>
         </div>
 

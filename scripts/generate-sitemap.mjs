@@ -11,13 +11,13 @@ import { fileURLToPath } from "node:url";
 const REPO_ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SITE_ROOT = "https://agreddy.com";
 
-// Hand-authored pages not yet migrated off scripts/generate_site.py
-// (User Story 3, T034-T038/T043) — still real, still served, still belong
-// in the sitemap during the mixed-stack transition (FR-013).
-const LEGACY_STATIC_PAGES = ["/", "/accessibility.html", "/availability/", "/cv/"];
+// nginx's error_page 404 target — a real route, deliberately excluded from
+// the sitemap (search engines shouldn't index the error page), matching the
+// original SITEMAP_STATIC_PAGES list which never included it either.
+const EXCLUDED_FROM_SITEMAP = new Set(["404.html"]);
 
 function pathToUrl(repoRelativePath) {
-  if (repoRelativePath.endsWith("/index.html")) {
+  if (repoRelativePath === "index.html" || repoRelativePath.endsWith("/index.html")) {
     return `${SITE_ROOT}/${repoRelativePath.slice(0, -"index.html".length)}`;
   }
   return `${SITE_ROOT}/${repoRelativePath}`;
@@ -27,7 +27,9 @@ function main() {
   const manifestPath = resolve(REPO_ROOT, "assets/site/route-manifest.json");
   const routes = JSON.parse(readFileSync(manifestPath, "utf-8"));
 
-  const urls = [...LEGACY_STATIC_PAGES.map((p) => `${SITE_ROOT}${p}`), ...routes.map(pathToUrl)];
+  const urls = routes
+    .filter((route) => !EXCLUDED_FROM_SITEMAP.has(route))
+    .map(pathToUrl);
 
   const lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',

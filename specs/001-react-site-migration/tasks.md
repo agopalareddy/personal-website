@@ -104,20 +104,20 @@ description: 'Task list for migrating site generation to a component-based build
 
 ### Implementation for User Story 3
 
-- [ ] T034 [P] [US3] Create `Home` page in `site/src/pages/Home.tsx`
-- [ ] T035 [P] [US3] Create `CvHub` page in `site/src/pages/CvHub.tsx` (porting `cv/index.html`'s structure)
-- [ ] T036 [P] [US3] Create `Availability` page in `site/src/pages/Availability.tsx`
-- [ ] T037 [P] [US3] Create `Accessibility` statement page in `site/src/pages/Accessibility.tsx` — must stay accurate to actual a11y behavior (Constitution Principle IV)
-- [ ] T038 [P] [US3] Create `NotFound` (404) page in `site/src/pages/NotFound.tsx`
-- [ ] T039 [P] [US3] Implement `useCatalogFilter` + `CatalogFilter` in `site/src/hooks/useCatalogFilter.ts` + `site/src/components/catalog/CatalogFilter.tsx`, porting the filter/search logic from `assets/js/projects-catalog.js` and `assets/js/experience-catalog.js`
-- [ ] T040 [P] [US3] Implement `useModal` + `Modal` in `site/src/hooks/useModal.ts` + `site/src/components/common/Modal.tsx`, porting `assets/js/cv-modal.js` (using `Icon` from T012 for the close control)
-- [ ] T041 [P] [US3] Implement `useEmailProtection` in `site/src/hooks/useEmailProtection.ts`, porting `assets/js/email-protection.js`'s obfuscation/reveal logic
-- [ ] T042 [US3] Wire `CatalogFilter` (T039) into `ProjectCatalogPage`/`ExperienceCatalogPage` as a hydrated island (T016's mechanism)
-- [ ] T043 [US3] Wire `render.mjs` to render the 5 hand-authored pages (T034–T038) to their existing paths (`index.html`, `cv/index.html`, `availability/index.html`, `accessibility.html`, `404.html`)
-- [ ] T044 [US3] Confirm no-JS behavior across every migrated page: navigation, default theme, and content all present with JavaScript disabled (FR-006, SC-005, Acceptance Scenario 1)
-- [ ] T045 [US3] Confirm theme choice persists across reload/revisit exactly as today (Acceptance Scenario 2)
-- [ ] T046 [US3] Update `tests/e2e/theme-picker.spec.ts` and `tests/e2e/smoke.spec.ts` for any changed selectors (FR-008)
-- [ ] T047 [US3] Delete `assets/js/theme.js`, `projects-catalog.js`, `experience-catalog.js`, `cv-modal.js`, `email-protection.js`, `status-badge.js`, `icons.js` — fully superseded by T012/T013/T014/T039–T041
+- [x] T034 [P] [US3] Create `Home` page in `site/src/pages/Home.tsx`
+- [x] T035 [P] [US3] Create `CvHub` page in `site/src/pages/CvHub.tsx` (porting `cv/index.html`'s structure)
+- [x] T036 [P] [US3] Create `Availability` page in `site/src/pages/Availability.tsx`
+- [x] T037 [P] [US3] Create `Accessibility` statement page in `site/src/pages/Accessibility.tsx` — must stay accurate to actual a11y behavior (Constitution Principle IV). Body content loaded verbatim from `site/src/content/accessibility-body.html` via `loadAccessibilityBody()` rather than hand-transcribed into JSX, for byte-accuracy.
+- [x] T038 [P] [US3] Create `NotFound` (404) page in `site/src/pages/NotFound.tsx` — required `Layout`'s new `hideSidebar`/`activePage?` options since 404 is the one page with no sidebar and no active nav item.
+- [ ] T039 [P] [US3] Implement `useCatalogFilter` + `CatalogFilter` in `site/src/hooks/useCatalogFilter.ts` + `site/src/components/catalog/CatalogFilter.tsx`, porting the filter/search logic from `assets/js/projects-catalog.js` and `assets/js/experience-catalog.js` — **not done**. `tests/e2e/experience-listing.spec.ts`'s filter/search/sort/TOC tests are `test.skip` pending this.
+- [x] T040 [P] [US3] ~~Implement `useModal` + `Modal`~~ — built as `site/src/islands/cv-modal.ts` instead: a plain-DOM client island (direct port of `assets/js/cv-modal.js`'s native-`<dialog>`-imperative logic), not a React hook/component. There's exactly one consumer (`CvHubPage`) and the behavior (`dialog.showModal()`, delegated click handling) is inherently imperative — a React abstraction with no second use case would be indirection, not simplification.
+- [x] T041 [P] [US3] ~~Implement `useEmailProtection`~~ — built as `site/src/islands/email-protection.ts` instead, same reasoning as T040: a global `DOMContentLoaded` DOM-decoding script (direct port of `assets/js/email-protection.js`), not React state. Loaded on every page via `render.mjs`'s `commonIslands`.
+- [ ] T042 [US3] Wire `CatalogFilter` (T039) into `ProjectCatalogPage`/`ExperienceCatalogPage` as a hydrated island (T016's mechanism) — blocked on T039.
+- [x] T043 [US3] Wire `render.mjs` to render the 5 hand-authored pages (T034–T038) to their existing paths (`index.html`, `cv/index.html`, `availability/index.html`, `accessibility.html`, `404.html`)
+- [x] T044 [US3] Confirm no-JS behavior across every migrated page: navigation, default theme, and content all present with JavaScript disabled (FR-006, SC-005, Acceptance Scenario 1) — verified via raw `curl` (no browser JS involved at all) showing full content on every page; structurally guaranteed by the SSG-with-islands architecture (research.md R1), not something that regresses per-page.
+- [x] T045 [US3] Confirm theme choice persists across reload/revisit exactly as today (Acceptance Scenario 2) — covered by the existing `tests/e2e/theme-picker.spec.ts` suite, all passing against the new build.
+- [x] T046 [US3] Update `tests/e2e/theme-picker.spec.ts` and `tests/e2e/smoke.spec.ts` for any changed selectors (FR-008) — no selector changes needed; both suites pass unmodified against the new build.
+- [~] T047 [US3] Delete `assets/js/theme.js`, `projects-catalog.js`, `experience-catalog.js`, `cv-modal.js`, `email-protection.js`, `status-badge.js`, `icons.js` — **partially done**. `projects-catalog.js`, `experience-catalog.js`, and `cv-modal.js` deleted (fully orphaned — nothing left in the repo references them). `theme.js`, `icons.js`, `email-protection.js`, `status-badge.js` **kept**: `files/index.html` and `files/README/index.html` (a file-browser index for `/files/`, not in `contracts/url-contract.md` and out of this migration's scope) still load them directly. Deleting those four now would break a real, still-served page nobody asked to migrate.
 
 **Checkpoint**: Every page and interactive behavior is served by the new pipeline. Only full-suite regression confirmation (User Story 4) remains before retiring the old generator.
 

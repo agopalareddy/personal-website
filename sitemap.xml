@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://agreddy.com/</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/accessibility.html</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/availability/</loc>
-  </url>
-  <url>
-    <loc>https://agreddy.com/cv/</loc>
-  </url>
-  <url>
     <loc>https://agreddy.com/projects/</loc>
   </url>
   <url>
@@ -185,5 +173,17 @@
   </url>
   <url>
     <loc>https://agreddy.com/experience/leadership/2021-08-member.html</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/cv/</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/availability/</loc>
+  </url>
+  <url>
+    <loc>https://agreddy.com/accessibility.html</loc>
   </url>
 </urlset>

@@ -17,6 +17,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         theme: resolve(__dirname, "site/src/islands/theme.tsx"),
+        "email-protection": resolve(__dirname, "site/src/islands/email-protection.ts"),
+        "cv-modal": resolve(__dirname, "site/src/islands/cv-modal.ts"),
       },
     },
   },

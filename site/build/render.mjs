@@ -15,6 +15,11 @@ import { ProjectCatalogPage } from "../src/pages/ProjectCatalog.tsx";
 import { ProjectDetailPage } from "../src/pages/ProjectDetail.tsx";
 import { ExperienceCatalogPage } from "../src/pages/ExperienceCatalog.tsx";
 import { ExperienceDetailPage } from "../src/pages/ExperienceDetail.tsx";
+import { HomePage } from "../src/pages/Home.tsx";
+import { CvHubPage } from "../src/pages/CvHub.tsx";
+import { AvailabilityPage } from "../src/pages/Availability.tsx";
+import { AccessibilityPage } from "../src/pages/Accessibility.tsx";
+import { NotFoundPage } from "../src/pages/NotFound.tsx";
 
 const REPO_ROOT = fileURLToPath(new URL("../..", import.meta.url));
 
@@ -45,6 +50,12 @@ function renderPage(element, outPath, islandTags) {
 async function main() {
   const manifest = await buildIslands();
   const themeIsland = islandScriptTag(manifest, "src/islands/theme.tsx");
+  const emailProtectionIsland = islandScriptTag(manifest, "src/islands/email-protection.ts");
+  const cvModalIsland = islandScriptTag(manifest, "src/islands/cv-modal.ts");
+
+  // Loaded on every page — the protected-email markup in Sidebar/Footer/etc.
+  // needs this decoder to become a working mailto: link with JS enabled.
+  const commonIslands = [themeIsland, emailProtectionIsland];
 
   const projects = loadProjects();
   const written = [];
@@ -54,21 +65,21 @@ async function main() {
   // so there's no Rules-of-Hooks concern, and it keeps this orchestrator
   // file JSX-free.
   written.push(
-    renderPage(ProjectCatalogPage({ projects }), "projects/index.html", [themeIsland]),
+    renderPage(ProjectCatalogPage({ projects }), "projects/index.html", commonIslands),
   );
 
   for (const p of projects) {
     if (!p.has_detail) continue;
     const slug = p.permalink.replace(/^\/projects\//, "");
     written.push(
-      renderPage(ProjectDetailPage({ p }), `projects/${slug}.html`, [themeIsland]),
+      renderPage(ProjectDetailPage({ p }), `projects/${slug}.html`, commonIslands),
     );
   }
 
   const experiences = loadExperience();
 
   written.push(
-    renderPage(ExperienceCatalogPage({ entries: experiences }), "experience/index.html", [themeIsland]),
+    renderPage(ExperienceCatalogPage({ entries: experiences }), "experience/index.html", commonIslands),
   );
 
   for (const e of experiences) {
@@ -79,10 +90,16 @@ async function main() {
       renderPage(
         ExperienceDetailPage({ e }),
         `experience/${e.category}/${e.id}.html`,
-        [themeIsland],
+        commonIslands,
       ),
     );
   }
+
+  written.push(renderPage(HomePage(), "index.html", commonIslands));
+  written.push(renderPage(CvHubPage(), "cv/index.html", [...commonIslands, cvModalIsland]));
+  written.push(renderPage(AvailabilityPage(), "availability/index.html", commonIslands));
+  written.push(renderPage(AccessibilityPage(), "accessibility.html", commonIslands));
+  written.push(renderPage(NotFoundPage(), "404.html", commonIslands));
 
   // Route manifest for scripts/generate-sitemap.mjs (research.md R5) — the
   // sitemap is derived from exactly what this build wrote, never hand-maintained.

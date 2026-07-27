@@ -11,7 +11,7 @@ const NAV_ITEMS: Array<{ key: string; href: string; label: string; icon: IconNam
 export type ActivePage = (typeof NAV_ITEMS)[number]["key"];
 
 /** Ported from scripts/chrome.py's render_nav(). */
-export function Nav({ activePage }: { activePage: ActivePage }) {
+export function Nav({ activePage }: { activePage?: ActivePage }) {
   return (
     <header className="top-header">
       <div className="top-bar container">

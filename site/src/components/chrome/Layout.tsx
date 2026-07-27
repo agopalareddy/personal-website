@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
-import { Head, type HeadProps } from "./Head";
-import { Nav, type ActivePage } from "./Nav";
-import { Sidebar } from "./Sidebar";
-import { Footer } from "./Footer";
+import type { ReactNode } from 'react';
+import { Head, type HeadProps } from './Head';
+import { Nav, type ActivePage } from './Nav';
+import { Sidebar } from './Sidebar';
+import { Footer } from './Footer';
 
 export interface LayoutProps extends HeadProps {
   activePage?: ActivePage;
@@ -10,6 +10,8 @@ export interface LayoutProps extends HeadProps {
   bodyClassName?: string;
   /** 404.html and similarly plain pages skip the academic-layout sidebar entirely. */
   hideSidebar?: boolean;
+  /** Catalog pages' filter/TOC panel (CatalogFilter), rendered inside the sidebar after the author bio. */
+  sidebarExtra?: ReactNode;
   children: ReactNode;
 }
 
@@ -24,6 +26,7 @@ export function Layout({
   contentAriaLabel,
   bodyClassName,
   hideSidebar,
+  sidebarExtra,
   children,
   ...headProps
 }: LayoutProps) {
@@ -43,7 +46,7 @@ export function Layout({
               children
             ) : (
               <div className="academic-layout">
-                <Sidebar />
+                <Sidebar>{sidebarExtra}</Sidebar>
                 <article className="academic-content" aria-label={contentAriaLabel}>
                   {children}
                 </article>

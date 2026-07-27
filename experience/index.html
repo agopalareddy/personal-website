@@ -282,6 +282,173 @@
                 </li>
               </ul>
             </div>
+            <div class="toc-container card-surface" id="filterControls">
+              <button
+                class="toc-toggle-btn"
+                id="filterToggleBtn"
+                aria-expanded="true"
+                aria-controls="filterNav"
+              >
+                <h3 class="toc-title">Filters &amp; Search</h3>
+                <span class="toc-toggle-icon" aria-hidden="true"></span>
+              </button>
+              <div id="filterNav">
+                <search>
+                  <div class="projects-controls projects-controls--stacked">
+                    <div class="controls-row">
+                      <div class="filter-pills" role="group" aria-label="Category Filters">
+                        <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                          All</button
+                        ><button class="filter-btn" data-filter="professional" aria-pressed="false">
+                          Professional</button
+                        ><button class="filter-btn" data-filter="education" aria-pressed="false">
+                          Education</button
+                        ><button class="filter-btn" data-filter="research" aria-pressed="false">
+                          Research</button
+                        ><button class="filter-btn" data-filter="leadership" aria-pressed="false">
+                          Leadership</button
+                        ><button
+                          class="filter-btn"
+                          data-filter="presentations"
+                          aria-pressed="false"
+                        >
+                          Presentations</button
+                        ><button class="filter-btn" data-filter="awards" aria-pressed="false">
+                          Awards
+                        </button>
+                      </div>
+                      <div class="search-wrapper">
+                        <span class="search-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-search"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
+                              ></path></svg></span></span
+                        ><input
+                          type="text"
+                          class="search-input"
+                          id="experienceSearch"
+                          aria-label="Search experience by title, organization, or keyword"
+                          placeholder="Search experience..."
+                        />
+                      </div>
+                    </div>
+                    <div class="controls-row controls-row--bordered">
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="orgFilter"
+                          data-role="group-filter"
+                          aria-label="Filter experience by organization"
+                        >
+                          <option value="all">All Organizations</option>
+                          <option value="WashU">Washington University in St. Louis</option>
+                          <option value="OWU">Ohio Wesleyan University</option>
+                          <option value="Corporate">Corporate / Industry</option>
+                          <option value="Personal">Other / Personal</option></select
+                        ><span class="select-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-chevron-down"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                              ></path></svg></span
+                        ></span>
+                      </div>
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="yearFilter"
+                          data-role="year-filter"
+                          aria-label="Filter experience by year range"
+                        >
+                          <option value="all">All Years</option>
+                          <option value="2026">2026</option>
+                          <option value="2025">2025</option>
+                          <option value="2024">2024</option>
+                          <option value="2023">2023</option>
+                          <option value="2022">2022</option>
+                          <option value="2020">2020</option></select
+                        ><span class="select-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-chevron-down"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                              ></path></svg></span
+                        ></span>
+                      </div>
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="experienceSort"
+                          data-role="sort"
+                          aria-label="Sort experience chronologically or alphabetically"
+                        >
+                          <option value="date-desc">Newest First</option>
+                          <option value="date-asc">Oldest First</option>
+                          <option value="title-asc">Alphabetical (A-Z)</option></select
+                        ><span class="select-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-chevron-down"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                              ></path></svg></span
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </search>
+              </div>
+            </div>
+            <div class="toc-container card-surface" id="tocContainer" hidden="">
+              <button
+                class="toc-toggle-btn"
+                id="tocToggleBtn"
+                aria-expanded="true"
+                aria-controls="tocNav"
+              >
+                <h3 class="toc-title">On this page</h3>
+                <span class="toc-toggle-icon" aria-hidden="true"></span>
+              </button>
+              <nav aria-label="Table of contents" id="tocNav">
+                <ul class="toc-list" id="tocList"></ul>
+              </nav>
+            </div>
           </aside>
           <article class="academic-content" aria-label="Experience Grid Content">
             <h1 class="page-intro-title">Experience</h1>
@@ -296,6 +463,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2024-08-m-s-computer-science"
                   data-category="education"
+                  data-group="WashU"
+                  data-year="2026"
+                  data-date="2026-05-31"
+                  data-title="M.S. Computer Science"
+                  data-search="m.s. computer science m.s. in computer science at washu&#x27;s mckelvey school of engineering (gpa 3.67/4.00), capped by a master&#x27;s thesis on predicting cognitive impairment from naturalistic driving data. washington university in st. louis st. louis, missouri, usa washu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -345,6 +517,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2025-11-graduate-assistant-with-the-taylor-family-center"
                   data-category="professional"
+                  data-group="WashU"
+                  data-year="2026"
+                  data-date="2026-05-31"
+                  data-title="Graduate Assistant with the Taylor Family Center for Student Success"
+                  data-search="graduate assistant with the taylor family center for student success drove event programming, ferpa-compliant engagement analytics, and communications for washu&#x27;s center supporting first-generation and limited-income students. washington university in st. louis st. louis, missouri, usa washu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -394,6 +571,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2026-01-graduate-teaching-assistant-cse-5114-data"
                   data-category="professional"
+                  data-group="WashU"
+                  data-year="2026"
+                  data-date="2026-05-31"
+                  data-title="Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale"
+                  data-search="graduate teaching assistant - cse 5114: data manipulation and management at scale supported a graduate data engineering course spanning snowflake, airflow, spark, kafka, and flink — running interview-style oral midterms and mentoring three capstone teams. washington university in st. louis st. louis, missouri, usa washu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -444,6 +626,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2025-08-member"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2026"
+                  data-date="2026-05-31"
+                  data-title="Member - GSAAB"
+                  data-search="member - gsaab provided strategic feedback to the vice chancellor for student affairs on critical issues impacting graduate student life and experience. graduate student affairs advisory board (gsaab) washington university in st. louis, st. louis, missouri, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -493,6 +680,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2025-08-graduate-student-member"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2026"
+                  data-date="2026-05-31"
+                  data-title="Graduate Student Member - CCE Board"
+                  data-search="graduate student member - cce board served on a 25-30 member advisory board guiding the strategic direction of washu&#x27;s center for career engagement on behalf of graduate students. center for career engagement (cce) student advisory board washington university in st. louis, st. louis, missouri, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -542,6 +734,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2025-05-vice-president-of-the-graduate-professional-council"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2026"
+                  data-date="2026-05-31"
+                  data-title="Vice President of the Graduate-Professional Council (GPC) Chamber - GPSC"
+                  data-search="vice president of the graduate-professional council (gpc) chamber - gpsc launched the merged council&#x27;s first unified collaboration workspace and chaired the committee that drafted and ratified its founding constitution and bylaws. graduate and professional student council (gpsc) washington university in st. louis, st. louis, missouri, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -592,6 +789,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2025-08-toward-vehicle-agnostic-driving-signatures-for"
                   data-category="research"
+                  data-group="WashU"
+                  data-year="2026"
+                  data-date="2026-04-30"
+                  data-title="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+                  data-search="toward vehicle-agnostic driving signatures for cognitive impairment prediction from naturalistic driving data master&#x27;s thesis benchmarking six model families on 26,968 participant-weeks of naturalistic driving data from 304 older adults to predict cognitive impairment across vehicle types. drives project, washington university in st. louis master&#x27;s thesis (thesis supervisor &amp; lab pi: dr. ganesh babulal; thesis advisor &amp; committee chair: dr. alvitta ottley) st. louis, missouri, usa washu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -644,6 +846,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2026-04-bauer-leaders-academy-bla-leadership-development"
                   data-category="awards"
+                  data-group="WashU"
+                  data-year="2026"
+                  data-date="2026-04-01"
+                  data-title="Bauer Leaders Academy (BLA) Leadership Development Badge"
+                  data-search="bauer leaders academy (bla) leadership development badge earned the bauer leaders academy leadership development badge through leadership workshops, one-on-one coaching, and experiential learning. washington university in st. louis washu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -691,6 +898,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2025-06-treasurer"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2025"
+                  data-date="2025-10-31"
+                  data-title="Treasurer - Umang"
+                  data-search="treasurer - umang managed finances and university funding requests for washu&#x27;s indian graduate student association, enabling cultural events and community programming. umang (indian graduate student association) washington university in st. louis, st. louis, missouri, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -741,6 +953,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2025-06-ai-engineer-intern"
                   data-category="professional"
+                  data-group="Corporate"
+                  data-year="2025"
+                  data-date="2025-08-31"
+                  data-title="AI Engineer Intern"
+                  data-search="ai engineer intern generated 100,000 labeled social media posts across seven personas and trained a tensorflow/keras recommendation model achieving 80% accuracy for crittercircle, crittero&#x27;s social platform. crittero, inc. remote"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -788,6 +1005,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2024-12-treasurer"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2025"
+                  data-date="2025-07-31"
+                  data-title="Treasurer - HackWashU"
+                  data-search="treasurer - hackwashu managed finances, fundraising, and sponsorship outreach for washu&#x27;s student hackathon organization. hackwashu washington university in st. louis, st. louis, missouri, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -836,6 +1058,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2024-08-graduate-assistant-with-the-taylor-family-center"
                   data-category="professional"
+                  data-group="WashU"
+                  data-year="2025"
+                  data-date="2025-05-31"
+                  data-title="Graduate Assistant with the Taylor Family Center for Student Success"
+                  data-search="graduate assistant with the taylor family center for student success organized signature community events and led engagement analytics and communications for washu&#x27;s center supporting first-generation and limited-income students. washington university in st. louis st. louis, missouri, usa washu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -886,6 +1113,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2024-09-an-introduction-to-artificial-intelligence-for-high"
                   data-category="presentations"
+                  data-group="Personal"
+                  data-year="2024"
+                  data-date="2024-09-01"
+                  data-title="An Introduction to Artificial Intelligence for High School Students"
+                  data-search="an introduction to artificial intelligence for high school students presented on artificial intelligence — with a hands-on connect 4 ai demo — to high school students at a workshop hosted by ages and science coach. engineering workshop by ages &amp; science coach washington university in st. louis"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -935,6 +1167,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2023-06-data-analyst-intern"
                   data-category="professional"
+                  data-group="Corporate"
+                  data-year="2024"
+                  data-date="2024-05-31"
+                  data-title="Data Analyst Intern"
+                  data-search="data analyst intern designed and engineered a figma-to-react ui for an environmental sensor device; analyzed iot sensor data on aws, building dashboards that cut client pool maintenance costs by 20%. lab714 boca raton, florida, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -982,6 +1219,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2024-05-graduate-scholarship"
                   data-category="awards"
+                  data-group="WashU"
+                  data-year="2024"
+                  data-date="2024-05-01"
+                  data-title="Graduate Scholarship"
+                  data-search="graduate scholarship awarded a scholarship for graduate study at washington university in st. louis&#x27;s mckelvey school of engineering. washington university in st. louis washu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1029,6 +1271,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2020-08-b-a-computer-science-data-analytics"
                   data-category="education"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="B.A. Computer Science &amp; Data Analytics"
+                  data-search="b.a. computer science &amp; data analytics b.a. in computer science &amp; data analytics with an economics minor at ohio wesleyan university — four-year program completed in three years. ohio wesleyan university delaware, ohio, usa owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1075,6 +1322,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2023-01-opinion-survey-on-artificial-intelligence-in-the"
                   data-category="research"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="Opinion Survey on Artificial Intelligence in the Workplace"
+                  data-search="opinion survey on artificial intelligence in the workplace designed and fielded a capstone survey experiment on workplace attitudes toward ai across four industries, analyzing 1,000 employee responses with r and tableau. ohio wesleyan university data analytics capstone — data 490 independent study (mentor: dr. nicholas dietrich) delaware, ohio, usa owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1125,6 +1377,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2021-09-media-center-assistant"
                   data-category="professional"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="Media Center Assistant"
+                  data-search="media center assistant provided audio-visual setup, logistics tracking, and on-site troubleshooting for events across the ohio wesleyan campus. ohio wesleyan university delaware, ohio, usa owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1171,6 +1428,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-01-computer-science-lab-assistant"
                   data-category="professional"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="Computer Science Lab Assistant"
+                  data-search="computer science lab assistant tutored 10+ students weekly across introductory through advanced computer science courses and graded assignments for roughly 35 students. ohio wesleyan university delaware, ohio, usa owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1217,6 +1479,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2023-01-treasurer-and-founding-member"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="Treasurer and Founding Member - HSC"
+                  data-search="treasurer and founding member - hsc co-founded ohio wesleyan&#x27;s hindu student council and managed its finances, organizing holi, diwali, and other cultural celebrations. hindu student council ohio wesleyan university, delaware, ohio, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1265,6 +1532,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-08-budget-committee-senator"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="Budget Committee Senator - WCSA"
+                  data-search="budget committee senator - wcsa oversaw the allocation of a $350,000+ annual budget as a student government senator, earning the golden bishop award for wcsa best new member. wesleyan council on student affairs (wcsa) ohio wesleyan university, delaware, ohio, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1314,6 +1586,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-08-member"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="Founding Member - The Neurds"
+                  data-search="founding member - the neurds founding member of ohio wesleyan&#x27;s neuroscience club; presented on ai at brain fair 2023 during brain awareness week. the neurds (neuroscience club) ohio wesleyan university, delaware, ohio, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1362,6 +1639,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2021-08-member"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2023"
+                  data-date="2023-05-31"
+                  data-title="Member - Math/CS Board"
+                  data-search="member - math/cs board advised the department by analyzing faculty evaluations and synthesizing student feedback on course offerings. mathematics, computer science &amp; data analytics student board ohio wesleyan university, delaware, ohio, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1411,6 +1693,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2023-05-dean-s-list"
                   data-category="awards"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-05-01"
+                  data-title="Dean&#x27;s List"
+                  data-search="dean&#x27;s list named to ohio wesleyan&#x27;s spring 2023 dean&#x27;s list for achieving a gpa of 3.5 or higher. ohio wesleyan university owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1457,6 +1744,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2023-04-artificial-intelligence-opinion-survey"
                   data-category="presentations"
+                  data-group="Personal"
+                  data-year="2023"
+                  data-date="2023-04-01"
+                  data-title="Artificial Intelligence Opinion Survey"
+                  data-search="artificial intelligence opinion survey presented the &#x27;artificial intelligence opinion survey&#x27; capstone research at ohio wesleyan&#x27;s 2023 spring student symposium. spring student symposium ohio wesleyan university"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1505,6 +1797,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2023-04-mortar-board-national-college-senior-honor-society"
                   data-category="awards"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-04-01"
+                  data-title="Mortar Board National College Senior Honor Society Membership"
+                  data-search="mortar board national college senior honor society membership one of 15 ohio wesleyan students inducted into mortar board, the national senior honor society recognizing exemplary scholarship, leadership, and service. ohio wesleyan university owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1551,6 +1848,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2023-04-golden-bishop-award-wcsa-best-new-member"
                   data-category="awards"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-04-01"
+                  data-title="Golden Bishop Award - WCSA Best New Member"
+                  data-search="golden bishop award - wcsa best new member named wcsa best new member at ohio wesleyan&#x27;s 2022-23 golden bishop awards for the greatest overall contribution by a first-term member of the student government. ohio wesleyan university owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1599,6 +1901,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-01-vice-president-of-finance"
                   data-category="leadership"
+                  data-group="Personal"
+                  data-year="2022"
+                  data-date="2022-12-31"
+                  data-title="Vice President of Finance - CPB"
+                  data-search="vice president of finance - cpb managed an $86,000+ events budget for ohio wesleyan&#x27;s campus programming board and negotiated a $10,000 annual funding increase. campus programming board ohio wesleyan university, delaware, ohio, usa"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1647,6 +1954,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-09-artificial-intelligence-in-modern-board-games"
                   data-category="presentations"
+                  data-group="Personal"
+                  data-year="2022"
+                  data-date="2022-09-01"
+                  data-title="Artificial Intelligence in Modern Board Games"
+                  data-search="artificial intelligence in modern board games presented &#x27;artificial intelligence in modern board games&#x27; research at ohio wesleyan&#x27;s patricia belt conrades summer science research symposium. patricia belt conrades summer science research symposium ohio wesleyan university"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1696,6 +2008,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-05-artificial-intelligence-in-modern-board-games-lost"
                   data-category="research"
+                  data-group="OWU"
+                  data-year="2022"
+                  data-date="2022-07-31"
+                  data-title="Artificial Intelligence in Modern Board Games - Lost Cities AI"
+                  data-search="artificial intelligence in modern board games - lost cities ai built a digital lost cities card game in java and a heuristic-driven ai agent that won over 70% of test games against human players during a mentored summer research program. ohio wesleyan university summer science research program (mentor: dr. sean mcculloch) delaware, ohio, usa owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1746,6 +2063,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-05-dean-s-list"
                   data-category="awards"
+                  data-group="OWU"
+                  data-year="2022"
+                  data-date="2022-05-01"
+                  data-title="Dean&#x27;s List"
+                  data-search="dean&#x27;s list named to ohio wesleyan&#x27;s spring 2022 dean&#x27;s list for achieving a gpa of 3.5 or higher. ohio wesleyan university owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1792,6 +2114,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-04-florence-leas-sophomore-prize"
                   data-category="awards"
+                  data-group="OWU"
+                  data-year="2022"
+                  data-date="2022-04-01"
+                  data-title="Florence Leas Sophomore Prize"
+                  data-search="florence leas sophomore prize awarded the florence leas prize for excelling in mathematics or computer science, on faculty recommendation. ohio wesleyan university owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1838,6 +2165,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2022-03-first-place-32nd-annual-spring-programming-contest"
                   data-category="awards"
+                  data-group="Personal"
+                  data-year="2022"
+                  data-date="2022-03-01"
+                  data-title="First Place - 32nd Annual Spring Programming Contest"
+                  data-search="first place - 32nd annual spring programming contest won first place with team codebit-19, solving all eight problems against 28 teams from six schools at denison&#x27;s annual programming contest. denison university"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1885,6 +2217,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2020-01-international-baccalaureate-scholarship"
                   data-category="awards"
+                  data-group="OWU"
+                  data-year="2020"
+                  data-date="2020-01-01"
+                  data-title="International Baccalaureate Scholarship"
+                  data-search="international baccalaureate scholarship awarded ohio wesleyan&#x27;s international baccalaureate scholarship for excelling in the ib diploma programme. ohio wesleyan university owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1931,6 +2268,11 @@
                   class="project-card card-surface timeline-card experience-card"
                   id="exp-2020-01-scholar"
                   data-category="awards"
+                  data-group="Personal"
+                  data-year="2020"
+                  data-date="2020-01-01"
+                  data-title="Next Genius Scholar"
+                  data-search="next genius scholar selected as a next genius scholar through a competitive program funding high-performing indian students at leading global universities. next genius scholarship foundation"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1974,6 +2316,9 @@
                   </div>
                 </div>
               </div>
+              <div id="emptyState" class="empty-state" hidden="">
+                No experience entries match your search or filter criteria.
+              </div>
             </div>
           </article>
         </div>
@@ -2005,5 +2350,6 @@
     <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
     <script type="module" src="/assets/site/assets/theme-D_rgo2Xr.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
+    <script type="module" src="/assets/site/assets/catalog-filter-CRJqc_i6.js"></script>
   </body>
 </html>

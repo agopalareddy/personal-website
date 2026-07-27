@@ -288,6 +288,170 @@
                 </li>
               </ul>
             </div>
+            <div class="toc-container card-surface" id="filterControls">
+              <button
+                class="toc-toggle-btn"
+                id="filterToggleBtn"
+                aria-expanded="true"
+                aria-controls="filterNav"
+              >
+                <h3 class="toc-title">Filters &amp; Search</h3>
+                <span class="toc-toggle-icon" aria-hidden="true"></span>
+              </button>
+              <div id="filterNav">
+                <search>
+                  <div class="projects-controls projects-controls--stacked">
+                    <div class="controls-row">
+                      <div class="filter-pills" role="group" aria-label="Category Filters">
+                        <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                          All</button
+                        ><button
+                          class="filter-btn"
+                          data-filter="Research &amp; ML"
+                          aria-pressed="false"
+                        >
+                          Research &amp; ML</button
+                        ><button
+                          class="filter-btn"
+                          data-filter="Software &amp; Tools"
+                          aria-pressed="false"
+                        >
+                          Software &amp; Tools</button
+                        ><button class="filter-btn" data-filter="Web Apps" aria-pressed="false">
+                          Web Apps
+                        </button>
+                      </div>
+                      <div class="search-wrapper">
+                        <span class="search-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-search"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
+                              ></path></svg></span></span
+                        ><input
+                          type="text"
+                          class="search-input"
+                          id="projectSearch"
+                          aria-label="Search projects by title, tags, or venues"
+                          placeholder="Search projects, tags, venues..."
+                        />
+                      </div>
+                    </div>
+                    <div class="controls-row controls-row--bordered">
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="venueFilter"
+                          data-role="group-filter"
+                          aria-label="Filter projects by institution or venue"
+                        >
+                          <option value="all">All Institutions/Venues</option>
+                          <option value="WashU">Washington University in St. Louis</option>
+                          <option value="OWU">Ohio Wesleyan University</option>
+                          <option value="MITxSureStart">MITxSureStart</option>
+                          <option value="Personal">Personal Projects</option></select
+                        ><span class="select-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-chevron-down"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                              ></path></svg></span
+                        ></span>
+                      </div>
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="yearFilter"
+                          data-role="year-filter"
+                          aria-label="Filter projects by year range"
+                        >
+                          <option value="all">All Years</option>
+                          <option value="2026">2026</option>
+                          <option value="2025">2025</option>
+                          <option value="2024">2024</option>
+                          <option value="2023">2023</option>
+                          <option value="2022">2022</option></select
+                        ><span class="select-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-chevron-down"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                              ></path></svg></span
+                        ></span>
+                      </div>
+                      <div class="select-wrapper">
+                        <select
+                          class="custom-select"
+                          id="projectSort"
+                          data-role="sort"
+                          aria-label="Sort projects chronologically or alphabetically"
+                        >
+                          <option value="date-desc">Newest First</option>
+                          <option value="date-asc">Oldest First</option>
+                          <option value="title-asc">Alphabetical (A-Z)</option></select
+                        ><span class="select-icon"
+                          ><span style="display: contents"
+                            ><svg
+                              class="octicon octicon-chevron-down"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                              focusable="false"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                              ></path></svg></span
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </search>
+              </div>
+            </div>
+            <div class="toc-container card-surface" id="tocContainer" hidden="">
+              <button
+                class="toc-toggle-btn"
+                id="tocToggleBtn"
+                aria-expanded="true"
+                aria-controls="tocNav"
+              >
+                <h3 class="toc-title">On this page</h3>
+                <span class="toc-toggle-icon" aria-hidden="true"></span>
+              </button>
+              <nav aria-label="Table of contents" id="tocNav">
+                <ul class="toc-list" id="tocList"></ul>
+              </nav>
+            </div>
           </aside>
           <article class="academic-content" aria-label="Projects Grid Content">
             <h1 class="page-intro-title">Academic &amp; Engineering Projects</h1>
@@ -298,7 +462,16 @@
             <div class="projects-container">
               <div class="project-timeline timeline-section" id="projectGrid">
                 <h2 class="timeline-year" id="year-2026">2026</h2>
-                <div class="project-card card-surface timeline-card" id="proj-2026-06-env-monitor">
+                <div
+                  class="project-card card-surface timeline-card"
+                  id="proj-2026-06-env-monitor"
+                  data-category="Software &amp; Tools"
+                  data-group="Personal"
+                  data-year="2026"
+                  data-date="2026-06-23"
+                  data-title="Environment Monitor"
+                  data-search="environment monitor an arduino-based continuous environment monitor using a dht11 sensor and lcd 1602 display, with rolling eeprom buffer, dew point calculation, and ambient light sensing. personal project personal arduino c++ dht11 lcd 1602 eeprom embedded systems  "
+                >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
                     <span class="card-category cat-tools">Software &amp; Tools</span
@@ -372,6 +545,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2026-06-wellness-companion"
+                  data-category="Web Apps"
+                  data-group="Kaggle"
+                  data-year="2026"
+                  data-date="2026-06-21"
+                  data-title="AURA: Ambient Wellness Companion"
+                  data-search="aura: ambient wellness companion built aura, a privacy-first elderly wellness companion using google adk 2.0 multi-agent orchestration and gemini. empathetic check-ins, medication compliance tracking, anonymized telemetry, and automatic escalation for critical wellness drops. kaggle agents for good hackathon kaggle python fastapi google adk gemini mcp multi-agent systems javascript html css  "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -466,7 +645,16 @@
                     >
                   </div>
                 </div>
-                <div class="project-card card-surface timeline-card" id="proj-2026-06-speedtest">
+                <div
+                  class="project-card card-surface timeline-card"
+                  id="proj-2026-06-speedtest"
+                  data-category="Software &amp; Tools"
+                  data-group="Personal"
+                  data-year="2026"
+                  data-date="2026-06-15"
+                  data-title="Speed Test"
+                  data-search="speed test a simple, single-page network speed test measuring download speed, upload speed, and ping against the server hosting this site, with live-updating results and connection details. personal project personal node.js express javascript streams api  "
+                >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
                     <span class="card-category cat-tools">Software &amp; Tools</span
@@ -559,6 +747,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2026-06-blink-morse-decoder"
+                  data-category="Software &amp; Tools"
+                  data-group="Personal"
+                  data-year="2026"
+                  data-date="2026-06-01"
+                  data-title="Blink Morse Decoder"
+                  data-search="blink morse decoder an accessibility-focused android app that translates deliberate eye blinks into morse code text using real-time camera-based facial landmark tracking and a custom blink state machine — enabling hands-free communication without extra hardware. codetilldawn hackathon personal kotlin android camerax smartspectra material 3  "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -630,7 +824,16 @@
                     >
                   </div>
                 </div>
-                <div class="project-card card-surface timeline-card" id="proj-2026-04-ms-thesis">
+                <div
+                  class="project-card card-surface timeline-card"
+                  id="proj-2026-04-ms-thesis"
+                  data-category="Research &amp; ML"
+                  data-group="WashU"
+                  data-year="2026"
+                  data-date="2026-04-01"
+                  data-title="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+                  data-search="toward vehicle-agnostic driving signatures for cognitive impairment prediction from naturalistic driving data master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults. washington university in st. louis washu python pytorch deep learning domain adaptation sequence modeling scikit-learn pandas numpy matplotlib git washu "
+                >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
                     <span class="card-category cat-research">Research &amp; ML</span
@@ -707,7 +910,16 @@
                   </div>
                 </div>
                 <h2 class="timeline-year" id="year-2025">2025</h2>
-                <div class="project-card card-surface timeline-card" id="proj-2025-08-vlm-security">
+                <div
+                  class="project-card card-surface timeline-card"
+                  id="proj-2025-08-vlm-security"
+                  data-category="Research &amp; ML"
+                  data-group="WashU"
+                  data-year="2025"
+                  data-date="2025-10-02"
+                  data-title="Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses"
+                  data-search="red-blue visual auto defender: automated visual jailbreak generation and explainable defenses built a red-blue teaming system for vlm security that automatically generates visual jailbreak attacks and explainable, code-based defenses using ocr and keyword detection. washington university in st. louis washu python pytorch transformers gemma-3 pillow opencv ocr openai api anthropic api washu "
+                >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
                     <span class="card-category cat-research">Research &amp; ML</span
@@ -783,6 +995,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2025-08-mlb-statcast-pipeline"
+                  data-category="Research &amp; ML"
+                  data-group="WashU"
+                  data-year="2025"
+                  data-date="2025-10-01"
+                  data-title="MLB Statcast Real-Time Data Pipeline"
+                  data-search="mlb statcast real-time data pipeline built a real-time data pipeline for mlb pitch data using apache airflow, snowflake, and kafka, with an interactive streamlit dashboard for pitch analysis and visualization. washington university in st. louis washu python apache airflow snowflake apache kafka apache spark streamlit pybaseball pandas washu "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -859,6 +1077,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2025-10-hackwashu-databases-workshop"
+                  data-category="Software &amp; Tools"
+                  data-group="WashU"
+                  data-year="2025"
+                  data-date="2025-09-15"
+                  data-title="HackWashU Databases Workshop"
+                  data-search="hackwashu databases workshop developed and facilitated a hands-on databases workshop teaching sqlite, supabase, api integration, and full-stack web development through two complete projects. washington university in st. louis - hackwashu washu python sqlite supabase postgresql javascript html css apis database design washu "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -934,6 +1158,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2025-08-google-calendar-sync"
+                  data-category="Software &amp; Tools"
+                  data-group="Personal"
+                  data-year="2025"
+                  data-date="2025-08-11"
+                  data-title="Google Calendar Availability Sync"
+                  data-search="google calendar availability sync a google apps script that automatically syncs events from multiple source calendars to a single &#x27;availability&#x27; calendar, creating customizable availability blocks while preserving privacy. personal project personal google apps script javascript google calendar api  "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1027,6 +1257,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2024-11-php-calendar-app"
+                  data-category="Web Apps"
+                  data-group="WashU"
+                  data-year="2025"
+                  data-date="2025-07-15"
+                  data-title="PHP Calendar Application"
+                  data-search="php calendar application developed chronos, a feature-rich personal calendar and event management web app using php 8.4 and mysql, with secure authentication, an interactive month-view dashboard, and a glassmorphic ui. washington university in st. louis washu php mysql html css javascript web security database design authentication git washu "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1123,6 +1359,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2025-07-bayesian-optimization"
+                  data-category="Research &amp; ML"
+                  data-group="Personal"
+                  data-year="2025"
+                  data-date="2025-07-01"
+                  data-title="Bayesian Optimization for Material and Product Optimization"
+                  data-search="bayesian optimization for material and product optimization applied bayesian optimization techniques for hyperparameter tuning and feature optimization across superconductivity, concrete strength, and wine quality prediction problems. personal project personal python jupyter notebooks scikit-learn scikit-optimize xgboost numpy pandas matplotlib seaborn  "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1200,6 +1442,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2025-11-instagram-unfollow-checker"
+                  data-category="Software &amp; Tools"
+                  data-group="Personal"
+                  data-year="2025"
+                  data-date="2025-06-01"
+                  data-title="Instagram Unfollow Checker"
+                  data-search="instagram unfollow checker a cross-platform gui application that identifies instagram accounts you follow that don&#x27;t follow you back, with session management and 2fa support. personal project personal python tkinter instaloader pyinstaller  "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1272,6 +1520,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2025-05-desperate-housewives-monologues"
+                  data-category="Research &amp; ML"
+                  data-group="Personal"
+                  data-year="2025"
+                  data-date="2025-05-31"
+                  data-title="Desperate Housewives Monologues Dataset"
+                  data-search="desperate housewives monologues dataset extracted and organized monologues from desperate housewives for nlp analysis, sentiment analysis, and text-based machine learning projects. personal project personal python nlp text processing  "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1344,6 +1598,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2024-12-datacenter-cooling"
+                  data-category="Research &amp; ML"
+                  data-group="WashU"
+                  data-year="2024"
+                  data-date="2024-11-30"
+                  data-title="Datacenter Cooling Optimization using Deep Reinforcement Learning"
+                  data-search="datacenter cooling optimization using deep reinforcement learning implemented multiple deep reinforcement learning algorithms (ddqn, ppo, sac) integrated with energyplus simulations to optimize datacenter cooling systems for improved energy efficiency. washington university in st. louis washu python pytorch energyplus gymnasium sinergym numpy tensorboard git washu "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1418,6 +1678,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2024-12-interactive-storybook"
+                  data-category="Web Apps"
+                  data-group="WashU"
+                  data-year="2024"
+                  data-date="2024-11-30"
+                  data-title="Interactive Storybook"
+                  data-search="interactive storybook built tales we weave, an ai-powered interactive storytelling platform where readers shape branching narratives through choices, with ai-generated text (google gemini) and illustrations (fal.ai), built with vue 3, express, and mongodb. washington university in st. louis washu vue.js pinia vue router node.js express.js mongodb google gemini api fal.ai javascript html css ai integration git washu "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1516,6 +1782,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2024-12-multimodal-alzheimers"
+                  data-category="Research &amp; ML"
+                  data-group="WashU"
+                  data-year="2024"
+                  data-date="2024-11-30"
+                  data-title="Multimodal Prediction of Alzheimer&#x27;s Disease"
+                  data-search="multimodal prediction of alzheimer&#x27;s disease built a multimodal machine learning pipeline combining mri imaging and clinical data from the oasis-1 dataset for early alzheimer&#x27;s disease detection. washington university in st. louis washu python deep learning tensorflow keras pytorch machine learning scikit-learn xgboost pandas numpy matplotlib seaborn jupyter notebooks washu "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1593,6 +1865,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2024-11-socketio-chat-app"
+                  data-category="Web Apps"
+                  data-group="WashU"
+                  data-year="2024"
+                  data-date="2024-11-19"
+                  data-title="Socket.IO Multi-Room Chat Application"
+                  data-search="socket.io multi-room chat application developed a feature-rich multi-room chat application using node.js and socket.io with password-protected rooms, private messaging, and user moderation capabilities. washington university in st. louis washu node.js socket.io javascript html css real-time communication web development authentication git washu "
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1690,6 +1968,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2023-04-artificial-intelligence-opinion-survey"
+                  data-category="Research &amp; ML"
+                  data-group="OWU"
+                  data-year="2023"
+                  data-date="2023-04-30"
+                  data-title="Artificial Intelligence Opinion Survey"
+                  data-search="artificial intelligence opinion survey designed, fielded, and investigated a survey research of 1000 employees to analyze ai&#x27;s impact on work efficiency and attitudes. found ai improved efficiency across industries. ohio wesleyan university owu research data analysis r tableau qualtrics prolific artificial intelligence statistics  owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -1763,7 +2047,16 @@
                   </div>
                 </div>
                 <h2 class="timeline-year" id="year-2022">2022</h2>
-                <div class="project-card card-surface timeline-card" id="proj-2022-11-connect-4-ai">
+                <div
+                  class="project-card card-surface timeline-card"
+                  id="proj-2022-11-connect-4-ai"
+                  data-category="Web Apps"
+                  data-group="OWU"
+                  data-year="2022"
+                  data-date="2022-11-30"
+                  data-title="Connect 4 AI"
+                  data-search="connect 4 ai co-developed an ai opponent for connect 4 using alpha-beta pruning algorithm. ohio wesleyan university owu java html css javascript oop artificial intelligence git  owu"
+                >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
                     <span class="card-category cat-web">Web Apps</span
@@ -1853,7 +2146,16 @@
                     >
                   </div>
                 </div>
-                <div class="project-card card-surface timeline-card" id="proj-2022-07-aiparkinscan">
+                <div
+                  class="project-card card-surface timeline-card"
+                  id="proj-2022-07-aiparkinscan"
+                  data-category="Research &amp; ML"
+                  data-group="MITxSureStart"
+                  data-year="2022"
+                  data-date="2022-07-31"
+                  data-title="AIParkinScan"
+                  data-search="aiparkinscan co-developed aiparkinscan software for parkinson&#x27;s diagnosis using audio and image data. utilized neural networks, spectrograms, and random forest algorithm. mitxsurestart futuremakers create-a-thon program mitxsurestart python tensorflow flask scikit-learn artificial intelligence machine learning  "
+                >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
                     <span class="card-category cat-research">Research &amp; ML</span
@@ -1949,6 +2251,12 @@
                 <div
                   class="project-card card-surface timeline-card"
                   id="proj-2022-07-artificial-intelligence-in-modern-board-games"
+                  data-category="Web Apps"
+                  data-group="OWU"
+                  data-year="2022"
+                  data-date="2022-07-25"
+                  data-title="Artificial Intelligence in Modern Board Games"
+                  data-search="artificial intelligence in modern board games built a browser-playable java lost cities game with greedy, minimax, and alpha-beta ai agents that evaluate complete turn outcomes. ohio wesleyan university owu java html css javascript artificial intelligence oop game theory git  owu"
                 >
                   <span class="timeline-marker"></span>
                   <div class="card-meta">
@@ -2041,6 +2349,9 @@
                   </div>
                 </div>
               </div>
+              <div id="emptyState" class="empty-state" hidden="">
+                No projects match your search or filter criteria.
+              </div>
             </div>
           </article>
         </div>
@@ -2072,5 +2383,6 @@
     <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
     <script type="module" src="/assets/site/assets/theme-D_rgo2Xr.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
+    <script type="module" src="/assets/site/assets/catalog-filter-CRJqc_i6.js"></script>
   </body>
 </html>

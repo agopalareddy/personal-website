@@ -1,9 +1,10 @@
-import { Icon } from "../common/Icon";
+import type { ReactNode } from 'react';
+import { Icon } from '../common/Icon';
 
 export interface StatusBadgeProps {
   text?: string;
   ariaLabel?: string;
-  variant?: "available" | "busy" | "unavailable" | "custom";
+  variant?: 'available' | 'busy' | 'unavailable' | 'custom';
   pulse?: boolean;
 }
 
@@ -16,9 +17,9 @@ export interface StatusBadgeProps {
  * visible content" floor, never less).
  */
 function StatusBadge({
-  text = "Open to opportunities",
-  ariaLabel = "Currently open to opportunities",
-  variant = "available",
+  text = 'Open to opportunities',
+  ariaLabel = 'Currently open to opportunities',
+  variant = 'available',
   pulse = true,
 }: StatusBadgeProps) {
   return (
@@ -30,7 +31,7 @@ function StatusBadge({
 }
 
 /** Ported from scripts/chrome.py's render_sidebar(). */
-export function Sidebar() {
+export function Sidebar({ children }: { children?: ReactNode }) {
   return (
     <aside className="academic-sidebar" aria-label="Author Biography">
       <div className="author-avatar-wrapper">
@@ -45,7 +46,7 @@ export function Sidebar() {
             <Icon name="LOCATION_16" /> St. Louis, Missouri, USA
           </li>
           <li>
-            <Icon name="MAIL_16" />{" "}
+            <Icon name="MAIL_16" />{' '}
             <a
               href="#"
               className="protected-email"
@@ -57,19 +58,20 @@ export function Sidebar() {
             </a>
           </li>
           <li>
-            <Icon name="LINKEDIN_16" />{" "}
+            <Icon name="LINKEDIN_16" />{' '}
             <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
               LinkedIn <span className="sr-only">(opens in a new tab)</span>
             </a>
           </li>
           <li>
-            <Icon name="MARK_GITHUB_16" />{" "}
+            <Icon name="MARK_GITHUB_16" />{' '}
             <a href="https://github.com/agopalareddy" target="_blank" rel="noopener">
               GitHub <span className="sr-only">(opens in a new tab)</span>
             </a>
           </li>
         </ul>
       </div>
+      {children}
     </aside>
   );
 }

@@ -36,10 +36,12 @@ databases in `scripts/`; end-to-end coverage lives under `tests/` using Playwrig
 ## Background
 
 - Shared design tokens and component styles live in `assets/css/style.css`.
-- Client-side behavior (theme selection, email protection, catalog filtering, PDF
-  previews) lives in `assets/js/`.
+- The site is built from React components in `site/src/` via `site/build/render.mjs`
+  (`react-dom/server`), which writes static HTML directly to the repo-root paths Nginx
+  serves. Small interactive behaviors (theme selection, email protection, catalog
+  filtering, PDF previews) are hydrated "islands" bundled by Vite into `assets/site/`.
 - Project and experience detail pages are generated from JSON sources under `scripts/`
-  and must not be edited directly — see `scripts/generate_site.py`.
+  and must not be edited directly — see [Content Workflows](#content-workflows).
 - Tracked snapshots of the production Nginx configuration live under `infra/nginx/`.
 
 ```text
@@ -52,17 +54,20 @@ personal-website/
 ├── assets/
 │   ├── css/                    # Site-wide design system and page styles
 │   ├── fonts/                  # Self-hosted font files
-│   └── js/                     # Theme, catalogs, modals, and email protection
+│   ├── js/                     # Legacy scripts still used by out-of-scope /files/ pages
+│   └── site/                   # Vite-built hydration island bundles (generated)
+├── site/                       # React components, pages, and the build script
 ├── files/                      # Public PDFs and LaTeX source directories
 ├── images/                     # Site images, icons, and manifest assets
-├── scripts/                    # Content databases and generators
+├── scripts/                    # Content databases and content-adjacent tooling
 ├── tests/                      # Playwright test suite
 └── infra/nginx/                # Production Nginx config snapshots and deploy script
 ```
 
 ## Install
 
-Requires Node.js (for tooling) and Python 3 (for content generation and local serving).
+Requires Node.js (for the site build and tooling) and Python 3 (for local serving and
+auxiliary scripts like `verify_ga4.py`).
 
 ```bash
 npm install
@@ -95,11 +100,10 @@ Format HTML, CSS, JavaScript, JSON, and Markdown with Prettier:
 npm run format
 ```
 
-Regenerate project or experience pages from their JSON databases:
+Rebuild the entire site from its React components and JSON databases:
 
 ```bash
-python3 scripts/generate_site.py --projects
-python3 scripts/generate_site.py --experiences
+npm run build:site
 ```
 
 Run the GA4 Realtime API smoke test:
@@ -112,27 +116,27 @@ Run the GA4 Realtime API smoke test:
 
 ### Projects
 
-Project metadata lives in `scripts/projects_database.json`. After editing, regenerate:
+Project metadata lives in `scripts/projects_database.json` — the single source of
+truth (no second hand-maintained copy). After editing, rebuild:
 
 ```bash
-python3 scripts/generate_site.py --projects
+npm run build:site
 ```
 
-This writes detail pages into `projects/` and updates the JSON payload used by
-`projects/index.html`. `assets/js/projects-catalog.js` holds a second, hand-maintained
-copy of the project list and must be updated to match.
+This writes `projects/index.html` and every `has_detail: true` entry's detail page,
+and regenerates `sitemap.xml` from the build's own route manifest.
 
 ### Experience
 
 Experience metadata lives in `scripts/experience_database.json`. After editing,
-regenerate:
+rebuild:
 
 ```bash
-python3 scripts/generate_site.py --experiences
+npm run build:site
 ```
 
-This writes detail pages into `experience/`, updates the listing page data, and
-refreshes the sitemap.
+This writes `experience/index.html`, every entry's detail page, and regenerates
+`sitemap.xml`.
 
 ### CV, Resume, and Cover Letter PDFs
 

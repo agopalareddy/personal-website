@@ -1,0 +1,232 @@
+<h1>Accessibility Statement</h1>
+
+<p>
+  This website is committed to ensuring digital accessibility for people with disabilities. The user
+  experience is continually improved for everyone, and the site conforms to the
+  <strong>Web Content Accessibility Guidelines (WCAG) 2.1 Level AA</strong>
+  specification.
+</p>
+
+<p>
+  To achieve this commitment, this site is built upon GitHub's open-source
+  <a href="https://primer.style/accessibility/" target="_blank" rel="noopener"
+    >Primer Design System <span class="sr-only">(opens in a new tab)</span></a
+  >, inheriting its robust accessibility foundations, design primitives, and interactive guidelines.
+</p>
+
+<hr aria-hidden="true" />
+
+<h2>
+  <svg
+    class="octicon octicon-tools"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+    focusable="false"
+    fill="currentColor"
+  >
+    <path
+      d="M5.433 2.304A4.492 4.492 0 0 0 3.5 6c0 1.598.832 3.002 2.09 3.802.518.328.929.923.902 1.64v.008l-.164 3.337a.75.75 0 1 1-1.498-.073l.163-3.33c.002-.085-.05-.216-.207-.316A5.996 5.996 0 0 1 2 6a5.993 5.993 0 0 1 2.567-4.92 1.482 1.482 0 0 1 1.673-.04c.462.296.76.827.76 1.423v2.82c0 .082.041.16.11.206l.75.51a.25.25 0 0 0 .28 0l.75-.51A.249.249 0 0 0 9 5.282V2.463c0-.596.298-1.127.76-1.423a1.482 1.482 0 0 1 1.673.04A5.993 5.993 0 0 1 14 6a5.996 5.996 0 0 1-2.786 5.068c-.157.1-.209.23-.207.315l.163 3.33a.752.752 0 0 1-1.094.714.75.75 0 0 1-.404-.64l-.164-3.345c-.027-.717.384-1.312.902-1.64A4.495 4.495 0 0 0 12.5 6a4.492 4.492 0 0 0-1.933-3.696c-.024.017-.067.067-.067.16v2.818a1.75 1.75 0 0 1-.767 1.448l-.75.51a1.75 1.75 0 0 1-1.966 0l-.75-.51A1.75 1.75 0 0 1 5.5 5.282V2.463c0-.092-.043-.142-.067-.159Z"
+    ></path>
+  </svg>
+  Implemented Accessibility Features
+</h2>
+
+<p>The following accessibility measures have been implemented throughout the site:</p>
+
+<h3>1. Semantic HTML &amp; ARIA Landmarks</h3>
+<ul>
+  <li>
+    <strong>Skip Navigation Link:</strong> A keyboard-accessible skip link is placed at the top of
+    every page, allowing keyboard-only users to bypass navigation and jump directly to the main
+    content.
+  </li>
+  <li>
+    <strong>Semantic Regions:</strong> Content is enclosed within appropriate HTML5 landmark
+    elements: <code>&lt;header&gt;</code> and <code>&lt;nav&gt;</code> for site navigation,
+    <code>&lt;aside&gt;</code> for sidebar details, <code>&lt;main&gt;</code> and
+    <code>&lt;article&gt;</code> for core page content, and <code>&lt;footer&gt;</code> for site
+    footer. The projects filter area uses the <code>&lt;search&gt;</code> element for improved
+    screen reader navigation.
+  </li>
+  <li>
+    <strong>Heading Hierarchy:</strong> Each page contains a single primary
+    <code>&lt;h1&gt;</code> element with logical sequential headings (<code>&lt;h2&gt;</code>,
+    <code>&lt;h3&gt;</code>) to produce a coherent screen-reader outline.
+  </li>
+  <li>
+    <strong>ARIA Labels:</strong> Navigation regions, form controls, and interactive elements carry
+    explicit <code>aria-label</code> or <code>aria-labelledby</code> attributes where native
+    semantics are insufficient.
+  </li>
+</ul>
+
+<h3>2. Keyboard &amp; Focus Management</h3>
+<ul>
+  <li>
+    <strong>Visible Focus Rings:</strong> Following Primer's interactive guidelines, all
+    keyboard-focusable elements display a highly visible, high-contrast custom focus ring during
+    keyboard navigation.
+  </li>
+  <li>
+    <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the navigation
+    headers, accordion detail menus, and search filters without becoming trapped or lost.
+  </li>
+  <li>
+    <strong>Interactive Controls:</strong> Tab order is managed dynamically for collapsed states
+    (such as the theme selector popup or accordion card panels), updating their focusability states
+    when expanded.
+  </li>
+  <li>
+    <strong>Decorative Icons:</strong> Decorative icons use Primer Octicons which are either
+    dynamically labeled or cleanly ignored via <code>aria-hidden="true"</code> depending on their
+    context.
+  </li>
+</ul>
+
+<h3>3. Visual Standards &amp; Design Tokens</h3>
+<ul>
+  <li>
+    <strong>Color Contrast:</strong> By utilizing Primer primitives design tokens, all text,
+    headings, and interactive elements maintain a contrast ratio of at least
+    <strong>4.5:1</strong> for normal body text and <strong>3:1</strong> for large headings.
+  </li>
+  <li>
+    <strong>High Contrast Modes:</strong> Conformance is maintained across all color modes—including
+    the specialized Light High Contrast and Dark High Contrast themes—specifically designed to
+    support users with low vision.
+  </li>
+  <li>
+    <strong>Text Resizing:</strong> All text uses relative units (<code>rem</code>) which adapt to
+    the browser's root font-size configurations. The layout supports zooming up to 200% without
+    layout disruption or clipping.
+  </li>
+  <li>
+    <strong>Reduced Motion Support:</strong> Theme transitions and interactive accordion toggles
+    respect the user's operating system setting for <code>prefers-reduced-motion</code>, disabling
+    animations automatically.
+  </li>
+</ul>
+
+<h3>4. Modern Web Standards &amp; Links</h3>
+<ul>
+  <li>
+    <strong>New Tab Warnings:</strong> All links that open in a new tab
+    (<code>target="_blank"</code>) include a screen-reader-visible
+    <code>&lt;span class="sr-only"&gt;(opens in a new tab)&lt;/span&gt;</code>
+    indicator and carry <code>rel="noopener"</code> for security.
+  </li>
+  <li>
+    <strong>Screen‑Reader‑Only Content:</strong> The <code>.sr-only</code> utility class uses a
+    modern <code>clip-path: inset(50%)</code> pattern (instead of legacy clip methods) and becomes
+    visible on focus for keyboard users via <code>:focus-within</code> and
+    <code>:active</code> selectors.
+  </li>
+</ul>
+
+<hr aria-hidden="true" />
+
+<h2>
+  <svg
+    class="octicon octicon-checklist"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+    focusable="false"
+    fill="currentColor"
+  >
+    <path
+      d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"
+    ></path>
+  </svg>
+  Validation &amp; Testing
+</h2>
+<ul>
+  <li>
+    <strong>Automated Audits:</strong> Pages are continuously audited programmatically using
+    Axe-core (via Playwright and programmatic accessibility runners) to confirm WCAG 2.1 AA
+    compliance with zero violations.
+  </li>
+  <li>
+    <strong>Keyboard Walkthroughs:</strong> Focus trapping, tab order, and skip-link functionality
+    are manually tested in modern browsers.
+  </li>
+  <li>
+    <strong>Screen Reader Testing:</strong> Outline structures are verified with screen readers to
+    confirm logical heading hierarchy.
+  </li>
+</ul>
+
+<hr aria-hidden="true" />
+
+<h2>
+  <svg
+    class="octicon octicon-comment"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+    focusable="false"
+    fill="currentColor"
+  >
+    <path
+      d="M1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 13.25 12H9.06l-2.573 2.573A1.458 1.458 0 0 1 4 13.543V12H2.75A1.75 1.75 0 0 1 1 10.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h4.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"
+    ></path>
+  </svg>
+  Feedback &amp; Contact
+</h2>
+<p>
+  If you encounter any accessibility barriers or have suggestions for further improvement, please
+  reach out:
+</p>
+<ul>
+  <li>
+    <svg
+      class="octicon octicon-mail"
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      aria-hidden="true"
+      focusable="false"
+      fill="currentColor"
+    >
+      <path
+        d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"
+      ></path>
+    </svg>
+    Email:
+    <a
+      href="#"
+      class="protected-email"
+      data-email-user="YWR1cnMyMDAy"
+      data-email-domain="Z21haWwuY29t"
+      >&#9993; Email</a
+    >
+  </li>
+  <li>
+    <svg
+      class="octicon octicon-linkedin"
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      fill="currentColor"
+    >
+      <path
+        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+      />
+    </svg>
+    LinkedIn:
+    <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+      >Aadarsha Gopala Reddy <span class="sr-only">(opens in a new tab)</span></a
+    >
+  </li>
+</ul>

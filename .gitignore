@@ -37,6 +37,10 @@ venv/
 node_modules/
 pnpm-lock.yaml
 
+# Vite (config load artifacts; assets/site/ build output is intentionally committed)
+*.tsbuildinfo
+vite.config.ts.timestamp-*.mjs
+
 # Playwright
 tests/test-results/
 

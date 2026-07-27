@@ -3,7 +3,7 @@
 // exact repo-root paths nginx already serves (research.md R2) — no dist/,
 // no infra change (FR-010). Client-side "islands" (research.md R1/R3) are
 // bundled separately by Vite and their <script> tags injected here.
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -11,6 +11,7 @@ import { build } from 'vite';
 
 import { loadProjects } from '../src/content/loadProjects.ts';
 import { loadExperience } from '../src/content/loadExperience.ts';
+import { buildProjectJsonLd } from '../src/content/projectSeo.ts';
 import { ProjectCatalogPage } from '../src/pages/ProjectCatalog.tsx';
 import { ProjectDetailPage } from '../src/pages/ProjectDetail.tsx';
 import { ExperienceCatalogPage } from '../src/pages/ExperienceCatalog.tsx';
@@ -75,7 +76,19 @@ async function main() {
   for (const p of projects) {
     if (!p.has_detail) continue;
     const slug = p.permalink.replace(/^\/projects\//, '');
-    written.push(renderPage(ProjectDetailPage({ p }), `projects/${slug}.html`, commonIslands));
+
+    // Per-project OG image: falls back to the site avatar until a screenshot
+    // is dropped at images/projects/<slug>.png — no code change needed then.
+    const projectImagePath = resolve(REPO_ROOT, 'images', 'projects', `${slug}.png`);
+    const ogImage = existsSync(projectImagePath)
+      ? `https://agreddy.com/images/projects/${slug}.png`
+      : 'https://agreddy.com/images/profile.png';
+    const canonicalUrl = `https://agreddy.com${p.permalink}.html`;
+    const jsonLd = buildProjectJsonLd(p, canonicalUrl, ogImage);
+
+    written.push(
+      renderPage(ProjectDetailPage({ p, ogImage, jsonLd }), `projects/${slug}.html`, commonIslands)
+    );
   }
 
   const experiences = loadExperience();
@@ -111,6 +124,16 @@ async function main() {
   writeFileSync(
     resolve(REPO_ROOT, 'assets/site/route-manifest.json'),
     JSON.stringify(written, null, 2)
+  );
+
+  // Read-only JSON mirror of both catalogs at /data/ so agents/tools can
+  // consume structured data directly instead of scraping HTML (llms.txt
+  // points here).
+  mkdirSync(resolve(REPO_ROOT, 'data'), { recursive: true });
+  writeFileSync(resolve(REPO_ROOT, 'data/projects.json'), JSON.stringify(projects, null, 2) + '\n');
+  writeFileSync(
+    resolve(REPO_ROOT, 'data/experience.json'),
+    JSON.stringify(experiences, null, 2) + '\n'
   );
 
   console.log(`[render] wrote ${written.length} file(s):`);

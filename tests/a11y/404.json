@@ -13,7 +13,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2026-07-27T22:11:44.936Z",
+  "timestamp": "2026-07-27T23:03:06.088Z",
   "url": "http://localhost:8080/404.html",
   "toolOptions": {
     "runOnly": {
@@ -506,25 +506,6 @@
       "nodes": []
     },
     {
-      "id": "link-in-text-block",
-      "impact": null,
-      "tags": [
-        "cat.color",
-        "wcag2a",
-        "wcag141",
-        "TTv5",
-        "TT13.a",
-        "EN-301-549",
-        "EN-9.1.4.1",
-        "RGAAv4",
-        "RGAA-10.6.1"
-      ],
-      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
-      "help": "Links must be distinguishable without relying on color",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
-      "nodes": []
-    },
-    {
       "id": "marquee",
       "impact": null,
       "tags": [
@@ -831,7 +812,7 @@
           ],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -863,6 +844,37 @@
           "impact": null,
           "html": "<summary aria-label=\"Theme: Sync with system\">",
           "target": ["#theme-toggle > details > summary"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            },
+            {
+              "id": "aria-allowed-attr-elm",
+              "data": null,
+              "relatedNodes": [],
+              "message": "ARIA attributes are allowed for this element",
+              "impact": "critical"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -919,7 +931,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -936,6 +948,22 @@
           "impact": null,
           "html": "<summary aria-label=\"Theme: Sync with system\">",
           "target": ["#theme-toggle > details > summary"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -2109,7 +2137,7 @@
           ],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -2126,6 +2154,22 @@
           "impact": null,
           "html": "<summary aria-label=\"Theme: Sync with system\">",
           "target": ["#theme-toggle > details > summary"]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -2181,7 +2225,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -2212,6 +2256,36 @@
           "impact": null,
           "html": "<summary aria-label=\"Theme: Sync with system\">",
           "target": ["#theme-toggle > details > summary"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -2267,7 +2341,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [
@@ -2284,6 +2358,22 @@
           "impact": null,
           "html": "<summary aria-label=\"Theme: Sync with system\">",
           "target": ["#theme-toggle > details > summary"]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [
@@ -2588,7 +2678,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p class=\"error-message\">It may have moved, or never existed. Try one of these instead.</p>",
+          "html": "<p class=\"error-message\">\n            It may have moved, or never existed. Try one of these instead.\n          </p>",
           "target": [".error-message"]
         },
         {
@@ -2749,8 +2839,8 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": ["a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [".protected-email"]
         },
         {
           "any": [
@@ -3218,8 +3308,8 @@
             }
           ],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": ["a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [".protected-email"]
         },
         {
           "any": [
@@ -3374,7 +3464,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"mailto:adurs2002@gmail.com\">Email</a></li>",
+          "html": "<li>",
           "target": ["li:nth-child(2)"]
         },
         {
@@ -3390,7 +3480,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a></li>",
+          "html": "<li>\n              <a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": ["li:nth-child(3)"]
         },
         {
@@ -3406,7 +3496,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a></li>",
+          "html": "<li>\n              <a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": ["li:nth-child(4)"]
         },
         {
@@ -3542,6 +3632,51 @@
       ]
     }
   ],
-  "incomplete": [],
+  "incomplete": [
+    {
+      "id": "link-in-text-block",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2a",
+        "wcag141",
+        "TTv5",
+        "TT13.a",
+        "EN-301-549",
+        "EN-9.1.4.1",
+        "RGAAv4",
+        "RGAA-10.6.1"
+      ],
+      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+      "help": "Links must be distinguishable without relying on color",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "link-in-text-block",
+              "data": {
+                "messageKey": "bgOverlap"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<li>",
+                  "target": ["li:nth-child(2)"]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element's contrast ratio could not be determined because of element overlap"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [".protected-email"],
+          "failureSummary": "Fix any of the following:\n  Element's contrast ratio could not be determined because of element overlap"
+        }
+      ]
+    }
+  ],
   "violations": []
 }

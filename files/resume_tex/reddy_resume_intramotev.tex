@@ -1,0 +1,185 @@
+\documentclass[10pt, letterpaper]{article}
+% ----------------------------------------------------------------------
+% LaTeX Preamble
+% ----------------------------------------------------------------------
+
+% --- Required Packages ---
+\usepackage{reddy_resume}   % Custom resume style package
+
+% ----------------------------------------------------------------------
+% Document Body
+% ----------------------------------------------------------------------
+\begin{document}
+
+% ----------------------------------------------------------------------
+% HEADER SECTION
+% ----------------------------------------------------------------------
+\begin{header}
+	\begin{minipage}[t]{1.0\textwidth}
+		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
+		\normalsize
+		% Phone
+		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		% Email
+		\mbox{\hrefWithoutArrow{mailto:adurs2002@gmail.com}{adurs2002@gmail.com}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://www.linkedin.com/in/agopalareddy}{linkedin.com/in/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://github.com/agopalareddy}{github.com/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://agreddy.com}{agreddy.com}%
+	\end{minipage}
+\end{header}
+
+% --- Vertical Space After Header ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SUMMARY SECTION
+% ----------------------------------------------------------------------
+
+\section{SUMMARY}
+
+\vspace{\entrySpacing}
+\begin{samepage}
+	\begin{summary}
+		Full-stack engineer with hands-on experience building Android apps, embedded C++ firmware, and production React interfaces for IoT device fleets --- seeking full-stack/embedded software engineering roles.
+	\end{summary}
+\end{samepage}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SKILLS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com}{SKILLS}}
+\needspace{10\baselineskip}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Programming Languages}
+	Python, TypeScript, JavaScript, SQL, Java, Kotlin, Go, C++, C\#, R.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Frameworks \& Libraries}
+	React, Node.js, FastAPI, Socket.IO, PyTorch, TensorFlow, Scikit-learn, Pandas, NumPy, Streamlit.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Tools \& Technologies}
+	Git, Docker, Linux, Arduino/Embedded Systems, \LaTeX, AWS, PostgreSQL, MongoDB, Protobuf, Snowflake, Apache Airflow, Spark, Gemini/OpenAI APIs, Microsoft 365, Google Workspace.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Languages}
+	Proficient in English, Kannada, Telugu; Conversational in Hindi.
+\end{skillcategory}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience/}{EXPERIENCE}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale}{January 2026 - May 2026}
+		\item Taught large-scale data pipeline concepts (Snowflake, Airflow, Spark, Kafka, Flink) to a graduate cohort, covering fault-tolerant design, streaming windowing, and query optimization.
+	\end{positionentry}
+	\begin{positionentry}{\href{https://agreddy.com/projects/ms-thesis}{Master's Thesis Research}}{August 2025 - May 2026}
+		\item Built an end-to-end pipeline processing 790,000 naturalistic driving trips from 304 older adults, engineering vehicle-agnostic weekly behavioral features and benchmarking six models under leave-one-participant-out cross-validation.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Crittero, Inc.}{Remote}
+	\begin{positionentry}{AI Engineer Intern}{June 2025 - August 2025}
+		\item Generated 100,000 labeled social media posts across seven user personas via time-series behavioral modeling in TypeScript, capturing post sequences, engagement timings, and content preferences.
+		\item Built a configurable Python CLI test harness (700+ lines) with deterministic seeding and CSV export for reproducible evaluation, validating a TensorFlow/Keras recommendation model (80\% accuracy) across manually tuned configurations.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Lab714}{Boca Raton, Florida, USA}
+	\begin{positionentry}{Data Analyst Intern}{June 2023 - May 2024}
+		\item Designed and engineered the Figma-to-React UI for an all-in-one environmental sensor device, delivering a pixel-perfect, production-ready interface from initial wireframes.
+		\item Built AWS data ingestion pipelines to normalize telemetry from a deployed IoT device fleet, powering real-time client dashboards that surfaced equipment alerts and cut pool maintenance costs by 20\%.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% PROJECTS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Personal Projects}{St. Louis, Missouri, USA}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/blink-morse-app}{Blink Morse Decoder}}{June 2026}
+		\item Built a real-time Android app (Kotlin, CameraX) that decodes deliberate eye blinks into Morse code via facial-landmark tracking at 30Hz and a debounced blink state machine filtering involuntary micro-blinks.
+	\end{positionentry}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/wellness-companion}{AURA: Ambient Wellness Companion}}{June 2026}
+		\item Built a FastAPI backend orchestrating a Google ADK multi-agent system for elderly wellness check-ins, with least-privilege MCP toolsets and a deterministic privacy guard persisting only allowlisted patient telemetry.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EDUCATION SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience}{EDUCATION}}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Washington University in St. Louis}
+	{August 2024 - May 2026}
+	{M.S. in Computer Science}
+	{St. Louis, Missouri, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Thesis:} \href{https://doi.org/10.7936/g95n-fv35}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data}
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Ohio Wesleyan University}
+	{August 2020 - May 2023}
+	{B.A. in Computer Science and Data Analytics}
+	{Delaware, Ohio, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Minor:} Economics \textbar{} \textit{Honors:} Golden Bishop Award, Mortar Board, Florence Leas Prize, Dean's List
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% LEADERSHIP SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience}{LEADERSHIP}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{Vice President of the Graduate-Professional Council (GPC) Chamber, GPSC}{May 2025 - May 2026}
+		\item Chaired the Constitution Committee to draft and ratify founding governing documents; built committee rosters via ranked-choice preference allocation; represented graduate students to university leadership.
+	\end{positionentry}
+\end{leadershipentry}
+
+% ----------------------------------------------------------------------
+% End of Document
+% ----------------------------------------------------------------------
+\end{document}

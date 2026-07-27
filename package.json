@@ -9,7 +9,9 @@
     "format": "prettier --write .",
     "lint:readme": "remark README.md",
     "prepare": "husky",
-    "vendor:primer": "node scripts/vendor-primer.mjs"
+    "vendor:primer": "node scripts/vendor-primer.mjs",
+    "og:images": "node scripts/generate_og_images.mjs",
+    "cache:bump": "python3 scripts/bump_cache_version.py"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,10 @@
   },
   "homepage": "https://github.com/agopalareddy/personal-website#readme",
   "lint-staged": {
+    "assets/{css/style.css,css/primer/primer.css,js/icons.js,js/theme.js,js/status-badge.js,js/sw-register.js}": [
+      "python3 scripts/bump_cache_version.py",
+      "git add -- site/src/components/chrome/Head.tsx files/index.html files/README/index.html"
+    ],
     "*.{html,css,js,json,md}": "prettier --write"
   },
   "remarkConfig": {

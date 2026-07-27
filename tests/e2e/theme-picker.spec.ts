@@ -19,11 +19,16 @@ test.describe('Theme Picker', () => {
     }
   });
 
-  test('should toggle color-scheme and light/dark theme attributes when selecting options', async ({ page, viewport }) => {
+  test('should toggle color-scheme and light/dark theme attributes when selecting options', async ({
+    page,
+    viewport,
+  }) => {
     const isMobile = viewport && viewport.width < 768;
-    const picker = page.locator(isMobile ? '#theme-toggle-footer .theme-picker' : '#theme-toggle .theme-picker');
+    const picker = page.locator(
+      isMobile ? '#theme-toggle-footer .theme-picker' : '#theme-toggle .theme-picker'
+    );
     const summary = picker.locator('summary');
-    
+
     // Open picker
     await summary.click();
     await expect(picker).toHaveAttribute('open', '');
@@ -45,9 +50,14 @@ test.describe('Theme Picker', () => {
     expect(localStorageVal).toBe('light');
   });
 
-  test('should support keyboard navigation (Escape key closes picker)', async ({ page, viewport }) => {
+  test('should support keyboard navigation (Escape key closes picker)', async ({
+    page,
+    viewport,
+  }) => {
     const isMobile = viewport && viewport.width < 768;
-    const picker = page.locator(isMobile ? '#theme-toggle-footer .theme-picker' : '#theme-toggle .theme-picker');
+    const picker = page.locator(
+      isMobile ? '#theme-toggle-footer .theme-picker' : '#theme-toggle .theme-picker'
+    );
     const summary = picker.locator('summary');
 
     // Open
@@ -65,7 +75,7 @@ test.describe('Theme Picker', () => {
       localStorage.setItem('theme', 'dark');
       localStorage.removeItem('color-scheme');
     });
-    
+
     await page.goto('/');
 
     const html = page.locator('html');

@@ -1,0 +1,183 @@
+\documentclass[10pt, letterpaper]{article}
+% ----------------------------------------------------------------------
+% LaTeX Preamble
+% ----------------------------------------------------------------------
+
+% --- Required Packages ---
+\usepackage{reddy_resume}   % Custom resume style package
+
+% ----------------------------------------------------------------------
+% Document Body
+% ----------------------------------------------------------------------
+\begin{document}
+
+% ----------------------------------------------------------------------
+% HEADER SECTION
+% ----------------------------------------------------------------------
+\begin{header}
+	\begin{minipage}[t]{1.0\textwidth}
+		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
+		\normalsize
+		% Phone
+		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		% Email
+		\mbox{\hrefWithoutArrow{mailto:adurs2002@gmail.com}{adurs2002@gmail.com}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://www.linkedin.com/in/agopalareddy}{linkedin.com/in/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://github.com/agopalareddy}{github.com/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://agreddy.com}{agreddy.com}%
+	\end{minipage}
+\end{header}
+
+% --- Vertical Space After Header ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SUMMARY SECTION
+% ----------------------------------------------------------------------
+
+\section{SUMMARY}
+
+\vspace{\entrySpacing}
+\begin{samepage}
+	\begin{summary}
+		Research-driven builder who pairs rigorous, detail-heavy analysis with Python/SQL automation and frontier-AI tooling, seeking a research role where technical fluency accelerates target identification and workflow design.
+	\end{summary}
+\end{samepage}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SKILLS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com}{SKILLS}}
+\needspace{10\baselineskip}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Programming \& Automation}
+	Python, SQL, TypeScript, JavaScript, R, scripting/workflow automation.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{AI \& Data Tools}
+	Gemini/OpenAI APIs, Pandas, NumPy, Apache Airflow, FastAPI, Streamlit.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Data \& Platforms}
+	PostgreSQL, MongoDB, Snowflake, AWS, Git, Microsoft 365, Google Workspace.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Languages}
+	Proficient in English, Kannada, Telugu; Conversational in Hindi.
+\end{skillcategory}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience/}{EXPERIENCE}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{\href{https://agreddy.com/projects/ms-thesis}{Master's Thesis Research}}{August 2025 - May 2026}
+		\item Built an end-to-end research pipeline processing 790,000 naturalistic driving trips from 304 participants, verifying data integrity and reconciling inconsistent source records before analysis.
+		\item Benchmarked six models under leave-one-participant-out cross-validation, documenting methodology and findings in a publishable thesis reviewed by three faculty advisors.
+	\end{positionentry}
+	\begin{positionentry}{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale}{January 2026 - May 2026}
+		\item Taught database and pipeline design (Snowflake, Airflow, Spark, Kafka) to a graduate cohort, including query optimization and data-integrity tradeoffs in production-scale systems.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Crittero, Inc.}{Remote}
+	\begin{positionentry}{AI Engineer Intern}{June 2025 - August 2025}
+		\item Built Python and TypeScript automation scripts to generate and validate 100,000 structured behavioral records, replacing manual data construction with a repeatable, auditable pipeline.
+		\item Used LLM APIs and a configurable CLI to accelerate iteration on a recommendation model, cutting evaluation turnaround while keeping results reproducible across configurations.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Lab714}{Boca Raton, Florida, USA}
+	\begin{positionentry}{Data Analyst Intern}{June 2023 - May 2024}
+		\item Wrote SQL queries against AWS-hosted IoT sensor data to identify equipment anomalies, building client-facing dashboards that surfaced findings clearly enough to cut maintenance costs by 20\%.
+		\item Owned data ingestion and normalization for a live device fleet, keeping downstream records accurate as new sensors and clients came online.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% PROJECTS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/visual-jailbreak-defense}{Red-Blue Visual Auto Defender}}{August 2025 - December 2025}
+		\item Built a Python pipeline that auto-generates test attacks and matching defenses, validated with precision/recall metrics, as a self-checking research workflow built and verified end-to-end.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EDUCATION SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience}{EDUCATION}}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Washington University in St. Louis}
+	{August 2024 - May 2026}
+	{M.S. in Computer Science}
+	{St. Louis, Missouri, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Thesis:} \href{https://doi.org/10.7936/g95n-fv35}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data}
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Ohio Wesleyan University}
+	{August 2020 - May 2023}
+	{B.A. in Computer Science and Data Analytics}
+	{Delaware, Ohio, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Minor:} Economics \textbar{} \textit{Honors:} Golden Bishop Award, Mortar Board, Florence Leas Prize, Dean's List
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% LEADERSHIP SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience}{LEADERSHIP}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{Vice President of the Graduate-Professional Council (GPC) Chamber, GPSC}{May 2025 - May 2026}
+		\item Chaired the Constitution Committee to draft and ratify founding governing documents; built committee rosters via ranked-choice preference allocation; represented graduate students to university leadership.
+	\end{positionentry}
+\end{leadershipentry}
+
+% ----------------------------------------------------------------------
+% End of Document
+% ----------------------------------------------------------------------
+\end{document}

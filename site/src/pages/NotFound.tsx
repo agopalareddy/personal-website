@@ -1,4 +1,4 @@
-import { Layout } from "../components/chrome/Layout";
+import { Layout } from '../components/chrome/Layout';
 
 /** Ported from 404.html — the only page that skips the sidebar entirely. */
 export function NotFoundPage() {

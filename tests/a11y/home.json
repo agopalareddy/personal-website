@@ -13,7 +13,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2026-07-27T22:11:08.558Z",
+  "timestamp": "2026-07-27T23:02:08.397Z",
   "url": "http://localhost:8080/index.html",
   "toolOptions": {
     "runOnly": {
@@ -689,7 +689,7 @@
           ],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -812,7 +812,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -874,7 +874,7 @@
             }
           ],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         },
         {
@@ -938,6 +938,37 @@
           "impact": null,
           "html": "<a href=\"/files/reddy_resume.pdf\" target=\"_blank\" rel=\"noopener\" class=\"site-action-btn\" aria-label=\"Download Resume PDF (opens in a new tab)\">",
           "target": [".site-action-btn"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            },
+            {
+              "id": "aria-allowed-attr-elm",
+              "data": null,
+              "relatedNodes": [],
+              "message": "ARIA attributes are allowed for this element",
+              "impact": "critical"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -994,7 +1025,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -1057,7 +1088,7 @@
           ],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -1089,7 +1120,7 @@
           ],
           "none": [],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         },
         {
@@ -1137,6 +1168,22 @@
           ],
           "none": [],
           "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
           "html": "<div id=\"a11y-announcer\" class=\"sr-only\" aria-live=\"polite\"></div>",
           "target": ["#a11y-announcer"]
         }
@@ -1163,7 +1210,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         }
       ]
@@ -2502,7 +2549,7 @@
           ],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -2565,7 +2612,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -2597,7 +2644,7 @@
             }
           ],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         },
         {
@@ -2631,6 +2678,22 @@
           "impact": null,
           "html": "<a href=\"/files/reddy_resume.pdf\" target=\"_blank\" rel=\"noopener\" class=\"site-action-btn\" aria-label=\"Download Resume PDF (opens in a new tab)\">",
           "target": [".site-action-btn"]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -2671,7 +2734,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         }
       ]
@@ -2711,7 +2774,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         }
       ]
@@ -2752,7 +2815,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -2871,7 +2934,7 @@
           ],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -2931,7 +2994,7 @@
           ],
           "none": [],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         },
         {
@@ -2993,6 +3056,36 @@
           "impact": null,
           "html": "<a href=\"/files/reddy_resume.pdf\" target=\"_blank\" rel=\"noopener\" class=\"site-action-btn\" aria-label=\"Download Resume PDF (opens in a new tab)\">",
           "target": [".site-action-btn"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -3048,7 +3141,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [
@@ -3111,7 +3204,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -3143,7 +3236,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         },
         {
@@ -3177,6 +3270,22 @@
           "impact": null,
           "html": "<a href=\"/files/reddy_resume.pdf\" target=\"_blank\" rel=\"noopener\" class=\"site-action-btn\" aria-label=\"Download Resume PDF (opens in a new tab)\">",
           "target": [".site-action-btn"]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [
@@ -3230,7 +3339,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         }
       ]
@@ -3509,7 +3618,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p class=\"author-bio\">M.S. Computer Science graduate from Washington University in St. Louis</p>",
+          "html": "<p class=\"author-bio\">\n                M.S. Computer Science graduate from Washington University in St. Louis\n              </p>",
           "target": [".author-bio"]
         },
         {
@@ -3532,7 +3641,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -3580,7 +3689,7 @@
           "impact": null,
           "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">adurs2002 [at] gmail [dot] com</a>",
           "target": [
-            "li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+            ".author-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
           ]
         },
         {
@@ -3718,7 +3827,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         },
         {
@@ -5384,7 +5493,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p>For the full story on my research, teaching, and work experience, see my <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.</p>",
+          "html": "<p>\n                For the full story on my research, teaching, and work experience, see my\n                <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.\n              </p>",
           "target": ["p:nth-child(5)"]
         },
         {
@@ -5476,7 +5585,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/projects/ms-thesis\">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a></strong> — Compared six modeling approaches for predicting cognitive impairment from naturalistic driving data.</li>",
+          "html": "<li>\n                  <strong><a href=\"/projects/ms-thesis\">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a></strong>\n                  — Compared six modeling approaches for predicting cognitive impairment from\n                  naturalistic driving data.\n                </li>",
           "target": ["section > ul > li:nth-child(1)"]
         },
         {
@@ -5522,7 +5631,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/projects/multimodal-alzheimers\">Multimodal Alzheimer’s Prediction</a></strong> — Combined MRI imaging with clinical data for early Alzheimer’s disease detection.</li>",
+          "html": "<li>\n                  <strong><a href=\"/projects/multimodal-alzheimers\">Multimodal Alzheimer’s Prediction</a></strong>\n                  — Combined MRI imaging with clinical data for early Alzheimer’s disease detection.\n                </li>",
           "target": ["section > ul > li:nth-child(2)"]
         },
         {
@@ -5568,7 +5677,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/projects/datacenter-cooling\">Datacenter Cooling Optimization</a></strong> — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter cooling efficiency.</li>",
+          "html": "<li>\n                  <strong><a href=\"/projects/datacenter-cooling\">Datacenter Cooling Optimization</a></strong>\n                  — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter\n                  cooling efficiency.\n                </li>",
           "target": ["section > ul > li:nth-child(3)"]
         },
         {
@@ -5614,7 +5723,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/storybook/\">Tales We Weave</a></strong> — AI-powered interactive storytelling app with branching narratives, built with Vue 3, Express, and MongoDB.</li>",
+          "html": "<li>\n                  <strong><a href=\"/storybook/\">Tales We Weave</a></strong> — AI-powered interactive\n                  storytelling app with branching narratives, built with Vue 3, Express, and\n                  MongoDB.\n                </li>",
           "target": ["section > ul > li:nth-child(4)"]
         },
         {
@@ -5869,8 +5978,10 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": [".footer-links > li:nth-child(2) > a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -6446,14 +6557,14 @@
             }
           ],
           "impact": null,
-          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\">",
+          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\" fetchpriority=\"high\">",
           "target": ["img"]
         }
       ]
     },
     {
       "id": "link-in-text-block",
-      "impact": null,
+      "impact": "serious",
       "tags": [
         "cat.color",
         "wcag2a",
@@ -6509,7 +6620,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<p>For the full story on my research, teaching, and work experience, see my <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.</p>",
+                  "html": "<p>\n                For the full story on my research, teaching, and work experience, see my\n                <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.\n              </p>",
                   "target": ["p:nth-child(5)"]
                 }
               ],
@@ -6521,7 +6632,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<p>For the full story on my research, teaching, and work experience, see my <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.</p>",
+                  "html": "<p>\n                For the full story on my research, teaching, and work experience, see my\n                <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.\n              </p>",
                   "target": ["p:nth-child(5)"]
                 }
               ],
@@ -6542,7 +6653,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<p>For the full story on my research, teaching, and work experience, see my <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.</p>",
+                  "html": "<p>\n                For the full story on my research, teaching, and work experience, see my\n                <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.\n              </p>",
                   "target": ["p:nth-child(5)"]
                 }
               ],
@@ -6554,7 +6665,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<p>For the full story on my research, teaching, and work experience, see my <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.</p>",
+                  "html": "<p>\n                For the full story on my research, teaching, and work experience, see my\n                <a href=\"/experience/\">Experience</a> page, or download my <a href=\"/cv/\">CV</a>.\n              </p>",
                   "target": ["p:nth-child(5)"]
                 }
               ],
@@ -6575,7 +6686,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<li><strong><a href=\"/projects/ms-thesis\">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a></strong> — Compared six modeling approaches for predicting cognitive impairment from naturalistic driving data.</li>",
+                  "html": "<li>\n                  <strong><a href=\"/projects/ms-thesis\">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a></strong>\n                  — Compared six modeling approaches for predicting cognitive impairment from\n                  naturalistic driving data.\n                </li>",
                   "target": ["section > ul > li:nth-child(1)"]
                 }
               ],
@@ -6596,7 +6707,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<li><strong><a href=\"/projects/multimodal-alzheimers\">Multimodal Alzheimer’s Prediction</a></strong> — Combined MRI imaging with clinical data for early Alzheimer’s disease detection.</li>",
+                  "html": "<li>\n                  <strong><a href=\"/projects/multimodal-alzheimers\">Multimodal Alzheimer’s Prediction</a></strong>\n                  — Combined MRI imaging with clinical data for early Alzheimer’s disease detection.\n                </li>",
                   "target": ["section > ul > li:nth-child(2)"]
                 }
               ],
@@ -6617,7 +6728,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<li><strong><a href=\"/projects/datacenter-cooling\">Datacenter Cooling Optimization</a></strong> — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter cooling efficiency.</li>",
+                  "html": "<li>\n                  <strong><a href=\"/projects/datacenter-cooling\">Datacenter Cooling Optimization</a></strong>\n                  — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter\n                  cooling efficiency.\n                </li>",
                   "target": ["section > ul > li:nth-child(3)"]
                 }
               ],
@@ -6638,7 +6749,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<li><strong><a href=\"/storybook/\">Tales We Weave</a></strong> — AI-powered interactive storytelling app with branching narratives, built with Vue 3, Express, and MongoDB.</li>",
+                  "html": "<li>\n                  <strong><a href=\"/storybook/\">Tales We Weave</a></strong> — AI-powered interactive\n                  storytelling app with branching narratives, built with Vue 3, Express, and\n                  MongoDB.\n                </li>",
                   "target": ["section > ul > li:nth-child(4)"]
                 }
               ],
@@ -6945,7 +7056,7 @@
           "impact": null,
           "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">adurs2002 [at] gmail [dot] com</a>",
           "target": [
-            "li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+            ".author-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
           ]
         },
         {
@@ -8812,8 +8923,10 @@
             }
           ],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": [".footer-links > li:nth-child(2) > a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -9320,7 +9433,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Data%20Analysis\">Data Analysis</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Data%20Analysis\">Data Analysis</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(2) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(2)"
           ]
@@ -9428,7 +9541,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Scikit-learn\">Scikit-learn</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Scikit-learn\">Scikit-learn</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(2) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(8)"
           ]
@@ -9464,7 +9577,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Transformers\">Transformers</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Transformers\">Transformers</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(2) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(10)"
           ]
@@ -9482,7 +9595,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Database%20Design\">Database Design</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Database%20Design\">Database Design</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(3) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(1)"
           ]
@@ -9842,7 +9955,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Agentic%20Coding\">Agentic Coding</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Agentic%20Coding\">Agentic Coding</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(5) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(1)"
           ]
@@ -9860,7 +9973,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Context%20Engineering\">Context Engineering</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Context%20Engineering\">Context Engineering</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(5) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(2)"
           ]
@@ -9878,7 +9991,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=AI%20Code%20Review\">AI Code Review</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=AI%20Code%20Review\">AI Code Review</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(5) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(3)"
           ]
@@ -9896,7 +10009,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=AI-Assisted%20Testing\">AI-Assisted Testing</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=AI-Assisted%20Testing\">AI-Assisted Testing</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(5) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(4)"
           ]
@@ -9914,7 +10027,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Multi-agent%20Systems\">Multi-agent Systems</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Multi-agent%20Systems\">Multi-agent Systems</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(5) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(5)"
           ]
@@ -9932,7 +10045,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Claude%20Code\">Claude Code</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Claude%20Code\">Claude Code</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(6) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(1)"
           ]
@@ -10238,7 +10351,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Google%20Workspace\">Google Workspace</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Google%20Workspace\">Google Workspace</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(8) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(6)"
           ]
@@ -10256,7 +10369,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"tech-tag\"><a href=\"/projects/?q=Microsoft%20365\">Microsoft 365</a></li>",
+          "html": "<li class=\"tech-tag\">\n                          <a href=\"/projects/?q=Microsoft%20365\">Microsoft 365</a>\n                        </li>",
           "target": [
             ".home-skill-group:nth-child(8) > dd > .project-tech.home-skill-tags > .tech-tag:nth-child(7)"
           ]
@@ -10274,7 +10387,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/projects/ms-thesis\">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a></strong> — Compared six modeling approaches for predicting cognitive impairment from naturalistic driving data.</li>",
+          "html": "<li>\n                  <strong><a href=\"/projects/ms-thesis\">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a></strong>\n                  — Compared six modeling approaches for predicting cognitive impairment from\n                  naturalistic driving data.\n                </li>",
           "target": ["section > ul > li:nth-child(1)"]
         },
         {
@@ -10290,7 +10403,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/projects/multimodal-alzheimers\">Multimodal Alzheimer’s Prediction</a></strong> — Combined MRI imaging with clinical data for early Alzheimer’s disease detection.</li>",
+          "html": "<li>\n                  <strong><a href=\"/projects/multimodal-alzheimers\">Multimodal Alzheimer’s Prediction</a></strong>\n                  — Combined MRI imaging with clinical data for early Alzheimer’s disease detection.\n                </li>",
           "target": ["section > ul > li:nth-child(2)"]
         },
         {
@@ -10306,7 +10419,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/projects/datacenter-cooling\">Datacenter Cooling Optimization</a></strong> — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter cooling efficiency.</li>",
+          "html": "<li>\n                  <strong><a href=\"/projects/datacenter-cooling\">Datacenter Cooling Optimization</a></strong>\n                  — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter\n                  cooling efficiency.\n                </li>",
           "target": ["section > ul > li:nth-child(3)"]
         },
         {
@@ -10322,7 +10435,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><strong><a href=\"/storybook/\">Tales We Weave</a></strong> — AI-powered interactive storytelling app with branching narratives, built with Vue 3, Express, and MongoDB.</li>",
+          "html": "<li>\n                  <strong><a href=\"/storybook/\">Tales We Weave</a></strong> — AI-powered interactive\n                  storytelling app with branching narratives, built with Vue 3, Express, and\n                  MongoDB.\n                </li>",
           "target": ["section > ul > li:nth-child(4)"]
         },
         {
@@ -10354,7 +10467,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"mailto:adurs2002@gmail.com\">Email</a></li>",
+          "html": "<li>",
           "target": [".footer-links > li:nth-child(2)"]
         },
         {
@@ -10370,7 +10483,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a></li>",
+          "html": "<li>\n              <a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": [".footer-links > li:nth-child(3)"]
         },
         {
@@ -10386,7 +10499,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a></li>",
+          "html": "<li>\n              <a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": [".footer-links > li:nth-child(4)"]
         },
         {
@@ -10489,7 +10602,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\">",
+          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\" fetchpriority=\"high\">",
           "target": ["img"]
         },
         {
@@ -10505,7 +10618,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">Technical stack by area</button>",
+          "html": "<button class=\"home-skill-toggle toc-toggle-btn\" type=\"button\" aria-expanded=\"true\" aria-controls=\"homeSkillGroups\">\n                  Technical stack by area\n                </button>",
           "target": [".home-skill-toggle"]
         }
       ]
@@ -10554,6 +10667,53 @@
       ]
     }
   ],
-  "incomplete": [],
+  "incomplete": [
+    {
+      "id": "link-in-text-block",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2a",
+        "wcag141",
+        "TTv5",
+        "TT13.a",
+        "EN-301-549",
+        "EN-9.1.4.1",
+        "RGAAv4",
+        "RGAA-10.6.1"
+      ],
+      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+      "help": "Links must be distinguishable without relying on color",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "link-in-text-block",
+              "data": {
+                "messageKey": "bgOverlap"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<li>",
+                  "target": [".footer-links > li:nth-child(2)"]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element's contrast ratio could not be determined because of element overlap"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element's contrast ratio could not be determined because of element overlap"
+        }
+      ]
+    }
+  ],
   "violations": []
 }

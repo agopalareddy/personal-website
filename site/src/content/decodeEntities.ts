@@ -1,13 +1,13 @@
 const NAMED_ENTITIES: Record<string, string> = {
-  "&amp;": "&",
-  "&apos;": "'",
-  "&quot;": '"',
-  "&mdash;": "—",
-  "&ndash;": "–",
-  "&ldquo;": "“",
-  "&rdquo;": "”",
-  "&deg;": "°",
-  "&rarr;": "→",
+  '&amp;': '&',
+  '&apos;': "'",
+  '&quot;': '"',
+  '&mdash;': '—',
+  '&ndash;': '–',
+  '&ldquo;': '“',
+  '&rdquo;': '”',
+  '&deg;': '°',
+  '&rarr;': '→',
 };
 
 /**
@@ -21,5 +21,8 @@ const NAMED_ENTITIES: Record<string, string> = {
  * intentionally-escaped HTML (research.md R4), injected unescaped on purpose.
  */
 export function decodeEntities(text: string): string {
-  return text.replace(/&(amp|apos|quot|mdash|ndash|ldquo|rdquo|deg|rarr);/g, (m) => NAMED_ENTITIES[m]);
+  return text.replace(
+    /&(amp|apos|quot|mdash|ndash|ldquo|rdquo|deg|rarr);/g,
+    (m) => NAMED_ENTITIES[m]
+  );
 }

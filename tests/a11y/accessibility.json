@@ -13,7 +13,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2026-07-27T22:11:39.196Z",
+  "timestamp": "2026-07-27T23:02:52.343Z",
   "url": "http://localhost:8080/accessibility.html",
   "toolOptions": {
     "runOnly": {
@@ -762,7 +762,7 @@
           ],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -854,7 +854,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -887,6 +887,37 @@
           "impact": null,
           "html": "<article class=\"academic-content\" aria-label=\"Accessibility compliance details\">",
           "target": ["article"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            },
+            {
+              "id": "aria-allowed-attr-elm",
+              "data": null,
+              "relatedNodes": [],
+              "message": "ARIA attributes are allowed for this element",
+              "impact": "critical"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -943,7 +974,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -990,7 +1021,7 @@
           ],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -1008,6 +1039,22 @@
           "impact": null,
           "html": "<article class=\"academic-content\" aria-label=\"Accessibility compliance details\">",
           "target": ["article"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -1048,7 +1095,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         }
       ]
@@ -2567,7 +2614,7 @@
           ],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -2614,7 +2661,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -2632,6 +2679,22 @@
           "impact": null,
           "html": "<article class=\"academic-content\" aria-label=\"Accessibility compliance details\">",
           "target": ["article"]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -2672,7 +2735,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         }
       ]
@@ -2712,7 +2775,7 @@
             }
           ],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         }
       ]
@@ -2753,7 +2816,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [],
@@ -2842,7 +2905,7 @@
           ],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -2874,6 +2937,36 @@
           "impact": null,
           "html": "<article class=\"academic-content\" aria-label=\"Accessibility compliance details\">",
           "target": ["article"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -2929,7 +3022,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"nav-links\" aria-label=\"Primary Navigation\">",
-          "target": ["nav"]
+          "target": [".nav-links"]
         },
         {
           "any": [
@@ -2976,7 +3069,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -2994,6 +3087,22 @@
           "impact": null,
           "html": "<article class=\"academic-content\" aria-label=\"Accessibility compliance details\">",
           "target": ["article"]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [
@@ -3307,7 +3416,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p class=\"author-bio\">M.S. Computer Science graduate from Washington University in St. Louis</p>",
+          "html": "<p class=\"author-bio\">\n                M.S. Computer Science graduate from Washington University in St. Louis\n              </p>",
           "target": [".author-bio"]
         },
         {
@@ -3330,7 +3439,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\"><span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities</div>",
+          "html": "<div class=\"status-badge status-badge--available\" role=\"status\" aria-label=\"Currently open to opportunities\">\n                <span class=\"status-dot\" aria-hidden=\"true\"></span>Open to opportunities\n              </div>",
           "target": [".status-badge"]
         },
         {
@@ -3378,7 +3487,7 @@
           "impact": null,
           "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">adurs2002 [at] gmail [dot] com</a>",
           "target": [
-            "li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+            ".author-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
           ]
         },
         {
@@ -3470,7 +3579,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p>\n  This website is committed to ensuring digital accessibility for people with disabilities. The user\n  experience is continually improved for everyone, and the site conforms to the\n  <strong>Web Content Accessibility Guidelines (WCAG) 2.1 Level AA</strong>\n  specification.\n</p>",
+          "html": "<p>",
           "target": ["p:nth-child(2)"]
         },
         {
@@ -3631,7 +3740,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Skip Navigation Link:</strong> A keyboard-accessible skip link is placed at the top of\n    every page, allowing keyboard-only users to bypass navigation and jump directly to the main\n    content.\n  </li>",
+          "html": "<li>\n                  <strong>Skip Navigation Link:</strong> A keyboard-accessible skip link is placed\n                  at the top of every page, allowing keyboard-only users to bypass navigation and\n                  jump directly to the main content.\n                </li>",
           "target": ["ul:nth-child(8) > li:nth-child(1)"]
         },
         {
@@ -3884,7 +3993,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Heading Hierarchy:</strong> Each page contains a single primary\n    <code>&lt;h1&gt;</code> element with logical sequential headings (<code>&lt;h2&gt;</code>,\n    <code>&lt;h3&gt;</code>) to produce a coherent screen-reader outline.\n  </li>",
+          "html": "<li>",
           "target": ["ul:nth-child(8) > li:nth-child(3)"]
         },
         {
@@ -3999,7 +4108,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>ARIA Labels:</strong> Navigation regions, form controls, and interactive elements carry\n    explicit <code>aria-label</code> or <code>aria-labelledby</code> attributes where native\n    semantics are insufficient.\n  </li>",
+          "html": "<li>\n                  <strong>ARIA Labels:</strong> Navigation regions, form controls, and interactive\n                  elements carry explicit <code>aria-label</code> or\n                  <code>aria-labelledby</code> attributes where native semantics are insufficient.\n                </li>",
           "target": ["ul:nth-child(8) > li:nth-child(4)"]
         },
         {
@@ -4076,6 +4185,75 @@
             {
               "id": "color-contrast",
               "data": {
+                "fgColor": "#59636e",
+                "bgColor": "#ffffff",
+                "contrastRatio": 6.11,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 6.11"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li>\n                  <strong>No-JavaScript Fallback:</strong> Protected email links include a\n                  <code>&lt;noscript&gt;</code> message pointing to LinkedIn when JavaScript\n                  (required for the anti-scraping email obfuscation) is unavailable.\n                </li>",
+          "target": ["ul:nth-child(8) > li:nth-child(5)"]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#59636e",
+                "bgColor": "#ffffff",
+                "contrastRatio": 6.11,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 6.11"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<strong>No-JavaScript Fallback:</strong>",
+          "target": ["li:nth-child(5) > strong"]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#59636e",
+                "bgColor": "#ffffff",
+                "contrastRatio": 6.11,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 6.11"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<code>&lt;noscript&gt;</code>",
+          "target": ["li:nth-child(5) > code"]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
                 "fgColor": "#1f2328",
                 "bgColor": "#ffffff",
                 "contrastRatio": 15.79,
@@ -4114,7 +4292,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Visible Focus Rings:</strong> Following Primer's interactive guidelines, all\n    keyboard-focusable elements display a highly visible, high-contrast custom focus ring during\n    keyboard navigation.\n  </li>",
+          "html": "<li>\n                  <strong>Visible Focus Rings:</strong> Following Primer's interactive guidelines,\n                  all keyboard-focusable elements display a highly visible, high-contrast custom\n                  focus ring during keyboard navigation.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(1)"]
         },
         {
@@ -4160,7 +4338,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the navigation\n    headers, accordion detail menus, and search filters without becoming trapped or lost.\n  </li>",
+          "html": "<li>\n                  <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the\n                  navigation headers, accordion detail menus, and search filters without becoming\n                  trapped or lost.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(2)"]
         },
         {
@@ -4206,7 +4384,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Interactive Controls:</strong> Tab order is managed dynamically for collapsed states\n    (such as the theme selector popup or accordion card panels), updating their focusability states\n    when expanded.\n  </li>",
+          "html": "<li>\n                  <strong>Interactive Controls:</strong> Tab order is managed dynamically for\n                  collapsed states (such as the theme selector popup or accordion card panels),\n                  updating their focusability states when expanded.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(3)"]
         },
         {
@@ -4252,7 +4430,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Decorative Icons:</strong> Decorative icons use Primer Octicons which are either\n    dynamically labeled or cleanly ignored via <code>aria-hidden=\"true\"</code> depending on their\n    context.\n  </li>",
+          "html": "<li>\n                  <strong>Decorative Icons:</strong> Decorative icons use Primer Octicons which are\n                  either dynamically labeled or cleanly ignored via\n                  <code>aria-hidden=\"true\"</code> depending on their context.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(4)"]
         },
         {
@@ -4344,7 +4522,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Color Contrast:</strong> By utilizing Primer primitives design tokens, all text,\n    headings, and interactive elements maintain a contrast ratio of at least\n    <strong>4.5:1</strong> for normal body text and <strong>3:1</strong> for large headings.\n  </li>",
+          "html": "<li>",
           "target": ["ul:nth-child(12) > li:nth-child(1)"]
         },
         {
@@ -4436,7 +4614,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>High Contrast Modes:</strong> Conformance is maintained across all color modes—including\n    the specialized Light High Contrast and Dark High Contrast themes—specifically designed to\n    support users with low vision.\n  </li>",
+          "html": "<li>\n                  <strong>High Contrast Modes:</strong> Conformance is maintained across all color\n                  modes—including the specialized Light High Contrast and Dark High Contrast\n                  themes—specifically designed to support users with low vision.\n                </li>",
           "target": ["ul:nth-child(12) > li:nth-child(2)"]
         },
         {
@@ -4482,7 +4660,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Text Resizing:</strong> All text uses relative units (<code>rem</code>) which adapt to\n    the browser's root font-size configurations. The layout supports zooming up to 200% without\n    layout disruption or clipping.\n  </li>",
+          "html": "<li>\n                  <strong>Text Resizing:</strong> All text uses relative units (<code>rem</code>)\n                  which adapt to the browser's root font-size configurations. The layout supports\n                  zooming up to 200% without layout disruption or clipping.\n                </li>",
           "target": ["ul:nth-child(12) > li:nth-child(3)"]
         },
         {
@@ -4551,7 +4729,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Reduced Motion Support:</strong> Theme transitions and interactive accordion toggles\n    respect the user's operating system setting for <code>prefers-reduced-motion</code>, disabling\n    animations automatically.\n  </li>",
+          "html": "<li>\n                  <strong>Reduced Motion Support:</strong> Theme transitions and interactive\n                  accordion toggles respect the user's operating system setting for\n                  <code>prefers-reduced-motion</code>, disabling animations automatically.\n                </li>",
           "target": ["ul:nth-child(12) > li:nth-child(4)"]
         },
         {
@@ -4643,7 +4821,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>New Tab Warnings:</strong> All links that open in a new tab\n    (<code>target=\"_blank\"</code>) include a screen-reader-visible\n    <code>&lt;span class=\"sr-only\"&gt;(opens in a new tab)&lt;/span&gt;</code>\n    indicator and carry <code>rel=\"noopener\"</code> for security.\n  </li>",
+          "html": "<li>",
           "target": ["ul:nth-child(14) > li:nth-child(1)"]
         },
         {
@@ -4919,7 +5097,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Automated Audits:</strong> Pages are continuously audited programmatically using\n    Axe-core (via Playwright and programmatic accessibility runners) to confirm WCAG 2.1 AA\n    compliance with zero violations.\n  </li>",
+          "html": "<li>\n                  <strong>Automated Audits:</strong> Pages are continuously audited programmatically\n                  using Axe-core (via Playwright and programmatic accessibility runners) to confirm\n                  WCAG 2.1 AA compliance with zero violations.\n                </li>",
           "target": ["ul:nth-child(17) > li:nth-child(1)"]
         },
         {
@@ -4965,7 +5143,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Keyboard Walkthroughs:</strong> Focus trapping, tab order, and skip-link functionality\n    are manually tested in modern browsers.\n  </li>",
+          "html": "<li>\n                  <strong>Keyboard Walkthroughs:</strong> Focus trapping, tab order, and skip-link\n                  functionality are manually tested in modern browsers.\n                </li>",
           "target": ["ul:nth-child(17) > li:nth-child(2)"]
         },
         {
@@ -5011,7 +5189,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Screen Reader Testing:</strong> Outline structures are verified with screen readers to\n    confirm logical heading hierarchy.\n  </li>",
+          "html": "<li>\n                  <strong>Screen Reader Testing:</strong> Outline structures are verified with\n                  screen readers to confirm logical heading hierarchy.\n                </li>",
           "target": ["ul:nth-child(17) > li:nth-child(3)"]
         },
         {
@@ -5080,7 +5258,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p>\n  If you encounter any accessibility barriers or have suggestions for further improvement, please\n  reach out:\n</p>",
+          "html": "<p>\n                If you encounter any accessibility barriers or have suggestions for further\n                improvement, please reach out:\n              </p>",
           "target": ["p:nth-child(20)"]
         },
         {
@@ -5266,8 +5444,10 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": [".footer-links > li:nth-child(2) > a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -5494,14 +5674,14 @@
             }
           ],
           "impact": null,
-          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\">",
+          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\" fetchpriority=\"high\">",
           "target": ["img"]
         }
       ]
     },
     {
       "id": "link-in-text-block",
-      "impact": null,
+      "impact": "serious",
       "tags": [
         "cat.color",
         "wcag2a",
@@ -5549,6 +5729,29 @@
           "impact": null,
           "html": "<a href=\"https://primer.style/accessibility/\" target=\"_blank\" rel=\"noopener\">Primer Design System <span class=\"sr-only\">(opens in a new tab)</span></a>",
           "target": ["p:nth-child(3) > a[target=\"_blank\"][rel=\"noopener\"]"]
+        },
+        {
+          "any": [
+            {
+              "id": "link-in-text-block-style",
+              "data": null,
+              "relatedNodes": [
+                {
+                  "html": "<li>",
+                  "target": ["ul:nth-child(21) > li:nth-child(1)"]
+                }
+              ],
+              "impact": "serious",
+              "message": "Links can be distinguished from surrounding text by visual styling"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">✉ Email</a>",
+          "target": [
+            "li:nth-child(1) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         }
       ]
     },
@@ -5742,7 +5945,7 @@
           "impact": null,
           "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">adurs2002 [at] gmail [dot] com</a>",
           "target": [
-            "li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+            ".author-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
           ]
         },
         {
@@ -5912,8 +6115,10 @@
             }
           ],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": [".footer-links > li:nth-child(2) > a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -6228,7 +6433,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Skip Navigation Link:</strong> A keyboard-accessible skip link is placed at the top of\n    every page, allowing keyboard-only users to bypass navigation and jump directly to the main\n    content.\n  </li>",
+          "html": "<li>\n                  <strong>Skip Navigation Link:</strong> A keyboard-accessible skip link is placed\n                  at the top of every page, allowing keyboard-only users to bypass navigation and\n                  jump directly to the main content.\n                </li>",
           "target": ["ul:nth-child(8) > li:nth-child(1)"]
         },
         {
@@ -6260,7 +6465,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Heading Hierarchy:</strong> Each page contains a single primary\n    <code>&lt;h1&gt;</code> element with logical sequential headings (<code>&lt;h2&gt;</code>,\n    <code>&lt;h3&gt;</code>) to produce a coherent screen-reader outline.\n  </li>",
+          "html": "<li>",
           "target": ["ul:nth-child(8) > li:nth-child(3)"]
         },
         {
@@ -6276,7 +6481,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>ARIA Labels:</strong> Navigation regions, form controls, and interactive elements carry\n    explicit <code>aria-label</code> or <code>aria-labelledby</code> attributes where native\n    semantics are insufficient.\n  </li>",
+          "html": "<li>\n                  <strong>ARIA Labels:</strong> Navigation regions, form controls, and interactive\n                  elements carry explicit <code>aria-label</code> or\n                  <code>aria-labelledby</code> attributes where native semantics are insufficient.\n                </li>",
           "target": ["ul:nth-child(8) > li:nth-child(4)"]
         },
         {
@@ -6292,7 +6497,23 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Visible Focus Rings:</strong> Following Primer's interactive guidelines, all\n    keyboard-focusable elements display a highly visible, high-contrast custom focus ring during\n    keyboard navigation.\n  </li>",
+          "html": "<li>\n                  <strong>No-JavaScript Fallback:</strong> Protected email links include a\n                  <code>&lt;noscript&gt;</code> message pointing to LinkedIn when JavaScript\n                  (required for the anti-scraping email obfuscation) is unavailable.\n                </li>",
+          "target": ["ul:nth-child(8) > li:nth-child(5)"]
+        },
+        {
+          "any": [
+            {
+              "id": "listitem",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li>\n                  <strong>Visible Focus Rings:</strong> Following Primer's interactive guidelines,\n                  all keyboard-focusable elements display a highly visible, high-contrast custom\n                  focus ring during keyboard navigation.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(1)"]
         },
         {
@@ -6308,7 +6529,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the navigation\n    headers, accordion detail menus, and search filters without becoming trapped or lost.\n  </li>",
+          "html": "<li>\n                  <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the\n                  navigation headers, accordion detail menus, and search filters without becoming\n                  trapped or lost.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(2)"]
         },
         {
@@ -6324,7 +6545,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Interactive Controls:</strong> Tab order is managed dynamically for collapsed states\n    (such as the theme selector popup or accordion card panels), updating their focusability states\n    when expanded.\n  </li>",
+          "html": "<li>\n                  <strong>Interactive Controls:</strong> Tab order is managed dynamically for\n                  collapsed states (such as the theme selector popup or accordion card panels),\n                  updating their focusability states when expanded.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(3)"]
         },
         {
@@ -6340,7 +6561,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Decorative Icons:</strong> Decorative icons use Primer Octicons which are either\n    dynamically labeled or cleanly ignored via <code>aria-hidden=\"true\"</code> depending on their\n    context.\n  </li>",
+          "html": "<li>\n                  <strong>Decorative Icons:</strong> Decorative icons use Primer Octicons which are\n                  either dynamically labeled or cleanly ignored via\n                  <code>aria-hidden=\"true\"</code> depending on their context.\n                </li>",
           "target": ["ul:nth-child(10) > li:nth-child(4)"]
         },
         {
@@ -6356,7 +6577,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Color Contrast:</strong> By utilizing Primer primitives design tokens, all text,\n    headings, and interactive elements maintain a contrast ratio of at least\n    <strong>4.5:1</strong> for normal body text and <strong>3:1</strong> for large headings.\n  </li>",
+          "html": "<li>",
           "target": ["ul:nth-child(12) > li:nth-child(1)"]
         },
         {
@@ -6372,7 +6593,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>High Contrast Modes:</strong> Conformance is maintained across all color modes—including\n    the specialized Light High Contrast and Dark High Contrast themes—specifically designed to\n    support users with low vision.\n  </li>",
+          "html": "<li>\n                  <strong>High Contrast Modes:</strong> Conformance is maintained across all color\n                  modes—including the specialized Light High Contrast and Dark High Contrast\n                  themes—specifically designed to support users with low vision.\n                </li>",
           "target": ["ul:nth-child(12) > li:nth-child(2)"]
         },
         {
@@ -6388,7 +6609,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Text Resizing:</strong> All text uses relative units (<code>rem</code>) which adapt to\n    the browser's root font-size configurations. The layout supports zooming up to 200% without\n    layout disruption or clipping.\n  </li>",
+          "html": "<li>\n                  <strong>Text Resizing:</strong> All text uses relative units (<code>rem</code>)\n                  which adapt to the browser's root font-size configurations. The layout supports\n                  zooming up to 200% without layout disruption or clipping.\n                </li>",
           "target": ["ul:nth-child(12) > li:nth-child(3)"]
         },
         {
@@ -6404,7 +6625,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Reduced Motion Support:</strong> Theme transitions and interactive accordion toggles\n    respect the user's operating system setting for <code>prefers-reduced-motion</code>, disabling\n    animations automatically.\n  </li>",
+          "html": "<li>\n                  <strong>Reduced Motion Support:</strong> Theme transitions and interactive\n                  accordion toggles respect the user's operating system setting for\n                  <code>prefers-reduced-motion</code>, disabling animations automatically.\n                </li>",
           "target": ["ul:nth-child(12) > li:nth-child(4)"]
         },
         {
@@ -6420,7 +6641,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>New Tab Warnings:</strong> All links that open in a new tab\n    (<code>target=\"_blank\"</code>) include a screen-reader-visible\n    <code>&lt;span class=\"sr-only\"&gt;(opens in a new tab)&lt;/span&gt;</code>\n    indicator and carry <code>rel=\"noopener\"</code> for security.\n  </li>",
+          "html": "<li>",
           "target": ["ul:nth-child(14) > li:nth-child(1)"]
         },
         {
@@ -6452,7 +6673,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Automated Audits:</strong> Pages are continuously audited programmatically using\n    Axe-core (via Playwright and programmatic accessibility runners) to confirm WCAG 2.1 AA\n    compliance with zero violations.\n  </li>",
+          "html": "<li>\n                  <strong>Automated Audits:</strong> Pages are continuously audited programmatically\n                  using Axe-core (via Playwright and programmatic accessibility runners) to confirm\n                  WCAG 2.1 AA compliance with zero violations.\n                </li>",
           "target": ["ul:nth-child(17) > li:nth-child(1)"]
         },
         {
@@ -6468,7 +6689,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Keyboard Walkthroughs:</strong> Focus trapping, tab order, and skip-link functionality\n    are manually tested in modern browsers.\n  </li>",
+          "html": "<li>\n                  <strong>Keyboard Walkthroughs:</strong> Focus trapping, tab order, and skip-link\n                  functionality are manually tested in modern browsers.\n                </li>",
           "target": ["ul:nth-child(17) > li:nth-child(2)"]
         },
         {
@@ -6484,7 +6705,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n    <strong>Screen Reader Testing:</strong> Outline structures are verified with screen readers to\n    confirm logical heading hierarchy.\n  </li>",
+          "html": "<li>\n                  <strong>Screen Reader Testing:</strong> Outline structures are verified with\n                  screen readers to confirm logical heading hierarchy.\n                </li>",
           "target": ["ul:nth-child(17) > li:nth-child(3)"]
         },
         {
@@ -6548,7 +6769,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"mailto:adurs2002@gmail.com\">Email</a></li>",
+          "html": "<li>",
           "target": [".footer-links > li:nth-child(2)"]
         },
         {
@@ -6564,7 +6785,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a></li>",
+          "html": "<li>\n              <a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": [".footer-links > li:nth-child(3)"]
         },
         {
@@ -6580,7 +6801,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a></li>",
+          "html": "<li>\n              <a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": [".footer-links > li:nth-child(4)"]
         },
         {
@@ -6597,7 +6818,7 @@
           "none": [],
           "impact": null,
           "html": "<li><a href=\"/accessibility.html\">Accessibility</a></li>",
-          "target": ["li:nth-child(5)"]
+          "target": [".footer-links > li:nth-child(5)"]
         }
       ]
     },
@@ -6683,7 +6904,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\">",
+          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\" fetchpriority=\"high\">",
           "target": ["img"]
         }
       ]
@@ -6732,6 +6953,53 @@
       ]
     }
   ],
-  "incomplete": [],
+  "incomplete": [
+    {
+      "id": "link-in-text-block",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2a",
+        "wcag141",
+        "TTv5",
+        "TT13.a",
+        "EN-301-549",
+        "EN-9.1.4.1",
+        "RGAAv4",
+        "RGAA-10.6.1"
+      ],
+      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+      "help": "Links must be distinguishable without relying on color",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "link-in-text-block",
+              "data": {
+                "messageKey": "bgOverlap"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<li>",
+                  "target": [".footer-links > li:nth-child(2)"]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element's contrast ratio could not be determined because of element overlap"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element's contrast ratio could not be determined because of element overlap"
+        }
+      ]
+    }
+  ],
   "violations": []
 }

@@ -1,0 +1,169 @@
+\documentclass[10pt, letterpaper]{article}
+% ----------------------------------------------------------------------
+% LaTeX Preamble
+% ----------------------------------------------------------------------
+
+% --- Required Packages ---
+\usepackage{reddy_resume}   % Custom resume style package
+
+% ----------------------------------------------------------------------
+% Document Body
+% ----------------------------------------------------------------------
+\begin{document}
+
+% ----------------------------------------------------------------------
+% HEADER SECTION
+% ----------------------------------------------------------------------
+\begin{header}
+	\begin{minipage}[t]{1.0\textwidth}
+		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
+		\normalsize
+		% Phone
+		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		% Email
+		\mbox{\hrefWithoutArrow{mailto:adurs2002@gmail.com}{adurs2002@gmail.com}}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://www.linkedin.com/in/agopalareddy}{linkedin.com/in/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://github.com/agopalareddy}{github.com/agopalareddy}%
+		\kern \kernSpacing\AND\kern \kernSpacing
+		\href{https://agreddy.com}{agreddy.com}%
+	\end{minipage}
+\end{header}
+
+% --- Vertical Space After Header ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SUMMARY SECTION
+% ----------------------------------------------------------------------
+
+\section{SUMMARY}
+
+\vspace{\entrySpacing}
+\begin{samepage}
+	\begin{summary}
+		Data-driven researcher who pairs Python/SQL data engineering with simulation benchmarking and LLM-based tooling, seeking a research role applying AI to power systems and energy infrastructure.
+	\end{summary}
+\end{samepage}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% SKILLS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com}{SKILLS}}
+\needspace{10\baselineskip}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Programming \& Data Analysis}
+	Python, SQL, Pandas, NumPy, R.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{AI \& LLM Development}
+	Gemini/OpenAI APIs, agentic coding workflows with Claude Code, LLM-assisted workflow automation.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Data Engineering \& Simulation}
+	Apache Airflow, Snowflake, Spark, Kafka, Flink, EnergyPlus simulation benchmarking.
+\end{skillcategory}
+
+\vspace{\entrySpacing}
+\begin{skillcategory}{Visualization \& Tools}
+	Tableau, Power BI, Git, AWS, PostgreSQL.
+\end{skillcategory}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EXPERIENCE SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience/}{EXPERIENCE}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{\href{https://agreddy.com/projects/ms-thesis}{Master's Thesis Research}}{August 2025 - May 2026}
+		\item Built an end-to-end pipeline processing 790,000 naturalistic driving trips from 304 participants, engineering behavioral features and benchmarking six model architectures under leave-one-participant-out cross-validation for a faculty-reviewed thesis.
+	\end{positionentry}
+	\begin{positionentry}{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale}{January 2026 - May 2026}
+		\item Taught large-scale data pipeline concepts (Snowflake, Airflow, Spark, Kafka, Flink) to a graduate cohort, covering fault-tolerant design, streaming windowing, and query optimization.
+		\item Authored instructional documentation and debugged student pipeline failures weekly through hands-on code review and testing feedback.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Crittero, Inc.}{Remote}
+	\begin{positionentry}{AI Engineer Intern}{June 2025 - August 2025}
+		\item Generated 100,000 labeled training records via time-series behavioral modeling and trained a TensorFlow/Keras recommendation model achieving 80\% accuracy, benchmarked against a random baseline and a collaborative-filtering fallback.
+		\item Built a configurable Python CLI for reproducible model evaluation and benchmarking across hyperparameters, embedding dimensions, and fallback thresholds; established Git-based workflow practices in a multi-developer codebase.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Lab714}{Boca Raton, Florida, USA}
+	\begin{positionentry}{Data Analyst Intern}{June 2023 - May 2024}
+		\item Wrote SQL queries and built AWS data ingestion pipelines (S3, Lambda) to process, normalize, and aggregate IoT sensor telemetry, powering trend-analytics and anomaly-detection dashboards for real-time operational monitoring.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% PROJECTS SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/projects/}{PROJECTS}}
+
+\vspace{\entrySpacing}
+\begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
+	\begin{positionentry}{Datacenter Cooling Optimization using Deep RL}{August 2024 - December 2024}
+		\item Implemented DDQN, PPO, and SAC reinforcement learning agents benchmarked against EnergyPlus building-energy simulations, achieving a 35.8\% energy efficiency improvement over baseline controllers.
+	\end{positionentry}
+	\begin{positionentry}{\href{https://github.com/agopalareddy/visual-jailbreak-defense}{Red-Blue Visual Auto Defender}}{August 2025 - December 2025}
+		\item Built an automated red-blue teaming pipeline using Claude Code for agentic coding workflows, generating visual jailbreak attacks against vision-language models and auto-generating deterministic OCR-based Python defenses.
+	\end{positionentry}
+\end{leadershipentry}
+
+% --- Vertical Space After Section ---
+\vspace{\headerSpacing}
+
+% ----------------------------------------------------------------------
+% EDUCATION SECTION
+% ----------------------------------------------------------------------
+
+\section{\sectionlink{https://agreddy.com/experience}{EDUCATION}}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Washington University in St. Louis}
+	{August 2024 - May 2026}
+	{M.S. in Computer Science}
+	{St. Louis, Missouri, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Thesis:} \href{https://doi.org/10.7936/g95n-fv35}{Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data}
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+\vspace{\entrySpacing}
+\begin{educationentry}
+	{Ohio Wesleyan University}
+	{August 2020 - May 2023}
+	{B.A. in Computer Science and Data Analytics}
+	{Delaware, Ohio, USA}
+\begin{highlightsforbulletentries}
+\item \textit{Minor:} Economics \textbar{} \textit{Honors:} Golden Bishop Award, Mortar Board, Florence Leas Prize, Dean's List
+\end{highlightsforbulletentries}
+\end{educationentry}
+
+% ----------------------------------------------------------------------
+% End of Document
+% ----------------------------------------------------------------------
+\end{document}

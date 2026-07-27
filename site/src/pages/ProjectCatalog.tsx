@@ -81,11 +81,15 @@ export function ProjectCatalogPage({ projects }: { projects: ProjectEntry[] }) {
         projects.
       </p>
       <div className="projects-container">
+        <p id="resultsCount" className="results-count" aria-live="polite" />
         <div className="project-timeline timeline-section" id="projectGrid">
           {items}
         </div>
         <div id="emptyState" className="empty-state" hidden>
           No projects match your search or filter criteria.
+          <button type="button" id="clearFiltersBtn" className="card-btn btn-detail">
+            Clear Filters
+          </button>
         </div>
       </div>
     </Layout>

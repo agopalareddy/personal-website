@@ -8,75 +8,79 @@ var t = e(() => {
       r = document.getElementById(`tocContainer`),
       i = document.getElementById(`tocList`),
       a = document.getElementById(`emptyState`),
-      o = n?.querySelector(`.search-input`) ?? null,
-      s = n?.querySelector(`[data-role="group-filter"]`) ?? null,
-      c = n?.querySelector(`[data-role="year-filter"]`) ?? null,
-      l = n?.querySelector(`[data-role="sort"]`) ?? null,
-      u = Array.from(n?.querySelectorAll(`.filter-btn`) ?? []),
-      d = Array.from(t.querySelectorAll(`.timeline-card`));
-    function f() {
-      return u.find((e) => e.classList.contains(`active`))?.dataset.filter ?? `all`;
+      o = document.getElementById(`resultsCount`),
+      s = document.getElementById(`clearFiltersBtn`),
+      c = n?.querySelector(`.search-input`) ?? null,
+      l = n?.querySelector(`[data-role="group-filter"]`) ?? null,
+      u = n?.querySelector(`[data-role="year-filter"]`) ?? null,
+      d = n?.querySelector(`[data-role="sort"]`) ?? null,
+      f = Array.from(n?.querySelectorAll(`.filter-btn`) ?? []),
+      p = t.id === `experienceGrid` ? `entry` : `project`,
+      m = t.id === `experienceGrid` ? `entries` : `projects`,
+      h = Array.from(t.querySelectorAll(`.timeline-card`));
+    function g() {
+      return f.find((e) => e.classList.contains(`active`))?.dataset.filter ?? `all`;
     }
-    function p() {
-      let e = f(),
-        n = s?.value ?? `all`,
-        r = c?.value ?? `all`,
-        i = (o?.value ?? ``).trim().toLowerCase(),
-        u = d.filter((t) => {
+    function _() {
+      let e = g(),
+        n = l?.value ?? `all`,
+        r = u?.value ?? `all`,
+        i = (c?.value ?? ``).trim().toLowerCase(),
+        s = h.filter((t) => {
           let a = e === `all` || t.dataset.category === e,
             o = n === `all` || t.dataset.group === n,
             s = r === `all` || t.dataset.year === r,
             c = !i || (t.dataset.search ?? ``).includes(i);
           return a && o && s && c;
         }),
-        p = l?.value ?? `date-desc`;
+        f = d?.value ?? `date-desc`;
       if (
-        (u.sort((e, t) => {
-          if (p === `title-asc`)
+        (s.sort((e, t) => {
+          if (f === `title-asc`)
             return (e.dataset.title ?? ``).localeCompare(t.dataset.title ?? ``);
           let n = e.dataset.date ?? ``,
             r = t.dataset.date ?? ``;
-          return p === `date-asc` ? n.localeCompare(r) : r.localeCompare(n);
+          return f === `date-asc` ? n.localeCompare(r) : r.localeCompare(n);
         }),
         t.querySelectorAll(`.timeline-year`).forEach((e) => e.remove()),
-        d.forEach((e) => e.remove()),
-        u.length === 0)
+        h.forEach((e) => e.remove()),
+        s.length === 0)
       ) {
-        (a && (a.hidden = !1), m([]));
+        (a && (a.hidden = !1), o && (o.textContent = `Showing 0 ${m}.`), v([]));
         return;
       }
       a && (a.hidden = !0);
-      let h = document.createDocumentFragment(),
-        g;
-      for (let e of u) {
-        if (p !== `title-asc` && e.dataset.year && e.dataset.year !== g) {
+      let _ = document.createDocumentFragment(),
+        y;
+      for (let e of s) {
+        if (f !== `title-asc` && e.dataset.year && e.dataset.year !== y) {
           let t = document.createElement(`h2`);
           ((t.className = `timeline-year`),
             (t.id = `year-${e.dataset.year}`),
             (t.textContent = e.dataset.year),
-            h.append(t),
-            (g = e.dataset.year));
+            _.append(t),
+            (y = e.dataset.year));
         }
-        h.append(e);
+        _.append(e);
       }
-      (t.append(h), m(u));
+      (t.append(_), o && (o.textContent = `Showing ${s.length} ${s.length === 1 ? p : m}.`), v(s));
     }
-    function m(e) {
+    function v(e) {
       if (!r || !i) return;
       if (e.length <= 1) {
         ((r.hidden = !0), i.replaceChildren());
         return;
       }
-      ((r.hidden = !1), _());
+      ((r.hidden = !1), C());
       let t = document.getElementById(`tocToggleBtn`);
       if (t && !t.hasAttribute(`data-initialized`)) {
         let e = window.innerWidth < 768;
         (t.setAttribute(`aria-expanded`, e ? `false` : `true`),
           t.setAttribute(`data-initialized`, `true`));
       }
-      let n = l?.value ?? `date-desc`,
+      let n = d?.value ?? `date-desc`,
         a = document.createDocumentFragment();
-      if (n === `title-asc`) for (let t of e) a.append(h(t));
+      if (n === `title-asc`) for (let t of e) a.append(y(t));
       else {
         let t,
           n = null;
@@ -95,7 +99,7 @@ var t = e(() => {
               a.append(r),
               (t = e));
           }
-          n?.append(h(r));
+          n?.append(y(r));
         }
       }
       (i.replaceChildren(a),
@@ -116,7 +120,7 @@ var t = e(() => {
           });
         }));
     }
-    function h(e) {
+    function y(e) {
       let t = document.createElement(`li`);
       t.className = `toc-item`;
       let n = document.createElement(`a`);
@@ -128,21 +132,58 @@ var t = e(() => {
         t
       );
     }
-    (o?.addEventListener(`input`, p),
-      s?.addEventListener(`change`, p),
-      c?.addEventListener(`change`, p),
-      l?.addEventListener(`change`, p),
-      u.forEach((e) => {
+    function b() {
+      let e = new URLSearchParams(),
+        t = g();
+      (t !== `all` && e.set(`category`, t),
+        l && l.value !== `all` && e.set(`group`, l.value),
+        u && u.value !== `all` && e.set(`year`, u.value),
+        d && d.value !== `date-desc` && e.set(`sort`, d.value),
+        c?.value && e.set(`q`, c.value));
+      let n = e.toString();
+      history.replaceState(
+        null,
+        ``,
+        n ? `?${n}${location.hash}` : location.pathname + location.hash
+      );
+    }
+    function x() {
+      (f.forEach((e) => {
+        let t = e.dataset.filter === `all`;
+        (e.classList.toggle(`active`, t), e.setAttribute(`aria-pressed`, String(t)));
+      }),
+        l && (l.value = `all`),
+        u && (u.value = `all`),
+        d && (d.value = `date-desc`),
+        c && (c.value = ``),
+        b(),
+        _());
+    }
+    (c?.addEventListener(`input`, () => {
+      (b(), _());
+    }),
+      l?.addEventListener(`change`, () => {
+        (b(), _());
+      }),
+      u?.addEventListener(`change`, () => {
+        (b(), _());
+      }),
+      d?.addEventListener(`change`, () => {
+        (b(), _());
+      }),
+      f.forEach((e) => {
         e.addEventListener(`click`, () => {
-          (u.forEach((e) => {
+          (f.forEach((e) => {
             (e.classList.remove(`active`), e.setAttribute(`aria-pressed`, `false`));
           }),
             e.classList.add(`active`),
             e.setAttribute(`aria-pressed`, `true`),
-            p());
+            b(),
+            _());
         });
-      }));
-    function g() {
+      }),
+      s?.addEventListener(`click`, x));
+    function S() {
       if (!n) return;
       let e = window.innerWidth < 768,
         t = document.querySelector(`.academic-sidebar`),
@@ -154,7 +195,7 @@ var t = e(() => {
           r.parentNode?.insertBefore(e, r.nextSibling);
       } else !e && t && n.parentNode !== t && t.append(n);
     }
-    function _() {
+    function C() {
       if (!r) return;
       let e = window.innerWidth < 768,
         t = document.querySelector(`.academic-sidebar`);
@@ -163,7 +204,7 @@ var t = e(() => {
           n.parentNode?.insertBefore(r, n.nextSibling)
         : !e && t && r.parentNode !== t && t.append(r);
     }
-    function v() {
+    function w() {
       let e = window.innerWidth < 768,
         t = document.querySelector(`.mobile-sticky-wrapper`);
       if (e) {
@@ -185,31 +226,47 @@ var t = e(() => {
         e?.removeChild(t);
       }
     }
-    function y() {
-      (g(), _(), v());
+    function T() {
+      (S(), C(), w());
     }
-    window.matchMedia(`(max-width: 767px)`).addEventListener(`change`, y);
-    let b = document.getElementById(`filterToggleBtn`);
-    if (b) {
-      if (!b.hasAttribute(`data-initialized`)) {
+    window.matchMedia(`(max-width: 767px)`).addEventListener(`change`, T);
+    let E = document.getElementById(`filterToggleBtn`);
+    if (E) {
+      if (!E.hasAttribute(`data-initialized`)) {
         let e = window.innerWidth < 768;
-        (b.setAttribute(`aria-expanded`, e ? `false` : `true`),
-          b.setAttribute(`data-initialized`, `true`));
+        (E.setAttribute(`aria-expanded`, e ? `false` : `true`),
+          E.setAttribute(`data-initialized`, `true`));
       }
-      b.addEventListener(`click`, () => {
-        let e = b.getAttribute(`aria-expanded`) === `true`;
-        b.setAttribute(`aria-expanded`, String(!e));
+      E.addEventListener(`click`, () => {
+        let e = E.getAttribute(`aria-expanded`) === `true`;
+        E.setAttribute(`aria-expanded`, String(!e));
       });
     }
-    let x = document.getElementById(`tocToggleBtn`);
-    (x &&
-      x.addEventListener(`click`, () => {
-        let e = x.getAttribute(`aria-expanded`) === `true`;
-        x.setAttribute(`aria-expanded`, String(!e));
-      }),
-      g(),
-      v(),
-      p());
+    let D = document.getElementById(`tocToggleBtn`);
+    D &&
+      D.addEventListener(`click`, () => {
+        let e = D.getAttribute(`aria-expanded`) === `true`;
+        D.setAttribute(`aria-expanded`, String(!e));
+      });
+    let O = new URLSearchParams(window.location.search),
+      k = O.get(`category`);
+    if (k) {
+      let e = f.find((e) => e.dataset.filter === k);
+      e &&
+        (f.forEach((e) => {
+          (e.classList.remove(`active`), e.setAttribute(`aria-pressed`, `false`));
+        }),
+        e.classList.add(`active`),
+        e.setAttribute(`aria-pressed`, `true`));
+    }
+    let A = O.get(`group`);
+    A && l && (l.value = A);
+    let j = O.get(`year`);
+    j && u && (u.value = j);
+    let M = O.get(`sort`);
+    M && d && (d.value = M);
+    let N = O.get(`q`);
+    (N && c && (c.value = N), S(), w(), _());
   });
 });
 export default t();

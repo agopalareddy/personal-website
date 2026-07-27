@@ -1,5 +1,5 @@
-import { Layout } from "../components/chrome/Layout";
-import { Icon } from "../components/common/Icon";
+import { Layout } from '../components/chrome/Layout';
+import { Icon } from '../components/common/Icon';
 
 /** Ported from availability/index.html. */
 export function AvailabilityPage() {
@@ -22,7 +22,7 @@ export function AvailabilityPage() {
           rel="noopener"
           aria-label="Book an appointment on Google Calendar (opens in a new tab)"
         >
-          <Icon name="CALENDAR_16" /> Book an appointment{" "}
+          <Icon name="CALENDAR_16" /> Book an appointment{' '}
           <span className="sr-only">(opens in a new tab)</span>
         </a>
       </div>

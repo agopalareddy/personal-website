@@ -13,27 +13,43 @@ export function Footer() {
         <span className="footer-copyright">
           &copy; <span className="current-year">{year}</span> Aadarsha Gopala Reddy
         </span>
-        <ul className="footer-links">
-          <li className="footer-cv-link">
-            <a href="/cv/">CV/Resume</a>
-          </li>
-          <li>
-            <a href="mailto:adurs2002@gmail.com">Email</a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
-              LinkedIn <span className="sr-only">(opens in a new tab)</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/agopalareddy" target="_blank" rel="noopener">
-              GitHub <span className="sr-only">(opens in a new tab)</span>
-            </a>
-          </li>
-          <li>
-            <a href="/accessibility.html">Accessibility</a>
-          </li>
-        </ul>
+        <nav aria-label="Footer Navigation">
+          <ul className="footer-links">
+            <li className="footer-cv-link">
+              <a href="/cv/">CV/Resume</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="protected-email"
+                data-email-user="YWR1cnMyMDAy"
+                data-email-domain="Z21haWwuY29t"
+              >
+                Email
+              </a>
+              <noscript>
+                (requires JavaScript —{' '}
+                <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
+                  message me on LinkedIn
+                </a>{' '}
+                instead)
+              </noscript>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
+                LinkedIn <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/agopalareddy" target="_blank" rel="noopener">
+                GitHub <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accessibility.html">Accessibility</a>
+            </li>
+          </ul>
+        </nav>
         {/* Hydration mount point for the ThemePicker island (T014/T016) */}
         <div id="theme-toggle-footer" />
       </div>

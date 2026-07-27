@@ -92,11 +92,15 @@ export function ExperienceCatalogPage({ entries }: { entries: ExperienceEntry[] 
         Professional, research, leadership, and academic experience across industry and academia.
       </p>
       <div className="experience-container">
+        <p id="resultsCount" className="results-count" aria-live="polite" />
         <div className="experience-timeline timeline-section" id="experienceGrid">
           {items}
         </div>
         <div id="emptyState" className="empty-state" hidden>
           No experience entries match your search or filter criteria.
+          <button type="button" id="clearFiltersBtn" className="card-btn btn-detail">
+            Clear Filters
+          </button>
         </div>
       </div>
     </Layout>

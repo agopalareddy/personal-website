@@ -11500,7 +11500,11 @@ Error generating stack: ` +
 function m({ name: e, className: t }) {
   let n = u[e];
   if (!n) throw Error(`Icon "${String(e)}" is not in the vendored octicon set`);
-  return (0, h.jsx)(`span`, { className: t, dangerouslySetInnerHTML: { __html: n } });
+  return (0, h.jsx)(`span`, {
+    className: t,
+    style: { display: `contents` },
+    dangerouslySetInnerHTML: { __html: n },
+  });
 }
 var h,
   g = e(() => {

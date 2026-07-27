@@ -68,7 +68,7 @@ description: 'Task list for migrating site generation to a component-based build
 - [x] T021 [US1] Update any `tests/e2e/*.spec.ts` selectors touching `/projects/*` that changed due to the new markup (FR-008) — do not alter passing assertions about behavior
 - [x] T022 [US1] Run `tests/a11y/run-audit.mjs` against the new `/projects/` pages; confirm 0 new violations (FR-007, SC-003)
 - [x] T023 [US1] Diff every current `/projects/` URL (old generator output vs. new build output) for visible-content parity (SC-001) and confirm chrome links between the new and still-old sections are unbroken (Acceptance Scenario 2)
-- [x] T024 [US1] Deploy the proof-of-concept via the existing `git push` deploy flow (no infra changes) and confirm it serves correctly as static files (Acceptance Scenario 3, FR-010)
+- [ ] T024 [US1] Deploy the proof-of-concept via the existing `git push` deploy flow (no infra changes) and confirm it serves correctly as static files (Acceptance Scenario 3, FR-010) — **pending explicit go-ahead to push/deploy**, per this repo's risky-action confirmation policy
 
 **Checkpoint**: `/projects/` fully on the new pipeline, reviewed and deployed as the standalone checkpoint required by FR-011 before continuing.
 

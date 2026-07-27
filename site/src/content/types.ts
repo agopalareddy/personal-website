@@ -18,12 +18,7 @@ export interface ProjectEntry {
 }
 
 export type ExperienceCategory =
-  | "education"
-  | "research"
-  | "professional"
-  | "leadership"
-  | "presentations"
-  | "awards";
+  'education' | 'research' | 'professional' | 'leadership' | 'presentations' | 'awards';
 
 export interface ExperienceLink {
   label: string;

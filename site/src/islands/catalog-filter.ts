@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const tocContainer = document.getElementById('tocContainer');
   const tocList = document.getElementById('tocList');
   const emptyState = document.getElementById('emptyState');
+  const resultsCount = document.getElementById('resultsCount');
+  const clearFiltersBtn = document.getElementById('clearFiltersBtn');
   const searchInput = filterControls?.querySelector<HTMLInputElement>('.search-input') ?? null;
   const groupSelect =
     filterControls?.querySelector<HTMLSelectElement>('[data-role="group-filter"]') ?? null;
@@ -33,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = Array.from(
     filterControls?.querySelectorAll<HTMLButtonElement>('.filter-btn') ?? []
   );
+  const noun = grid.id === 'experienceGrid' ? 'entry' : 'project';
+  const nounPlural = grid.id === 'experienceGrid' ? 'entries' : 'projects';
 
   const cards = Array.from(grid.querySelectorAll<HTMLElement>('.timeline-card'));
 
@@ -74,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (filtered.length === 0) {
       if (emptyState) emptyState.hidden = false;
+      if (resultsCount) resultsCount.textContent = `Showing 0 ${nounPlural}.`;
       renderToc([]);
       return;
     }
@@ -94,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     grid.append(frag);
 
+    if (resultsCount) {
+      resultsCount.textContent = `Showing ${filtered.length} ${filtered.length === 1 ? noun : nounPlural}.`;
+    }
     renderToc(filtered);
   }
 
@@ -177,10 +185,56 @@ document.addEventListener('DOMContentLoaded', () => {
     return li;
   }
 
-  searchInput?.addEventListener('input', render);
-  groupSelect?.addEventListener('change', render);
-  yearSelect?.addEventListener('change', render);
-  sortSelect?.addEventListener('change', render);
+  // ---------------------------------------------------------------------
+  // URL param sync — makes a filtered view shareable/bookmarkable.
+  // replaceState (not pushState) keeps every keystroke off the back button.
+  // ---------------------------------------------------------------------
+  function updateUrlParams() {
+    const params = new URLSearchParams();
+    const filter = activeFilter();
+    if (filter !== 'all') params.set('category', filter);
+    if (groupSelect && groupSelect.value !== 'all') params.set('group', groupSelect.value);
+    if (yearSelect && yearSelect.value !== 'all') params.set('year', yearSelect.value);
+    if (sortSelect && sortSelect.value !== 'date-desc') params.set('sort', sortSelect.value);
+    if (searchInput?.value) params.set('q', searchInput.value);
+    const qs = params.toString();
+    history.replaceState(
+      null,
+      '',
+      qs ? `?${qs}${location.hash}` : location.pathname + location.hash
+    );
+  }
+
+  function clearAllFilters() {
+    filterButtons.forEach((b) => {
+      const isAll = b.dataset.filter === 'all';
+      b.classList.toggle('active', isAll);
+      b.setAttribute('aria-pressed', String(isAll));
+    });
+    if (groupSelect) groupSelect.value = 'all';
+    if (yearSelect) yearSelect.value = 'all';
+    if (sortSelect) sortSelect.value = 'date-desc';
+    if (searchInput) searchInput.value = '';
+    updateUrlParams();
+    render();
+  }
+
+  searchInput?.addEventListener('input', () => {
+    updateUrlParams();
+    render();
+  });
+  groupSelect?.addEventListener('change', () => {
+    updateUrlParams();
+    render();
+  });
+  yearSelect?.addEventListener('change', () => {
+    updateUrlParams();
+    render();
+  });
+  sortSelect?.addEventListener('change', () => {
+    updateUrlParams();
+    render();
+  });
   filterButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       filterButtons.forEach((b) => {
@@ -189,9 +243,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       btn.classList.add('active');
       btn.setAttribute('aria-pressed', 'true');
+      updateUrlParams();
       render();
     });
   });
+  clearFiltersBtn?.addEventListener('click', clearAllFilters);
 
   // ---------------------------------------------------------------------
   // Responsive placement — ported near-verbatim from experience-catalog.js.
@@ -297,6 +353,30 @@ document.addEventListener('DOMContentLoaded', () => {
       tocToggleBtn.setAttribute('aria-expanded', String(!expanded));
     });
   }
+
+  // Read initial filter state from the URL so filtered views are
+  // shareable/bookmarkable.
+  const initParams = new URLSearchParams(window.location.search);
+  const categoryParam = initParams.get('category');
+  if (categoryParam) {
+    const matchBtn = filterButtons.find((b) => b.dataset.filter === categoryParam);
+    if (matchBtn) {
+      filterButtons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      matchBtn.classList.add('active');
+      matchBtn.setAttribute('aria-pressed', 'true');
+    }
+  }
+  const groupParam = initParams.get('group');
+  if (groupParam && groupSelect) groupSelect.value = groupParam;
+  const yearParam = initParams.get('year');
+  if (yearParam && yearSelect) yearSelect.value = yearParam;
+  const sortParam = initParams.get('sort');
+  if (sortParam && sortSelect) sortSelect.value = sortParam;
+  const qParam = initParams.get('q');
+  if (qParam && searchInput) searchInput.value = qParam;
 
   positionFilterControlsResponsive();
   wrapMobileStickyPanels();

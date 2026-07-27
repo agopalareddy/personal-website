@@ -61,6 +61,11 @@
     explicit <code>aria-label</code> or <code>aria-labelledby</code> attributes where native
     semantics are insufficient.
   </li>
+  <li>
+    <strong>No-JavaScript Fallback:</strong> Protected email links include a
+    <code>&lt;noscript&gt;</code> message pointing to LinkedIn when JavaScript (required for the
+    anti-scraping email obfuscation) is unavailable.
+  </li>
 </ul>
 
 <h3>2. Keyboard &amp; Focus Management</h3>
@@ -207,6 +212,13 @@
       data-email-user="YWR1cnMyMDAy"
       data-email-domain="Z21haWwuY29t"
       >&#9993; Email</a
+    >
+    <noscript
+      >(requires JavaScript —
+      <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+        >message me on LinkedIn</a
+      >
+      instead)</noscript
     >
   </li>
   <li>

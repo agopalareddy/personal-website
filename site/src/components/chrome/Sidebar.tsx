@@ -35,7 +35,12 @@ export function Sidebar({ children }: { children?: ReactNode }) {
   return (
     <aside className="academic-sidebar" aria-label="Author Biography">
       <div className="author-avatar-wrapper">
-        <img src="/images/profile.png" className="author-avatar" alt="Aadarsha Gopala Reddy" />
+        <img
+          src="/images/profile.png"
+          className="author-avatar"
+          alt="Aadarsha Gopala Reddy"
+          fetchPriority="high"
+        />
         <h2 className="author-name">Aadarsha Gopala Reddy</h2>
         <p className="author-bio">
           M.S. Computer Science graduate from Washington University in St. Louis
@@ -56,6 +61,13 @@ export function Sidebar({ children }: { children?: ReactNode }) {
             >
               adurs2002 [at] gmail [dot] com
             </a>
+            <noscript>
+              (requires JavaScript —{' '}
+              <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
+                message me on LinkedIn
+              </a>{' '}
+              instead)
+            </noscript>
           </li>
           <li>
             <Icon name="LINKEDIN_16" />{' '}

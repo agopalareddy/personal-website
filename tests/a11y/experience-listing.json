@@ -13,7 +13,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2026-07-27T22:09:37.098Z",
+  "timestamp": "2026-07-27T23:01:50.123Z",
   "url": "http://localhost:8080/experience/",
   "toolOptions": {
     "runOnly": {
@@ -373,25 +373,6 @@
       "description": "Ensure <input type=\"image\"> elements have alternative text",
       "help": "Image buttons must have alternative text",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/input-image-alt?application=playwright",
-      "nodes": []
-    },
-    {
-      "id": "link-in-text-block",
-      "impact": null,
-      "tags": [
-        "cat.color",
-        "wcag2a",
-        "wcag141",
-        "TTv5",
-        "TT13.a",
-        "EN-301-549",
-        "EN-9.1.4.1",
-        "RGAAv4",
-        "RGAA-10.6.1"
-      ],
-      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
-      "help": "Links must be distinguishable without relying on color",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
       "nodes": []
     },
     {
@@ -1308,6 +1289,37 @@
             }
           ],
           "impact": null,
+          "html": "<p id=\"resultsCount\" class=\"results-count\" aria-live=\"polite\">Showing 35 entries.</p>",
+          "target": ["#resultsCount"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            },
+            {
+              "id": "aria-allowed-attr-elm",
+              "data": null,
+              "relatedNodes": [],
+              "message": "ARIA attributes are allowed for this element",
+              "impact": "critical"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
           "html": "<a href=\"/experience/education/2024-08-m-s-computer-science.html\" aria-label=\"Explore dedicated detail page for M.S. Computer Science\">M.S. Computer Science</a>",
           "target": ["#exp-2024-08-m-s-computer-science > .project-title > a"]
         },
@@ -3511,6 +3523,37 @@
           "impact": null,
           "html": "<a href=\"/experience/awards/2020-01-scholar.html\" class=\"card-btn btn-detail\" aria-label=\"Explore dedicated detail page for Next Genius Scholar\">",
           "target": ["#exp-2020-01-scholar > .card-actions > .card-btn.btn-detail"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            },
+            {
+              "id": "aria-allowed-attr-elm",
+              "data": null,
+              "relatedNodes": [],
+              "message": "ARIA attributes are allowed for this element",
+              "impact": "critical"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -3902,6 +3945,22 @@
           ],
           "none": [],
           "impact": null,
+          "html": "<p id=\"resultsCount\" class=\"results-count\" aria-live=\"polite\">Showing 35 entries.</p>",
+          "target": ["#resultsCount"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
           "html": "<a href=\"/experience/education/2024-08-m-s-computer-science.html\" aria-label=\"Explore dedicated detail page for M.S. Computer Science\">M.S. Computer Science</a>",
           "target": ["#exp-2024-08-m-s-computer-science > .project-title > a"]
         },
@@ -5084,6 +5143,22 @@
           ],
           "none": [],
           "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
           "html": "<div id=\"a11y-announcer\" class=\"sr-only\" aria-live=\"polite\"></div>",
           "target": ["#a11y-announcer"]
         }
@@ -5428,7 +5503,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-device-desktop\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-device-desktop[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-device-desktop[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5460,7 +5535,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5492,7 +5567,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-sun\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5524,7 +5599,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5556,7 +5631,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-sun\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5588,7 +5663,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5620,7 +5695,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-moon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5652,7 +5727,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5684,7 +5759,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-moon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5716,7 +5791,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5748,7 +5823,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-moon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -5780,7 +5855,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7332,7 +7407,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-device-desktop\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-device-desktop[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-device-desktop[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7364,7 +7439,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"auto\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7396,7 +7471,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-sun\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7428,7 +7503,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7460,7 +7535,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-sun\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-sun[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7492,7 +7567,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"light_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7524,7 +7599,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-moon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7556,7 +7631,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7588,7 +7663,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-moon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7620,7 +7695,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_dimmed\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7652,7 +7727,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-moon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][type=\"button\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-icon > span > .octicon-moon[viewBox=\"0 0 16 16\"]"
           ]
         },
         {
@@ -7684,7 +7759,7 @@
           "impact": null,
           "html": "<svg class=\"octicon octicon-check\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\">",
           "target": [
-            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][type=\"button\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
+            "#theme-toggle-footer > details > .theme-picker-menu[role=\"menu\"] > .theme-picker-option[data-theme-value=\"dark_high_contrast\"][role=\"menuitemradio\"] > .theme-picker-option-check > span > .octicon-check[viewBox=\"0 0 16 16\"]"
           ]
         }
       ]
@@ -8032,6 +8107,22 @@
           "impact": null,
           "html": "<article class=\"academic-content\" aria-label=\"Experience Grid Content\">",
           "target": ["article"]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<p id=\"resultsCount\" class=\"results-count\" aria-live=\"polite\">Showing 35 entries.</p>",
+          "target": ["#resultsCount"]
         },
         {
           "any": [],
@@ -9214,6 +9305,22 @@
           "impact": null,
           "html": "<a href=\"/experience/awards/2020-01-scholar.html\" class=\"card-btn btn-detail\" aria-label=\"Explore dedicated detail page for Next Genius Scholar\">",
           "target": ["#exp-2020-01-scholar > .card-actions > .card-btn.btn-detail"]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -10010,6 +10117,36 @@
           ],
           "none": [],
           "impact": null,
+          "html": "<p id=\"resultsCount\" class=\"results-count\" aria-live=\"polite\">Showing 35 entries.</p>",
+          "target": ["#resultsCount"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
           "html": "<a href=\"/experience/education/2024-08-m-s-computer-science.html\" aria-label=\"Explore dedicated detail page for M.S. Computer Science\">M.S. Computer Science</a>",
           "target": ["#exp-2024-08-m-s-computer-science > .project-title > a"]
         },
@@ -12144,6 +12281,36 @@
           "impact": null,
           "html": "<a href=\"/experience/awards/2020-01-scholar.html\" class=\"card-btn btn-detail\" aria-label=\"Explore dedicated detail page for Next Genius Scholar\">",
           "target": ["#exp-2020-01-scholar > .card-actions > .card-btn.btn-detail"]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [],
@@ -12534,6 +12701,22 @@
           "all": [],
           "none": [],
           "impact": null,
+          "html": "<p id=\"resultsCount\" class=\"results-count\" aria-live=\"polite\">Showing 35 entries.</p>",
+          "target": ["#resultsCount"]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
           "html": "<a href=\"/experience/education/2024-08-m-s-computer-science.html\" aria-label=\"Explore dedicated detail page for M.S. Computer Science\">M.S. Computer Science</a>",
           "target": ["#exp-2024-08-m-s-computer-science > .project-title > a"]
         },
@@ -13702,6 +13885,22 @@
           "impact": null,
           "html": "<a href=\"/experience/awards/2020-01-scholar.html\" class=\"card-btn btn-detail\" aria-label=\"Explore dedicated detail page for Next Genius Scholar\">",
           "target": ["#exp-2020-01-scholar > .card-actions > .card-btn.btn-detail"]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<nav aria-label=\"Footer Navigation\">",
+          "target": ["nav[aria-label=\"Footer Navigation\"]"]
         },
         {
           "any": [
@@ -14424,7 +14623,9 @@
           "none": [],
           "impact": null,
           "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">adurs2002 [at] gmail [dot] com</a>",
-          "target": [".protected-email"]
+          "target": [
+            ".author-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -15813,6 +16014,29 @@
             {
               "id": "color-contrast",
               "data": {
+                "fgColor": "#1f2328",
+                "bgColor": "#ffffff",
+                "contrastRatio": 15.79,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.79"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p id=\"resultsCount\" class=\"results-count\" aria-live=\"polite\">Showing 35 entries.</p>",
+          "target": ["#resultsCount"]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
                 "fgColor": "#59636e",
                 "bgColor": "#ffffff",
                 "contrastRatio": 6.11,
@@ -15897,8 +16121,10 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": [".footer-links > li:nth-child(2) > a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -16259,7 +16485,7 @@
             }
           ],
           "impact": null,
-          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\">",
+          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\" fetchpriority=\"high\">",
           "target": ["img"]
         }
       ]
@@ -16507,7 +16733,9 @@
           ],
           "impact": null,
           "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">adurs2002 [at] gmail [dot] com</a>",
-          "target": [".protected-email"]
+          "target": [
+            ".author-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -19866,8 +20094,10 @@
             }
           ],
           "impact": null,
-          "html": "<a href=\"mailto:adurs2002@gmail.com\">Email</a>",
-          "target": [".footer-links > li:nth-child(2) > a[href=\"mailto:adurs2002@gmail.com\"]"]
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ]
         },
         {
           "any": [
@@ -20870,7 +21100,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"mailto:adurs2002@gmail.com\">Email</a></li>",
+          "html": "<li>",
           "target": [".footer-links > li:nth-child(2)"]
         },
         {
@@ -20886,7 +21116,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n            <a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a>\n          </li>",
+          "html": "<li>\n              <a href=\"https://www.linkedin.com/in/agopalareddy\" target=\"_blank\" rel=\"noopener\">LinkedIn <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": [".footer-links > li:nth-child(3)"]
         },
         {
@@ -20902,7 +21132,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li>\n            <a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a>\n          </li>",
+          "html": "<li>\n              <a href=\"https://github.com/agopalareddy\" target=\"_blank\" rel=\"noopener\">GitHub <span class=\"sr-only\">(opens in a new tab)</span></a>\n            </li>",
           "target": [".footer-links > li:nth-child(4)"]
         },
         {
@@ -21005,7 +21235,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\">",
+          "html": "<img src=\"/images/profile.png\" class=\"author-avatar\" alt=\"Aadarsha Gopala Reddy\" fetchpriority=\"high\">",
           "target": ["img"]
         },
         {
@@ -27612,6 +27842,52 @@
           "html": "<a href=\"/experience/awards/2020-01-scholar.html\" class=\"card-btn btn-detail\" aria-label=\"Explore dedicated detail page for Next Genius Scholar\">",
           "target": ["#exp-2020-01-scholar > .card-actions > .card-btn.btn-detail"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+        }
+      ]
+    },
+    {
+      "id": "link-in-text-block",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2a",
+        "wcag141",
+        "TTv5",
+        "TT13.a",
+        "EN-301-549",
+        "EN-9.1.4.1",
+        "RGAAv4",
+        "RGAA-10.6.1"
+      ],
+      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+      "help": "Links must be distinguishable without relying on color",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "link-in-text-block",
+              "data": {
+                "messageKey": "bgOverlap"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<li>",
+                  "target": [".footer-links > li:nth-child(2)"]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element's contrast ratio could not be determined because of element overlap"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<a href=\"mailto:adurs2002@gmail.com\" class=\"protected-email email-decoded\">Email</a>",
+          "target": [
+            ".footer-links > li:nth-child(2) > .protected-email.email-decoded[href=\"mailto:adurs2002@gmail.com\"]"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element's contrast ratio could not be determined because of element overlap"
         }
       ]
     }

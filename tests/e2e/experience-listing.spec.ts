@@ -231,7 +231,12 @@ test.describe('Experience Listing Page', () => {
     const href = await firstLink.getAttribute('href');
     expect(href).toMatch(/^#exp-/);
 
-    await firstLink.click({ force: true });
+    // Mobile's fixed bottom nav bar can overlap the tail end of a fully
+    // expanded Filters+TOC panel — scroll the link into view first so the
+    // click lands on it instead of blindly forcing through whatever is
+    // frontmost at its pre-scroll coordinates.
+    await firstLink.scrollIntoViewIfNeeded();
+    await firstLink.click();
     await page.waitForTimeout(300);
     expect(page.url()).toContain(href || '');
   });

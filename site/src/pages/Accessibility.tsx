@@ -1,5 +1,5 @@
-import { Layout } from "../components/chrome/Layout";
-import { loadAccessibilityBody } from "../content/accessibilityBody";
+import { Layout } from '../components/chrome/Layout';
+import { loadAccessibilityBody } from '../content/accessibilityBody';
 
 /**
  * Ported from accessibility.html. The prose body is injected verbatim via

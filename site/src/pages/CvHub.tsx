@@ -1,5 +1,5 @@
-import { Layout } from "../components/chrome/Layout";
-import { Icon } from "../components/common/Icon";
+import { Layout } from '../components/chrome/Layout';
+import { Icon } from '../components/common/Icon';
 
 /** Ported from cv/index.html. The preview dialog's interactivity is wired
  * by the cv-modal client island (assets/js/cv-modal.js's port) — this

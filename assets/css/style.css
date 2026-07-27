@@ -46,6 +46,18 @@
     scroll-padding-top: 80px;
   }
 
+  html[data-color-mode='light'] {
+    color-scheme: light;
+  }
+
+  html[data-color-mode='dark'] {
+    color-scheme: dark;
+  }
+
+  html[data-color-mode='auto'] {
+    color-scheme: light dark;
+  }
+
   body {
     font-family: var(
       --fontStack-system,
@@ -1061,6 +1073,22 @@
     border-color: var(--fgColor-accent);
     background: var(--fgColor-accent);
     transform: scale(1.25);
+  }
+
+  /* ─── Empty search/filter state ─── */
+  .empty-state,
+  .no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--fgColor-muted);
+  }
+
+  .empty-state[hidden] {
+    display: none;
   }
 
   .timeline-year {
@@ -2245,6 +2273,12 @@
     margin-top: 1.5rem;
   }
 
+  .results-count {
+    font-size: var(--text-body-size-small, 0.8125rem);
+    color: var(--fgColor-muted);
+    margin: 0 0 0.75rem;
+  }
+
   /* Scroll margins for anchor targets */
   .academic-content [id],
   .timeline-card[id] {
@@ -2529,6 +2563,9 @@
 
     .filter-btn {
       flex-shrink: 0 !important;
+      min-height: 2.75rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
     }
 
     .controls-row {
@@ -2541,6 +2578,17 @@
     .custom-select {
       width: 100% !important;
       max-width: none !important;
+    }
+
+    .search-input,
+    .custom-select {
+      min-height: 2.75rem !important;
+    }
+
+    /* WCAG 2.1 44x44px touch target for the theme toggle */
+    .theme-picker summary,
+    .theme-picker-option {
+      min-height: 2.75rem !important;
     }
 
     .card {
@@ -2640,5 +2688,44 @@
     .toc-toggle-icon {
       transition: none !important;
     }
+  }
+}
+
+/* ==========================================================================
+   Print — force light mode, strip chrome, keep cards intact across pages
+   ========================================================================== */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #767676 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .top-header,
+  .site-footer,
+  .skip-link,
+  #theme-toggle,
+  #theme-toggle-footer,
+  .status-badge,
+  .search-wrapper,
+  .toc-container,
+  #a11y-announcer {
+    display: none !important;
+  }
+
+  .project-card,
+  .experience-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: underline;
   }
 }

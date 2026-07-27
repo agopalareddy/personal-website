@@ -40,7 +40,7 @@ export function Layout({
 
         <Nav activePage={activePage} />
 
-        <div id="main-content">
+        <div id="main-content" tabIndex={-1}>
           <main className="container">
             {hideSidebar ? (
               children
@@ -58,6 +58,8 @@ export function Layout({
         <Footer />
 
         <div id="a11y-announcer" className="sr-only" aria-live="polite" />
+
+        <script src="/assets/js/sw-register.js" />
       </body>
     </html>
   );

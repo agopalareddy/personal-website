@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     <meta
       name="description"
       content="Page not found. Academic engineering portfolio of Aadarsha Gopala Reddy."
@@ -36,6 +39,14 @@
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
     <link rel="canonical" href="https://agreddy.com/404.html" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-QWNGSMS0LY');
+    </script>
     <script>
       (function () {
         var e = document.documentElement,
@@ -178,7 +189,7 @@
         <div id="theme-toggle"></div>
       </div>
     </header>
-    <div id="main-content">
+    <div id="main-content" tabindex="-1">
       <main class="container">
         <div class="error-page-content">
           <p class="error-code" aria-hidden="true">404</p>
@@ -199,25 +210,42 @@
         <span class="footer-copyright"
           >© <span class="current-year">2026</span> Aadarsha Gopala Reddy</span
         >
-        <ul class="footer-links">
-          <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
-          <li><a href="mailto:adurs2002@gmail.com">Email</a></li>
-          <li>
-            <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
-              >LinkedIn <span class="sr-only">(opens in a new tab)</span></a
-            >
-          </li>
-          <li>
-            <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
-              >GitHub <span class="sr-only">(opens in a new tab)</span></a
-            >
-          </li>
-          <li><a href="/accessibility.html">Accessibility</a></li>
-        </ul>
+        <nav aria-label="Footer Navigation">
+          <ul class="footer-links">
+            <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
+            <li>
+              <a
+                href="#"
+                class="protected-email"
+                data-email-user="YWR1cnMyMDAy"
+                data-email-domain="Z21haWwuY29t"
+                >Email</a
+              ><noscript
+                >(requires JavaScript —
+                <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+                  >message me on LinkedIn</a
+                >
+                instead)</noscript
+              >
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+                >LinkedIn <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+            <li>
+              <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
+                >GitHub <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+            <li><a href="/accessibility.html">Accessibility</a></li>
+          </ul>
+        </nav>
         <div id="theme-toggle-footer"></div>
       </div>
     </footer>
     <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
+    <script src="/assets/js/sw-register.js"></script>
     <script type="module" src="/assets/site/assets/theme-D_rgo2Xr.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
   </body>

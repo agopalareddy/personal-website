@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preload" as="image" href="/images/profile.png" />
+    <link rel="preload" as="image" href="/images/profile.png" fetchpriority="high" />
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     <meta
       name="description"
       content="Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes."
@@ -31,7 +34,10 @@
       property="og:description"
       content="Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes."
     />
-    <meta property="og:image" content="https://agreddy.com/images/profile.png" />
+    <meta
+      property="og:image"
+      content="https://agreddy.com/images/projects/artificial-intelligence-in-modern-board-games.png"
+    />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -46,12 +52,23 @@
       name="twitter:description"
       content="Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes."
     />
-    <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
+    <meta
+      name="twitter:image"
+      content="https://agreddy.com/images/projects/artificial-intelligence-in-modern-board-games.png"
+    />
     <meta name="twitter:site" content="@aadarsha2002" />
     <link
       rel="canonical"
       href="https://agreddy.com/projects/artificial-intelligence-in-modern-board-games.html"
     />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-QWNGSMS0LY');
+    </script>
     <script>
       (function () {
         var e = document.documentElement,
@@ -103,6 +120,20 @@
     </script>
     <link rel="stylesheet" href="/assets/css/primer/primer.css?v=2.0.0" />
     <link rel="stylesheet" href="/assets/css/style.css?v=2.0.0" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "name": "Artificial Intelligence in Modern Board Games",
+        "description": "Built a browser-playable Java Lost Cities game with greedy, minimax, and alpha-beta AI agents that evaluate complete turn outcomes.",
+        "url": "https://agreddy.com/projects/artificial-intelligence-in-modern-board-games.html",
+        "image": "https://agreddy.com/images/projects/artificial-intelligence-in-modern-board-games.png",
+        "author": { "@type": "Person", "name": "Aadarsha Gopala Reddy" },
+        "@type": "SoftwareApplication",
+        "applicationCategory": "WebApplication",
+        "installUrl": "https://agreddy.com/lost-cities/",
+        "operatingSystem": "Any (web-based)"
+      }
+    </script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to Content</a>
@@ -194,12 +225,17 @@
         <div id="theme-toggle"></div>
       </div>
     </header>
-    <div id="main-content">
+    <div id="main-content" tabindex="-1">
       <main class="container">
         <div class="academic-layout">
           <aside class="academic-sidebar" aria-label="Author Biography">
             <div class="author-avatar-wrapper">
-              <img src="/images/profile.png" class="author-avatar" alt="Aadarsha Gopala Reddy" />
+              <img
+                src="/images/profile.png"
+                class="author-avatar"
+                alt="Aadarsha Gopala Reddy"
+                fetchpriority="high"
+              />
               <h2 class="author-name">Aadarsha Gopala Reddy</h2>
               <p class="author-bio">
                 M.S. Computer Science graduate from Washington University in St. Louis
@@ -253,6 +289,15 @@
                     data-email-domain="Z21haWwuY29t"
                     data-email-text="adurs2002 [at] gmail [dot] com"
                     >adurs2002 [at] gmail [dot] com</a
+                  ><noscript
+                    >(requires JavaScript —
+                    <a
+                      href="https://www.linkedin.com/in/agopalareddy"
+                      target="_blank"
+                      rel="noopener"
+                      >message me on LinkedIn</a
+                    >
+                    instead)</noscript
                   >
                 </li>
                 <li>
@@ -424,25 +469,42 @@
         <span class="footer-copyright"
           >© <span class="current-year">2026</span> Aadarsha Gopala Reddy</span
         >
-        <ul class="footer-links">
-          <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
-          <li><a href="mailto:adurs2002@gmail.com">Email</a></li>
-          <li>
-            <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
-              >LinkedIn <span class="sr-only">(opens in a new tab)</span></a
-            >
-          </li>
-          <li>
-            <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
-              >GitHub <span class="sr-only">(opens in a new tab)</span></a
-            >
-          </li>
-          <li><a href="/accessibility.html">Accessibility</a></li>
-        </ul>
+        <nav aria-label="Footer Navigation">
+          <ul class="footer-links">
+            <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
+            <li>
+              <a
+                href="#"
+                class="protected-email"
+                data-email-user="YWR1cnMyMDAy"
+                data-email-domain="Z21haWwuY29t"
+                >Email</a
+              ><noscript
+                >(requires JavaScript —
+                <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+                  >message me on LinkedIn</a
+                >
+                instead)</noscript
+              >
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+                >LinkedIn <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+            <li>
+              <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
+                >GitHub <span class="sr-only">(opens in a new tab)</span></a
+              >
+            </li>
+            <li><a href="/accessibility.html">Accessibility</a></li>
+          </ul>
+        </nav>
         <div id="theme-toggle-footer"></div>
       </div>
     </footer>
     <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
+    <script src="/assets/js/sw-register.js"></script>
     <script type="module" src="/assets/site/assets/theme-D_rgo2Xr.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
   </body>

@@ -1,91 +1,91 @@
-import { Layout } from "../components/chrome/Layout";
+import { Layout } from '../components/chrome/Layout';
 
 const JSON_LD = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Aadarsha Gopala Reddy",
-  url: "https://agreddy.com",
-  image: "https://agreddy.com/images/profile.png",
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Aadarsha Gopala Reddy',
+  url: 'https://agreddy.com',
+  image: 'https://agreddy.com/images/profile.png',
   alumniOf: {
-    "@type": "EducationalOrganization",
-    name: "Washington University in St. Louis",
-    sameAs: "https://www.wustl.edu",
+    '@type': 'EducationalOrganization',
+    name: 'Washington University in St. Louis',
+    sameAs: 'https://www.wustl.edu',
   },
-  jobTitle: "Software & Data Engineer",
-  sameAs: ["https://github.com/agopalareddy", "https://www.linkedin.com/in/agopalareddy/"],
+  jobTitle: 'Software & Data Engineer',
+  sameAs: ['https://github.com/agopalareddy', 'https://www.linkedin.com/in/agopalareddy/'],
 });
 
 const SKILL_GROUPS: Array<{ label: string; skills: string[] }> = [
   {
-    label: "Languages",
-    skills: ["Python", "SQL", "JavaScript", "TypeScript", "Java", "C#", "C++"],
+    label: 'Languages',
+    skills: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'Java', 'C#', 'C++'],
   },
   {
-    label: "ML & analytics",
+    label: 'ML & analytics',
     skills: [
-      "Statistics",
-      "Data Analysis",
-      "Pandas",
-      "NumPy",
-      "PyTorch",
-      "TensorFlow",
-      "Keras",
-      "Scikit-learn",
-      "XGBoost",
-      "Transformers",
+      'Statistics',
+      'Data Analysis',
+      'Pandas',
+      'NumPy',
+      'PyTorch',
+      'TensorFlow',
+      'Keras',
+      'Scikit-learn',
+      'XGBoost',
+      'Transformers',
     ],
   },
   {
-    label: "Data systems",
+    label: 'Data systems',
     skills: [
-      "Database Design",
-      "PostgreSQL",
-      "MySQL",
-      "SQLite",
-      "MongoDB",
-      "Supabase",
-      "Snowflake",
-      "Spark",
-      "Airflow",
-      "Kafka",
+      'Database Design',
+      'PostgreSQL',
+      'MySQL',
+      'SQLite',
+      'MongoDB',
+      'Supabase',
+      'Snowflake',
+      'Spark',
+      'Airflow',
+      'Kafka',
     ],
   },
   {
-    label: "Web & apps",
+    label: 'Web & apps',
     skills: [
-      "HTML",
-      "CSS",
-      "React",
-      "Vue",
-      "Node",
-      "Express",
-      "FastAPI",
-      "Flask",
-      "Streamlit",
-      "Socket.IO",
+      'HTML',
+      'CSS',
+      'React',
+      'Vue',
+      'Node',
+      'Express',
+      'FastAPI',
+      'Flask',
+      'Streamlit',
+      'Socket.IO',
     ],
   },
   {
-    label: "AI practice",
+    label: 'AI practice',
     skills: [
-      "Agentic Coding",
-      "Context Engineering",
-      "AI Code Review",
-      "AI-Assisted Testing",
-      "Multi-agent Systems",
+      'Agentic Coding',
+      'Context Engineering',
+      'AI Code Review',
+      'AI-Assisted Testing',
+      'Multi-agent Systems',
     ],
   },
   {
-    label: "AI tools",
-    skills: ["Claude Code", "Codex", "Copilot", "Cursor", "Antigravity"],
+    label: 'AI tools',
+    skills: ['Claude Code', 'Codex', 'Copilot', 'Cursor', 'Antigravity'],
   },
   {
-    label: "Agents & APIs",
-    skills: ["Gemini", "OpenAI", "Claude", "Fal.ai API", "Google ADK", "MCP", "Skills"],
+    label: 'Agents & APIs',
+    skills: ['Gemini', 'OpenAI', 'Claude', 'Fal.ai API', 'Google ADK', 'MCP', 'Skills'],
   },
   {
-    label: "Tools",
-    skills: ["Git", "AWS", "Docker", "Tableau", "Power BI", "Google Workspace", "Microsoft 365"],
+    label: 'Tools',
+    skills: ['Git', 'AWS', 'Docker', 'Tableau', 'Power BI', 'Google Workspace', 'Microsoft 365'],
   },
 ];
 
@@ -106,11 +106,11 @@ export function HomePage() {
         <h1 id="hello-im-aadarsha">Hello, I&rsquo;m Aadarsha</h1>
         <p>
           My thesis used domain-adversarial learning to predict cognitive impairment from
-          naturalistic driving data, work I completed while earning an M.S. in Computer Science at{" "}
-          <a href="https://www.washu.edu/">Washington University in St. Louis</a>. I have
-          hands-on experience across machine learning, data engineering, and full-stack
-          development, gained through research, teaching, and industry internships, and I&rsquo;m
-          seeking software, data, or ML engineering roles.
+          naturalistic driving data, work I completed while earning an M.S. in Computer Science at{' '}
+          <a href="https://www.washu.edu/">Washington University in St. Louis</a>. I have hands-on
+          experience across machine learning, data engineering, and full-stack development, gained
+          through research, teaching, and industry internships, and I&rsquo;m seeking software,
+          data, or ML engineering roles.
         </p>
         <div className="home-skill-details card-surface">
           <button
@@ -121,7 +121,11 @@ export function HomePage() {
           >
             Technical stack by area
           </button>
-          <dl className="home-skill-groups" id="homeSkillGroups" aria-label="Technical stack by area">
+          <dl
+            className="home-skill-groups"
+            id="homeSkillGroups"
+            aria-label="Technical stack by area"
+          >
             {SKILL_GROUPS.map((group) => (
               <div className="home-skill-group" key={group.label}>
                 <dt>{group.label}</dt>
@@ -179,7 +183,7 @@ export function HomePage() {
           </a>
         </div>
         <p>
-          For the full story on my research, teaching, and work experience, see my{" "}
+          For the full story on my research, teaching, and work experience, see my{' '}
           <a href="/experience/">Experience</a> page, or download my <a href="/cv/">CV</a>.
         </p>
         <h2 id="featured-projects">Featured Projects</h2>
@@ -187,27 +191,27 @@ export function HomePage() {
           <li>
             <strong>
               <a href="/projects/ms-thesis">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a>
-            </strong>{" "}
-            — Compared six modeling approaches for predicting cognitive impairment from
-            naturalistic driving data.
+            </strong>{' '}
+            — Compared six modeling approaches for predicting cognitive impairment from naturalistic
+            driving data.
           </li>
           <li>
             <strong>
               <a href="/projects/multimodal-alzheimers">Multimodal Alzheimer&rsquo;s Prediction</a>
-            </strong>{" "}
+            </strong>{' '}
             — Combined MRI imaging with clinical data for early Alzheimer&rsquo;s disease detection.
           </li>
           <li>
             <strong>
               <a href="/projects/datacenter-cooling">Datacenter Cooling Optimization</a>
-            </strong>{" "}
+            </strong>{' '}
             — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter cooling
             efficiency.
           </li>
           <li>
             <strong>
               <a href="/storybook/">Tales We Weave</a>
-            </strong>{" "}
+            </strong>{' '}
             — AI-powered interactive storytelling app with branching narratives, built with Vue 3,
             Express, and MongoDB.
           </li>
@@ -218,10 +222,23 @@ export function HomePage() {
         <h2 id="applied-ml-and-data-systems">Applied ML and Data Systems</h2>
         <p>
           I&rsquo;m interested in roles and collaborations that turn applied ML research into
-          reliable data systems, especially in health, mobility, and human-centered AI.{" "}
-          <a href="#" className="protected-email" data-email-user="YWR1cnMyMDAy" data-email-domain="Z21haWwuY29t">
+          reliable data systems, especially in health, mobility, and human-centered AI.{' '}
+          <a
+            href="#"
+            className="protected-email"
+            data-email-user="YWR1cnMyMDAy"
+            data-email-domain="Z21haWwuY29t"
+          >
             Email me
-          </a>{" "}
+          </a>
+          <noscript>
+            {' '}
+            (requires JavaScript —{' '}
+            <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
+              message me on LinkedIn
+            </a>{' '}
+            instead)
+          </noscript>{' '}
           or review my <a href="/cv/">CV</a> for the full record.
         </p>
       </section>

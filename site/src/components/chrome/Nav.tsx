@@ -1,14 +1,14 @@
-import { Icon, type IconName } from "../common/Icon";
+import { Icon, type IconName } from '../common/Icon';
 
 const NAV_ITEMS: Array<{ key: string; href: string; label: string; icon: IconName }> = [
-  { key: "home", href: "/", label: "Home", icon: "HOME_16" },
-  { key: "experience", href: "/experience/", label: "Experience", icon: "BRIEFCASE_16" },
-  { key: "projects", href: "/projects/", label: "Projects", icon: "CODE_16" },
-  { key: "cv", href: "/cv/", label: "CV/Resume", icon: "FILE_16" },
-  { key: "availability", href: "/availability/", label: "Availability", icon: "CALENDAR_16" },
+  { key: 'home', href: '/', label: 'Home', icon: 'HOME_16' },
+  { key: 'experience', href: '/experience/', label: 'Experience', icon: 'BRIEFCASE_16' },
+  { key: 'projects', href: '/projects/', label: 'Projects', icon: 'CODE_16' },
+  { key: 'cv', href: '/cv/', label: 'CV/Resume', icon: 'FILE_16' },
+  { key: 'availability', href: '/availability/', label: 'Availability', icon: 'CALENDAR_16' },
 ];
 
-export type ActivePage = (typeof NAV_ITEMS)[number]["key"];
+export type ActivePage = (typeof NAV_ITEMS)[number]['key'];
 
 /** Ported from scripts/chrome.py's render_nav(). */
 export function Nav({ activePage }: { activePage?: ActivePage }) {
@@ -22,8 +22,8 @@ export function Nav({ activePage }: { activePage?: ActivePage }) {
               <a
                 key={key}
                 href={href}
-                className={isActive ? "nav-link active" : "nav-link"}
-                aria-current={isActive ? "page" : undefined}
+                className={isActive ? 'nav-link active' : 'nav-link'}
+                aria-current={isActive ? 'page' : undefined}
               >
                 <Icon name={icon} />
                 <span>{label}</span>

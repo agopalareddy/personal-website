@@ -1,4 +1,4 @@
-import { ICONS } from "./icons-data";
+import { ICONS } from './icons-data';
 
 export type IconName = keyof typeof ICONS;
 
@@ -23,7 +23,7 @@ export function Icon({ name, className }: { name: IconName; className?: string }
   return (
     <span
       className={className}
-      style={{ display: "contents" }}
+      style={{ display: 'contents' }}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

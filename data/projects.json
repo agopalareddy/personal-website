@@ -2,7 +2,7 @@
   {
     "id": "2022-07-aiparkinscan",
     "title": "AIParkinScan",
-    "excerpt": "Co-developed AIParkinScan software for Parkinson&apos;s diagnosis using audio and image data. Utilized neural networks, spectrograms, and Random Forest algorithm.",
+    "excerpt": "Co-developed AIParkinScan software for Parkinson's diagnosis using audio and image data. Utilized neural networks, spectrograms, and Random Forest algorithm.",
     "venue": "MITxSureStart FutureMakers Create-a-Thon Program",
     "venue_tag": "MITxSureStart",
     "permalink": "/projects/aiparkinscan",
@@ -72,7 +72,7 @@
   {
     "id": "2023-04-artificial-intelligence-opinion-survey",
     "title": "Artificial Intelligence Opinion Survey",
-    "excerpt": "Designed, fielded, and investigated a survey research of 1000 employees to analyze AI&apos;s impact on work efficiency and attitudes. Found AI improved efficiency across industries.",
+    "excerpt": "Designed, fielded, and investigated a survey research of 1000 employees to analyze AI's impact on work efficiency and attitudes. Found AI improved efficiency across industries.",
     "venue": "Ohio Wesleyan University",
     "venue_tag": "OWU",
     "permalink": "/projects/artificial-intelligence-opinion-survey",
@@ -214,7 +214,7 @@
   {
     "id": "2024-12-multimodal-alzheimers",
     "title": "Multimodal Prediction of Alzheimer's Disease",
-    "excerpt": "Built a multimodal machine learning pipeline combining MRI imaging and clinical data from the OASIS-1 dataset for early Alzheimer&apos;s disease detection.",
+    "excerpt": "Built a multimodal machine learning pipeline combining MRI imaging and clinical data from the OASIS-1 dataset for early Alzheimer's disease detection.",
     "venue": "Washington University in St. Louis",
     "venue_tag": "WashU",
     "permalink": "/projects/multimodal-alzheimers",
@@ -411,7 +411,7 @@
   {
     "id": "2026-04-ms-thesis",
     "title": "Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data",
-    "excerpt": "Master&apos;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults.",
+    "excerpt": "Master's thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults.",
     "venue": "Washington University in St. Louis",
     "venue_tag": "WashU",
     "permalink": "/projects/ms-thesis",

@@ -1,42 +1,25 @@
 <!doctype html>
 <html lang="en" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.google-analytics.com" />
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'G-QWNGSMS0LY');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     <meta
       name="description"
       content="Page not found. Academic engineering portfolio of Aadarsha Gopala Reddy."
     />
     <title>Page Not Found - Aadarsha Gopala Reddy</title>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=fae21a1b" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=fae21a1b" />
-
-    <!-- Favicons & Mobile Device Integration -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/images/android-chrome-192x192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/mstile-150x150.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/mstile-70x70.png" />
     <link rel="manifest" href="/images/manifest.json" />
-    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#1a3478" />
-    <meta name="msapplication-TileColor" content="#1a3478" />
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#0a0a16" />
+    <meta name="msapplication-TileColor" content="#0a0a16" />
     <meta name="msapplication-TileImage" content="/images/mstile-144x144.png" />
     <meta name="msapplication-config" content="/images/browserconfig.xml" />
-    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
-
-    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://agreddy.com/404.html" />
     <meta property="og:title" content="Page Not Found - Aadarsha Gopala Reddy" />
@@ -46,8 +29,6 @@
     />
     <meta property="og:image" content="https://agreddy.com/images/profile.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
-
-    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://agreddy.com/404.html" />
     <meta name="twitter:title" content="Page Not Found - Aadarsha Gopala Reddy" />
@@ -57,132 +38,196 @@
     />
     <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
-
-    <!-- Canonical Link -->
     <link rel="canonical" href="https://agreddy.com/404.html" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-QWNGSMS0LY');
+    </script>
+    <script>
+      (function () {
+        var e = document.documentElement,
+          a = localStorage.getItem('color-scheme');
+        if (!a) {
+          var t = localStorage.getItem('theme');
+          if (t) {
+            var r = { light: 'light', dark: 'dark', device: 'auto' };
+            a = r[t] || 'auto';
+            localStorage.removeItem('theme');
+            localStorage.setItem('color-scheme', a);
+          } else a = 'auto';
+        }
+        var m = {
+          auto: {
+            'data-color-mode': 'auto',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark',
+          },
+          light: {
+            'data-color-mode': 'light',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark',
+          },
+          light_high_contrast: {
+            'data-color-mode': 'light',
+            'data-light-theme': 'light_high_contrast',
+            'data-dark-theme': 'dark',
+          },
+          dark: {
+            'data-color-mode': 'dark',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark',
+          },
+          dark_dimmed: {
+            'data-color-mode': 'dark',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark_dimmed',
+          },
+          dark_high_contrast: {
+            'data-color-mode': 'dark',
+            'data-light-theme': 'light',
+            'data-dark-theme': 'dark_high_contrast',
+          },
+        };
+        var s = m[a] || m.auto;
+        for (var k in s) e.setAttribute(k, s[k]);
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=2.0.0" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=2.0.0" />
   </head>
   <body>
-    <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Skip to Content</a>
-
-    <!-- Top Navigation Bar -->
     <header class="top-header">
       <div class="top-bar container">
         <nav class="nav-links" aria-label="Primary Navigation">
           <a href="/" class="nav-link"
-            ><svg
-              class="octicon octicon-home"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-              focusable="false"
-              fill="currentColor"
-            >
-              <path
-                d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"
-              ></path></svg
+            ><span style="display: contents"
+              ><svg
+                class="octicon octicon-home"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+                fill="currentColor"
+              >
+                <path
+                  d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"
+                ></path></svg></span
             ><span>Home</span></a
-          >
-          <a href="/experience/" class="nav-link"
-            ><svg
-              class="octicon octicon-briefcase"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-              focusable="false"
-              fill="currentColor"
-            >
-              <path
-                d="M6.75 0h2.5C10.216 0 11 .784 11 1.75V3h3.25c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25v-8.5C0 3.784.784 3 1.75 3H5V1.75C5 .784 5.784 0 6.75 0ZM3.5 9.5a3.49 3.49 0 0 1-2-.627v4.377c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V8.873a3.49 3.49 0 0 1-2 .627Zm-1.75-5a.25.25 0 0 0-.25.25V6a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V4.75a.25.25 0 0 0-.25-.25H1.75ZM9.5 3V1.75a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25V3Z"
-              ></path></svg
+          ><a href="/experience/" class="nav-link"
+            ><span style="display: contents"
+              ><svg
+                class="octicon octicon-briefcase"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+                fill="currentColor"
+              >
+                <path
+                  d="M6.75 0h2.5C10.216 0 11 .784 11 1.75V3h3.25c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25v-8.5C0 3.784.784 3 1.75 3H5V1.75C5 .784 5.784 0 6.75 0ZM3.5 9.5a3.49 3.49 0 0 1-2-.627v4.377c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V8.873a3.49 3.49 0 0 1-2 .627Zm-1.75-5a.25.25 0 0 0-.25.25V6a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V4.75a.25.25 0 0 0-.25-.25H1.75ZM9.5 3V1.75a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25V3Z"
+                ></path></svg></span
             ><span>Experience</span></a
-          >
-          <a href="/projects/" class="nav-link"
-            ><svg
-              class="octicon octicon-code"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-              focusable="false"
-              fill="currentColor"
-            >
-              <path
-                d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"
-              ></path></svg
+          ><a href="/projects/" class="nav-link"
+            ><span style="display: contents"
+              ><svg
+                class="octicon octicon-code"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+                fill="currentColor"
+              >
+                <path
+                  d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"
+                ></path></svg></span
             ><span>Projects</span></a
-          >
-          <a href="/cv/" class="nav-link"
-            ><svg
-              class="octicon octicon-file"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-              focusable="false"
-              fill="currentColor"
-            >
-              <path
-                d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"
-              ></path></svg
+          ><a href="/cv/" class="nav-link"
+            ><span style="display: contents"
+              ><svg
+                class="octicon octicon-file"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+                fill="currentColor"
+              >
+                <path
+                  d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"
+                ></path></svg></span
             ><span>CV/Resume</span></a
-          >
-          <a href="/availability/" class="nav-link"
-            ><svg
-              class="octicon octicon-calendar"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-              focusable="false"
-              fill="currentColor"
-            >
-              <path
-                d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"
-              ></path></svg
+          ><a href="/availability/" class="nav-link"
+            ><span style="display: contents"
+              ><svg
+                class="octicon octicon-calendar"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+                fill="currentColor"
+              >
+                <path
+                  d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"
+                ></path></svg></span
             ><span>Availability</span></a
           >
         </nav>
-
         <div id="theme-toggle"></div>
       </div>
     </header>
-
-    <!-- Main Wrapper -->
     <div id="main-content" tabindex="-1">
       <main class="container">
         <div class="error-page-content">
           <p class="error-code" aria-hidden="true">404</p>
-          <h1>This page isn't here.</h1>
+          <h1>This page isn&#x27;t here.</h1>
           <p class="error-message">
             It may have moved, or never existed. Try one of these instead.
           </p>
           <div class="error-recovery">
-            <a href="/" class="site-action-btn">Go home</a>
-            <a href="/projects/" class="doc-row-btn btn-secondary">View projects</a>
-            <a href="/cv/" class="doc-row-btn btn-secondary">CV &amp; Resume</a>
+            <a href="/" class="site-action-btn">Go home</a
+            ><a href="/projects/" class="doc-row-btn btn-secondary">View projects</a
+            ><a href="/cv/" class="doc-row-btn btn-secondary">CV &amp; Resume</a>
           </div>
         </div>
       </main>
     </div>
-
-    <!-- Footer -->
     <footer class="site-footer">
       <div class="container footer-grid">
         <span class="footer-copyright"
-          >&copy; <span class="current-year">2026</span> Aadarsha Gopala Reddy</span
+          >© <span class="current-year">2026</span> Aadarsha Gopala Reddy</span
         >
         <nav aria-label="Footer Navigation">
           <ul class="footer-links">
             <li class="footer-cv-link"><a href="/cv/">CV/Resume</a></li>
-            <li><a href="mailto:adurs2002@gmail.com">Email</a></li>
+            <li>
+              <a
+                href="#"
+                class="protected-email"
+                data-email-user="YWR1cnMyMDAy"
+                data-email-domain="Z21haWwuY29t"
+                >Email</a
+              ><noscript
+                >(requires JavaScript —
+                <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+                  >message me on LinkedIn</a
+                >
+                instead)</noscript
+              >
+            </li>
             <li>
               <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
                 >LinkedIn <span class="sr-only">(opens in a new tab)</span></a
@@ -199,10 +244,9 @@
         <div id="theme-toggle-footer"></div>
       </div>
     </footer>
-
-    <!-- Theme Switcher Persistence Script -->
-    <script src="/assets/js/icons.js?v=fae21a1b"></script>
-    <script src="/assets/js/theme.js?v=fae21a1b"></script>
-    <script src="/assets/js/email-protection.js"></script>
+    <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
+    <script src="/assets/js/sw-register.js"></script>
+    <script type="module" src="/assets/site/assets/theme-D_rgo2Xr.js"></script>
+    <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
   </body>
 </html>

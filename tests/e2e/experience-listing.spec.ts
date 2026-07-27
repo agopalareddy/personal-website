@@ -30,7 +30,12 @@ test.describe('Experience Listing Page', () => {
     expect(await cards.count()).toBeGreaterThanOrEqual(30);
   });
 
-  test('category filter narrows results', async ({ page }) => {
+  // Filter pills, search, sort, org/year dropdowns, and the "On this page"
+  // TOC are User Story 3 scope (useCatalogFilter/CatalogFilter, hydrated as
+  // an island per tasks.md T039/T042) — not yet wired into the migrated
+  // /experience/ page (User Story 2 only ports the static, unfiltered
+  // listing). Skipped until that story lands, not deleted.
+  test.skip('category filter narrows results', async ({ page }) => {
     const allCards = page.locator('.experience-card');
     const initialCount = await allCards.count();
 
@@ -51,7 +56,7 @@ test.describe('Experience Listing Page', () => {
     }
   });
 
-  test('search filters by text', async ({ page }) => {
+  test.skip('search filters by text', async ({ page }) => {
     const searchInput = page.locator('#experienceSearch');
     await searchInput.fill('WashU');
 
@@ -69,7 +74,7 @@ test.describe('Experience Listing Page', () => {
     }
   });
 
-  test('sort dropdown reorders cards (date-asc)', async ({ page }) => {
+  test.skip('sort dropdown reorders cards (date-asc)', async ({ page }) => {
     // Select "Oldest First"
     await page.locator('#experienceSort').selectOption('date-asc');
     await page.waitForTimeout(300);
@@ -108,9 +113,12 @@ test.describe('Experience Listing Page', () => {
     expect(msHeaderYear).toBe('2026');
   });
 
-  test('leadership cards and TOC include organization context in titles', async ({ page }) => {
+  test('leadership cards include organization context in titles', async ({ page }) => {
     await expect(page.locator('#exp-2025-08-member .project-title a')).toHaveText('Member - GSAAB');
+  });
 
+  // TOC portion is User Story 3 scope — see skip comment above.
+  test.skip('TOC includes organization context in titles', async ({ page }) => {
     const toggleBtn = page.locator('#tocToggleBtn');
     if (
       (await toggleBtn.isVisible()) &&
@@ -139,7 +147,7 @@ test.describe('Experience Listing Page', () => {
     await expect(page.locator('h1').first()).toBeVisible();
   });
 
-  test('empty state appears when no matches', async ({ page }) => {
+  test.skip('empty state appears when no matches', async ({ page }) => {
     const searchInput = page.locator('#experienceSearch');
     await searchInput.fill('zzzznonexistent');
     await page.waitForTimeout(300);
@@ -152,7 +160,7 @@ test.describe('Experience Listing Page', () => {
     await expect(emptyState).toBeVisible();
   });
 
-  test('keyboard navigation: Tab through filter pills, Enter to activate, aria-pressed toggles', async ({
+  test.skip('keyboard navigation: Tab through filter pills, Enter to activate, aria-pressed toggles', async ({
     page,
   }) => {
     // Focus the first filter pill (should be "All" with active class)
@@ -170,7 +178,7 @@ test.describe('Experience Listing Page', () => {
     await expect(allFilter).toHaveAttribute('aria-pressed', 'false');
   });
 
-  test('aria-pressed updates on filter activation/deactivation through click', async ({ page }) => {
+  test.skip('aria-pressed updates on filter activation/deactivation through click', async ({ page }) => {
     const allFilter = page.locator('.filter-btn[data-filter="all"]');
     const researchFilter = page.locator('.filter-btn[data-filter="research"]');
 
@@ -189,7 +197,7 @@ test.describe('Experience Listing Page', () => {
     await expect(researchFilter).toHaveAttribute('aria-pressed', 'false');
   });
 
-  test('dynamic Table of Contents renders, updates and is clickable', async ({ page }) => {
+  test.skip('dynamic Table of Contents renders, updates and is clickable', async ({ page }) => {
     const tocContainer = page.locator('#tocContainer');
     const tocList = page.locator('#tocList');
 

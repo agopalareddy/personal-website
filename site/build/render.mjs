@@ -10,8 +10,11 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { build } from "vite";
 
 import { loadProjects } from "../src/content/loadProjects.ts";
+import { loadExperience } from "../src/content/loadExperience.ts";
 import { ProjectCatalogPage } from "../src/pages/ProjectCatalog.tsx";
 import { ProjectDetailPage } from "../src/pages/ProjectDetail.tsx";
+import { ExperienceCatalogPage } from "../src/pages/ExperienceCatalog.tsx";
+import { ExperienceDetailPage } from "../src/pages/ExperienceDetail.tsx";
 
 const REPO_ROOT = fileURLToPath(new URL("../..", import.meta.url));
 
@@ -61,6 +64,32 @@ async function main() {
       renderPage(ProjectDetailPage({ p }), `projects/${slug}.html`, [themeIsland]),
     );
   }
+
+  const experiences = loadExperience();
+
+  written.push(
+    renderPage(ExperienceCatalogPage({ entries: experiences }), "experience/index.html", [themeIsland]),
+  );
+
+  for (const e of experiences) {
+    // Unlike projects, generate_site.py writes an experience detail page for
+    // every entry regardless of has_detail (that flag is checked for
+    // projects but never for experience) — matched here for parity.
+    written.push(
+      renderPage(
+        ExperienceDetailPage({ e }),
+        `experience/${e.category}/${e.id}.html`,
+        [themeIsland],
+      ),
+    );
+  }
+
+  // Route manifest for scripts/generate-sitemap.mjs (research.md R5) — the
+  // sitemap is derived from exactly what this build wrote, never hand-maintained.
+  writeFileSync(
+    resolve(REPO_ROOT, "assets/site/route-manifest.json"),
+    JSON.stringify(written, null, 2),
+  );
 
   console.log(`[render] wrote ${written.length} file(s):`);
   for (const path of written) console.log(`  - ${path}`);

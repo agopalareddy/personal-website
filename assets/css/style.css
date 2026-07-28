@@ -2672,6 +2672,53 @@
       gap: 1rem;
     }
   }
+
+  /* ─── Scroll to top button (spec 002) ─── */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--borderColor-muted);
+    background-color: var(--bgColor-default);
+    color: var(--fgColor-default);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.15s ease-out,
+      visibility 0.15s ease-out;
+  }
+
+  .scroll-to-top:hover {
+    color: var(--fgColor-accent);
+    border-color: var(--fgColor-accent);
+  }
+
+  .scroll-to-top .octicon {
+    transform: rotate(180deg);
+  }
+
+  .scroll-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 47.99em) {
+    .scroll-to-top {
+      /* Clears the fixed bottom nav bar (.top-header, ~72px + safe area). */
+      bottom: calc(72px + env(safe-area-inset-bottom) + 1rem);
+      right: 1rem;
+    }
+  }
 }
 
 /* ==========================================================================
@@ -2741,7 +2788,8 @@
   .status-badge,
   .search-wrapper,
   .toc-container,
-  #a11y-announcer {
+  #a11y-announcer,
+  .scroll-to-top {
     display: none !important;
   }
 

@@ -41,6 +41,13 @@
     "isEntry": true,
     "imports": ["_rolldown-runtime-Czjbc987.js", "_toggle-Bl4j4AUN.js"]
   },
+  "src/islands/scroll-to-top.ts": {
+    "file": "assets/scroll-to-top-B-5Wv14u.js",
+    "name": "scroll-to-top",
+    "src": "src/islands/scroll-to-top.ts",
+    "isEntry": true,
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
+  },
   "src/islands/theme.tsx": {
     "file": "assets/theme-D_rgo2Xr.js",
     "name": "theme",

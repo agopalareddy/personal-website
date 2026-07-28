@@ -3,6 +3,7 @@ import { Head, type HeadProps } from './Head';
 import { Nav, type ActivePage } from './Nav';
 import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
+import { Icon } from '../common/Icon';
 
 export interface LayoutProps extends HeadProps {
   activePage?: ActivePage;
@@ -58,6 +59,17 @@ export function Layout({
         <Footer />
 
         <div id="a11y-announcer" className="sr-only" aria-live="polite" />
+
+        <button
+          type="button"
+          id="scroll-to-top"
+          className="scroll-to-top"
+          aria-label="Scroll to top"
+          aria-hidden="true"
+          tabIndex={-1}
+        >
+          <Icon name="CHEVRON_DOWN_16" />
+        </button>
 
         <script src="/assets/js/sw-register.js" />
       </body>

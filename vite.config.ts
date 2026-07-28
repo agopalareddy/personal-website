@@ -21,6 +21,7 @@ export default defineConfig({
         'email-protection': resolve(__dirname, 'site/src/islands/email-protection.ts'),
         'cv-modal': resolve(__dirname, 'site/src/islands/cv-modal.ts'),
         'catalog-filter': resolve(__dirname, 'site/src/islands/catalog-filter.ts'),
+        'home-skill-toggle': resolve(__dirname, 'site/src/islands/home-skill-toggle.ts'),
       },
     },
   },

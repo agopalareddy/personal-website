@@ -26,6 +26,7 @@ const HEADER = `/* vendored from @primer/primitives v${VERSION} — do not edit;
 const FILES = {
   'base/size/size.css': 'base-size.css',
   'base/typography/typography.css': 'base-typography.css',
+  'base/motion/motion.css': 'base-motion.css',
   'functional/size/size.css': 'size.css',
   'functional/size/border.css': 'border.css',
   'functional/size/breakpoints.css': 'breakpoints.css',
@@ -42,6 +43,7 @@ const FILES = {
 const CONCAT_ORDER = [
   'base-size.css',
   'base-typography.css',
+  'base-motion.css',
   'size.css',
   'border.css',
   'breakpoints.css',

@@ -29,6 +29,13 @@
     "isEntry": true,
     "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
+  "src/islands/home-skill-toggle.ts": {
+    "file": "assets/home-skill-toggle-BCelnWSA.js",
+    "name": "home-skill-toggle",
+    "src": "src/islands/home-skill-toggle.ts",
+    "isEntry": true,
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
+  },
   "src/islands/theme.tsx": {
     "file": "assets/theme-D_rgo2Xr.js",
     "name": "theme",

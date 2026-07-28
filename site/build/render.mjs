@@ -54,6 +54,7 @@ async function main() {
   const emailProtectionIsland = islandScriptTag(manifest, 'src/islands/email-protection.ts');
   const cvModalIsland = islandScriptTag(manifest, 'src/islands/cv-modal.ts');
   const catalogFilterIsland = islandScriptTag(manifest, 'src/islands/catalog-filter.ts');
+  const homeSkillToggleIsland = islandScriptTag(manifest, 'src/islands/home-skill-toggle.ts');
 
   // Loaded on every page — the protected-email markup in Sidebar/Footer/etc.
   // needs this decoder to become a working mailto: link with JS enabled.
@@ -113,7 +114,7 @@ async function main() {
     );
   }
 
-  written.push(renderPage(HomePage(), 'index.html', commonIslands));
+  written.push(renderPage(HomePage(), 'index.html', [...commonIslands, homeSkillToggleIsland]));
   written.push(renderPage(CvHubPage(), 'cv/index.html', [...commonIslands, cvModalIsland]));
   written.push(renderPage(AvailabilityPage(), 'availability/index.html', commonIslands));
   written.push(renderPage(AccessibilityPage(), 'accessibility.html', commonIslands));

@@ -14,6 +14,8 @@
  * cv-modal.ts/email-protection.ts: the behavior is imperative DOM filtering
  * over server-rendered content, not client-owned state.
  */
+import { bindExpandToggle } from './toggle';
+
 document.addEventListener('DOMContentLoaded', () => {
   const gridEl =
     document.getElementById('projectGrid') || document.getElementById('experienceGrid');
@@ -337,22 +339,13 @@ document.addEventListener('DOMContentLoaded', () => {
       filterToggleBtn.setAttribute('aria-expanded', isMobile ? 'false' : 'true');
       filterToggleBtn.setAttribute('data-initialized', 'true');
     }
-    filterToggleBtn.addEventListener('click', () => {
-      const expanded = filterToggleBtn.getAttribute('aria-expanded') === 'true';
-      filterToggleBtn.setAttribute('aria-expanded', String(!expanded));
-    });
+    bindExpandToggle(filterToggleBtn);
   }
 
   // tocToggleBtn's initial aria-expanded/data-initialized is set inside
   // renderToc() instead — matches experience-catalog.js's timing, since the
   // TOC only exists once the first render() produces >1 visible card.
-  const tocToggleBtn = document.getElementById('tocToggleBtn');
-  if (tocToggleBtn) {
-    tocToggleBtn.addEventListener('click', () => {
-      const expanded = tocToggleBtn.getAttribute('aria-expanded') === 'true';
-      tocToggleBtn.setAttribute('aria-expanded', String(!expanded));
-    });
-  }
+  bindExpandToggle(document.getElementById('tocToggleBtn'));
 
   // Read initial filter state from the URL so filtered views are
   // shareable/bookmarkable.

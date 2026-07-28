@@ -2,12 +2,8 @@
 // the React migration since no island loaded it on the home page, leaving
 // the "Technical stack by area" panel permanently expanded (aria-expanded
 // hardcoded to "true" in Home.tsx with nothing to ever flip it).
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.querySelector<HTMLButtonElement>('.home-skill-toggle');
-  if (!toggle) return;
+import { bindExpandToggle } from './toggle';
 
-  toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  bindExpandToggle(document.querySelector<HTMLButtonElement>('.home-skill-toggle'));
 });

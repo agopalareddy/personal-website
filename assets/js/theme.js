@@ -189,15 +189,17 @@
     var currentObj = MODES.find((m) => m.value === mode) || MODES[0];
     var pickers = document.querySelectorAll('.theme-picker');
 
+    var newDoc = new DOMParser().parseFromString(modeIcon(mode), 'image/svg+xml');
+    var iconTemplate = newDoc.documentElement;
+
     pickers.forEach((picker) => {
       // Update summary
       var summary = picker.querySelector('summary');
       if (summary) {
         summary.setAttribute('aria-label', 'Theme: ' + currentObj.label);
         var icons = summary.querySelectorAll('svg');
-        if (icons.length > 0) {
-          var newDoc = new DOMParser().parseFromString(modeIcon(mode), 'image/svg+xml');
-          if (newDoc.documentElement) icons[0].replaceWith(newDoc.documentElement);
+        if (icons.length > 0 && iconTemplate) {
+          icons[0].replaceWith(iconTemplate.cloneNode(true));
         }
       }
       // Update aria-checked on options

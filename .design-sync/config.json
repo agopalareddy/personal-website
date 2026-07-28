@@ -1,0 +1,31 @@
+{
+  "pkg": "personal-website",
+  "globalName": "PersonalWebsiteDS",
+  "shape": "package",
+  "projectId": "2f88eaa3-c410-44e8-98d5-bed78c4ef11b",
+  "srcDir": "site/src/components",
+  "cssEntry": "assets/css/style.css",
+  "tokensPkg": "personal-website",
+  "tokensGlob": "assets/css/primer/*.css",
+  "tsconfig": "tsconfig.json",
+  "readmeHeader": ".design-sync/conventions.md",
+  "componentSrcMap": {
+    "icons-data": null,
+    "theme-inline-snippet": null
+  },
+  "overrides": {
+    "Layout": { "cardMode": "column" }
+  },
+  "dtsPropsFor": {
+    "Nav": "activePage?: 'home' | 'experience' | 'projects' | 'cv' | 'availability';",
+    "Footer": "",
+    "ThemePicker": "",
+    "Sidebar": "children?: React.ReactNode;",
+    "Head": "title: string;\n  description: string;\n  canonicalUrl: string;\n  ogType?: 'website' | 'article';\n  ogImage?: string;\n  jsonLd?: string;",
+    "Layout": "title: string;\n  description: string;\n  canonicalUrl: string;\n  ogType?: 'website' | 'article';\n  ogImage?: string;\n  jsonLd?: string;\n  activePage?: 'home' | 'experience' | 'projects' | 'cv' | 'availability';\n  contentAriaLabel?: string;\n  bodyClassName?: string;\n  hideSidebar?: boolean;\n  sidebarExtra?: React.ReactNode;\n  children: React.ReactNode;",
+    "CatalogFilter": "categories: { value: string; label: string }[];\n  categoryGroupAriaLabel: string;\n  searchId: string;\n  searchPlaceholder: string;\n  searchAriaLabel: string;\n  groupSelectId: string;\n  groupAriaLabel: string;\n  groupOptions: { value: string; label: string }[];\n  yearSelectId: string;\n  yearAriaLabel: string;\n  years: number[];\n  sortSelectId: string;\n  sortAriaLabel: string;",
+    "ExperienceEntryCard": "e: {\n    id: string;\n    title: string;\n    category: 'education' | 'research' | 'professional' | 'leadership' | 'presentations' | 'awards';\n    organization: string;\n    location: string | null;\n    role_context: string | null;\n    start_date: string;\n    end_date: string;\n    responsibilities: string[];\n    related_projects: string[];\n    links: { label: string; url: string; type: string }[];\n    has_detail: boolean;\n    excerpt: string;\n    is_presentation?: boolean;\n  };",
+    "ProjectCard": "p: {\n    id: string;\n    title: string;\n    excerpt: string;\n    venue: string;\n    venue_tag: string;\n    permalink: string;\n    date: string;\n    formatted_date: string;\n    category: string;\n    technologies: string[];\n    github: string | null;\n    demo: string | null;\n    pdf: string | null;\n    presentation: string | null;\n    has_detail: boolean;\n    content_html: string;\n  };",
+    "Icon": "name: 'HOME_16' | 'BRIEFCASE_16' | 'CODE_16' | 'FILE_16' | 'CALENDAR_16' | 'LOCATION_16' | 'MAIL_16' | 'MARK_GITHUB_16' | 'SUN_16' | 'MOON_16' | 'DEVICE_DESKTOP_16' | 'CHECK_16' | 'CHEVRON_DOWN_16' | 'LINK_EXTERNAL_16' | 'SEARCH_16' | 'ORGANIZATION_16' | 'ROCKET_16' | 'TROPHY_16' | 'INFO_16' | 'EYE_16' | 'DOWNLOAD_16' | 'X_16' | 'CLOCK_16' | 'ALERT_24' | 'SHIELD_CHECK_24' | 'SYNC_16' | 'TOOLS_16' | 'CHECKLIST_16' | 'COMMENT_16' | 'PAPER_AIRPLANE_16' | 'RSS_16' | 'LOG_16' | 'LINKEDIN_16';\n  className?: string;"
+  }
+}

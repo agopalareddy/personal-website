@@ -55,10 +55,11 @@ async function main() {
   const cvModalIsland = islandScriptTag(manifest, 'src/islands/cv-modal.ts');
   const catalogFilterIsland = islandScriptTag(manifest, 'src/islands/catalog-filter.ts');
   const homeSkillToggleIsland = islandScriptTag(manifest, 'src/islands/home-skill-toggle.ts');
+  const scrollToTopIsland = islandScriptTag(manifest, 'src/islands/scroll-to-top.ts');
 
   // Loaded on every page — the protected-email markup in Sidebar/Footer/etc.
   // needs this decoder to become a working mailto: link with JS enabled.
-  const commonIslands = [themeIsland, emailProtectionIsland];
+  const commonIslands = [themeIsland, emailProtectionIsland, scrollToTopIsland];
 
   const projects = loadProjects();
   const written = [];

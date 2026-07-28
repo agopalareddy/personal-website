@@ -8,6 +8,7 @@ Vendored from `@primer/primitives` v11.9.0.
 | --------------------- | ----------------------------------------------------------------------- |
 | base-size.css         | `@primer/primitives/dist/css/base/size/size.css`                        |
 | base-typography.css   | `@primer/primitives/dist/css/base/typography/typography.css`            |
+| base-motion.css       | `@primer/primitives/dist/css/base/motion/motion.css`                    |
 | size.css              | `@primer/primitives/dist/css/functional/size/size.css`                  |
 | border.css            | `@primer/primitives/dist/css/functional/size/border.css`                |
 | breakpoints.css       | `@primer/primitives/dist/css/functional/size/breakpoints.css`           |

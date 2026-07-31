@@ -240,6 +240,8 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        # SMTP RCPT probing is sequential per candidate; a real lookup can run 60-90s+
+        proxy_read_timeout 180;
     }
 
     include /etc/nginx/conf.d/security-headers.conf;
@@ -496,6 +498,8 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        # SMTP RCPT probing is sequential per candidate; a real lookup can run 60-90s+
+        proxy_read_timeout 180;
     }
 
     include /etc/nginx/conf.d/security-headers.conf;

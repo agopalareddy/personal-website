@@ -258,7 +258,7 @@ server {
 }
 
 server {
-    server_name 34-68-198-196.nip.io agreddy.com; # managed by Certbot
+    server_name 147-93-139-98.nip.io agreddy.com; # managed by Certbot
     root /opt/personal-website;
     server_tokens off;
     more_clear_headers Server;
@@ -521,13 +521,13 @@ server {
     } # managed by Certbot
 
 
-    if ($host = 34-68-198-196.nip.io) {
+    if ($host = 147-93-139-98.nip.io) {
         return 301 https://$host$request_uri;
     }
 
     listen 80 ;
     listen [::]:80 ;
-    server_name 34-68-198-196.nip.io agreddy.com www.agreddy.com;
+    server_name 147-93-139-98.nip.io agreddy.com www.agreddy.com;
     return 301 https://$host$request_uri;
 
 

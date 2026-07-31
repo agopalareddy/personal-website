@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Sync nginx config from repo to GCP VM, validate, and reload.
+# Sync nginx config from repo to the showcase VM, validate, and reload.
 #
 # Usage: ./deploy.sh [ssh-alias]
-#   ssh-alias: defaults to "gcp-showcase" (see ~/.ssh/config)
+#   ssh-alias: defaults to "contabo-showcase" (see ~/.ssh/config)
 #
 # This script is idempotent and safe to re-run.
 
 set -euo pipefail
 
-SSH_TARGET="${1:-gcp-showcase}"
+SSH_TARGET="${1:-contabo-showcase}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Files to sync (paths relative to this script)

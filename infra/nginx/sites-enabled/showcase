@@ -248,6 +248,19 @@ server {
         # is headroom for the poll, not for a blocking probe.
         proxy_read_timeout 120;
 
+        # Job polling and status reads: cheap, and the client polls once a
+        # second while a lookup runs.
+        location ~ ^/email-verify/api/(lookups/[A-Za-z0-9]+|queue|auth/me)$ {
+            limit_req zone=emailverifypoll burst=30 nodelay;
+            limit_req_status 429;
+            proxy_pass http://127.0.0.1:8091/api/$1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Cookie $http_cookie;
+        }
+
         location ~ ^/email-verify/api/auth/(login|signup)$ {
             limit_req zone=emailverifyauth burst=3 nodelay;
             limit_req_status 429;
@@ -520,6 +533,19 @@ server {
         # A lookup is queued and polled now, so requests return promptly; this
         # is headroom for the poll, not for a blocking probe.
         proxy_read_timeout 120;
+
+        # Job polling and status reads: cheap, and the client polls once a
+        # second while a lookup runs.
+        location ~ ^/email-verify/api/(lookups/[A-Za-z0-9]+|queue|auth/me)$ {
+            limit_req zone=emailverifypoll burst=30 nodelay;
+            limit_req_status 429;
+            proxy_pass http://127.0.0.1:8091/api/$1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Cookie $http_cookie;
+        }
 
         location ~ ^/email-verify/api/auth/(login|signup)$ {
             limit_req zone=emailverifyauth burst=3 nodelay;

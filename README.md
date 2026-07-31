@@ -3,7 +3,7 @@
 Static personal website and project archive for agreddy.com, built with HTML, CSS, and JavaScript.
 
 The site presents projects, research and teaching experience, CV/resume documents, and
-availability, served as a static Nginx site on Google Cloud Compute Engine with no
+availability, served as a static Nginx site on a Contabo Cloud VPS with no
 runtime application server. Content for projects and experience is generated from JSON
 databases in `scripts/`; end-to-end coverage lives under `tests/` using Playwright.
 
@@ -179,12 +179,12 @@ npm run test:mobile
 
 ## Deployment
 
-Production is a static Git checkout at `/opt/personal-website/` on the GCP VM.
+Production is a static Git checkout at `/opt/personal-website/` on the showcase VM.
 Deployments are Git-based; do not copy site files with `scp`.
 
 ```bash
 git push origin main
-ssh gcp-showcase "cd /opt/personal-website && git fetch origin && git reset --hard origin/main"
+ssh contabo-showcase "cd /opt/personal-website && git fetch origin && git reset --hard origin/main"
 ```
 
 There is no build step for the public site — Nginx serves files directly from the

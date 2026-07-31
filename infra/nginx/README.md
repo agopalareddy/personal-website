@@ -1,6 +1,6 @@
 # Nginx Infrastructure
 
-Tracked copies of nginx configuration for the personal-website production deployment on the GCP VM (`gcp-showcase`).
+Tracked copies of nginx configuration for the personal-website production deployment on the showcase VM (`contabo-showcase`).
 
 ## Layout
 
@@ -15,18 +15,18 @@ infra/nginx/
 
 ## Source of truth
 
-**`/etc/nginx/conf.d/security-headers.conf`** and **`/etc/nginx/sites-enabled/showcase`** on the GCP VM are the live truth.
+**`/etc/nginx/conf.d/security-headers.conf`** and **`/etc/nginx/sites-enabled/showcase`** on the showcase VM are the live truth.
 
 This directory is a **snapshot for reproducibility and recovery**. If you change configs on the VM (e.g., to add a new reverse proxy location), sync them back to the repo:
 
 ```bash
 # On VM
-ssh gcp-showcase
+ssh contabo-showcase
 sudo cat /etc/nginx/conf.d/security-headers.conf
 sudo cat /etc/nginx/sites-enabled/showcase
 
 # On local repo
-pbcopy < <(ssh gcp-showcase 'sudo cat /etc/nginx/conf.d/security-headers.conf')
+pbcopy < <(ssh contabo-showcase 'sudo cat /etc/nginx/conf.d/security-headers.conf')
 # paste into infra/nginx/conf.d/security-headers.conf
 ```
 
@@ -34,7 +34,7 @@ pbcopy < <(ssh gcp-showcase 'sudo cat /etc/nginx/conf.d/security-headers.conf')
 
 ```bash
 cd /home/adurs/repos/GCP_Projects/personal-website
-./infra/nginx/deploy.sh         # uses gcp-showcase SSH alias
+./infra/nginx/deploy.sh         # uses contabo-showcase SSH alias
 ```
 
 The script:
@@ -60,7 +60,7 @@ If a future CSP change accidentally removes these, GA4 hits will silently fail (
 The `showcase` file contains `server { ... }` blocks with comments like `# managed by Certbot`. Do not edit those directly. To re-issue certificates:
 
 ```bash
-ssh gcp-showcase
+ssh contabo-showcase
 sudo certbot --nginx -d agreddy.com -d www.agreddy.com
 ```
 

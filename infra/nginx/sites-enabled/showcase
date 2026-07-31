@@ -232,16 +232,31 @@ server {
 
     # ── Email Finder (unlisted) ──
     location /email-verify/ {
-        auth_basic "Restricted";
-        auth_basic_user_file /etc/nginx/.htpasswd;
+        # Auth is now handled by the application (accounts + sessions), not by
+        # a single shared htpasswd password.
         add_header X-Robots-Tag "noindex, nofollow";
+        limit_req zone=emailverify burst=10 nodelay;
+        limit_conn emailverifyconn 8;
+        limit_req_status 429;
+        client_max_body_size 16k;
         proxy_pass http://127.0.0.1:8091/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        # SMTP RCPT probing is sequential per candidate; a real lookup can run 60-90s+
-        proxy_read_timeout 180;
+        # A lookup is queued and polled now, so requests return promptly; this
+        # is headroom for the poll, not for a blocking probe.
+        proxy_read_timeout 120;
+
+        location ~ ^/email-verify/api/auth/(login|signup)$ {
+            limit_req zone=emailverifyauth burst=3 nodelay;
+            limit_req_status 429;
+            proxy_pass http://127.0.0.1:8091/api/auth/$1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
     }
 
     include /etc/nginx/conf.d/security-headers.conf;
@@ -490,16 +505,31 @@ server {
 
     # ── Email Finder (unlisted) ──
     location /email-verify/ {
-        auth_basic "Restricted";
-        auth_basic_user_file /etc/nginx/.htpasswd;
+        # Auth is now handled by the application (accounts + sessions), not by
+        # a single shared htpasswd password.
         add_header X-Robots-Tag "noindex, nofollow";
+        limit_req zone=emailverify burst=10 nodelay;
+        limit_conn emailverifyconn 8;
+        limit_req_status 429;
+        client_max_body_size 16k;
         proxy_pass http://127.0.0.1:8091/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        # SMTP RCPT probing is sequential per candidate; a real lookup can run 60-90s+
-        proxy_read_timeout 180;
+        # A lookup is queued and polled now, so requests return promptly; this
+        # is headroom for the poll, not for a blocking probe.
+        proxy_read_timeout 120;
+
+        location ~ ^/email-verify/api/auth/(login|signup)$ {
+            limit_req zone=emailverifyauth burst=3 nodelay;
+            limit_req_status 429;
+            proxy_pass http://127.0.0.1:8091/api/auth/$1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
     }
 
     include /etc/nginx/conf.d/security-headers.conf;

@@ -57,5 +57,5 @@ Our accessibility implementation is verified through:
 
 If you encounter any accessibility barriers or have suggestions for further improvement, please contact me directly at:
 
-- **Email**: [adurs2002@gmail.com](mailto:adurs2002@gmail.com)
+- **Email**: [agr@agreddy.com](mailto:agr@agreddy.com)
 - **LinkedIn**: [Aadarsha Gopala Reddy](https://www.linkedin.com/in/agopalareddy)

@@ -55,11 +55,11 @@ export function Sidebar({ children }: { children?: ReactNode }) {
             <a
               href="#"
               className="protected-email"
-              data-email-user="YWR1cnMyMDAy"
-              data-email-domain="Z21haWwuY29t"
-              data-email-text="adurs2002 [at] gmail [dot] com"
+              data-email-user="YWdy"
+              data-email-domain="YWdyZWRkeS5jb20="
+              data-email-text="agr [at] agreddy [dot] com"
             >
-              adurs2002 [at] gmail [dot] com
+              agr [at] agreddy [dot] com
             </a>
             <noscript>
               (requires JavaScript —{' '}

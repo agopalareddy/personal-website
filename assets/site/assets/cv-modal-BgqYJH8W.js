@@ -13098,13 +13098,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         getMetadata() {
           let e = `GetMetadata`;
           return this.#t.getOrInsertComputed(e, () =>
-            this.messageHandler.sendWithPromise(e, null).then((e) => ({
-              info: e[0],
-              metadata: e[1] ? new Mr(e[1]) : null,
-              contentDispositionFilename: this.#e?.filename ?? null,
-              contentLength: this.#e?.contentLength ?? null,
-              hasStructTree: e[2],
-            }))
+            this.messageHandler
+              .sendWithPromise(e, null)
+              .then((e) => ({
+                info: e[0],
+                metadata: e[1] ? new Mr(e[1]) : null,
+                contentDispositionFilename: this.#e?.filename ?? null,
+                contentLength: this.#e?.contentLength ?? null,
+                hasStructTree: e[2],
+              }))
           );
         }
         getMarkInfo() {

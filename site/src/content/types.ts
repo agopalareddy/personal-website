@@ -34,7 +34,7 @@ export interface ExperienceEntry {
   location: string | null;
   role_context: string | null;
   start_date: string;
-  end_date: string;
+  end_date: string | null;
   responsibilities: string[];
   related_projects: string[];
   links: ExperienceLink[];

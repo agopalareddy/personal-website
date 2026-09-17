@@ -9,6 +9,7 @@ function orgShort(org: string): string {
   }
   if (lower.includes('ohio wesleyan')) return 'Ohio Wesleyan University';
   if (lower.includes('crittero')) return 'Crittero';
+  if (lower.includes('ignite performance')) return 'Ignite Performance';
   if (lower.includes('lab714')) return 'Lab714';
   if (lower.includes('mitxsurestart') || lower.includes('mitx')) return 'MITxSureStart';
   if (lower.includes('denison')) return 'Denison University';
@@ -120,7 +121,8 @@ export function orgGroup(organization: string): string {
   const org = (organization || '').toLowerCase();
   if (org.includes('washington university')) return 'WashU';
   if (org.includes('ohio wesleyan')) return 'OWU';
-  if (org.includes('crittero') || org.includes('lab714')) return 'Corporate';
+  if (org.includes('crittero') || org.includes('lab714') || org.includes('ignite performance'))
+    return 'Corporate';
   if (org.includes('mitx') || org.includes('surestart')) return 'MITxSureStart';
   return 'Personal';
 }

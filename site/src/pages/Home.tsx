@@ -109,7 +109,8 @@ export function HomePage() {
           naturalistic driving data, work I completed while earning an M.S. in Computer Science at{' '}
           <a href="https://www.washu.edu/">Washington University in St. Louis</a>. I have hands-on
           experience across machine learning, data engineering, and full-stack development, gained
-          through research, teaching, and industry internships, and I&rsquo;m seeking software,
+          through research, teaching, and industry internships. I&rsquo;m currently building the
+          athlete coaching mobile app at Ignite Performance Consulting while seeking software,
           data, or ML engineering roles.
         </p>
         <div className="home-skill-details card-surface">

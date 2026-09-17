@@ -126,6 +126,26 @@
     "excerpt": "Built a digital Lost Cities card game in Java and a heuristic-driven AI agent that won over 70% of test games against human players during a mentored summer research program."
   },
   {
+    "title": "Mobile Application Developer Intern",
+    "category": "professional",
+    "organization": "Ignite Performance Consulting",
+    "location": "Remote",
+    "role_context": null,
+    "start_date": "2026-09-01",
+    "end_date": null,
+    "responsibilities": [
+      "Own development and launch of the company's athlete coaching app, a React Native mobile client backed by a Next.js web platform, an Express/MongoDB API, and a Rasa chatbot.",
+      "Work directly with the founder on product direction, delivering the remaining features, such as the daily check-in, to bring the mobile app level with the web platform.",
+      "Modernized the mobile codebase and fixed security and cross-platform setup problems to get the app ready for production.",
+      "Leading testing and release of the app on the Apple App Store and Google Play ahead of its planned October 2026 launch."
+    ],
+    "related_projects": [],
+    "links": [],
+    "has_detail": true,
+    "id": "2026-09-mobile-application-developer-intern",
+    "excerpt": "Building Ignite Performance Consulting's athlete coaching app, a React Native client on a Next.js, Express/MongoDB, and Rasa stack, and preparing its App Store and Google Play release."
+  },
+  {
     "title": "Graduate Assistant with the Taylor Family Center for Student Success",
     "category": "professional",
     "organization": "Washington University in St. Louis",

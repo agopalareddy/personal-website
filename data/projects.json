@@ -518,5 +518,32 @@
     "has_detail": true,
     "formatted_date": "Jun 2026",
     "content_html": "<p>A self-contained Arduino environment monitor that continuously reads temperature and humidity from a DHT11 sensor every two minutes, displays live readings on a 1602 LCD, and stores a rolling 255-sample buffer in EEPROM for offline data retrieval over serial.</p><p>The device supports three temperature units (&deg;C, &deg;F, K) and two humidity modes (relative humidity and dew point via the Magnus formula), toggled with a hardware button. A second button forces an immediate sensor read. A photoresistor (LDR) on an analog pin provides ambient light readings on a secondary display page. EEPROM persistence preserves the buffer index and user-selected unit preferences across power cycles. The full rolling buffer can be dumped over serial on command for analysis.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Continuous DHT11 sensing (temp &amp; humidity) every 2 minutes, displayed on 1602 LCD</li><li>Three temperature units (&deg;C, &deg;F, K) and dew point calculation (Magnus formula)</li><li>255-sample rolling EEPROM buffer with serial dump command for offline retrieval</li><li>Ambient light sensing via photoresistor with live raw and percentage display</li><li>Two-button interface: force-refresh and unit/page cycling with long-press detection</li><li>Unit preferences and buffer index persist across power cycles via EEPROM</li></ul>"
+  },
+  {
+    "id": "2026-09-umm",
+    "title": "Umm: Voice Typing",
+    "excerpt": "A voice keyboard and floating dictation assistant for Android that transcribes and cleans up spoken text in real time using user-provided OpenRouter keys — stripping filler words, formatting lists, and preserving multilingual speech without server-side tracking.",
+    "venue": "Personal Project",
+    "venue_tag": "Personal",
+    "permalink": "/projects/umm",
+    "date": "2026-09-30",
+    "category": "Software & Tools",
+    "technologies": [
+      "Kotlin",
+      "Android",
+      "Jetpack Compose",
+      "OpenRouter",
+      "Speech-to-Text",
+      "LLM",
+      "Material 3",
+      "Accessibility API"
+    ],
+    "github": "https://github.com/agopalareddy/umm",
+    "demo": null,
+    "pdf": null,
+    "presentation": null,
+    "has_detail": true,
+    "formatted_date": "Sep 2026",
+    "content_html": "<p>Umm is an open-source/source-available Android voice keyboard and accessibility floating dictation assistant that transcribes speech and types a cleaned-up version directly into any app. When dictating, spoken filler words (&ldquo;um&rdquo;, &ldquo;uh&rdquo;, &ldquo;like&rdquo;), false starts, and mid-sentence self-corrections are automatically removed, while punctuation, paragraph breaks, and formatting (such as bullet lists in emails) are inferred from context. Mixed speech such as Hinglish is preserved as spoken without unwanted translation.</p><p>Unlike subscription-based dictation services or device-locked alternatives, Umm operates entirely on a pay-per-use model powered by the user&apos;s own <a href=\"https://openrouter.ai\" target=\"_blank\" rel=\"noopener\">OpenRouter</a> account. Dictations are recorded on-device in mono AAC with local silence and speech detection. Audio is transcribed via OpenRouter&apos;s audio transcription endpoint (defaulting to <code>openai/gpt-4o-mini-transcribe</code> with fallbacks), and transcripts are structured and refined through a lightweight LLM completion stage (defaulting to <code>google/gemini-3.5-flash-lite</code>). A typical short dictation costs about $0.0004 and resolves in 1.2 to 1.8 seconds.</p><p>In addition to the standard input method editor (IME) keyboard, Umm includes an optional floating button built on Android&apos;s Accessibility API, enabling hold-to-talk, tap-to-stop, or continuous dictation over any editable text field without switching away from the user&apos;s primary keyboard. Privacy is foundational: Umm has no centralized backend, accounts, advertising, or telemetry; all requests communicate directly from the phone to OpenRouter with credentials encrypted in Android Keystore, and optional zero-data-retention routing ensures upstream providers never store speech payloads.</p><h4 style=\"font-family: var(--font-heading); margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);\">Highlights</h4><ul><li>Real-time voice dictation with automated cleanup of filler words, false starts, and speech disfluencies</li><li>Four configurable cleanup levels (Raw, Light, Formatted, Polished) mapped per application category</li><li>Optional screen-docked floating button using Android Accessibility API for single-tap or hold dictation across apps</li><li>Two-stage pipeline: on-device silence detection, OpenRouter audio transcription, and LLM text formatting</li><li>Pay-per-use economics with personal OpenRouter keys (~$0.0004/dictation), monthly spending caps, and in-app usage tracking</li><li>Privacy-first architecture: no intermediate servers, encrypted local key storage, and zero-data-retention provider enforcement</li><li>Multilingual and code-mixed speech support (such as Hinglish) preserved accurately without translation</li></ul><p><a href=\"https://github.com/agopalareddy/umm/releases/latest\" target=\"_blank\" rel=\"noopener\">Download the latest release on GitHub</a> <span class=\"sr-only\">(opens in a new tab)</span>.</p>"
   }
 ]

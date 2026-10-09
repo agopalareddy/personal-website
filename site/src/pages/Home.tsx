@@ -134,7 +134,9 @@ export function HomePage() {
                   <ul className="project-tech home-skill-tags">
                     {group.skills.map((skill) => (
                       <li className="tech-tag" key={skill}>
-                        <a href={`/projects/?q=${encodeURIComponent(skill)}`}>{skill}</a>
+                        <a href={`/projects/?q=${encodeURIComponent(skill)}`} rel="nofollow">
+                          {skill}
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -191,20 +193,20 @@ export function HomePage() {
         <ul>
           <li>
             <strong>
-              <a href="/projects/ms-thesis">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a>
+              <a href="/projects/ms-thesis.html">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a>
             </strong>{' '}
             — Compared six modeling approaches for predicting cognitive impairment from naturalistic
             driving data.
           </li>
           <li>
             <strong>
-              <a href="/projects/multimodal-alzheimers">Multimodal Alzheimer&rsquo;s Prediction</a>
+              <a href="/projects/multimodal-alzheimers.html">Multimodal Alzheimer&rsquo;s Prediction</a>
             </strong>{' '}
             — Combined MRI imaging with clinical data for early Alzheimer&rsquo;s disease detection.
           </li>
           <li>
             <strong>
-              <a href="/projects/datacenter-cooling">Datacenter Cooling Optimization</a>
+              <a href="/projects/datacenter-cooling.html">Datacenter Cooling Optimization</a>
             </strong>{' '}
             — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter cooling
             efficiency.

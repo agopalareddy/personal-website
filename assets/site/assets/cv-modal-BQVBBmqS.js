@@ -3,19 +3,41 @@ var n,
   r,
   i,
   a,
-  o = e(() => {
+  o,
+  s,
+  c = e(() => {
     ((n = `modulepreload`),
       (r = function (e) {
         return `/assets/site/` + e;
       }),
       (i = {}),
-      (a = function (e, t, a) {
-        let o = Promise.resolve();
+      (a = function (e) {
+        return e.pathname.endsWith(`.css`);
+      }),
+      (o = function (e, t, n) {
+        if (t in e) return e[t];
+        let r = n();
+        if (!r) {
+          e[t] = void 0;
+          return;
+        }
+        let i = r.then(
+          () => {
+            e[t] = void 0;
+          },
+          (n) => {
+            throw ((e[t] = void 0), n);
+          }
+        );
+        return ((e[t] = i), i);
+      }),
+      (s = function (e, t, s) {
+        let c = Promise.resolve();
         if (t && t.length > 0) {
-          let e = document.getElementsByTagName(`link`),
-            s = document.querySelector(`meta[property=csp-nonce]`),
-            c = s?.nonce || s?.getAttribute(`nonce`);
-          function l(e) {
+          let e,
+            l = document.querySelector(`meta[property=csp-nonce]`),
+            u = l?.nonce || l?.getAttribute(`nonce`);
+          function d(e) {
             return Promise.all(
               e.map((e) =>
                 Promise.resolve(e).then(
@@ -25,64 +47,77 @@ var n,
               )
             );
           }
-          function u(e) {
-            return import.meta.resolve ? import.meta.resolve(e) : new URL(e, import.meta.url).href;
+          function f(e) {
+            return import.meta.resolve
+              ? new URL(import.meta.resolve(e))
+              : new URL(e, import.meta.url);
           }
-          o = l(
-            t.map((t) => {
-              if (((t = r(t, a)), (t = u(t)), t in i)) return;
-              i[t] = !0;
-              let o = t.endsWith(`.css`);
-              for (let n = e.length - 1; n >= 0; n--) {
-                let r = e[n];
-                if (r.href === t && (!o || r.rel === `stylesheet`)) return;
-              }
-              let s = document.createElement(`link`);
-              if (
-                ((s.rel = o ? `stylesheet` : n),
-                o || (s.as = `script`),
-                (s.crossOrigin = ``),
-                (s.href = t),
-                c && s.setAttribute(`nonce`, c),
-                document.head.appendChild(s),
-                o)
-              )
-                return new Promise((e, n) => {
-                  (s.addEventListener(`load`, e),
-                    s.addEventListener(`error`, () => n(Error(`Unable to preload CSS for ${t}`))));
+          c = d(
+            t
+              .map((t) => {
+                t = r(t, s);
+                let c = f(t),
+                  l = a(c);
+                return o(i, c.href, () => {
+                  if (e === void 0) {
+                    e = { all: new Set(), styles: new Set() };
+                    let t = document.getElementsByTagName(`link`);
+                    for (let n = t.length - 1; n >= 0; n--) {
+                      let r = t[n];
+                      (e.all.add(r.href), r.rel === `stylesheet` && e.styles.add(r.href));
+                    }
+                  }
+                  if ((l ? e.styles : e.all).has(c.href)) return;
+                  let t = document.createElement(`link`);
+                  if (
+                    ((t.rel = l ? `stylesheet` : n),
+                    l || (t.as = `script`),
+                    (t.crossOrigin = ``),
+                    (t.href = c.href),
+                    u && t.setAttribute(`nonce`, u),
+                    document.head.appendChild(t),
+                    l)
+                  )
+                    return new Promise((e, n) => {
+                      (t.addEventListener(`load`, e),
+                        t.addEventListener(`error`, () =>
+                          n(Error(`Unable to preload CSS for ${c}`))
+                        ));
+                    });
                 });
-            })
+              })
+              .filter((e) => e !== void 0)
           );
         }
-        function s(e) {
+        function l(e) {
           let t = new Event(`vite:preloadError`, { cancelable: !0 });
           if (((t.payload = e), window.dispatchEvent(t), !t.defaultPrevented)) throw e;
         }
-        return o.then((t) => {
-          for (let e of t || []) e.status === `rejected` && s(e.reason);
-          return e().catch(s);
+        return c.then((t) => {
+          for (let e of t || []) e.status === `rejected` && l(e.reason);
+          return e().catch(l);
         });
       }));
   });
-function s(e) {
-  Number.isInteger(e) && (St = e);
-}
-function c() {
-  return St;
-}
 function l(e) {
-  St >= vt.INFOS && console.info(`Info: ${e}`);
+  Number.isInteger(e) && (At = e);
 }
-function u(e) {
-  St >= vt.WARNINGS && console.warn(`Warning: ${e}`);
+function u() {
+  return At;
 }
 function d(e) {
-  throw Error(e);
+  At >= Dt.INFOS && console.info(`Info: ${e}`);
 }
-function f(e, t) {
-  e || d(t);
+function f(e) {
+  At >= Dt.WARNINGS && console.warn(`Warning: ${e}`);
 }
 function p(e) {
+  throw Error(e);
+}
+function m(e, t) {
+  e || p(t);
+}
+function h(e) {
   switch (e?.protocol) {
     case `http:`:
     case `https:`:
@@ -94,7 +129,7 @@ function p(e) {
       return !1;
   }
 }
-function m(e, t = null, n = null) {
+function g(e, t = null, n = null) {
   if (!e) return null;
   if (
     n &&
@@ -106,30 +141,30 @@ function m(e, t = null, n = null) {
     n.tryConvertEncoding)
   )
     try {
-      e = b(e);
+      e = S(e);
     } catch {}
   let r = t ? URL.parse(e, t) : URL.parse(e);
-  return p(r) ? r : null;
+  return h(r) ? r : null;
 }
-function h(e, t, n = !1) {
+function _(e, t, n = !1) {
   let r = URL.parse(e);
   return r
     ? ((r.hash = t), r.href)
-    : n && m(e, `http://example.com`)
+    : n && g(e, `http://example.com`)
       ? e.split(`#`, 1)[0] + `${t ? `#${t}` : ``}`
       : ``;
 }
-function g(e) {
+function v(e) {
   return e.substring(e.lastIndexOf(`/`) + 1);
 }
-function _(e, t, n, r = !1) {
+function y(e, t, n, r = !1) {
   return (
     Object.defineProperty(e, t, { value: n, enumerable: !r, configurable: !0, writable: !1 }),
     n
   );
 }
-function v(e) {
-  (typeof e != `object` || e?.length === void 0) && d(`Invalid argument for bytesToString`);
+function b(e) {
+  (typeof e != `object` || e?.length === void 0) && p(`Invalid argument for bytesToString`);
   let t = e.length,
     n = 8192;
   if (t < n) return String.fromCharCode.apply(null, e);
@@ -141,31 +176,31 @@ function v(e) {
   }
   return r.join(``);
 }
-function y(e) {
-  typeof e != `string` && d(`Invalid argument for stringToBytes`);
+function x(e) {
+  typeof e != `string` && p(`Invalid argument for stringToBytes`);
   let t = e.length,
     n = new Uint8Array(t);
   for (let r = 0; r < t; ++r) n[r] = e.charCodeAt(r) & 255;
   return n;
 }
-function b(e) {
+function S(e) {
   return decodeURIComponent(escape(e));
 }
-function x(e) {
+function C(e) {
   return (
-    At ||
-      ((At =
+    Rt ||
+      ((Rt =
         /([\u00a0\u00b5\u037e\u0eb3\u2000-\u200a\u202f\u2126\ufb00-\ufb04\ufb06\ufb20-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufba1\ufba4-\ufba9\ufbae-\ufbb1\ufbd3-\ufbdc\ufbde-\ufbe7\ufbea-\ufbf8\ufbfc\ufbfd\ufc00-\ufc5d\ufc64-\ufcf1\ufcf5-\ufd3d\ufd88\ufdf4\ufdfa\ufdfb\ufe71\ufe77\ufe79\ufe7b\ufe7d]+)|(\ufb05+)/gu),
-      (jt = new Map([[`ﬅ`, `ſt`]]))),
-    e.replaceAll(At, (e, t, n) => (t ? t.normalize(`NFKC`) : jt.get(n)))
+      (zt = new Map([[`ﬅ`, `ſt`]]))),
+    e.replaceAll(Rt, (e, t, n) => (t ? t.normalize(`NFKC`) : zt.get(n)))
   );
 }
-function S() {
+function w() {
   if (typeof crypto.randomUUID == `function`) return crypto.randomUUID();
   let e = new Uint8Array(32);
-  return (crypto.getRandomValues(e), v(e));
+  return (crypto.getRandomValues(e), b(e));
 }
-function C(e, t, n) {
+function T(e, t, n) {
   if (!Array.isArray(n) || n.length < 2) return !1;
   let [r, i, ...a] = n;
   if ((!e(r) && !Number.isInteger(r)) || !t(i)) return !1;
@@ -194,11 +229,11 @@ function C(e, t, n) {
   for (let e of a) if (!(typeof e == `number` || (s && e === null))) return !1;
   return !0;
 }
-function w(e, t, n) {
+function E(e, t, n) {
   return Math.min(Math.max(e, t), n);
 }
-async function T(e, t = `text`) {
-  if (O(e, document.baseURI)) {
+async function D(e, t = `text`) {
+  if (ne(e, document.baseURI)) {
     let n = await fetch(e);
     if (!n.ok) throw Error(n.statusText);
     switch (t) {
@@ -228,29 +263,27 @@ async function T(e, t = `text`) {
                 return;
             }
             n(i.responseText);
-            return;
-          }
-          r(Error(i.statusText));
+          } else r(Error(i.statusText));
         }
       }),
       i.send(null));
   });
 }
-function E(e) {
+function O(e) {
   let t = e.length,
     n = 0;
   for (; n < t && e[n].trim() === ``;) n++;
   return e.substring(n, n + 5).toLowerCase() === `data:`;
 }
-function D(e) {
+function ee(e) {
   return typeof e == `string` && /\.pdf$/i.test(e);
 }
-function ee(e) {
-  return (([e] = e.split(/[#?]/, 1)), g(e));
+function k(e) {
+  return (([e] = e.split(/[#?]/, 1)), v(e));
 }
 function te(e, t = `document.pdf`) {
   if (typeof e != `string`) return t;
-  if (E(e)) return (u(`getPdfFilenameFromUrl: ignore "data:"-URL for performance reasons.`), t);
+  if (O(e)) return (f(`getPdfFilenameFromUrl: ignore "data:"-URL for performance reasons.`), t);
   let n = ((e) => {
     try {
       return new URL(e);
@@ -270,13 +303,13 @@ function te(e, t = `document.pdf`) {
   let r = (e) => {
       try {
         let t = decodeURIComponent(e);
-        return t.includes(`/`) && ((t = g(t)), t.length === 4 && i.test(t)) ? e : t;
+        return t.includes(`/`) && ((t = v(t)), t.length === 4 && i.test(t)) ? e : t;
       } catch {
         return e;
       }
     },
     i = /\.pdf$/i,
-    a = g(n.pathname);
+    a = v(n.pathname);
   if (i.test(a)) return r(a);
   if (n.searchParams.size > 0) {
     let e = (e) => [...e].findLast((e) => i.test(e)),
@@ -284,22 +317,28 @@ function te(e, t = `document.pdf`) {
     if (t) return r(t);
   }
   if (n.hash) {
-    let e = /[^/?#=]+\.pdf\b(?!.*\.pdf\b)/i.exec(n.hash);
-    if (e) return r(e[0]);
+    let { hash: e } = n,
+      t = -1;
+    for (let { index: n } of e.matchAll(/\.pdf\b/gi)) t = n;
+    if (t > 0) {
+      let n = t;
+      for (; n > 0 && !`/?#=`.includes(e[n - 1]);) n--;
+      if (n < t) return r(e.slice(n, t + 4));
+    }
   }
   return t;
 }
-function O(e, t) {
+function ne(e, t) {
   let n = t ? URL.parse(e, t) : URL.parse(e);
   return /https?:/.test(n?.protocol ?? ``);
 }
-function k(e) {
+function A(e) {
   e.preventDefault();
 }
-function A(e) {
+function j(e) {
   (e.preventDefault(), e.stopPropagation());
 }
-function ne(e) {
+function re(e) {
   if (e.startsWith(`#`)) {
     let t = e.slice(1);
     return [
@@ -330,30 +369,30 @@ function ne(e) {
       ]
     : null;
 }
-function re(e) {
-  let t = ne(e);
-  return t ? t.slice(0, 3) : (u(`Not a valid color format: "${e}"`), [0, 0, 0]);
-}
 function ie(e) {
+  let t = re(e);
+  return t ? t.slice(0, 3) : (f(`Not a valid color format: "${e}"`), [0, 0, 0]);
+}
+function ae(e) {
   let t = document.createElement(`span`);
   ((t.style.visibility = `hidden`), (t.style.colorScheme = `only light`), document.body.append(t));
   for (let n of e.keys()) {
     t.style.color = n;
     let r = window.getComputedStyle(t).color;
-    e.set(n, re(r));
+    e.set(n, ie(r));
   }
   t.remove();
 }
-function j(e) {
+function M(e) {
   let { a: t, b: n, c: r, d: i, e: a, f: o } = e.getTransform();
   return [t, n, r, i, a, o];
 }
-function M(e) {
+function oe(e) {
   let { a: t, b: n, c: r, d: i, e: a, f: o } = e.getTransform().invertSelf();
   return [t, n, r, i, a, o];
 }
-function ae(e, t, n = !1, r = !0) {
-  if (t instanceof Ft) {
+function se(e, t, n = !1, r = !0) {
+  if (t instanceof Wt) {
     let { pageWidth: r, pageHeight: i } = t.rawDims,
       { style: a } = e,
       o = `round(down, var(--total-scale-factor) * ${r}px, var(--scale-round-x))`,
@@ -362,12 +401,12 @@ function ae(e, t, n = !1, r = !0) {
   }
   r && e.setAttribute(`data-main-rotation`, t.rotation);
 }
-function oe(e, t) {
-  t = w(t ?? 1, 0, 1);
+function ce(e, t) {
+  t = E(t ?? 1, 0, 1);
   let n = 255 * (1 - t);
   return e.map((e) => Math.round(e * t + n));
 }
-function se(e, t) {
+function le(e, t) {
   let n = e[0] / 255,
     r = e[1] / 255,
     i = e[2] / 255,
@@ -386,12 +425,11 @@ function se(e, t) {
         break;
       case i:
         t[0] = ((n - r) / e + 4) * 60;
-        break;
     }
   }
   t[2] = s;
 }
-function ce(e, t) {
+function ue(e, t) {
   let n = e[0],
     r = e[1],
     i = e[2],
@@ -417,48 +455,47 @@ function ce(e, t) {
     case 5:
     case 6:
       ((t[0] = a + s), (t[1] = s), (t[2] = o + s));
-      break;
   }
 }
-function le(e) {
+function de(e) {
   return e <= 0.03928 ? e / 12.92 : ((e + 0.055) / 1.055) ** 2.4;
 }
-function ue(e, t, n) {
-  (ce(e, n), n.map(le));
+function fe(e, t, n) {
+  (ue(e, n), n.map(de));
   let r = 0.2126 * n[0] + 0.7152 * n[1] + 0.0722 * n[2];
-  (ce(t, n), n.map(le));
+  (ue(t, n), n.map(de));
   let i = 0.2126 * n[0] + 0.7152 * n[1] + 0.0722 * n[2];
   return r > i ? (r + 0.05) / (i + 0.05) : (i + 0.05) / (r + 0.05);
 }
-function de(e, t) {
+function pe(e, t) {
   let n =
       e[0] + e[1] * 256 + e[2] * 65536 + t[0] * 16777216 + t[1] * 4294967296 + t[2] * 1099511627776,
-    r = Kt.get(n);
+    r = rn.get(n);
   if (r) return r;
   let i = new Float32Array(9),
     a = i.subarray(0, 3),
     o = i.subarray(3, 6);
-  se(e, o);
+  le(e, o);
   let s = i.subarray(6, 9);
-  se(t, s);
+  le(t, s);
   let c = s[2] < 0.5,
     l = c ? 12 : 4.5;
-  if (((o[2] = c ? Math.sqrt(o[2]) : 1 - Math.sqrt(1 - o[2])), ue(o, s, a) < l)) {
+  if (((o[2] = c ? Math.sqrt(o[2]) : 1 - Math.sqrt(1 - o[2])), fe(o, s, a) < l)) {
     let e, t;
     for (c ? ((e = o[2]), (t = 1)) : ((e = 0), (t = o[2])); t - e > 0.005;) {
       let n = (o[2] = (e + t) / 2);
-      c === ue(o, s, a) < l ? (e = n) : (t = n);
+      c === fe(o, s, a) < l ? (e = n) : (t = n);
     }
     o[2] = c ? t : e;
   }
   return (
-    ce(o, a),
-    (r = H.makeHexColor(Math.round(a[0] * 255), Math.round(a[1] * 255), Math.round(a[2] * 255))),
-    Kt.set(n, r),
+    ue(o, a),
+    (r = U.makeHexColor(Math.round(a[0] * 255), Math.round(a[1] * 255), Math.round(a[2] * 255))),
+    rn.set(n, r),
     r
   );
 }
-function fe({ html: e, dir: t, className: n }, r) {
+function me({ html: e, dir: t, className: n }, r) {
   let i = document.createDocumentFragment();
   if (typeof e == `string`) {
     let n = document.createElement(`p`);
@@ -469,45 +506,50 @@ function fe({ html: e, dir: t, className: n }, r) {
       (n.append(document.createTextNode(i)), e < t - 1 && n.append(document.createElement(`br`)));
     }
     i.append(n);
-  } else Lt.render({ xfaHtml: e, div: i, intent: `richText` });
+  } else Jt.render({ xfaHtml: e, div: i, intent: `richText` });
   (i.firstElementChild.classList.add(`richText`, n), r.append(i));
 }
-function pe(e) {
+function he(e) {
   let t = new Path2D();
   if (!e) return t;
   for (let n = 0, r = e.length; n < r;)
     switch (e[n++]) {
-      case bt.moveTo:
+      case Ot.moveTo:
         t.moveTo(e[n++], e[n++]);
         break;
-      case bt.lineTo:
+      case Ot.lineTo:
         t.lineTo(e[n++], e[n++]);
         break;
-      case bt.curveTo:
+      case Ot.curveTo:
         t.bezierCurveTo(e[n++], e[n++], e[n++], e[n++], e[n++], e[n++]);
         break;
-      case bt.quadraticCurveTo:
+      case Ot.quadraticCurveTo:
         t.quadraticCurveTo(e[n++], e[n++], e[n++], e[n++]);
         break;
-      case bt.closePath:
+      case Ot.closePath:
         t.closePath();
         break;
       default:
-        u(`Unrecognized drawing path operator: ${e[n - 1]}`);
-        break;
+        f(`Unrecognized drawing path operator: ${e[n - 1]}`);
     }
   return t;
 }
-function me(e, t, n) {
+function ge(e, t, n) {
   for (let r of n) t.addEventListener(r, e[r].bind(e));
 }
-function he(e, t, n, r, i, a) {
+function _e(e) {
+  e.preventDefault();
+}
+function ve(e) {
+  return e.cancelable ? (j(e), !0) : (e.stopPropagation(), !1);
+}
+function ye(e, t, n, r, i, a) {
   ((e[t * 4 + 0] = Math.min(e[t * 4 + 0], n)),
     (e[t * 4 + 1] = Math.min(e[t * 4 + 1], r)),
     (e[t * 4 + 2] = Math.max(e[t * 4 + 2], i)),
     (e[t * 4 + 3] = Math.max(e[t * 4 + 3], a)));
 }
-function ge(e, t, n, r, i) {
+function be(e, t, n, r, i) {
   let a;
   (e
     ? (e < 0 && ((a = i[0]), (i[0] = i[2]), (i[2] = a)),
@@ -522,7 +564,28 @@ function ge(e, t, n, r, i) {
     (i[2] += n),
     (i[3] += r));
 }
-function _e(e) {
+function xe(e) {
+  let t = e[0];
+  if (e.length < 2 || (t !== `"` && t !== `'`) || e.at(-1) !== t) return !1;
+  let n = e.length - 1;
+  for (let r = 1; r < n; r++) {
+    let i = e[r];
+    if (i === t || Fn.test(i) || (i === `\\` && (++r >= n || Fn.test(e[r])))) return !1;
+  }
+  return !0;
+}
+function Se(e) {
+  return xe(e)
+    ? e
+    : `"${e.replaceAll(/["\\\p{Cc}]/gu, (e) => (e === `"` || e === `\\` ? `\\${e}` : `\\${e.codePointAt(0).toString(16)} `))}"`;
+}
+function Ce(e, t, n, r = 0) {
+  let { decoder: i } = Hn;
+  for (let e = 0; e < n; e++) r += t.getUint32(r) + 4;
+  let a = t.getUint32(r);
+  return i.decode(new Uint8Array(e, r + 4, a));
+}
+function we(e) {
   if (e instanceof URL) return e;
   if (typeof e == `string`) {
     if (P) {
@@ -535,11 +598,11 @@ function _e(e) {
   }
   throw Error(`Invalid PDF url data: either string or URL-object is expected in the url property.`);
 }
-function ve(e) {
+function Te(e) {
   if (P && typeof Buffer < `u` && e instanceof Buffer)
     throw Error('Please provide binary data as `Uint8Array`, rather than `Buffer`.');
   if (e instanceof Uint8Array && e.byteLength === e.buffer.byteLength) return e;
-  if (typeof e == `string`) return y(e);
+  if (typeof e == `string`) return x(e);
   if (
     e instanceof ArrayBuffer ||
     ArrayBuffer.isView(e) ||
@@ -550,42 +613,42 @@ function ve(e) {
     `Invalid PDF binary data: either TypedArray, string, or array-like object is expected in the data property.`
   );
 }
-function ye(e) {
+function Ee(e) {
   if (typeof e != `string`) return null;
   if (e.endsWith(`/`)) return e;
   throw Error(`Invalid factory url: "${e}" must include trailing slash.`);
 }
-function be() {}
+function De() {}
 function N(e) {
-  if (e instanceof kt || e instanceof Et || e instanceof wt || e instanceof Dt || e instanceof Tt)
+  if (e instanceof Lt || e instanceof Pt || e instanceof Mt || e instanceof Ft || e instanceof Nt)
     return e;
   switch (
     (e instanceof Error ||
       (typeof e == `object` && e) ||
-      d(`wrapReason: Expected "reason" to be a (possibly cloned) Error.`),
+      p(`wrapReason: Expected "reason" to be a (possibly cloned) Error.`),
     e.name)
   ) {
     case `AbortException`:
-      return new kt(e.message);
+      return new Lt(e.message);
     case `InvalidPDFException`:
-      return new Et(e.message);
+      return new Pt(e.message);
     case `PasswordException`:
-      return new wt(e.message, e.code);
+      return new Mt(e.message, e.code);
     case `ResponseException`:
-      return new Dt(e.message, e.status, e.missing);
+      return new Ft(e.message, e.status, e.missing);
     case `UnknownErrorException`:
-      return new Tt(e.message, e.details);
+      return new Nt(e.message, e.details);
   }
-  return new Tt(e.message, e.toString());
+  return new Nt(e.message, e.toString());
 }
-function xe(e, t, n) {
+function Oe(e, t, n) {
   return Math.round(n * e + (1 - n) * t);
 }
-async function Se(e) {
+async function ke(e) {
   let t = await process.getBuiltinModule(`fs/promises`).readFile(e);
   return new Uint8Array(t);
 }
-function Ce({
+function Ae({
   src: e,
   srcPos: t = 0,
   dest: n,
@@ -594,7 +657,7 @@ function Ce({
   nonBlackColor: a = 4294967295,
   inverseDecode: o = !1,
 }) {
-  let s = V.isLittleEndian ? 4278190080 : 255,
+  let s = H.isLittleEndian ? 4278190080 : 255,
     [c, l] = o ? [a, s] : [s, a],
     u = r >> 3,
     d = r & 7,
@@ -620,13 +683,13 @@ function Ce({
   }
   return { srcPos: t, destPos: m };
 }
-function we({ src: e, srcPos: t = 0, dest: n, destPos: r = 0, width: i, height: a }) {
+function je({ src: e, srcPos: t = 0, dest: n, destPos: r = 0, width: i, height: a }) {
   let o = 0,
     s = i * a * 3,
     c = s >> 2,
     l = new Uint32Array(e.buffer, t, c),
-    u = V.isLittleEndian ? 4278190080 : 255;
-  if (V.isLittleEndian) {
+    u = H.isLittleEndian ? 4278190080 : 255;
+  if (H.isLittleEndian) {
     for (; o < c - 2; o += 3, r += 4) {
       let e = l[o],
         t = l[o + 1],
@@ -636,7 +699,7 @@ function we({ src: e, srcPos: t = 0, dest: n, destPos: r = 0, width: i, height: 
         (n[r + 2] = (t >>> 16) | (i << 16) | u),
         (n[r + 3] = (i >>> 8) | u));
     }
-    for (let i = o * 4, a = t + s; i < a; i += 3)
+    for (let i = t + o * 4, a = t + s; i < a; i += 3)
       n[r++] = e[i] | (e[i + 1] << 8) | (e[i + 2] << 16) | u;
   } else {
     for (; o < c - 2; o += 3, r += 4) {
@@ -648,31 +711,31 @@ function we({ src: e, srcPos: t = 0, dest: n, destPos: r = 0, width: i, height: 
         (n[r + 2] = (t << 16) | (i >>> 16) | u),
         (n[r + 3] = (i << 8) | u));
     }
-    for (let i = o * 4, a = t + s; i < a; i += 3)
+    for (let i = t + o * 4, a = t + s; i < a; i += 3)
       n[r++] = (e[i] << 24) | (e[i + 1] << 16) | (e[i + 2] << 8) | u;
   }
   return { srcPos: t + s, destPos: r };
 }
-function Te() {
-  return Xn.init();
+function Me() {
+  return dr.init();
 }
-function Ee() {
-  return Xn.isReady;
+function Ne() {
+  return dr.isReady;
 }
-function De() {
-  Xn.loadMeshShader();
+function Pe() {
+  dr.loadMeshShader();
 }
-function Oe(e, t, n, r, i, a, o, s) {
-  return Xn.draw(e, t, n, r, i, a, o, s);
+function Fe(e, t, n, r, i, a, o, s) {
+  return dr.draw(e, t, n, r, i, a, o, s);
 }
-function ke(e, t) {
+function Ie(e, t) {
   if (!t) return;
   let n = t[2] - t[0],
     r = t[3] - t[1],
     i = new Path2D();
   (i.rect(t[0], t[1], n, r), e.clip(i));
 }
-function Ae(e, t, n, r, i, a, o, s) {
+function Le(e, t, n, r, i, a, o, s) {
   let c = t.coords,
     l = t.colors,
     u = e.data,
@@ -697,58 +760,61 @@ function Ae(e, t, n, r, i, a, o, s) {
     T = l[s * 4],
     E = l[s * 4 + 1],
     D = l[s * 4 + 2],
-    ee = Math.round(m),
-    te = Math.round(v),
-    O,
+    O = Math.round(m),
+    ee = Math.round(v),
     k,
-    A,
+    te,
     ne,
+    A,
+    j,
     re,
     ie,
-    j,
-    M;
-  for (let e = ee; e <= te; e++) {
+    ae;
+  for (let e = O; e <= ee; e++) {
     if (e < g) {
       let t = e < m ? 0 : (m - e) / (m - g);
-      ((O = p - (p - h) * t), (k = y - (y - S) * t), (A = b - (b - C) * t), (ne = x - (x - w) * t));
+      ((k = p - (p - h) * t),
+        (te = y - (y - S) * t),
+        (ne = b - (b - C) * t),
+        (A = x - (x - w) * t));
     } else {
       let t;
       ((t = e > v ? 1 : g === v ? 0 : (g - e) / (g - v)),
-        (O = h - (h - _) * t),
-        (k = S - (S - T) * t),
-        (A = C - (C - E) * t),
-        (ne = w - (w - D) * t));
+        (k = h - (h - _) * t),
+        (te = S - (S - T) * t),
+        (ne = C - (C - E) * t),
+        (A = w - (w - D) * t));
     }
     let t;
     ((t = e < m ? 0 : e > v ? 1 : (m - e) / (m - v)),
-      (re = p - (p - _) * t),
-      (ie = y - (y - T) * t),
-      (j = b - (b - E) * t),
-      (M = x - (x - D) * t));
-    let n = Math.round(Math.min(O, re)),
-      r = Math.round(Math.max(O, re)),
+      (j = p - (p - _) * t),
+      (re = y - (y - T) * t),
+      (ie = b - (b - E) * t),
+      (ae = x - (x - D) * t));
+    let n = Math.round(Math.min(k, j)),
+      r = Math.round(Math.max(k, j)),
       i = d * e + n * 4;
     for (let e = n; e <= r; e++)
-      ((t = (O - e) / (O - re)),
+      ((t = (k - e) / (k - j)),
         t < 0 ? (t = 0) : t > 1 && (t = 1),
-        (u[i++] = (k - (k - ie) * t) | 0),
-        (u[i++] = (A - (A - j) * t) | 0),
-        (u[i++] = (ne - (ne - M) * t) | 0),
+        (u[i++] = (te - (te - re) * t) | 0),
+        (u[i++] = (ne - (ne - ie) * t) | 0),
+        (u[i++] = (A - (A - ae) * t) | 0),
         (u[i++] = 255));
   }
 }
-function je(e) {
+function Re(e) {
   switch (e[0]) {
     case `RadialAxial`:
-      return new Qn(e);
+      return new pr(e);
     case `Mesh`:
-      return new $n(e);
+      return new mr(e);
     case `Dummy`:
-      return new er();
+      return new hr();
   }
   throw Error(`Unknown IR type: ${e[0]}`);
 }
-function Me(e, t) {
+function ze(e, t) {
   if (e._removeMirroring) throw Error(`Context is already forwarding operations.`);
   let n = new Map();
   for (let r of [
@@ -774,8 +840,8 @@ function Me(e, t) {
     `beginPath`,
   ]) {
     let i = e[r];
-    typeof i != `function` ||
-      typeof t[r] != `function` ||
+    typeof i == `function` &&
+      typeof t[r] == `function` &&
       (n.set(r, i),
       (e[r] = function (...e) {
         return (t[r](...e), i.apply(this, e));
@@ -786,8 +852,8 @@ function Me(e, t) {
     delete e._removeMirroring;
   };
 }
-function Ne(e, t, n, r, i, a, o, s, c, l) {
-  let [u, d, f, p, m, h] = j(e);
+function Be(e, t, n, r, i, a, o, s, c, l) {
+  let [u, d, f, p, m, h] = M(e);
   if (d === 0 && f === 0) {
     let g = o * u + m,
       _ = Math.round(g),
@@ -825,7 +891,7 @@ function Ne(e, t, n, r, i, a, o, s, c, l) {
     _ = Math.hypot(f, p);
   return [g * c, _ * l];
 }
-function Pe(e, t) {
+function Ve(e, t) {
   let { width: n, height: r, kind: i } = t,
     a = r % X,
     o = (r - a) / X,
@@ -835,19 +901,19 @@ function Pe(e, t) {
     u = t.data,
     d = c.data,
     f;
-  if (i === gt.GRAYSCALE_1BPP)
+  if (i === Tt.GRAYSCALE_1BPP)
     for (f = 0; f < s; f++)
-      (({ srcPos: l } = Ce({ src: u, srcPos: l, dest: d, width: n, height: f < o ? X : a })),
+      (({ srcPos: l } = Ae({ src: u, srcPos: l, dest: d, width: n, height: f < o ? X : a })),
         e.putImageData(c, 0, f * X));
-  else if (i === gt.RGBA_32BPP) {
+  else if (i === Tt.RGBA_32BPP) {
     let t = 0,
       r = n * X * 4;
     for (f = 0; f < o; f++)
       (d.set(u.subarray(l, l + r)), (l += r), e.putImageData(c, 0, t), (t += X));
     f < s && ((r = n * a * 4), d.set(u.subarray(l, l + r)), e.putImageData(c, 0, t));
-  } else if (i === gt.RGB_24BPP)
+  } else if (i === Tt.RGB_24BPP)
     for (f = 0; f < s; f++)
-      (({ srcPos: l } = we({
+      (({ srcPos: l } = je({
         src: u,
         srcPos: l,
         dest: new Uint32Array(d.buffer),
@@ -857,7 +923,7 @@ function Pe(e, t) {
         e.putImageData(c, 0, f * X));
   else throw Error(`bad image kind: ${i}`);
 }
-function Fe(e, t) {
+function He(e, t) {
   if (t.bitmap) {
     e.drawImage(t.bitmap, 0, 0);
     return;
@@ -871,7 +937,7 @@ function Fe(e, t) {
     l = t.data,
     u = s.data;
   for (let t = 0; t < o; t++)
-    (({ srcPos: c } = Ce({
+    (({ srcPos: c } = Ae({
       src: l,
       srcPos: c,
       dest: u,
@@ -881,7 +947,7 @@ function Fe(e, t) {
     })),
       e.putImageData(s, 0, t * X));
 }
-function Ie(e, t) {
+function Ue(e, t) {
   for (let n of [
     `strokeStyle`,
     `fillStyle`,
@@ -899,7 +965,7 @@ function Ie(e, t) {
   e.setLineDash !== void 0 &&
     (t.setLineDash(e.getLineDash()), (t.lineDashOffset = e.lineDashOffset));
 }
-function Le(e) {
+function We(e) {
   ((e.strokeStyle = e.fillStyle = `#000000`),
     (e.fillRule = `nonzero`),
     (e.globalAlpha = 1),
@@ -913,13 +979,13 @@ function Le(e) {
   let { filter: t } = e;
   t !== `none` && t !== `` && (e.filter = `none`);
 }
-function Re(e, t) {
+function Ge(e, t) {
   if (t) return !0;
-  H.singularValueDecompose2dScale(e, Z);
-  let n = Math.fround(Ht.pixelRatio * Rt.PDF_TO_CSS_UNITS);
+  U.singularValueDecompose2dScale(e, Z);
+  let n = Math.fround($t.pixelRatio * Yt.PDF_TO_CSS_UNITS);
   return Z[0] <= n && Z[1] <= n;
 }
-function ze(e) {
+function Ke(e) {
   let t = !0,
     n = r(`filename\\*`, `i`).exec(e);
   if (n) {
@@ -941,7 +1007,7 @@ function ze(e) {
       if (!/^[\x00-\xFF]+$/.test(n)) return n;
       try {
         let r = new TextDecoder(e, { fatal: !0 }),
-          i = y(n);
+          i = x(n);
         ((n = r.decode(i)), (t = !1));
       } catch {}
     }
@@ -958,9 +1024,7 @@ function ze(e) {
       let [, e, r, i] = n;
       if (((e = parseInt(e, 10)), e in t)) {
         if (e === 0) break;
-        continue;
-      }
-      t[e] = [r, i];
+      } else t[e] = [r, i];
     }
     let a = [];
     for (let e = 0; e < t.length && e in t; ++e) {
@@ -991,10 +1055,9 @@ function ze(e) {
       : e.replaceAll(/=\?([\w-]*)\?([QB])\?((?:[^?]|\?(?!=))*)\?=/gi, function (e, t, n, r) {
           if (n === `q` || n === `Q`)
             return (
-              (r = r.replaceAll(`_`, ` `)),
-              (r = r.replaceAll(/=([0-9a-f]{2})/gi, function (e, t) {
-                return String.fromCharCode(parseInt(t, 16));
-              })),
+              (r = r
+                .replaceAll(`_`, ` `)
+                .replaceAll(/=([0-9a-f]{2})/gi, (e, t) => String.fromCharCode(parseInt(t, 16)))),
               i(t, r)
             );
           try {
@@ -1005,7 +1068,7 @@ function ze(e) {
   }
   return ``;
 }
-function Be(e, t) {
+function qe(e, t) {
   let n = new Headers();
   if (!e || !t || typeof t != `object`) return n;
   for (let e in t) {
@@ -1014,10 +1077,15 @@ function Be(e, t) {
   }
   return n;
 }
-function Ve(e) {
+function Je(e) {
+  let t = e.length;
+  for (; t > 0 && e[t - 1] !== ` ` && /\s/.test(e[t - 1]);) t--;
+  return e.slice(0, t);
+}
+function Ye(e) {
   return URL.parse(e)?.origin ?? null;
 }
-function He({ responseHeaders: e, isHttp: t, rangeChunkSize: n, disableRange: r }) {
+function Xe({ responseHeaders: e, isHttp: t, rangeChunkSize: n, disableRange: r }) {
   let i = { contentLength: 0, isRangeSupported: !1 },
     a = parseInt(e.get(`Content-Length`), 10);
   return (
@@ -1030,29 +1098,29 @@ function He({ responseHeaders: e, isHttp: t, rangeChunkSize: n, disableRange: r 
     i
   );
 }
-function Ue(e) {
+function Ze(e) {
   let t = e.get(`Content-Disposition`);
   if (t) {
-    let e = ze(t);
+    let e = Ke(t);
     if (e.includes(`%`))
       try {
         e = decodeURIComponent(e);
       } catch {}
-    if (D(e)) return e;
+    if (ee(e)) return e;
   }
   return null;
 }
-function We(e, t) {
-  return new Dt(
+function Qe(e, t) {
+  return new Ft(
     `Unexpected server response (${e}) while retrieving PDF "${t.href}".`,
     e,
     e === 404 || (e === 0 && t.protocol === `file:`)
   );
 }
-function Ge(e, t) {
+function $e(e, t) {
   if (e !== t) throw Error(`Expected range response-origin "${e}" to match "${t}".`);
 }
-function Ke(e, t, n, r) {
+function et(e, t, n, r) {
   return fetch(e, {
     method: `GET`,
     headers: t,
@@ -1062,53 +1130,53 @@ function Ke(e, t, n, r) {
     redirect: `follow`,
   });
 }
-function qe(e, t) {
-  if (e !== 200 && e !== 206) throw We(e, t);
+function tt(e, t) {
+  if (e !== 200 && e !== 206) throw Qe(e, t);
 }
-function Je(e) {
+function nt(e) {
   if (e instanceof Uint8Array) return e.buffer;
   if (e instanceof ArrayBuffer) return e;
   throw Error(`getArrayBuffer - unexpected data: ${e}`);
 }
-function Ye(e) {
+function rt(e) {
   return e instanceof Uint8Array && e.byteLength === e.buffer.byteLength
     ? e.buffer
     : new Uint8Array(e).buffer;
 }
-function Xe() {
+function it() {
   for (let e of this._requests) e.resolve({ value: void 0, done: !0 });
   this._requests.length = 0;
 }
-function Ze(e) {
-  return typeof e == `string` ? y(e).buffer : e;
+function at(e) {
+  return typeof e == `string` ? x(e).buffer : e;
 }
-function Qe(e, t = null) {
+function ot(e, t = null) {
   let n = process.getBuiltinModule(`fs`),
     { Readable: r } = process.getBuiltinModule(`stream`),
     i = n.createReadStream(e, t);
   return r.toWeb(i);
 }
-function $e(e) {
-  return O(e) ? _r : P ? Or : Tr;
+function st(e) {
+  return ne(e) ? Mr : P ? Ur : Br;
 }
-function et(e = {}) {
-  let t = new Wr(),
+function ct(e = {}) {
+  let t = new ai(),
     { docId: n } = t,
-    r = e.url ? _e(e.url) : null,
-    i = e.data ? ve(e.data) : null,
+    r = e.url ? we(e.url) : null,
+    i = e.data ? Te(e.data) : null,
     a = e.httpHeaders || null,
     o = e.withCredentials === !0,
-    c = e.password ?? null,
-    l = e.range instanceof Gr ? e.range : null,
+    s = e.password ?? null,
+    c = e.range instanceof oi ? e.range : null,
     u = Number.isInteger(e.rangeChunkSize) && e.rangeChunkSize > 0 ? e.rangeChunkSize : 2 ** 16,
-    d = e.worker instanceof Jr ? e.worker : null,
+    d = e.worker instanceof li ? e.worker : null,
     f = e.verbosity,
-    p = typeof e.docBaseUrl == `string` && !E(e.docBaseUrl) ? e.docBaseUrl : null,
-    m = ye(e.cMapUrl),
+    p = typeof e.docBaseUrl == `string` && !O(e.docBaseUrl) ? e.docBaseUrl : null,
+    m = Ee(e.cMapUrl),
     h = e.cMapPacked !== !1,
-    g = ye(e.iccUrl),
-    _ = ye(e.standardFontDataUrl),
-    v = ye(e.wasmUrl),
+    g = Ee(e.iccUrl),
+    _ = Ee(e.standardFontDataUrl),
+    v = Ee(e.wasmUrl),
     y = e.stopAtErrors !== !0,
     b = Number.isInteger(e.maxImageSize) && e.maxImageSize > -1 ? e.maxImageSize : -1,
     x = typeof e.isOffscreenCanvasSupported == `boolean` ? e.isOffscreenCanvasSupported : !P,
@@ -1116,49 +1184,49 @@ function et(e = {}) {
     C = Number.isInteger(e.canvasMaxAreaInBytes) ? e.canvasMaxAreaInBytes : -1,
     w = typeof e.disableFontFace == `boolean` ? e.disableFontFace : P,
     T = e.fontExtraProperties === !0,
-    D = e.enableXfa === !0,
-    ee = e.ownerDocument || globalThis.document,
-    te = e.disableRange === !0,
+    E = e.enableXfa === !0,
+    D = e.ownerDocument || globalThis.document,
+    ee = e.disableRange === !0,
     k = e.disableStream === !0,
-    A = e.disableAutoFetch === !0,
-    ne = e.pdfBug === !0,
-    re = e.CanvasFactory || (P ? Kn : Hn),
-    ie = e.FilterFactory || (P ? Gn : Wn),
-    j = e.BinaryDataFactory || (P ? qn : Bn),
-    M = e.enableHWA === !0,
-    ae = e.enableWebGPU === !0 ? Te() : Promise.resolve(!1),
+    te = e.disableAutoFetch === !0,
+    A = e.pdfBug === !0,
+    j = e.CanvasFactory || (P ? sr : rr),
+    re = e.FilterFactory || (P ? or : ar),
+    ie = e.BinaryDataFactory || (P ? cr : tr),
+    ae = e.enableHWA === !0,
+    M = e.enableWebGPU === !0 ? Me() : Promise.resolve(!1),
     oe = e.useWasm !== !1,
-    se = e.pagesMapper || new Ir(),
+    se = e.pagesMapper || new Zr(),
     ce = typeof e.useSystemFonts == `boolean` ? e.useSystemFonts : !P && !w,
     le =
       typeof e.useWorkerFetch == `boolean`
         ? e.useWorkerFetch
         : !!(
-            j === Bn &&
+            ie === tr &&
             m &&
             h &&
             _ &&
             v &&
-            O(m, document.baseURI) &&
-            O(_, document.baseURI) &&
-            O(v, document.baseURI)
+            ne(m, document.baseURI) &&
+            ne(_, document.baseURI) &&
+            ne(v, document.baseURI)
           );
-  s(f);
+  l(f);
   let ue = {
-    canvasFactory: new re({ ownerDocument: ee, enableHWA: M }),
-    filterFactory: new ie({ docId: n, ownerDocument: ee }),
-    binaryDataFactory: le ? null : new j({ cMapUrl: m, standardFontDataUrl: _, wasmUrl: v }),
+    canvasFactory: new j({ ownerDocument: D, enableHWA: ae }),
+    filterFactory: new re({ docId: n, ownerDocument: D }),
+    binaryDataFactory: le ? null : new ie({ cMapUrl: m, standardFontDataUrl: _, wasmUrl: v }),
   };
-  d || ((d = Jr.create({ verbosity: f, port: jr.workerPort })), (t._worker = d));
+  d || ((d = li.create({ verbosity: f, port: Kr.workerPort })), (t._worker = d));
   let de = {
       docId: n,
-      apiVersion: `6.1.200`,
+      apiVersion: `6.4.299`,
       data: i,
-      password: c,
-      disableAutoFetch: A,
+      password: s,
+      disableAutoFetch: te,
       rangeChunkSize: u,
       docBaseUrl: p,
-      enableXfa: D,
+      enableXfa: E,
       evaluatorOptions: {
         maxImageSize: b,
         disableFontFace: w,
@@ -1179,35 +1247,36 @@ function et(e = {}) {
       },
     },
     fe = {
-      ownerDocument: ee,
-      pdfBug: ne,
+      ownerDocument: D,
+      pdfBug: A,
       styleElement: null,
-      enableHWA: M,
-      loadingParams: { disableAutoFetch: A, enableXfa: D },
+      enableHWA: ae,
+      loadingParams: { disableAutoFetch: te, enableXfa: E },
     };
   return (
-    Promise.all([d.promise, ae])
+    Promise.all([d.promise, M])
       .then(function ([, e]) {
         if (d.destroyed) throw Error(`Worker was destroyed`);
         de.evaluatorOptions.hasGPU = e;
         let s = d.messageHandler.sendWithPromise(`GetDocRequest`, de, i ? [i.buffer] : null),
-          c;
-        if (!i)
-          if (l) c = new br({ pdfDataRangeTransport: l, disableRange: te, disableStream: k });
+          l;
+        if (!i) {
+          if (c) l = new Fr({ pdfDataRangeTransport: c, disableRange: ee, disableStream: k });
           else if (r)
-            c = new ($e(r))({
+            l = new (st(r))({
               url: r,
               httpHeaders: a,
               withCredentials: o,
               rangeChunkSize: u,
-              disableRange: te,
+              disableRange: ee,
               disableStream: k,
             });
           else throw Error('getDocument - expected either `data`, `range`, or `url` parameter.');
+        }
         return s.then((e) => {
           if (d.destroyed) throw Error(`Worker was destroyed`);
-          let r = new Rn(n, e, d.port),
-            i = new Yr(r, t, c, fe, ue, se);
+          let r = new $n(n, e, d.port),
+            i = new ui(r, t, l, fe, ue, se);
           if (((t._transport = i), t.destroyed)) throw Error(`Loading aborted`);
           r.send(`Ready`, null);
         });
@@ -1217,25 +1286,42 @@ function et(e = {}) {
     t
   );
 }
-function tt(e) {
-  return Math.floor(w(e, 0, 1) * 255)
+function lt(e) {
+  return Math.floor(E(e, 0, 1) * 255)
     .toString(16)
     .padStart(2, `0`);
 }
-function nt(e) {
-  return w(e, 0, 1) * 255;
+function ut(e) {
+  return E(e, 0, 1) * 255;
 }
-function rt(e, t) {
+function dt(e) {
+  return {
+    bbox: e.box,
+    root: { viewBox: `0 0 1 1` },
+    rootClass: { highlight: !0, free: e.isFree },
+    path: { d: e.toSVGPath() },
+  };
+}
+function ft(e, t) {
+  let { focusOutline: n } = e;
+  return {
+    bbox: $._rotateBox(n.box, t),
+    root: { 'data-main-rotation': t },
+    rootClass: { highlightOutline: !0, free: e.isFree },
+    path: { d: n.toSVGPath() },
+  };
+}
+function pt(e, t) {
   return e === t ? 0 : e.compareDocumentPosition(t) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
 }
-function it(e) {
+function mt(e) {
   return e
     ? e.nodeType === Node.ELEMENT_NODE
       ? e.closest(`.textLayer`)
       : e.parentElement?.closest(`.textLayer`) || null
     : null;
 }
-function at(e, t, n, r) {
+function ht(e, t, n, r) {
   if (e === n) return t <= r;
   let i = e.compareDocumentPosition(n);
   return i & Node.DOCUMENT_POSITION_FOLLOWING
@@ -1244,7 +1330,7 @@ function at(e, t, n, r) {
       ? !1
       : null;
 }
-function ot(e, t, n) {
+function gt(e, t, n) {
   if (
     e.nodeType !== Node.ELEMENT_NODE ||
     !e.classList.contains(`textLayer`) ||
@@ -1263,40 +1349,29 @@ function ot(e, t, n) {
         : { container: r, offset: r.childNodes.length }
   );
 }
-function st(e) {
+function _t(e) {
   return `${(e * 100).toFixed(2)}%`;
 }
 var P,
-  ct,
-  lt,
-  ut,
-  dt,
-  F,
-  I,
-  ft,
-  pt,
-  mt,
-  L,
-  R,
-  ht,
-  z,
-  gt,
-  B,
-  _t,
   vt,
   yt,
   bt,
+  F,
+  I,
   xt,
   St,
   Ct,
+  L,
+  R,
   wt,
+  z,
   Tt,
+  B,
   Et,
   Dt,
+  V,
   Ot,
   kt,
-  V,
-  H,
   At,
   jt,
   Mt,
@@ -1305,6 +1380,8 @@ var P,
   Ft,
   It,
   Lt,
+  H,
+  U,
   Rt,
   zt,
   Bt,
@@ -1317,7 +1394,6 @@ var P,
   qt,
   Jt,
   Yt,
-  U,
   Xt,
   Zt,
   Qt,
@@ -1327,10 +1403,9 @@ var P,
   nn,
   rn,
   an,
-  W,
   on,
   sn,
-  G,
+  W,
   cn,
   ln,
   un,
@@ -1341,17 +1416,17 @@ var P,
   hn,
   gn,
   _n,
+  G,
   vn,
   yn,
+  K,
   bn,
   xn,
-  K,
   Sn,
   Cn,
   wn,
   Tn,
   En,
-  q,
   Dn,
   On,
   kn,
@@ -1359,11 +1434,11 @@ var P,
   jn,
   Mn,
   Nn,
+  q,
   Pn,
   Fn,
   In,
   Ln,
-  J,
   Rn,
   zn,
   Bn,
@@ -1377,9 +1452,9 @@ var P,
   Jn,
   Yn,
   Xn,
-  Y,
   Zn,
   Qn,
+  J,
   $n,
   er,
   tr,
@@ -1388,13 +1463,12 @@ var P,
   ir,
   ar,
   or,
-  X,
   sr,
-  Z,
   cr,
   lr,
   ur,
   dr,
+  Y,
   fr,
   pr,
   mr,
@@ -1405,6 +1479,8 @@ var P,
   yr,
   br,
   xr,
+  X,
+  Z,
   Sr,
   Cr,
   wr,
@@ -1446,7 +1522,6 @@ var P,
   oi,
   si,
   ci,
-  Q,
   li,
   ui,
   di,
@@ -1462,6 +1537,7 @@ var P,
   xi,
   Si,
   Ci,
+  Q,
   wi,
   Ti,
   Ei,
@@ -1477,7 +1553,6 @@ var P,
   Ii,
   Li,
   Ri,
-  $,
   zi,
   Bi,
   Vi,
@@ -1495,6 +1570,7 @@ var P,
   $i,
   ea,
   ta,
+  $,
   na,
   ra,
   ia,
@@ -1502,17 +1578,33 @@ var P,
   oa,
   sa,
   ca,
-  la = e(() => {
-    (o(),
+  la,
+  ua,
+  da,
+  fa,
+  pa,
+  ma,
+  ha,
+  ga,
+  _a,
+  va,
+  ya,
+  ba,
+  xa,
+  Sa,
+  Ca,
+  wa,
+  Ta,
+  Ea = e(() => {
+    (c(),
       (P =
         typeof process == `object` &&
         process + `` == `[object process]` &&
         !process.versions.nw &&
         !(process.versions.electron && process.type && process.type !== `browser`)),
-      (ct = [1 / 0, 1 / 0, -1 / 0, -1 / 0]),
-      (lt = new Float32Array(ct)),
-      (ut = [0.001, 0, 0, 0.001, 0, 0]),
-      (dt = 1.35),
+      (vt = [1 / 0, 1 / 0, -1 / 0, -1 / 0]),
+      (yt = new Float32Array(vt)),
+      (bt = [0.001, 0, 0, 0.001, 0, 0]),
       (F = `http://www.w3.org/2000/svg`),
       (I = {
         ANY: 1,
@@ -1525,9 +1617,9 @@ var P,
         IS_EDITING: 128,
         OPLIST: 256,
       }),
-      (ft = { DISABLE: 0, ENABLE: 1, ENABLE_FORMS: 2, ENABLE_STORAGE: 3 }),
-      (pt = `pdfjs_internal_id_`),
-      (mt = `pdfjs_internal_editor_`),
+      (xt = { DISABLE: 0, ENABLE: 1, ENABLE_FORMS: 2, ENABLE_STORAGE: 3 }),
+      (St = `pdfjs_internal_id_`),
+      (Ct = `pdfjs_internal_editor_`),
       (L = {
         DISABLE: -1,
         NONE: 0,
@@ -1555,7 +1647,7 @@ var P,
         HIGHLIGHT_SHOW_ALL: 34,
         DRAW_STEP: 41,
       }),
-      (ht = {
+      (wt = {
         PRINT: 4,
         MODIFY_CONTENTS: 8,
         COPY: 16,
@@ -1577,7 +1669,7 @@ var P,
         FILL_STROKE_MASK: 3,
         ADD_TO_PATH_FLAG: 4,
       }),
-      (gt = { GRAYSCALE_1BPP: 1, RGB_24BPP: 2, RGBA_32BPP: 3 }),
+      (Tt = { GRAYSCALE_1BPP: 1, RGB_24BPP: 2, RGBA_32BPP: 3 }),
       (B = {
         TEXT: 1,
         LINK: 2,
@@ -1607,9 +1699,9 @@ var P,
         REDACT: 26,
         RICHMEDIA: 27,
       }),
-      (_t = { SOLID: 1, DASHED: 2, BEVELED: 3, INSET: 4, UNDERLINE: 5 }),
-      (vt = { ERRORS: 0, WARNINGS: 1, INFOS: 5 }),
-      (yt = {
+      (Et = { SOLID: 1, DASHED: 2, BEVELED: 3, INSET: 4, UNDERLINE: 5 }),
+      (Dt = { ERRORS: 0, WARNINGS: 1, INFOS: 5 }),
+      (V = {
         dependency: 1,
         setLineWidth: 2,
         setLineCap: 3,
@@ -1702,67 +1794,67 @@ var P,
         setFillTransparent: 93,
         rawFillPath: 94,
       }),
-      (bt = { moveTo: 0, lineTo: 1, curveTo: 2, quadraticCurveTo: 3, closePath: 4 }),
-      (xt = { NEED_PASSWORD: 1, INCORRECT_PASSWORD: 2 }),
-      (St = vt.WARNINGS),
-      (Ct = (function () {
+      (Ot = { moveTo: 0, lineTo: 1, curveTo: 2, quadraticCurveTo: 3, closePath: 4 }),
+      (kt = { NEED_PASSWORD: 1, INCORRECT_PASSWORD: 2 }),
+      (At = Dt.WARNINGS),
+      (jt = (function () {
         function e(e, t) {
           ((this.message = e), (this.name = t));
         }
         return ((e.prototype = Error()), (e.constructor = e), e);
       })()),
-      (wt = class extends Ct {
+      (Mt = class extends jt {
         constructor(e, t) {
           (super(e, `PasswordException`), (this.code = t));
         }
       }),
-      (Tt = class extends Ct {
+      (Nt = class extends jt {
         constructor(e, t) {
           (super(e, `UnknownErrorException`), (this.details = t));
         }
       }),
-      (Et = class extends Ct {
+      (Pt = class extends jt {
         constructor(e) {
           super(e, `InvalidPDFException`);
         }
       }),
-      (Dt = class extends Ct {
+      (Ft = class extends jt {
         constructor(e, t, n) {
           (super(e, `ResponseException`), (this.status = t), (this.missing = n));
         }
       }),
-      (Ot = class extends Ct {
+      (It = class extends jt {
         constructor(e) {
           super(e, `FormatError`);
         }
       }),
-      (kt = class extends Ct {
+      (Lt = class extends jt {
         constructor(e) {
           super(e, `AbortException`);
         }
       }),
-      (V = class {
+      (H = class {
         static get isLittleEndian() {
           let e = new Uint8Array(4);
           e[0] = 1;
           let t = new Uint32Array(e.buffer, 0, 1);
-          return _(this, `isLittleEndian`, t[0] === 1);
+          return y(this, `isLittleEndian`, t[0] === 1);
         }
         static get isOffscreenCanvasSupported() {
-          return _(this, `isOffscreenCanvasSupported`, typeof OffscreenCanvas < `u`);
+          return y(this, `isOffscreenCanvasSupported`, typeof OffscreenCanvas < `u`);
         }
         static get isImageDecoderSupported() {
-          return _(this, `isImageDecoderSupported`, typeof ImageDecoder < `u`);
+          return y(this, `isImageDecoderSupported`, typeof ImageDecoder < `u`);
         }
         static get isFloat16ArraySupported() {
-          return _(this, `isFloat16ArraySupported`, typeof Float16Array < `u`);
+          return y(this, `isFloat16ArraySupported`, typeof Float16Array < `u`);
         }
         static get isSanitizerSupported() {
-          return _(this, `isSanitizerSupported`, typeof Sanitizer < `u`);
+          return y(this, `isSanitizerSupported`, typeof Sanitizer < `u`);
         }
         static get platform() {
           let { platform: e, userAgent: t } = navigator;
-          return _(this, `platform`, {
+          return y(this, `platform`, {
             isAndroid: t.includes(`Android`),
             isLinux: e.includes(`Linux`),
             isMac: e.includes(`Mac`),
@@ -1776,33 +1868,33 @@ var P,
             this.isOffscreenCanvasSupported
               ? (e = new OffscreenCanvas(1, 1).getContext(`2d`))
               : typeof document < `u` && (e = document.createElement(`canvas`).getContext(`2d`)),
-            _(this, `isCanvasFilterSupported`, e?.filter !== void 0)
+            y(this, `isCanvasFilterSupported`, e?.filter !== void 0)
           );
         }
         static get isAlphaColorInputSupported() {
-          if (typeof document > `u`) return _(this, `isAlphaColorInputSupported`, !1);
+          if (typeof document > `u`) return y(this, `isAlphaColorInputSupported`, !1);
           let e = document.createElement(`input`);
           return (
             (e.type = `color`),
             e.setAttribute(`alpha`, ``),
             (e.value = `#ff000080`),
-            _(this, `isAlphaColorInputSupported`, e.value !== `#ff0000`)
+            y(this, `isAlphaColorInputSupported`, e.value !== `#ff0000`)
           );
         }
         static get isBackdropFilterSupported() {
-          return _(
+          return y(
             this,
             `isBackdropFilterSupported`,
             typeof CSS < `u` && CSS.supports(`backdrop-filter`, `blur(1px)`)
           );
         }
       }),
-      (H = class {
+      (U = class {
         static get hexNums() {
-          return _(
+          return y(
             this,
             `hexNums`,
-            Array.from(Array(256).keys(), (e) => e.toString(16).padStart(2, `0`))
+            Array.from({ length: 256 }, (e, t) => t.toString(16).padStart(2, `0`))
           );
         }
         static makeHexColor(e, t, n) {
@@ -1994,12 +2086,17 @@ var P,
             ));
         }
       }),
-      (At = null),
-      (jt = null),
-      (Mt = () => []),
-      (Nt = () => new Map()),
-      (Pt = () => Object.create(null)),
-      (Ft = class e {
+      (Rt = null),
+      (zt = null),
+      (Bt = () => []),
+      (Vt = () => new Map()),
+      (Ht = () => Object.create(null)),
+      (Ut = () => new Set()),
+      typeof Iterator.prototype.join != `function` &&
+        (Iterator.prototype.join = function (e) {
+          return [...this].join(e);
+        }),
+      (Wt = class e {
         constructor({
           viewBox: e,
           userUnit: t,
@@ -2062,7 +2159,7 @@ var P,
         }
         get rawDims() {
           let e = this.viewBox;
-          return _(this, `rawDims`, {
+          return y(this, `rawDims`, {
             pageWidth: e[2] - e[0],
             pageHeight: e[3] - e[1],
             pageX: e[0],
@@ -2088,14 +2185,14 @@ var P,
         }
         convertToViewportPoint(e, t) {
           let n = [e, t];
-          return (H.applyTransform(n, this.transform), n);
+          return (U.applyTransform(n, this.transform), n);
         }
         convertToPdfPoint(e, t) {
           let n = [e, t];
-          return (H.applyInverseTransform(n, this.transform), n);
+          return (U.applyInverseTransform(n, this.transform), n);
         }
       }),
-      (It = class e {
+      (Gt = class e {
         static textContent(t) {
           let n = [],
             r = { items: n, styles: Object.create(null) };
@@ -2114,10 +2211,67 @@ var P,
           return (i(t), r);
         }
         static shouldBuildText(e) {
-          return !(e === `textarea` || e === `input` || e === `option` || e === `select`);
+          return e !== `textarea` && e !== `input` && e !== `option` && e !== `select`;
         }
       }),
-      (Lt = class {
+      (Kt = /url\(|image-set\(/i),
+      (qt = /^on/i),
+      (Jt = class {
+        static get _allowedHtmlElements() {
+          return y(
+            this,
+            `_allowedHtmlElements`,
+            new Set([
+              `a`,
+              `b`,
+              `br`,
+              `button`,
+              `div`,
+              `i`,
+              `img`,
+              `input`,
+              `label`,
+              `li`,
+              `ol`,
+              `option`,
+              `p`,
+              `select`,
+              `span`,
+              `sub`,
+              `sup`,
+              `textarea`,
+              `ul`,
+            ])
+          );
+        }
+        static get _allowedSvgElements() {
+          return y(
+            this,
+            `_allowedSvgElements`,
+            new Set([`ellipse`, `line`, `path`, `rect`, `svg`])
+          );
+        }
+        static get _allowedRichTextElements() {
+          return y(
+            this,
+            `_allowedRichTextElements`,
+            new Set([`a`, `b`, `br`, `div`, `i`, `li`, `ol`, `p`, `span`, `sub`, `sup`, `ul`])
+          );
+        }
+        static get _allowedRichTextAttributes() {
+          return y(this, `_allowedRichTextAttributes`, new Set([`class`, `dir`, `style`]));
+        }
+        static get _allowedRichTextStyles() {
+          return y(
+            this,
+            `_allowedRichTextStyles`,
+            new Set(
+              `color.font.fontFamily.fontSize.fontStretch.fontStyle.fontWeight.kerningMode.letterSpacing.lineHeight.margin.marginBottom.marginLeft.marginRight.marginTop.orphans.paddingLeft.paddingRight.breakAfter.breakBefore.breakInside.tabInterval.tabStop.textAlign.textDecoration.textIndent.transform.verticalAlign.widows`.split(
+                `.`
+              )
+            )
+          );
+        }
         static setupStorage(e, t, n, r, i) {
           let a = r.getValue(t, { value: null });
           switch (n.name) {
@@ -2163,7 +2317,6 @@ var P,
                   i = n.selectedIndex === -1 ? `` : n[n.selectedIndex].value;
                 r.setValue(t, { value: i });
               });
-              break;
           }
         }
         static setAttributes({
@@ -2177,7 +2330,10 @@ var P,
             o = e instanceof HTMLAnchorElement;
           a.type === `radio` && (a.name = `${a.name}-${r}`);
           for (let [t, n] of Object.entries(a))
-            if (n != null)
+            if (
+              !(n == null || qt.test(t)) &&
+              (r !== `richText` || this._allowedRichTextAttributes.has(t))
+            )
               switch (t) {
                 case `class`:
                   n.length && e.setAttribute(t, n.join(` `));
@@ -2188,7 +2344,11 @@ var P,
                   e.setAttribute(`data-element-id`, n);
                   break;
                 case `style`:
-                  Object.assign(e.style, n);
+                  if (r === `richText`) {
+                    let t = this._allowedRichTextStyles;
+                    for (let [r, i] of Object.entries(n))
+                      t.has(r) && !Kt.test(i) && (e.style[r] = i);
+                  } else Object.assign(e.style, n);
                   break;
                 case `textContent`:
                   e.textContent = n;
@@ -2196,15 +2356,28 @@ var P,
                 default:
                   (!o || (t !== `href` && t !== `newWindow`)) && e.setAttribute(t, n);
               }
-          (o && i.addLinkAttributes(e, a.href, a.newWindow),
+          (o && i?.addLinkAttributes(e, a.href, a.newWindow),
             n && a.dataId && this.setupStorage(e, a.dataId, t, n));
+        }
+        static #e(e, t, n) {
+          return n === `richText`
+            ? !t && this._allowedRichTextElements.has(e)
+              ? document.createElement(e)
+              : null
+            : t
+              ? t === F && this._allowedSvgElements.has(e)
+                ? document.createElementNS(F, e)
+                : null
+              : this._allowedHtmlElements.has(e)
+                ? document.createElement(e)
+                : null;
         }
         static render(e) {
           let t = e.annotationStorage,
             n = e.linkService,
             r = e.xfaHtml,
             i = e.intent || `display`,
-            a = document.createElement(r.name);
+            a = this.#e(r.name, r.attributes?.xmlns, i) ?? document.createElement(`div`);
           r.attributes && this.setAttributes({ html: a, element: r, intent: i, linkService: n });
           let o = i !== `richText`,
             s = e.div;
@@ -2217,7 +2390,7 @@ var P,
           if (r.children.length === 0) {
             if (r.value) {
               let e = document.createTextNode(r.value);
-              (a.append(e), o && It.shouldBuildText(r.name) && c.push(e));
+              (a.append(e), o && Gt.shouldBuildText(r.name) && c.push(e));
             }
             return { textDivs: c };
           }
@@ -2236,19 +2409,25 @@ var P,
               (c.push(e), a.append(e));
               continue;
             }
-            let d = s?.attributes?.xmlns
-              ? document.createElementNS(s.attributes.xmlns, u)
-              : document.createElement(u);
-            if (
-              (a.append(d),
-              s.attributes &&
-                this.setAttributes({ html: d, element: s, storage: t, intent: i, linkService: n }),
-              s.children?.length > 0)
-            )
-              l.push([s, -1, d]);
-            else if (s.value) {
-              let e = document.createTextNode(s.value);
-              (o && It.shouldBuildText(u) && c.push(e), d.append(e));
+            let d = this.#e(u, s.attributes?.xmlns, i);
+            if (d) {
+              if (
+                (a.append(d),
+                s.attributes &&
+                  this.setAttributes({
+                    html: d,
+                    element: s,
+                    storage: t,
+                    intent: i,
+                    linkService: n,
+                  }),
+                s.children?.length > 0)
+              )
+                l.push([s, -1, d]);
+              else if (s.value) {
+                let e = document.createTextNode(s.value);
+                (o && Gt.shouldBuildText(u) && c.push(e), d.append(e));
+              }
             }
           }
           for (let e of s.querySelectorAll(`.xfaNonInteractive input, .xfaNonInteractive textarea`))
@@ -2261,7 +2440,7 @@ var P,
         }
         static getPageViewport(e, { scale: t = 1, rotation: n = 0 }) {
           let { width: r, height: i } = e.attributes.style;
-          return new Ft({
+          return new Wt({
             viewBox: [0, 0, parseInt(r, 10), parseInt(i, 10)],
             userUnit: 1,
             scale: t,
@@ -2269,24 +2448,24 @@ var P,
           });
         }
       }),
-      (Rt = class {
+      (Yt = class {
         static CSS = 96;
         static PDF = 72;
         static PDF_TO_CSS_UNITS = this.CSS / this.PDF;
       }),
-      (zt = class extends Ct {
+      (Xt = class extends jt {
         constructor(e, t = 0) {
           (super(e, `RenderingCancelledException`), (this.extraDelay = t));
         }
       }),
-      (Bt = class {
+      (Zt = class {
         #e = new Map();
         times = [];
         time(e) {
-          (this.#e.has(e) && u(`Timer is already running for ${e}`), this.#e.set(e, Date.now()));
+          (this.#e.has(e) && f(`Timer is already running for ${e}`), this.#e.set(e, Date.now()));
         }
         timeEnd(e) {
-          (this.#e.has(e) || u(`Timer has not been started for ${e}`),
+          (this.#e.has(e) || f(`Timer has not been started for ${e}`),
             this.times.push({ name: e, start: this.#e.get(e), end: Date.now() }),
             this.#e.delete(e));
         }
@@ -2295,7 +2474,7 @@ var P,
           return this.times.map((t) => `${t.name.padEnd(e)} ${t.end - t.start}ms\n`).join(``);
         }
       }),
-      (Vt = class {
+      (Qt = class {
         static #e;
         static toDateObject(e) {
           if (e instanceof Date) return e;
@@ -2327,7 +2506,7 @@ var P,
           );
         }
       }),
-      (Ht = class e {
+      ($t = class e {
         constructor() {
           let { pixelRatio: t } = e;
           ((this.sx = t), (this.sy = t));
@@ -2364,7 +2543,7 @@ var P,
           return e;
         }
       }),
-      (Ut = [
+      (en = new Set([
         `image/apng`,
         `image/avif`,
         `image/bmp`,
@@ -2374,17 +2553,17 @@ var P,
         `image/svg+xml`,
         `image/webp`,
         `image/x-icon`,
-      ]),
-      (Wt = class {
+      ])),
+      (tn = class {
         static get isDarkMode() {
-          return _(
+          return y(
             this,
             `isDarkMode`,
             !!window?.matchMedia?.(`(prefers-color-scheme: dark)`).matches
           );
         }
       }),
-      (Gt = class {
+      (nn = class {
         static get commentForegroundColor() {
           let e = document.createElement(`span`);
           e.classList.add(`comment`, `sidebar`);
@@ -2394,11 +2573,11 @@ var P,
             (t.color = `var(--comment-fg-color)`),
             document.body.append(e));
           let { color: n } = window.getComputedStyle(e);
-          return (e.remove(), _(this, `commentForegroundColor`, re(n)));
+          return (e.remove(), y(this, `commentForegroundColor`, ie(n)));
         }
       }),
-      (Kt = new Map()),
-      (qt = class e {
+      (rn = new Map()),
+      (an = class e {
         #e = null;
         #t = null;
         #n;
@@ -2424,7 +2603,7 @@ var P,
           let n = this.#n._uiManager._signal;
           n instanceof AbortSignal &&
             !n.aborted &&
-            (t.addEventListener(`contextmenu`, k, { signal: n }),
+            (t.addEventListener(`contextmenu`, A, { signal: n }),
             t.addEventListener(`pointerdown`, e.#l, { signal: n }));
           let r = (this.#r = document.createElement(`div`));
           ((r.className = `buttons`), t.append(r));
@@ -2443,10 +2622,10 @@ var P,
           e.stopPropagation();
         }
         #u(e) {
-          ((this.#n._focusEventsAllowed = !1), A(e));
+          ((this.#n._focusEventsAllowed = !1), j(e));
         }
         #d(e) {
-          ((this.#n._focusEventsAllowed = !0), A(e));
+          ((this.#n._focusEventsAllowed = !0), j(e));
         }
         #f(e) {
           let t = this.#n._uiManager._signal;
@@ -2454,7 +2633,7 @@ var P,
             ? !1
             : (e.addEventListener(`focusin`, this.#u.bind(this), { capture: !0, signal: t }),
               e.addEventListener(`focusout`, this.#d.bind(this), { capture: !0, signal: t }),
-              e.addEventListener(`contextmenu`, k, { signal: t }),
+              e.addEventListener(`contextmenu`, A, { signal: t }),
               !0);
         }
         hide() {
@@ -2505,17 +2684,14 @@ var P,
         }
         async addEditSignatureButton(e) {
           let t = (this.#s = await e.renderEditButton(this.#n));
-          (this.#f(t), this.#r.append(t, this.#p));
+          t && (this.#f(t), this.#r.append(t, this.#p));
         }
         removeButton(e) {
-          switch (e) {
-            case `comment`:
-              (this.#a?.removeToolbarCommentButton(),
-                (this.#a = null),
-                this.#o?.remove(),
-                (this.#o = null));
-              break;
-          }
+          e === `comment` &&
+            (this.#a?.removeToolbarCommentButton(),
+            (this.#a = null),
+            this.#o?.remove(),
+            (this.#o = null));
         }
         async addButton(e, t) {
           switch (e) {
@@ -2533,7 +2709,6 @@ var P,
               break;
             case `comment`:
               t && this.addComment(t);
-              break;
           }
         }
         async addButtonBefore(e, t, n) {
@@ -2548,7 +2723,7 @@ var P,
           (this.#e.remove(), this.#t?.destroy(), (this.#t = null));
         }
       }),
-      (Jt = class {
+      (on = class {
         #e = null;
         #t = null;
         #n;
@@ -2557,11 +2732,13 @@ var P,
         }
         #r() {
           let e = (this.#t = document.createElement(`div`));
-          ((e.className = `editToolbar`), e.setAttribute(`role`, `toolbar`));
+          ((e.className = `editToolbar`),
+            e.setAttribute(`role`, `toolbar`),
+            (e.dir = this.#n.direction));
           let t = this.#n._signal;
           t instanceof AbortSignal &&
             !t.aborted &&
-            e.addEventListener(`contextmenu`, k, { signal: t });
+            e.addEventListener(`contextmenu`, A, { signal: t });
           let n = (this.#e = document.createElement(`div`));
           return (
             (n.className = `buttons`),
@@ -2593,11 +2770,7 @@ var P,
             let e = i.y + i.height;
             if (e < n) continue;
             let a = i.x + (t ? i.width : 0);
-            if (e > n) {
-              ((r = a), (n = e));
-              continue;
-            }
-            t ? a > r && (r = a) : a < r && (r = a);
+            e > n ? ((r = a), (n = e)) : t ? a > r && (r = a) : a < r && (r = a);
           }
           return [t ? 1 - r : r, n];
         }
@@ -2619,13 +2792,13 @@ var P,
           let o = this.#n._signal;
           (o instanceof AbortSignal &&
             !o.aborted &&
-            (i.addEventListener(`contextmenu`, k, { signal: o }),
+            (i.addEventListener(`contextmenu`, A, { signal: o }),
             i.addEventListener(`click`, r, { signal: o })),
             this.#e.append(i));
         }
       }),
-      (Yt = Object.freeze({ internal: `068f09d6-5b37-4f77-a97a-f8ff4f253b68` })),
-      (U = class e {
+      (sn = Object.freeze({ internal: `2837668c-d334-48d1-ba74-aa7deba483da` })),
+      (W = class e {
         static #e = NaN;
         static #t = null;
         static #n = NaN;
@@ -2643,7 +2816,7 @@ var P,
           return e.#e === t;
         }
         static isSamePointerIdOrRemove(t) {
-          return e.#e === t ? !0 : (e.#t?.delete(t), !1);
+          return e.#e === t || (e.#t?.delete(t), !1);
         }
         static isSamePointerType(t) {
           return e.#r === t;
@@ -2667,14 +2840,14 @@ var P,
           e.#n = NaN;
         }
       }),
-      (Xt = class {
+      (cn = class {
         #e = 0;
         get id() {
-          return `${mt}${this.#e++}`;
+          return `${Ct}${this.#e++}`;
         }
       }),
-      (Zt = class e {
-        #e = S();
+      (ln = class e {
+        #e = w();
         #t = 0;
         #n = null;
         static get _isSVGFittingCanvas() {
@@ -2690,7 +2863,7 @@ var P,
                 new Uint32Array(t.getImageData(0, 0, 1, 1).data.buffer)[0] === 0
               )
             );
-          return _(this, `_isSVGFittingCanvas`, r);
+          return y(this, `_isSVGFittingCanvas`, r);
         }
         async #r(t, n) {
           this.#n ||= new Map();
@@ -2702,7 +2875,7 @@ var P,
             let t;
             if (
               (typeof n == `string`
-                ? ((r.url = n), (t = await T(n, `blob`)))
+                ? ((r.url = n), (t = await D(n, `blob`)))
                 : n instanceof File
                   ? (t = r.file = n)
                   : n instanceof Blob && (t = n),
@@ -2725,7 +2898,7 @@ var P,
             } else r.bitmap = await createImageBitmap(t);
             r.refCounter = 1;
           } catch (e) {
-            (u(e), (r = null));
+            (f(e), (r = null));
           }
           return (this.#n.set(t, r), r && this.#n.set(r.id, r), r);
         }
@@ -2790,7 +2963,7 @@ var P,
           return e.startsWith(`image_${this.#e}_`);
         }
       }),
-      (Qt = class {
+      (un = class {
         #e = [];
         #t = !1;
         #n;
@@ -2856,14 +3029,14 @@ var P,
           this.#e = null;
         }
       }),
-      ($t = class e {
+      (dn = class e {
         static ALT = 1;
         static CTRL = 2;
         static META = 4;
         static SHIFT = 8;
         constructor(t) {
           this.callbacks = new Map();
-          let { isMac: n } = V.platform;
+          let { isMac: n } = H.platform;
           for (let [r, i, a = {}] of t) {
             let t = r.some((e) => e.startsWith(`mac+`));
             for (let o of r) {
@@ -2876,7 +3049,7 @@ var P,
               let [s, c] = e.#e(r);
               s !== null &&
                 this.callbacks
-                  .getOrInsertComputed(s, Mt)
+                  .getOrInsertComputed(s, Bt)
                   .push({ callback: i, options: a, modifiers: c });
             }
           }
@@ -2888,17 +3061,16 @@ var P,
             if (((i = i.trim()), !i)) continue;
             let a = i.toUpperCase(),
               o = e[a];
-            if (o) {
-              r |= o;
-              continue;
+            if (o) r |= o;
+            else {
+              if (n !== null) {
+                f(`KeyboardManager: multiple keys in shortcut "${t}"`);
+                break;
+              }
+              n = a === `SPACE` ? ` ` : i;
             }
-            if (n !== null) {
-              u(`KeyboardManager: multiple keys in shortcut "${t}"`);
-              break;
-            }
-            n = a === `SPACE` ? ` ` : i;
           }
-          return (n === null && u(`KeyboardManager: no key found in shortcut "${t}"`), [n, r]);
+          return (n === null && f(`KeyboardManager: no key found in shortcut "${t}"`), [n, r]);
         }
         static #t(e) {
           let t = /^(?:Key([A-Z])|(?:Digit|Numpad)(\d))$/.exec(e);
@@ -2922,10 +3094,10 @@ var P,
             callback: o,
             options: { bubbles: s = !1, args: c = [], checker: l = null },
           } = a;
-          (l && !l(t, n)) || (o.bind(t, ...c, n)(), s || A(n));
+          (!l || l(t, n)) && (o.bind(t, ...c, n)(), s || j(n));
         }
       }),
-      (en = class e {
+      (fn = class e {
         static _colorsMapping = new Map([
           [`CanvasText`, [0, 0, 0]],
           [`Canvas`, [255, 255, 255]],
@@ -2935,10 +3107,10 @@ var P,
             [`CanvasText`, null],
             [`Canvas`, null],
           ]);
-          return (ie(e), _(this, `_colors`, e));
+          return (ae(e), y(this, `_colors`, e));
         }
         convert(t) {
-          let n = re(t);
+          let n = ie(t);
           if (!window.matchMedia(`(forced-colors: active)`).matches) return n;
           for (let [t, r] of this._colors)
             if (r.every((e, t) => e === n[t])) return e._colorsMapping.get(t);
@@ -2946,10 +3118,10 @@ var P,
         }
         getHexCode(e) {
           let t = this._colors.get(e);
-          return t ? H.makeHexColor(...t) : e;
+          return t ? U.makeHexColor(...t) : e;
         }
       }),
-      (tn = class e {
+      (pn = class e {
         #e = new AbortController();
         #t = null;
         #n = null;
@@ -2959,42 +3131,43 @@ var P,
         #o = null;
         #s = null;
         #c = null;
-        #l = new Qt();
-        #u = null;
+        #l = null;
+        #u = new un();
         #d = null;
         #f = null;
-        #p = 0;
-        #m = new Set();
-        #h = null;
+        #p = null;
+        #m = 0;
+        #h = new Set();
         #g = null;
-        #_ = new Set();
+        #_ = null;
+        #v = new Set();
         _editorUndoBar = null;
-        #v = !1;
         #y = !1;
         #b = !1;
-        #x = null;
+        #x = !1;
         #S = null;
         #C = null;
         #w = null;
-        #T = !1;
-        #E = null;
-        #D = new Xt();
-        #O = !1;
+        #T = null;
+        #E = !1;
+        #D = null;
+        #O = new cn();
         #k = !1;
         #A = !1;
-        #j = null;
+        #j = !1;
         #M = null;
         #N = null;
         #P = null;
         #F = null;
-        #I = L.NONE;
-        #L = new Set();
-        #R = null;
+        #I = null;
+        #L = L.NONE;
+        #R = new Set();
         #z = null;
         #B = null;
         #V = null;
         #H = null;
-        #U = {
+        #U = null;
+        #W = {
           isEditing: !1,
           isEmpty: !0,
           hasSomethingToUndo: !1,
@@ -3002,18 +3175,18 @@ var P,
           hasSelectedEditor: !1,
           hasSelectedText: !1,
         };
-        #W = [0, 0];
-        #G = null;
+        #G = [0, 0];
         #K = null;
         #q = null;
         #J = null;
         #Y = null;
+        #X = null;
         static TRANSLATE_SMALL = 1;
         static TRANSLATE_BIG = 10;
         static get _keyboardManager() {
           let t = e.prototype,
             n = (e) =>
-              e.#K.contains(document.activeElement) &&
+              e.#q.contains(document.activeElement) &&
               document.activeElement.tagName !== `BUTTON` &&
               e.hasSomethingToControl(),
             r = (e, { target: t }) => {
@@ -3025,10 +3198,10 @@ var P,
             },
             i = this.TRANSLATE_SMALL,
             a = this.TRANSLATE_BIG;
-          return _(
+          return y(
             this,
             `_keyboardManager`,
-            new $t([
+            new dn([
               [[`ctrl+a`, `mac+meta+a`], t.selectAll, { checker: r }],
               [[`ctrl+z`, `mac+meta+z`], t.undo, { checker: r }],
               [
@@ -3058,7 +3231,7 @@ var P,
                 t.addNewEditorFromKeyboard,
                 {
                   checker: (e, { target: t }) =>
-                    !(t instanceof HTMLButtonElement) && e.#K.contains(t) && !e.isEnterHandled,
+                    !(t instanceof HTMLButtonElement) && e.#q.contains(t) && !e.isEnterHandled,
                 },
               ],
               [
@@ -3066,7 +3239,7 @@ var P,
                 t.addNewEditorFromKeyboard,
                 {
                   checker: (e, { target: t }) =>
-                    !(t instanceof HTMLButtonElement) && e.#K.contains(document.activeElement),
+                    !(t instanceof HTMLButtonElement) && e.#q.contains(document.activeElement),
                 },
               ],
               [[`Escape`], t.unselectAll],
@@ -3099,15 +3272,15 @@ var P,
         }
         constructor(e, t, n, r, i, a, o, s, c, l, u, d, f, p, m, h) {
           let g = (this._signal = this.#e.signal);
-          ((this.#K = e),
-            (this.#q = t),
-            (this.#J = n),
-            (this.#o = r),
-            (this.#u = i),
-            (this.#z = a),
-            (this.#H = s),
+          ((this.#q = e),
+            (this.#J = t),
+            (this.#Y = n),
+            (this.#s = r),
+            (this.#d = i),
+            (this.#B = a),
+            (this.#U = s),
             (this._eventBus = o));
-          let _ = { signal: g, ...Yt };
+          let _ = { signal: g, ...sn };
           (o.on(`editingaction`, this.onEditingAction.bind(this), _),
             o.on(`pagechanging`, this.onPageChanging.bind(this), _),
             o.on(`scalechanging`, this.onScaleChanging.bind(this), _),
@@ -3117,91 +3290,94 @@ var P,
             window.addEventListener(
               `pointerdown`,
               () => {
-                this.#k = !0;
+                this.#A = !0;
               },
               { capture: !0, signal: g }
             ),
             window.addEventListener(
               `pointerup`,
               () => {
-                this.#k = !1;
+                this.#A = !1;
               },
               { capture: !0, signal: g }
             ),
-            window.addEventListener(`beforeunload`, this.#Q.bind(this), { capture: !0, signal: g }),
+            window.addEventListener(`beforeunload`, this.endCurrentEditing.bind(this), {
+              capture: !0,
+              signal: g,
+            }),
             this.#ne(),
             this.#le(),
             this.#ae(),
-            (this.#s = s.annotationStorage),
-            (this.#x = s.filterFactory),
-            (this.#B = c),
-            (this.#w = l || null),
-            (this.#v = u),
-            (this.#y = d),
-            (this.#b = f),
-            (this.#F = p || null),
-            (this.viewParameters = { realScale: Rt.PDF_TO_CSS_UNITS, rotation: 0 }),
+            (this.#c = s.annotationStorage),
+            (this.#S = s.filterFactory),
+            (this.#V = c),
+            (this.#T = l || null),
+            (this.#y = u),
+            (this.#b = d),
+            (this.#x = f),
+            (this.#I = p || null),
+            (this.viewParameters = { realScale: Yt.PDF_TO_CSS_UNITS, rotation: 0 }),
             (this.isShiftKeyDown = !1),
             (this._editorUndoBar = m || null),
             (this._supportsPinchToZoom = h !== !1),
             i?.setSidebarUiManager(this));
         }
         destroy() {
-          (this.#Y?.resolve(),
-            (this.#Y = null),
+          (this.#X?.resolve(),
+            (this.#X = null),
             this.#e?.abort(),
             (this.#e = null),
             (this._signal = null));
           for (let e of this.#i.values()) e.destroy();
           (this.#i.clear(),
             this.#r.clear(),
-            this.#_.clear(),
-            this.#P?.clear(),
+            this.#v.clear(),
+            this.#F?.clear(),
             (this.#t = null),
-            this.#L.clear(),
-            this.#l.destroy(),
-            this.#o?.destroy(),
-            this.#u?.destroy(),
-            this.#z?.destroy(),
-            this.#E?.hide(),
-            (this.#E = null),
-            this.#N?.destroy(),
-            (this.#N = null),
+            this.#R.clear(),
+            this.#u.destroy(),
+            this.#s?.destroy(),
+            this.#d?.destroy(),
+            this.#B?.destroy(),
+            this.#D?.hide(),
+            (this.#D = null),
+            this.#P?.destroy(),
+            (this.#P = null),
             (this.#n = null),
-            (this.#S &&= (clearTimeout(this.#S), null)),
-            (this.#G &&= (clearTimeout(this.#G), null)),
+            (this.#C &&= (clearTimeout(this.#C), null)),
+            (this.#K &&= (clearTimeout(this.#K), null)),
             this._editorUndoBar?.destroy(),
-            (this.#H = null));
+            (this.#U = null));
         }
         combinedSignal(e) {
           return AbortSignal.any([this._signal, e.signal]);
         }
         get mlManager() {
-          return this.#F;
+          return this.#I;
         }
         get useNewAltTextFlow() {
-          return this.#y;
-        }
-        get useNewAltTextWhenAddingImage() {
           return this.#b;
         }
+        get useNewAltTextWhenAddingImage() {
+          return this.#x;
+        }
         get hcmFilter() {
-          return _(
+          return y(
             this,
             `hcmFilter`,
-            this.#B ? this.#x.addHCMFilter(this.#B.foreground, this.#B.background) : `none`
+            this.#V ? this.#S.addHCMFilter(this.#V.foreground, this.#V.background) : `none`
           );
         }
         get direction() {
-          return _(this, `direction`, getComputedStyle(this.#K).direction);
+          return y(this, `direction`, getComputedStyle(this.#q).direction);
         }
         get _highlightColors() {
-          return _(
+          return y(
             this,
             `_highlightColors`,
-            this.#w
+            this.#T
               ? new Map(
-                  this.#w
+                  this.#T
                     .split(`,`)
                     .map(
                       (e) => (
@@ -3216,21 +3392,17 @@ var P,
         }
         get highlightColors() {
           let { _highlightColors: e } = this;
-          if (!e) return _(this, `highlightColors`, null);
+          if (!e) return y(this, `highlightColors`, null);
           let t = new Map(),
-            n = !!this.#B;
+            n = !!this.#V;
           for (let [r, i] of e) {
             let e = r.endsWith(`_HCM`);
-            if (n && e) {
-              t.set(r.replace(`_HCM`, ``), i);
-              continue;
-            }
-            !n && !e && t.set(r, i);
+            n && e ? t.set(r.replace(`_HCM`, ``), i) : !n && !e && t.set(r, i);
           }
-          return _(this, `highlightColors`, t);
+          return y(this, `highlightColors`, t);
         }
         get highlightColorNames() {
-          return _(
+          return y(
             this,
             `highlightColorNames`,
             this.highlightColors
@@ -3248,31 +3420,31 @@ var P,
         }
         setCurrentDrawingSession(e) {
           (e ? (this.unselectAll(), this.disableUserSelect(!0)) : this.disableUserSelect(!1),
-            (this.#f = e));
+            (this.#p = e));
         }
         setMainHighlightColorPicker(e) {
-          this.#N = e;
+          this.#P = e;
         }
         editAltText(e, t = !1) {
-          this.#o?.editAltText(this, e, t);
+          this.#s?.editAltText(this, e, t);
         }
         hasCommentManager() {
-          return !!this.#u;
+          return !!this.#d;
         }
         editComment(e, t, n, r) {
-          this.#u?.showDialog(this, e, t, n, r);
+          this.#d?.showDialog(this, e, t, n, r);
         }
         selectComment(e, t) {
           this.#i.get(e)?.getEditorByUID(t)?.toggleComment(!0, !0);
         }
         updateComment(e) {
-          this.#u?.updateComment(e.getData());
+          this.#d?.updateComment(e.getData());
         }
         updatePopupColor(e) {
-          this.#u?.updatePopupColor(e);
+          this.#d?.updatePopupColor(e);
         }
         removeComment(e) {
-          this.#u?.removeComments([e.uid]);
+          this.#d?.removeComments([e.uid]);
         }
         deleteComment(e, t) {
           let n = () => {
@@ -3289,13 +3461,13 @@ var P,
           });
         }
         toggleComment(e, t, n = void 0) {
-          this.#u?.toggleCommentPopup(e, t, n);
+          this.#d?.toggleCommentPopup(e, t, n);
         }
         makeCommentColor(e, t) {
-          return (e && this.#u?.makeCommentColor(e, t)) || null;
+          return (e && this.#d?.makeCommentColor(e, t)) || null;
         }
         getCommentDialogElement() {
-          return this.#u?.dialogElement || null;
+          return this.#d?.dialogElement || null;
         }
         async waitForEditorsRendered(e) {
           if (this.#i.has(e - 1)) return;
@@ -3303,19 +3475,19 @@ var P,
             r = (n) => {
               n.pageNumber === e && (this._eventBus.off(`editorsrendered`, r), t());
             };
-          (this._eventBus.on(`editorsrendered`, r, Yt), await n);
+          (this._eventBus.on(`editorsrendered`, r, sn), await n);
         }
         getSignature(e) {
-          this.#z?.getSignature({ uiManager: this, editor: e });
+          this.#B?.getSignature({ uiManager: this, editor: e });
         }
         get signatureManager() {
-          return this.#z;
+          return this.#B;
         }
         switchToMode(e, t) {
           (this._eventBus.on(`annotationeditormodechanged`, t, {
             once: !0,
             signal: this._signal,
-            ...Yt,
+            ...sn,
           }),
             this._eventBus.dispatch(`showannotationeditorui`, { source: this, mode: e }));
         }
@@ -3323,21 +3495,17 @@ var P,
           this._eventBus.dispatch(`setpreference`, { source: this, name: e, value: t });
         }
         onSetPreference({ name: e, value: t }) {
-          switch (e) {
-            case `enableNewAltTextWhenAddingImage`:
-              this.#b = t;
-              break;
-          }
+          e === `enableNewAltTextWhenAddingImage` && (this.#x = t);
         }
         onPageChanging({ pageNumber: e }) {
-          this.#p = e - 1;
+          this.#m = e - 1;
         }
         deletePage(e) {
           for (let t of this.getEditors(e)) t.remove();
-          (this.#i.delete(e), this.#p === e && (this.#p = 0));
+          (this.#i.delete(e), this.#m === e && (this.#m = 0));
         }
         focusMainContainer() {
-          this.#K.focus();
+          this.#q.focus();
         }
         findParent(e, t) {
           for (let n of this.#i.values()) {
@@ -3347,26 +3515,26 @@ var P,
           return null;
         }
         disableUserSelect(e = !1) {
-          this.#q.classList.toggle(`noUserSelect`, e);
+          this.#J.classList.toggle(`noUserSelect`, e);
         }
         addShouldRescale(e) {
-          this.#_.add(e);
+          this.#v.add(e);
         }
         removeShouldRescale(e) {
-          this.#_.delete(e);
+          this.#v.delete(e);
         }
         onScaleChanging({ scale: e }) {
-          (this.commitOrRemove(), (this.viewParameters.realScale = e * Rt.PDF_TO_CSS_UNITS));
-          for (let e of this.#_) e.onScaleChanging();
-          this.#f?.onScaleChanging();
+          (this.commitOrRemove(), (this.viewParameters.realScale = e * Yt.PDF_TO_CSS_UNITS));
+          for (let e of this.#v) e.onScaleChanging();
+          this.#p?.onScaleChanging();
         }
         onRotationChanging({ pagesRotation: e }) {
           (this.commitOrRemove(), (this.viewParameters.rotation = e));
         }
-        #X({ anchorNode: e }) {
+        #Z({ anchorNode: e }) {
           return e.nodeType === Node.TEXT_NODE ? e.parentElement : e;
         }
-        #Z(e) {
+        #Q(e) {
           let { currentLayer: t } = this;
           if (t.hasTextLayer(e)) return t;
           for (let t of this.#i.values()) if (t.hasTextLayer(e)) return t;
@@ -3377,12 +3545,12 @@ var P,
           if (!n || n.isCollapsed) return;
           let { anchorNode: r, anchorOffset: i, focusNode: a, focusOffset: o } = n,
             s = n.toString(),
-            c = this.#X(n).closest(`.textLayer`),
+            c = this.#Z(n).closest(`.textLayer`),
             l = this.getSelectionBoxes(c);
           if (!l) return;
           n.empty();
-          let u = this.#Z(c),
-            d = this.#I === L.NONE,
+          let u = this.#Q(c),
+            d = this.#L === L.NONE,
             f = () => {
               let n = u?.createAndAddNewEditor({ x: 0, y: 0 }, !1, {
                 methodOfCreation: e,
@@ -3395,36 +3563,32 @@ var P,
               });
               (d && this.showAllEditors(`highlight`, !0, !0), t && n?.editComment());
             };
-          if (d) {
-            this.switchToMode(L.HIGHLIGHT, f);
-            return;
-          }
-          f();
+          d ? this.switchToMode(L.HIGHLIGHT, f) : f();
         }
         commentSelection(e = ``) {
           this.highlightSelection(e, !0);
         }
-        #Q(e) {
+        endCurrentEditing() {
           (this.commitOrRemove(), this.currentLayer?.endDrawingSession(!1));
         }
         #$() {
           let e = document.getSelection();
           if (!e || e.isCollapsed) return;
-          let t = this.#X(e).closest(`.textLayer`),
+          let t = this.#Z(e).closest(`.textLayer`),
             n = this.getSelectionBoxes(t);
-          n && ((this.#E ||= new Jt(this)), this.#E.show(t, n, this.direction === `ltr`));
+          n && ((this.#D ||= new on(this)), this.#D.show(t, n, this.direction === `ltr`));
         }
         getAndRemoveDataFromAnnotationStorage(e) {
-          if (!this.#s) return null;
-          let t = `${mt}${e}`,
-            n = this.#s.getRawValue(t);
-          return (n && this.#s.remove(t), n);
+          if (!this.#c) return null;
+          let t = `${Ct}${e}`,
+            n = this.#c.getRawValue(t);
+          return (n && this.#c.remove(t), n);
         }
         addToAnnotationStorage(e) {
-          !e.isEmpty() && this.#s && !this.#s.has(e.id) && this.#s.setValue(e.id, e);
+          !e.isEmpty() && this.#c && !this.#c.has(e.id) && this.#c.setValue(e.id, e);
         }
         a11yAlert(e, t = null) {
-          let n = this.#J;
+          let n = this.#Y;
           n &&
             (n.setAttribute(`data-l10n-id`, e),
             t
@@ -3434,31 +3598,28 @@ var P,
         #ee() {
           let e = document.getSelection();
           if (!e || e.isCollapsed) {
-            this.#R && (this.#E?.hide(), (this.#R = null), this.#ue({ hasSelectedText: !1 }));
+            this.#z && (this.#D?.hide(), (this.#z = null), this.#ue({ hasSelectedText: !1 }));
             return;
           }
           let { anchorNode: t } = e;
-          if (t === this.#R) return;
-          let n = this.#X(e).closest(`.textLayer`);
-          if (!n) {
-            this.#R && (this.#E?.hide(), (this.#R = null), this.#ue({ hasSelectedText: !1 }));
-            return;
-          }
-          if (
-            (this.#E?.hide(),
-            (this.#R = t),
+          if (t === this.#z) return;
+          let n = this.#Z(e).closest(`.textLayer`);
+          if (!n) this.#z && (this.#D?.hide(), (this.#z = null), this.#ue({ hasSelectedText: !1 }));
+          else if (
+            (this.#D?.hide(),
+            (this.#z = t),
             this.#ue({ hasSelectedText: !0 }),
-            !(this.#I !== L.HIGHLIGHT && this.#I !== L.NONE) &&
-              (this.#I === L.HIGHLIGHT && this.showAllEditors(`highlight`, !0, !0),
-              (this.#T = this.isShiftKeyDown),
+            (this.#L === L.HIGHLIGHT || this.#L === L.NONE) &&
+              (this.#L === L.HIGHLIGHT && this.showAllEditors(`highlight`, !0, !0),
+              (this.#E = this.isShiftKeyDown),
               !this.isShiftKeyDown))
           ) {
-            let e = this.#I === L.HIGHLIGHT ? this.#Z(n) : null;
-            if ((e?.toggleDrawing(), this.#k)) {
+            let e = this.#L === L.HIGHLIGHT ? this.#Q(n) : null;
+            if ((e?.toggleDrawing(), this.#A)) {
               let t = new AbortController(),
                 n = this.combinedSignal(t),
                 r = (n) => {
-                  (n.type === `pointerup` && n.button !== 0) ||
+                  (n.type !== `pointerup` || n.button === 0) &&
                     (t.abort(),
                     e?.toggleDrawing(!0),
                     n.type === `pointerup` && this.#te(`main_toolbar`));
@@ -3469,7 +3630,7 @@ var P,
           }
         }
         #te(e = ``) {
-          this.#I === L.HIGHLIGHT ? this.highlightSelection(e) : this.#v && this.#$();
+          this.#L === L.HIGHLIGHT ? this.highlightSelection(e) : this.#y && this.#$();
         }
         #ne() {
           document.addEventListener(`selectionchange`, this.#ee.bind(this), {
@@ -3477,33 +3638,33 @@ var P,
           });
         }
         #re() {
-          if (this.#C) return;
-          this.#C = new AbortController();
-          let e = this.combinedSignal(this.#C);
+          if (this.#w) return;
+          this.#w = new AbortController();
+          let e = this.combinedSignal(this.#w);
           (window.addEventListener(`focus`, this.focus.bind(this), { signal: e }),
             window.addEventListener(`blur`, this.blur.bind(this), { signal: e }));
         }
         #ie() {
-          (this.#C?.abort(), (this.#C = null));
+          (this.#w?.abort(), (this.#w = null));
         }
         blur() {
           if (
             ((this.isShiftKeyDown = !1),
-            this.#T && ((this.#T = !1), this.#te(`main_toolbar`)),
+            this.#E && ((this.#E = !1), this.#te(`main_toolbar`)),
             !this.hasSelection)
           )
             return;
           let { activeElement: e } = document;
-          for (let t of this.#L)
+          for (let t of this.#R)
             if (t.div.contains(e)) {
-              ((this.#M = [t, e]), (t._focusEventsAllowed = !1));
+              ((this.#N = [t, e]), (t._focusEventsAllowed = !1));
               break;
             }
         }
         focus() {
-          if (!this.#M) return;
-          let [e, t] = this.#M;
-          ((this.#M = null),
+          if (!this.#N) return;
+          let [e, t] = this.#N;
+          ((this.#N = null),
             t.addEventListener(
               `focusin`,
               () => {
@@ -3514,25 +3675,25 @@ var P,
             t.focus());
         }
         #ae() {
-          if (this.#j) return;
-          this.#j = new AbortController();
-          let e = this.combinedSignal(this.#j);
+          if (this.#M) return;
+          this.#M = new AbortController();
+          let e = this.combinedSignal(this.#M);
           (window.addEventListener(`keydown`, this.keydown.bind(this), { signal: e }),
             window.addEventListener(`keyup`, this.keyup.bind(this), { signal: e }));
         }
         #oe() {
-          (this.#j?.abort(), (this.#j = null));
+          (this.#M?.abort(), (this.#M = null));
         }
         #se() {
-          if (this.#d) return;
-          this.#d = new AbortController();
-          let e = this.combinedSignal(this.#d);
+          if (this.#f) return;
+          this.#f = new AbortController();
+          let e = this.combinedSignal(this.#f);
           (document.addEventListener(`copy`, this.copy.bind(this), { signal: e }),
             document.addEventListener(`cut`, this.cut.bind(this), { signal: e }),
             document.addEventListener(`paste`, this.paste.bind(this), { signal: e }));
         }
         #ce() {
-          (this.#d?.abort(), (this.#d = null));
+          (this.#f?.abort(), (this.#f = null));
         }
         #le() {
           let e = this._signal;
@@ -3547,7 +3708,7 @@ var P,
         }
         dragOver(e) {
           for (let { type: t } of e.dataTransfer.items)
-            for (let n of this.#g)
+            for (let n of this.#_)
               if (n.isHandlingMimeForPasting(t)) {
                 ((e.dataTransfer.dropEffect = `copy`), e.preventDefault());
                 return;
@@ -3555,7 +3716,7 @@ var P,
         }
         drop(e) {
           for (let t of e.dataTransfer.items)
-            for (let n of this.#g)
+            for (let n of this.#_)
               if (n.isHandlingMimeForPasting(t.type)) {
                 (n.paste(t, this.currentLayer), e.preventDefault());
                 return;
@@ -3564,7 +3725,7 @@ var P,
         copy(e) {
           if ((e.preventDefault(), this.#t?.commitOrRemove(), !this.hasSelection)) return;
           let t = [];
-          for (let e of this.#L) {
+          for (let e of this.#R) {
             let n = e.serialize(!0);
             n && t.push(n);
           }
@@ -3577,7 +3738,7 @@ var P,
           e.preventDefault();
           let { clipboardData: t } = e;
           for (let e of t.items)
-            for (let t of this.#g)
+            for (let t of this.#_)
               if (t.isHandlingMimeForPasting(e.type)) {
                 t.paste(e, this.currentLayer);
                 return;
@@ -3587,7 +3748,7 @@ var P,
           try {
             n = JSON.parse(n);
           } catch (e) {
-            u(`paste: "${e.message}".`);
+            f(`paste: "${e.message}".`);
             return;
           }
           if (!Array.isArray(n)) return;
@@ -3611,19 +3772,19 @@ var P,
               mustExec: !0,
             });
           } catch (e) {
-            u(`paste: "${e.message}".`);
+            f(`paste: "${e.message}".`);
           }
         }
         keydown(t) {
           (!this.isShiftKeyDown && t.key === `Shift` && (this.isShiftKeyDown = !0),
-            this.#I !== L.NONE &&
+            this.#L !== L.NONE &&
               !this.isEditorHandlingKeyboard &&
               e._keyboardManager.exec(this, t));
         }
         keyup(e) {
           this.isShiftKeyDown &&
             e.key === `Shift` &&
-            ((this.isShiftKeyDown = !1), this.#T && ((this.#T = !1), this.#te(`main_toolbar`)));
+            ((this.isShiftKeyDown = !1), this.#E && ((this.#E = !1), this.#te(`main_toolbar`)));
         }
         onEditingAction({ name: e }) {
           switch (e) {
@@ -3638,19 +3799,25 @@ var P,
               break;
             case `commentSelection`:
               this.commentSelection(`context_menu`);
-              break;
           }
         }
         updatePageIndex(e, t) {
-          for (let n of this.getEditors(e)) n.pageIndex = t;
+          for (let n of this.#o.get(e) || []) n.pageIndex = t;
           let n = this.#a.get(e);
-          n && ((n.pageIndex = t), this.#i.set(t, n), this.#O ? n.enable() : n.disable());
+          n && ((n.pageIndex = t), this.#i.set(t, n), this.#k ? n.enable() : n.disable());
         }
         startUpdatePages() {
           ((this.#a = new Map(this.#i)), this.#i.clear());
+          let e = (this.#o = new Map()),
+            t = (t) => {
+              e.getOrInsertComputed(t.pageIndex, Bt).push(t);
+            };
+          for (let e of this.#r.values()) t(e);
+          for (let [e, n] of this.#c)
+            e.startsWith(Ct) && !this.#r.has(e) && Number.isInteger(n?.pageIndex) && t(n);
         }
         endUpdatePages() {
-          this.#a = null;
+          ((this.#a = null), (this.#o = null));
         }
         clonePage(e, t) {
           for (let n of this.getEditors(e)) {
@@ -3660,16 +3827,16 @@ var P,
               (e.id = this.getId()),
               (e.isClone = !0),
               delete e.popupRef,
-              this.#s.setValue(e.id, e));
+              this.#c.setValue(e.id, e));
           }
         }
         findClonesForPage(e) {
           let t = [],
             { pageIndex: n } = e;
-          for (let [r, i] of this.#s)
+          for (let [r, i] of this.#c)
             i.pageIndex === n &&
               i.isClone &&
-              (this.#s.remove(r),
+              (this.#c.remove(r),
               t.push(
                 e.deserialize(i).then((t) => {
                   t && ((t.isClone = !0), e.addOrRebuild(t));
@@ -3678,12 +3845,12 @@ var P,
           return Promise.all(t);
         }
         #ue(e) {
-          Object.entries(e).some(([e, t]) => this.#U[e] !== t) &&
+          Object.entries(e).some(([e, t]) => this.#W[e] !== t) &&
             (this._eventBus.dispatch(`editingstateschanged`, {
               source: this,
-              details: Object.assign(this.#U, e),
+              details: Object.assign(this.#W, e),
             }),
-            this.#I === L.HIGHLIGHT &&
+            this.#L === L.HIGHLIGHT &&
               e.hasSelectedEditor === !1 &&
               this.#de([[R.HIGHLIGHT_FREE, !0]]));
         }
@@ -3695,96 +3862,96 @@ var P,
             ? (this.#re(),
               this.#se(),
               this.#ue({
-                isEditing: this.#I !== L.NONE,
+                isEditing: this.#L !== L.NONE,
                 isEmpty: this.#ge(),
-                hasSomethingToUndo: this.#l.hasSomethingToUndo(),
-                hasSomethingToRedo: this.#l.hasSomethingToRedo(),
+                hasSomethingToUndo: this.#u.hasSomethingToUndo(),
+                hasSomethingToRedo: this.#u.hasSomethingToRedo(),
                 hasSelectedEditor: !1,
               }))
             : (this.#ie(), this.#ce(), this.#ue({ isEditing: !1 }), this.disableUserSelect(!1));
         }
         registerEditorTypes(e) {
-          if (!this.#g) {
-            this.#g = e;
-            for (let e of this.#g) this.#de(e.defaultPropertiesToUpdate);
+          if (!this.#_) {
+            this.#_ = e;
+            for (let e of this.#_) this.#de(e.defaultPropertiesToUpdate);
           }
         }
         getId() {
-          return this.#D.id;
+          return this.#O.id;
         }
         get currentLayer() {
-          return this.#i.get(this.#p);
+          return this.#i.get(this.#m);
         }
         getLayer(e) {
           return this.#i.get(e);
         }
         get currentPageIndex() {
-          return this.#p;
+          return this.#m;
         }
         addLayer(e) {
-          (this.#i.set(e.pageIndex, e), this.#O ? e.enable() : e.disable());
+          (this.#i.set(e.pageIndex, e), this.#k ? e.enable() : e.disable());
         }
         removeLayer(e) {
           this.#i.delete(e.pageIndex);
         }
         async updateMode(e, t = null, n = !1, r = !1, i = !1, a = !1) {
-          if (this.#I !== e && !(this.#Y && (await this.#Y.promise, !this.#Y))) {
+          if (this.#L !== e && !(this.#X && (await this.#X.promise, !this.#X))) {
             if (
-              ((this.#Y = Promise.withResolvers()),
-              this.#f?.commitOrRemove(),
-              this.#I === L.POPUP && this.#u?.hideSidebar(),
-              this.#u?.destroyPopup(),
-              (this.#I = e),
+              ((this.#X = Promise.withResolvers()),
+              this.#p?.commitOrRemove(),
+              this.#L === L.POPUP && this.#d?.hideSidebar(),
+              this.#d?.destroyPopup(),
+              (this.#L = e),
               e === L.NONE)
             ) {
               (this.setEditingState(!1), this.#pe());
               for (let e of this.#r.values()) e.hideStandaloneCommentButton();
-              (this._editorUndoBar?.hide(), this.toggleComment(null), this.#Y.resolve());
-              return;
-            }
-            for (let e of this.#r.values()) e.addStandaloneCommentButton();
-            (e === L.SIGNATURE && (await this.#z?.loadSignatures()),
-              n && U.clearPointerType(),
-              this.setEditingState(!0),
-              await this.#fe(),
-              this.unselectAll());
-            for (let t of this.#i.values()) t.updateMode(e);
-            if (e === L.POPUP) {
-              this.#n ||= await this.#H.getAnnotationsByType(
-                new Set(this.#g.map((e) => e._editorType))
-              );
-              let e = new Set(),
-                t = [];
-              for (let n of this.#r.values()) {
-                let { annotationElementId: r, hasComment: i, deleted: a } = n;
-                (r && e.add(r), i && !a && t.push(n.getData()));
+              (this._editorUndoBar?.hide(), this.toggleComment(null), this.#X.resolve());
+            } else {
+              for (let e of this.#r.values()) e.addStandaloneCommentButton();
+              (e === L.SIGNATURE && (await this.#B?.loadSignatures()),
+                n && W.clearPointerType(),
+                this.setEditingState(!0),
+                await this.#fe(),
+                this.unselectAll());
+              for (let t of this.#i.values()) t.updateMode(e);
+              if (e === L.POPUP) {
+                this.#n ||= await this.#U.getAnnotationsByType(
+                  new Set(this.#_.map((e) => e._editorType))
+                );
+                let e = new Set(),
+                  t = [];
+                for (let n of this.#r.values()) {
+                  let { annotationElementId: r, hasComment: i, deleted: a } = n;
+                  (r && e.add(r), i && !a && t.push(n.getData()));
+                }
+                for (let n of this.#n) {
+                  let { id: r, popupRef: i, contentsObj: a } = n;
+                  i && a?.str && !e.has(r) && !this.#h.has(r) && t.push(n);
+                }
+                this.#d?.showSidebar(t);
               }
-              for (let n of this.#n) {
-                let { id: r, popupRef: i, contentsObj: a } = n;
-                i && a?.str && !e.has(r) && !this.#m.has(r) && t.push(n);
+              if (!t) (r && this.addNewEditorFromKeyboard(), this.#X.resolve());
+              else {
+                for (let e of this.#r.values())
+                  e.uid === t
+                    ? (this.setSelected(e),
+                      a ? e.editComment() : i ? e.enterInEditMode() : e.focus())
+                    : e.unselect();
+                this.#X.resolve();
               }
-              this.#u?.showSidebar(t);
             }
-            if (!t) {
-              (r && this.addNewEditorFromKeyboard(), this.#Y.resolve());
-              return;
-            }
-            for (let e of this.#r.values())
-              e.uid === t
-                ? (this.setSelected(e), a ? e.editComment() : i ? e.enterInEditMode() : e.focus())
-                : e.unselect();
-            this.#Y.resolve();
           }
         }
         addNewEditorFromKeyboard() {
           this.currentLayer.canCreateNewEmptyEditor() && this.currentLayer.addNewEditor();
         }
         updateToolbar(e) {
-          e.mode !== this.#I &&
+          e.mode !== this.#L &&
             this._eventBus.dispatch(`switchannotationeditormode`, { source: this, ...e });
         }
         updateParams(e, t) {
-          if (this.#g) {
+          if (this.#_) {
             switch (e) {
               case R.CREATE:
                 this.currentLayer.addNewEditor(t);
@@ -3797,28 +3964,27 @@ var P,
                     data: { type: `highlight`, action: `toggle_visibility` },
                   },
                 }),
-                  (this.#V ||= new Map()).set(e, t),
+                  (this.#H ||= new Map()).set(e, t),
                   this.showAllEditors(`highlight`, t));
-                break;
             }
-            if (this.hasSelection) for (let n of this.#L) n.updateParams(e, t);
-            else for (let n of this.#g) n.updateDefaultParams(e, t);
+            if (this.hasSelection) for (let n of this.#R) n.updateParams(e, t);
+            else for (let n of this.#_) n.updateDefaultParams(e, t);
           }
         }
         showAllEditors(e, t, n = !1) {
           for (let n of this.#r.values()) n.editorType === e && n.show(t);
-          (this.#V?.get(R.HIGHLIGHT_SHOW_ALL) ?? !0) !== t && this.#de([[R.HIGHLIGHT_SHOW_ALL, t]]);
+          (this.#H?.get(R.HIGHLIGHT_SHOW_ALL) ?? !0) !== t && this.#de([[R.HIGHLIGHT_SHOW_ALL, t]]);
         }
         enableWaiting(e = !1) {
-          if (this.#A !== e) {
-            this.#A = e;
+          if (this.#j !== e) {
+            this.#j = e;
             for (let t of this.#i.values())
               (e ? t.disableClick() : t.enableClick(), t.div.classList.toggle(`waiting`, e));
           }
         }
         async #fe() {
-          if (!this.#O) {
-            this.#O = !0;
+          if (!this.#k) {
+            this.#k = !0;
             let e = [];
             for (let t of this.#i.values()) e.push(t.enable());
             await Promise.all(e);
@@ -3826,8 +3992,8 @@ var P,
           }
         }
         #pe() {
-          if ((this.unselectAll(), this.#O)) {
-            this.#O = !1;
+          if ((this.unselectAll(), this.#k)) {
+            this.#k = !1;
             for (let e of this.#i.values()) e.disable();
             for (let e of this.#r.values()) e.disable();
           }
@@ -3843,26 +4009,26 @@ var P,
         }
         removeEditor(e) {
           (e.div.contains(document.activeElement) &&
-            (this.#S && clearTimeout(this.#S),
-            (this.#S = setTimeout(() => {
-              (this.focusMainContainer(), (this.#S = null));
+            (this.#C && clearTimeout(this.#C),
+            (this.#C = setTimeout(() => {
+              (this.focusMainContainer(), (this.#C = null));
             }, 0))),
             this.#r.delete(e.id),
-            e.annotationElementId && this.#P?.delete(e.annotationElementId),
+            e.annotationElementId && this.#F?.delete(e.annotationElementId),
             this.unselect(e),
-            (!e.annotationElementId || !this.#m.has(e.annotationElementId)) &&
-              this.#s?.remove(e.id));
+            (!e.annotationElementId || !this.#h.has(e.annotationElementId)) &&
+              this.#c?.remove(e.id));
         }
         addDeletedAnnotationElement(e) {
-          (this.#m.add(e.annotationElementId),
+          (this.#h.add(e.annotationElementId),
             this.addChangedExistingAnnotation(e),
             (e.deleted = !0));
         }
         isDeletedAnnotationElement(e) {
-          return this.#m.has(e);
+          return this.#h.has(e);
         }
         removeDeletedAnnotationElement(e) {
-          (this.#m.delete(e.annotationElementId),
+          (this.#h.delete(e.annotationElementId),
             this.removeChangedExistingAnnotation(e),
             (e.deleted = !1));
         }
@@ -3875,7 +4041,7 @@ var P,
         }
         get #he() {
           let e = null;
-          for (e of this.#L);
+          for (e of this.#R);
           return e;
         }
         updateUI(e) {
@@ -3885,60 +4051,58 @@ var P,
           this.#de(e.defaultPropertiesToUpdate);
         }
         toggleSelected(e) {
-          if (this.#L.has(e)) {
-            (this.#L.delete(e), e.unselect(), this.#ue({ hasSelectedEditor: this.hasSelection }));
-            return;
-          }
-          (this.#L.add(e),
-            e.select(),
-            this.#de(e.propertiesToUpdate),
-            this.#ue({ hasSelectedEditor: !0 }));
+          this.#R.has(e)
+            ? (this.#R.delete(e), e.unselect(), this.#ue({ hasSelectedEditor: this.hasSelection }))
+            : (this.#R.add(e),
+              e.select(),
+              this.#de(e.propertiesToUpdate),
+              this.#ue({ hasSelectedEditor: !0 }));
         }
         setSelected(e) {
-          (this.updateToolbar({ mode: e.mode, editId: e.uid }), this.#f?.commitOrRemove());
-          for (let t of this.#L) t !== e && t.unselect();
-          (this.#u?.destroyPopup(),
-            this.#L.clear(),
-            this.#L.add(e),
+          (this.updateToolbar({ mode: e.mode, editId: e.uid }), this.#p?.commitOrRemove());
+          for (let t of this.#R) t !== e && t.unselect();
+          (this.#d?.destroyPopup(),
+            this.#R.clear(),
+            this.#R.add(e),
             e.select(),
             this.#de(e.propertiesToUpdate),
             this.#ue({ hasSelectedEditor: !0 }));
         }
         get firstSelectedEditor() {
-          return this.#L.values().next().value;
+          return this.#R.values().next().value;
         }
         unselect(e) {
-          (e.unselect(), this.#L.delete(e), this.#ue({ hasSelectedEditor: this.hasSelection }));
+          (e.unselect(), this.#R.delete(e), this.#ue({ hasSelectedEditor: this.hasSelection }));
         }
         get hasSelection() {
-          return this.#L.size !== 0;
+          return this.#R.size !== 0;
         }
         get isEnterHandled() {
-          return this.#L.size === 1 && this.firstSelectedEditor.isEnterHandled;
+          return this.#R.size === 1 && this.firstSelectedEditor.isEnterHandled;
         }
         undo() {
-          (this.#l.undo(),
+          (this.#u.undo(),
             this.#ue({
-              hasSomethingToUndo: this.#l.hasSomethingToUndo(),
+              hasSomethingToUndo: this.#u.hasSomethingToUndo(),
               hasSomethingToRedo: !0,
               isEmpty: this.#ge(),
             }),
             this._editorUndoBar?.hide());
         }
         redo() {
-          (this.#l.redo(),
+          (this.#u.redo(),
             this.#ue({
               hasSomethingToUndo: !0,
-              hasSomethingToRedo: this.#l.hasSomethingToRedo(),
+              hasSomethingToRedo: this.#u.hasSomethingToRedo(),
               isEmpty: this.#ge(),
             }));
         }
         addCommands(e) {
-          (this.#l.add(e),
+          (this.#u.add(e),
             this.#ue({ hasSomethingToUndo: !0, hasSomethingToRedo: !1, isEmpty: this.#ge() }));
         }
         cleanUndoStack(e) {
-          this.#l.cleanType(e);
+          this.#u.cleanType(e);
         }
         #ge() {
           if (this.#r.size === 0) return !0;
@@ -3949,7 +4113,7 @@ var P,
           this.commitOrRemove();
           let e = this.currentLayer?.endDrawingSession(!0);
           if (!this.hasSelection && !e) return;
-          let t = e ? [e] : [...this.#L],
+          let t = e ? [e] : [...this.#R],
             n = () => {
               this._editorUndoBar?.show(r, t.length === 1 ? t[0].editorType : t.length);
               for (let e of t) e.remove();
@@ -3966,34 +4130,34 @@ var P,
           return this.#t || this.hasSelection;
         }
         #_e(e) {
-          for (let e of this.#L) e.unselect();
-          this.#L.clear();
-          for (let t of e) t.isEmpty() || (this.#L.add(t), t.select());
+          for (let e of this.#R) e.unselect();
+          this.#R.clear();
+          for (let t of e) t.isEmpty() || (this.#R.add(t), t.select());
           this.#ue({ hasSelectedEditor: this.hasSelection });
         }
         selectAll() {
-          for (let e of this.#L) e.commit();
+          for (let e of this.#R) e.commit();
           this.#_e(this.#r.values());
         }
         unselectAll() {
           if (
-            !(this.#t && (this.#t.commitOrRemove(), this.#I !== L.NONE)) &&
-            !this.#f?.commitOrRemove() &&
-            (this.#u?.destroyPopup(), this.hasSelection)
+            !(this.#t && (this.#t.commitOrRemove(), this.#L !== L.NONE)) &&
+            !this.#p?.commitOrRemove() &&
+            (this.#d?.destroyPopup(), this.hasSelection)
           ) {
-            for (let e of this.#L) e.unselect();
-            (this.#L.clear(), this.#ue({ hasSelectedEditor: !1 }));
+            for (let e of this.#R) e.unselect();
+            (this.#R.clear(), this.#ue({ hasSelectedEditor: !1 }));
           }
         }
         translateSelectedEditors(e, t, n = !1) {
           if ((n || this.commitOrRemove(), !this.hasSelection)) return;
-          ((this.#W[0] += e), (this.#W[1] += t));
-          let [r, i] = this.#W,
-            a = [...this.#L];
-          (this.#G && clearTimeout(this.#G),
-            (this.#G = setTimeout(() => {
-              ((this.#G = null),
-                (this.#W[0] = this.#W[1] = 0),
+          ((this.#G[0] += e), (this.#G[1] += t));
+          let [r, i] = this.#G,
+            a = [...this.#R];
+          (this.#K && clearTimeout(this.#K),
+            (this.#K = setTimeout(() => {
+              ((this.#K = null),
+                (this.#G[0] = this.#G[1] = 0),
                 this.addCommands({
                   cmd: () => {
                     for (let e of a)
@@ -4010,9 +4174,9 @@ var P,
         }
         setUpDragSession() {
           if (this.hasSelection) {
-            (this.disableUserSelect(!0), (this.#h = new Map()));
-            for (let e of this.#L)
-              this.#h.set(e, {
+            (this.disableUserSelect(!0), (this.#g = new Map()));
+            for (let e of this.#R)
+              this.#g.set(e, {
                 savedX: e.x,
                 savedY: e.y,
                 savedPageIndex: e.pageIndex,
@@ -4023,10 +4187,10 @@ var P,
           }
         }
         endDragSession() {
-          if (!this.#h) return !1;
+          if (!this.#g) return !1;
           this.disableUserSelect(!1);
-          let e = this.#h;
-          this.#h = null;
+          let e = this.#g;
+          this.#g = null;
           let t = !1;
           for (let [{ x: n, y: r, pageIndex: i }, a] of e)
             ((a.newX = n),
@@ -4054,7 +4218,7 @@ var P,
           );
         }
         dragSelectedEditors(e, t) {
-          if (this.#h) for (let n of this.#h.keys()) n.drag(e, t);
+          if (this.#g) for (let n of this.#g.keys()) n.drag(e, t);
         }
         rebuild(e) {
           if (e.parent === null) {
@@ -4067,7 +4231,7 @@ var P,
         get isEditorHandlingKeyboard() {
           return (
             this.getActive()?.shouldGetKeyboardEvents() ||
-            (this.#L.size === 1 && this.firstSelectedEditor.shouldGetKeyboardEvents())
+            (this.#R.size === 1 && this.firstSelectedEditor.shouldGetKeyboardEvents())
           );
         }
         isActive(e) {
@@ -4077,13 +4241,13 @@ var P,
           return this.#t;
         }
         getMode() {
-          return this.#I;
+          return this.#L;
         }
         isEditingMode() {
-          return this.#I !== L.NONE;
+          return this.#L !== L.NONE;
         }
         get imageManager() {
-          return _(this, `imageManager`, new Zt());
+          return y(this, `imageManager`, new ln());
         }
         getSelectionBoxes(e) {
           if (!e) return null;
@@ -4119,38 +4283,37 @@ var P,
               break;
             default:
               o = (e, t, o, s) => ({ x: (e - n) / i, y: (t - r) / a, width: o / i, height: s / a });
-              break;
           }
           let s = [];
           for (let e = 0, n = t.rangeCount; e < n; e++) {
             let n = t.getRangeAt(e);
             if (!n.collapsed)
               for (let { x: e, y: t, width: r, height: i } of n.getClientRects())
-                r === 0 || i === 0 || s.push(o(e, t, r, i));
+                r !== 0 && i !== 0 && s.push(o(e, t, r, i));
           }
           return s.length === 0 ? null : s;
         }
         addChangedExistingAnnotation({ annotationElementId: e, id: t }) {
-          (this.#c ||= new Map()).set(e, t);
+          (this.#l ||= new Map()).set(e, t);
         }
         removeChangedExistingAnnotation({ annotationElementId: e }) {
-          this.#c?.delete(e);
+          this.#l?.delete(e);
         }
         renderAnnotationElement(e) {
-          let t = this.#c?.get(e.data.id);
+          let t = this.#l?.get(e.data.id);
           if (!t) return;
-          let n = this.#s.getRawValue(t);
-          n && ((this.#I === L.NONE && !n.hasBeenModified) || n.renderAnnotationElement(e));
+          let n = this.#c.getRawValue(t);
+          n && (this.#L !== L.NONE || n.hasBeenModified) && n.renderAnnotationElement(e);
         }
         setMissingCanvas(e, t, n) {
-          let r = this.#P?.get(e);
-          r && (r.setCanvas(t, n), this.#P.delete(e));
+          let r = this.#F?.get(e);
+          r && (r.setCanvas(t, n), this.#F.delete(e));
         }
         addMissingCanvas(e, t) {
-          (this.#P ||= new Map()).set(e, t);
+          (this.#F ||= new Map()).set(e, t);
         }
       }),
-      (nn = class e {
+      (mn = class e {
         #e = null;
         #t = !1;
         #n = null;
@@ -4192,7 +4355,7 @@ var P,
               : (t.setAttribute(`data-l10n-id`, `pdfjs-editor-alt-text-button`),
                 n.setAttribute(`data-l10n-id`, `pdfjs-editor-alt-text-button-label`)));
           let r = this.#c._uiManager._signal;
-          (t.addEventListener(`contextmenu`, k, { signal: r }),
+          (t.addEventListener(`contextmenu`, A, { signal: r }),
             t.addEventListener(`pointerdown`, (e) => e.stopPropagation(), { signal: r }));
           let i = (e) => {
             (e.preventDefault(),
@@ -4243,15 +4406,14 @@ var P,
             this.#m());
         }
         toggleAltTextBadge(e = !1) {
-          if (!this.#d || this.#e) {
-            (this.#s?.remove(), (this.#s = null));
-            return;
+          if (!this.#d || this.#e) (this.#s?.remove(), (this.#s = null));
+          else {
+            if (!this.#s) {
+              let e = (this.#s = document.createElement(`div`));
+              ((e.className = `noAltTextBadge`), this.#c.div.append(e));
+            }
+            this.#s.classList.toggle(`hidden`, !e);
           }
-          if (!this.#s) {
-            let e = (this.#s = document.createElement(`div`));
-            ((e.className = `noAltTextBadge`), this.#c.div.append(e));
-          }
-          this.#s.classList.toggle(`hidden`, !e);
         }
         serialize(e) {
           let t = this.#e;
@@ -4271,7 +4433,7 @@ var P,
           cancel: i = !1,
         }) {
           (n && ((this.#l = n), (this.#u = r)),
-            !(this.#e === e && this.#t === t) && (i || ((this.#e = e), (this.#t = t)), this.#m()));
+            (this.#e !== e || this.#t !== t) && (i || ((this.#e = e), (this.#t = t)), this.#m()));
         }
         toggle(e = !1) {
           this.#n &&
@@ -4352,7 +4514,7 @@ var P,
             this.#c.getElementForAltText()?.setAttribute(`aria-describedby`, n.id));
         }
       }),
-      (rn = class {
+      (hn = class {
         #e = null;
         #t = null;
         #n = !1;
@@ -4431,19 +4593,19 @@ var P,
                 e.setAttribute(`data-l10n-id`, `pdfjs-editor-add-comment-button`)));
           let n = this.#r._uiManager._signal;
           if (!(n instanceof AbortSignal) || n.aborted) return e;
-          (e.addEventListener(`contextmenu`, k, { signal: n }),
+          (e.addEventListener(`contextmenu`, A, { signal: n }),
             t &&
               (e.addEventListener(
                 `focusin`,
                 (e) => {
-                  ((this.#r._focusEventsAllowed = !1), A(e));
+                  ((this.#r._focusEventsAllowed = !1), j(e));
                 },
                 { capture: !0, signal: n }
               ),
               e.addEventListener(
                 `focusout`,
                 (e) => {
-                  ((this.#r._focusEventsAllowed = !0), A(e));
+                  ((this.#r._focusEventsAllowed = !0), j(e));
                 },
                 { capture: !0, signal: n }
               )),
@@ -4513,11 +4675,10 @@ var P,
           return { text: this.#o, richText: this.#a, date: this.#s, deleted: this.isDeleted() };
         }
         set data(e) {
-          if ((e !== this.#o && (this.#a = null), e === null)) {
-            ((this.#o = ``), (this.#c = !0));
-            return;
-          }
-          ((this.#o = e), (this.#s = new Date()), (this.#c = !1));
+          (e !== this.#o && (this.#a = null),
+            e === null
+              ? ((this.#o = ``), (this.#c = !0))
+              : ((this.#o = e), (this.#s = new Date()), (this.#c = !1)));
         }
         restoreData({ text: e, richText: t, date: n }) {
           ((this.#o = e), (this.#a = t), (this.#s = n), (this.#c = !1));
@@ -4539,7 +4700,8 @@ var P,
             (this.#c = !1));
         }
       }),
-      (an = class e {
+      (gn = 1e-4),
+      (_n = class {
         #e;
         #t = !1;
         #n = null;
@@ -4547,11 +4709,15 @@ var P,
         #i;
         #a;
         #o;
-        #s = null;
-        #c;
+        #s;
+        #c = !1;
         #l = null;
         #u;
-        #d = null;
+        #d = new Set();
+        #f = null;
+        #p;
+        #m = null;
+        #h = 0;
         constructor({
           container: e,
           isPinchingDisabled: t = null,
@@ -4559,7 +4725,8 @@ var P,
           onPinchStart: r = null,
           onPinching: i = null,
           onPinchEnd: a = null,
-          signal: o,
+          onPanning: o = null,
+          signal: s,
         }) {
           ((this.#e = e),
             (this.#n = n),
@@ -4567,97 +4734,168 @@ var P,
             (this.#i = r),
             (this.#a = i),
             (this.#o = a),
-            (this.#u = new AbortController()),
-            (this.#c = AbortSignal.any([o, this.#u.signal])),
-            e.addEventListener(`touchstart`, this.#f.bind(this), { passive: !1, signal: this.#c }));
+            (this.#s = o),
+            (this.#p = new AbortController()),
+            (this.#u = AbortSignal.any([s, this.#p.signal])),
+            e.addEventListener(`touchstart`, this.#g.bind(this), { passive: !1, signal: this.#u }));
         }
         get MIN_TOUCH_DISTANCE_TO_PINCH() {
-          return 35 / Ht.pixelRatio;
+          return 35 / $t.pixelRatio;
         }
-        #f(e) {
+        get MIN_TOUCH_DISTANCE_TO_SCALE() {
+          return 4 / $t.pixelRatio;
+        }
+        #g(e) {
           if (this.#r?.()) return;
-          if (e.touches.length === 1) {
-            if (this.#s) return;
-            let e = (this.#s = new AbortController()),
-              t = AbortSignal.any([this.#c, e.signal]),
-              n = this.#e,
-              r = { capture: !0, signal: t, passive: !1 },
-              i = (e) => {
-                e.pointerType === `touch` && (this.#s?.abort(), (this.#s = null));
-              };
-            (n.addEventListener(
-              `pointerdown`,
-              (e) => {
-                e.pointerType === `touch` && (A(e), i(e));
-              },
-              r
-            ),
-              n.addEventListener(`pointerup`, i, r),
-              n.addEventListener(`pointercancel`, i, r));
-            return;
+          this.#v(e);
+          let t = this.#d;
+          for (let { identifier: n } of e.changedTouches) t.add(n);
+          if (t.size === 1) this.#_();
+          else {
+            if (!this.#m) {
+              this.#m = new AbortController();
+              let e = AbortSignal.any([this.#u, this.#m.signal]),
+                t = this.#e,
+                n = { signal: e, capture: !1, passive: !1 };
+              t.addEventListener(`touchmove`, this.#x.bind(this), n);
+              let r = this.#S.bind(this);
+              (t.addEventListener(`touchend`, r, n),
+                t.addEventListener(`touchcancel`, r, n),
+                (n.capture = !0),
+                t.addEventListener(`pointerdown`, j, n),
+                t.addEventListener(`pointermove`, j, n),
+                t.addEventListener(`pointercancel`, _e, n),
+                t.addEventListener(`pointerup`, _e, n),
+                this.#i?.());
+            }
+            ((this.#c = ve(e)), this.#b(e));
           }
-          if (!this.#d) {
-            this.#d = new AbortController();
-            let e = AbortSignal.any([this.#c, this.#d.signal]),
-              t = this.#e,
-              n = { signal: e, capture: !1, passive: !1 };
-            t.addEventListener(`touchmove`, this.#p.bind(this), n);
-            let r = this.#m.bind(this);
-            (t.addEventListener(`touchend`, r, n),
-              t.addEventListener(`touchcancel`, r, n),
-              (n.capture = !0),
-              t.addEventListener(`pointerdown`, A, n),
-              t.addEventListener(`pointermove`, A, n),
-              t.addEventListener(`pointercancel`, A, n),
-              t.addEventListener(`pointerup`, A, n),
-              this.#i?.());
-          }
-          if ((A(e), e.touches.length !== 2 || this.#n?.())) {
-            this.#l = null;
-            return;
-          }
-          let [t, n] = e.touches;
-          (t.identifier > n.identifier && ([t, n] = [n, t]),
-            (this.#l = {
-              touch0X: t.screenX,
-              touch0Y: t.screenY,
-              touch1X: n.screenX,
-              touch1Y: n.screenY,
-            }));
         }
-        #p(t) {
-          if (!this.#l || t.touches.length !== 2) return;
-          A(t);
-          let [n, r] = t.touches;
-          n.identifier > r.identifier && ([n, r] = [r, n]);
-          let { screenX: i, screenY: a } = n,
-            { screenX: o, screenY: s } = r,
-            c = this.#l,
-            { touch0X: l, touch0Y: u, touch1X: d, touch1Y: f } = c,
-            p = d - l,
-            m = f - u,
-            h = o - i,
-            g = s - a,
-            _ = Math.hypot(h, g) || 1,
-            v = Math.hypot(p, m) || 1;
-          if (!this.#t && Math.abs(v - _) <= e.MIN_TOUCH_DISTANCE_TO_PINCH) return;
-          if (((c.touch0X = i), (c.touch0Y = a), (c.touch1X = o), (c.touch1Y = s), !this.#t)) {
-            this.#t = !0;
+        #_() {
+          if (this.#l) return;
+          let e = (this.#l = new AbortController()),
+            t = AbortSignal.any([this.#u, e.signal]),
+            n = this.#e,
+            r = { capture: !0, signal: t, passive: !1 },
+            i = (e) => {
+              e.pointerType === `touch` && (this.#l?.abort(), (this.#l = null));
+            };
+          (n.addEventListener(
+            `pointerdown`,
+            (e) => {
+              e.pointerType === `touch` && (j(e), i(e));
+            },
+            r
+          ),
+            n.addEventListener(`pointerup`, i, r),
+            n.addEventListener(`pointercancel`, i, r));
+        }
+        #v(e) {
+          let t = this.#d;
+          if (t.size === 0) return;
+          let n = (this.#d = new Set());
+          for (let { identifier: r } of e.touches) t.has(r) && n.add(r);
+        }
+        #y(e) {
+          let t = this.#d,
+            n = [];
+          for (let r of e.touches) t.has(r.identifier) && n.push(r);
+          return n;
+        }
+        #b(e) {
+          let t = this.#y(e);
+          if (t.length !== 2 || this.#n?.()) {
+            this.#f = null;
             return;
           }
-          let y = [(i + o) / 2, (a + s) / 2];
-          this.#a?.(y, v, _);
+          let [n, r] = t;
+          this.#f = {
+            touch0X: n.screenX,
+            touch0Y: n.screenY,
+            touch1X: r.screenX,
+            touch1Y: r.screenY,
+            panX: (n.clientX + r.clientX) / 2,
+            panY: (n.clientY + r.clientY) / 2,
+            screenPanX: (n.screenX + r.screenX) / 2,
+            screenPanY: (n.screenY + r.screenY) / 2,
+          };
         }
-        #m(e) {
-          e.touches.length >= 2 ||
-            (this.#d && (this.#d.abort(), (this.#d = null), this.#o?.()),
-            this.#l && (A(e), (this.#l = null), (this.#t = !1)));
+        #x(e) {
+          if (!this.#f) return;
+          let t = this.#y(e);
+          if (t.length !== 2) return;
+          let n = this.#c;
+          if (((this.#c = ve(e)), !this.#c)) return;
+          if (!n) {
+            this.#b(e);
+            return;
+          }
+          let [r, i] = t,
+            { screenX: a, screenY: o } = r,
+            { screenX: s, screenY: c } = i,
+            l = this.#f,
+            { touch0X: u, touch0Y: d, touch1X: f, touch1Y: p, panX: m, panY: h } = l,
+            g = f - u,
+            _ = p - d,
+            v = s - a,
+            y = c - o,
+            b = (r.clientX + i.clientX) / 2,
+            x = (r.clientY + i.clientY) / 2;
+          ((l.panX = b), (l.panY = x));
+          let S = b - m,
+            C = x - h,
+            w = (a + s) / 2,
+            T = (o + c) / 2,
+            E = Math.hypot(w - l.screenPanX, T - l.screenPanY);
+          ((l.screenPanX = w), (l.screenPanY = T));
+          let D = Math.hypot(v, y),
+            O = Math.hypot(g, _),
+            ee = this.#t
+              ? this.MIN_TOUCH_DISTANCE_TO_SCALE
+              : this.MIN_TOUCH_DISTANCE_TO_PINCH + 2 * E;
+          if (D < gn || O < gn || Math.abs(O - D) <= ee) {
+            (S || C) && this.#s?.(S, C);
+            return;
+          }
+          ((l.touch0X = a), (l.touch0Y = o), (l.touch1X = s), (l.touch1Y = c));
+          let k = Math.sign(D - O);
+          if (!this.#t) ((this.#t = !0), (this.#h = k), (S || C) && this.#s?.(S, C));
+          else {
+            if (this.#h) {
+              let e = this.#h;
+              if (((this.#h = 0), k !== e && Math.abs(D - O) <= 2 * E)) {
+                ((this.#t = !1), (S || C) && this.#s?.(S, C));
+                return;
+              }
+            }
+            this.#a?.([m, h], O, D, S, C);
+          }
+        }
+        #S(e) {
+          if ((this.#v(e), this.#d.size >= 2)) {
+            this.#b(e);
+            return;
+          }
+          let t = !!this.#f;
+          (this.#C(), this.#d.size === 1 && this.#_(), t && ve(e));
+        }
+        #C() {
+          ((this.#f = null),
+            (this.#t = !1),
+            (this.#h = 0),
+            (this.#c = !1),
+            this.#m && (this.#m.abort(), (this.#m = null), this.#o?.()));
         }
         destroy() {
-          (this.#u?.abort(), (this.#u = null), this.#s?.abort(), (this.#s = null));
+          (this.#C(),
+            this.#d.clear(),
+            this.#p?.abort(),
+            (this.#p = null),
+            this.#l?.abort(),
+            (this.#l = null));
         }
       }),
-      (W = class e {
+      (G = class e {
         #e = null;
         #t = null;
         #n = null;
@@ -4696,17 +4934,17 @@ var P,
         #w = !1;
         #T = e._zIndex++;
         static _borderLineWidth = -1;
-        static _colorManager = new en();
+        static _colorManager = new fn();
         static _zIndex = 1;
         static _telemetryTimeout = 1e3;
         static get _resizerKeyboardManager() {
           let t = e.prototype._resizeWithKeyboard,
-            n = tn.TRANSLATE_SMALL,
-            r = tn.TRANSLATE_BIG;
-          return _(
+            n = pn.TRANSLATE_SMALL,
+            r = pn.TRANSLATE_BIG;
+          return y(
             this,
             `_resizerKeyboardManager`,
-            new $t([
+            new dn([
               [[`ArrowLeft`], t, { args: [-n, 0] }],
               [[`ctrl+ArrowLeft`, `mac+shift+ArrowLeft`], t, { args: [-r, 0] }],
               [[`ArrowRight`], t, { args: [n, 0] }],
@@ -4762,10 +5000,10 @@ var P,
           return !1;
         }
         static get _defaultLineColor() {
-          return _(this, `_defaultLineColor`, this._colorManager.getHexCode(`CanvasText`));
+          return y(this, `_defaultLineColor`, this._colorManager.getHexCode(`CanvasText`));
         }
         static deleteAnnotationElement(e) {
-          let t = new on({ id: e._uiManager.getId(), parent: e.parent, uiManager: e._uiManager });
+          let t = new vn({ id: e._uiManager.getId(), parent: e.parent, uiManager: e._uiManager });
           ((t.annotationElementId = e.annotationElementId),
             (t.deleted = !0),
             t._uiManager.addToAnnotationStorage(t));
@@ -4804,7 +5042,7 @@ var P,
           return !1;
         }
         static paste(e, t) {
-          d(`Not implemented`);
+          p(`Not implemented`);
         }
         get propertiesToUpdate() {
           return [];
@@ -4835,7 +5073,6 @@ var P,
               break;
             default:
               ((this.x -= this.width / 2), (this.y -= this.height / 2));
-              break;
           }
           this.fixAndSetPosition();
         }
@@ -4853,7 +5090,7 @@ var P,
         }
         setParent(e) {
           (e === null
-            ? (this.#W(), this.#d?.remove(), (this.#d = null))
+            ? (this.#G(), this.#d?.remove(), (this.#d = null))
             : ((this.pageIndex = e.pageIndex), (this.pageDimensions = e.pageDimensions)),
             (this.parent = e));
         }
@@ -4929,8 +5166,7 @@ var P,
           let { style: l } = n;
           ((l.left = `${(100 * a).toFixed(2)}%`),
             (l.top = `${(100 * o).toFixed(2)}%`),
-            this._onTranslating(a, o),
-            n.scrollIntoView({ block: `nearest` }));
+            this._onTranslating(a, o));
         }
         _onTranslating(e, t) {}
         _onTranslated(e, t) {}
@@ -4968,17 +5204,16 @@ var P,
           if (((o *= n), (s *= r), (i *= n), (a *= r), this._mustFixPosition))
             switch (e) {
               case 0:
-                ((i = w(i, 0, n - o)), (a = w(a, 0, r - s)));
+                ((i = E(i, 0, n - o)), (a = E(a, 0, r - s)));
                 break;
               case 90:
-                ((i = w(i, 0, n - s)), (a = w(a, o, r)));
+                ((i = E(i, 0, n - s)), (a = E(a, o, r)));
                 break;
               case 180:
-                ((i = w(i, o, n)), (a = w(a, s, r)));
+                ((i = E(i, o, n)), (a = E(a, s, r)));
                 break;
               case 270:
-                ((i = w(i, s, n)), (a = w(a, 0, r - o)));
-                break;
+                ((i = E(i, s, n)), (a = E(a, 0, r - o)));
             }
           ((this.x = i /= n), (this.y = a /= r));
           let [c, l] = this.getBaseTranslation();
@@ -5068,14 +5303,14 @@ var P,
               e.classList.add(`resizer`, n),
               e.setAttribute(`data-resizer-name`, n),
               e.addEventListener(`pointerdown`, this.#A.bind(this, n), { signal: t }),
-              e.addEventListener(`contextmenu`, k, { signal: t }),
+              e.addEventListener(`contextmenu`, A, { signal: t }),
               (e.tabIndex = -1));
           }
           this.div.prepend(this.#c);
         }
         #A(e, t) {
           t.preventDefault();
-          let { isMac: n } = V.platform;
+          let { isMac: n } = H.platform;
           if (t.button !== 0 || (t.ctrlKey && n)) return;
           this.#n?.toggle(!1);
           let r = this._isDraggable;
@@ -5088,8 +5323,8 @@ var P,
               capture: !0,
               signal: a,
             }),
-            window.addEventListener(`touchmove`, A, { passive: !1, signal: a }),
-            window.addEventListener(`contextmenu`, k, { signal: a }),
+            window.addEventListener(`touchmove`, j, { passive: !1, signal: a }),
+            window.addEventListener(`contextmenu`, A, { signal: a }),
             (this.#u = {
               savedX: this.x,
               savedY: this.y,
@@ -5131,7 +5366,7 @@ var P,
             a = this.y,
             o = this.width,
             s = this.height;
-          (i === e && a === t && o === n && s === r) ||
+          (i !== e || a !== t || o !== n || s !== r) &&
             this.addCommands({
               cmd: this.#j.bind(this, i, a, o, s),
               undo: this.#j.bind(this, e, t, n, r),
@@ -5181,46 +5416,45 @@ var P,
               break;
             case `middleLeft`:
               ((v = !0), (h = (e, t) => [0, t / 2]), (g = (e, t) => [e, t / 2]));
-              break;
           }
           let y = h(s, c),
             b = g(s, c),
             x = f(...b),
             S = e._round(a + x[0]),
             C = e._round(o + x[1]),
+            w = 1,
             T = 1,
-            E = 1,
             D,
-            ee;
-          if (n.fromKeyboard) ({ deltaX: D, deltaY: ee } = n);
+            O;
+          if (n.fromKeyboard) ({ deltaX: D, deltaY: O } = n);
           else {
             let { screenX: e, screenY: t } = n,
               [r, i] = this.#l;
-            (([D, ee] = this.screenToPageTranslation(e - r, t - i)),
+            (([D, O] = this.screenToPageTranslation(e - r, t - i)),
               (this.#l[0] = e),
               (this.#l[1] = t));
           }
-          if ((([D, ee] = m(D / r, ee / i)), _)) {
+          if ((([D, O] = m(D / r, O / i)), _)) {
             let e = Math.hypot(s, c);
-            T = E = Math.max(
-              Math.min(Math.hypot(b[0] - y[0] - D, b[1] - y[1] - ee) / e, 1 / s, 1 / c),
+            w = T = Math.max(
+              Math.min(Math.hypot(b[0] - y[0] - D, b[1] - y[1] - O) / e, 1 / s, 1 / c),
               l / s,
               u / c
             );
           } else
             v
-              ? (T = w(Math.abs(b[0] - y[0] - D), l, 1) / s)
-              : (E = w(Math.abs(b[1] - y[1] - ee), u, 1) / c);
-          let te = e._round(s * T),
-            O = e._round(c * E);
-          x = f(...g(te, O));
-          let k = S - x[0],
-            A = C - x[1];
+              ? (w = E(Math.abs(b[0] - y[0] - D), l, 1) / s)
+              : (T = E(Math.abs(b[1] - y[1] - O), u, 1) / c);
+          let ee = e._round(s * w),
+            k = e._round(c * T);
+          x = f(...g(ee, k));
+          let te = S - x[0],
+            ne = C - x[1];
           ((this.#h ||= [this.x, this.y, this.width, this.height]),
-            (this.width = te),
-            (this.height = O),
-            (this.x = k),
-            (this.y = A),
+            (this.width = ee),
+            (this.height = k),
+            (this.x = te),
+            (this.y = ne),
             this.setDims(),
             this.fixAndSetPosition(),
             this._onResizing());
@@ -5234,7 +5468,7 @@ var P,
         }
         async addEditToolbar() {
           if (this._editToolbar || this.#_) return this._editToolbar;
-          ((this._editToolbar = new qt(this)), this.div.append(this._editToolbar.render()));
+          ((this._editToolbar = new an(this)), this.div.append(this._editToolbar.render()));
           let { toolbarButtons: e } = this;
           if (e) for (let [t, n] of e) await this._editToolbar.addButton(t, n);
           return (
@@ -5262,8 +5496,8 @@ var P,
         createAltText() {
           return (
             this.#n ||
-              (nn.initialize(e._l10n),
-              (this.#n = new nn(this)),
+              (mn.initialize(e._l10n),
+              (this.#n = new mn(this)),
               (this.#e &&= ((this.#n.data = this.#e), null))),
             this.#n
           );
@@ -5293,17 +5527,14 @@ var P,
           this.#r?.focusButton();
         }
         addCommentButton() {
-          return this.canAddComment ? (this.#r ||= new rn(this)) : null;
+          return this.canAddComment ? (this.#r ||= new hn(this)) : null;
         }
         addStandaloneCommentButton() {
-          if (this._uiManager.hasCommentManager()) {
-            if (this.#i) {
-              this._uiManager.isEditingMode() && this.#i.classList.remove(`hidden`);
-              return;
-            }
-            this.hasComment &&
-              ((this.#i = this.#r.renderForStandalone()), this.div.append(this.#i));
-          }
+          this._uiManager.hasCommentManager() &&
+            (this.#i
+              ? this._uiManager.isEditingMode() && this.#i.classList.remove(`hidden`)
+              : this.hasComment &&
+                ((this.#i = this.#r.renderForStandalone()), this.div.append(this.#i)));
         }
         removeStandaloneCommentButton() {
           (this.#r.removeStandaloneCommentButton(), (this.#i = null));
@@ -5326,7 +5557,7 @@ var P,
           };
         }
         set comment(e) {
-          ((this.#r ||= new rn(this)),
+          ((this.#r ||= new hn(this)),
             typeof e == `object` && e ? this.#r.restoreData(e) : (this.#r.data = e),
             this.hasComment
               ? (this.removeCommentButtonFromToolbar(),
@@ -5339,7 +5570,7 @@ var P,
         setCommentData({ comment: e, popupRef: t, richText: n }) {
           if (
             !t ||
-            ((this.#r ||= new rn(this)), this.#r.setInitialText(e, n), !this.annotationElementId)
+            ((this.#r ||= new hn(this)), this.#r.setInitialText(e, n), !this.annotationElementId)
           )
             return;
           let r = this._uiManager.getAndRemoveDataFromAnnotationStorage(this.annotationElementId);
@@ -5355,7 +5586,7 @@ var P,
           return !!this.#r && !this.#r.isEmpty() && !this.#r.isDeleted();
         }
         async editComment(e) {
-          ((this.#r ||= new rn(this)), this.#r.edit(e));
+          ((this.#r ||= new hn(this)), this.#r.edit(e));
         }
         toggleComment(e, t = void 0) {
           this.hasComment && this._uiManager.toggleComment(this, e, t);
@@ -5402,17 +5633,8 @@ var P,
           let [r, i] = this.getInitialTranslation();
           return (
             this.translate(r, i),
-            me(this, e, [`keydown`, `pointerdown`, `dblclick`]),
-            this.isResizable &&
-              this._uiManager._supportsPinchToZoom &&
-              (this.#C ||= new an({
-                container: e,
-                isPinchingDisabled: () => !this.isSelected,
-                onPinchStart: this.#P.bind(this),
-                onPinching: this.#F.bind(this),
-                onPinchEnd: this.#I.bind(this),
-                signal: this._uiManager._signal,
-              })),
+            ge(this, e, [`keydown`, `pointerdown`, `dblclick`]),
+            this.#B(),
             this.addStandaloneCommentButton(),
             this._uiManager._editorUndoBar?.hide(),
             e
@@ -5462,19 +5684,13 @@ var P,
           (this.#n?.toggle(!0), this.parent.togglePointerEvents(!0), this.#M());
         }
         pointerdown(e) {
-          let { isMac: t } = V.platform;
-          if (e.button !== 0 || (e.ctrlKey && t)) {
-            e.preventDefault();
-            return;
-          }
-          if (((this.#m = !0), this._isDraggable)) {
-            this.#R(e);
-            return;
-          }
-          this.#L(e);
+          let { isMac: t } = H.platform;
+          e.button !== 0 || (e.ctrlKey && t)
+            ? e.preventDefault()
+            : ((this.#m = !0), this._isDraggable ? this.#R(e) : this.#L(e));
         }
         #L(e) {
-          let { isMac: t } = V.platform;
+          let { isMac: t } = H.platform;
           (e.ctrlKey && !t) || e.shiftKey || (e.metaKey && t)
             ? this.parent.toggleSelected(this)
             : this.parent.setSelected(this);
@@ -5505,28 +5721,27 @@ var P,
                   ((n = !0), this._uiManager.toggleComment(this, !0, !1), this._onStartDragging());
                 let { clientX: t, clientY: r, pointerId: i } = e;
                 if (i !== this.#o) {
-                  A(e);
+                  j(e);
                   return;
                 }
                 let [a, o] = this.screenToPageTranslation(t - this.#b, r - this.#x);
-                ((this.#b = t), (this.#x = r), this._uiManager.dragSelectedEditors(a, o));
+                ((this.#b = t),
+                  (this.#x = r),
+                  this._uiManager.dragSelectedEditors(a, o),
+                  this.div.scrollIntoView({ block: `nearest` }));
               },
               a
             ),
-            window.addEventListener(`touchmove`, A, a),
+            window.addEventListener(`touchmove`, j, a),
             window.addEventListener(
               `pointerdown`,
               (e) => {
-                (e.pointerType === this.#s && (this.#C || e.isPrimary) && o(e), A(e));
+                (e.pointerType === this.#s && (this.#C || e.isPrimary) && o(e), j(e));
               },
               a
             ));
           let s = (e) => {
-            if (!this.#o || this.#o === e.pointerId) {
-              o(e);
-              return;
-            }
-            A(e);
+            !this.#o || this.#o === e.pointerId ? o(e) : j(e);
           };
           (window.addEventListener(`pointerup`, s, { signal: i }),
             window.addEventListener(`blur`, s, { signal: i }));
@@ -5621,7 +5836,7 @@ var P,
           return !1;
         }
         enableEditMode() {
-          return this.isInEditMode() ? !1 : (this.parent.setEditingState(!1), (this.#_ = !0), !0);
+          return !this.isInEditMode() && (this.parent.setEditingState(!1), (this.#_ = !0), !0);
         }
         disableEditMode() {
           return this.isInEditMode() ? (this.parent.setEditingState(!0), (this.#_ = !1), !0) : !1;
@@ -5647,8 +5862,22 @@ var P,
           (this.div.addEventListener(`focusin`, this.focusin.bind(this), { signal: e }),
             this.div.addEventListener(`focusout`, this.focusout.bind(this), { signal: e }));
         }
+        #B() {
+          this.#C ||
+            !this.div ||
+            !this.isResizable ||
+            !this._uiManager._supportsPinchToZoom ||
+            (this.#C = new _n({
+              container: this.div,
+              isPinchingDisabled: () => !this.isSelected,
+              onPinchStart: this.#P.bind(this),
+              onPinching: this.#F.bind(this),
+              onPinchEnd: this.#I.bind(this),
+              signal: this._uiManager._signal,
+            }));
+        }
         rebuild() {
-          this.#z();
+          (this.#z(), this.#B());
         }
         rotate(e) {}
         resize() {}
@@ -5692,21 +5921,19 @@ var P,
             (this.#f?.abort(),
             (this.#f = null),
             this.isEmpty() || this.commit(),
+            this.#C?.destroy(),
+            (this.#C = null),
             this.parent ? this.parent.remove(this) : this._uiManager.removeEditor(this),
             this.hideCommentPopup(),
             (this.#y &&= (clearTimeout(this.#y), null)),
-            this.#W(),
+            this.#G(),
             this.removeEditToolbar(),
             this.#S)
           ) {
             for (let e of this.#S.values()) clearTimeout(e);
             this.#S = null;
           }
-          ((this.parent = null),
-            this.#C?.destroy(),
-            (this.#C = null),
-            this.#d?.remove(),
-            (this.#d = null));
+          ((this.parent = null), this.#d?.remove(), (this.#d = null));
         }
         get isResizable() {
           return !1;
@@ -5760,15 +5987,15 @@ var P,
           let n = this.#c.children;
           if (!this.#t) {
             this.#t = Array.from(n);
-            let t = this.#B.bind(this),
-              r = this.#V.bind(this),
+            let t = this.#V.bind(this),
+              r = this.#H.bind(this),
               i = this._uiManager._signal;
             for (let n of this.#t) {
               let a = n.getAttribute(`data-resizer-name`);
               (n.setAttribute(`role`, `spinbutton`),
                 n.addEventListener(`keydown`, t, { signal: i }),
                 n.addEventListener(`blur`, r, { signal: i }),
-                n.addEventListener(`focus`, this.#H.bind(this, a), { signal: i }),
+                n.addEventListener(`focus`, this.#U.bind(this, a), { signal: i }),
                 n.setAttribute(`data-l10n-id`, e._l10nResizer[a]));
             }
           }
@@ -5790,50 +6017,44 @@ var P,
               r.setAttribute(`data-l10n-id`, e._l10nResizer[n]);
             }
           }
-          (this.#U(0),
+          (this.#W(0),
             (this.#v = !0),
             this.#c.firstElementChild.focus({ focusVisible: !0 }),
             t.preventDefault(),
             t.stopImmediatePropagation());
         }
-        #B(t) {
+        #V(t) {
           e._resizerKeyboardManager.exec(this, t);
         }
-        #V(e) {
-          this.#v && e.relatedTarget?.parentNode !== this.#c && this.#W();
-        }
         #H(e) {
-          this.#p = this.#v ? e : ``;
+          this.#v && e.relatedTarget?.parentNode !== this.#c && this.#G();
         }
         #U(e) {
+          this.#p = this.#v ? e : ``;
+        }
+        #W(e) {
           if (this.#t) for (let t of this.#t) t.tabIndex = e;
         }
         _resizeWithKeyboard(e, t) {
           this.#v && this.#N(this.#p, { deltaX: e, deltaY: t, fromKeyboard: !0 });
         }
-        #W() {
-          ((this.#v = !1), this.#U(-1), this.#M());
+        #G() {
+          ((this.#v = !1), this.#W(-1), this.#M());
         }
         _stopResizingWithKeyboard() {
-          (this.#W(), this.div.focus());
+          (this.#G(), this.div.focus());
         }
         select() {
-          if (this.isSelected && this._editToolbar) {
-            this._editToolbar.show();
-            return;
-          }
-          if (
-            ((this.isSelected = !0),
-            this.makeResizable(),
-            this.div?.classList.add(`selectedEditor`),
-            !this._editToolbar)
-          ) {
-            this.addEditToolbar().then(() => {
-              this.div?.classList.contains(`selectedEditor`) && this._editToolbar?.show();
-            });
-            return;
-          }
-          (this._editToolbar?.show(), this.#n?.toggleAltTextBadge(!1));
+          this.isSelected && this._editToolbar
+            ? this._editToolbar.show()
+            : ((this.isSelected = !0),
+              this.makeResizable(),
+              this.div?.classList.add(`selectedEditor`),
+              this._editToolbar
+                ? (this._editToolbar?.show(), this.#n?.toggleAltTextBadge(!1))
+                : this.addEditToolbar().then(() => {
+                    this.div?.classList.contains(`selectedEditor`) && this._editToolbar?.show();
+                  }));
         }
         focus() {
           this.div &&
@@ -5908,13 +6129,12 @@ var P,
                   this.#S.size === 0 && (this.#S = null));
               }, e._telemetryTimeout)),
               this.#S.set(n, r));
-            return;
-          }
-          ((t.type ||= this.editorType),
-            this._uiManager._eventBus.dispatch(`reporttelemetry`, {
-              source: this,
-              details: { type: `editing`, data: t },
-            }));
+          } else
+            ((t.type ||= this.editorType),
+              this._uiManager._eventBus.dispatch(`reporttelemetry`, {
+                source: this,
+                details: { type: `editing`, data: t },
+              }));
         }
         show(e = this._isVisible) {
           (this.div.classList.toggle(`hidden`, !e), (this._isVisible = e));
@@ -5926,16 +6146,12 @@ var P,
           (this.div && (this.div.tabIndex = -1), (this.#a = !0));
         }
         updateFakeAnnotationElement(e) {
-          if (!this.#d && !this.deleted) {
-            this.#d = e.addFakeAnnotation(this);
-            return;
-          }
-          if (this.deleted) {
-            (this.#d.remove(), (this.#d = null));
-            return;
-          }
-          (this.hasEditedComment || this._hasBeenMoved || this._hasBeenResized) &&
-            this.#d.updateEdited({ rect: this.getPDFRect(), popup: this.comment });
+          !this.#d && !this.deleted
+            ? (this.#d = e.addFakeAnnotation(this))
+            : this.deleted
+              ? (this.#d.remove(), (this.#d = null))
+              : (this.hasEditedComment || this._hasBeenMoved || this._hasBeenResized) &&
+                this.#d.updateEdited({ rect: this.getPDFRect(), popup: this.comment });
         }
         renderAnnotationElement(e) {
           if (this.deleted) return (e.hide(), null);
@@ -5957,7 +6173,7 @@ var P,
           t?.nodeName === `DIV` && t.classList.contains(`annotationContent`) && t.remove();
         }
       }),
-      (on = class extends W {
+      (vn = class extends G {
         constructor(e) {
           (super(e), (this.annotationElementId = e.annotationElementId), (this.deleted = !0));
         }
@@ -5965,12 +6181,12 @@ var P,
           return this.serializeDeleted();
         }
       }),
-      (sn = 3285377520),
-      (G = 4294901760),
-      (cn = 65535),
-      (ln = class {
+      (yn = 3285377520),
+      (K = 4294901760),
+      (bn = 65535),
+      (xn = class {
         constructor(e) {
-          ((this.h1 = e ? e & 4294967295 : sn), (this.h2 = e ? e & 4294967295 : sn));
+          ((this.h1 = e ? e | 0 : yn), (this.h2 = e ? e | 0 : yn));
         }
         update(e) {
           let t, n;
@@ -5996,16 +6212,16 @@ var P,
           for (let e = 0; e < r; e++)
             e & 1
               ? ((o = a[e]),
-                (o = ((o * u) & G) | ((o * f) & cn)),
+                (o = ((o * u) & K) | ((o * f) & bn)),
                 (o = (o << 15) | (o >>> 17)),
-                (o = ((o * d) & G) | ((o * p) & cn)),
+                (o = ((o * d) & K) | ((o * p) & bn)),
                 (c ^= o),
                 (c = (c << 13) | (c >>> 19)),
                 (c = c * 5 + 3864292196))
               : ((s = a[e]),
-                (s = ((s * u) & G) | ((s * f) & cn)),
+                (s = ((s * u) & K) | ((s * f) & bn)),
                 (s = (s << 15) | (s >>> 17)),
-                (s = ((s * d) & G) | ((s * p) & cn)),
+                (s = ((s * d) & K) | ((s * p) & bn)),
                 (l ^= s),
                 (l = (l << 13) | (l >>> 19)),
                 (l = l * 5 + 3864292196));
@@ -6016,9 +6232,9 @@ var P,
               o ^= t[r * 4 + 1] << 8;
             case 1:
               ((o ^= t[r * 4]),
-                (o = ((o * u) & G) | ((o * f) & cn)),
+                (o = ((o * u) & K) | ((o * f) & bn)),
                 (o = (o << 15) | (o >>> 17)),
-                (o = ((o * d) & G) | ((o * p) & cn)),
+                (o = ((o * d) & K) | ((o * p) & bn)),
                 r & 1 ? (c ^= o) : (l ^= o));
           }
           ((this.h1 = c), (this.h2 = l));
@@ -6028,18 +6244,18 @@ var P,
             t = this.h2;
           return (
             (e ^= t >>> 1),
-            (e = ((e * 3981806797) & G) | ((e * 36045) & cn)),
-            (t = ((t * 4283543511) & G) | (((((t << 16) | (e >>> 16)) * 2950163797) & G) >>> 16)),
+            (e = ((e * 3981806797) & K) | ((e * 36045) & bn)),
+            (t = ((t * 4283543511) & K) | (((((t << 16) | (e >>> 16)) * 2950163797) & K) >>> 16)),
             (e ^= t >>> 1),
-            (e = ((e * 444984403) & G) | ((e * 60499) & cn)),
-            (t = ((t * 3301882366) & G) | (((((t << 16) | (e >>> 16)) * 3120437893) & G) >>> 16)),
+            (e = ((e * 444984403) & K) | ((e * 60499) & bn)),
+            (t = ((t * 3301882366) & K) | (((((t << 16) | (e >>> 16)) * 3120437893) & K) >>> 16)),
             (e ^= t >>> 1),
             (e >>> 0).toString(16).padStart(8, `0`) + (t >>> 0).toString(16).padStart(8, `0`)
           );
         }
       }),
-      (un = Object.freeze({ map: null, hash: ``, transfer: void 0 })),
-      (dn = class {
+      (Sn = Object.freeze({ map: null, hash: ``, transfer: void 0 })),
+      (Cn = class {
         #e = !1;
         #t = null;
         #n = null;
@@ -6057,10 +6273,10 @@ var P,
         remove(e) {
           let t = this.#r.get(e);
           t !== void 0 &&
-            (t instanceof W && this.#n.delete(t.annotationElementId),
+            (t instanceof G && this.#n.delete(t.annotationElementId),
             this.#r.delete(e),
             this.#r.size === 0 && this.resetModified(),
-            !this.#r.values().some((e) => e instanceof W) && this.onAnnotationEditor?.(null));
+            !this.#r.values().some((e) => e instanceof G) && this.onAnnotationEditor?.(null));
         }
         setValue(e, t) {
           let n = this.#r.get(e),
@@ -6069,7 +6285,7 @@ var P,
             for (let [e, i] of Object.entries(t)) n[e] !== i && ((r = !0), (n[e] = i));
           else ((r = !0), this.#r.set(e, t));
           (r && this.#i(),
-            t instanceof W &&
+            t instanceof G &&
               ((this.#n ||= new Map()).set(t.annotationElementId, t),
               this.onAnnotationEditor?.(t.constructor._type)));
         }
@@ -6086,22 +6302,22 @@ var P,
           this.#e && ((this.#e = !1), this.onResetModified?.());
         }
         get print() {
-          return new fn(this);
+          return new wn(this);
         }
         get serializable() {
-          if (this.#r.size === 0) return un;
+          if (this.#r.size === 0) return Sn;
           let e = new Map(),
-            t = new ln(),
+            t = new xn(),
             n = [],
             r = Object.create(null),
             i = !1;
           for (let [n, a] of this.#r) {
-            let o = a instanceof W ? a.serialize(!1, r) : a;
+            let o = a instanceof G ? a.serialize(!1, r) : a;
             (a.page && ((a.pageIndex = a.page._pageIndex), delete a.page),
               o && (e.set(n, o), t.update(`${n}:${JSON.stringify(o)}`), (i ||= !!o.bitmap)));
           }
           if (i) for (let t of e.values()) t.bitmap && n.push(t.bitmap);
-          return e.size > 0 ? { map: e, hash: t.hexdigest(), transfer: n } : un;
+          return e.size > 0 ? { map: e, hash: t.hexdigest(), transfer: n } : Sn;
         }
         get editorStats() {
           let e = null,
@@ -6109,7 +6325,7 @@ var P,
             n = 0,
             r = 0;
           for (let i of this.#r.values()) {
-            if (!(i instanceof W)) {
+            if (!(i instanceof G)) {
               i.popup && (i.popup.deleted ? (r += 1) : (n += 1));
               continue;
             }
@@ -6122,7 +6338,7 @@ var P,
             let s = (e[o] ||= new Map());
             for (let [e, t] of Object.entries(a)) {
               if (e === `type`) continue;
-              let n = s.getOrInsertComputed(e, Nt);
+              let n = s.getOrInsertComputed(e, Vt);
               n.set(t, (n.get(t) ?? 0) + 1);
             }
           }
@@ -6152,7 +6368,7 @@ var P,
             for (let t of this.#n.values()) t.serialize() && e.push(t.annotationElementId);
           let t = ``;
           if (e.length) {
-            let n = new ln();
+            let n = new xn();
             (n.update(e.join(`,`)), (t = n.hexdigest()));
           }
           return (this.#t = { ids: new Set(e), hash: t });
@@ -6161,30 +6377,30 @@ var P,
           return this.#r.entries();
         }
       }),
-      (fn = class extends dn {
-        #e = un;
+      (wn = class extends Cn {
+        #e = Sn;
         constructor(e) {
           super();
           let { serializable: t } = e;
-          if (t === un) return;
+          if (t === Sn) return;
           let { map: n, hash: r, transfer: i } = t,
             a = structuredClone(n, i ? { transfer: i } : null);
           this.#e = { map: a, hash: r, transfer: [] };
         }
         get print() {
-          d(`Should not call PrintAnnotationStorage.print`);
+          p(`Should not call PrintAnnotationStorage.print`);
         }
         get serializable() {
           return this.#e;
         }
         get modifiedIds() {
-          return _(this, `modifiedIds`, { ids: new Set(), hash: `` });
+          return y(this, `modifiedIds`, { ids: new Set(), hash: `` });
         }
       }),
-      (pn = `__forcedDependency`),
-      ({ floor: mn, ceil: hn } = Math),
-      (gn = new Uint32Array(new Uint8Array([255, 255, 0, 0]).buffer)[0]),
-      (_n = class {
+      (Tn = `__forcedDependency`),
+      ({ floor: En, ceil: Dn } = Math),
+      (On = new Uint32Array(new Uint8Array([255, 255, 0, 0]).buffer)[0]),
+      (kn = class {
         #e;
         #t;
         constructor(e, t) {
@@ -6194,7 +6410,7 @@ var P,
           return this.#e.length;
         }
         isEmpty(e) {
-          return this.#e[e] === gn;
+          return this.#e[e] === On;
         }
         minX(e) {
           return this.#t[e * 4 + 0] / 256;
@@ -6209,12 +6425,12 @@ var P,
           return (this.#t[e * 4 + 3] + 1) / 256;
         }
       }),
-      (vn = (e, t) =>
+      (An = (e, t) =>
         e?.getOrInsertComputed(t, () => ({ dependencies: new Set(), isRenderingOperation: !1 }))),
-      (yn = class {
+      (jn = class {
         #e = [[1, 0, 0, 1, 0, 0]];
         #t = [-1 / 0, -1 / 0, 1 / 0, 1 / 0];
-        #n = new Float64Array(ct);
+        #n = new Float64Array(vt);
         _pendingBBoxIdx = -1;
         #r;
         #i;
@@ -6232,7 +6448,7 @@ var P,
           let n = new ArrayBuffer(e * 4);
           ((this.#a = new Uint8ClampedArray(n)),
             (this.#o = new Uint32Array(n)),
-            t && t.length > 0 ? (this.#o.set(t), this.#o.fill(gn, t.length)) : this.#o.fill(gn));
+            t && t.length > 0 ? (this.#o.set(t), this.#o.fill(On, t.length)) : this.#o.fill(On));
         }
         get clipBox() {
           return this.#t;
@@ -6265,22 +6481,22 @@ var P,
           return (n !== void 0 && (t?.(n, e), (this.#o[e] = this.#o[n])), this);
         }
         pushBaseTransform(e) {
-          return (this.#e.push(H.multiplyByDOMMatrix(this.#e.at(-1), e.getTransform())), this);
+          return (this.#e.push(U.multiplyByDOMMatrix(this.#e.at(-1), e.getTransform())), this);
         }
         popBaseTransform() {
           return (this.#e.length > 1 && this.#e.pop(), this);
         }
         resetBBox(e) {
           return (
-            this._pendingBBoxIdx !== e && ((this._pendingBBoxIdx = e), this.#n.set(ct, 0)),
+            this._pendingBBoxIdx !== e && ((this._pendingBBoxIdx = e), this.#n.set(vt, 0)),
             this
           );
         }
         recordClipBox(e, t, n, r, i, a) {
-          let o = H.multiplyByDOMMatrix(this.#e.at(-1), t.getTransform()),
-            s = ct.slice();
-          H.axialAlignedBoundingBox([n, i, r, a], o, s);
-          let c = H.intersect(this.#t, s);
+          let o = U.multiplyByDOMMatrix(this.#e.at(-1), t.getTransform()),
+            s = vt.slice();
+          U.axialAlignedBoundingBox([n, i, r, a], o, s);
+          let c = U.intersect(this.#t, s);
           return (
             c
               ? ((this.#t[0] = c[0]), (this.#t[1] = c[1]), (this.#t[2] = c[2]), (this.#t[3] = c[3]))
@@ -6291,15 +6507,15 @@ var P,
         recordBBox(e, t, n, r, i, a) {
           let o = this.#t;
           if (o[0] === 1 / 0) return this;
-          let s = H.multiplyByDOMMatrix(this.#e.at(-1), t.getTransform());
-          if (o[0] === -1 / 0) return (H.axialAlignedBoundingBox([n, i, r, a], s, this.#n), this);
-          let c = ct.slice();
+          let s = U.multiplyByDOMMatrix(this.#e.at(-1), t.getTransform());
+          if (o[0] === -1 / 0) return (U.axialAlignedBoundingBox([n, i, r, a], s, this.#n), this);
+          let c = vt.slice();
           return (
-            H.axialAlignedBoundingBox([n, i, r, a], s, c),
-            (this.#n[0] = w(c[0], o[0], this.#n[0])),
-            (this.#n[1] = w(c[1], o[1], this.#n[1])),
-            (this.#n[2] = w(c[2], this.#n[2], o[2])),
-            (this.#n[3] = w(c[3], this.#n[3], o[3])),
+            U.axialAlignedBoundingBox([n, i, r, a], s, c),
+            (this.#n[0] = E(c[0], o[0], this.#n[0])),
+            (this.#n[1] = E(c[1], o[1], this.#n[1])),
+            (this.#n[2] = E(c[2], this.#n[2], o[2])),
+            (this.#n[3] = E(c[3], this.#n[3], o[3])),
             this
           );
         }
@@ -6314,12 +6530,12 @@ var P,
         }
         recordOperation(e, t = !1, n) {
           if (this._pendingBBoxIdx !== e) return this;
-          let r = mn((this.#n[0] * 256) / this.#r),
-            i = mn((this.#n[1] * 256) / this.#i),
-            a = hn((this.#n[2] * 256) / this.#r),
-            o = hn((this.#n[3] * 256) / this.#i);
-          if ((he(this.#a, e, r, i, a, o), n))
-            for (let t of n) for (let n of t) n !== e && he(this.#a, n, r, i, a, o);
+          let r = En((this.#n[0] * 256) / this.#r),
+            i = En((this.#n[1] * 256) / this.#i),
+            a = Dn((this.#n[2] * 256) / this.#r),
+            o = Dn((this.#n[3] * 256) / this.#i);
+          if ((ye(this.#a, e, r, i, a, o), n))
+            for (let t of n) for (let n of t) n !== e && ye(this.#a, n, r, i, a, o);
           return (t || (this._pendingBBoxIdx = -1), this);
         }
         bboxToClipBoxDropOperation(e) {
@@ -6334,7 +6550,7 @@ var P,
           );
         }
         take() {
-          return new _n(this.#o, this.#a);
+          return new kn(this.#o, this.#a);
         }
         takeDebugMetadata() {
           throw Error(`Unreachable`);
@@ -6377,9 +6593,9 @@ var P,
           return this;
         }
       }),
-      (bn = class {
+      (Mn = class {
         #e = { __proto__: null };
-        #t = { __proto__: null, transform: [], moveText: [], sameLineText: [], [pn]: [] };
+        #t = { __proto__: null, transform: [], moveText: [], sameLineText: [], [Tn]: [] };
         #n = new Map();
         #r = new Set();
         #i = new Map();
@@ -6391,7 +6607,7 @@ var P,
             t &&
               ((this.#a = new Map()),
               (this.#o = (e, t) => {
-                vn(this.#a, t).dependencies.add(e);
+                An(this.#a, t).dependencies.add(e);
               })));
         }
         get clipBox() {
@@ -6408,7 +6624,7 @@ var P,
               transform: { __proto__: this.#t.transform },
               moveText: { __proto__: this.#t.moveText },
               sameLineText: { __proto__: this.#t.sameLineText },
-              [pn]: { __proto__: this.#t[pn] },
+              [Tn]: { __proto__: this.#t[Tn] },
             }),
             this.#s.save(e),
             this
@@ -6417,9 +6633,7 @@ var P,
         restore(e) {
           this.#s.restore(e, this.#o);
           let t = Object.getPrototypeOf(this.#e);
-          return t === null
-            ? this
-            : ((this.#e = t), (this.#t = Object.getPrototypeOf(this.#t)), this);
+          return (t === null || ((this.#e = t), (this.#t = Object.getPrototypeOf(this.#t))), this);
         }
         recordOpenMarker(e) {
           return (this.#s.recordOpenMarker(e, this.#o), this);
@@ -6458,14 +6672,14 @@ var P,
           this.#e[e] = this.#n.get(t) ?? n;
         }
         recordFutureForcedDependency(e, t) {
-          return (this.recordIncrementalData(pn, t), this);
+          return (this.recordIncrementalData(Tn, t), this);
         }
         inheritSimpleDataAsFutureForcedDependencies(e) {
           for (let t of e) t in this.#e && this.recordFutureForcedDependency(t, this.#e[t]);
           return this;
         }
         inheritPendingDependenciesAsFutureForcedDependencies() {
-          for (let e of this.#r) this.recordFutureForcedDependency(pn, e);
+          for (let e of this.#r) this.recordFutureForcedDependency(Tn, e);
           return this;
         }
         resetBBox(e) {
@@ -6486,8 +6700,8 @@ var P,
             ((c = s[2] !== s[0] && s[3] !== s[1] && this.#i.get(n)),
             c !== !1 &&
               ((l = [0, 0, 0, 0]),
-              H.axialAlignedBoundingBox(s, n.fontMatrix, l),
-              (r !== 1 || i !== 0 || a !== 0) && ge(r, -r, i, a, l),
+              U.axialAlignedBoundingBox(s, n.fontMatrix, l),
+              (r !== 1 || i !== 0 || a !== 0) && be(r, -r, i, a, l),
               c))
           )
             return this.recordBBox(e, t, l[0], l[2], l[1], l[3]);
@@ -6530,8 +6744,8 @@ var P,
           return (this.#n.has(t) && this.#r.add(this.#n.get(t)), this);
         }
         recordOperation(e, t = !1) {
-          if ((this.recordDependencies(e, [pn]), this.#a)) {
-            let t = vn(this.#a, e),
+          if ((this.recordDependencies(e, [Tn]), this.#a)) {
+            let t = An(this.#a, e),
               { dependencies: n } = t;
             (this.#r.forEach(n.add, n),
               this.#s._savesStack.forEach(n.add, n),
@@ -6567,7 +6781,7 @@ var P,
           return this.#a;
         }
       }),
-      (xn = class e {
+      (Nn = class e {
         #e;
         #t;
         #n;
@@ -6674,7 +6888,7 @@ var P,
           throw Error(`Unreachable`);
         }
       }),
-      (K = {
+      (q = {
         stroke: [
           `path`,
           `transform`,
@@ -6726,15 +6940,15 @@ var P,
           `sameLineText`,
         ],
         transform: [`transform`],
-        transformAndFill: [`transform`, `fillColor`],
+        transformAndFill: [`transform`, `filter`, `fillColor`],
       }),
-      (Sn = class e {
+      (Pn = class e {
         #e;
         #t;
         #n = 4;
         #r = 0;
         #i = new e.#a(this.#n * 6);
-        static #a = V.isFloat16ArraySupported ? Float16Array : Float32Array;
+        static #a = H.isFloat16ArraySupported ? Float16Array : Float32Array;
         constructor(e) {
           ((this.#e = e.width), (this.#t = e.height));
         }
@@ -6744,12 +6958,12 @@ var P,
             let t = new e.#a(this.#n * 6);
             (t.set(this.#i), (this.#i = t));
           }
-          let a = j(t),
+          let a = M(t),
             o;
           if (i[0] !== 1 / 0) {
-            let e = ct.slice();
-            H.axialAlignedBoundingBox([0, -r, n, 0], a, e);
-            let t = H.intersect(i, e);
+            let e = vt.slice();
+            U.axialAlignedBoundingBox([0, -r, n, 0], a, e);
+            let t = U.intersect(i, e);
             if (!t) return;
             let [s, c, l, u] = t;
             if (s !== e[0] || c !== e[1] || l !== e[2] || u !== e[3]) {
@@ -6771,9 +6985,9 @@ var P,
           }
           (o ||
             ((o = [0, -r, 0, 0, n, -r]),
-            H.applyTransform(o, a, 0),
-            H.applyTransform(o, a, 2),
-            H.applyTransform(o, a, 4)),
+            U.applyTransform(o, a, 0),
+            U.applyTransform(o, a, 2),
+            U.applyTransform(o, a, 4)),
             (o[0] /= this.#e),
             (o[1] /= this.#t),
             (o[2] /= this.#e),
@@ -6787,34 +7001,35 @@ var P,
           return this.#i.subarray(0, this.#r * 6);
         }
       }),
-      (Cn = class {
+      (Fn = /\p{Cc}/u),
+      (In = class {
         #e = new Set();
-        #t = null;
+        #t = new Set();
+        #n = null;
         constructor({ ownerDocument: e = globalThis.document, styleElement: t = null }) {
           ((this._document = e),
-            (this.nativeFontFaces = new Set()),
             (this.styleElement = null),
             (this.loadingRequests = []),
             (this.loadTestFontId = 0));
         }
         addNativeFontFace(e) {
-          (this.nativeFontFaces.add(e), this._document.fonts.add(e));
+          (this.#e.add(e), this._document.fonts.add(e));
         }
         removeNativeFontFace(e) {
-          (this.nativeFontFaces.delete(e), this._document.fonts.delete(e));
+          (this.#e.delete(e), this._document.fonts.delete(e));
         }
         insertRule(e) {
-          let t = this.#n();
+          let t = this.#r();
           t.insertRule(e, t.cssRules.length);
         }
-        #n() {
-          if (this.#t) return this.#t;
+        #r() {
+          if (this.#n) return this.#n;
           let e = this._document.defaultView?.CSSStyleSheet || globalThis.CSSStyleSheet;
           if (!this.styleElement && e) {
             let { adoptedStyleSheets: t } = this._document;
             if (t) {
               let n = new e();
-              return (t.push(n), (this.#t = n));
+              return (t.push(n), (this.#n = n));
             }
           }
           return (
@@ -6823,39 +7038,37 @@ var P,
               this._document.documentElement
                 .getElementsByTagName(`head`)[0]
                 .append(this.styleElement)),
-            (this.#t = this.styleElement.sheet)
+            (this.#n = this.styleElement.sheet)
           );
         }
         clear() {
-          for (let e of this.nativeFontFaces) this._document.fonts.delete(e);
-          if ((this.nativeFontFaces.clear(), this.#e.clear(), this.#t)) {
+          for (let e of this.#e) this._document.fonts.delete(e);
+          if ((this.#e.clear(), this.#t.clear(), this.#n)) {
             let { adoptedStyleSheets: e } = this._document;
-            (e?.includes(this.#t) &&
-              (this._document.adoptedStyleSheets = e.filter((e) => e !== this.#t)),
-              (this.#t = null));
+            (e?.includes(this.#n) &&
+              (this._document.adoptedStyleSheets = e.filter((e) => e !== this.#n)),
+              (this.#n = null));
           }
-          this.styleElement &&= (this.styleElement.remove(), null);
+          (this.styleElement?.remove(), (this.styleElement = null));
         }
         async loadSystemFont({ systemFontInfo: e, disableFontFace: t, _inspectFont: n }) {
-          if (!(!e || this.#e.has(e.loadedName))) {
+          if (e && !this.#t.has(e.loadedName)) {
             if (
-              (f(!t, "loadSystemFont shouldn't be called when `disableFontFace` is set."),
+              (m(!t, "loadSystemFont shouldn't be called when `disableFontFace` is set."),
               this.isFontLoadingAPISupported)
             ) {
               let { loadedName: t, src: r, style: i } = e,
                 a = new FontFace(t, r, i);
               this.addNativeFontFace(a);
               try {
-                (await a.load(), this.#e.add(t), n?.(e));
+                (await a.load(), this.#t.add(t), n?.(e));
               } catch {
-                (u(
+                (f(
                   `Cannot load system font: ${e.baseFontName}, installing it could help to improve PDF rendering.`
                 ),
                   this.removeNativeFontFace(a));
               }
-              return;
-            }
-            d(`Not implemented: loadSystemFont without the Font Loading API.`);
+            } else p(`Not implemented: loadSystemFont without the Font Loading API.`);
           }
         }
         async bind(e) {
@@ -6872,7 +7085,7 @@ var P,
                 await t.loaded;
               } catch (n) {
                 throw (
-                  u(`Failed to load font '${t.family}': '${n}'.`),
+                  f(`Failed to load font '${t.family}': '${n}'.`),
                   (e.disableFontFace = !0),
                   n
                 );
@@ -6883,41 +7096,33 @@ var P,
           let t = e.createFontFaceRule();
           if (t) {
             if ((this.insertRule(t), this.isSyncFontLoadingSupported)) return;
-            await new Promise((t) => {
-              let n = this._queueLoadingCallback(t);
-              this._prepareFontLoadEvent(e, n);
-            });
+            await this.#i(e);
           }
         }
         get isFontLoadingAPISupported() {
-          let e = !!this._document?.fonts;
-          return _(this, `isFontLoadingAPISupported`, e);
+          return y(this, `isFontLoadingAPISupported`, !!this._document?.fonts);
         }
         get isSyncFontLoadingSupported() {
-          return _(this, `isSyncFontLoadingSupported`, P || V.platform.isFirefox);
+          return y(this, `isSyncFontLoadingSupported`, P || H.platform.isFirefox);
         }
-        _queueLoadingCallback(e) {
+        #i(e) {
           function t() {
             for (
-              f(!r.done, `completeRequest() cannot be called twice.`), r.done = !0;
+              m(!a.done, `completeRequest() cannot be called twice.`), a.done = !0;
               n.length > 0 && n[0].done;
             ) {
               let e = n.shift();
-              setTimeout(e.callback, 0);
+              setTimeout(e.resolve, 0);
             }
           }
           let { loadingRequests: n } = this,
-            r = { done: !1, complete: t, callback: e };
-          return (n.push(r), r);
-        }
-        get _loadTestFont() {
-          let e = atob(
-            `T1RUTwALAIAAAwAwQ0ZGIDHtZg4AAAOYAAAAgUZGVE1lkzZwAAAEHAAAABxHREVGABQAFQAABDgAAAAeT1MvMlYNYwkAAAEgAAAAYGNtYXABDQLUAAACNAAAAUJoZWFk/xVFDQAAALwAAAA2aGhlYQdkA+oAAAD0AAAAJGhtdHgD6AAAAAAEWAAAAAZtYXhwAAJQAAAAARgAAAAGbmFtZVjmdH4AAAGAAAAAsXBvc3T/hgAzAAADeAAAACAAAQAAAAEAALZRFsRfDzz1AAsD6AAAAADOBOTLAAAAAM4KHDwAAAAAA+gDIQAAAAgAAgAAAAAAAAABAAADIQAAAFoD6AAAAAAD6AABAAAAAAAAAAAAAAAAAAAAAQAAUAAAAgAAAAQD6AH0AAUAAAKKArwAAACMAooCvAAAAeAAMQECAAACAAYJAAAAAAAAAAAAAQAAAAAAAAAAAAAAAFBmRWQAwAAuAC4DIP84AFoDIQAAAAAAAQAAAAAAAAAAACAAIAABAAAADgCuAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAMAAQQJAAAAAgABAAMAAQQJAAEAAgABAAMAAQQJAAIAAgABAAMAAQQJAAMAAgABAAMAAQQJAAQAAgABAAMAAQQJAAUAAgABAAMAAQQJAAYAAgABWABYAAAAAAAAAwAAAAMAAAAcAAEAAAAAADwAAwABAAAAHAAEACAAAAAEAAQAAQAAAC7//wAAAC7////TAAEAAAAAAAABBgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAD/gwAyAAAAAQAAAAAAAAAAAAAAAAAAAAABAAQEAAEBAQJYAAEBASH4DwD4GwHEAvgcA/gXBIwMAYuL+nz5tQXkD5j3CBLnEQACAQEBIVhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYAAABAQAADwACAQEEE/t3Dov6fAH6fAT+fPp8+nwHDosMCvm1Cvm1DAz6fBQAAAAAAAABAAAAAMmJbzEAAAAAzgTjFQAAAADOBOQpAAEAAAAAAAAADAAUAAQAAAABAAAAAgABAAAAAAAAAAAD6AAAAAAAAA==`
-          );
-          return _(this, `_loadTestFont`, e);
-        }
-        _prepareFontLoadEvent(e, t) {
-          function n(e, t) {
+            { promise: r, resolve: i } = Promise.withResolvers(),
+            a = { done: !1, resolve: i };
+          (n.push(a),
+            (this._loadTestFont ??= atob(
+              `T1RUTwALAIAAAwAwQ0ZGIDHtZg4AAAOYAAAAgUZGVE1lkzZwAAAEHAAAABxHREVGABQAFQAABDgAAAAeT1MvMlYNYwkAAAEgAAAAYGNtYXABDQLUAAACNAAAAUJoZWFk/xVFDQAAALwAAAA2aGhlYQdkA+oAAAD0AAAAJGhtdHgD6AAAAAAEWAAAAAZtYXhwAAJQAAAAARgAAAAGbmFtZVjmdH4AAAGAAAAAsXBvc3T/hgAzAAADeAAAACAAAQAAAAEAALZRFsRfDzz1AAsD6AAAAADOBOTLAAAAAM4KHDwAAAAAA+gDIQAAAAgAAgAAAAAAAAABAAADIQAAAFoD6AAAAAAD6AABAAAAAAAAAAAAAAAAAAAAAQAAUAAAAgAAAAQD6AH0AAUAAAKKArwAAACMAooCvAAAAeAAMQECAAACAAYJAAAAAAAAAAAAAQAAAAAAAAAAAAAAAFBmRWQAwAAuAC4DIP84AFoDIQAAAAAAAQAAAAAAAAAAACAAIAABAAAADgCuAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAMAAQQJAAAAAgABAAMAAQQJAAEAAgABAAMAAQQJAAIAAgABAAMAAQQJAAMAAgABAAMAAQQJAAQAAgABAAMAAQQJAAUAAgABAAMAAQQJAAYAAgABWABYAAAAAAAAAwAAAAMAAAAcAAEAAAAAADwAAwABAAAAHAAEACAAAAAEAAQAAQAAAC7//wAAAC7////TAAEAAAAAAAABBgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAD/gwAyAAAAAQAAAAAAAAAAAAAAAAAAAAABAAQEAAEBAQJYAAEBASH4DwD4GwHEAvgcA/gXBIwMAYuL+nz5tQXkD5j3CBLnEQACAQEBIVhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYAAABAQAADwACAQEEE/t3Dov6fAH6fAT+fPp8+nwHDosMCvm1Cvm1DAz6fBQAAAAAAAABAAAAAMmJbzEAAAAAzgTjFQAAAADOBOQpAAEAAAAAAAAADAAUAAQAAAABAAAAAgABAAAAAAAAAAAD6AAAAAAAAA==`
+            )));
+          function o(e, t) {
             return (
               (e.charCodeAt(t) << 24) |
               (e.charCodeAt(t + 1) << 16) |
@@ -6925,188 +7130,170 @@ var P,
               (e.charCodeAt(t + 3) & 255)
             );
           }
-          function r(e) {
+          function s(e) {
             return String.fromCharCode((e >> 24) & 255, (e >> 16) & 255, (e >> 8) & 255, e & 255);
           }
-          function i(e, t, n, r) {
+          function c(e, t, n, r) {
             let i = e.substring(0, t),
               a = e.substring(t + n);
             return i + r + a;
           }
-          let a,
-            o,
-            s = this._document.createElement(`canvas`);
-          ((s.width = 1), (s.height = 1));
-          let c = s.getContext(`2d`),
-            l = 0;
-          function d(e, t) {
-            if (++l > 30) {
-              (u(`Load test font never loaded.`), t());
-              return;
-            }
-            if (
-              ((c.font = `30px ` + e),
-              c.fillText(`.`, 0, 20),
-              c.getImageData(0, 0, 1, 1).data[3] > 0)
-            ) {
-              t();
-              return;
-            }
-            setTimeout(d.bind(null, e, t));
+          let l,
+            u,
+            d = this._document.createElement(`canvas`);
+          ((d.width = 1), (d.height = 1));
+          let p = d.getContext(`2d`),
+            h = 0;
+          function g(e, t) {
+            ++h > 30
+              ? (f(`Load test font never loaded.`), t())
+              : ((p.font = `30px ` + e),
+                p.fillText(`.`, 0, 20),
+                p.getImageData(0, 0, 1, 1).data[3] > 0 ? t() : setTimeout(g.bind(null, e, t)));
           }
-          let f = `lt${Date.now()}${this.loadTestFontId++}`,
-            p = this._loadTestFont;
-          p = i(p, 976, f.length, f);
-          let m = 1482184792,
-            h = n(p, 16);
-          for (a = 0, o = f.length - 3; a < o; a += 4) h = (h - m + n(f, a)) | 0;
-          (a < f.length && (h = (h - m + n(f + `XXX`, a)) | 0), (p = i(p, 16, 4, r(h))));
-          let g = `@font-face {font-family:"${f}";src:${`url(data:font/opentype;base64,${btoa(p)});`}}`;
-          this.insertRule(g);
-          let _ = this._document.createElement(`div`);
-          ((_.style.visibility = `hidden`),
-            (_.style.width = _.style.height = `10px`),
-            (_.style.position = `absolute`),
-            (_.style.top = _.style.left = `0px`));
-          for (let t of [e.loadedName, f]) {
+          let _ = `lt${Date.now()}${this.loadTestFontId++}`,
+            v = this._loadTestFont;
+          v = c(v, 976, _.length, _);
+          let y = 1482184792,
+            b = o(v, 16);
+          for (l = 0, u = _.length - 3; l < u; l += 4) b = (b - y + o(_, l)) | 0;
+          (l < _.length && (b = (b - y + o(_ + `XXX`, l)) | 0), (v = c(v, 16, 4, s(b))));
+          let x = `@font-face {font-family:"${_}";src:${`url(data:font/opentype;base64,${btoa(v)});`}}`;
+          this.insertRule(x);
+          let S = this._document.createElement(`div`);
+          ((S.style.visibility = `hidden`),
+            (S.style.width = S.style.height = `10px`),
+            (S.style.position = `absolute`),
+            (S.style.top = S.style.left = `0px`));
+          for (let t of [e.loadedName, _]) {
             let e = this._document.createElement(`span`);
-            ((e.textContent = `Hi`), (e.style.fontFamily = t), _.append(e));
+            ((e.textContent = `Hi`), (e.style.fontFamily = t), S.append(e));
           }
-          (this._document.body.append(_),
-            d(f, () => {
-              (_.remove(), t.complete());
-            }));
+          return (
+            this._document.body.append(S),
+            g(_, () => {
+              (S.remove(), t());
+            }),
+            r
+          );
         }
       }),
-      (wn = class {
-        compiledGlyphs = Object.create(null);
-        #e;
+      (Ln = class {
+        #e = new Map();
+        #t;
         constructor(e, t = null, n, r) {
-          ((this.#e = e),
+          ((this.#t = e),
             (this._inspectFont = t),
             n && (this.charProcOperatorList = n),
             r && Object.assign(this, r));
         }
         createNativeFontFace() {
-          if (!this.data || this.disableFontFace) return null;
-          let e;
-          if (!this.cssFontInfo) e = new FontFace(this.loadedName, this.data, {});
+          let { data: e } = this;
+          if (!e || this.disableFontFace) return null;
+          let t;
+          if (!this.cssFontInfo) t = new FontFace(this.loadedName, e, {});
           else {
-            let t = { weight: this.cssFontInfo.fontWeight };
+            let n = { weight: this.cssFontInfo.fontWeight };
             (this.cssFontInfo.italicAngle &&
-              (t.style = `oblique ${this.cssFontInfo.italicAngle}deg`),
-              (e = new FontFace(this.cssFontInfo.fontFamily, this.data, t)));
+              (n.style = `oblique ${this.cssFontInfo.italicAngle}deg`),
+              (t = new FontFace(Se(this.cssFontInfo.fontFamily), e, n)));
           }
-          return (this._inspectFont?.(this), e);
+          return (this._inspectFont?.(this), t);
         }
         createFontFaceRule() {
-          if (!this.data || this.disableFontFace) return null;
-          let e = `url(data:${this.mimetype};base64,${this.data.toBase64()});`,
-            t;
-          if (!this.cssFontInfo) t = `@font-face {font-family:"${this.loadedName}";src:${e}}`;
+          let { data: e } = this;
+          if (!e || this.disableFontFace) return null;
+          let t = `url(data:${this.mimetype};base64,${e.toBase64()});`,
+            n;
+          if (!this.cssFontInfo) n = `@font-face {font-family:"${this.loadedName}";src:${t}}`;
           else {
-            let n = `font-weight: ${this.cssFontInfo.fontWeight};`;
+            let e = `font-weight: ${this.cssFontInfo.fontWeight};`;
             (this.cssFontInfo.italicAngle &&
-              (n += `font-style: oblique ${this.cssFontInfo.italicAngle}deg;`),
-              (t = `@font-face {font-family:"${this.cssFontInfo.fontFamily}";${n}src:${e}}`));
+              (e += `font-style: oblique ${this.cssFontInfo.italicAngle}deg;`),
+              (n = `@font-face {font-family:${Se(this.cssFontInfo.fontFamily)};${e}src:${t}}`));
           }
-          return (this._inspectFont?.(this, e), t);
+          return (this._inspectFont?.(this, t), n);
         }
         getPathGenerator(e, t) {
-          if (this.compiledGlyphs[t] !== void 0) return this.compiledGlyphs[t];
-          let n = this.loadedName + `_path_` + t,
-            r;
+          let n = this.#e.get(t);
+          if (n) return n;
+          let r = `${this.loadedName}_path_${t}`,
+            i;
           try {
-            r = e.get(n);
+            i = e.get(r);
           } catch (e) {
-            u(`getPathGenerator - ignoring character: "${e}".`);
+            f(`getPathGenerator - ignoring character: "${e}".`);
           }
-          let i = pe(r?.path);
-          return (this.fontExtraProperties || e.delete(n), (this.compiledGlyphs[t] = i));
+          return ((n = he(i?.path)), this.fontExtraProperties || e.delete(r), this.#e.set(t, n), n);
         }
         get black() {
-          return this.#e.black;
+          return this.#t.black;
         }
         get bold() {
-          return this.#e.bold;
+          return this.#t.bold;
         }
         get disableFontFace() {
-          return this.#e.disableFontFace;
+          return this.#t.disableFontFace;
         }
         set disableFontFace(e) {
-          _(this, `disableFontFace`, !!e);
+          y(this, `disableFontFace`, !!e);
         }
         get fontExtraProperties() {
-          return this.#e.fontExtraProperties;
+          return this.#t.fontExtraProperties;
         }
         get isInvalidPDFjsFont() {
-          return this.#e.isInvalidPDFjsFont;
+          return this.#t.isInvalidPDFjsFont;
         }
         get isType3Font() {
-          return this.#e.isType3Font;
+          return this.#t.isType3Font;
         }
         get italic() {
-          return this.#e.italic;
+          return this.#t.italic;
         }
         get missingFile() {
-          return this.#e.missingFile;
+          return this.#t.missingFile;
         }
         get remeasure() {
-          return this.#e.remeasure;
+          return this.#t.remeasure;
         }
         get vertical() {
-          return this.#e.vertical;
-        }
-        get ascent() {
-          return this.#e.ascent;
-        }
-        get defaultWidth() {
-          return this.#e.defaultWidth;
-        }
-        get descent() {
-          return this.#e.descent;
+          return this.#t.vertical;
         }
         get bbox() {
-          return this.#e.bbox;
+          return this.#t.bbox;
         }
         get fontMatrix() {
-          return this.#e.fontMatrix;
+          return this.#t.fontMatrix;
         }
         get fallbackName() {
-          return this.#e.fallbackName;
+          return this.#t.fallbackName;
         }
         get loadedName() {
-          return this.#e.loadedName;
+          return this.#t.loadedName;
         }
         get mimetype() {
-          return this.#e.mimetype;
-        }
-        get name() {
-          return this.#e.name;
+          return this.missingFile ? null : `font/opentype`;
         }
         get data() {
-          return this.#e.data;
+          return this.#t.data;
         }
         clearData() {
-          this.#e.clearData();
+          this.#t.clearData();
         }
         get cssFontInfo() {
-          return this.#e.cssFontInfo;
+          return this.#t.cssFontInfo;
         }
         get systemFontInfo() {
-          return this.#e.systemFontInfo;
-        }
-        get defaultVMetrics() {
-          return this.#e.defaultVMetrics;
+          return this.#t.systemFontInfo;
         }
       }),
-      (Tn = class {
+      (Rn = class {
         static strings = [`fontFamily`, `fontWeight`, `italicAngle`];
       }),
-      (En = class {
+      (zn = class {
         static strings = [`css`, `loadedName`, `baseFontName`, `src`];
       }),
-      (q = class {
+      (Bn = class {
         static bools = [
           `black`,
           `bold`,
@@ -7119,15 +7306,12 @@ var P,
           `remeasure`,
           `vertical`,
         ];
-        static numbers = [`ascent`, `defaultWidth`, `descent`];
-        static strings = [`fallbackName`, `loadedName`, `mimetype`, `name`];
-        static OFFSET_NUMBERS = Math.ceil((this.bools.length * 2) / 8);
-        static OFFSET_BBOX = this.OFFSET_NUMBERS + this.numbers.length * 8;
+        static strings = [`fallbackName`, `loadedName`];
+        static OFFSET_BBOX = Math.ceil((this.bools.length * 2) / 8);
         static OFFSET_FONT_MATRIX = this.OFFSET_BBOX + 1 + 8;
-        static OFFSET_DEFAULT_VMETRICS = this.OFFSET_FONT_MATRIX + 1 + 48;
-        static OFFSET_STRINGS = this.OFFSET_DEFAULT_VMETRICS + 1 + 6;
+        static OFFSET_STRINGS = this.OFFSET_FONT_MATRIX + 1 + 48;
       }),
-      (Dn = class {
+      (Vn = class {
         static KIND = 0;
         static HAS_BBOX = 1;
         static HAS_BACKGROUND = 2;
@@ -7137,219 +7321,179 @@ var P,
         static N_STOP = 12;
         static N_FIGURES = 16;
       }),
-      (On = class {
-        #e;
-        #t = new TextDecoder();
-        #n;
-        constructor(e) {
-          ((this.#e = e), (this.#n = new DataView(e)));
+      (Hn = class {
+        static get decoder() {
+          return y(this, `decoder`, new TextDecoder());
         }
-        #r(e) {
-          f(e < Tn.strings.length, `Invalid string index`);
-          let t = 0;
-          for (let n = 0; n < e; n++) t += this.#n.getUint32(t) + 4;
-          let n = this.#n.getUint32(t);
-          return this.#t.decode(new Uint8Array(this.#e, t + 4, n));
+        static get encoder() {
+          return y(this, `encoder`, new TextEncoder());
+        }
+      }),
+      (Un = class {
+        #e;
+        #t;
+        constructor(e) {
+          ((this.#e = e), (this.#t = new DataView(e)));
+        }
+        #n(e) {
+          return (m(e < Rn.strings.length, `Invalid string index`), Ce(this.#e, this.#t, e));
         }
         get fontFamily() {
-          return this.#r(0);
+          return y(this, `fontFamily`, this.#n(0));
         }
         get fontWeight() {
-          return this.#r(1);
+          return y(this, `fontWeight`, this.#n(1));
         }
         get italicAngle() {
-          return this.#r(2);
+          return y(this, `italicAngle`, this.#n(2));
         }
       }),
-      (kn = class {
+      (Wn = class {
         #e;
-        #t = new TextDecoder();
-        #n;
+        #t;
         constructor(e) {
-          ((this.#e = e), (this.#n = new DataView(e)));
+          ((this.#e = e), (this.#t = new DataView(e)));
         }
-        get guessFallback() {
-          return this.#n.getUint8(0) !== 0;
-        }
-        #r(e) {
-          f(e < En.strings.length, `Invalid string index`);
-          let t = 5;
-          for (let n = 0; n < e; n++) t += this.#n.getUint32(t) + 4;
-          let n = this.#n.getUint32(t);
-          return this.#t.decode(new Uint8Array(this.#e, t + 4, n));
+        #n(e) {
+          return (m(e < zn.strings.length, `Invalid string index`), Ce(this.#e, this.#t, e, 4));
         }
         get css() {
-          return this.#r(0);
+          return y(this, `css`, this.#n(0));
         }
         get loadedName() {
-          return this.#r(1);
+          return y(this, `loadedName`, this.#n(1));
         }
         get baseFontName() {
-          return this.#r(2);
+          return y(this, `baseFontName`, this.#n(2));
         }
         get src() {
-          return this.#r(3);
+          return y(this, `src`, this.#n(3));
         }
         get style() {
-          let e = 1;
-          e += 4 + this.#n.getUint32(e);
-          let t = this.#n.getUint32(e),
-            n = this.#t.decode(new Uint8Array(this.#e, e + 4, t));
-          e += 4 + t;
-          let r = this.#n.getUint32(e);
-          return { style: n, weight: this.#t.decode(new Uint8Array(this.#e, e + 4, r)) };
+          let e = 0;
+          e += 4 + this.#t.getUint32(e);
+          let t = Ce(this.#e, this.#t, 0, e),
+            n = Ce(this.#e, this.#t, 1, e);
+          return y(this, `style`, { style: t, weight: n });
         }
       }),
-      (An = class {
+      (Gn = class {
         #e;
-        #t = new TextDecoder();
-        #n;
-        constructor({ buffer: e, extra: t }) {
-          ((this.#e = e), (this.#n = new DataView(e)), t && Object.assign(this, t));
+        #t;
+        constructor(e) {
+          ((this.#e = e), (this.#t = new DataView(e)));
         }
-        #r(e) {
-          f(e < q.bools.length, `Invalid boolean index`);
+        #n(e) {
+          m(e < Bn.bools.length, `Invalid boolean index`);
           let t = Math.floor(e / 4),
             n = (e * 2) % 8,
-            r = (this.#n.getUint8(t) >> n) & 3;
+            r = (this.#t.getUint8(t) >> n) & 3;
           return r === 0 ? void 0 : r === 2;
         }
         get black() {
-          return this.#r(0);
+          return y(this, `black`, this.#n(0));
         }
         get bold() {
-          return this.#r(1);
+          return y(this, `bold`, this.#n(1));
         }
         get disableFontFace() {
-          return this.#r(2);
+          return y(this, `disableFontFace`, this.#n(2));
         }
         get fontExtraProperties() {
-          return this.#r(3);
+          return y(this, `fontExtraProperties`, this.#n(3));
         }
         get isInvalidPDFjsFont() {
-          return this.#r(4);
+          return y(this, `isInvalidPDFjsFont`, this.#n(4));
         }
         get isType3Font() {
-          return this.#r(5);
+          return y(this, `isType3Font`, this.#n(5));
         }
         get italic() {
-          return this.#r(6);
+          return y(this, `italic`, this.#n(6));
         }
         get missingFile() {
-          return this.#r(7);
+          return y(this, `missingFile`, this.#n(7));
         }
         get remeasure() {
-          return this.#r(8);
+          return y(this, `remeasure`, this.#n(8));
         }
         get vertical() {
-          return this.#r(9);
+          return y(this, `vertical`, this.#n(9));
         }
-        #i(e) {
-          return (
-            f(e < q.numbers.length, `Invalid number index`),
-            this.#n.getFloat64(q.OFFSET_NUMBERS + e * 8)
-          );
-        }
-        get ascent() {
-          return this.#i(0);
-        }
-        get defaultWidth() {
-          return this.#i(1);
-        }
-        get descent() {
-          return this.#i(2);
-        }
-        #a(e, t, n, r) {
-          let i = this.#n.getUint8(e);
+        #r(e, t, n, r) {
+          let i = this.#t.getUint8(e++);
           if (i === 0) return;
-          (f(i === t, `Invalid array length.`), (e += 1));
+          m(i === t, `Invalid array length.`);
           let a = Array(i);
-          for (let t = 0; t < i; t++) ((a[t] = this.#n[n](e, !0)), (e += r));
+          for (let t = 0; t < i; t++) ((a[t] = this.#t[n](e, !0)), (e += r));
           return a;
         }
         get bbox() {
-          return this.#a(q.OFFSET_BBOX, 4, `getInt16`, 2);
+          return y(this, `bbox`, this.#r(Bn.OFFSET_BBOX, 4, `getInt16`, 2));
         }
         get fontMatrix() {
-          return this.#a(q.OFFSET_FONT_MATRIX, 6, `getFloat64`, 8);
+          return y(this, `fontMatrix`, this.#r(Bn.OFFSET_FONT_MATRIX, 6, `getFloat64`, 8));
         }
-        get defaultVMetrics() {
-          return this.#a(q.OFFSET_DEFAULT_VMETRICS, 3, `getInt16`, 2);
-        }
-        #o(e) {
-          f(e < q.strings.length, `Invalid string index`);
-          let t = q.OFFSET_STRINGS + 4;
-          for (let n = 0; n < e; n++) t += this.#n.getUint32(t) + 4;
-          let n = this.#n.getUint32(t);
-          return this.#t.decode(new Uint8Array(this.#e, t + 4, n));
+        #i(e) {
+          return (
+            m(e < Bn.strings.length, `Invalid string index`),
+            Ce(this.#e, this.#t, e, Bn.OFFSET_STRINGS + 4)
+          );
         }
         get fallbackName() {
-          return this.#o(0);
+          return y(this, `fallbackName`, this.#i(0));
         }
         get loadedName() {
-          return this.#o(1);
+          return y(this, `loadedName`, this.#i(1));
         }
-        get mimetype() {
-          return this.#o(2);
-        }
-        get name() {
-          return this.#o(3);
-        }
-        #s() {
-          let e = q.OFFSET_STRINGS,
-            t = this.#n.getUint32(e);
-          e += 4 + t;
-          let n = this.#n.getUint32(e);
-          e += 4 + n;
-          let r = this.#n.getUint32(e);
-          e += 4 + r;
-          let i = this.#n.getUint32(e);
-          return { offset: e, length: i };
+        #a(e) {
+          let t = Bn.OFFSET_STRINGS;
+          for (let n = 0; n <= e; n++) t += 4 + this.#t.getUint32(t);
+          let n = this.#t.getUint32(t);
+          return { offset: t, length: n };
         }
         get data() {
-          let { offset: e, length: t } = this.#s();
-          return t === 0 ? void 0 : new Uint8Array(this.#e, e + 4, t);
+          let { offset: e, length: t } = this.#a(2);
+          return t ? new Uint8Array(this.#e, e + 4, t) : void 0;
         }
         clearData() {
-          let { offset: e, length: t } = this.#s();
-          t !== 0 &&
-            (this.#n.setUint32(e, 0),
+          let { offset: e, length: t } = this.#a(2);
+          t &&
+            (this.#t.setUint32(e, 0),
             (this.#e = new Uint8Array(this.#e, 0, e + 4).slice().buffer),
-            (this.#n = new DataView(this.#e)));
+            (this.#t = new DataView(this.#e)));
         }
         get cssFontInfo() {
-          let e = q.OFFSET_STRINGS,
-            t = this.#n.getUint32(e);
-          e += 4 + t;
-          let n = this.#n.getUint32(e);
-          e += 4 + n;
-          let r = this.#n.getUint32(e);
-          if (r === 0) return null;
-          let i = new Uint8Array(r);
-          return (i.set(new Uint8Array(this.#e, e + 4, r)), new On(i.buffer));
+          let { offset: e, length: t } = this.#a(1),
+            n = null;
+          if (t) {
+            let r = new Uint8Array(this.#e, e + 4, t).slice();
+            n = new Un(r.buffer);
+          }
+          return y(this, `cssFontInfo`, n);
         }
         get systemFontInfo() {
-          let e = q.OFFSET_STRINGS,
-            t = this.#n.getUint32(e);
-          e += 4 + t;
-          let n = this.#n.getUint32(e);
-          if (n === 0) return null;
-          let r = new Uint8Array(n);
-          return (r.set(new Uint8Array(this.#e, e + 4, n)), new kn(r.buffer));
+          let { offset: e, length: t } = this.#a(0),
+            n = null;
+          if (t) {
+            let r = new Uint8Array(this.#e, e + 4, t).slice();
+            n = new Wn(r.buffer);
+          }
+          return y(this, `systemFontInfo`, n);
         }
       }),
-      (jn = class {
+      (Kn = class {
         constructor(e) {
           ((this.buffer = e), (this.view = new DataView(e)), (this.data = new Uint8Array(e)));
         }
         getIR() {
           let e = this.view,
-            t = this.data[Dn.KIND],
-            n = !!this.data[Dn.HAS_BBOX],
-            r = !!this.data[Dn.HAS_BACKGROUND],
-            i = e.getUint32(Dn.N_COORD, !0),
-            a = e.getUint32(Dn.N_COLOR, !0),
-            o = e.getUint32(Dn.N_STOP, !0),
+            t = this.data[Vn.KIND],
+            n = !!this.data[Vn.HAS_BBOX],
+            r = !!this.data[Vn.HAS_BACKGROUND],
+            i = e.getUint32(Vn.N_COORD, !0),
+            a = e.getUint32(Vn.N_COLOR, !0),
+            o = e.getUint32(Vn.N_STOP, !0),
             s = 20,
             c = new Float32Array(this.buffer, s, i * 2);
           s += i * 8;
@@ -7369,48 +7513,39 @@ var P,
           }
           let f = null;
           if ((r && ((f = new Uint8Array(this.buffer, s, 3)), (s += 3)), t === 1))
-            return [
-              `RadialAxial`,
-              `axial`,
-              d,
-              u,
-              Array.from(c.slice(0, 2)),
-              Array.from(c.slice(2, 4)),
-              null,
-              null,
-            ];
+            return [`RadialAxial`, `axial`, d, u, [c[0], c[1]], [c[2], c[3]], null, null];
           if (t === 2)
             return [`RadialAxial`, `radial`, d, u, [c[0], c[1]], [c[3], c[4]], c[2], c[5]];
           if (t === 3) {
-            let e = this.data[Dn.SHADING_TYPE],
+            let e = this.data[Vn.SHADING_TYPE],
               t = null;
             if (c.length > 0) {
-              t = ct.slice();
-              for (let e = 0, n = c.length; e < n; e += 2) H.pointBoundingBox(c[e], c[e + 1], t);
+              t = vt.slice();
+              for (let e = 0, n = c.length; e < n; e += 2) U.pointBoundingBox(c[e], c[e + 1], t);
             }
             return [`Mesh`, e, c, l, i, t, d, f];
           }
           throw Error(`Unsupported pattern kind: ${t}`);
         }
       }),
-      (Mn = class {
+      (qn = class {
         #e;
         constructor(e) {
           this.#e = e;
         }
         get path() {
-          return V.isFloat16ArraySupported ? new Float16Array(this.#e) : new Float32Array(this.#e);
+          return H.isFloat16ArraySupported ? new Float16Array(this.#e) : new Float32Array(this.#e);
         }
       }),
-      (Nn = (e) =>
+      (Jn = (e) =>
         typeof e == `object` &&
         Number.isInteger(e?.num) &&
         e.num >= 0 &&
         Number.isInteger(e?.gen) &&
         e.gen >= 0),
-      (Pn = (e) => typeof e == `object` && typeof e?.name == `string`),
-      (Fn = C.bind(null, Nn, Pn)),
-      (In = class {
+      (Yn = (e) => typeof e == `object` && typeof e?.name == `string`),
+      (Xn = T.bind(null, Jn, Yn)),
+      (Zn = class {
         #e = new Map();
         #t = Promise.resolve();
         postMessage(e, t) {
@@ -7424,7 +7559,7 @@ var P,
           if (n?.signal instanceof AbortSignal) {
             let { signal: i } = n;
             if (i.aborted) {
-              u('LoopbackPort - cannot use an `aborted` signal.');
+              f('LoopbackPort - cannot use an `aborted` signal.');
               return;
             }
             let a = () => this.removeEventListener(e, t);
@@ -7440,7 +7575,7 @@ var P,
           this.#e.clear();
         }
       }),
-      (Ln = { DATA: 1, ERROR: 2 }),
+      (Qn = { DATA: 1, ERROR: 2 }),
       (J = {
         CANCEL: 1,
         CANCEL_COMPLETE: 2,
@@ -7451,93 +7586,81 @@ var P,
         PULL_COMPLETE: 7,
         START_COMPLETE: 8,
       }),
-      (Rn = class {
-        #e = new AbortController();
+      ($n = class {
+        #e = new Map();
+        #t = new Map();
+        #n = 1;
+        #r;
+        #i = new AbortController();
+        #a;
+        #o = new Map();
+        #s = 1;
+        #c = new Map();
+        #l;
         constructor(e, t, n) {
-          ((this.sourceName = e),
-            (this.targetName = t),
-            (this.comObj = n),
-            (this.callbackId = 1),
-            (this.streamId = 1),
-            (this.streamSinks = Object.create(null)),
-            (this.streamControllers = Object.create(null)),
-            (this.callbackCapabilities = Object.create(null)),
-            (this.actionHandler = Object.create(null)),
-            n.addEventListener(`message`, this.#t.bind(this), { signal: this.#e.signal }));
+          ((this.#a = e),
+            (this.#l = t),
+            (this.#r = n),
+            n.addEventListener(`message`, this.#u.bind(this), { signal: this.#i.signal }));
         }
-        #t({ data: e }) {
-          if (e.targetName !== this.sourceName) return;
+        #u({ data: e }) {
+          if (e.targetName !== this.#a) return;
           if (e.stream) {
-            this.#r(e);
+            this.#f(e);
             return;
           }
           if (e.callback) {
-            let t = e.callbackId,
-              n = this.callbackCapabilities[t];
-            if (!n) throw Error(`Cannot resolve callback ${t}`);
-            if ((delete this.callbackCapabilities[t], e.callback === Ln.DATA)) n.resolve(e.data);
-            else if (e.callback === Ln.ERROR) n.reject(N(e.reason));
+            let { callbackId: t, callback: n } = e,
+              r = this.#t.get(t);
+            if (!r) throw Error(`Cannot resolve callback ${t}`);
+            if ((this.#t.delete(t), n === Qn.DATA)) r.resolve(e.data);
+            else if (n === Qn.ERROR) r.reject(N(e.reason));
             else throw Error(`Unexpected callback case`);
             return;
           }
-          let t = this.actionHandler[e.action];
+          let t = this.#e.get(e.action);
           if (!t) throw Error(`Unknown action from worker: ${e.action}`);
           if (e.callbackId) {
-            let n = this.sourceName,
+            let n = this.#a,
               r = e.sourceName,
-              i = this.comObj;
+              i = this.#r;
             Promise.try(t, e.data).then(
-              function (t) {
+              (t) => {
                 i.postMessage({
                   sourceName: n,
                   targetName: r,
-                  callback: Ln.DATA,
+                  callback: Qn.DATA,
                   callbackId: e.callbackId,
                   data: t,
                 });
               },
-              function (t) {
+              (t) => {
                 i.postMessage({
                   sourceName: n,
                   targetName: r,
-                  callback: Ln.ERROR,
+                  callback: Qn.ERROR,
                   callbackId: e.callbackId,
                   reason: N(t),
                 });
               }
             );
-            return;
-          }
-          if (e.streamId) {
-            this.#n(e);
-            return;
-          }
-          t(e.data);
+          } else e.streamId ? this.#d(e) : t(e.data);
         }
         on(e, t) {
-          let n = this.actionHandler;
-          if (n[e]) throw Error(`There is already an actionName called "${e}"`);
-          n[e] = t;
+          let n = this.#e;
+          if (n.has(e)) throw Error(`There is already a "${e}" handler.`);
+          n.set(e, t);
         }
         send(e, t, n) {
-          this.comObj.postMessage(
-            { sourceName: this.sourceName, targetName: this.targetName, action: e, data: t },
-            n
-          );
+          this.#r.postMessage({ sourceName: this.#a, targetName: this.#l, action: e, data: t }, n);
         }
         sendWithPromise(e, t, n) {
-          let r = this.callbackId++,
+          let r = this.#n++,
             i = Promise.withResolvers();
-          this.callbackCapabilities[r] = i;
+          this.#t.set(r, i);
           try {
-            this.comObj.postMessage(
-              {
-                sourceName: this.sourceName,
-                targetName: this.targetName,
-                action: e,
-                callbackId: r,
-                data: t,
-              },
+            this.#r.postMessage(
+              { sourceName: this.#a, targetName: this.#l, action: e, callbackId: r, data: t },
               n
             );
           } catch (e) {
@@ -7546,16 +7669,16 @@ var P,
           return i.promise;
         }
         sendWithStream(e, t, n, r) {
-          let i = this.streamId++,
-            a = this.sourceName,
-            o = this.targetName,
-            s = this.comObj;
+          let i = this.#s++,
+            a = this.#a,
+            o = this.#l,
+            s = this.#r;
           return new ReadableStream(
             {
               start: (n) => {
                 let c = Promise.withResolvers();
                 return (
-                  (this.streamControllers[i] = {
+                  this.#o.set(i, {
                     controller: n,
                     startCall: c,
                     pullCall: null,
@@ -7579,7 +7702,7 @@ var P,
               pull: (e) => {
                 let t = Promise.withResolvers();
                 return (
-                  (this.streamControllers[i].pullCall = t),
+                  (this.#o.get(i).pullCall = t),
                   s.postMessage({
                     sourceName: a,
                     targetName: o,
@@ -7591,11 +7714,11 @@ var P,
                 );
               },
               cancel: (e) => {
-                f(e instanceof Error, `cancel must have a valid reason`);
+                m(e instanceof Error, `cancel must have a valid reason`);
                 let t = Promise.withResolvers();
                 return (
-                  (this.streamControllers[i].cancelCall = t),
-                  (this.streamControllers[i].isClosed = !0),
+                  (this.#o.get(i).cancelCall = t),
+                  (this.#o.get(i).isClosed = !0),
                   s.postMessage({
                     sourceName: a,
                     targetName: o,
@@ -7610,13 +7733,13 @@ var P,
             n
           );
         }
-        #n(e) {
+        #d(e) {
           let t = e.streamId,
-            n = this.sourceName,
+            n = this.#a,
             r = e.sourceName,
-            i = this.comObj,
-            a = this,
-            o = this.actionHandler[e.action],
+            i = this.#r,
+            a = this.#c,
+            o = this.#e.get(e.action),
             s = {
               enqueue(e, a = 1, o) {
                 if (this.isCancelled) return;
@@ -7635,10 +7758,10 @@ var P,
                 this.isCancelled ||
                   ((this.isCancelled = !0),
                   i.postMessage({ sourceName: n, targetName: r, stream: J.CLOSE, streamId: t }),
-                  delete a.streamSinks[t]);
+                  a.delete(t));
               },
               error(e) {
-                (f(e instanceof Error, `error must have a valid reason`),
+                (m(e instanceof Error, `error must have a valid reason`),
                   !this.isCancelled &&
                     ((this.isCancelled = !0),
                     i.postMessage({
@@ -7658,9 +7781,9 @@ var P,
             };
           (s.sinkCapability.resolve(),
             (s.ready = s.sinkCapability.promise),
-            (this.streamSinks[t] = s),
+            a.set(t, s),
             Promise.try(o, e.data, s).then(
-              function () {
+              () => {
                 i.postMessage({
                   sourceName: n,
                   targetName: r,
@@ -7669,7 +7792,7 @@ var P,
                   success: !0,
                 });
               },
-              function (e) {
+              (e) => {
                 i.postMessage({
                   sourceName: n,
                   targetName: r,
@@ -7680,13 +7803,13 @@ var P,
               }
             ));
         }
-        #r(e) {
+        #f(e) {
           let t = e.streamId,
-            n = this.sourceName,
+            n = this.#a,
             r = e.sourceName,
-            i = this.comObj,
-            a = this.streamControllers[t],
-            o = this.streamSinks[t];
+            i = this.#r,
+            a = this.#o.get(t),
+            o = this.#c.get(t);
           switch (e.stream) {
             case J.START_COMPLETE:
               e.success ? a.startCall.resolve() : a.startCall.reject(N(e.reason));
@@ -7707,8 +7830,8 @@ var P,
               }
               (o.desiredSize <= 0 && e.desiredSize > 0 && o.sinkCapability.resolve(),
                 (o.desiredSize = e.desiredSize),
-                Promise.try(o.onPull || be).then(
-                  function () {
+                Promise.try(o.onPull || De).then(
+                  () => {
                     i.postMessage({
                       sourceName: n,
                       targetName: r,
@@ -7717,7 +7840,7 @@ var P,
                       success: !0,
                     });
                   },
-                  function (e) {
+                  (e) => {
                     i.postMessage({
                       sourceName: n,
                       targetName: r,
@@ -7729,27 +7852,27 @@ var P,
                 ));
               break;
             case J.ENQUEUE:
-              if ((f(a, `enqueue should have stream controller`), a.isClosed)) break;
+              if ((m(a, `enqueue should have stream controller`), a.isClosed)) break;
               a.controller.enqueue(e.chunk);
               break;
             case J.CLOSE:
-              if ((f(a, `close should have stream controller`), a.isClosed)) break;
-              ((a.isClosed = !0), a.controller.close(), this.#i(a, t));
+              if ((m(a, `close should have stream controller`), a.isClosed)) break;
+              ((a.isClosed = !0), a.controller.close(), this.#p(a, t));
               break;
             case J.ERROR:
-              (f(a, `error should have stream controller`),
+              (m(a, `error should have stream controller`),
                 a.controller.error(N(e.reason)),
-                this.#i(a, t));
+                this.#p(a, t));
               break;
             case J.CANCEL_COMPLETE:
               (e.success ? a.cancelCall.resolve() : a.cancelCall.reject(N(e.reason)),
-                this.#i(a, t));
+                this.#p(a, t));
               break;
             case J.CANCEL:
               if (!o) break;
               let s = N(e.reason);
-              (Promise.try(o.onCancel || be, s).then(
-                function () {
+              (Promise.try(o.onCancel || De, s).then(
+                () => {
                   i.postMessage({
                     sourceName: n,
                     targetName: r,
@@ -7758,7 +7881,7 @@ var P,
                     success: !0,
                   });
                 },
-                function (e) {
+                (e) => {
                   i.postMessage({
                     sourceName: n,
                     targetName: r,
@@ -7770,25 +7893,25 @@ var P,
               ),
                 o.sinkCapability.reject(s),
                 (o.isCancelled = !0),
-                delete this.streamSinks[t]);
+                this.#c.delete(t));
               break;
             default:
               throw Error(`Unexpected stream case`);
           }
         }
-        async #i(e, t) {
+        async #p(e, t) {
           (await Promise.allSettled([
             e.startCall?.promise,
             e.pullCall?.promise,
             e.cancelCall?.promise,
           ]),
-            delete this.streamControllers[t]);
+            this.#o.delete(t));
         }
         destroy() {
-          (this.#e?.abort(), (this.#e = null));
+          (this.#i?.abort(), (this.#i = null));
         }
       }),
-      (zn = class {
+      (er = class {
         #e = Object.freeze({ cMapUrl: `CMap`, standardFontDataUrl: `font`, wasmUrl: `wasm` });
         constructor({ cMapUrl: e = null, standardFontDataUrl: t = null, wasmUrl: n = null }) {
           ((this.cMapUrl = e), (this.standardFontDataUrl = t), (this.wasmUrl = n));
@@ -7800,7 +7923,7 @@ var P,
             case `wasmUrl`:
               break;
             default:
-              d(`Not implemented: ${e}`);
+              p(`Not implemented: ${e}`);
           }
           let n = this[e];
           if (!n) throw Error(`Ensure that the \`${e}\` API parameter is provided.`);
@@ -7810,16 +7933,16 @@ var P,
           });
         }
         async _fetch(e, t) {
-          d('Abstract method `_fetch` called.');
+          p('Abstract method `_fetch` called.');
         }
       }),
-      (Bn = class extends zn {
+      (tr = class extends er {
         async _fetch(e, t) {
-          let n = await T(e, t === `cMapUrl` && !e.endsWith(`.bcmap`) ? `text` : `bytes`);
-          return n instanceof Uint8Array ? n : y(n);
+          let n = await D(e, t === `cMapUrl` && !e.endsWith(`.bcmap`) ? `text` : `bytes`);
+          return n instanceof Uint8Array ? n : x(n);
         }
       }),
-      (Vn = class {
+      (nr = class {
         #e = !1;
         constructor({ enableHWA: e = !1 }) {
           this.#e = e;
@@ -7840,10 +7963,10 @@ var P,
           ((t.width = t.height = 0), (e.canvas = null), (e.context = null));
         }
         _createCanvas(e, t) {
-          d('Abstract method `_createCanvas` called.');
+          p('Abstract method `_createCanvas` called.');
         }
       }),
-      (Hn = class extends Vn {
+      (rr = class extends nr {
         constructor({ ownerDocument: e = globalThis.document, enableHWA: t = !1 }) {
           (super({ enableHWA: t }), (this._document = e));
         }
@@ -7852,7 +7975,7 @@ var P,
           return ((n.width = e), (n.height = t), n);
         }
       }),
-      (Un = class {
+      (ir = class {
         addFilter(e) {
           return `none`;
         }
@@ -7882,7 +8005,7 @@ var P,
         }
         destroy(e = !1) {}
       }),
-      (Wn = class extends Un {
+      (ar = class extends ir {
         #e;
         #t;
         #n;
@@ -7921,29 +8044,22 @@ var P,
           return this.#n;
         }
         #u(e) {
+          let t = (e) => e && Array.from(e, (e) => e / 255).join(`,`);
           if (e.length === 1) {
-            let t = e[0],
-              n = Array(256);
-            for (let e = 0; e < 256; e++) n[e] = t[e] / 255;
-            let r = n.join(`,`);
-            return [r, r, r];
+            let n = t(e[0]);
+            return [n, n, n];
           }
-          let [t, n, r] = e,
-            i = Array(256),
-            a = Array(256),
-            o = Array(256);
-          for (let e = 0; e < 256; e++)
-            ((i[e] = t[e] / 255), (a[e] = n[e] / 255), (o[e] = r[e] / 255));
-          return [i.join(`,`), a.join(`,`), o.join(`,`)];
+          let [n, r, i] = e;
+          return [t(n), t(r), t(i)];
         }
         #d(e) {
           if (this.#e === void 0) {
             this.#e = ``;
             let e = this.#i.URL;
             e !== this.#i.baseURI &&
-              (E(e)
-                ? u(`#createUrl: ignore "data:"-URL for performance reasons.`)
-                : (this.#e = h(e, ``)));
+              (O(e)
+                ? f(`#createUrl: ignore "data:"-URL for performance reasons.`)
+                : (this.#e = _(e, ``)));
           }
           return `url(${this.#e}#${e})`;
         }
@@ -7973,31 +8089,24 @@ var P,
           )
             return i.url;
           let a = this.#v(e);
-          e = H.makeHexColor(...a);
+          e = U.makeHexColor(...a);
           let o = this.#v(t);
           if (
-            ((t = H.makeHexColor(...o)),
-            (this.#l.style.color = ``),
-            (e === `#000000` && t === `#ffffff`) || e === t)
+            ((t = U.makeHexColor(...o)), this.#b(), (e === `#000000` && t === `#ffffff`) || e === t)
           )
             return i.url;
-          let s = Array(256);
-          for (let e = 0; e <= 255; e++) {
-            let t = e / 255;
-            s[e] = t <= 0.03928 ? t / 12.92 : ((t + 0.055) / 1.055) ** 2.4;
-          }
-          let c = s.join(`,`),
-            l = `g_${this.#r}_hcm_filter`,
-            u = (i.filter = this.#m(l));
-          (this.#g(c, c, c, u), this.#p(u));
-          let d = (e, t) => {
+          let s = Array.from({ length: 256 }, (e, t) => de(t / 255)).join(`,`),
+            c = `g_${this.#r}_hcm_filter`,
+            l = (i.filter = this.#m(c));
+          (this.#g(s, s, s, l), this.#p(l));
+          let u = (e, t) => {
             let n = a[e] / 255,
               r = o[e] / 255,
               i = Array(t + 1);
             for (let e = 0; e <= t; e++) i[e] = n + (e / t) * (r - n);
             return i.join(`,`);
           };
-          return (this.#g(d(0, 5), d(1, 5), d(2, 5), u), (i.url = this.#d(l)), i.url);
+          return (this.#g(u(0, 5), u(1, 5), u(2, 5), l), (i.url = this.#d(c)), i.url);
         }
         addSelectionHCMFilter(e, t) {
           return this.addHighlightHCMFilter(`selection`, e, t, `HighlightText`, `Highlight`);
@@ -8015,7 +8124,7 @@ var P,
           let t = e
             ? this.addSelectionHCMFilter(e.foreground, e.background)
             : this.addSelectionFilter();
-          return t === `none` || !V.platform.isFirefox
+          return t === `none` || !H.platform.isFirefox
             ? null
             : { 'backdrop-filter': t, 'background-color': `transparent` };
         }
@@ -8081,8 +8190,8 @@ var P,
           let [s, c] = [t, n].map(this.#v.bind(this)),
             l = Math.round(0.2126 * s[0] + 0.7152 * s[1] + 0.0722 * s[2]),
             u = Math.round(0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]),
-            [d, f] = [r, i].map(this.#b.bind(this));
-          (u < l && ([l, u, d, f] = [u, l, f, d]), (this.#l.style.color = ``));
+            [d, f] = [r, i].map(this.#x.bind(this));
+          (u < l && ([l, u, d, f] = [u, l, f, d]), this.#b());
           let p = (e, t, n) => {
               let r = Array(256),
                 i = (u - l) / n,
@@ -8142,6 +8251,7 @@ var P,
           );
         }
         #h(e, t, n) {
+          if (!n) return;
           let r = this.#i.createElementNS(F, t);
           (r.setAttribute(`type`, `discrete`), r.setAttribute(`tableValues`, n), e.append(r));
         }
@@ -8158,26 +8268,31 @@ var P,
         }
         #v(e) {
           return (
-            (this.#l.style.color = e),
-            re(getComputedStyle(this.#l).getPropertyValue(`color`))
+            (this.#l.style.color = `CanvasText`),
+            (this.#l.style.backgroundColor = e),
+            ie(getComputedStyle(this.#l).getPropertyValue(`background-color`))
           );
         }
         #y(e) {
           return (
-            (this.#l.style.color = e),
-            ne(getComputedStyle(this.#l).getPropertyValue(`color`))
+            (this.#l.style.color = `CanvasText`),
+            (this.#l.style.backgroundColor = e),
+            re(getComputedStyle(this.#l).getPropertyValue(`background-color`))
           );
         }
-        #b(e) {
+        #b() {
+          ((this.#l.style.color = ``), (this.#l.style.backgroundColor = ``));
+        }
+        #x(e) {
           let [t, n, r, i] = this.#y(e);
           if (i === 1) return [t, n, r];
           let [a, o, s] = this.#v(`Canvas`);
-          return [xe(t, a, i), xe(n, o, i), xe(r, s, i)];
+          return [Oe(t, a, i), Oe(n, o, i), Oe(r, s, i)];
         }
       }),
-      P && u('Please use the `legacy` build in Node.js environments.'),
-      (Gn = class extends Un {}),
-      (Kn = class extends Vn {
+      P && f('Please use the `legacy` build in Node.js environments.'),
+      (or = class extends ir {}),
+      (sr = class extends nr {
         _createCanvas(e, t) {
           return process
             .getBuiltinModule(`module`)
@@ -8185,12 +8300,12 @@ var P,
             .createCanvas(e, t);
         }
       }),
-      (qn = class extends zn {
+      (cr = class extends er {
         async _fetch(e, t) {
-          return Se(e);
+          return ke(e);
         }
       }),
-      (Jn = `
+      (lr = `
 struct Uniforms {
   offsetX      : f32,
   offsetY      : f32,
@@ -8234,7 +8349,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
   return vec4<f32>(in.color, 1.0);
 }
 `),
-      (Yn = class {
+      (ur = class {
         #e = null;
         #t = null;
         #n = null;
@@ -8260,7 +8375,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         loadMeshShader() {
           if (!this.#t || this.#n) return;
-          let e = this.#t.createShaderModule({ code: Jn });
+          let e = this.#t.createShaderModule({ code: lr });
           this.#n = this.#t.createRenderPipeline({
             layout: `auto`,
             vertex: {
@@ -8337,17 +8452,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (Xn = new Yn()),
+      (dr = new ur()),
       (Y = { FILL: `Fill`, STROKE: `Stroke`, SHADING: `Shading` }),
-      (Zn = class {
+      (fr = class {
+        matrix = null;
         isModifyingCurrentTransform() {
           return !1;
         }
         getPattern() {
-          d('Abstract method `getPattern` called.');
+          p('Abstract method `getPattern` called.');
         }
       }),
-      (Qn = class extends Zn {
+      (pr = class extends fr {
         constructor(e) {
           (super(),
             (this._type = e[1]),
@@ -8356,8 +8472,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this._p0 = e[4]),
             (this._p1 = e[5]),
             (this._r0 = e[6]),
-            (this._r1 = e[7]),
-            (this.matrix = null));
+            (this._r1 = e[7]));
         }
         isOriginBased() {
           return (
@@ -8380,7 +8495,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             i = this._p1;
           if (
             (t &&
-              ((r = r.slice()), (i = i.slice()), H.applyTransform(r, t), H.applyTransform(i, t)),
+              ((r = r.slice()), (i = i.slice()), U.applyTransform(r, t), U.applyTransform(i, t)),
             this._type === `axial`)
           )
             n = e.createLinearGradient(r[0], r[1], i[0], i[1]);
@@ -8389,7 +8504,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               o = this._r1;
             if (t) {
               let e = new Float32Array(2);
-              (H.singularValueDecompose2dScale(t, e), (a *= e[0]), (o *= e[0]));
+              (U.singularValueDecompose2dScale(t, e), (a *= e[0]), (o *= e[0]));
             }
             n = e.createRadialGradient(r[0], r[1], a, i[0], i[1], o);
           }
@@ -8399,66 +8514,70 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         _createReversedGradient(e, t = null) {
           let n = this._p1,
             r = this._p0;
-          t && ((n = n.slice()), (r = r.slice()), H.applyTransform(n, t), H.applyTransform(r, t));
+          t && ((n = n.slice()), (r = r.slice()), U.applyTransform(n, t), U.applyTransform(r, t));
           let i = this._r1,
             a = this._r0;
           if (t) {
             let e = new Float32Array(2);
-            (H.singularValueDecompose2dScale(t, e), (i *= e[0]), (a *= e[0]));
+            (U.singularValueDecompose2dScale(t, e), (i *= e[0]), (a *= e[0]));
           }
           let o = e.createRadialGradient(n[0], n[1], i, r[0], r[1], a),
             s = this._colorStops.map(([e, t]) => [1 - e, t]).reverse();
           for (let [e, t] of s) o.addColorStop(e, t);
           return o;
         }
+        _createRasterPattern(e, t, n, r, i, a) {
+          let o = Math.ceil(r[2] - r[0]) || 1,
+            s = Math.ceil(r[3] - r[1]) || 1,
+            c = t.canvasFactory.create(o, s),
+            l = c.context;
+          (l.clearRect(0, 0, o, s),
+            l.beginPath(),
+            l.rect(0, 0, o, s),
+            l.translate(-r[0], -r[1]),
+            (n = U.transform(n, [1, 0, 0, 1, r[0], r[1]])),
+            l.transform(...i),
+            Ie(l, this._bbox),
+            this.areConic() && ((l.fillStyle = this._createReversedGradient(l)), l.fill()),
+            (l.fillStyle = this._createGradient(l)),
+            l.fill(),
+            a?.applyToCanvas(l));
+          let u = e.createPattern(c.canvas, `no-repeat`);
+          return (t.canvasFactory.destroy(c), u.setTransform(new DOMMatrix(n)), u);
+        }
         getPattern(e, t, n, r) {
-          let i;
+          let i = t.current.transferMapsFallback;
           if (r === Y.STROKE || r === Y.FILL) {
-            if (this.isOriginBased()) {
-              let r = H.transform(n, t.baseTransform);
-              this.matrix && (r = H.transform(r, this.matrix));
+            if (this.isOriginBased() && !i) {
+              let r = U.transform(n, t.baseTransform);
+              this.matrix && (r = U.transform(r, this.matrix));
               let i = 0.001,
                 a = Math.hypot(r[0], r[1]),
                 o = Math.hypot(r[2], r[3]),
                 s = (r[0] * r[2] + r[1] * r[3]) / (a * o);
-              if (Math.abs(s) < i)
+              if (Math.abs(s) < i) {
                 if (this.isRadial()) {
                   if (Math.abs(a - o) < i) return this._createGradient(e, r);
                 } else return this._createGradient(e, r);
+              }
             }
-            let a = t.current.getClippedPathBoundingBox(r, j(e)) || [0, 0, 0, 0],
-              o = Math.ceil(a[2] - a[0]) || 1,
-              s = Math.ceil(a[3] - a[1]) || 1,
-              c = t.canvasFactory.create(o, s),
-              l = c.context;
-            (l.clearRect(0, 0, l.canvas.width, l.canvas.height),
-              l.beginPath(),
-              l.rect(0, 0, l.canvas.width, l.canvas.height),
-              l.translate(-a[0], -a[1]),
-              (n = H.transform(n, [1, 0, 0, 1, a[0], a[1]])),
-              l.transform(...t.baseTransform),
-              this.matrix && l.transform(...this.matrix),
-              ke(l, this._bbox),
-              this.areConic() && ((l.fillStyle = this._createReversedGradient(l)), l.fill()),
-              (l.fillStyle = this._createGradient(l)),
-              l.fill(),
-              (i = e.createPattern(c.canvas, `no-repeat`)),
-              t.canvasFactory.destroy(c));
-            let u = new DOMMatrix(n);
-            i.setTransform(u);
-          } else
-            (this.areConic() &&
-              (e.save(),
-              ke(e, this._bbox),
-              (e.fillStyle = this._createReversedGradient(e)),
-              e.fillRect(-1e10, -1e10, 2e10, 2e10),
-              e.restore()),
-              ke(e, this._bbox),
-              (i = this._createGradient(e)));
-          return i;
+            let a = t.current.getClippedPathBoundingBox(r, M(e)) || [0, 0, 0, 0],
+              o = this.matrix ? U.transform(t.baseTransform, this.matrix) : t.baseTransform;
+            return this._createRasterPattern(e, t, n, a, o, i);
+          }
+          return i && n
+            ? this._createRasterPattern(e, t, n, t.current.clipBox, M(e), i)
+            : (this.areConic() &&
+                (e.save(),
+                Ie(e, this._bbox),
+                (e.fillStyle = this._createReversedGradient(e)),
+                e.fillRect(-1e10, -1e10, 2e10, 2e10),
+                e.restore()),
+              Ie(e, this._bbox),
+              this._createGradient(e));
         }
       }),
-      ($n = class extends Zn {
+      (mr = class extends fr {
         constructor(e) {
           (super(),
             (this._posData = e[2]),
@@ -8467,66 +8586,69 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this._bounds = e[5]),
             (this._bbox = e[6]),
             (this._background = e[7]),
-            (this.matrix = null),
-            De());
+            Pe());
         }
-        _createMeshCanvas(e, t, n) {
-          let r = 1.1,
-            i = 3e3,
-            a = Math.floor(this._bounds[0]),
-            o = Math.floor(this._bounds[1]),
-            s = Math.ceil(this._bounds[2]) - a,
-            c = Math.ceil(this._bounds[3]) - o,
-            l = Math.min(Math.ceil(Math.abs(s * e[0] * r)), i) || 1,
-            u = Math.min(Math.ceil(Math.abs(c * e[1] * r)), i) || 1,
-            d = s ? s / l : 1,
+        _createMeshCanvas(e, t, n, r = null) {
+          let i = 1.1,
+            a = 3e3,
+            o = Math.floor(this._bounds[0]),
+            s = Math.floor(this._bounds[1]),
+            c = Math.ceil(this._bounds[2]) - o,
+            l = Math.ceil(this._bounds[3]) - s,
+            u = Math.min(Math.ceil(Math.abs(c * e[0] * i)), a) || 1,
+            d = Math.min(Math.ceil(Math.abs(l * e[1] * i)), a) || 1,
             f = c ? c / u : 1,
-            p = {
+            p = l ? l / d : 1,
+            m = {
               coords: this._posData,
               colors: this._colData,
-              offsetX: -a,
-              offsetY: -o,
-              scaleX: 1 / d,
-              scaleY: 1 / f,
+              offsetX: -o,
+              offsetY: -s,
+              scaleX: 1 / f,
+              scaleY: 1 / p,
             },
-            m = l + 4,
             h = u + 4,
-            g = n.create(m, h);
-          if (Ee() && this._vertexCount > 48)
-            g.context.drawImage(
-              Oe(this._posData, this._colData, this._vertexCount, p, t, m, h, 2),
+            g = d + 4,
+            _ = n.create(h, g);
+          if (Ne() && this._vertexCount > 48)
+            _.context.drawImage(
+              Fe(this._posData, this._colData, this._vertexCount, m, t, h, g, 2),
               0,
               0
             );
           else {
-            let e = g.context.createImageData(l, u);
+            let e = _.context.createImageData(u, d);
             if (t) {
               let n = e.data;
               for (let e = 0, r = n.length; e < r; e += 4)
                 ((n[e] = t[0]), (n[e + 1] = t[1]), (n[e + 2] = t[2]), (n[e + 3] = 255));
             }
             for (let t = 0, n = this._vertexCount; t < n; t += 3)
-              Ae(e, p, t, t + 1, t + 2, t, t + 1, t + 2);
-            g.context.putImageData(e, 2, 2);
+              Le(e, m, t, t + 1, t + 2, t, t + 1, t + 2);
+            _.context.putImageData(e, 2, 2);
           }
-          return { canvas: g.canvas, offsetX: a - 2 * d, offsetY: o - 2 * f, scaleX: d, scaleY: f };
+          return (
+            r?.applyToCanvas(_.context),
+            { canvas: _.canvas, offsetX: o - 2 * f, offsetY: s - 2 * p, scaleX: f, scaleY: p }
+          );
         }
         isModifyingCurrentTransform() {
           return !0;
         }
         getPattern(e, t, n, r) {
-          ke(e, this._bbox);
+          Ie(e, this._bbox);
           let i = new Float32Array(2);
-          if (r === Y.SHADING) H.singularValueDecompose2dScale(j(e), i);
+          if (r === Y.SHADING) U.singularValueDecompose2dScale(M(e), i);
           else if (this.matrix) {
-            H.singularValueDecompose2dScale(this.matrix, i);
+            U.singularValueDecompose2dScale(this.matrix, i);
             let [e, n] = i;
-            (H.singularValueDecompose2dScale(t.baseTransform, i), (i[0] *= e), (i[1] *= n));
-          } else H.singularValueDecompose2dScale(t.baseTransform, i);
+            (U.singularValueDecompose2dScale(t.baseTransform, i), (i[0] *= e), (i[1] *= n));
+          } else U.singularValueDecompose2dScale(t.baseTransform, i);
           let a = this._createMeshCanvas(
             i,
             r === Y.SHADING ? null : this._background,
-            t.canvasFactory
+            t.canvasFactory,
+            t.current.transferMapsFallback
           );
           (r !== Y.SHADING &&
             (e.setTransform(...t.baseTransform), this.matrix && e.transform(...this.matrix)),
@@ -8536,13 +8658,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return (t.canvasFactory.destroy(a), o);
         }
       }),
-      (er = class extends Zn {
+      (hr = class extends fr {
         getPattern() {
           return `hotpink`;
         }
       }),
-      (tr = { COLORED: 1, UNCOLORED: 2 }),
-      (nr = class e {
+      (gr = { COLORED: 1, UNCOLORED: 2 }),
+      (_r = class e {
         static MAX_PATTERN_SIZE = 3e3;
         constructor(e, t, n, r) {
           ((this.color = e[1]),
@@ -8557,7 +8679,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.ctx = t),
             (this.canvasGraphicsFactory = n),
             (this.baseTransform = r),
-            (this.patternBaseMatrix = this.matrix ? H.transform(r, this.matrix) : r));
+            (this.patternBaseMatrix = this.matrix ? U.transform(r, this.matrix) : r));
         }
         canSkipPatternCanvas([e, t, n, r]) {
           let [i, a, o, s] = this.bbox,
@@ -8571,15 +8693,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return d <= u && p <= f ? [u, f] : null;
         }
         updatePatternDims(e, t) {
-          let n = H.inverseTransform(this.patternBaseMatrix),
-            r = [e[0], e[1]],
-            i = [e[2], e[3]];
-          (H.applyTransform(r, n),
-            H.applyTransform(i, n),
-            (t[0] = Math.abs(i[0] - r[0])),
-            (t[1] = Math.abs(i[1] - r[1])),
-            (t[2] = Math.min(r[0], i[0])),
-            (t[3] = Math.min(r[1], i[1])));
+          let n = vt.slice();
+          (U.axialAlignedBoundingBox(e, U.inverseTransform(this.patternBaseMatrix), n),
+            (t[0] = n[2] - n[0]),
+            (t[1] = n[3] - n[1]),
+            (t[2] = n[0]),
+            (t[3] = n[1]));
         }
         _renderTileCanvas(e, t, n, r) {
           let [i, a, o, s] = this.bbox,
@@ -8588,13 +8707,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             u = this.canvasGraphicsFactory.createCanvasGraphics(l, t);
           return (
             (u.groupLevel = e.groupLevel),
+            (u.current.transferMapsFallback = e.current.transferMapsFallback),
             this.setFillAndStrokeStyleToContext(u, this.paintType, this.color),
             l.translate(-n.scale * i, -r.scale * a),
             u.transform(0, n.scale, 0, 0, r.scale, 0, 0),
             l.save(),
             u.dependencyTracker?.save(),
             this.clipBbox(u, i, a, o, s),
-            (u.baseTransform = j(u.ctx)),
+            (u.baseTransform = M(u.ctx)),
             u.executeOperatorList(this.operatorList),
             u.endDrawing(),
             u.dependencyTracker?.restore(),
@@ -8604,15 +8724,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         _getCombinedScales() {
           let e = new Float32Array(2);
-          H.singularValueDecompose2dScale(this.matrix, e);
+          U.singularValueDecompose2dScale(this.matrix, e);
           let [t, n] = e;
-          return (H.singularValueDecompose2dScale(this.baseTransform, e), [t * e[0], n * e[1]]);
+          return (U.singularValueDecompose2dScale(this.baseTransform, e), [t * e[0], n * e[1]]);
         }
         drawPattern(e, t, n = !1, [r, i], a) {
           let [o, s, c, l] = this.bbox,
             u = e.dependencyTracker;
           if (
-            (u && (e.dependencyTracker = new xn(u, a)),
+            (u && (e.dependencyTracker = new Nn(u, a)),
             e.save(),
             n ? e.ctx.clip(t, `evenodd`) : e.ctx.clip(t),
             e.ctx.setTransform(...this.patternBaseMatrix),
@@ -8633,7 +8753,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.setFillAndStrokeStyleToContext(e, this.paintType, this.color),
               this.clipBbox(e, o, s, c, l),
               e.baseTransformStack.push(e.baseTransform),
-              (e.baseTransform = j(e.ctx)),
+              (e.baseTransform = M(e.ctx)),
               e.executeOperatorList(this.operatorList),
               (e.baseTransform = e.baseTransformStack.pop()));
           (e.restore(), u && (e.dependencyTracker = u));
@@ -8642,32 +8762,40 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let [n, r, i, a] = this.bbox,
             o = i - n,
             s = a - r,
-            { xstep: c, ystep: u } = this;
-          ((c = Math.abs(c)), (u = Math.abs(u)), l(`TilingType: ` + this.tilingType));
-          let [d, f] = this._getCombinedScales(),
+            { xstep: c, ystep: l } = this;
+          ((c = Math.abs(c)), (l = Math.abs(l)), d(`TilingType: ` + this.tilingType));
+          let [u, f] = this._getCombinedScales(),
             p = o,
             m = s,
             h = !1,
             g = !1;
-          (Math.ceil(c * d) >= Math.ceil(o * d) ? (p = c) : (h = !0),
-            Math.ceil(u * f) >= Math.ceil(s * f) ? (m = u) : (g = !0));
-          let _ = this.getSizeAndScale(p, this.ctx.canvas.width, d),
+          (Math.ceil(c * u) >= Math.ceil(o * u) ? (p = c) : (h = !0),
+            Math.ceil(l * f) >= Math.ceil(s * f) ? (m = l) : (g = !0));
+          let _ = this.getSizeAndScale(p, this.ctx.canvas.width, u),
             v = this.getSizeAndScale(m, this.ctx.canvas.height, f),
             y = this._renderTileCanvas(e, t, _, v);
           if (h || g) {
             let t = y.canvas;
-            (h && (p = c), g && (m = u));
-            let i = this.getSizeAndScale(p, this.ctx.canvas.width, d),
+            (h && (p = c), g && (m = l));
+            let i = this.getSizeAndScale(p, this.ctx.canvas.width, u),
               a = this.getSizeAndScale(m, this.ctx.canvas.height, f),
-              l = i.size,
+              d = i.size,
               _ = a.size,
-              v = e.canvasFactory.create(l, _),
+              v = e.canvasFactory.create(d, _),
               b = v.context,
-              x = h ? Math.floor(o / c) : 0,
-              S = g ? Math.floor(s / u) : 0;
-            for (let e = 0; e <= x; e++)
-              for (let n = 0; n <= S; n++) b.drawImage(t, l * e, _ * n, l, _, 0, 0, l, _);
+              x = h ? Math.min(Math.floor(o / c), Math.ceil(t.width / d)) : 0,
+              S = g ? Math.min(Math.floor(s / l), Math.ceil(t.height / _)) : 0,
+              C = t,
+              w = null;
+            if (g) {
+              w = e.canvasFactory.create(t.width, _);
+              let n = w.context;
+              for (let e = S; e >= 0; e--) n.drawImage(t, 0, _ * e, t.width, _, 0, 0, t.width, _);
+              C = w.canvas;
+            }
+            for (let e = x; e >= 0; e--) b.drawImage(C, d * e, 0, d, _, 0, 0, d, _);
             return (
+              w && e.canvasFactory.destroy(w),
               e.canvasFactory.destroy(y),
               {
                 canvas: v.canvas,
@@ -8698,30 +8826,30 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             o = i - n,
             s = new Path2D();
           (s.rect(t, n, a, o),
-            H.axialAlignedBoundingBox([t, n, r, i], j(e.ctx), e.current.minMax),
+            U.axialAlignedBoundingBox([t, n, r, i], M(e.ctx), e.current.minMax),
             e.ctx.clip(s),
             e.current.updateClipFromPath());
         }
         setFillAndStrokeStyleToContext(e, t, n) {
-          let r = e.ctx,
-            i = e.current;
-          switch (((i.patternFill = i.patternStroke = !1), t)) {
-            case tr.COLORED:
-              let { fillStyle: e, strokeStyle: a } = this.ctx;
-              ((r.fillStyle = i.fillColor = e), (r.strokeStyle = i.strokeColor = a));
+          switch (t) {
+            case gr.COLORED:
+              n = `#000000`;
               break;
-            case tr.UNCOLORED:
-              ((r.fillStyle = r.strokeStyle = n), (i.fillColor = i.strokeColor = n));
+            case gr.UNCOLORED:
               break;
             default:
-              throw new Ot(`Unsupported paint type: ${t}`);
+              throw new It(`Unsupported paint type: ${t}`);
           }
+          let { ctx: r, current: i } = e;
+          ((i.patternFill = i.patternStroke = !1),
+            (r.fillStyle = r.strokeStyle = i.transferMapsFallback?.applyToColor(n) ?? n),
+            (i.fillColor = i.strokeColor = n));
         }
         isModifyingCurrentTransform() {
           return !1;
         }
         getPattern(e, t, n, r, i) {
-          let a = r === Y.SHADING ? n : H.transform(n, this.patternBaseMatrix),
+          let a = r === Y.SHADING ? n : U.transform(n, this.patternBaseMatrix),
             o = this.createPatternCanvas(t, i),
             s = new DOMMatrix(a);
           ((s = s.translate(o.offsetX, o.offsetY)), (s = s.scale(1 / o.scaleX, 1 / o.scaleY)));
@@ -8729,20 +8857,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return (t.canvasFactory.destroy(o.canvasEntry), c.setTransform(s), c);
         }
       }),
-      (rr = 16),
-      (ir = 100),
-      (ar = 15),
-      (or = 10),
+      (vr = 16),
+      (yr = 100),
+      (br = 15),
+      (xr = 10),
       (X = 16),
-      (sr = new DOMMatrix()),
       (Z = new Float32Array(2)),
-      (cr = class {
+      (Sr = class {
         alphaIsShape = !1;
         fontSize = 0;
         fontSizeScale = 1;
         textMatrix = null;
         textMatrixScale = 1;
-        fontMatrix = ut;
+        fontMatrix = bt;
         leading = 0;
         x = 0;
         y = 0;
@@ -8763,7 +8890,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         lineWidth = 1;
         activeSMask = null;
         transferMaps = `none`;
-        minMax = lt.slice();
+        transferMapsFallback = null;
+        minMax = yt.slice();
         constructor(e, t) {
           this.clipBox = new Float32Array([0, 0, e, t]);
         }
@@ -8779,8 +8907,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         getPathBoundingBox(e = Y.FILL, t = null) {
           let n = this.minMax.slice();
           if (e === Y.STROKE) {
-            (t || d(`Stroke bounding box must include transform.`),
-              H.singularValueDecompose2dScale(t, Z));
+            (t || p(`Stroke bounding box must include transform.`),
+              U.singularValueDecompose2dScale(t, Z));
             let e = (Z[0] * this.lineWidth) / 2,
               r = (Z[1] * this.lineWidth) / 2;
             ((n[0] -= e), (n[1] -= r), (n[2] += e), (n[3] += r));
@@ -8788,34 +8916,66 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return n;
         }
         updateClipFromPath() {
-          let e = H.intersect(this.clipBox, this.getPathBoundingBox());
+          let e = U.intersect(this.clipBox, this.getPathBoundingBox());
           this.startNewPathAndClipBox(e || [0, 0, 0, 0]);
         }
         isEmptyClip() {
           return this.minMax[0] === 1 / 0;
         }
         startNewPathAndClipBox(e) {
-          (this.clipBox.set(e, 0), this.minMax.set(lt, 0));
+          (this.clipBox.set(e, 0), this.minMax.set(yt, 0));
         }
         getClippedPathBoundingBox(e = Y.FILL, t = null) {
-          return H.intersect(this.clipBox, this.getPathBoundingBox(e, t));
+          return U.intersect(this.clipBox, this.getPathBoundingBox(e, t));
         }
       }),
-      (lr = [`butt`, `round`, `square`]),
-      (ur = [`miter`, `round`, `bevel`]),
-      (dr = {}),
-      (fr = {}),
-      (pr = class e {
-        #e = 0;
+      (Cr = class e {
+        #e;
+        constructor(t) {
+          let [n, r = n, i = n] = t,
+            { identityMap: a } = e;
+          this.#e = [n || a, r || a, i || a];
+        }
+        static get identityMap() {
+          return y(
+            this,
+            `identityMap`,
+            Uint8Array.from({ length: 256 }, (e, t) => t)
+          );
+        }
+        applyToColor(e) {
+          if (typeof e != `string` || !e.startsWith(`#`)) return e;
+          let [t, n, r] = re(e),
+            [i, a, o] = this.#e;
+          return U.makeHexColor(i[t], a[n], o[r]);
+        }
+        applyToImageData({ data: e }) {
+          let [t, n, r] = this.#e;
+          for (let i = 0, a = e.length; i < a; i += 4)
+            ((e[i] = t[e[i]]), (e[i + 1] = n[e[i + 1]]), (e[i + 2] = r[e[i + 2]]));
+        }
+        applyToCanvas(e) {
+          let { width: t, height: n } = e.canvas,
+            r = e.getImageData(0, 0, t, n);
+          (this.applyToImageData(r), e.putImageData(r, 0, 0));
+        }
+      }),
+      (wr = [`butt`, `round`, `square`]),
+      (Tr = [`miter`, `round`, `bevel`]),
+      (Er = {}),
+      (Dr = {}),
+      (Or = class e {
+        static #e = null;
         #t = 0;
-        #n = null;
+        #n = 0;
         #r = null;
         #i = null;
         #a = null;
-        #o = 1;
-        #s;
-        #c = null;
-        #l = [];
+        #o = null;
+        #s = 1;
+        #c;
+        #l = null;
+        #u = [];
         constructor(
           e,
           t,
@@ -8829,7 +8989,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           u
         ) {
           ((this.ctx = e),
-            (this.current = new cr(this.ctx.canvas.width, this.ctx.canvas.height)),
+            (this.current = new Sr(this.ctx.canvas.width, this.ctx.canvas.height)),
             (this.stateStack = []),
             (this.pendingClip = null),
             (this.pendingEOFill = !1),
@@ -8860,7 +9020,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.outputScaleY = 1),
             (this.pageColors = c),
             (this._cachedScaleForStroking = [-1, 0]),
-            (this._cachedGetSinglePixelWidth = null),
             (this._cachedBitmapsMap = new Map()),
             (this.dependencyTracker = l ?? null),
             (this.imagesTracker = u ?? null));
@@ -8885,14 +9044,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             ((this.compositeCtx = this.ctx),
               ({ canvas: this.transparentCanvas, context: this.ctx } = e),
               this.ctx.save(),
-              this.ctx.transform(...j(this.compositeCtx)));
+              this.ctx.transform(...M(this.compositeCtx)));
           }
           (this.ctx.save(),
-            Le(this.ctx),
+            We(this.ctx),
             e && (this.ctx.transform(...e), (this.outputScaleX = e[0]), (this.outputScaleY = e[3])),
             this.ctx.transform(...t.transform),
             (this.viewportScale = t.scale),
-            (this.baseTransform = j(this.ctx)));
+            (this.baseTransform = M(this.ctx)));
         }
         executeOperatorList(e, t, n, r, i) {
           let a = e.argsArray,
@@ -8900,8 +9059,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             s = t || 0,
             c = a.length;
           if (c === s) return s;
-          let l = c - s > or && typeof n == `function`,
-            u = l ? Date.now() + ar : 0,
+          let l = c - s > xr && typeof n == `function`,
+            u = l ? Date.now() + br : 0,
             d = 0,
             f = this.commonObjs,
             p = this.objs,
@@ -8915,8 +9074,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 continue;
               }
             }
-            if (!i || i(s))
-              if (((m = o[s]), (h = a[s] ?? null), m !== yt.dependency))
+            if (!i || i(s, e)) {
+              if (((m = o[s]), (h = a[s] ?? null), m !== V.dependency))
                 h === null ? this[m](s) : this[m](s, ...h);
               else
                 for (let e of h) {
@@ -8924,14 +9083,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   let t = e.startsWith(`g_`) ? f : p;
                   if (!t.has(e)) return (t.get(e, n), s);
                 }
+            }
             if ((s++, s === c)) return s;
-            if (l && ++d > or) {
+            if (l && ++d > xr) {
               if (Date.now() > u) return (n(), s);
               d = 0;
             }
           }
         }
-        #u() {
+        #d() {
           for (; this.stateStack.length || this.inSMaskMode;) this.restore();
           ((this.current.activeSMask = null),
             this.ctx.restore(),
@@ -8946,22 +9106,22 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               (this.transparentCanvasEntry = null)));
         }
         endDrawing() {
-          this.#u();
+          this.#d();
           for (let e of this.smaskGroupCanvases) this.canvasFactory.destroy(e);
           ((this.smaskGroupCanvases.length = 0),
             this._clearPreparedSMask(),
             (this.tempSMask = null),
             (this.smaskStack.length = 0));
-          for (let e of this.#l) this.#y(e);
-          ((this.#l.length = 0),
-            (this.#n = null),
+          for (let e of this.#u) this.#x(e);
+          ((this.#u.length = 0),
             (this.#r = null),
             (this.#i = null),
             (this.#a = null),
-            (this.#o = 1),
-            (this.#c = null),
+            (this.#o = null),
+            (this.#s = 1),
+            (this.#l = null),
+            (this.#n = 0),
             (this.#t = 0),
-            (this.#e = 0),
             this.cachedPatterns.clear());
           for (let e of this._cachedBitmapsMap.values()) {
             for (let t of e.values())
@@ -8970,9 +9130,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (t.width = t.height = 0);
             e.clear();
           }
-          (this._cachedBitmapsMap.clear(), this.#d());
+          (this._cachedBitmapsMap.clear(), this.#f());
         }
-        #d() {
+        #f() {
           if (this.pageColors) {
             let e = this.filterFactory.addHCMFilter(
               this.pageColors.foreground,
@@ -9034,33 +9194,33 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         _createMaskCanvas(e, t) {
           let n = this.ctx,
             { width: r, height: i } = t,
-            a = this.current.fillColor,
-            o = this.current.patternFill,
-            s = j(n),
+            a = this.current.patternFill,
+            o = a ? this.current.fillColor : n.fillStyle,
+            s = M(n),
             c,
             l,
             u,
             d;
           if ((t.bitmap || t.data) && t.count > 1) {
             let n = t.bitmap || t.data.buffer;
-            ((l = JSON.stringify(o ? s : [s.slice(0, 4), a])),
-              (c = this._cachedBitmapsMap.getOrInsertComputed(n, Nt)));
+            ((l = JSON.stringify(a ? s : [s.slice(0, 4), o])),
+              (c = this._cachedBitmapsMap.getOrInsertComputed(n, Vt)));
             let r = c.get(l);
-            if (r && !o) {
+            if (r && !a) {
               let t = Math.round(Math.min(s[0], s[2]) + s[4]),
                 n = Math.round(Math.min(s[1], s[3]) + s[5]);
               return (
-                this.dependencyTracker?.recordDependencies(e, K.transformAndFill),
+                this.dependencyTracker?.recordDependencies(e, q.transformAndFill),
                 { canvas: r, offsetX: t, offsetY: n }
               );
             }
             u = r;
           }
-          u || ((d = this.canvasFactory.create(r, i)), Fe(d.context, t));
-          let f = H.transform(s, [1 / r, 0, 0, -1 / i, 0, 0]);
-          f = H.transform(f, [1, 0, 0, 1, 0, -i]);
-          let p = lt.slice();
-          H.axialAlignedBoundingBox([0, 0, r, i], f, p);
+          u || ((d = this.canvasFactory.create(r, i)), He(d.context, t));
+          let f = U.transform(s, [1 / r, 0, 0, -1 / i, 0, 0]);
+          f = U.transform(f, [1, 0, 0, 1, 0, -i]);
+          let p = yt.slice();
+          U.axialAlignedBoundingBox([0, 0, r, i], f, p);
           let [m, h, g, _] = p,
             v = Math.round(g - m) || 1,
             y = Math.round(_ - h) || 1,
@@ -9071,26 +9231,26 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           (x.translate(-S, -C), x.transform(...f));
           let w = null;
           if (!u) {
-            let e = this._scaleImage(d.canvas, M(x));
+            let e = this._scaleImage(d.canvas, oe(x));
             ((u = e.img),
               (w = e.tmpCanvas),
               u !== d.canvas && (this.canvasFactory.destroy(d), (d = null)),
-              c && o && (c.set(l, u), (w = null), (d = null)));
+              c && a && (c.set(l, u), (w = null), (d = null)));
           }
-          ((x.imageSmoothingEnabled = Re(j(x), t.interpolate)),
-            Ne(x, u, 0, 0, u.width, u.height, 0, 0, r, i),
+          ((x.imageSmoothingEnabled = Ge(M(x), t.interpolate)),
+            Be(x, u, 0, 0, u.width, u.height, 0, 0, r, i),
             w && this.canvasFactory.destroy(w),
             d && this.canvasFactory.destroy(d),
             (x.globalCompositeOperation = `source-in`));
-          let T = H.transform(M(x), [1, 0, 0, 1, -S, -C]);
+          let T = U.transform(oe(x), [1, 0, 0, 1, -S, -C]);
           return (
-            (x.fillStyle = o ? a.getPattern(n, this, T, Y.FILL, e) : a),
+            (x.fillStyle = a ? o.getPattern(n, this, T, Y.FILL, e) : o),
             x.fillRect(0, 0, r, i),
-            c && !o && c.set(l, b.canvas),
-            this.dependencyTracker?.recordDependencies(e, K.transformAndFill),
+            c && !a && c.set(l, b.canvas),
+            this.dependencyTracker?.recordDependencies(e, q.transformAndFill),
             {
               canvas: b.canvas,
-              canvasEntry: c && !o ? null : b,
+              canvasEntry: c && !a ? null : b,
               offsetX: Math.round(S),
               offsetY: Math.round(C),
             }
@@ -9103,10 +9263,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.ctx.lineWidth = t));
         }
         setLineCap(e, t) {
-          (this.dependencyTracker?.recordSimpleData(`lineCap`, e), (this.ctx.lineCap = lr[t]));
+          (this.dependencyTracker?.recordSimpleData(`lineCap`, e), (this.ctx.lineCap = wr[t]));
         }
         setLineJoin(e, t) {
-          (this.dependencyTracker?.recordSimpleData(`lineJoin`, e), (this.ctx.lineJoin = ur[t]));
+          (this.dependencyTracker?.recordSimpleData(`lineJoin`, e), (this.ctx.lineJoin = Tr[t]));
         }
         setMiterLimit(e, t) {
           (this.dependencyTracker?.recordSimpleData(`miterLimit`, e), (this.ctx.miterLimit = t));
@@ -9165,10 +9325,26 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   (this.tempSMask = null),
                   this.checkSMaskState(e));
                 break;
-              case `TR`:
-                (this.dependencyTracker?.recordSimpleData(`filter`, e),
-                  (this.ctx.filter = this.current.transferMaps = this.filterFactory.addFilter(r)));
+              case `TR`: {
+                this.dependencyTracker?.recordSimpleData(`filter`, e);
+                let t = this.filterFactory.addFilter(r);
+                this.ctx.filter = t;
+                let n = null;
+                (r &&
+                  (t === `none` ||
+                    !H.isCanvasFilterSupported ||
+                    this.ctx.filter === `none` ||
+                    this.ctx.filter === ``) &&
+                  ((this.ctx.filter = t = `none`), (n = new Cr(r))),
+                  (this.current.transferMaps = t),
+                  (n || this.current.transferMapsFallback) &&
+                    ((this.current.transferMapsFallback = n),
+                    this.current.patternFill ||
+                      (this.ctx.fillStyle = this.#y(this.current.fillColor)),
+                    this.current.patternStroke ||
+                      (this.ctx.strokeStyle = this.#y(this.current.strokeColor))));
                 break;
+              }
             }
         }
         get inSMaskMode() {
@@ -9204,7 +9380,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
           let o;
           if (n === `Luminosity` && r) {
-            let [e, t, n] = ne(r),
+            let [e, t, n] = re(r),
               a = Math.round(0.3 * e + 0.59 * t + 0.11 * n);
             o = i?.[a] ?? a;
           } else o = i?.[0] ?? 0;
@@ -9237,7 +9413,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.smaskPreparedOOBAlpha = !u && o !== 0 ? o : null));
         }
         _bakeSMaskCanvas(e, t, n, r, i, a, o) {
-          !a && !o && d(`_bakeSMaskCanvas with neither backdrop nor filter`);
+          !a && !o && p(`_bakeSMaskCanvas with neither backdrop nor filter`);
           let s = this.canvasFactory.create(r, i),
             c = s.context;
           if (
@@ -9252,8 +9428,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let l = this.canvasFactory.create(r, i),
             u = l.context;
           u.filter = o.url;
-          let f = V.isCanvasFilterSupported && u.filter !== `none` && u.filter !== ``;
-          if ((u.drawImage(s.canvas, 0, 0), V.isCanvasFilterSupported && (u.filter = `none`), !f)) {
+          let d = H.isCanvasFilterSupported && u.filter !== `none` && u.filter !== ``;
+          if ((u.drawImage(s.canvas, 0, 0), H.isCanvasFilterSupported && (u.filter = `none`), !d)) {
             let e = u.getImageData(0, 0, r, i),
               { data: t } = e,
               { transferMap: n } = o;
@@ -9274,33 +9450,33 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ((this.smaskScratchCanvas = r), (this.suspendedCtx = this.ctx));
           let i = (this.ctx = r.context);
           (i.setTransform(this.suspendedCtx.getTransform()),
-            Ie(this.suspendedCtx, i),
-            Me(i, this.suspendedCtx),
+            Ue(this.suspendedCtx, i),
+            ze(i, this.suspendedCtx),
             this._ensurePreparedSMask(this.current.activeSMask),
             this.setGState(e, [[`BM`, `source-over`]]));
         }
         endSMaskMode() {
           if (!this.inSMaskMode) throw Error(`endSMaskMode called while not in smask mode`);
           (this.ctx._removeMirroring(),
-            Ie(this.ctx, this.suspendedCtx),
+            Ue(this.ctx, this.suspendedCtx),
             (this.ctx = this.suspendedCtx),
             (this.suspendedCtx = null),
             this.canvasFactory.destroy(this.smaskScratchCanvas),
             (this.smaskScratchCanvas = null),
             this._clearPreparedSMask());
         }
-        #f(e, t = null, n = 1) {
+        #p(e, t = null, n = 1) {
           let { width: r, height: i } = e,
             a = t ?? this.canvasFactory.create(r, i),
             o = a.context;
           n = Math.round(n * 255) / 255;
           let s = n < 1;
-          s && this.#s === void 0 && (this.#s = V.isCanvasFilterSupported ? new Map() : `none`);
+          s && this.#c === void 0 && (this.#c = H.isCanvasFilterSupported ? new Map() : `none`);
           let c = `none`;
           if (
             (s &&
-              this.#s instanceof Map &&
-              (c = this.#s.getOrInsertComputed(n, () => this.filterFactory.addKnockoutFilter(n))),
+              this.#c instanceof Map &&
+              (c = this.#c.getOrInsertComputed(n, () => this.filterFactory.addKnockoutFilter(n))),
             !s || c !== `none`)
           )
             return (
@@ -9319,7 +9495,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           for (let e = 3, t = d.length; e < t; e += 4) f[e] = Math.min(Math.round(d[e] * p), 255);
           return (o.putImageData(u, 0, 0), a);
         }
-        #p(e, t, n, r) {
+        #m(e, t, n, r) {
           let i = e?.[t] ?? null;
           if (
             (i &&
@@ -9337,7 +9513,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             i
           );
         }
-        #m(e, t, n = {}) {
+        #h(e, t, n = {}) {
           let {
               backdropCanvas: r = null,
               destTransform: i = [1, 0, 0, 1, 0, 0],
@@ -9349,19 +9525,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               knockoutAlpha: u = 1,
             } = n,
             { width: d, height: f } = t,
-            p = this.#f(t, o, u),
+            p = this.#p(t, o, u),
             m = e.globalCompositeOperation;
           if (
             (e.save(),
             e.setTransform(...i),
             (e.globalAlpha = 1),
-            V.isCanvasFilterSupported && (e.filter = `none`),
+            H.isCanvasFilterSupported && (e.filter = `none`),
             (e.globalCompositeOperation = `destination-out`),
             e.drawImage(p.canvas, 0, 0),
             r)
           ) {
             let [t, n] = a,
-              i = this.#p(s, `knockoutBackdropEntry`, d, f),
+              i = this.#m(s, `knockoutBackdropEntry`, d, f),
               o = i.context;
             (o.drawImage(r, t, n, d, f, 0, 0, d, f),
               (o.globalCompositeOperation = `destination-in`),
@@ -9373,56 +9549,56 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
           ((e.globalCompositeOperation = m),
             (e.globalAlpha = c),
-            V.isCanvasFilterSupported && (e.filter = l ?? `none`),
+            H.isCanvasFilterSupported && (e.filter = l ?? `none`),
             e.drawImage(t, 0, 0),
             e.restore(),
             o || this.canvasFactory.destroy(p));
         }
-        #h(e = 1) {
-          if (this.#e === 0 || this.#t > 0 || !this.contentVisible) return !1;
-          (this.#t++, (this.#o = e));
-          let t = this.#l.at(-1),
+        #g(e = 1) {
+          if (this.#t === 0 || this.#n > 0 || !this.contentVisible) return !1;
+          (this.#n++, (this.#s = e));
+          let t = this.#u.at(-1),
             { canvas: n } = this.ctx,
-            r = this.#p(t, `knockoutTempEntry`, n.width, n.height);
-          this.#n = r;
+            r = this.#m(t, `knockoutTempEntry`, n.width, n.height);
+          this.#r = r;
           let i = r.context;
           return (
             i.save(),
             i.setTransform(this.ctx.getTransform()),
-            Ie(this.ctx, i),
-            (this.#a = i.globalCompositeOperation),
+            Ue(this.ctx, i),
+            (this.#o = i.globalCompositeOperation),
             (i.globalCompositeOperation = `source-over`),
-            Me(i, this.ctx),
-            (this.#c = t),
-            (this.#r = this.ctx),
-            (this.#i = this.suspendedCtx),
+            ze(i, this.ctx),
+            (this.#l = t),
+            (this.#i = this.ctx),
+            (this.#a = this.suspendedCtx),
             (this.ctx = i),
             this.inSMaskMode && (this.suspendedCtx = i),
             !0
           );
         }
-        #g(e) {
+        #_(e) {
           if (!e) return;
-          let t = this.#n,
-            n = this.#r,
-            r = this.#i,
+          let t = this.#r,
+            n = this.#i,
+            r = this.#a,
             i = t.context;
-          ((this.#n = null),
-            (this.#r = null),
+          ((this.#r = null),
             (this.#i = null),
+            (this.#a = null),
             this.inSMaskMode && this.suspendedCtx === i && this.ctx !== i && this.endSMaskMode(),
             this.inSMaskMode && (this.suspendedCtx = r),
             this.ctx._removeMirroring(),
-            (this.ctx.globalCompositeOperation = this.#a),
-            (this.#a = null),
-            Ie(this.ctx, n),
+            (this.ctx.globalCompositeOperation = this.#o),
+            (this.#o = null),
+            Ue(this.ctx, n),
             (this.ctx = n));
-          let a = this.#c;
-          this.#c = null;
-          let o = this.#o;
-          this.#o = 1;
+          let a = this.#l;
+          this.#l = null;
+          let o = this.#s;
+          this.#s = 1;
           try {
-            this.#m(r ?? n, t.canvas, {
+            this.#h(r ?? n, t.canvas, {
               backdropCanvas: a?.backdropCtx?.canvas ?? null,
               backdropOffset: a?.backdropCtx ? [a.offsetX, a.offsetY] : [0, 0],
               reuseMaskEntry: a?.knockoutMaskEntry ?? null,
@@ -9430,7 +9606,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               knockoutAlpha: o,
             });
           } finally {
-            (i.restore(), this.#t--, a || this.canvasFactory.destroy(t));
+            (i.restore(), this.#n--, a || this.canvasFactory.destroy(t));
           }
         }
         compose(e) {
@@ -9440,7 +9616,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             : [0, 0, this.ctx.canvas.width, this.ctx.canvas.height];
           let t = this.current.activeSMask,
             n = this.suspendedCtx,
-            r = this.#t > 0 && n === this.ctx;
+            r = this.#n > 0 && n === this.ctx;
           (this.composeSMask(r ? null : n, t, this.ctx, e),
             !r &&
               (this.ctx.save(),
@@ -9515,56 +9691,48 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             t.restore());
         }
         save(e) {
-          (this.inSMaskMode && Ie(this.ctx, this.suspendedCtx), this.ctx.save());
+          (this.inSMaskMode && Ue(this.ctx, this.suspendedCtx), this.ctx.save());
           let t = this.current;
           (this.stateStack.push(t), (this.current = t.clone()), this.dependencyTracker?.save(e));
         }
         restore(e) {
-          if ((this.dependencyTracker?.restore(e), this.stateStack.length === 0)) {
-            this.inSMaskMode && this.endSMaskMode();
-            return;
-          }
-          ((this.current = this.stateStack.pop()),
-            this.ctx.restore(),
-            this.inSMaskMode &&
-              (Ie(this.suspendedCtx, this.ctx),
-              this.ctx.setTransform(this.suspendedCtx.getTransform())),
-            this.checkSMaskState(e),
-            (this.pendingClip = null),
-            (this._cachedScaleForStroking[0] = -1),
-            (this._cachedGetSinglePixelWidth = null));
+          (this.dependencyTracker?.restore(e),
+            this.stateStack.length === 0
+              ? this.inSMaskMode && this.endSMaskMode()
+              : ((this.current = this.stateStack.pop()),
+                this.ctx.restore(),
+                this.inSMaskMode &&
+                  (Ue(this.suspendedCtx, this.ctx),
+                  this.ctx.setTransform(this.suspendedCtx.getTransform())),
+                this.checkSMaskState(e),
+                (this.pendingClip = null),
+                (this._cachedScaleForStroking[0] = -1)));
         }
         transform(e, t, n, r, i, a, o) {
           (this.dependencyTracker?.recordIncrementalData(`transform`, e),
             this.ctx.transform(t, n, r, i, a, o),
-            (this._cachedScaleForStroking[0] = -1),
-            (this._cachedGetSinglePixelWidth = null));
+            (this._cachedScaleForStroking[0] = -1));
         }
         constructPath(e, t, n, r) {
           let [i] = n;
           if (!r) {
             ((i ||= n[0] = new Path2D()),
-              t !== yt.stroke && t !== yt.closeStroke && (this.current.tilingPatternDims = null),
+              t !== V.stroke && t !== V.closeStroke && (this.current.tilingPatternDims = null),
               this[t](e, i));
             return;
           }
           if (this.dependencyTracker !== null) {
-            let n = t === yt.stroke ? this.current.lineWidth / 2 : 0;
+            let n = t === V.stroke ? this.current.lineWidth / 2 : 0;
             this.dependencyTracker
               .resetBBox(e)
               .recordBBox(e, this.ctx, r[0] - n, r[2] + n, r[1] - n, r[3] + n)
               .recordDependencies(e, [`transform`]);
           }
-          (i instanceof Path2D || (i = n[0] = pe(i)),
-            H.axialAlignedBoundingBox(r, j(this.ctx), this.current.minMax));
+          (i instanceof Path2D || (i = n[0] = he(i)),
+            U.axialAlignedBoundingBox(r, M(this.ctx), this.current.minMax));
           let a = this.current.tilingPatternDims;
-          if (
-            a &&
-            t !== yt.stroke &&
-            t !== yt.closeStroke &&
-            this.current.fillColor instanceof nr
-          ) {
-            let e = H.intersect(this.current.clipBox, this.current.minMax);
+          if (a && t !== V.stroke && t !== V.closeStroke && this.current.fillColor instanceof _r) {
+            let e = U.intersect(this.current.clipBox, this.current.minMax);
             e
               ? this.current.fillColor.updatePatternDims(e, a)
               : (this.current.tilingPatternDims = null);
@@ -9575,35 +9743,36 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.ctx.closePath();
         }
         stroke(e, t, n = !0) {
-          let r = n && this.#h(this.current.strokeAlpha),
+          let r = n && this.#g(this.current.strokeAlpha),
             i = this.ctx,
             a = this.current.strokeColor;
-          if (((i.globalAlpha = this.current.strokeAlpha), this.contentVisible))
+          if (((i.globalAlpha = this.current.strokeAlpha), this.contentVisible)) {
             if (typeof a == `object` && a?.getPattern) {
               let n = a.isModifyingCurrentTransform() ? i.getTransform() : null;
-              if ((i.save(), (i.strokeStyle = a.getPattern(i, this, M(i), Y.STROKE, e)), n)) {
+              if ((i.save(), (i.strokeStyle = a.getPattern(i, this, oe(i), Y.STROKE, e)), n)) {
                 let e = new Path2D();
                 (e.addPath(t, i.getTransform().invertSelf().multiplySelf(n)), (t = e));
               }
               (this.rescaleAndStroke(t, !1), i.restore());
             } else this.rescaleAndStroke(t, !0);
-          (this.dependencyTracker?.recordDependencies(e, K.stroke),
+          }
+          (this.dependencyTracker?.recordDependencies(e, q.stroke),
             n &&
-              this.consumePath(e, t, this.current.getClippedPathBoundingBox(Y.STROKE, j(this.ctx))),
+              this.consumePath(e, t, this.current.getClippedPathBoundingBox(Y.STROKE, M(this.ctx))),
             (i.globalAlpha = this.current.fillAlpha),
-            this.#g(r));
+            this.#_(r));
         }
         closeStroke(e, t) {
           this.stroke(e, t);
         }
         fill(e, t, n = !0) {
-          let r = n && this.#h(this.current.fillAlpha),
+          let r = n && this.#g(this.current.fillAlpha),
             i = this.ctx,
             a = this.current.fillColor,
             o = this.current.patternFill,
             s = !1,
             c = this.current.getClippedPathBoundingBox();
-          if ((this.dependencyTracker?.recordDependencies(e, K.fill), o)) {
+          if ((this.dependencyTracker?.recordDependencies(e, q.fill), o)) {
             let o = this.current.tilingPatternDims,
               l = o && a.canSkipPatternCanvas(o);
             if (l) {
@@ -9611,14 +9780,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (this.pendingEOFill = !1),
                 n && this.consumePath(e, t, c),
                 (this.current.tilingPatternDims = null),
-                this.#g(r));
+                this.#_(r));
               return;
             }
             let u = a.isModifyingCurrentTransform() ? i.getTransform() : null;
             if (
               (this.dependencyTracker?.save(e),
               i.save(),
-              (i.fillStyle = a.getPattern(i, this, M(i), Y.FILL, e)),
+              (i.fillStyle = a.getPattern(i, this, oe(i), Y.FILL, e)),
               u)
             ) {
               let e = new Path2D();
@@ -9631,14 +9800,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.pendingEOFill ? (i.fill(t, `evenodd`), (this.pendingEOFill = !1)) : i.fill(t)),
             s && (i.restore(), this.dependencyTracker?.restore(e)),
             n && this.consumePath(e, t, c),
-            this.#g(r));
+            this.#_(r));
         }
         eoFill(e, t) {
           ((this.pendingEOFill = !0), this.fill(e, t));
         }
         fillStroke(e, t) {
-          let n = this.#h(Math.min(this.current.fillAlpha, this.current.strokeAlpha));
-          (this.fill(e, t, !1), this.stroke(e, t, !1), this.consumePath(e, t), this.#g(n));
+          let n = this.#g(Math.min(this.current.fillAlpha, this.current.strokeAlpha));
+          (this.fill(e, t, !1), this.stroke(e, t, !1), this.consumePath(e, t), this.#_(n));
         }
         eoFillStroke(e, t) {
           ((this.pendingEOFill = !0), this.fillStroke(e, t));
@@ -9653,18 +9822,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.consumePath(e, t);
         }
         rawFillPath(e, t) {
-          let n = this.#h(this.current.fillAlpha);
+          let n = this.#g(this.current.fillAlpha);
           (this.ctx.fill(t),
-            this.dependencyTracker?.recordDependencies(e, K.rawFillPath).recordOperation(e),
-            this.#g(n));
+            this.dependencyTracker?.recordDependencies(e, q.rawFillPath).recordOperation(e),
+            this.#_(n));
         }
         clip(e) {
           (this.dependencyTracker?.recordFutureForcedDependency(`clipMode`, e),
-            (this.pendingClip = dr));
+            (this.pendingClip = Er));
         }
         eoClip(e) {
           (this.dependencyTracker?.recordFutureForcedDependency(`clipMode`, e),
-            (this.pendingClip = fr));
+            (this.pendingClip = Dr));
         }
         beginText(e) {
           ((this.current.textMatrix = null),
@@ -9719,9 +9888,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             i = this.current;
           if (!r) throw Error(`Can't find font for ${t}`);
           if (
-            ((i.fontMatrix = r.fontMatrix || ut),
+            ((i.fontMatrix = r.fontMatrix || bt),
             (i.fontMatrix[0] === 0 || i.fontMatrix[3] === 0) &&
-              u(`Invalid font matrix for font ` + t),
+              f(`Invalid font matrix for font ` + t),
             n < 0 ? ((n = -n), (i.fontDirection = -1)) : (i.fontDirection = 1),
             (this.current.font = r),
             (this.current.fontSize = n),
@@ -9733,7 +9902,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             s = `normal`;
           r.black ? (s = `900`) : r.bold && (s = `bold`);
           let c = r.italic ? `italic` : `normal`,
-            l = w(n, rr, ir);
+            l = E(n, vr, yr);
           ((this.current.fontSizeScale = n / l), (this.ctx.font = `${c} ${s} ${l}px ${o}`));
         }
         setTextRenderingMode(e, t) {
@@ -9770,7 +9939,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               this.dependencyTracker.getSimpleIndex(`leading`) ?? e
             ));
         }
-        #_(e, t, n) {
+        #v(e, t, n) {
           let r = new Path2D();
           return (r.addPath(e, new DOMMatrix(n).invertSelf().multiplySelf(t)), r);
         }
@@ -9796,22 +9965,24 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               o.scale(u, -u),
               this.dependencyTracker?.recordCharacterBBox(e, o, c));
             let t;
-            if (d === z.FILL || d === z.FILL_STROKE)
+            if (d === z.FILL || d === z.FILL_STROKE) {
               if (i) {
                 ((t = o.getTransform()), o.setTransform(...i));
-                let e = this.#_(h, t, i);
+                let e = this.#v(h, t, i);
                 o.fill(e);
               } else o.fill(h);
-            if (d === z.STROKE || d === z.FILL_STROKE)
+            }
+            if (d === z.STROKE || d === z.FILL_STROKE) {
               if (a) {
                 ((t ||= o.getTransform()), o.setTransform(...a));
                 let { a: e, b: n, c: r, d: i } = t,
-                  s = H.inverseTransform(a),
-                  c = H.transform([e, n, r, i, 0, 0], s);
-                (H.singularValueDecompose2dScale(c, Z),
+                  s = U.inverseTransform(a),
+                  c = U.transform([e, n, r, i, 0, 0], s);
+                (U.singularValueDecompose2dScale(c, Z),
                   (o.lineWidth *= Math.max(Z[0], Z[1]) / u),
-                  o.stroke(this.#_(h, t, a)));
+                  o.stroke(this.#v(h, t, a)));
               } else ((o.lineWidth /= u), o.stroke(h));
+            }
             o.restore();
           } else
             ((d === z.FILL || d === z.FILL_STROKE) &&
@@ -9823,11 +9994,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (this.dependencyTracker &&
                   this.dependencyTracker
                     ?.recordCharacterBBox(e, o, c, u, n, r, () => o.measureText(t))
-                    .recordDependencies(e, K.stroke),
+                    .recordDependencies(e, q.stroke),
                 o.strokeText(t, n, r)));
           f &&
             ((this.pendingTextPaths ||= []).push({
-              transform: j(o),
+              transform: M(o),
               x: n,
               y: r,
               fontSize: u,
@@ -9847,11 +10018,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               r = !0;
               break;
             }
-          return _(this, `isFontSubpixelAAEnabled`, r);
+          return y(this, `isFontSubpixelAAEnabled`, r);
         }
         showText(e, t) {
           this.dependencyTracker &&
-            (this.dependencyTracker.recordDependencies(e, K.showText).resetBBox(e),
+            (this.dependencyTracker.recordDependencies(e, q.showText).resetBBox(e),
             this.current.textRenderingMode & z.ADD_TO_PATH_FLAG &&
               this.dependencyTracker
                 .recordFutureForcedDependency(`textClip`, e)
@@ -9859,10 +10030,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let n = this.current,
             r = n.font;
           if (r.isType3Font) {
-            let r = this.#h(n.fillAlpha);
+            let r = this.#g(n.fillAlpha);
             (this.showType3Text(e, t),
               this.dependencyTracker?.recordShowTextOperation(e),
-              this.#g(r));
+              this.#_(r));
             return;
           }
           let i = n.fontSize;
@@ -9870,7 +10041,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.dependencyTracker?.recordOperation(e);
             return;
           }
-          let a = this.#h(n.fillAlpha),
+          let a = this.#g(n.fillAlpha),
             o = this.ctx,
             s = n.fontSizeScale,
             c = n.charSpacing,
@@ -9880,34 +10051,33 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             f = t.length,
             p = r.vertical,
             m = p ? 1 : -1,
-            h = r.defaultVMetrics,
-            g = i * n.fontMatrix[0],
-            _ = n.textRenderingMode === z.FILL && !r.disableFontFace && !n.patternFill;
+            h = i * n.fontMatrix[0],
+            g = n.textRenderingMode === z.FILL && !r.disableFontFace && !n.patternFill;
           (o.save(),
             n.textMatrix && o.transform(...n.textMatrix),
             o.translate(n.x, n.y + n.textRise),
             u > 0 ? o.scale(d, -1) : o.scale(d, 1));
-          let v,
-            y,
-            b = n.textRenderingMode & z.FILL_STROKE_MASK,
-            x = b === z.FILL || b === z.FILL_STROKE,
-            S = b === z.STROKE || b === z.FILL_STROKE,
-            C = n.lineWidth,
-            w = n.textMatrixScale;
+          let _,
+            v,
+            y = n.textRenderingMode & z.FILL_STROKE_MASK,
+            b = y === z.FILL || y === z.FILL_STROKE,
+            x = y === z.STROKE || y === z.FILL_STROKE,
+            S = n.lineWidth,
+            C = n.textMatrixScale;
           if (
-            (w === 0 || C === 0 ? S && (C = this.getSinglePixelWidth()) : (C /= w),
-            s !== 1 && (o.scale(s, s), (C /= s)),
-            (o.lineWidth = C),
-            x && n.patternFill)
+            (C === 0 || S === 0 ? x && (S = this.getSinglePixelWidth()) : (S /= C),
+            s !== 1 && (o.scale(s, s), (S /= s)),
+            (o.lineWidth = S),
+            b && n.patternFill)
           ) {
             o.save();
-            let t = n.fillColor.getPattern(o, this, M(o), Y.FILL, e);
-            ((v = j(o)), o.restore(), (o.fillStyle = t));
+            let t = n.fillColor.getPattern(o, this, oe(o), Y.FILL, e);
+            ((_ = M(o)), o.restore(), (o.fillStyle = t));
           }
-          if (S && n.patternStroke) {
+          if (x && n.patternStroke) {
             o.save();
-            let t = n.strokeColor.getPattern(o, this, M(o), Y.STROKE, e);
-            ((y = j(o)), o.restore(), (o.strokeStyle = t));
+            let t = n.strokeColor.getPattern(o, this, oe(o), Y.STROKE, e);
+            ((v = M(o)), o.restore(), (o.strokeStyle = t));
           }
           if (r.isInvalidPDFjsFont) {
             let r = [],
@@ -9927,65 +10097,65 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 )
                 .recordShowTextOperation(e);
             }
-            ((n.x += i * g * d), o.restore(), this.compose(), this.#g(a));
+            ((n.x += i * h * d), o.restore(), this.compose(), this.#_(a));
             return;
           }
-          let T = 0,
-            E;
-          for (E = 0; E < f; ++E) {
-            let n = t[E];
+          let w = 0,
+            T = 0;
+          for (; T < f; ++T) {
+            let n = t[T];
             if (typeof n == `number`) {
-              T += (m * n * i) / 1e3;
+              w += (m * n * i) / 1e3;
               continue;
             }
             let a = !1,
               d = (n.isSpace ? l : 0) + c,
               f = n.fontChar,
-              b = n.accent,
+              y = n.accent,
+              b,
               x,
-              S,
-              C = n.width;
+              S = n.width;
             if (p) {
-              let e = n.vmetric || h,
-                t = -(n.vmetric ? e[1] : C * 0.5) * g,
-                r = e[2] * g;
-              ((C = e ? -e[0] : C), (x = t / s), (S = (T + r) / s));
-            } else ((x = T / s), (S = 0));
-            let w;
-            if (r.remeasure && C > 0) {
-              w = o.measureText(f);
-              let e = ((w.width * 1e3) / i) * s;
-              if (C < e && this.isFontSubpixelAAEnabled) {
-                let t = C / e;
-                ((a = !0), o.save(), o.scale(t, 1), (x /= t));
-              } else C !== e && (x += (((C - e) / 2e3) * i) / s);
+              let e = n.vmetric,
+                t = -e[1] * h,
+                r = e[2] * h;
+              ((S = -e[0]), (b = t / s), (x = (w + r) / s));
+            } else ((b = w / s), (x = 0));
+            let C;
+            if (r.remeasure && S > 0) {
+              C = o.measureText(f);
+              let e = ((C.width * 1e3) / i) * s;
+              if (S < e && this.isFontSubpixelAAEnabled) {
+                let t = S / e;
+                ((a = !0), o.save(), o.scale(t, 1), (b /= t));
+              } else S !== e && (b += (((S - e) / 2e3) * i) / s);
             }
             if (this.contentVisible && (n.isInFont || r.missingFile)) {
-              if (_ && !b)
-                (o.fillText(f, x, S),
+              if (g && !y)
+                (o.fillText(f, b, x),
                   this.dependencyTracker?.recordCharacterBBox(
                     e,
                     o,
-                    w ? { bbox: null } : r,
+                    C ? { bbox: null } : r,
                     i / s,
+                    b,
                     x,
-                    S,
-                    () => w ?? o.measureText(f)
+                    () => C ?? o.measureText(f)
                   ));
-              else if ((this.paintChar(e, f, x, S, v, y), b)) {
-                let t = x + (i * b.offset.x) / s,
-                  n = S - (i * b.offset.y) / s;
-                this.paintChar(e, b.fontChar, t, n, v, y);
+              else if ((this.paintChar(e, f, b, x, _, v), y)) {
+                let t = b + (i * y.offset.x) / s,
+                  n = x - (i * y.offset.y) / s;
+                this.paintChar(e, y.fontChar, t, n, _, v);
               }
             }
-            let D = p ? C * g - d * u : C * g + d * u;
-            ((T += D), a && o.restore());
+            let E = p ? S * h - d * u : S * h + d * u;
+            ((w += E), a && o.restore());
           }
-          (p ? (n.y -= T) : (n.x += T * d),
+          (p ? (n.y -= w) : (n.x += w * d),
             o.restore(),
             this.compose(),
             this.dependencyTracker?.recordShowTextOperation(e),
-            this.#g(a));
+            this.#_(a));
         }
         showType3Text(e, t) {
           let n = this.ctx,
@@ -9996,8 +10166,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             s = i.vertical ? 1 : -1,
             c = r.charSpacing,
             l = r.wordSpacing,
-            d = r.textHScale * o,
-            f = r.fontMatrix || ut,
+            u = r.textHScale * o,
+            d = r.fontMatrix || bt,
             p = t.length,
             m = r.textRenderingMode === z.INVISIBLE,
             h,
@@ -10006,31 +10176,30 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             v;
           if (m || a === 0) return;
           ((this._cachedScaleForStroking[0] = -1),
-            (this._cachedGetSinglePixelWidth = null),
             n.save(),
             r.textMatrix && n.transform(...r.textMatrix),
             n.translate(r.x, r.y + r.textRise),
-            n.scale(d, o));
+            n.scale(u, o));
           let y = this.dependencyTracker;
-          for (this.dependencyTracker = y ? new xn(y, e) : null, h = 0; h < p; ++h) {
+          for (this.dependencyTracker = y ? new Nn(y, e) : null, h = 0; h < p; ++h) {
             if (((g = t[h]), typeof g == `number`)) {
-              ((v = (s * g * a) / 1e3), this.ctx.translate(v, 0), (r.x += v * d));
+              ((v = (s * g * a) / 1e3), this.ctx.translate(v, 0), (r.x += v * u));
               continue;
             }
             let e = (g.isSpace ? l : 0) + c,
-              o = i.charProcOperatorList[g.operatorListId];
+              o = i.charProcOperatorList.get(g.operatorListId);
             o
               ? this.contentVisible &&
                 (this.save(),
-                o.fnArray[0] === yt.setCharWidth &&
+                o.fnArray[0] === V.setCharWidth &&
                   ((r.fillAlpha = r.strokeAlpha = 1), (n.globalAlpha = 1)),
                 n.scale(a, a),
-                n.transform(...f),
+                n.transform(...d),
                 this.executeOperatorList(o),
                 this.restore())
-              : u(`Type3 character "${g.operatorListId}" is not available.`);
+              : f(`Type3 character "${g.operatorListId}" is not available.`);
             let p = [g.width, 0];
-            (H.applyTransform(p, f), (_ = p[0] * a + e), n.translate(_, 0), (r.x += _ * d));
+            (U.applyTransform(p, d), (_ = p[0] * a + e), n.translate(_, 0), (r.x += _ * u));
           }
           (n.restore(), y && (this.dependencyTracker = y));
         }
@@ -10047,8 +10216,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         getColorN_Pattern(t, n) {
           let r;
           if (n[0] === `TilingPattern`) {
-            let t = this.baseTransform || j(this.ctx);
-            r = new nr(
+            let t = this.baseTransform || M(this.ctx);
+            r = new _r(
               n,
               this.ctx,
               {
@@ -10065,7 +10234,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                     },
                     void 0,
                     void 0,
-                    this.dependencyTracker ? new xn(this.dependencyTracker, n, !0) : null
+                    this.dependencyTracker ? new Nn(this.dependencyTracker, n, !0) : null
                   ),
               },
               t
@@ -10082,11 +10251,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.dependencyTracker?.recordSimpleData(`fillColor`, e);
           let n = (this.current.fillColor = this.getColorN_Pattern(e, t));
           ((this.current.patternFill = !0),
-            (this.current.tilingPatternDims = n instanceof nr ? [0, 0, 0, 0] : null));
+            (this.current.tilingPatternDims = n instanceof _r ? [0, 0, 0, 0] : null));
+        }
+        #y(e) {
+          return this.current.transferMapsFallback?.applyToColor(e) ?? e;
         }
         setStrokeRGBColor(e, t) {
           (this.dependencyTracker?.recordSimpleData(`strokeColor`, e),
-            (this.ctx.strokeStyle = this.current.strokeColor = t),
+            (this.current.strokeColor = t),
+            (this.ctx.strokeStyle = this.#y(t)),
             (this.current.patternStroke = !1));
         }
         setStrokeTransparent(e) {
@@ -10096,7 +10269,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         setFillRGBColor(e, t) {
           (this.dependencyTracker?.recordSimpleData(`fillColor`, e),
-            (this.ctx.fillStyle = this.current.fillColor = t),
+            (this.current.fillColor = t),
+            (this.ctx.fillStyle = this.#y(t)),
             (this.current.patternFill = !1),
             (this.current.tilingPatternDims = null));
         }
@@ -10107,44 +10281,38 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.current.tilingPatternDims = null));
         }
         _getPattern(e, t, n = null) {
-          let r;
-          return (
-            this.cachedPatterns.has(t)
-              ? (r = this.cachedPatterns.get(t))
-              : ((r = je(this.getObject(e, t))), this.cachedPatterns.set(t, r)),
-            n && (r.matrix = n),
-            r
-          );
+          let r = this.cachedPatterns.getOrInsertComputed(t, () => Re(this.getObject(e, t)));
+          return (n && (r.matrix = n), r);
         }
         shadingFill(e, t) {
           if (!this.contentVisible) return;
-          let n = this.#h(this.current.fillAlpha),
+          let n = this.#g(this.current.fillAlpha),
             r = this.ctx;
           (this.save(e),
-            (r.fillStyle = this._getPattern(e, t).getPattern(r, this, M(r), Y.SHADING, e)));
-          let i = M(r);
+            (r.fillStyle = this._getPattern(e, t).getPattern(r, this, oe(r), Y.SHADING, e)));
+          let i = oe(r);
           if (i) {
             let { width: e, height: t } = r.canvas,
-              n = lt.slice();
-            H.axialAlignedBoundingBox([0, 0, e, t], i, n);
+              n = yt.slice();
+            U.axialAlignedBoundingBox([0, 0, e, t], i, n);
             let [a, o, s, c] = n;
             this.ctx.fillRect(a, o, s - a, c - o);
           } else this.ctx.fillRect(-1e10, -1e10, 2e10, 2e10);
           (this.dependencyTracker
             ?.resetBBox(e)
             .recordFullPageBBox(e)
-            .recordDependencies(e, K.transform)
-            .recordDependencies(e, K.fill)
+            .recordDependencies(e, q.transform)
+            .recordDependencies(e, q.fill)
             .recordOperation(e),
             this.compose(this.current.getClippedPathBoundingBox()),
             this.restore(e),
-            this.#g(n));
+            this.#_(n));
         }
         beginInlineImage() {
-          d(`Should not call beginInlineImage`);
+          p(`Should not call beginInlineImage`);
         }
         beginImageData() {
-          d(`Should not call beginImageData`);
+          p(`Should not call beginImageData`);
         }
         paintFormXObjectBegin(e, t, n) {
           if (
@@ -10152,10 +10320,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.save(e),
             this.baseTransformStack.push(this.baseTransform),
             t && this.transform(e, ...t),
-            (this.baseTransform = j(this.ctx)),
+            (this.baseTransform = M(this.ctx)),
             n)
           ) {
-            H.axialAlignedBoundingBox(n, this.baseTransform, this.current.minMax);
+            U.axialAlignedBoundingBox(n, this.baseTransform, this.current.minMax);
             let [t, r, i, a] = n,
               o = new Path2D();
             (o.rect(t, r, i - t, a - r),
@@ -10178,7 +10346,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (!t.needsIsolation || (!t.isolated && !t.hasSoftMask)) &&
             !t.knockout &&
             !t.isGray &&
-            this.#e === 0 &&
+            this.#t === 0 &&
             r.globalAlpha === 1 &&
             r.globalCompositeOperation === `source-over` &&
             !n
@@ -10192,42 +10360,50 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               }
               r.clip(e);
             }
-            (this.groupStack.push(null), this.#l.push(null), this.groupLevel++);
+            (this.groupStack.push(null), this.#u.push(null), this.groupLevel++);
             return;
           }
           !t.isolated &&
             !t.knockout &&
-            this.#e === 0 &&
-            l(`TODO: Fully support non-isolated non-knockout groups.`);
-          let i = j(r);
+            this.#t === 0 &&
+            d(`TODO: Fully support non-isolated non-knockout groups.`);
+          let i = M(r);
           t.matrix && r.transform(...t.matrix);
           let a = [0, 0, r.canvas.width, r.canvas.height],
             o;
           t.bbox
-            ? ((o = lt.slice()),
-              H.axialAlignedBoundingBox(t.bbox, j(r), o),
-              (o = H.intersect(o, a) || [0, 0, 0, 0]))
+            ? ((o = yt.slice()),
+              U.axialAlignedBoundingBox(t.bbox, M(r), o),
+              (o = U.intersect(o, a) || [0, 0, 0, 0]))
             : (o = a);
           let s = Math.floor(o[0]),
             c = Math.floor(o[1]),
-            u = Math.max(Math.ceil(o[2]) - s, 1),
-            d = Math.max(Math.ceil(o[3]) - c, 1);
-          this.current.startNewPathAndClipBox([0, 0, u, d]);
-          let f = this.canvasFactory.create(u, d);
+            l = Math.max(Math.ceil(o[2]) - s, 1),
+            u = Math.max(Math.ceil(o[3]) - c, 1);
+          this.current.startNewPathAndClipBox([0, 0, l, u]);
+          let f = this.canvasFactory.create(l, u);
           t.smask && this.smaskGroupCanvases.push(f);
           let p = f.context,
             m = t.knockout && !t.isolated ? r : null,
-            h = !t.isolated && !t.knockout && !t.smask && t.needsIsolation && this.#e > 0,
-            g = t.knockout ? this.canvasFactory.create(u, d) : null,
-            _ = this.#e;
+            h = !t.isolated && !t.knockout && !t.smask && t.needsIsolation && this.#t > 0,
+            g = t.knockout ? this.canvasFactory.create(l, u) : null,
+            _ = this.#t;
+          (t.knockout ? this.#t++ : (this.#t = 0), p.translate(-s, -c), p.transform(...i));
+          let v = !t.isolated && !t.smask && t.needsIsolation,
+            y =
+              v &&
+              !n &&
+              _ === 0 &&
+              !t.knockout &&
+              !t.isGray &&
+              t.hasSoftMask &&
+              r.globalAlpha === 1 &&
+              r.globalCompositeOperation === `source-over` &&
+              this.current.transferMaps === `none` &&
+              !this.current.transferMapsFallback;
           if (
-            (t.knockout ? this.#e++ : (this.#e = 0),
-            p.translate(-s, -c),
-            p.transform(...i),
-            !t.isolated &&
-              !t.smask &&
-              n &&
-              t.needsIsolation &&
+            (v &&
+              (n || y) &&
               (p.save(),
               p.setTransform(1, 0, 0, 1, 0, 0),
               p.drawImage(r.canvas, -s, -c),
@@ -10254,7 +10430,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             }),
             (!t.smask || this.dependencyTracker) &&
               (r.setTransform(1, 0, 0, 1, 0, 0), r.translate(s, c), r.save()),
-            Ie(r, p),
+            Ue(r, p),
             (this.ctx = p),
             this.dependencyTracker
               ?.inheritSimpleDataAsFutureForcedDependencies([
@@ -10270,12 +10446,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               [`TR`, null],
             ]),
             this.groupStack.push(r),
-            this.#l.push({
+            this.#u.push({
               backdropCtx: m,
               savedKnockoutLevel: _,
               offsetX: s,
               offsetY: c,
               hasInnerBackdrop: h,
+              replaceBackdrop: y,
               knockoutMaskEntry: g,
               knockoutTempEntry: null,
               knockoutBackdropEntry: null,
@@ -10287,13 +10464,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.groupLevel--;
           let n = this.ctx,
             r = this.groupStack.pop(),
-            i = this.#l.pop();
-          if ((i && (this.#e = i.savedKnockoutLevel), r === null)) {
-            this.restore(e);
-            return;
-          }
-          if (
-            (t.isGray && this.#v(n),
+            i = this.#u.pop();
+          if ((i && (this.#t = i.savedKnockoutLevel), r === null)) this.restore(e);
+          else if (
+            (t.isGray && this.#b(n),
             (this.ctx = r),
             (this.ctx.imageSmoothingEnabled = !1),
             this.dependencyTracker?.popBaseTransform(),
@@ -10304,15 +10478,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               this.dependencyTracker &&
                 (this.ctx.restore(),
                 this.inSMaskMode && this.ctx.setTransform(this.suspendedCtx.getTransform())),
-              this.#y(i));
+              this.#x(i));
           else {
             this.ctx.restore();
-            let t = j(this.ctx);
-            (this.restore(e), this.ctx.save(), this.ctx.setTransform(...t));
-            let a = lt.slice();
-            H.axialAlignedBoundingBox([0, 0, n.canvas.width, n.canvas.height], t, a);
-            let o = this.#l.at(-1);
-            if (this.#e > 0)
+            let t = M(this.ctx);
+            (this.restore(e),
+              this.current.transferMapsFallback?.applyToCanvas(n),
+              this.ctx.save(),
+              this.ctx.setTransform(...t));
+            let a = yt.slice();
+            U.axialAlignedBoundingBox([0, 0, n.canvas.width, n.canvas.height], t, a);
+            let o = this.#u.at(-1);
+            if (this.#t > 0) {
               if (i.hasInnerBackdrop) {
                 let { width: e, height: a } = n.canvas,
                   o = this.canvasFactory.create(e, a),
@@ -10320,7 +10497,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (s.drawImage(r.canvas, i.offsetX, i.offsetY, e, a, 0, 0, e, a),
                   (s.globalCompositeOperation = `source-over`),
                   s.drawImage(n.canvas, 0, 0));
-                let c = this.#f(n.canvas);
+                let c = this.#p(n.canvas);
                 ((s.globalCompositeOperation = `destination-in`), s.drawImage(c.canvas, 0, 0));
                 let l = this.ctx.globalCompositeOperation,
                   u = this.ctx.globalAlpha,
@@ -10328,19 +10505,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (this.ctx.save(),
                   this.ctx.setTransform(...t),
                   (this.ctx.globalAlpha = 1),
-                  V.isCanvasFilterSupported && (this.ctx.filter = `none`),
+                  H.isCanvasFilterSupported && (this.ctx.filter = `none`),
                   (this.ctx.globalCompositeOperation = `destination-out`),
                   this.ctx.drawImage(c.canvas, 0, 0),
                   (this.ctx.globalCompositeOperation = l),
                   (this.ctx.globalAlpha = u),
-                  V.isCanvasFilterSupported && (this.ctx.filter = d ?? `none`),
+                  H.isCanvasFilterSupported && (this.ctx.filter = d ?? `none`),
                   this.ctx.drawImage(o.canvas, 0, 0),
                   this.ctx.restore(),
                   this.canvasFactory.destroy(c),
                   this.canvasFactory.destroy(o));
               } else {
                 let e = o?.backdropCtx ?? null;
-                this.#m(this.ctx, n.canvas, {
+                this.#h(this.ctx, n.canvas, {
                   backdropCanvas: e?.canvas ?? null,
                   destTransform: t,
                   backdropOffset: e ? [o.offsetX + i.offsetX, o.offsetY + i.offsetY] : [0, 0],
@@ -10348,17 +10525,25 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   sourceFilter: this.ctx.filter,
                 });
               }
-            else this.ctx.drawImage(n.canvas, 0, 0);
+            } else {
+              if (i.replaceBackdrop) {
+                let e = new Path2D();
+                (e.rect(0, 0, n.canvas.width, n.canvas.height),
+                  this.ctx.clip(e),
+                  (this.ctx.globalCompositeOperation = `copy`));
+              }
+              this.ctx.drawImage(n.canvas, 0, 0);
+            }
             (this.ctx.restore(),
               this.canvasFactory.destroy({ canvas: n.canvas, context: n }),
-              this.#y(i),
+              this.#x(i),
               this.compose(a));
           }
         }
-        #v(e) {
+        #b(e) {
           let { canvas: t } = e,
             { width: n, height: r } = t;
-          if (V.isCanvasFilterSupported) {
+          if (H.isCanvasFilterSupported) {
             (e.save(),
               e.setTransform(1, 0, 0, 1, 0, 0),
               (e.filter = `grayscale(1)`),
@@ -10376,7 +10561,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
           e.putImageData(i, 0, 0);
         }
-        #y(e) {
+        #x(e) {
           e &&
             ((e.knockoutMaskEntry &&= (this.canvasFactory.destroy(e.knockoutMaskEntry), null)),
             (e.knockoutTempEntry &&= (this.canvasFactory.destroy(e.knockoutTempEntry), null)),
@@ -10385,8 +10570,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         beginAnnotation(e, t, n, r, i, a, o) {
           if (
-            (this.#u(),
-            Le(this.ctx),
+            (this.#d(),
+            We(this.ctx),
             this.ctx.save(),
             this.save(e),
             this.baseTransform && this.ctx.setTransform(...this.baseTransform),
@@ -10398,18 +10583,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               ((r = r.slice()),
                 (r[4] -= n[0]),
                 (r[5] -= n[1]),
-                (n = n.slice()),
-                (n[0] = n[1] = 0),
-                (n[2] = i),
-                (n[3] = s),
-                H.singularValueDecompose2dScale(j(this.ctx), Z));
+                U.singularValueDecompose2dScale(M(this.ctx), Z));
               let { viewportScale: e } = this,
                 a = Math.ceil(i * this.outputScaleX * e),
                 c = Math.ceil(s * this.outputScaleY * e);
               this.annotationCanvas = this.canvasFactory.create(a, c);
               let { canvas: l, context: u } = this.annotationCanvas;
               if (o) {
-                let e = this.annotationCanvasMap.getOrInsertComputed(t, Mt);
+                let e = this.annotationCanvasMap.getOrInsertComputed(t, Bt);
                 l.setAttribute(`data-canvas-name`, o);
                 let n = e.findIndex((e) => e.getAttribute(`data-canvas-name`) === o);
                 n === -1 ? e.push(l) : (e[n] = l);
@@ -10418,23 +10599,23 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (this.ctx = u),
                 this.ctx.save(),
                 this.ctx.setTransform(Z[0], 0, 0, -Z[1], 0, s * Z[1]),
-                Le(this.ctx));
+                We(this.ctx));
             } else {
-              (Le(this.ctx), this.endPath(e));
+              (We(this.ctx), this.endPath(e));
               let t = new Path2D();
               (t.rect(n[0], n[1], i, s), this.ctx.clip(t));
             }
           }
-          ((this.current = new cr(this.ctx.canvas.width, this.ctx.canvas.height)),
+          ((this.current = new Sr(this.ctx.canvas.width, this.ctx.canvas.height)),
             this.baseTransformStack.push(this.baseTransform),
             this.transform(e, ...r),
             this.transform(e, ...i),
-            (this.baseTransform = j(this.ctx)));
+            (this.baseTransform = M(this.ctx)));
         }
         endAnnotation(e) {
           (this.annotationCanvas &&
             (this.ctx.restore(),
-            this.#d(),
+            this.#f(),
             (this.ctx = this.annotationCanvas.savedCtx),
             delete this.annotationCanvas.savedCtx,
             delete this.annotationCanvas),
@@ -10444,7 +10625,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           if (!this.contentVisible) return;
           let n = t.count;
           ((t = this.getObject(e, t.data, t)), (t.count = n));
-          let r = this.#h(this.current.fillAlpha),
+          let r = this.#g(this.current.fillAlpha),
             i = this.ctx,
             a = this._createMaskCanvas(e, t),
             o = a.canvas;
@@ -10465,21 +10646,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             i.restore(),
             a.canvasEntry && this.canvasFactory.destroy(a.canvasEntry),
             this.compose(),
-            this.#g(r));
+            this.#_(r));
         }
         paintImageMaskXObjectRepeat(e, t, n, r = 0, i = 0, a, o) {
           if (!this.contentVisible) return;
           t = this.getObject(e, t.data, t);
-          let s = this.#h(this.current.fillAlpha),
+          let s = this.#g(this.current.fillAlpha),
             c = this.ctx;
           c.save();
-          let l = j(c);
+          let l = M(c);
           c.transform(n, r, i, a, 0, 0);
           let u = this._createMaskCanvas(e, t);
           (c.setTransform(1, 0, 0, 1, u.offsetX - l[4], u.offsetY - l[5]),
             this.dependencyTracker?.resetBBox(e));
           for (let t = 0, s = o.length; t < s; t += 2) {
-            let s = H.transform(l, [n, r, i, a, o[t], o[t + 1]]);
+            let s = U.transform(l, [n, r, i, a, o[t], o[t + 1]]);
             (c.drawImage(u.canvas, s[4], s[5]),
               this.dependencyTracker?.recordBBox(
                 e,
@@ -10494,49 +10675,45 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             u.canvasEntry && this.canvasFactory.destroy(u.canvasEntry),
             this.compose(),
             this.dependencyTracker?.recordOperation(e),
-            this.#g(s));
+            this.#_(s));
         }
         paintImageMaskXObjectGroup(e, t) {
           if (!this.contentVisible) return;
-          let n = this.#h(this.current.fillAlpha),
+          let n = this.#g(this.current.fillAlpha),
             r = this.ctx,
-            i = this.current.fillColor,
-            a = this.current.patternFill;
-          this.dependencyTracker?.resetBBox(e).recordDependencies(e, K.transformAndFill);
+            i = this.current.patternFill,
+            a = i ? this.current.fillColor : r.fillStyle;
+          this.dependencyTracker?.resetBBox(e).recordDependencies(e, q.transformAndFill);
           for (let n of t) {
             let { data: t, width: o, height: s, transform: c } = n,
               l = this.canvasFactory.create(o, s),
               u = l.context;
             (u.save(),
-              Fe(u, this.getObject(e, t, n)),
+              He(u, this.getObject(e, t, n)),
               (u.globalCompositeOperation = `source-in`),
-              (u.fillStyle = a ? i.getPattern(u, this, M(r), Y.FILL, e) : i),
+              (u.fillStyle = i ? a.getPattern(u, this, oe(r), Y.FILL, e) : a),
               u.fillRect(0, 0, o, s),
               u.restore(),
               r.save(),
               r.transform(...c),
               r.scale(1, -1),
-              Ne(r, l.canvas, 0, 0, o, s, 0, -1, 1, 1),
+              Be(r, l.canvas, 0, 0, o, s, 0, -1, 1, 1),
               this.canvasFactory.destroy(l),
               this.dependencyTracker?.recordBBox(e, r, 0, o, 0, s),
               r.restore());
           }
-          (this.compose(), this.dependencyTracker?.recordOperation(e), this.#g(n));
+          (this.compose(), this.dependencyTracker?.recordOperation(e), this.#_(n));
         }
         paintImageXObject(e, t) {
           if (!this.contentVisible) return;
           let n = this.getObject(e, t);
-          if (!n) {
-            u(`Dependent image isn't ready yet`);
-            return;
-          }
-          this.paintInlineImageXObject(e, n);
+          n ? this.paintInlineImageXObject(e, n) : f(`Dependent image isn't ready yet`);
         }
         paintImageXObjectRepeat(e, t, n, r, i) {
           if (!this.contentVisible) return;
           let a = this.getObject(e, t);
           if (!a) {
-            u(`Dependent image isn't ready yet`);
+            f(`Dependent image isn't ready yet`);
             return;
           }
           let o = a.width,
@@ -10548,30 +10725,33 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         applyTransferMapsToCanvas(e) {
           return (
-            this.current.transferMaps !== `none` &&
-              ((e.filter = this.current.transferMaps),
-              e.drawImage(e.canvas, 0, 0),
-              (e.filter = `none`)),
+            this.current.transferMaps === `none`
+              ? this.current.transferMapsFallback?.applyToCanvas(e)
+              : ((e.filter = this.current.transferMaps),
+                e.drawImage(e.canvas, 0, 0),
+                (e.filter = `none`)),
             e.canvas
           );
         }
         applyTransferMapsToBitmap(e) {
-          if (this.current.transferMaps === `none`) return { img: e.bitmap, canvasEntry: null };
-          let { bitmap: t, width: n, height: r } = e,
-            i = this.canvasFactory.create(n, r),
-            a = i.context;
+          let { transferMaps: t, transferMapsFallback: n } = this.current;
+          if (t === `none` && !n) return { img: e.bitmap, canvasEntry: null };
+          let { bitmap: r, width: i, height: a } = e,
+            o = this.canvasFactory.create(i, a),
+            s = o.context;
           return (
-            (a.filter = this.current.transferMaps),
-            a.drawImage(t, 0, 0),
-            (a.filter = `none`),
-            { img: i.canvas, canvasEntry: i }
+            (s.filter = t),
+            s.drawImage(r, 0, 0),
+            (s.filter = `none`),
+            n?.applyToCanvas(s),
+            { img: o.canvas, canvasEntry: o }
           );
         }
         paintInlineImageXObject(e, t) {
           if (!this.contentVisible) return;
           let n = t.width,
             r = t.height,
-            i = this.#h(this.current.fillAlpha),
+            i = this.#g(this.current.fillAlpha),
             a = this.ctx;
           this.save(e);
           let { filter: o } = a;
@@ -10583,61 +10763,62 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             ((s = e.img), (c = e.canvasEntry));
           } else {
             let e = this.canvasFactory.create(n, r);
-            (Pe(e.context, t), (s = this.applyTransferMapsToCanvas(e.context)), (c = e));
+            (Ve(e.context, t), (s = this.applyTransferMapsToCanvas(e.context)), (c = e));
           }
-          let l = this._scaleImage(s, M(a));
-          ((a.imageSmoothingEnabled = Re(j(a), t.interpolate)),
+          let l = this._scaleImage(s, oe(a));
+          ((a.imageSmoothingEnabled = Ge(M(a), t.interpolate)),
             this.dependencyTracker &&
               (this.dependencyTracker
                 .resetBBox(e)
                 .recordBBox(e, a, 0, n, -r, 0)
-                .recordDependencies(e, K.imageXObject)
+                .recordDependencies(e, q.imageXObject)
                 .recordOperation(e),
               this.imagesTracker?.record(a, n, r, this.dependencyTracker.clipBox)),
-            Ne(a, l.img, 0, 0, l.paintWidth, l.paintHeight, 0, -r, n, r),
+            Be(a, l.img, 0, 0, l.paintWidth, l.paintHeight, 0, -r, n, r),
             l.tmpCanvas && this.canvasFactory.destroy(l.tmpCanvas),
             c && this.canvasFactory.destroy(c),
             this.compose(),
             this.restore(e),
-            this.#g(i));
+            this.#_(i));
         }
         paintInlineImageXObjectGroup(e, t, n) {
           if (!this.contentVisible) return;
-          let r = this.#h(this.current.fillAlpha),
+          let r = this.#g(this.current.fillAlpha),
             i = this.ctx,
             a,
             o = null;
-          if (t.bitmap) a = t.bitmap;
+          if (t.bitmap && !this.current.transferMapsFallback) a = t.bitmap;
+          else if (t.bitmap) ({ img: a, canvasEntry: o } = this.applyTransferMapsToBitmap(t));
           else {
             let e = t.width,
               n = t.height,
               r = this.canvasFactory.create(e, n);
-            (Pe(r.context, t), (a = this.applyTransferMapsToCanvas(r.context)), (o = r));
+            (Ve(r.context, t), (a = this.applyTransferMapsToCanvas(r.context)), (o = r));
           }
           this.dependencyTracker?.resetBBox(e);
           for (let t of n)
             (i.save(),
               i.transform(...t.transform),
               i.scale(1, -1),
-              Ne(i, a, t.x, t.y, t.w, t.h, 0, -1, 1, 1),
+              Be(i, a, t.x, t.y, t.w, t.h, 0, -1, 1, 1),
               this.dependencyTracker?.recordBBox(e, i, 0, 1, -1, 0),
               i.restore());
           (o && this.canvasFactory.destroy(o),
             this.dependencyTracker?.recordOperation(e),
             this.compose(),
-            this.#g(r));
+            this.#_(r));
         }
         paintSolidColorImageMask(e) {
           if (!this.contentVisible) return;
-          let t = this.#h(this.current.fillAlpha);
+          let t = this.#g(this.current.fillAlpha);
           (this.dependencyTracker
             ?.resetBBox(e)
             .recordBBox(e, this.ctx, 0, 1, 0, 1)
-            .recordDependencies(e, K.fill)
+            .recordDependencies(e, q.fill)
             .recordOperation(e),
             this.ctx.fillRect(0, 0, 1, 1),
             this.compose(),
-            this.#g(t));
+            this.#_(t));
         }
         markPoint(e, t) {}
         markPointProps(e, t, n) {}
@@ -10665,7 +10846,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.pendingClip || this.compose(n));
           let i = this.ctx;
           (this.pendingClip
-            ? (r || (this.pendingClip === fr ? i.clip(t, `evenodd`) : i.clip(t)),
+            ? (r || (this.pendingClip === Dr ? i.clip(t, `evenodd`) : i.clip(t)),
               (this.pendingClip = null),
               this.dependencyTracker
                 ?.bboxToClipBoxDropOperation(e)
@@ -10674,18 +10855,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.current.startNewPathAndClipBox(this.current.clipBox));
         }
         getSinglePixelWidth() {
-          if (!this._cachedGetSinglePixelWidth) {
-            let e = j(this.ctx);
-            if (e[1] === 0 && e[2] === 0)
-              this._cachedGetSinglePixelWidth = 1 / Math.min(Math.abs(e[0]), Math.abs(e[3]));
-            else {
-              let t = Math.abs(e[0] * e[3] - e[2] * e[1]),
-                n = Math.hypot(e[0], e[2]),
-                r = Math.hypot(e[1], e[3]);
-              this._cachedGetSinglePixelWidth = Math.max(n, r) / t;
-            }
-          }
-          return this._cachedGetSinglePixelWidth;
+          let e = M(this.ctx);
+          if (e[1] === 0 && e[2] === 0) return 1 / Math.min(Math.abs(e[0]), Math.abs(e[3]));
+          let t = Math.abs(e[0] * e[3] - e[2] * e[1]),
+            n = Math.hypot(e[0], e[2]),
+            r = Math.hypot(e[1], e[3]);
+          return Math.max(n, r) / t;
         }
         getScaleForStroking() {
           if (this._cachedScaleForStroking[0] === -1) {
@@ -10696,13 +10871,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             if (n === 0 && r === 0) {
               let n = Math.abs(t),
                 r = Math.abs(i);
-              if (n === r)
+              if (n === r) {
                 if (e === 0) a = o = 1 / n;
                 else {
                   let t = n * e;
                   a = o = t < 1 ? 1 / t : 1;
                 }
-              else if (e === 0) ((a = 1 / n), (o = 1 / r));
+              } else if (e === 0) ((a = 1 / n), (o = 1 / r));
               else {
                 let t = n * e,
                   i = r * e;
@@ -10722,24 +10897,25 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
           return this._cachedScaleForStroking;
         }
-        rescaleAndStroke(e, t) {
+        rescaleAndStroke(t, n) {
           let {
-              ctx: n,
-              current: { lineWidth: r },
+              ctx: r,
+              current: { lineWidth: i },
             } = this,
-            [i, a] = this.getScaleForStroking();
-          if (i === a) {
-            ((n.lineWidth = (r || 1) * i), n.stroke(e));
+            [a, o] = this.getScaleForStroking();
+          if (a === o) {
+            ((r.lineWidth = (i || 1) * a), r.stroke(t));
             return;
           }
-          let o = n.getLineDash();
-          (t && n.save(), n.scale(i, a), (sr.a = 1 / i), (sr.d = 1 / a));
-          let s = new Path2D();
-          if ((s.addPath(e, sr), o.length > 0)) {
-            let e = Math.max(i, a);
-            (n.setLineDash(o.map((t) => t / e)), (n.lineDashOffset /= e));
+          let s = (e.#e ??= new DOMMatrix()),
+            c = r.getLineDash();
+          (n && r.save(), r.scale(a, o), (s.a = 1 / a), (s.d = 1 / o));
+          let l = new Path2D();
+          if ((l.addPath(t, s), c.length > 0)) {
+            let e = Math.max(a, o);
+            (r.setLineDash(c.map((t) => t / e)), (r.lineDashOffset /= e));
           }
-          ((n.lineWidth = r || 1), n.stroke(s), t && n.restore());
+          ((r.lineWidth = i || 1), r.stroke(l), n && r.restore());
         }
         isContentVisible() {
           for (let e = this.markedContentStack.length - 1; e >= 0; e--)
@@ -10747,8 +10923,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return !0;
         }
       }));
-    for (let e in yt) pr.prototype[e] !== void 0 && (pr.prototype[yt[e]] = pr.prototype[e]);
-    ((mr = class {
+    for (let e in V) Or.prototype[e] !== void 0 && (Or.prototype[V[e]] = Or.prototype[e]);
+    ((kr = class {
       #e = null;
       #t = null;
       _fullReader = null;
@@ -10762,7 +10938,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
       getFullReader() {
         return (
-          f(!this._fullReader, `BasePDFStream.getFullReader can only be called once.`),
+          m(!this._fullReader, `BasePDFStream.getFullReader can only be called once.`),
           (this._fullReader = new this.#e(this))
         );
       }
@@ -10776,7 +10952,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         for (let t of new Set(this._rangeReaders)) t.cancel(e);
       }
     }),
-      (hr = class {
+      (Ar = class {
         onProgress = null;
         _contentLength = 0;
         _filename = null;
@@ -10807,34 +10983,34 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._isStreamingSupported;
         }
         async read() {
-          d('Abstract method `read` called');
+          p('Abstract method `read` called');
         }
         cancel(e) {
-          d('Abstract method `cancel` called');
+          p('Abstract method `cancel` called');
         }
       }),
-      (gr = class {
+      (jr = class {
         _stream = null;
         constructor(e, t, n) {
           this._stream = e;
         }
         async read() {
-          d('Abstract method `read` called');
+          p('Abstract method `read` called');
         }
         cancel(e) {
-          d('Abstract method `cancel` called');
+          p('Abstract method `cancel` called');
         }
       }),
-      (_r = class extends mr {
+      (Mr = class extends kr {
         _responseOrigin = null;
         constructor(e) {
-          super(e, vr, yr);
+          super(e, Nr, Pr);
           let { httpHeaders: t, url: n } = e;
-          (f(/https?:/.test(n.protocol), `PDFFetchStream only supports http(s):// URLs.`),
-            (this.headers = Be(!0, t)));
+          (m(/https?:/.test(n.protocol), `PDFFetchStream only supports http(s):// URLs.`),
+            (this.headers = qe(!0, t)));
         }
       }),
-      (vr = class extends hr {
+      (Nr = class extends Ar {
         _abortController = new AbortController();
         _reader = null;
         constructor(e) {
@@ -10847,13 +11023,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             withCredentials: a,
           } = e._source;
           ((this._isStreamingSupported = !n),
-            Ke(i, new Headers(e.headers), a, this._abortController)
+            et(i, new Headers(e.headers), a, this._abortController)
               .then((n) => {
-                ((e._responseOrigin = Ve(n.url)),
-                  qe(n.status, i),
+                ((e._responseOrigin = Ye(n.url)),
+                  tt(n.status, i),
                   (this._reader = n.body.getReader()));
                 let a = n.headers,
-                  { contentLength: o, isRangeSupported: s } = He({
+                  { contentLength: o, isRangeSupported: s } = Xe({
                     responseHeaders: a,
                     isHttp: !0,
                     rangeChunkSize: r,
@@ -10861,10 +11037,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   });
                 ((this._contentLength = o),
                   (this._isRangeSupported = s),
-                  (this._filename = Ue(a)),
+                  (this._filename = Ze(a)),
                   !this._isStreamingSupported &&
                     this._isRangeSupported &&
-                    this.cancel(new kt(`Streaming is disabled.`)),
+                    this.cancel(new Lt(`Streaming is disabled.`)),
                   this._headersCapability.resolve());
               })
               .catch(this._headersCapability.reject));
@@ -10874,13 +11050,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let { value: e, done: t } = await this._reader.read();
           return t
             ? { value: e, done: t }
-            : ((this._loaded += e.byteLength), this._callOnProgress(), { value: Je(e), done: !1 });
+            : ((this._loaded += e.byteLength), this._callOnProgress(), { value: nt(e), done: !1 });
         }
         cancel(e) {
           (this._reader?.cancel(e), this._abortController.abort());
         }
       }),
-      (yr = class extends gr {
+      (Pr = class extends jr {
         _abortController = new AbortController();
         _readCapability = Promise.withResolvers();
         _reader = null;
@@ -10889,10 +11065,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let { url: r, withCredentials: i } = e._source,
             a = new Headers(e.headers);
           (a.append(`Range`, `bytes=${t}-${n - 1}`),
-            Ke(r, a, i, this._abortController)
+            et(r, a, i, this._abortController)
               .then((t) => {
-                (Ge(Ve(t.url), e._responseOrigin),
-                  qe(t.status, r),
+                ($e(Ye(t.url), e._responseOrigin),
+                  tt(t.status, r),
                   (this._reader = t.body.getReader()),
                   this._readCapability.resolve());
               })
@@ -10901,21 +11077,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         async read() {
           await this._readCapability.promise;
           let { value: e, done: t } = await this._reader.read();
-          return t ? { value: e, done: t } : { value: Je(e), done: !1 };
+          return t ? { value: e, done: t } : { value: nt(e), done: !1 };
         }
         cancel(e) {
           (this._reader?.cancel(e), this._abortController.abort());
         }
       }),
-      (br = class extends mr {
+      (Fr = class extends kr {
         _progressiveDone = !1;
         _queuedChunks = [];
         constructor(e) {
-          super(e, xr, Sr);
+          super(e, Ir, Lr);
           let { pdfDataRangeTransport: t } = e,
             { initialData: n, progressiveDone: r } = t;
           if (n?.length > 0) {
-            let e = Ye(n);
+            let e = rt(n);
             this._queuedChunks.push(e);
           }
           ((this._progressiveDone = r),
@@ -10927,17 +11103,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   break;
                 case `progressiveDone`:
                   (this._fullReader?.progressiveDone(), (this._progressiveDone = !0));
-                  break;
               }
             }));
         }
         #e(e, t) {
-          let n = Ye(t);
+          let n = rt(t);
           if (e === void 0)
             this._fullReader ? this._fullReader._enqueue(n) : this._queuedChunks.push(n);
           else {
             let t = this._rangeReaders.keys().find((t) => t._begin === e);
-            (f(t, '#onReceiveData - no `PDFDataTransportStreamRangeReader` instance found.'),
+            (m(t, '#onReceiveData - no `PDFDataTransportStreamRangeReader` instance found.'),
               t._enqueue(n));
           }
         }
@@ -10958,8 +11133,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           (super.cancelAllRequests(e), this._source.pdfDataRangeTransport.abort());
         }
       }),
-      (xr = class extends hr {
-        #e = Xe.bind(this);
+      (Ir = class extends Ar {
+        #e = it.bind(this);
         _done = !1;
         _queuedChunks = null;
         _requests = [];
@@ -10973,7 +11148,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this._contentLength = i),
             (this._isStreamingSupported = !r),
             (this._isRangeSupported = !n),
-            D(a) && (this._filename = a),
+            ee(a) && (this._filename = a),
             this._headersCapability.resolve());
           let o = this._loaded;
           Promise.resolve().then(() => {
@@ -11001,8 +11176,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ((this._done ||= !0), this._queuedChunks.length === 0 && this.#e());
         }
       }),
-      (Sr = class extends gr {
-        #e = Xe.bind(this);
+      (Lr = class extends jr {
+        #e = it.bind(this);
         onDone = null;
         _begin = -1;
         _done = !1;
@@ -11032,17 +11207,17 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ((this._done = !0), this.#e(), this.onDone?.());
         }
       }),
-      (Cr = 200),
-      (wr = 206),
-      (Tr = class extends mr {
+      (Rr = 200),
+      (zr = 206),
+      (Br = class extends kr {
         #e = new WeakMap();
         _responseOrigin = null;
         constructor(e) {
-          super(e, Er, Dr);
+          super(e, Vr, Hr);
           let { httpHeaders: t, url: n } = e;
           ((this.url = n),
             (this.isHttp = /https?:/.test(n.protocol)),
-            (this.headers = Be(this.isHttp, t)));
+            (this.headers = qe(this.isHttp, t)));
         }
         _request(e) {
           let t = new XMLHttpRequest(),
@@ -11060,10 +11235,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return (
             this.isHttp && `begin` in e && `end` in e
               ? (t.setRequestHeader(`Range`, `bytes=${e.begin}-${e.end - 1}`),
-                (n.validateStatus = (e) => e === wr || e === Cr))
-              : (n.validateStatus = (e) => e === Cr),
+                (n.validateStatus = (e) => e === zr || e === Rr))
+              : (n.validateStatus = (e) => e === Rr),
             (t.responseType = `arraybuffer`),
-            f(e.onError, 'Expected `onError` callback to be provided.'),
+            m(e.onError, 'Expected `onError` callback to be provided.'),
             (t.onerror = () => e.onError(t.status)),
             (t.onreadystatechange = this.#n.bind(this, t)),
             (t.onprogress = this.#t.bind(this, t)),
@@ -11089,17 +11264,17 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             n.onError(e.status);
             return;
           }
-          let r = e.status || Cr;
+          let r = e.status || Rr;
           if (!n.validateStatus(r)) {
             n.onError(e.status);
             return;
           }
-          let i = Ze(e.response);
-          if (r === wr) {
+          let i = at(e.response);
+          if (r === zr) {
             let t = e.getResponseHeader(`Content-Range`);
             /bytes \d+-\d+\/\d+/.test(t)
               ? n.onDone(i)
-              : (u(`Missing or invalid "Content-Range" header.`), n.onError(0));
+              : (f(`Missing or invalid "Content-Range" header.`), n.onError(0));
           } else i ? n.onDone(i) : n.onError(e.status);
         }
         _abortRequest(e) {
@@ -11110,8 +11285,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return (n && (n.onClosed = () => this._rangeReaders.delete(n)), n);
         }
       }),
-      (Er = class extends hr {
-        #e = Xe.bind(this);
+      (Vr = class extends Ar {
+        #e = it.bind(this);
         _cachedChunks = [];
         _done = !1;
         _requests = [];
@@ -11129,13 +11304,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let e = this._stream,
             { disableRange: t, rangeChunkSize: n } = e._source,
             r = this._fullRequestXhr;
-          e._responseOrigin = Ve(r.responseURL);
+          e._responseOrigin = Ye(r.responseURL);
           let i = r.getAllResponseHeaders(),
             a = new Headers(
               i
-                ? i
-                    .trimStart()
-                    .replace(/[^\S ]+$/, ``)
+                ? Je(i.trimStart())
                     .split(/[\r\n]+/)
                     .map((e) => {
                       let [t, ...n] = e.split(`: `);
@@ -11143,7 +11316,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                     })
                 : []
             ),
-            { contentLength: o, isRangeSupported: s } = He({
+            { contentLength: o, isRangeSupported: s } = Xe({
               responseHeaders: a,
               isHttp: e.isHttp,
               rangeChunkSize: n,
@@ -11151,7 +11324,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             });
           ((this._contentLength = o),
             (this._isRangeSupported = s),
-            (this._filename = Ue(a)),
+            (this._filename = Ze(a)),
             this._isRangeSupported && e._abortRequest(r),
             this._headersCapability.resolve());
         }
@@ -11163,7 +11336,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this._cachedChunks.length === 0 && this.#e());
         }
         #r(e) {
-          ((this._storedError = We(e, this._stream.url)),
+          ((this._storedError = Qe(e, this._stream.url)),
             this._headersCapability.reject(this._storedError));
           for (let e of this._requests) e.reject(this._storedError);
           ((this._requests.length = 0), (this._cachedChunks.length = 0));
@@ -11189,8 +11362,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this._fullRequestXhr = null));
         }
       }),
-      (Dr = class extends gr {
-        #e = Xe.bind(this);
+      (Hr = class extends jr {
+        #e = it.bind(this);
         onClosed = null;
         _done = !1;
         _queuedChunk = null;
@@ -11208,9 +11381,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             })));
         }
         #t() {
-          let e = Ve(this._requestXhr?.responseURL);
+          let e = Ye(this._requestXhr?.responseURL);
           try {
-            Ge(e, this._stream._responseOrigin);
+            $e(e, this._stream._responseOrigin);
           } catch (e) {
             ((this._storedError = e), this.#r(0));
           }
@@ -11224,7 +11397,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.onClosed?.());
         }
         #r(e) {
-          this._storedError ??= We(e, this._stream.url);
+          this._storedError ??= Qe(e, this._stream.url);
           for (let e of this._requests) e.reject(this._storedError);
           ((this._requests.length = 0), (this._queuedChunk = null));
         }
@@ -11245,14 +11418,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.onClosed?.());
         }
       }),
-      (Or = class extends mr {
+      (Ur = class extends kr {
         constructor(e) {
-          super(e, kr, Ar);
+          super(e, Wr, Gr);
           let { url: t } = e;
-          f(t.protocol === `file:`, `PDFNodeStream only supports file:// URLs.`);
+          m(t.protocol === `file:`, `PDFNodeStream only supports file:// URLs.`);
         }
       }),
-      (kr = class extends hr {
+      (Wr = class extends Ar {
         _reader = null;
         constructor(e) {
           super(e);
@@ -11262,18 +11435,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               .getBuiltinModule(`fs/promises`)
               .lstat(i)
               .then((e) => {
-                let n = Qe(i);
+                let n = ot(i);
                 this._reader = n.getReader();
                 let { size: a } = e;
                 ((this._contentLength = a),
                   (this._isRangeSupported = !t && a > 2 * r),
                   !this._isStreamingSupported &&
                     this._isRangeSupported &&
-                    this.cancel(new kt(`Streaming is disabled.`)),
+                    this.cancel(new Lt(`Streaming is disabled.`)),
                   this._headersCapability.resolve());
               })
               .catch((e) => {
-                (e.code === `ENOENT` && (e = We(0, i)), this._headersCapability.reject(e));
+                (e.code === `ENOENT` && (e = Qe(0, i)), this._headersCapability.reject(e));
               }));
         }
         async read() {
@@ -11281,20 +11454,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let { value: e, done: t } = await this._reader.read();
           return t
             ? { value: e, done: t }
-            : ((this._loaded += e.byteLength), this._callOnProgress(), { value: Je(e), done: !1 });
+            : ((this._loaded += e.byteLength), this._callOnProgress(), { value: nt(e), done: !1 });
         }
         cancel(e) {
           this._reader?.cancel(e);
         }
       }),
-      (Ar = class extends gr {
+      (Gr = class extends jr {
         _readCapability = Promise.withResolvers();
         _reader = null;
         constructor(e, t, n) {
           super(e, t, n);
           let { url: r } = e._source;
           try {
-            let e = Qe(r, { start: t, end: n - 1 });
+            let e = ot(r, { start: t, end: n - 1 });
             ((this._reader = e.getReader()), this._readCapability.resolve());
           } catch (e) {
             this._readCapability.reject(e);
@@ -11303,13 +11476,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         async read() {
           await this._readCapability.promise;
           let { value: e, done: t } = await this._reader.read();
-          return t ? { value: e, done: t } : { value: Je(e), done: !1 };
+          return t ? { value: e, done: t } : { value: nt(e), done: !1 };
         }
         cancel(e) {
           this._reader?.cancel(e);
         }
       }),
-      (jr = class {
+      (Kr = class {
         static #e = null;
         static #t = ``;
         static get workerPort() {
@@ -11328,7 +11501,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.#t = e;
         }
       }),
-      (Mr = class {
+      (qr = class {
         #e;
         #t;
         constructor({ parsedData: e, rawData: t }) {
@@ -11344,8 +11517,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.#e.entries();
         }
       }),
-      (Nr = Symbol(`INTERNAL`)),
-      (Pr = class {
+      (Jr = Symbol(`INTERNAL`)),
+      (Yr = class {
         #e = !1;
         #t = !1;
         #n = !1;
@@ -11365,13 +11538,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.#e ? t?.viewState !== `OFF` : !this.#t || e?.printState !== `OFF`;
         }
         _setVisible(e, t, n = !1) {
-          (e !== Nr && d('Internal method `_setVisible` called.'), (this.#n = n), (this.#r = t));
+          (e !== Jr && p('Internal method `_setVisible` called.'), (this.#n = n), (this.#r = t));
         }
         get serializable() {
           return { userSet: this.#n, visible: this.#r };
         }
       }),
-      (Fr = class e {
+      (Xr = class e {
         #e = null;
         #t = new Map();
         #n = null;
@@ -11382,14 +11555,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         constructor(e, t = I.DISPLAY, n = null) {
           if (((this.#i = e), (this.renderingIntent = t), e !== null)) {
             ((this.name = e.name), (this.creator = e.creator), (this.#r = e.order));
-            for (let n of e.groups) this.#t.set(n.id, new Pr(t, n));
+            for (let n of e.groups) this.#t.set(n.id, new Yr(t, n));
             if (n) {
-              n.size !== this.#t.size && d(`Incorrect serialized groupState.`);
-              for (let [e, t] of n) this.#t.get(e)._setVisible(Nr, t.visible, t.userSet);
+              n.size !== this.#t.size && p(`Incorrect serialized groupState.`);
+              for (let [e, t] of n) this.#t.get(e)._setVisible(Jr, t.visible, t.userSet);
             } else {
-              if (e.baseState === `OFF`) for (let e of this.#t.values()) e._setVisible(Nr, !1);
-              for (let t of e.on) this.#t.get(t)._setVisible(Nr, !0);
-              for (let t of e.off) this.#t.get(t)._setVisible(Nr, !1);
+              if (e.baseState === `OFF`) for (let e of this.#t.values()) e._setVisible(Jr, !1);
+              for (let t of e.on) this.#t.get(t)._setVisible(Jr, !0);
+              for (let t of e.off) this.#t.get(t)._setVisible(Jr, !1);
             }
             this.#n = this.getHash();
           }
@@ -11403,7 +11576,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               i;
             if (Array.isArray(t)) i = this.#a(t);
             else if (this.#t.has(t)) i = this.#t.get(t).visible;
-            else return (u(`Optional content group not found: ${t}`), !0);
+            else return (f(`Optional content group not found: ${t}`), !0);
             switch (n) {
               case `And`:
                 if (!i) return !1;
@@ -11421,52 +11594,54 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         isVisible(e) {
           if (this.#t.size === 0) return !0;
-          if (!e) return (l(`Optional content group not defined.`), !0);
+          if (!e) return (d(`Optional content group not defined.`), !0);
           if (e.type === `OCG`)
             return this.#t.has(e.id)
               ? this.#t.get(e.id).visible
-              : (u(`Optional content group not found: ${e.id}`), !0);
+              : (f(`Optional content group not found: ${e.id}`), !0);
           if (e.type === `OCMD`) {
             if (e.expression) return this.#a(e.expression);
             if (!e.policy || e.policy === `AnyOn`) {
               for (let t of e.ids) {
-                if (!this.#t.has(t)) return (u(`Optional content group not found: ${t}`), !0);
+                if (!this.#t.has(t)) return (f(`Optional content group not found: ${t}`), !0);
                 if (this.#t.get(t).visible) return !0;
               }
               return !1;
-            } else if (e.policy === `AllOn`) {
+            }
+            if (e.policy === `AllOn`) {
               for (let t of e.ids) {
-                if (!this.#t.has(t)) return (u(`Optional content group not found: ${t}`), !0);
+                if (!this.#t.has(t)) return (f(`Optional content group not found: ${t}`), !0);
                 if (!this.#t.get(t).visible) return !1;
               }
               return !0;
-            } else if (e.policy === `AnyOff`) {
+            }
+            if (e.policy === `AnyOff`) {
               for (let t of e.ids) {
-                if (!this.#t.has(t)) return (u(`Optional content group not found: ${t}`), !0);
+                if (!this.#t.has(t)) return (f(`Optional content group not found: ${t}`), !0);
                 if (!this.#t.get(t).visible) return !0;
               }
               return !1;
-            } else if (e.policy === `AllOff`) {
+            }
+            if (e.policy === `AllOff`) {
               for (let t of e.ids) {
-                if (!this.#t.has(t)) return (u(`Optional content group not found: ${t}`), !0);
+                if (!this.#t.has(t)) return (f(`Optional content group not found: ${t}`), !0);
                 if (this.#t.get(t).visible) return !1;
               }
               return !0;
             }
-            return (u(`Unknown optional content policy ${e.policy}.`), !0);
+            return (f(`Unknown optional content policy ${e.policy}.`), !0);
           }
-          return (u(`Unknown group type ${e.type}.`), !0);
+          return (f(`Unknown group type ${e.type}.`), !0);
         }
         setVisibility(e, t = !0, n = !0) {
           let r = this.#t.get(e);
-          if (!r) {
-            u(`Optional content group not found: ${e}`);
-            return;
+          if (!r) f(`Optional content group not found: ${e}`);
+          else {
+            if (n && t && r.rbGroups.length)
+              for (let t of r.rbGroups)
+                for (let n of t) n !== e && this.#t.get(n)?._setVisible(Jr, !1, !0);
+            (r._setVisible(Jr, !!t, !0), (this.#e = null));
           }
-          if (n && t && r.rbGroups.length)
-            for (let t of r.rbGroups)
-              for (let n of t) n !== e && this.#t.get(n)?._setVisible(Nr, !1, !0);
-          (r._setVisible(Nr, !!t, !0), (this.#e = null));
         }
         setOCGState({ state: e, preserveRB: t }) {
           let n;
@@ -11489,7 +11664,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   break;
                 case `Toggle`:
                   this.setVisibility(r, !e.visible, t);
-                  break;
               }
           }
           this.#e = null;
@@ -11505,7 +11679,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         getHash() {
           if (this.#e !== null) return this.#e;
-          let e = new ln();
+          let e = new xn();
           for (let [t, n] of this.#t) e.update(`${t}:${n.visible}`);
           return (this.#e = e.hexdigest());
         }
@@ -11521,7 +11695,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return new e(t, n, r);
         }
       }),
-      (Ir = class {
+      (Zr = class {
         #e = null;
         #t = null;
         #n = 0;
@@ -11553,21 +11727,23 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         movePages(e, t, n) {
           this.#a();
           let r = this.#e,
-            i = this.#o(),
-            a = t.length,
-            o = new Uint32Array(a),
-            s = 0;
-          for (let e = 0; e < a; e++) {
+            i = t.length,
+            a = new Uint32Array(i),
+            o = 0;
+          for (let e = 0; e < i; e++) {
             let i = t[e] - 1;
-            ((o[e] = r[i]), i < n && s++);
+            ((a[e] = r[i]), i < n && o++);
           }
-          let c = this.#n,
-            l = c - a,
-            u = w(n - s, 0, l);
-          for (let t = 0, n = 0; t < c; t++) e.has(t + 1) || (r[n++] = r[t]);
-          (r.copyWithin(u + a, u, l),
-            r.set(o, u),
-            this.#s(i),
+          let s = this.#n,
+            c = s - i,
+            l = new Int32Array(s),
+            u = E(n - o, 0, c);
+          for (let t = 0, n = 0; t < s; t++) e.has(t + 1) || ((r[n] = r[t]), (l[n++] = t + 1));
+          (r.copyWithin(u + i, u, c),
+            r.set(a, u),
+            l.copyWithin(u + i, u, c),
+            l.set(t, u),
+            (this.#t = l),
             r.every((e, t) => e === t + 1) && (this.#e = null));
         }
         deletePages(e) {
@@ -11642,28 +11818,46 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         hasBeenAltered() {
           return this.#e !== null;
         }
-        getPageMappingForSaving(e = null) {
+        #c(e = null) {
+          if (!this.#e) return null;
+          let t = new Int32Array(this.#n).fill(-1),
+            n = new Map();
+          if (e)
+            for (let r of e) {
+              let e = this.getPageId(r),
+                i = n.get(e) ?? 0;
+              (n.set(e, i + 1), (t[r - 1] = i));
+            }
+          else
+            for (let e = 0, r = this.#n; e < r; e++) {
+              let r = this.#e[e],
+                i = n.get(r) ?? 0;
+              (n.set(r, i + 1), (t[e] = i));
+            }
+          return t;
+        }
+        getPageMappingForSaving(e = null, t = this.#c()) {
           e ??= this.#o();
-          let t = 0;
-          for (let n of e.values()) t = Math.max(t, n.length);
-          let n = Array(t);
-          for (let e = 0; e < t; e++) n[e] = { document: null, pageIndices: [], includePages: [] };
-          for (let [t, r] of e)
-            for (let e = 0, i = r.length; e < i; e++) n[e].includePages.push([t - 1, r[e] - 1]);
-          for (let { includePages: e, pageIndices: t } of n) {
+          let n = 0;
+          for (let t of e.values()) n = Math.max(n, t.length);
+          let r = Array(n);
+          for (let e = 0; e < n; e++) r[e] = { document: null, pageIndices: [], includePages: [] };
+          for (let [t, n] of e)
+            for (let e = 0, i = n.length; e < i; e++) r[e].includePages.push([t - 1, n[e] - 1]);
+          for (let { includePages: e, pageIndices: t } of r) {
             e.sort((e, t) => e[0] - t[0]);
             for (let n = 0, r = e.length; n < r; n++) (t.push(e[n][1]), (e[n] = e[n][0]));
           }
-          return n;
+          return { pageInfos: r, copyLevels: t };
         }
         extractPages(e) {
           e = Array.from(e).sort((e, t) => e - t);
           let t = new Map();
           for (let n = 0, r = e.length; n < r; n++) {
             let r = this.getPageId(e[n]);
-            t.getOrInsertComputed(r, Mt).push(n + 1);
+            t.getOrInsertComputed(r, Bt).push(n + 1);
           }
-          return this.getPageMappingForSaving(t);
+          return this.getPageMappingForSaving(t, this.#c(e));
         }
         getPrevPageNumber(e) {
           return this.#t?.[e - 1] ?? 0;
@@ -11681,30 +11875,30 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.#e?.subarray(0, this.pagesNumber);
         }
       }),
-      (Lr = Symbol(`INITIAL_DATA`)),
-      (Rr = () => ({ ...Promise.withResolvers(), data: Lr })),
-      (zr = class {
+      (Qr = Symbol(`INITIAL_DATA`)),
+      ($r = () => ({ ...Promise.withResolvers(), data: Qr })),
+      (ei = class {
         #e = new Map();
         get(e, t = null) {
           if (t) {
-            let n = this.#e.getOrInsertComputed(e, Rr);
+            let n = this.#e.getOrInsertComputed(e, $r);
             return (n.promise.then(() => t(n.data)), null);
           }
           let n = this.#e.get(e);
-          if (!n || n.data === Lr) throw Error(`Requesting object that isn't resolved yet ${e}.`);
+          if (!n || n.data === Qr) throw Error(`Requesting object that isn't resolved yet ${e}.`);
           return n.data;
         }
         has(e) {
           let t = this.#e.get(e);
-          return !!t && t.data !== Lr;
+          return !!t && t.data !== Qr;
         }
         delete(e) {
           let t = this.#e.get(e);
-          return !t || t.data === Lr ? !1 : (this.#e.delete(e), !0);
+          return !t || t.data === Qr ? !1 : (this.#e.delete(e), !0);
         }
         resolve(e, t = null) {
-          let n = this.#e.getOrInsertComputed(e, Rr);
-          if (n.data !== Lr) throw Error(`Object already resolved ${e}.`);
+          let n = this.#e.getOrInsertComputed(e, $r);
+          if (n.data !== Qr) throw Error(`Object already resolved ${e}.`);
           ((n.data = t), n.resolve());
         }
         clear() {
@@ -11712,12 +11906,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.#e.clear();
         }
         *[Symbol.iterator]() {
-          for (let [e, { data: t }] of this.#e) t !== Lr && (yield [e, t]);
+          for (let [e, { data: t }] of this.#e) t !== Qr && (yield [e, t]);
         }
       }),
-      (Br = 1e5),
-      (Vr = 30),
-      (Hr = class e {
+      (ti = 1e5),
+      (ni = 30),
+      (ri = class e {
         #e = Promise.withResolvers();
         #t = null;
         #n = !1;
@@ -11727,51 +11921,52 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         #o = null;
         #s = 0;
         #c = 0;
-        #l = null;
+        #l = $t.pixelRatio;
         #u = null;
-        #d = 0;
+        #d = null;
         #f = 0;
-        #p = Object.create(null);
-        #m = [];
-        #h = null;
-        #g = [];
-        #_ = new WeakMap();
-        #v = null;
-        static #y = new Map();
+        #p = 0;
+        #m = Object.create(null);
+        #h = [];
+        #g = null;
+        #_ = [];
+        #v = new WeakMap();
+        #y = null;
         static #b = new Map();
-        static #x = new WeakMap();
-        static #S = null;
-        static #C = new Set();
+        static #x = new Map();
+        static #S = new WeakMap();
+        static #C = null;
+        static #w = new Set();
         constructor({ textContentSource: t, images: n, container: r, viewport: i }) {
-          if (t instanceof ReadableStream) this.#h = t;
+          if (t instanceof ReadableStream) this.#g = t;
           else if (typeof t == `object`)
-            this.#h = new ReadableStream({
+            this.#g = new ReadableStream({
               start(e) {
                 (e.enqueue(t), e.close());
               },
             });
           else throw Error(`No "textContentSource" parameter specified.`);
-          ((this.#t = this.#u = r),
+          ((this.#t = this.#d = r),
             (this.#i = n),
-            (this.#f = i.scale * Ht.pixelRatio),
-            (this.#d = i.rotation),
+            (this.#p = i.scale * this.#l),
+            (this.#f = i.rotation),
             (this.#o = { div: null, properties: null, ctx: null }));
           let { pageWidth: a, pageHeight: o, pageX: s, pageY: c } = i.rawDims;
-          ((this.#v = [1, 0, 0, -1, -s, c + o]),
+          ((this.#y = [1, 0, 0, -1, -s, c + o]),
             (this.#c = a),
             (this.#s = o),
-            e.#k(),
-            r.style.setProperty(`--min-font-size`, e.#S),
-            ae(r, i),
+            e.#j(),
+            r.style.setProperty(`--min-font-size`, e.#C),
+            se(r, i),
             this.#e.promise
               .finally(() => {
-                (e.#C.delete(this), (this.#o = null), (this.#p = null));
+                (e.#w.delete(this), (this.#o = null), (this.#m = null));
               })
               .catch(() => {}));
         }
         static get fontFamilyMap() {
-          let { isWindows: e, isFirefox: t } = V.platform;
-          return _(
+          let { isWindows: e, isFirefox: t } = H.platform;
+          return y(
             this,
             `fontFamilyMap`,
             new Map([
@@ -11783,45 +11978,43 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         render() {
           this.#i && this.#t.append(this.#i.render());
           let t = () => {
-            this.#l.read().then(({ value: e, done: n }) => {
-              if (n) {
-                this.#e.resolve();
-                return;
-              }
-              ((this.#a ??= e.lang), Object.assign(this.#p, e.styles), this.#w(e.items), t());
+            this.#u.read().then(({ value: e, done: n }) => {
+              n
+                ? this.#e.resolve()
+                : ((this.#a ??= e.lang), Object.assign(this.#m, e.styles), this.#T(e.items), t());
             }, this.#e.reject);
           };
-          return ((this.#l = this.#h.getReader()), e.#C.add(this), t(), this.#e.promise);
+          return ((this.#u = this.#g.getReader()), e.#w.add(this), t(), this.#e.promise);
         }
         update({ viewport: t, onBefore: n = null }) {
-          let r = t.scale * Ht.pixelRatio,
+          let r = t.scale * $t.pixelRatio,
             i = t.rotation;
           if (
-            (i !== this.#d && (n?.(), (this.#d = i), ae(this.#u, { rotation: i })), r !== this.#f)
+            (i !== this.#f && (n?.(), (this.#f = i), se(this.#d, { rotation: i })), r !== this.#p)
           ) {
-            (n?.(), (this.#f = r));
-            let t = { div: null, properties: null, ctx: e.#D(this.#a) };
-            for (let e of this.#g) ((t.properties = this.#_.get(e)), (t.div = e), this.#E(t));
+            (n?.(), (this.#p = r), (this.#l = $t.pixelRatio));
+            let t = { div: null, properties: null, ctx: e.#O(this.#a) };
+            for (let e of this.#_) ((t.properties = this.#v.get(e)), (t.div = e), this.#D(t));
           }
         }
         cancel() {
-          let e = new kt(`TextLayer task cancelled.`);
-          (this.#l?.cancel(e).catch(() => {}), (this.#l = null), this.#e.reject(e));
+          let e = new Lt(`TextLayer task cancelled.`);
+          (this.#u?.cancel(e).catch(() => {}), (this.#u = null), this.#e.reject(e));
         }
         get textDivs() {
-          return this.#g;
+          return this.#_;
         }
         get textContentItemsStr() {
-          return this.#m;
+          return this.#h;
         }
-        #w(t) {
+        #T(t) {
           if (this.#n) return;
-          this.#o.ctx ??= e.#D(this.#a);
-          let n = this.#g,
-            r = this.#m;
+          this.#o.ctx ??= e.#O(this.#a);
+          let n = this.#_,
+            r = this.#h;
           for (let e of t) {
-            if (n.length > Br) {
-              (u(`Ignoring additional textDivs for performance reasons.`), (this.#n = !0));
+            if (n.length > ti) {
+              (f(`Ignoring additional textDivs for performance reasons.`), (this.#n = !0));
               return;
             }
             if (e.str === void 0) {
@@ -11829,27 +12022,25 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 let t = this.#t;
                 ((this.#t = document.createElement(`span`)),
                   this.#t.classList.add(`markedContent`),
-                  e.id && this.#t.setAttribute(`id`, `${e.id}`),
+                  e.id && this.#t.setAttribute(`id`, e.id),
                   e.tag === `Artifact` && (this.#t.ariaHidden = !0),
                   t.append(this.#t));
               } else e.type === `endMarkedContent` && (this.#t = this.#t.parentNode);
-              continue;
-            }
-            (r.push(e.str), this.#T(e));
+            } else (r.push(e.str), this.#E(e));
           }
         }
-        #T(t) {
+        #E(t) {
           let n = document.createElement(`span`),
             r = { angle: 0, canvasWidth: 0, hasText: t.str !== ``, hasEOL: t.hasEOL, fontSize: 0 };
-          this.#g.push(n);
-          let i = H.transform(this.#v, t.transform),
+          this.#_.push(n);
+          let i = U.transform(this.#y, t.transform),
             a = Math.atan2(i[1], i[0]),
-            o = this.#p[t.fontName];
+            o = this.#m[t.fontName];
           o.vertical && (a += Math.PI / 2);
           let s = (this.#r && o.fontSubstitution) || o.fontFamily;
           s = e.fontFamilyMap.get(s) || s;
           let c = Math.hypot(i[2], i[3]),
-            l = c * e.#A(s, o, this.#a),
+            l = c * e.#M(s, o, this.#a),
             u,
             d;
           a === 0
@@ -11857,28 +12048,29 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             : ((u = i[4] + l * Math.sin(a)), (d = i[5] - l * Math.cos(a)));
           let f = n.style;
           ((f.left = `${((100 * u) / this.#c).toFixed(2)}%`),
-            (f.top = `${((100 * d) / this.#s).toFixed(2)}%`),
-            f.setProperty(`--font-height`, `${c.toFixed(2)}px`),
+            (f.top = `${((100 * d) / this.#s).toFixed(2)}%`));
+          let p = Math.round(c * 100) / 100;
+          (f.setProperty(`--font-height`, `${p}px`),
             (f.fontFamily = s),
-            (r.fontSize = c),
+            (r.fontSize = p),
             n.setAttribute(`role`, `presentation`),
             (n.textContent = t.str),
             (n.dir = t.dir),
             this.#r && (n.dataset.fontName = o.fontSubstitutionLoadedName || t.fontName),
             a !== 0 && (r.angle = (180 / Math.PI) * a));
-          let p = !1;
-          if (t.str.length > 1) p = !0;
+          let m = !1;
+          if (t.str.length > 1) m = !0;
           else if (t.str !== ` ` && t.transform[0] !== t.transform[3]) {
             let e = Math.abs(t.transform[0]),
               n = Math.abs(t.transform[3]);
-            e !== n && Math.max(e, n) / Math.min(e, n) > 1.5 && (p = !0);
+            e !== n && Math.max(e, n) / Math.min(e, n) > 1.5 && (m = !0);
           }
           if (
-            (p && (r.canvasWidth = o.vertical ? t.height : t.width),
-            this.#_.set(n, r),
+            (m && (r.canvasWidth = o.vertical ? t.height : t.width),
+            this.#v.set(n, r),
             (this.#o.div = n),
             (this.#o.properties = r),
-            this.#E(this.#o),
+            this.#D(this.#o),
             r.hasText && this.#t.append(n),
             r.hasEOL)
           ) {
@@ -11886,45 +12078,52 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (e.setAttribute(`role`, `presentation`), this.#t.append(e));
           }
         }
-        #E(t) {
+        #D(t) {
           let { div: n, properties: r, ctx: i } = t,
-            { style: a } = n;
-          if (r.canvasWidth !== 0 && r.hasText) {
+            { style: a } = n,
+            { canvasWidth: o, fontSize: s } = r;
+          if (o !== 0 && s !== 0 && r.hasText) {
             let { fontFamily: t } = a,
-              { canvasWidth: o, fontSize: s } = r;
-            e.#O(i, s * this.#f, t);
-            let { width: c } = i.measureText(n.textContent);
-            c > 0 && a.setProperty(`--scale-x`, (o * this.#f) / c);
+              r = this.#l,
+              c = e.#k((s * this.#p) / r) * r;
+            e.#A(i, c, t);
+            let { width: l } = i.measureText(n.textContent);
+            l > 0 && a.setProperty(`--scale-x`, (o * c) / (l * s));
           }
           r.angle !== 0 && a.setProperty(`--rotate`, `${r.angle}deg`);
         }
         static cleanup() {
-          if (!(this.#C.size > 0)) {
-            this.#y.clear();
-            for (let { canvas: e } of this.#b.values()) e.remove();
+          if (!(this.#w.size > 0)) {
             this.#b.clear();
+            for (let { canvas: e } of this.#x.values()) e.remove();
+            this.#x.clear();
           }
         }
-        static #D(e = null) {
-          let t = this.#b.get((e ||= ``));
+        static #O(e = null) {
+          let t = this.#x.get((e ||= ``));
           if (!t) {
             let n = document.createElement(`canvas`);
             ((n.style.cssText = `position:absolute;top:0;left:0;width:0;height:0;display:none;letter-spacing:normal;word-spacing:normal`),
               (n.lang = e),
               document.body.append(n),
               (t = n.getContext(`2d`, { alpha: !1, willReadFrequently: !0 })),
-              this.#b.set(e, t),
-              this.#x.set(t, { size: 0, family: `` }));
+              this.#x.set(e, t),
+              this.#S.set(t, { size: 0, family: `` }));
           }
           return t;
         }
-        static #O(e, t, n) {
-          let r = this.#x.get(e);
-          (t === r.size && n === r.family) ||
+        static #k(e) {
+          e = Math.fround(e);
+          let t = Math.fround(e * 131073);
+          return Math.fround(t - Math.fround(t - e));
+        }
+        static #A(e, t, n) {
+          let r = this.#S.get(e);
+          (t !== r.size || n !== r.family) &&
             ((e.font = `${t}px ${n}`), (r.size = t), (r.family = n));
         }
-        static #k() {
-          if (this.#S !== null) return;
+        static #j() {
+          if (this.#C !== null) return;
           let e = document.createElement(`div`);
           ((e.style.opacity = 0),
             (e.style.lineHeight = 1),
@@ -11932,34 +12131,33 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (e.style.position = `absolute`),
             (e.textContent = `X`),
             document.body.append(e),
-            (this.#S = e.getBoundingClientRect().height),
+            (this.#C = e.getBoundingClientRect().height),
             e.remove());
         }
-        static #A(e, t, n) {
-          let r = this.#y.get(e);
+        static #M(e, t, n) {
+          let r = this.#b.get(e);
           if (r) return r;
-          let i = this.#D(n);
-          ((i.canvas.width = i.canvas.height = Vr), this.#O(i, Vr, e));
+          let i = this.#O(n);
+          this.#A(i, ni, e);
           let a = i.measureText(``),
             o = a.fontBoundingBoxAscent,
-            s = Math.abs(a.fontBoundingBoxDescent);
-          i.canvas.width = i.canvas.height = 0;
-          let c = 0.8;
+            s = Math.abs(a.fontBoundingBoxDescent),
+            c = 0.8;
           return (
             o
               ? (c = o / (o + s))
-              : (V.platform.isFirefox &&
-                  u(
+              : (H.platform.isFirefox &&
+                  f(
                     'Enable the `dom.textMetrics.fontBoundingBox.enabled` preference in `about:config` to improve TextLayer rendering.'
                   ),
                 t.ascent ? (c = t.ascent) : t.descent && (c = 1 + t.descent)),
-            this.#y.set(e, c),
+            this.#b.set(e, c),
             c
           );
         }
       }),
-      (Ur = 100),
-      (Wr = class e {
+      (ii = 100),
+      (ai = class e {
         static #e = 0;
         _capability = Promise.withResolvers();
         _setupCapability = Promise.withResolvers();
@@ -11987,7 +12185,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._transport.getData();
         }
       }),
-      (Gr = class {
+      (oi = class {
         #e = Promise.withResolvers();
         #t = null;
         constructor(e, t, n = !1, r = null) {
@@ -12013,11 +12211,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ((this.#t = e), this.#e.resolve());
         }
         requestDataRange(e, t) {
-          d(`Abstract method PDFDataRangeTransport.requestDataRange`);
+          p(`Abstract method PDFDataRangeTransport.requestDataRange`);
         }
         abort() {}
       }),
-      (Kr = class {
+      (si = class {
         constructor(e, t) {
           ((this._pdfInfo = e), (this._transport = t));
         }
@@ -12040,7 +12238,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._pdfInfo.fingerprints;
         }
         get isPureXfa() {
-          return _(this, `isPureXfa`, !!this._transport._htmlForXfa);
+          return y(this, `isPureXfa`, !!this._transport._htmlForXfa);
         }
         get allXfaHtml() {
           return this._transport._htmlForXfa;
@@ -12103,17 +12301,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         getData() {
           return this._transport.getData();
         }
-        saveDocument() {
-          return this._transport.saveDocument();
+        saveDocument(e) {
+          return this._transport.saveDocument(e);
         }
-        extractPages(e) {
-          return this._transport.extractPages(e);
+        extractPages(e, t = null) {
+          return this._transport.extractPages(e, t);
         }
         getDownloadInfo() {
           return this._transport.downloadInfoCapability.promise;
-        }
-        getRawData(e) {
-          return this._transport.getRawData(e);
         }
         cleanup(e = !1) {
           return this._transport.startCleanup(e || this.isPureXfa);
@@ -12130,6 +12325,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         getFieldObjects() {
           return this._transport.getFieldObjects();
         }
+        getSignatures() {
+          return this._transport.getSignatures();
+        }
+        getSignatureData(e) {
+          return this._transport.getSignatureData(e);
+        }
         hasJSActions() {
           return this._transport.hasJSActions();
         }
@@ -12137,21 +12338,23 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._transport.getCalculationOrderIds();
         }
       }),
-      (qr = class e {
+      (ci = class e {
         #e = !1;
         #t = null;
-        constructor(e, t, n, r, i = !1) {
-          ((this._pageIndex = e),
-            (this._pageInfo = t),
-            (this._transport = n),
-            (this._stats = i ? new Bt() : null),
-            (this._pdfBug = i),
-            (this.commonObjs = n.commonObjs),
-            (this.objs = new zr()),
+        static #n = 0;
+        constructor(t, n, r, i, a = !1) {
+          ((this._pageIndex = t),
+            (this._id = e.#n++),
+            (this._pageInfo = n),
+            (this._transport = r),
+            (this._stats = a ? new Zt() : null),
+            (this._pdfBug = a),
+            (this.commonObjs = r.commonObjs),
+            (this.objs = new ei()),
             (this._intentStates = new Map()),
             (this.destroyed = !1),
             (this.recordedBBoxes = null),
-            (this.#t = r),
+            (this.#t = i),
             (this.imageCoordinates = null));
         }
         clone(t) {
@@ -12187,7 +12390,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           offsetY: r = 0,
           dontFlip: i = !1,
         } = {}) {
-          return new Ft({
+          return new Wt({
             viewBox: this.view,
             userUnit: this.userUnit,
             scale: e,
@@ -12208,7 +12411,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._transport.filterFactory;
         }
         get isPureXfa() {
-          return _(this, `isPureXfa`, !!this._transport._htmlForXfa);
+          return y(this, `isPureXfa`, !!this._transport._htmlForXfa);
         }
         async getXfa() {
           return this._transport._htmlForXfa?.children[this._pageIndex] || null;
@@ -12218,7 +12421,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           canvas: t = e.canvas,
           viewport: n,
           intent: r = `display`,
-          annotationMode: i = ft.ENABLE,
+          annotationMode: i = xt.ENABLE,
           transform: a = null,
           background: o = null,
           optionalContentConfigPromise: s = null,
@@ -12234,7 +12437,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let h = this._transport.getRenderingIntent(r, i, u, d),
             { renderingIntent: g, cacheKey: _ } = h;
           ((this.#e = !1), (s ||= this._transport.getOptionalContentConfig(g)));
-          let v = this._intentStates.getOrInsertComputed(_, Pt);
+          let v = this._intentStates.getOrInsertComputed(_, Ht);
           v.streamReaderCancelTimeout &&= (clearTimeout(v.streamReaderCancelTimeout), null);
           let y = !!(g & I.PRINT);
           v.displayReadyCapability ||
@@ -12254,7 +12457,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               }
               (S && !e && (this.imageCoordinates = E.gfx?.imagesTracker.take()),
                 y && (this.#e = !0),
-                this.#n(),
+                this.#r(),
                 e
                   ? (E.capability.reject(e),
                     this._abortOperatorList({
@@ -12269,14 +12472,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             },
             w = null,
             T = null;
-          ((x || S) && (T = new yn(t, v.operatorList.length)), x && (w = new bn(T, b)));
-          let E = new Zr({
+          ((x || S) && (T = new jn(t, v.operatorList.length)), x && (w = new Mn(T, b)));
+          let E = new fi({
             callback: C,
             params: {
               canvas: t,
               canvasContext: e,
               dependencyTracker: w ?? T,
-              imagesTracker: S ? new Sn(t) : null,
+              imagesTracker: S ? new Pn(t) : null,
               viewport: n,
               transform: a,
               background: o,
@@ -12299,16 +12502,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return (
             Promise.all([v.displayReadyCapability.promise, s])
               .then(([e, t]) => {
-                if (this.destroyed) {
-                  C();
-                  return;
+                if (this.destroyed) C();
+                else {
+                  if ((this._stats?.time(`Rendering`), !(t.renderingIntent & g)))
+                    throw Error(
+                      'Must use the same `intent`-argument when calling the `PDFPageProxy.render` and `PDFDocumentProxy.getOptionalContentConfig` methods.'
+                    );
+                  (E.initializeGraphics({ transparency: e, optionalContentConfig: t }),
+                    E.operatorListChanged());
                 }
-                if ((this._stats?.time(`Rendering`), !(t.renderingIntent & g)))
-                  throw Error(
-                    'Must use the same `intent`-argument when calling the `PDFPageProxy.render` and `PDFDocumentProxy.getOptionalContentConfig` methods.'
-                  );
-                (E.initializeGraphics({ transparency: e, optionalContentConfig: t }),
-                  E.operatorListChanged());
               })
               .catch(C),
             D
@@ -12316,7 +12518,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         getOperatorList({
           intent: e = `display`,
-          annotationMode: t = ft.ENABLE,
+          annotationMode: t = xt.ENABLE,
           printAnnotationStorage: n = null,
           isEditing: r = !1,
         } = {}) {
@@ -12325,7 +12527,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               (o.opListReadCapability.resolve(o.operatorList), o.renderTasks.delete(s));
           }
           let a = this._transport.getRenderingIntent(e, t, n, r, !0),
-            o = this._intentStates.getOrInsertComputed(a.cacheKey, Pt),
+            o = this._intentStates.getOrInsertComputed(a.cacheKey, Ht),
             s;
           return (
             o.opListReadCapability ||
@@ -12353,16 +12555,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               includeMarkedContent: e === !0,
               disableNormalization: t === !0,
             },
-            {
-              highWaterMark: 100,
-              size(e) {
-                return e.items.length;
-              },
-            }
+            { highWaterMark: 100, size: (e) => e.items.length }
           );
         }
         async getTextContent(e = {}) {
-          if (this._transport._htmlForXfa) return this.getXfa().then((e) => It.textContent(e));
+          if (this._transport._htmlForXfa) return this.getXfa().then((e) => Gt.textContent(e));
           let t = this.streamTextContent(e),
             n = { items: [], styles: Object.create(null), lang: null };
           for await (let e of t)
@@ -12389,10 +12586,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         cleanup(e = !1) {
           this.#e = !0;
-          let t = this.#n();
-          return (e && t && (this._stats &&= new Bt()), t);
+          let t = this.#r();
+          return (e && t && (this._stats &&= new Zt()), t);
         }
-        #n() {
+        #r() {
           if (!this.#e || this.destroyed) return !1;
           for (let { renderTasks: e, operatorList: t } of this._intentStates.values())
             if (e.size > 0 || !t.lastChunk) return !1;
@@ -12409,7 +12606,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ((t.operatorList.lastChunk = e.lastChunk),
             (t.operatorList.separateAnnots = e.separateAnnots));
           for (let e of t.renderTasks) e.operatorListChanged();
-          e.lastChunk && this.#n();
+          e.lastChunk && this.#r();
         }
         _pumpOperatorList({
           renderingIntent: e,
@@ -12424,6 +12621,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 {
                   pageId: this.#t.getPageId(this._pageIndex + 1) - 1,
                   pageIndex: this._pageIndex,
+                  pageProxyId: this._id,
                   intent: e,
                   cacheKey: t,
                   annotationStorage: i,
@@ -12438,18 +12636,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let c = () => {
             o.read().then(
               ({ value: e, done: t }) => {
-                if (t) {
-                  s.streamReader = null;
-                  return;
-                }
-                this._transport.destroyed || (this._renderPageChunk(e, s), c());
+                t
+                  ? (s.streamReader = null)
+                  : this._transport.destroyed || (this._renderPageChunk(e, s), c());
               },
               (e) => {
                 if (((s.streamReader = null), !this._transport.destroyed)) {
                   if (s.operatorList) {
                     s.operatorList.lastChunk = !0;
                     for (let e of s.renderTasks) e.operatorListChanged();
-                    this.#n();
+                    this.#r();
                   }
                   if (s.displayReadyCapability) s.displayReadyCapability.reject(e);
                   else if (s.opListReadCapability) s.opListReadCapability.reject(e);
@@ -12467,8 +12663,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               !n)
             ) {
               if (e.renderTasks.size > 0) return;
-              if (t instanceof zt) {
-                let n = Ur;
+              if (t instanceof Xt) {
+                let n = ii;
                 (t.extraDelay > 0 && t.extraDelay < 1e3 && (n += t.extraDelay),
                   (e.streamReaderCancelTimeout = setTimeout(() => {
                     ((e.streamReaderCancelTimeout = null),
@@ -12478,7 +12674,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               }
             }
             if (
-              (e.streamReader.cancel(new kt(t.message)).catch(() => {}),
+              (e.streamReader.cancel(new Lt(t.message)).catch(() => {}),
               (e.streamReader = null),
               !this._transport.destroyed)
             ) {
@@ -12495,7 +12691,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._stats;
         }
       }),
-      (Jr = class e {
+      (li = class e {
         #e = Promise.withResolvers();
         #t = null;
         #n = null;
@@ -12504,7 +12700,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         static #a = !1;
         static #o = new WeakMap();
         static {
-          (P && ((this.#a = !0), (jr.workerSrc ||= `./pdf.worker.mjs`)),
+          (P && ((this.#a = !0), (Kr.workerSrc ||= `./pdf.worker.mjs`)),
             (this._isSameOrigin = (e, t) => {
               let n = URL.parse(e);
               if (!n?.origin || n.origin === `null`) return !1;
@@ -12516,7 +12712,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               return URL.createObjectURL(new Blob([t], { type: `text/javascript` }));
             }));
         }
-        constructor({ name: t = null, port: n = null, verbosity: r = c() } = {}) {
+        constructor({ name: t = null, port: n = null, verbosity: r = u() } = {}) {
           if (((this.name = t), (this.destroyed = !1), (this.verbosity = r), n)) {
             if (e.#o.has(n)) throw Error(`Cannot use more than one PDFWorker per port.`);
             (e.#o.set(n, this), this.#c(n));
@@ -12536,7 +12732,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         #c(e) {
           ((this.#n = e),
-            (this.#t = new Rn(`main`, `worker`, e)),
+            (this.#t = new $n(`main`, `worker`, e)),
             this.#t.on(`ready`, () => {}),
             this.#s());
         }
@@ -12550,7 +12746,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             e._isSameOrigin(window.location, t) ||
               (t = e._createCDNWrapper(new URL(t, window.location).href));
             let n = new Worker(t, { type: `module` }),
-              r = new Rn(`main`, `worker`, n),
+              r = new $n(`main`, `worker`, n),
               i = () => {
                 (a.abort(),
                   r.destroy(),
@@ -12565,48 +12761,29 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               },
               { signal: a.signal }
             ),
-              r.on(`test`, (e) => {
-                if ((a.abort(), this.destroyed || !e)) {
-                  i();
-                  return;
-                }
-                ((this.#t = r), (this.#n = n), (this.#r = n), this.#s());
-              }),
               r.on(`ready`, (e) => {
-                if ((a.abort(), this.destroyed)) {
-                  i();
-                  return;
-                }
-                try {
-                  o();
-                } catch {
-                  this.#u();
-                }
+                (a.abort(),
+                  this.destroyed || !(e instanceof Uint8Array)
+                    ? i()
+                    : ((this.#t = r), (this.#n = n), (this.#r = n), this.#s()));
               }));
-            let o = () => {
-              let e = new Uint8Array();
-              r.send(`test`, e, [e.buffer]);
-            };
-            o();
-            return;
           } catch {
-            l(`The worker has been disabled.`);
+            (d(`The worker has been disabled.`), this.#u());
           }
-          this.#u();
         }
         #u() {
-          ((e.#a ||= (u(`Setting up fake worker.`), !0)),
+          ((e.#a ||= (f(`Setting up fake worker.`), !0)),
             e._setupFakeWorkerGlobal
               .then((t) => {
                 if (this.destroyed) {
                   this.#e.reject(Error(`Worker was destroyed`));
                   return;
                 }
-                let n = new In();
+                let n = new Zn();
                 this.#n = n;
                 let r = `fake${e.#i++}`,
-                  i = new Rn(r + `_worker`, r, n);
-                (t.setup(i, n), (this.#t = new Rn(r, r + `_worker`, n)), this.#s());
+                  i = new $n(r + `_worker`, r, n);
+                (t.setup(i, n), (this.#t = new $n(r, r + `_worker`, n)), this.#s());
               })
               .catch((e) => {
                 this.#e.reject(Error(`Setting up fake worker failed: "${e.message}".`));
@@ -12633,7 +12810,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return new e(t);
         }
         static get workerSrc() {
-          if (jr.workerSrc) return jr.workerSrc;
+          if (Kr.workerSrc) return Kr.workerSrc;
           throw Error(`No "GlobalWorkerOptions.workerSrc" specified.`);
         }
         static get #d() {
@@ -12644,17 +12821,17 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
         }
         static get _setupFakeWorkerGlobal() {
-          return _(
+          return y(
             this,
             `_setupFakeWorkerGlobal`,
             (async () =>
               this.#d
                 ? this.#d
-                : (await a(() => import(this.workerSrc), [])).WorkerMessageHandler)()
+                : (await s(() => import(this.workerSrc), [])).WorkerMessageHandler)()
           );
         }
       }),
-      (Yr = class {
+      (ui = class {
         downloadInfoCapability = Promise.withResolvers();
         #e = null;
         #t = new Map();
@@ -12663,12 +12840,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         #i = new Map();
         #a = new Map();
         #o = null;
+        #s = null;
         constructor(e, t, n, r, i, a) {
           ((this.messageHandler = e),
             (this.loadingTask = t),
             (this.#n = n),
-            (this.commonObjs = new zr()),
-            (this.fontLoader = new Cn({
+            (this.commonObjs = new ei()),
+            (this.fontLoader = new In({
               ownerDocument: r.ownerDocument,
               styleElement: r.styleElement,
             })),
@@ -12684,25 +12862,24 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.setupMessageHandler());
         }
         updatePage(e) {
-          let { _pageIndex: t } = e;
-          (this.#r.set(t, e), this.#i.set(t, Promise.resolve(e)));
+          (this.#r.set(e._id, e), this.#i.set(e._pageIndex, Promise.resolve(e)));
         }
-        #s(e, t = null) {
+        #c(e, t = null) {
           return this.#t.getOrInsertComputed(e, () => this.messageHandler.sendWithPromise(e, t));
         }
-        #c({ loaded: e, total: t }) {
+        #l({ loaded: e, total: t }) {
           this.loadingTask.onProgress?.({
             loaded: e,
             total: t,
-            percent: t ? w(Math.round((e / t) * 100), 0, 100) : NaN,
+            percent: t ? E(Math.round((e / t) * 100), 0, 100) : NaN,
           });
         }
         get annotationStorage() {
-          return _(this, `annotationStorage`, new dn());
+          return y(this, `annotationStorage`, new Cn());
         }
-        getRenderingIntent(e, t = ft.ENABLE, n = null, r = !1, i = !1) {
+        getRenderingIntent(e, t = xt.ENABLE, n = null, r = !1, i = !1) {
           let a = I.DISPLAY,
-            o = un;
+            o = Sn;
           switch (e) {
             case `any`:
               a = I.ANY;
@@ -12713,30 +12890,30 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               a = I.PRINT;
               break;
             default:
-              u(`getRenderingIntent - invalid intent: ${e}`);
+              f(`getRenderingIntent - invalid intent: ${e}`);
           }
-          let s = a & I.PRINT && n instanceof fn ? n : this.annotationStorage;
+          let s = a & I.PRINT && n instanceof wn ? n : this.annotationStorage;
           switch (t) {
-            case ft.DISABLE:
+            case xt.DISABLE:
               a += I.ANNOTATIONS_DISABLE;
               break;
-            case ft.ENABLE:
+            case xt.ENABLE:
               break;
-            case ft.ENABLE_FORMS:
+            case xt.ENABLE_FORMS:
               a += I.ANNOTATIONS_FORMS;
               break;
-            case ft.ENABLE_STORAGE:
+            case xt.ENABLE_STORAGE:
               ((a += I.ANNOTATIONS_STORAGE), (o = s.serializable));
               break;
             default:
-              u(`getRenderingIntent - invalid annotationMode: ${t}`);
+              f(`getRenderingIntent - invalid annotationMode: ${t}`);
           }
           (r && (a += I.IS_EDITING), i && (a += I.OPLIST));
           let { ids: c, hash: l } = s.modifiedIds,
-            d = [a, o.hash, l];
+            u = [a, o.hash, l];
           return {
             renderingIntent: a,
-            cacheKey: d.join(`_`),
+            cacheKey: u.join(`_`),
             annotationStorageSerializable: o,
             modifiedIds: c,
           };
@@ -12760,8 +12937,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 this.fontLoader.clear(),
                 this.#t.clear(),
                 this.filterFactory.destroy(),
-                Hr.cleanup(),
-                this.#n?.cancelAllRequests(new kt(`Worker was terminated.`)),
+                ri.cleanup(),
+                this.#n?.cancelAllRequests(new Lt(`Worker was terminated.`)),
                 this.messageHandler?.destroy(),
                 (this.messageHandler = null),
                 this.destroyCapability.resolve());
@@ -12772,19 +12949,17 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         setupMessageHandler() {
           let { messageHandler: e, loadingTask: t } = this;
           (e.on(`GetReader`, (e, t) => {
-            (f(this.#n, 'GetReader - no `BasePDFStream` instance available.'),
+            (m(this.#n, 'GetReader - no `BasePDFStream` instance available.'),
               (this.#e = this.#n.getFullReader()),
-              (this.#e.onProgress = (e) => this.#c(e)),
+              (this.#e.onProgress = (e) => this.#l(e)),
               (t.onPull = () => {
                 this.#e
                   .read()
                   .then(function ({ value: e, done: n }) {
-                    if (n) {
-                      t.close();
-                      return;
-                    }
-                    (f(e instanceof ArrayBuffer, `GetReader - expected an ArrayBuffer.`),
-                      t.enqueue(new Uint8Array(e), 1, [e]));
+                    n
+                      ? t.close()
+                      : (m(e instanceof ArrayBuffer, `GetReader - expected an ArrayBuffer.`),
+                        t.enqueue(new Uint8Array(e), 1, [e]));
                   })
                   .catch((e) => {
                     t.error(e);
@@ -12806,39 +12981,38 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               );
             }),
             e.on(`GetRangeReader`, (e, t) => {
-              f(this.#n, 'GetRangeReader - no `BasePDFStream` instance available.');
+              m(this.#n, 'GetRangeReader - no `BasePDFStream` instance available.');
               let n = this.#n.getRangeReader(e.begin, e.end);
-              if (!n) {
-                t.close();
-                return;
-              }
-              ((t.onPull = () => {
-                n.read()
-                  .then(function ({ value: e, done: n }) {
-                    if (n) {
-                      t.close();
-                      return;
-                    }
-                    (f(e instanceof ArrayBuffer, `GetRangeReader - expected an ArrayBuffer.`),
-                      t.enqueue(new Uint8Array(e), 1, [e]));
-                  })
-                  .catch((e) => {
-                    t.error(e);
-                  });
-              }),
-                (t.onCancel = (e) => {
-                  (n.cancel(e),
-                    t.ready.catch((e) => {
-                      if (!this.destroyed) throw e;
-                    }));
-                }));
+              n
+                ? ((t.onPull = () => {
+                    n.read()
+                      .then(function ({ value: e, done: n }) {
+                        n
+                          ? t.close()
+                          : (m(
+                              e instanceof ArrayBuffer,
+                              `GetRangeReader - expected an ArrayBuffer.`
+                            ),
+                            t.enqueue(new Uint8Array(e), 1, [e]));
+                      })
+                      .catch((e) => {
+                        t.error(e);
+                      });
+                  }),
+                  (t.onCancel = (e) => {
+                    (n.cancel(e),
+                      t.ready.catch((e) => {
+                        if (!this.destroyed) throw e;
+                      }));
+                  }))
+                : t.close();
             }),
             e.on(`GetDoc`, ({ pdfInfo: e }) => {
               ((this.pagesMapper.pagesNumber = e.numPages),
                 (this._numPages = e.numPages),
                 (this._htmlForXfa = e.htmlForXfa),
                 delete e.htmlForXfa,
-                t._capability.resolve(new Kr(e, this)));
+                t._capability.resolve(new si(e, this)));
             }),
             e.on(`DocException`, (e) => {
               t._capability.reject(N(e));
@@ -12856,12 +13030,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               return this.#o.promise;
             }),
             e.on(`DataLoaded`, (e) => {
-              (this.#c({ loaded: e.length, total: e.length }),
+              (this.#l({ loaded: e.length, total: e.length }),
                 this.downloadInfoCapability.resolve(e));
             }),
             e.on(`StartRenderPage`, (e) => {
               this.destroyed ||
-                this.#r.get(e.pageIndex)._startRenderPage(e.transparency, e.cacheKey);
+                this.#r.get(e.pageProxyId)._startRenderPage(e.transparency, e.cacheKey);
             }),
             e.on(`commonobj`, ([t, n, r]) => {
               if (this.destroyed || this.commonObjs.has(t)) return null;
@@ -12869,15 +13043,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 case `Font`:
                   if (`error` in r) {
                     let e = r.error;
-                    (u(`Error during font loading: ${e}`), this.commonObjs.resolve(t, e));
+                    (f(`Error during font loading: ${e}`), this.commonObjs.resolve(t, e));
                     break;
                   }
-                  let i = new An(r),
+                  let i = new Gn(r.buffer),
                     a =
                       this._params.pdfBug && globalThis.FontInspector?.enabled
                         ? (e, t) => globalThis.FontInspector.fontAdded(e, t)
                         : null,
-                    o = new wn(i, a, r.charProcOperatorList, r.extra);
+                    o = new Ln(i, a, r.charProcOperatorList, r.extra);
                   this.fontLoader
                     .bind(o)
                     .catch(() => e.sendWithPromise(`FontFallback`, { id: t }))
@@ -12887,7 +13061,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   break;
                 case `CopyLocalImage`:
                   let { imageRef: s } = r;
-                  f(s, `The imageRef must be defined.`);
+                  m(s, `The imageRef must be defined.`);
                   for (let e of this.#r.values())
                     for (let [, n] of e.objs) {
                       if (n?.ref !== s) continue;
@@ -12897,13 +13071,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                     }
                   break;
                 case `FontPath`:
-                  this.commonObjs.resolve(t, new Mn(r));
+                  this.commonObjs.resolve(t, new qn(r));
                   break;
                 case `Image`:
                   this.commonObjs.resolve(t, r);
                   break;
                 case `Pattern`:
-                  let c = new jn(r);
+                  let c = new Kn(r);
                   this.commonObjs.resolve(t, c.getIR());
                   break;
                 default:
@@ -12915,22 +13089,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               if (this.destroyed) return;
               let i = this.#r.get(t);
               if (!i.objs.has(e)) {
-                if (i._intentStates.size === 0) {
-                  r?.bitmap?.close();
-                  return;
-                }
-                switch (n) {
-                  case `Image`:
-                  case `Pattern`:
-                    i.objs.resolve(e, r);
-                    break;
-                  default:
-                    throw Error(`Got unknown object type ${n}`);
-                }
+                if (i._intentStates.size === 0) r?.bitmap?.close();
+                else
+                  switch (n) {
+                    case `Image`:
+                    case `Pattern`:
+                      i.objs.resolve(e, r);
+                      break;
+                    default:
+                      throw Error(`Got unknown object type ${n}`);
+                  }
               }
             }),
             e.on(`DocProgress`, (e) => {
-              this.destroyed || this.#c(e);
+              this.destroyed || this.#l(e);
             }),
             e.on(`FetchBinaryData`, async (e) => {
               if (this.destroyed) throw Error(`Worker was destroyed.`);
@@ -12944,57 +13116,59 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         getData() {
           return this.messageHandler.sendWithPromise(`GetData`, null);
         }
-        saveDocument() {
+        saveDocument(e = null) {
           this.annotationStorage.size <= 0 &&
-            u(
+            f(
               'saveDocument called while `annotationStorage` is empty, please use the getData-method instead.'
             );
-          let { map: e, transfer: t } = this.annotationStorage.serializable;
+          let { map: t, transfer: n } = this.annotationStorage.serializable;
           return this.messageHandler
             .sendWithPromise(
               `SaveDocument`,
               {
                 isPureXfa: !!this._htmlForXfa,
                 numPages: this._numPages,
-                annotationStorage: e,
+                annotationStorage: t,
+                supportsPrintToPDF: this.#s !== null,
                 filename: this.#e?.filename ?? null,
               },
-              t
+              n
             )
             .finally(() => {
-              this.annotationStorage.resetModified();
+              ((this.#s = null), this.annotationStorage.resetModified());
             });
         }
-        extractPages(e) {
-          let t = { pageInfos: e },
-            n,
-            r = globalThis.ImageBitmap;
-          if (typeof r == `function`) {
+        extractPages(e, t = null) {
+          let n = { pageInfos: e },
+            r,
+            i = globalThis.ImageBitmap;
+          if (typeof i == `function`) {
             let t = Array.isArray(e) ? e : [e];
-            for (let e of t) e?.image instanceof r && (n ||= []).push(e.image);
+            for (let e of t) e?.image instanceof i && (r ||= []).push(e.image);
           }
           if (this.annotationStorage.size > 0) {
             let e = this.annotationStorage.serializable,
-              { map: r } = e;
-            e.transfer?.length && (n ? n.push(...e.transfer) : (n = e.transfer));
-            let i = this.pagesMapper.getMapping();
-            if (i) {
+              { map: i } = e;
+            e.transfer?.length && (r ? r.push(...e.transfer) : (r = e.transfer));
+            let a = this.pagesMapper.getMapping();
+            if (a) {
               let e = new Map();
-              for (let [t, n] of r) {
-                if (n?.pageIndex !== void 0 && n.pageIndex >= 0 && n.pageIndex < i.length) {
-                  let r = i[n.pageIndex] - 1;
-                  if (r !== n.pageIndex) {
-                    e.set(t, { ...n, pageIndex: r });
+              for (let [n, r] of i) {
+                if (r?.pageIndex !== void 0 && r.pageIndex >= 0 && r.pageIndex < a.length) {
+                  let i = t?.[r.pageIndex] ?? 0,
+                    o = a[r.pageIndex] - 1;
+                  if (o !== r.pageIndex || i !== 0) {
+                    e.set(n, { ...r, pageIndex: o, copyLevel: i });
                     continue;
                   }
                 }
-                e.set(t, n);
+                e.set(n, r);
               }
-              r = e;
+              i = e;
             }
-            t.annotationStorage = r;
+            n.annotationStorage = i;
           }
-          return this.messageHandler.sendWithPromise(`ExtractPages`, t, n).finally(() => {
+          return this.messageHandler.sendWithPromise(`ExtractPages`, n, r).finally(() => {
             this.annotationStorage.resetModified();
           });
         }
@@ -13008,13 +13182,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let i = this.messageHandler.sendWithPromise(`GetPage`, { pageIndex: n }).then((e) => {
             if (this.destroyed) throw Error(`Transport destroyed`);
             e.refStr && this.#a.set(e.refStr, n);
-            let r = new qr(t, e, this, this.pagesMapper, this._params.pdfBug);
-            return (this.#r.set(t, r), r);
+            let r = new ci(t, e, this, this.pagesMapper, this._params.pdfBug);
+            return (this.#r.set(r._id, r), r);
           });
           return (this.#i.set(t, i), i);
         }
         async getPageIndex(e) {
-          if (!Nn(e)) throw Error(`Invalid pageIndex request.`);
+          if (!Jn(e)) throw Error(`Invalid pageIndex request.`);
           let t = await this.messageHandler.sendWithPromise(`GetPageIndex`, {
               num: e.num,
               gen: e.gen,
@@ -13030,10 +13204,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           });
         }
         getFieldObjects() {
-          return this.#s(`GetFieldObjects`);
+          return this.#c(`GetFieldObjects`);
+        }
+        getSignatures() {
+          return this.#c(`GetSignatures`);
+        }
+        getSignatureData(e) {
+          return this.messageHandler.sendWithPromise(`GetSignatureData`, e);
         }
         hasJSActions() {
-          return this.#s(`HasJSActions`);
+          return this.#c(`HasJSActions`);
         }
         getCalculationOrderIds() {
           return this.messageHandler.sendWithPromise(`GetCalculationOrderIds`, null);
@@ -13074,7 +13254,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           });
         }
         getDocJSActions() {
-          return this.#s(`GetDocJSActions`);
+          return this.#c(`GetDocJSActions`);
         }
         getPageJSActions(e) {
           return this.messageHandler.sendWithPromise(`GetPageJSActions`, {
@@ -13090,7 +13270,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.messageHandler.sendWithPromise(`GetOutline`, null);
         }
         getOptionalContentConfig(e) {
-          return this.#s(`GetOptionalContentConfig`).then((t) => new Fr(t, e));
+          return this.#c(`GetOptionalContentConfig`).then((t) => new Xr(t, e));
         }
         getPermissions() {
           return this.messageHandler.sendWithPromise(`GetPermissions`, null);
@@ -13102,7 +13282,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               .sendWithPromise(e, null)
               .then((e) => ({
                 info: e[0],
-                metadata: e[1] ? new Mr(e[1]) : null,
+                metadata: e[1] ? new qr(e[1]) : null,
                 contentDispositionFilename: this.#e?.filename ?? null,
                 contentLength: this.#e?.contentLength ?? null,
                 hasStructTree: e[2],
@@ -13111,9 +13291,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         getMarkInfo() {
           return this.messageHandler.sendWithPromise(`GetMarkInfo`, null);
-        }
-        getRawData(e) {
-          return this.messageHandler.sendWithPromise(`GetRawData`, e);
         }
         async startCleanup(e = !1) {
           if (!this.destroyed) {
@@ -13125,11 +13302,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               e || this.fontLoader.clear(),
               this.#t.clear(),
               this.filterFactory.destroy(!0),
-              Hr.cleanup());
+              ri.cleanup());
           }
         }
         cachedPageNumber(e) {
-          if (!Nn(e)) return null;
+          if (!Jn(e)) return null;
           let t = e.gen === 0 ? `${e.num}R` : `${e.num}R${e.gen}`,
             n = this.#a.get(t);
           if (n >= 0) {
@@ -13139,7 +13316,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return null;
         }
       }),
-      (Xr = class {
+      (di = class {
         _internalRenderTask = null;
         onContinue = null;
         onError = null;
@@ -13162,7 +13339,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._internalRenderTask.imageCoordinates || null;
         }
       }),
-      (Zr = class e {
+      (fi = class e {
         #e = null;
         static #t = new WeakSet();
         constructor({
@@ -13199,7 +13376,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this._useRequestAnimationFrame = l === !0 && typeof window < `u`),
             (this.cancelled = !1),
             (this.capability = Promise.withResolvers()),
-            (this.task = new Xr(this)),
+            (this.task = new di(this)),
             (this._cancelBound = this.cancel.bind(this)),
             (this._continueBound = this._continue.bind(this)),
             (this._scheduleNextBound = this._scheduleNext.bind(this)),
@@ -13212,7 +13389,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this._operationsFilter = p));
         }
         get completed() {
-          return this.capability.promise.catch(function () {});
+          return this.capability.promise.catch(() => {});
         }
         initializeGraphics({ transparency: t = !1, optionalContentConfig: n }) {
           if (this.cancelled) return;
@@ -13238,7 +13415,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             c =
               this._canvasContext ||
               this._canvas.getContext(`2d`, { alpha: !1, willReadFrequently: !this._enableHWA });
-          ((this.gfx = new pr(
+          ((this.gfx = new Or(
             c,
             this.commonObjs,
             this.objs,
@@ -13261,18 +13438,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.gfx?.endDrawing(),
             (this.#e &&= (window.cancelAnimationFrame(this.#e), null)),
             e.#t.delete(this._canvas),
-            (t ||= new zt(`Rendering cancelled, page ${this._pageIndex + 1}`, n)),
+            (t ||= new Xt(`Rendering cancelled, page ${this._pageIndex + 1}`, n)),
             this.callback(t),
             this.task.onError?.(t));
         }
         operatorListChanged() {
-          if (!this.graphicsReady) {
-            this.graphicsReadyCallback ||= this._continueBound;
-            return;
-          }
-          (this.gfx.dependencyTracker?.growOperationsCount(this.operatorList.fnArray.length),
-            this.stepper?.updateOperatorList(this.operatorList),
-            !this.running && this._continue());
+          this.graphicsReady
+            ? (this.gfx.dependencyTracker?.growOperationsCount(this.operatorList.fnArray.length),
+              this.stepper?.updateOperatorList(this.operatorList),
+              !this.running && this._continue())
+            : (this.graphicsReadyCallback ||= this._continueBound);
         }
         _continue() {
           ((this.running = !0),
@@ -13303,9 +13478,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (this.gfx.endDrawing(), e.#t.delete(this._canvas), this.callback())));
         }
       }),
-      (Qr = `6.1.200`),
-      ($r = `6353acefe`),
-      (ei = class e {
+      (pi = `6.4.299`),
+      (mi = `d0991a0d5`),
+      (hi = class e {
         #e = null;
         #t = null;
         #n;
@@ -13318,10 +13493,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         #l = null;
         static #u = null;
         static get _keyboardManager() {
-          return _(
+          return y(
             this,
             `_keyboardManager`,
-            new $t([
+            new dn([
               [[`Escape`], e.prototype._hideDropdownFromKeyboard],
               [[`Space`], e.prototype._colorSelectFromKeyboard],
               [[`ArrowDown`, `ArrowRight`], e.prototype._moveToNext],
@@ -13377,7 +13552,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         #d() {
           let t = document.createElement(`div`),
             n = this.#l._signal;
-          (t.addEventListener(`contextmenu`, k, { signal: n }),
+          (t.addEventListener(`contextmenu`, A, { signal: n }),
             (t.className = `dropdown`),
             (t.role = `listbox`),
             (t.ariaMultiSelectable = `false`),
@@ -13408,7 +13583,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               type: R.HIGHLIGHT_COLOR,
               value: e,
             }),
-            this.updateColor(e));
+            this.update(e));
         }
         _colorSelectFromKeyboard(e) {
           if (e.target === this.#e) {
@@ -13419,36 +13594,22 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           t && this.#f(t, e);
         }
         _moveToNext(e) {
-          if (!this.#g) {
-            this.#m(e);
-            return;
-          }
-          if (e.target === this.#e) {
-            this.#r.firstElementChild?.focus();
-            return;
-          }
-          e.target.nextSibling?.focus();
+          this.#g
+            ? e.target === this.#e
+              ? this.#r.firstElementChild?.focus()
+              : e.target.nextSibling?.focus()
+            : this.#m(e);
         }
         _moveToPrevious(e) {
-          if (e.target === this.#r?.firstElementChild || e.target === this.#e) {
-            this.#g && this._hideDropdownFromKeyboard();
-            return;
-          }
-          (this.#g || this.#m(e), e.target.previousSibling?.focus());
+          e.target === this.#r?.firstElementChild || e.target === this.#e
+            ? this.#g && this._hideDropdownFromKeyboard()
+            : (this.#g || this.#m(e), e.target.previousSibling?.focus());
         }
         _moveToBeginning(e) {
-          if (!this.#g) {
-            this.#m(e);
-            return;
-          }
-          this.#r.firstElementChild?.focus();
+          this.#g ? this.#r.firstElementChild?.focus() : this.#m(e);
         }
         _moveToEnd(e) {
-          if (!this.#g) {
-            this.#m(e);
-            return;
-          }
-          this.#r.lastElementChild?.focus();
+          this.#g ? this.#r.lastElementChild?.focus() : this.#m(e);
         }
         #p(t) {
           e._keyboardManager.exec(this, t);
@@ -13487,15 +13648,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.#r && !this.#r.classList.contains(`hidden`);
         }
         _hideDropdownFromKeyboard() {
-          if (!this.#a) {
-            if (!this.#g) {
-              this.#o?.unselect();
-              return;
-            }
-            (this.hideDropdown(), this.#e.focus({ preventScroll: !0, focusVisible: this.#i }));
-          }
+          this.#a ||
+            (this.#g
+              ? (this.hideDropdown(), this.#e.focus({ preventScroll: !0, focusVisible: this.#i }))
+              : this.#o?.unselect());
         }
-        updateColor(e) {
+        update(e) {
           if ((this.#t && (this.#t.style.backgroundColor = e), !this.#r)) return;
           let t = this.#l.highlightColors.values();
           for (let n of this.#r.children) n.ariaSelected = t.next().value === e.toUpperCase();
@@ -13508,7 +13666,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.#r = null));
         }
       }),
-      (ti = class e {
+      (gi = class e {
         #e = null;
         #t = !1;
         #n = null;
@@ -13532,11 +13690,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               color: a,
               opacity: o,
             } = this.#n,
-            s = (this.#t = V.isAlphaColorInputSupported && i !== void 0),
+            s = (this.#t = H.isAlphaColorInputSupported && i !== void 0),
             c = (this.#e = document.createElement(`input`));
           if (((c.type = `color`), s)) {
             c.setAttribute(`alpha`, ``);
-            let e = H.hexNums[Math.round((o ?? 1) * 255)];
+            let e = U.hexNums[Math.round((o ?? 1) * 255)];
             c.value = (a || `#000000`) + e;
           } else c.value = a || `#000000`;
           return (
@@ -13547,10 +13705,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               `input`,
               () => {
                 if (s) {
-                  let e = ne(c.value);
+                  let e = re(c.value);
                   if (!e) return;
                   let [t, a, o, s] = e,
-                    l = H.makeHexColor(t, a, o);
+                    l = U.makeHexColor(t, a, o);
                   r === void 0
                     ? (this.#r.updateParams(n, l), this.#r.updateParams(i, s))
                     : this.#r.updateParams(r, { color: l, opacity: s });
@@ -13562,15 +13720,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
         update(e) {
-          if (this.#e)
+          if (this.#e) {
             if (this.#t) {
-              let t = H.hexNums[Math.round(this.#n.opacity * 255)];
+              let t = U.hexNums[Math.round(this.#n.opacity * 255)];
               this.#e.value = e + t;
             } else this.#e.value = e;
+          }
         }
         updateOpacity(e) {
           if (!this.#e || !this.#t) return;
-          let t = H.hexNums[Math.round(e * 255)];
+          let t = U.hexNums[Math.round(e * 255)];
           this.#e.value = this.#n.color + t;
         }
         destroy() {
@@ -13578,7 +13737,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         hideDropdown() {}
       }),
-      (ni = class {
+      (_i = class {
         static CMYK_G([e, t, n, r]) {
           return [`G`, 1 - Math.min(1, 0.3 * e + 0.59 * n + 0.11 * t + r)];
         }
@@ -13589,20 +13748,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return [`RGB`, e, e, e];
         }
         static G_rgb([e]) {
-          return ((e = nt(e)), [e, e, e]);
+          return ((e = ut(e)), [e, e, e]);
         }
         static G_HTML([e]) {
-          let t = tt(e);
+          let t = lt(e);
           return `#${t}${t}${t}`;
         }
         static RGB_G([e, t, n]) {
           return [`G`, 0.3 * e + 0.59 * t + 0.11 * n];
         }
         static RGB_rgb(e) {
-          return e.map(nt);
+          return e.map(ut);
         }
         static RGB_HTML(e) {
-          return `#${e.map(tt).join(``)}`;
+          return `#${e.map(lt).join(``)}`;
         }
         static T_HTML() {
           return `#00000000`;
@@ -13615,9 +13774,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         static CMYK_rgb([e, t, n, r]) {
           return [
-            nt(1 - Math.min(1, e + r)),
-            nt(1 - Math.min(1, n + r)),
-            nt(1 - Math.min(1, t + r)),
+            ut(1 - Math.min(1, e + r)),
+            ut(1 - Math.min(1, n + r)),
+            ut(1 - Math.min(1, t + r)),
           ];
         }
         static CMYK_HTML(e) {
@@ -13631,7 +13790,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return [`CMYK`, r, i, a, Math.min(r, i, a)];
         }
       }),
-      (ri = class {
+      (vi = class {
         create(e, t, n = !1) {
           if (e <= 0 || t <= 0) throw Error(`Invalid SVG dimensions`);
           let r = this._createSVG(`svg:svg`);
@@ -13648,69 +13807,70 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this._createSVG(e);
         }
         _createSVG(e) {
-          d('Abstract method `_createSVG` called.');
+          p('Abstract method `_createSVG` called.');
         }
       }),
-      (ii = class extends ri {
+      (yi = class extends vi {
         _createSVG(e) {
           return document.createElementNS(F, e);
         }
       }),
-      (ai = 9),
-      (oi = new WeakSet()),
-      (si = new Date().getTimezoneOffset() * 60 * 1e3),
-      (ci = class {
+      (bi = 9),
+      (xi = new WeakSet()),
+      (Si = new Date().getTimezoneOffset() * 60 * 1e3),
+      (Ci = class {
         static create(e) {
           switch (e.data.annotationType) {
             case B.LINK:
-              return new ui(e);
+              return new Ti(e);
             case B.TEXT:
-              return new di(e);
+              return new Ei(e);
             case B.WIDGET:
               switch (e.data.fieldType) {
                 case `Tx`:
-                  return new pi(e);
+                  return new Oi(e);
                 case `Btn`:
-                  return e.data.radioButton ? new gi(e) : e.data.checkBox ? new hi(e) : new _i(e);
+                  return e.data.radioButton ? new ji(e) : e.data.checkBox ? new Ai(e) : new Mi(e);
                 case `Ch`:
-                  return new vi(e);
+                  return new Ni(e);
                 case `Sig`:
-                  return new mi(e);
+                  return new ki(e);
               }
-              return new fi(e);
-            case B.POPUP:
-              return new yi(e);
-            case B.FREETEXT:
-              return new xi(e);
-            case B.LINE:
-              return new Si(e);
-            case B.SQUARE:
-              return new Ci(e);
-            case B.CIRCLE:
-              return new wi(e);
-            case B.POLYLINE:
-              return new Ti(e);
-            case B.CARET:
               return new Di(e);
-            case B.INK:
-              return new Oi(e);
-            case B.POLYGON:
-              return new Ei(e);
-            case B.HIGHLIGHT:
-              return new ki(e);
-            case B.UNDERLINE:
-              return new Ai(e);
-            case B.SQUIGGLY:
-              return new ji(e);
-            case B.STRIKEOUT:
-              return new Mi(e);
-            case B.STAMP:
-              return new Ni(e);
-            case B.FILEATTACHMENT:
+            case B.POPUP:
               return new Pi(e);
+            case B.FREETEXT:
+              return new Ii(e);
+            case B.LINE:
+              return new Li(e);
+            case B.SQUARE:
+              return new Ri(e);
+            case B.CIRCLE:
+              return new zi(e);
+            case B.POLYLINE:
+              return new Bi(e);
+            case B.CARET:
+              return new Hi(e);
+            case B.INK:
+              return new Ui(e);
+            case B.POLYGON:
+              return new Vi(e);
+            case B.HIGHLIGHT:
+              return new Wi(e);
+            case B.UNDERLINE:
+              return new Gi(e);
+            case B.SQUIGGLY:
+              return new Ki(e);
+            case B.STRIKEOUT:
+              return new qi(e);
+            case B.STAMP:
+              return new Ji(e);
+            case B.FILEATTACHMENT:
+              return new Yi(e);
             case B.RICHMEDIA:
             case B.SCREEN:
-              return new Fi(e);
+            case B.SOUND:
+              return new Xi(e);
             default:
               return new Q(e);
           }
@@ -13799,7 +13959,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         get commentText() {
           let { data: e } = this;
           return (
-            this.annotationStorage.getRawValue(`${mt}${e.id}`)?.popup?.contents ||
+            this.annotationStorage.getRawValue(`${Ct}${e.id}`)?.popup?.contents ||
             e.contentsObj?.str ||
             ``
           );
@@ -13808,7 +13968,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let { data: t } = this,
             n = { deleted: !e, contents: e || `` };
           (this.annotationStorage.updateEditor(t.id, { popup: n }) ||
-            this.annotationStorage.setValue(`${mt}${t.id}`, {
+            this.annotationStorage.setValue(`${Ct}${t.id}`, {
               id: t.id,
               annotationType: t.annotationType,
               page: this.parent.page,
@@ -13860,9 +14020,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             } = this,
             i = document.createElement(`section`);
           (i.setAttribute(`data-annotation-id`, t.id),
-            !(this instanceof fi) &&
-              !(this instanceof ui) &&
-              !(this instanceof Fi) &&
+            !(this instanceof Di) &&
+              !(this instanceof Ti) &&
+              !(this instanceof Xi) &&
               (i.tabIndex = 0));
           let { style: a } = i;
           if (
@@ -13870,7 +14030,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.parent.zIndex += 2),
             t.alternativeText && (i.title = t.alternativeText),
             t.noRotate && i.classList.add(`norotate`),
-            !t.rect || this instanceof yi)
+            !t.rect || this instanceof Pi)
           ) {
             let { rotation: e } = t;
             return (!t.hasOwnCanvas && e !== 0 && this.setRotation(e, i), i);
@@ -13885,39 +14045,36 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (a.borderRadius = `calc(${e}px * var(--total-scale-factor)) / calc(${n}px * var(--total-scale-factor))`),
               t.borderStyle.style)
             ) {
-              case _t.SOLID:
+              case Et.SOLID:
                 a.borderStyle = `solid`;
                 break;
-              case _t.DASHED:
+              case Et.DASHED:
                 a.borderStyle = `dashed`;
                 break;
-              case _t.BEVELED:
-                u(`Unimplemented border style: beveled`);
+              case Et.BEVELED:
+                f(`Unimplemented border style: beveled`);
                 break;
-              case _t.INSET:
-                u(`Unimplemented border style: inset`);
+              case Et.INSET:
+                f(`Unimplemented border style: inset`);
                 break;
-              case _t.UNDERLINE:
+              case Et.UNDERLINE:
                 a.borderBottomStyle = `solid`;
-                break;
-              default:
-                break;
             }
             let r = t.borderColor || null;
-            r ? ((this.#t = !0), (a.borderColor = H.makeHexColor(...r))) : (a.borderWidth = 0);
+            r ? ((this.#t = !0), (a.borderColor = U.makeHexColor(...r))) : (a.borderWidth = 0);
           }
-          let c = H.normalizeRect([
+          let c = U.normalizeRect([
               t.rect[0],
               n.view[3] - t.rect[1] + n.view[1],
               t.rect[2],
               n.view[3] - t.rect[3] + n.view[1],
             ]),
-            { pageWidth: l, pageHeight: d, pageX: f, pageY: p } = r.rawDims;
-          ((a.left = `${(100 * (c[0] - f)) / l}%`), (a.top = `${(100 * (c[1] - p)) / d}%`));
+            { pageWidth: l, pageHeight: u, pageX: d, pageY: p } = r.rawDims;
+          ((a.left = `${(100 * (c[0] - d)) / l}%`), (a.top = `${(100 * (c[1] - p)) / u}%`));
           let { rotation: m } = t;
           return (
             t.hasOwnCanvas || m === 0
-              ? ((a.width = `${(100 * o) / l}%`), (a.height = `${(100 * s) / d}%`))
+              ? ((a.width = `${(100 * o) / l}%`), (a.height = `${(100 * s) / u}%`))
               : this.setRotation(m, i),
             i
           );
@@ -13936,10 +14093,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             let r = n.detail[e],
               i = r[0],
               a = r.slice(1);
-            ((n.target.style[t] = ni[`${i}_HTML`](a)),
-              this.annotationStorage.setValue(this.data.id, { [t]: ni[`${i}_rgb`](a) }));
+            ((n.target.style[t] = _i[`${i}_HTML`](a)),
+              this.annotationStorage.setValue(this.data.id, { [t]: _i[`${i}_rgb`](a) }));
           };
-          return _(this, `_commonActions`, {
+          return y(this, `_commonActions`, {
             display: (e) => {
               let { display: t } = e.detail,
                 n = t % 2 == 1;
@@ -14011,7 +14168,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           if (!this.container) return;
           let { quadPoints: e } = this.data;
           if (!e) return;
-          let [t, n, r, i] = this.data.rect.map((e) => Math.fround(e));
+          let [t, n, r, i] = this.data.rect.map(Math.fround);
           if (e.length === 8) {
             let [a, o, s, c] = e.subarray(2, 6);
             if (r === a && i === o && t === s && n === c) return;
@@ -14073,7 +14230,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           (e
             ? ((n = { str: e.text }), (r = e.date))
             : ((n = t.contentsObj), (r = t.modificationDate)),
-            (this.#n = new yi({
+            (this.#n = new Pi({
               data: {
                 color: t.color,
                 titleObj: t.titleObj,
@@ -14098,29 +14255,26 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.#n;
         }
         render() {
-          d('Abstract method `AnnotationElement.render` called');
+          p('Abstract method `AnnotationElement.render` called');
         }
         _getElementsByName(e, t = null) {
           let n = [];
           if (this._fieldObjects) {
-            let r = this._fieldObjects[e];
-            if (r)
-              for (let { page: e, id: i, exportValues: a } of r) {
-                if (e === -1 || i === t) continue;
-                let r = typeof a == `string` ? a : null,
-                  o = document.querySelector(`[data-element-id="${i}"]`);
-                if (o && !oi.has(o)) {
-                  u(`_getElementsByName - element not allowed: ${i}`);
-                  continue;
-                }
-                n.push({ id: i, exportValue: r, domElement: o });
-              }
+            let r = this._fieldObjects.get(e) || [];
+            for (let { page: e, id: i, exportValues: a } of r) {
+              if (e === -1 || i === t) continue;
+              let r = typeof a == `string` ? a : null,
+                o = document.querySelector(`[data-element-id="${i}"]`);
+              o && !xi.has(o)
+                ? f(`_getElementsByName - element not allowed: ${i}`)
+                : n.push({ id: i, exportValue: r, domElement: o });
+            }
             return n;
           }
           for (let r of document.getElementsByName(e)) {
             let { exportValue: e } = r,
               i = r.getAttribute(`data-element-id`);
-            i !== t && oi.has(r) && n.push({ id: i, exportValue: e, domElement: r });
+            i !== t && xi.has(r) && n.push({ id: i, exportValue: e, domElement: r });
           }
           return n;
         }
@@ -14154,7 +14308,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           });
         }
         updateOC(e) {
-          !this.data.oc || !e || (e.isVisible(this.data.oc) ? this.show() : this.hide());
+          this.data.oc && e && (e.isVisible(this.data.oc) ? this.show() : this.hide());
         }
         get width() {
           return this.data.rect[2] - this.data.rect[0];
@@ -14164,10 +14318,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         _setBackgroundColor(e) {
           let t = this.data.backgroundColor || null;
-          e.style.backgroundColor = t === null ? `transparent` : H.makeHexColor(...t);
+          e.style.backgroundColor = t === null ? `transparent` : U.makeHexColor(...t);
         }
       }),
-      (li = class extends Q {
+      (wi = class extends Q {
         constructor(e) {
           (super(e, { isRenderable: !0, ignoreBorder: !0 }), (this.editor = e.editor));
         }
@@ -14200,7 +14354,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.removePopup());
         }
       }),
-      (ui = class extends Q {
+      (Ti = class extends Q {
         constructor(e, t = null) {
           (super(e, {
             isRenderable: !0,
@@ -14227,7 +14381,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                     : e.dest
                       ? (this._bindLink(n, e.dest, e.overlaidText), (r = !0))
                       : (e.actions &&
-                          (e.actions.Action || e.actions[`Mouse Up`] || e.actions[`Mouse Down`]) &&
+                          (e.actions.has(`Action`) ||
+                            e.actions.has(`Mouse Up`) ||
+                            e.actions.has(`Mouse Down`)) &&
                           this.enableScripting &&
                           this.hasJSActions &&
                           (this._bindJSAction(n, e), (r = !0)),
@@ -14269,94 +14425,95 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             n && (e.title = n),
             this.#e());
         }
-        _bindJSAction(e, t) {
+        _bindJSAction(e, { actions: t, id: n, overlaidText: r }) {
           e.href = this.linkService.getAnchorUrl(``);
-          let n = new Map([
+          let i = new Map([
             [`Action`, `onclick`],
             [`Mouse Up`, `onmouseup`],
             [`Mouse Down`, `onmousedown`],
           ]);
-          for (let r of Object.keys(t.actions)) {
-            let i = n.get(r);
-            i &&
-              (e[i] = () => (
+          for (let r of t.keys()) {
+            let t = i.get(r);
+            t &&
+              (e[t] = () => (
                 this.linkService.eventBus?.dispatch(`dispatcheventinsandbox`, {
                   source: this,
-                  detail: { id: t.id, name: r },
+                  detail: { id: n, name: r },
                 }),
                 !1
               ));
           }
-          (t.overlaidText && (e.title = t.overlaidText), (e.onclick ||= () => !1), this.#e());
+          (r && (e.title = r), (e.onclick ||= () => !1), this.#e());
         }
         _bindResetFormAction(e, t) {
           let n = e.onclick;
-          if ((n || (e.href = this.linkService.getAnchorUrl(``)), this.#e(), !this._fieldObjects)) {
-            (u(
-              '_bindResetFormAction - "resetForm" action not supported, ensure that the `fieldObjects` parameter is provided.'
-            ),
-              n || (e.onclick = () => !1));
-            return;
-          }
-          e.onclick = () => {
-            n?.();
-            let { fields: e, refs: r, include: i } = t,
-              a = [];
-            if (e.length !== 0 || r.length !== 0) {
-              let t = new Set(r);
-              for (let n of e) {
-                let e = this._fieldObjects[n] || [];
-                for (let { id: n } of e) t.add(n);
-              }
-              for (let e of Object.values(this._fieldObjects))
-                for (let n of e) t.has(n.id) === i && a.push(n);
-            } else for (let e of Object.values(this._fieldObjects)) a.push(...e);
-            let o = this.annotationStorage,
-              s = [];
-            for (let e of a) {
-              let { id: t } = e;
-              switch ((s.push(t), e.type)) {
-                case `text`: {
-                  let n = e.defaultValue || ``;
-                  o.setValue(t, { value: n });
-                  break;
-                }
-                case `checkbox`:
-                case `radiobutton`: {
-                  let n = e.defaultValue === e.exportValues;
-                  o.setValue(t, { value: n });
-                  break;
-                }
-                case `combobox`:
-                case `listbox`: {
-                  let n = e.defaultValue || ``;
-                  o.setValue(t, { value: n });
-                  break;
-                }
-                default:
-                  continue;
-              }
-              let n = document.querySelector(`[data-element-id="${t}"]`);
-              if (n) {
-                if (!oi.has(n)) {
-                  u(`_bindResetFormAction - element not allowed: ${t}`);
-                  continue;
-                }
-                n.dispatchEvent(new Event(`resetform`));
-              }
-            }
-            return (
-              this.enableScripting &&
-                this.linkService.eventBus?.dispatch(`dispatcheventinsandbox`, {
-                  source: this,
-                  detail: { id: `app`, ids: s, name: `ResetForm` },
-                }),
-              !1
-            );
-          };
+          (n || (e.href = this.linkService.getAnchorUrl(``)),
+            this.#e(),
+            this._fieldObjects
+              ? (e.onclick = () => {
+                  n?.();
+                  let { fields: e, refs: r, include: i } = t,
+                    a = [];
+                  if (e.length !== 0 || r.length !== 0) {
+                    let t = new Set(r);
+                    for (let n of e) {
+                      let e = this._fieldObjects.get(n) || [];
+                      for (let { id: n } of e) t.add(n);
+                    }
+                    let n = new Map();
+                    for (let e of this._fieldObjects.values())
+                      for (let { id: t, kidIds: r } of e) r && n.set(t, r);
+                    for (let e of t) for (let r of n.get(e) || []) t.add(r);
+                    for (let e of this._fieldObjects.values())
+                      for (let n of e) t.has(n.id) === i && a.push(n);
+                  } else for (let e of this._fieldObjects.values()) a.push(...e);
+                  let o = this.annotationStorage,
+                    s = [];
+                  for (let e of a) {
+                    let { id: t } = e;
+                    switch ((s.push(t), e.type)) {
+                      case `text`: {
+                        let n = e.defaultValue || ``;
+                        o.setValue(t, { value: n });
+                        break;
+                      }
+                      case `checkbox`:
+                      case `radiobutton`: {
+                        let n = e.defaultValue === e.exportValues;
+                        o.setValue(t, { value: n });
+                        break;
+                      }
+                      case `combobox`:
+                      case `listbox`: {
+                        let n = e.defaultValue || ``;
+                        o.setValue(t, { value: n });
+                        break;
+                      }
+                      default:
+                        continue;
+                    }
+                    let n = document.querySelector(`[data-element-id="${t}"]`);
+                    n &&
+                      (xi.has(n)
+                        ? n.dispatchEvent(new Event(`resetform`))
+                        : f(`_bindResetFormAction - element not allowed: ${t}`));
+                  }
+                  return (
+                    this.enableScripting &&
+                      this.linkService.eventBus?.dispatch(`dispatcheventinsandbox`, {
+                        source: this,
+                        detail: { id: `app`, ids: s, name: `ResetForm` },
+                      }),
+                    !1
+                  );
+                })
+              : (f(
+                  '_bindResetFormAction - "resetForm" action not supported, ensure that the `fieldObjects` parameter is provided.'
+                ),
+                n || (e.onclick = () => !1)));
         }
       }),
-      (di = class extends Q {
+      (Ei = class extends Q {
         constructor(e) {
           super(e, { isRenderable: !0 });
         }
@@ -14376,12 +14533,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (fi = class extends Q {
+      (Di = class extends Q {
         render() {
           return this.container;
         }
         _getKeyModifier(e) {
-          return V.platform.isMac ? e.metaKey : e.ctrlKey;
+          return H.platform.isMac ? e.metaKey : e.ctrlKey;
         }
         _setEventListener(e, t, n, r, i) {
           n.includes(`mouse`)
@@ -14413,33 +14570,34 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               });
         }
         _setEventListeners(e, t, n, r) {
-          for (let [i, a] of n)
-            (a === `Action` || this.data.actions?.[a]) &&
-              ((a === `Focus` || a === `Blur`) && (t ||= { focused: !1 }),
-              this._setEventListener(e, t, i, a, r),
-              a === `Focus` && !this.data.actions?.Blur
+          let { actions: i } = this.data;
+          for (let [a, o] of n)
+            (o === `Action` || i?.has(o)) &&
+              ((o === `Focus` || o === `Blur`) && (t ||= { focused: !1 }),
+              this._setEventListener(e, t, a, o, r),
+              o === `Focus` && !i?.has(`Blur`)
                 ? this._setEventListener(e, t, `blur`, `Blur`, null)
-                : a === `Blur` &&
-                  !this.data.actions?.Focus &&
+                : o === `Blur` &&
+                  !i?.has(`Focus`) &&
                   this._setEventListener(e, t, `focus`, `Focus`, null));
         }
         _setTextStyle(e) {
           let t = [`left`, `center`, `right`],
             { fontColor: n } = this.data.defaultAppearanceData,
-            r = this.data.defaultAppearanceData.fontSize || ai,
+            r = this.data.defaultAppearanceData.fontSize || bi,
             i = e.style,
             a,
             o = (e) => Math.round(10 * e) / 10;
           if (this.data.multiLine) {
             let e = Math.abs(this.data.rect[3] - this.data.rect[1] - 2),
-              t = e / (Math.round(e / (dt * r)) || 1);
-            a = Math.min(r, o(t / dt));
+              t = e / (Math.round(e / (1.35 * r)) || 1);
+            a = Math.min(r, o(t / 1.35));
           } else {
             let e = Math.abs(this.data.rect[3] - this.data.rect[1] - 2);
-            a = Math.min(r, o(e / dt));
+            a = Math.min(r, o(e / 1.35));
           }
           ((i.fontSize = `calc(${a}px * var(--total-scale-factor))`),
-            (i.color = H.makeHexColor(...n)),
+            (i.color = U.makeHexColor(...n)),
             this.data.textAlignment !== null &&
               !this.data.comb &&
               (i.textAlign = t[this.data.textAlignment]));
@@ -14449,7 +14607,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             e.setAttribute(`aria-required`, t));
         }
       }),
-      (pi = class extends fi {
+      (Oi = class extends Di {
         constructor(e) {
           let t =
             e.renderForms || e.data.hasOwnCanvas || (!e.data.hasAppearance && !!e.data.fieldValue);
@@ -14494,7 +14652,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               this.data.hasOwnCanvas &&
                 (this.container.classList.add(`hasOwnCanvas`),
                 e.has(t) && this.container.classList.add(`sandboxModified`)),
-              oi.add(n),
+              xi.add(n),
               (this.contentElement = n),
               n.setAttribute(`data-element-id`, t),
               (n.disabled = this.data.readOnly),
@@ -14524,21 +14682,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 let { target: t } = e;
                 if ((d && ((t.type = l), u && (t.step = u)), s.userValue)) {
                   let e = s.userValue;
-                  if (d)
+                  if (d) {
                     if (l === `time`) {
                       let n = new Date(e);
                       t.value = [n.getHours(), n.getMinutes(), n.getSeconds()]
                         .map((e) => e.toString().padStart(2, `0`))
                         .join(`:`);
                     } else
-                      t.value = new Date(e - si)
+                      t.value = new Date(e - Si)
                         .toISOString()
                         .split(l === `date` ? `T` : `.`, 1)[0];
-                  else t.value = e;
+                  } else t.value = e;
                 }
                 ((s.lastCommittedValue = t.value),
                   (s.commitKey = 1),
-                  this.data.actions?.Focus || (s.focused = !0));
+                  this.data.actions?.has(`Focus`) || (s.focused = !0));
               }),
                 n.addEventListener(`updatefromsandbox`, (n) => {
                   (this.container.classList.add(`sandboxModified`),
@@ -14625,7 +14783,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               ((f = null),
                 n.addEventListener(`blur`, (e) => {
                   if (!s.focused || !e.relatedTarget) return;
-                  this.data.actions?.Blur || (s.focused = !1);
+                  this.data.actions?.has(`Blur`) || (s.focused = !1);
                   let { target: n } = e,
                     { value: i } = n;
                   if (d) {
@@ -14651,7 +14809,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                       }),
                     r(e));
                 }),
-                this.data.actions?.Keystroke &&
+                this.data.actions?.has(`Keystroke`) &&
                   n.addEventListener(`beforeinput`, (e) => {
                     s.lastCommittedValue = null;
                     let { data: n, target: r } = e,
@@ -14660,8 +14818,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                       l = o;
                     switch (e.inputType) {
                       case `deleteWordBackward`: {
-                        let e = i.substring(0, a).match(/\w*\W*$/);
-                        e && (c -= e[0].length);
+                        let e = /\w/;
+                        for (; c > 0 && !e.test(i[c - 1]);) c--;
+                        for (; c > 0 && e.test(i[c - 1]);) c--;
                         break;
                       }
                       case `deleteWordForward`: {
@@ -14674,7 +14833,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                         break;
                       case `deleteContentForward`:
                         a === o && (l += 1);
-                        break;
                     }
                     (e.preventDefault(),
                       this.linkService.eventBus?.dispatch(`dispatcheventinsandbox`, {
@@ -14734,12 +14892,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (mi = class extends fi {
+      (ki = class extends Di {
         constructor(e) {
           super(e, { isRenderable: !!e.data.hasOwnCanvas });
         }
       }),
-      (hi = class extends fi {
+      (Ai = class extends Di {
         constructor(e) {
           super(e, { isRenderable: e.renderForms });
         }
@@ -14752,7 +14910,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.container.classList.add(`buttonWidgetAnnotation`, `checkBox`));
           let i = document.createElement(`input`);
           return (
-            oi.add(i),
+            xi.add(i),
             i.setAttribute(`data-element-id`, n),
             (i.disabled = t.readOnly),
             this._setRequired(i, this.data.required),
@@ -14807,7 +14965,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (gi = class extends fi {
+      (ji = class extends Di {
         constructor(e) {
           super(e, { isRenderable: e.renderForms });
         }
@@ -14823,7 +14981,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             for (let r of this._getElementsByName(t.fieldName, n)) e.setValue(r.id, { value: !1 });
           let i = document.createElement(`input`);
           if (
-            (oi.add(i),
+            (xi.add(i),
             i.setAttribute(`data-element-id`, n),
             (i.disabled = t.readOnly),
             this._setRequired(i, this.data.required),
@@ -14876,7 +15034,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return (this._setDefaultPropertiesFromJS(i), this.container.append(i), this.container);
         }
       }),
-      (_i = class extends ui {
+      (Mi = class extends Ti {
         constructor(e) {
           super(e, { ignoreBorder: e.data.hasAppearance });
         }
@@ -14896,7 +15054,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (vi = class extends fi {
+      (Ni = class extends Di {
         constructor(e) {
           super(e, { isRenderable: e.renderForms });
         }
@@ -14906,7 +15064,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             t = this.data.id,
             n = e.getValue(t, { value: this.data.fieldValue }),
             r = document.createElement(`select`);
-          (oi.add(r),
+          (xi.add(r),
             r.setAttribute(`data-element-id`, t),
             (r.disabled = this.data.readOnly),
             this._setRequired(r, this.data.required),
@@ -15068,7 +15226,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (yi = class extends Q {
+      (Pi = class extends Q {
         constructor(e) {
           let { data: t, elements: n, parent: r } = e,
             i = !!r._commentManager;
@@ -15082,7 +15240,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           } else this.popup = null;
         }
         #e() {
-          return new bi({
+          return new Fi({
             container: this.container,
             color: this.data.color,
             titleObj: this.data.titleObj,
@@ -15108,12 +15266,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               n.push(e.data.id),
               e.addHighlightArea());
           return (
-            this.container.setAttribute(`aria-controls`, n.map((e) => `${pt}${e}`).join(`,`)),
+            this.container.setAttribute(`aria-controls`, n.map((e) => `${St}${e}`).join(`,`)),
             this.container
           );
         }
       }),
-      (bi = class {
+      (Fi = class {
         #e = null;
         #t = this.#P.bind(this);
         #n = this.#R.bind(this);
@@ -15165,7 +15323,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.#l = n),
             (this.#e = d),
             (this.#w = n[0]),
-            (this.#c = Vt.toDateObject(i)),
+            (this.#c = Qt.toDateObject(i)),
             (this.trigger = n.flatMap((e) => e.getElementsToTriggerPopup())),
             d || (this.#E(), (this.#o.hidden = !0), u && this.#I()));
         }
@@ -15316,7 +15474,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           if (this.#p) return;
           let e = (this.#p = document.createElement(`div`));
           if (((e.className = `popup`), this.#a)) {
-            let t = (e.style.outlineColor = H.makeHexColor(...this.#a));
+            let t = (e.style.outlineColor = U.makeHexColor(...this.#a));
             e.style.backgroundColor = `color-mix(in srgb, ${t} 30%, white)`;
           }
           let t = document.createElement(`span`);
@@ -15332,7 +15490,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               (e.dateTime = this.#c.toISOString()),
               t.append(e));
           }
-          (fe({ html: this.#A || this.#s.str, dir: this.#s?.dir, className: `popupContent` }, e),
+          (me({ html: this.#A || this.#s.str, dir: this.#s?.dir, className: `popupContent` }, e),
             this.#o.append(e));
         }
         get #A() {
@@ -15375,25 +15533,23 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             ((e.key === `Enter` || (e.key === `Escape` && this.#f)) && this.#I());
         }
         updateEdited({ rect: e, popup: t, deleted: n }) {
-          if (this.#e) {
-            (n
-              ? (this.remove(), (this.#T = null))
-              : t && (t.deleted ? this.remove() : (this.#k(), (this.#T = t.text))),
-              e && ((this.#_ = null), this.#D(), this.#O()));
-            return;
-          }
-          if (n || t?.deleted) {
-            this.remove();
-            return;
-          }
-          (this.#E(),
-            (this.#S ||= { contentsObj: this.#s, richText: this.#b }),
-            e && (this.#h = null),
-            t &&
-              t.text &&
-              ((this.#b = this.#N(t.text)), (this.#c = Vt.toDateObject(t.date)), (this.#s = null)),
-            this.#p?.remove(),
-            (this.#p = null));
+          this.#e
+            ? (n
+                ? (this.remove(), (this.#T = null))
+                : t && (t.deleted ? this.remove() : (this.#k(), (this.#T = t.text))),
+              e && ((this.#_ = null), this.#D(), this.#O()))
+            : n || t?.deleted
+              ? this.remove()
+              : (this.#E(),
+                (this.#S ||= { contentsObj: this.#s, richText: this.#b }),
+                e && (this.#h = null),
+                t &&
+                  t.text &&
+                  ((this.#b = this.#N(t.text)),
+                  (this.#c = Qt.toDateObject(t.date)),
+                  (this.#s = null)),
+                this.#p?.remove(),
+                (this.#p = null));
         }
         resetEdited() {
           this.#S &&
@@ -15428,11 +15584,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             a = !!this.#d,
             o = a ? this.#d : this.#y;
           for (let e of this.#l)
-            if (!o || H.intersect(e.data.rect, o) !== null) {
+            if (!o || U.intersect(e.data.rect, o) !== null) {
               ((o = e.data.rect), (a = !0));
               break;
             }
-          let s = H.normalizeRect([o[0], e[3] - o[1] + e[1], o[2], e[3] - o[3] + e[1]]),
+          let s = U.normalizeRect([o[0], e[3] - o[1] + e[1], o[2], e[3] - o[3] + e[1]]),
             c = a ? o[2] - o[0] + 5 : 0,
             l = s[0] + c,
             u = s[1];
@@ -15441,18 +15597,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ((d.left = `${this.#h[0]}%`), (d.top = `${this.#h[1]}%`));
         }
         #I() {
-          if (this.#e) {
-            this.#e.toggleCommentPopup(this, !1);
-            return;
-          }
-          ((this.#f = !this.#f),
-            this.#f
-              ? (this.#L(),
-                this.#o.addEventListener(`click`, this.#i),
-                this.#o.addEventListener(`keydown`, this.#t))
-              : (this.#R(),
-                this.#o.removeEventListener(`click`, this.#i),
-                this.#o.removeEventListener(`keydown`, this.#t)));
+          this.#e
+            ? this.#e.toggleCommentPopup(this, !1)
+            : ((this.#f = !this.#f),
+              this.#f
+                ? (this.#L(),
+                  this.#o.addEventListener(`click`, this.#i),
+                  this.#o.addEventListener(`keydown`, this.#t))
+                : (this.#R(),
+                  this.#o.removeEventListener(`click`, this.#i),
+                  this.#o.removeEventListener(`keydown`, this.#t)));
         }
         #L() {
           (this.#p || this.render(),
@@ -15479,7 +15633,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return !this.#e && this.#o.hidden === !1;
         }
       }),
-      (xi = class extends Q {
+      (Ii = class extends Q {
         constructor(e) {
           (super(e, { isRenderable: !0, ignoreBorder: !0 }),
             (this.textContent = e.data.textContent),
@@ -15505,7 +15659,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (Si = class extends Q {
+      (Li = class extends Q {
         #e = null;
         constructor(e) {
           super(e, { isRenderable: !0, ignoreBorder: !0 });
@@ -15538,7 +15692,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.container.classList.add(`highlightArea`);
         }
       }),
-      (Ci = class extends Q {
+      (Ri = class extends Q {
         #e = null;
         constructor(e) {
           super(e, { isRenderable: !0, ignoreBorder: !0 });
@@ -15572,7 +15726,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.container.classList.add(`highlightArea`);
         }
       }),
-      (wi = class extends Q {
+      (zi = class extends Q {
         #e = null;
         constructor(e) {
           super(e, { isRenderable: !0, ignoreBorder: !0 });
@@ -15606,7 +15760,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.container.classList.add(`highlightArea`);
         }
       }),
-      (Ti = class extends Q {
+      (Bi = class extends Q {
         #e = null;
         constructor(e) {
           (super(e, { isRenderable: !0, ignoreBorder: !0 }),
@@ -15648,14 +15802,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.container.classList.add(`highlightArea`);
         }
       }),
-      (Ei = class extends Ti {
+      (Vi = class extends Bi {
         constructor(e) {
           (super(e),
             (this.containerClassName = `polygonAnnotation`),
             (this.svgElementName = `svg:polygon`));
         }
       }),
-      (Di = class extends Q {
+      (Hi = class extends Q {
         constructor(e) {
           super(e, { isRenderable: !0, ignoreBorder: !0 });
         }
@@ -15669,7 +15823,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (Oi = class extends Q {
+      (Ui = class extends Q {
         #e = null;
         #t = [];
         constructor(e) {
@@ -15722,9 +15876,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             l.setAttribute(`stroke`, `transparent`),
             l.setAttribute(`fill`, `transparent`),
             l.setAttribute(`transform`, a));
-          for (let e = 0, t = n.length; e < t; e++) {
+          for (let e of n) {
             let t = this.svgFactory.createElement(this.svgElementName);
-            (this.#t.push(t), t.setAttribute(`points`, n[e].join(`,`)), l.append(t));
+            (this.#t.push(t), t.setAttribute(`points`, e.join(`,`)), l.append(t));
           }
           return (
             !i && this.hasPopupData && ((this.hasOwnCommentButton = !0), this._createPopup()),
@@ -15753,7 +15907,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.container.classList.add(`highlightArea`);
         }
       }),
-      (ki = class extends Q {
+      (Wi = class extends Q {
         constructor(e) {
           (super(e, { isRenderable: !0, ignoreBorder: !0, createQuadrilaterals: !0 }),
             (this.annotationEditorType = L.HIGHLIGHT));
@@ -15774,7 +15928,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.container;
         }
       }),
-      (Ai = class extends Q {
+      (Gi = class extends Q {
         constructor(e) {
           super(e, { isRenderable: !0, ignoreBorder: !0, createQuadrilaterals: !0 });
         }
@@ -15793,7 +15947,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.container;
         }
       }),
-      (ji = class extends Q {
+      (Ki = class extends Q {
         constructor(e) {
           super(e, { isRenderable: !0, ignoreBorder: !0, createQuadrilaterals: !0 });
         }
@@ -15812,7 +15966,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.container;
         }
       }),
-      (Mi = class extends Q {
+      (qi = class extends Q {
         constructor(e) {
           super(e, { isRenderable: !0, ignoreBorder: !0, createQuadrilaterals: !0 });
         }
@@ -15831,7 +15985,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.container;
         }
       }),
-      (Ni = class extends Q {
+      (Ji = class extends Q {
         constructor(e) {
           (super(e, { isRenderable: !0, ignoreBorder: !0 }), (this.annotationEditorType = L.STAMP));
         }
@@ -15847,7 +16001,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (Pi = class extends Q {
+      (Yi = class extends Q {
         #e = null;
         constructor(e) {
           super(e, { isRenderable: !0 });
@@ -15874,7 +16028,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (n.style = `filter: opacity(${Math.round(t.fillAlpha * 100)}%);`)),
             n.addEventListener(`dblclick`, this.#t.bind(this)),
             (this.#e = n));
-          let { isMac: r } = V.platform;
+          let { isMac: r } = H.platform;
           return (
             e.addEventListener(`keydown`, (e) => {
               e.key === `Enter` && (r ? e.metaKey : e.ctrlKey) && this.#t();
@@ -15898,7 +16052,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           r && this.downloadManager?.openOrDownloadData(r, t);
         }
       }),
-      (Fi = class extends Q {
+      (Xi = class extends Q {
         #e = new AbortController();
         #t = null;
         #n = null;
@@ -15931,25 +16085,27 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
           if (!i || !e.isConnected) return;
           let { signal: a } = this.#e,
-            o = URL.createObjectURL(new Blob([i], { type: r }));
-          this.#t = o;
-          let s = r.startsWith(`audio/`),
-            c = document.createElement(s ? `audio` : `video`);
+            o = new Blob([i], { type: r });
+          if (!/^(?:video|audio)\//.test(o.type)) return;
+          let s = URL.createObjectURL(o);
+          this.#t = s;
+          let c = o.type.startsWith(`audio/`),
+            l = document.createElement(c ? `audio` : `video`);
           if (
-            ((this.#n = c),
-            (c.className = `mediaContent`),
-            this._setBackgroundColor(c),
-            (c.src = o),
-            (c.title = n),
-            (c.controls = !0),
-            (c.autoplay = !0),
-            (c.tabIndex = 0),
-            s)
+            ((this.#n = l),
+            (l.className = `mediaContent`),
+            this._setBackgroundColor(l),
+            (l.src = s),
+            (l.title = n),
+            (l.controls = !0),
+            (l.autoplay = !0),
+            (l.tabIndex = 0),
+            c)
           ) {
             let e = !1,
               t = !1,
               n = () => {
-                c.controls = e || t;
+                l.controls = e || t;
               };
             (this.container.addEventListener(
               `pointerenter`,
@@ -15980,9 +16136,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 { signal: a }
               ));
           }
-          (c.addEventListener(`emptied`, () => this.#i(o), { once: !0, signal: a }),
-            e.replaceWith(c),
-            c.play().catch(() => {}));
+          (l.addEventListener(`emptied`, () => this.#i(s), { once: !0, signal: a }),
+            e.replaceWith(l),
+            l.play().catch(() => {}));
         }
         #i(e = this.#t) {
           e && e === this.#t && (URL.revokeObjectURL(e), (this.#t = null));
@@ -15993,7 +16149,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.#i());
         }
       }),
-      (Ii = class e {
+      (Zi = class e {
         #e = null;
         #t = null;
         #n = null;
@@ -16020,7 +16176,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.#t = n),
             (this.#i = o || null),
             (this.#a = c || null),
-            (this.#n = l || new dn()),
+            (this.#n = l || new Cn()),
             (this.page = i),
             (this.viewport = a),
             (this._annotationEditorUIManager = r),
@@ -16032,7 +16188,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         async render(e) {
           let { annotations: t, optionalContentConfig: n } = e,
             r = this.div;
-          ae(r, this.viewport);
+          se(r, this.viewport);
           let i = new Map(),
             a = [],
             o = {
@@ -16042,7 +16198,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               downloadManager: e.downloadManager,
               imageResourcesPath: e.imageResourcesPath || ``,
               renderForms: e.renderForms !== !1,
-              svgFactory: new ii(),
+              svgFactory: new yi(),
               annotationStorage: this.#n,
               enableComment: e.enableComment === !0,
               enableScripting: e.enableScripting === !0,
@@ -16064,9 +16220,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               o.elements = t;
             } else if (e.rect[2] === e.rect[0] || e.rect[3] === e.rect[1]) continue;
             o.data = e;
-            let r = ci.create(o);
+            let r = Ci.create(o);
             if (!r.isRenderable) continue;
-            t || (this.#o.push(r), e.popupRef && i.getOrInsertComputed(e.popupRef, Mt).push(r));
+            t || (this.#o.push(r), e.popupRef && i.getOrInsertComputed(e.popupRef, Bt).push(r));
             let s = r.render();
             (e.hidden && (s.style.visibility = `hidden`),
               r.updateOC(n),
@@ -16078,10 +16234,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           for (let e of a) {
             let t = (o.elements = i.get(e.id));
             o.data = e;
-            let n = ci.create(o);
+            let n = Ci.create(o);
             if (!n.isRenderable) continue;
             let r = n.render();
-            ((n.contentElement.id = `${pt}${e.id}`),
+            ((n.contentElement.id = `${St}${e.id}`),
               e.hidden && (r.style.visibility = `hidden`),
               t.at(-1).container.after(r));
           }
@@ -16095,11 +16251,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             this.#s = !0;
             for (let {
               contentElement: t,
-              data: { id: n },
+              data: { hidden: n, id: r, oc: i },
             } of this.#o) {
-              let r = (t.id = `${pt}${n}`);
+              let a = (t.id = `${St}${r}`),
+                o = t.localName === `a` && !n && !i;
               e.push(
-                this.#i?.getAriaAttributes(r).then((e) => {
+                this.#i?.getAriaAttributes(a, { enableLinkOwnership: o }).then((e) => {
                   if (e) for (let [n, r] of e) t.setAttribute(n, r);
                 })
               );
@@ -16135,27 +16292,30 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               this._commentManager
                 ? (e.extraPopupElement?.popup || e.popup)?.renderCommentButton()
                 : e.extraPopupElement && t.append(e.extraPopupElement.render()));
-          if ((this.div.append(t), await Promise.all(e), this.#e))
-            for (let e of this.#o) this.#e.addPointerInTextLayer(e.contentElement, !1);
+          if ((this.div.append(t), await Promise.all(e), this.#e)) {
+            let e = await this.#i?.getAnnotationIds();
+            for (let { contentElement: t } of this.#o)
+              e?.has(t.id) || this.#e.addPointerInTextLayer(t, !1);
+          }
         }
         async addLinkAnnotations(t) {
           let n = {
             data: null,
             layer: this.div,
             linkService: this.#a,
-            svgFactory: new ii(),
+            svgFactory: new yi(),
             parent: this,
           };
           for (let r of t) {
             ((r.borderStyle ||= e._defaultBorderStyle), (n.data = r));
-            let t = ci.create(n);
-            t.isRenderable && (t.render(), (t.contentElement.id = `${pt}${r.id}`), this.#o.push(t));
+            let t = Ci.create(n);
+            t.isRenderable && (t.render(), (t.contentElement.id = `${St}${r.id}`), this.#o.push(t));
           }
           await this.#c();
         }
         update({ viewport: e, optionalContentConfig: t }) {
           let n = this.div;
-          ((this.viewport = e), ae(n, { rotation: e.rotation }));
+          ((this.viewport = e), se(n, { rotation: e.rotation }));
           for (let e of this.#o) e.updateOC(t);
           (this.#l(), (n.hidden = !1));
         }
@@ -16210,7 +16370,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         addFakeAnnotation(e) {
           let { div: t } = this,
             { id: n, rotation: r } = e,
-            i = new li({
+            i = new wi({
               data: { id: n, rect: e.getPDFRect(), rotation: r },
               editor: e,
               layer: t,
@@ -16221,7 +16381,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             });
           return (
             i.render(),
-            (i.contentElement.id = `${pt}${n}`),
+            (i.contentElement.id = `${St}${n}`),
             i.createOrUpdatePopup(),
             this.#o.push(i),
             i
@@ -16243,13 +16403,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.div.classList.toggle(`disabled`, !e);
         }
         static get _defaultBorderStyle() {
-          return _(
+          return y(
             this,
             `_defaultBorderStyle`,
             Object.freeze({
               width: 1,
               rawWidth: 1,
-              style: _t.SOLID,
+              style: Et.SOLID,
               dashArray: [3],
               horizontalCornerRadius: 0,
               verticalCornerRadius: 0,
@@ -16257,8 +16417,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (Li = /\r\n?|\n/g),
-      (Ri = class e extends W {
+      (Qi = /\r\n?|\n/g),
+      ($i = class e extends G {
         #e = ``;
         #t = `${this.id}-editor`;
         #n = null;
@@ -16271,12 +16431,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         static get _keyboardManager() {
           let t = e.prototype,
             n = (e) => e.isEmpty(),
-            r = tn.TRANSLATE_SMALL,
-            i = tn.TRANSLATE_BIG;
-          return _(
+            r = pn.TRANSLATE_SMALL,
+            i = pn.TRANSLATE_BIG;
+          return y(
             this,
             `_keyboardManager`,
-            new $t([
+            new dn([
               [[`ctrl+s`, `mac+meta+s`, `ctrl+p`, `mac+meta+p`], t.commitOrRemove, { bubbles: !0 }],
               [[`ctrl+Enter`, `mac+meta+Enter`], t.commitOrRemove],
               [[`Escape`], t.commitOrRemove],
@@ -16311,13 +16471,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         static _editorType = L.FREETEXT;
         constructor(t) {
           (super({ ...t, name: `freeTextEditor` }),
-            (this.color = t.color || e._defaultColor || W._defaultLineColor),
+            (this.color = t.color || e._defaultColor || G._defaultLineColor),
             (this.#r = t.fontSize || e._defaultFontSize),
-            this.annotationElementId || this._uiManager.a11yAlert(W._l10nAlert.freetext),
+            this.annotationElementId || this._uiManager.a11yAlert(G._l10nAlert.freetext),
             (this.canAddComment = !1));
         }
         static initialize(e, t) {
-          W.initialize(e, t);
+          G.initialize(e, t);
           let n = getComputedStyle(document.documentElement);
           this._internalPadding = parseFloat(n.getPropertyValue(`--freetext-padding`));
         }
@@ -16328,7 +16488,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               break;
             case R.FREETEXT_COLOR:
               e._defaultColor = n;
-              break;
           }
         }
         updateParams(e, t) {
@@ -16338,13 +16497,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               break;
             case R.FREETEXT_COLOR:
               this.#a(t);
-              break;
           }
         }
         static get defaultPropertiesToUpdate() {
           return [
             [R.FREETEXT_SIZE, e._defaultFontSize],
-            [R.FREETEXT_COLOR, e._defaultColor || W._defaultLineColor],
+            [R.FREETEXT_COLOR, e._defaultColor || G._defaultLineColor],
           ];
         }
         get propertiesToUpdate() {
@@ -16354,7 +16512,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ];
         }
         get toolbarButtons() {
-          return ((this._colorPicker ||= new ti(this)), [[`colorPicker`, this._colorPicker]]);
+          return ((this._colorPicker ||= new gi(this)), [[`colorPicker`, this._colorPicker]]);
         }
         get colorType() {
           return R.FREETEXT_COLOR;
@@ -16466,7 +16624,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.editorDiv.normalize();
           let n = null;
           for (let r of this.editorDiv.childNodes)
-            (n?.nodeType === Node.TEXT_NODE && r.nodeName === `BR`) || (t.push(e.#c(r)), (n = r));
+            (n?.nodeType !== Node.TEXT_NODE || r.nodeName !== `BR`) && (t.push(e.#c(r)), (n = r));
           return t.join(`
 `);
         }
@@ -16498,11 +16656,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             t = (this.#e = this.#o().trimEnd());
           if (e === t) return;
           let n = (e) => {
-            if (((this.#e = e), !e)) {
-              this.remove();
-              return;
-            }
-            (this.#l(), this._uiManager.rebuild(this), this.#s());
+            ((this.#e = e),
+              e ? (this.#l(), this._uiManager.rebuild(this), this.#s()) : this.remove());
           };
           (this.addCommands({
             cmd: () => {
@@ -16596,7 +16751,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   ((d = e + (i[0] - l - this.height * c) / s),
                     (f = t + (i[1] - u - this.width * s) / c),
                     ([a, o] = [-o, a]));
-                  break;
               }
               this.setAt(d * n, f * r, a, o);
             } else this._moveAfterPaste(e, t);
@@ -16605,7 +16759,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.div;
         }
         static #c(e) {
-          return (e.nodeType === Node.TEXT_NODE ? e.nodeValue : e.innerText).replaceAll(Li, ``);
+          return (e.nodeType === Node.TEXT_NODE ? e.nodeValue : e.innerText).replaceAll(Qi, ``);
         }
         editorDivPaste(t) {
           let n = t.clipboardData || window.clipboardData,
@@ -16613,7 +16767,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           if (r.length === 1 && r[0] === `text/plain`) return;
           t.preventDefault();
           let i = e.#d(n.getData(`text`) || ``).replaceAll(
-            Li,
+            Qi,
             `
 `
           );
@@ -16636,17 +16790,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             u = [];
           if (s.nodeType === Node.TEXT_NODE) {
             let t = s.parentElement;
-            if ((u.push(s.nodeValue.slice(c).replaceAll(Li, ``)), t !== this.editorDiv)) {
+            if ((u.push(s.nodeValue.slice(c).replaceAll(Qi, ``)), t !== this.editorDiv)) {
               let n = l;
-              for (let r of this.editorDiv.childNodes) {
-                if (r === t) {
-                  n = u;
-                  continue;
-                }
-                n.push(e.#c(r));
-              }
+              for (let r of this.editorDiv.childNodes) r === t ? (n = u) : n.push(e.#c(r));
             }
-            l.push(s.nodeValue.slice(0, c).replaceAll(Li, ``));
+            l.push(s.nodeValue.slice(0, c).replaceAll(Qi, ``));
           } else if (s === this.editorDiv) {
             let t = l,
               n = 0;
@@ -16693,7 +16841,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         static async deserialize(t, n, r) {
           let i = null;
-          if (t instanceof xi) {
+          if (t instanceof Ii) {
             let {
               data: {
                 defaultAppearanceData: { fontSize: e, fontColor: n },
@@ -16736,7 +16884,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let a = await super.deserialize(t, n, r);
           return (
             (a.#r = t.fontSize),
-            (a.color = H.makeHexColor(...t.color)),
+            (a.color = U.makeHexColor(...t.color)),
             (a.#e = e.#d(t.value)),
             (a._initialData = i),
             t.comment && a.setCommentData(t),
@@ -16746,7 +16894,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         serialize(e = !1) {
           if (this.isEmpty()) return null;
           if (this.deleted) return this.serializeDeleted();
-          let t = W._colorManager.convert(
+          let t = G._colorManager.convert(
               this.isAttachedToDOM ? getComputedStyle(this.editorDiv).color : this.color
             ),
             n = Object.assign(super.serialize(e), {
@@ -16801,16 +16949,713 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           (super.resetAnnotationElement(e), e.resetEdited());
         }
       }),
+      (ea = class {
+        #e = Object.create(null);
+        updateProperty(e, t) {
+          ((this[e] = t), this.updateSVGProperty(e, t));
+        }
+        updateProperties(e) {
+          if (e)
+            for (let [t, n] of Object.entries(e)) t.startsWith(`_`) || this.updateProperty(t, n);
+        }
+        updateSVGProperty(e, t) {
+          this.#e[e] = t;
+        }
+        toSVGProperties() {
+          let e = this.#e;
+          return ((this.#e = Object.create(null)), { root: e });
+        }
+        reset() {
+          this.#e = Object.create(null);
+        }
+        updateAll(e = this) {
+          this.updateProperties(e);
+        }
+        clone() {
+          p(`Not implemented`);
+        }
+      }),
+      (ta = class e extends G {
+        #e = null;
+        #t;
+        _clipPathId = null;
+        _colorPicker = null;
+        _drawId = null;
+        _drawOutlines = null;
+        _focusDrawId = null;
+        static _currentDrawId = -1;
+        static _currentParent = null;
+        static #n = null;
+        static #r = null;
+        static #i = null;
+        static #a = null;
+        static _INNER_MARGIN = 3;
+        constructor(e) {
+          (super(e), (this.#t = e.mustBeCommitted || !1), this._addOutlines(e));
+        }
+        onUpdatedColor() {
+          (this._colorPicker?.update(this.color), super.onUpdatedColor());
+        }
+        onUpdatedOpacity() {
+          this._colorPicker?.updateOpacity?.(this.opacity);
+        }
+        _addOutlines(e) {
+          e.drawOutlines && (this.#o(e), this.#m());
+        }
+        #o({ drawOutlines: e, drawId: t, drawingOptions: n, clipPathId: r }) {
+          ((this._drawOutlines = e),
+            (this._drawingOptions ||= n),
+            this.annotationElementId || this._uiManager.a11yAlert(G._l10nAlert[this.editorType]),
+            t >= 0
+              ? ((this._drawId = t),
+                (this._clipPathId = r ?? null),
+                this.parent.drawLayer.finalizeDraw(t, e.defaultProperties),
+                this.#c(this.parent))
+              : (this._drawId = this.#s(e, this.parent)),
+            this.#_(e.box));
+        }
+        #s(t, n) {
+          let { id: r, clipPathId: i } = n.drawLayer.draw(
+            e._mergeSVGProperties(this._drawingOptions.toSVGProperties(), t.defaultSVGProperties),
+            !1,
+            this.constructor._hasClipPath
+          );
+          return (this.constructor._hasClipPath && (this._clipPathId = i), this.#c(n), r);
+        }
+        #c(e) {
+          let t = this._drawOutlines.getFocusSVGProperties(this.#f);
+          t &&
+            (this._focusDrawId = e.drawLayer.drawOutline(
+              t,
+              this._drawOutlines.focusMustRemoveSelfIntersections
+            ));
+        }
+        #l(e = this.#f) {
+          this._focusDrawId !== null &&
+            this.parent?.drawLayer.updateProperties(
+              this._focusDrawId,
+              this._drawOutlines.getFocusSVGProperties(e)
+            );
+        }
+        #u(e) {
+          this._focusDrawId !== null &&
+            this.parent?.drawLayer.updateProperties(this._focusDrawId, { rootClass: e });
+        }
+        #d() {
+          let { parent: e, _drawId: t, _focusDrawId: n, _isVisible: r } = this;
+          if (!e || t === null) return;
+          let i = { hidden: !r };
+          (e.drawLayer.updateProperties(t, { rootClass: i }),
+            n !== null && e.drawLayer.updateProperties(n, { rootClass: i }));
+        }
+        static _mergeSVGProperties(e, t) {
+          let n = new Set(Object.keys(e));
+          for (let [r, i] of Object.entries(t)) n.has(r) ? Object.assign(e[r], i) : (e[r] = i);
+          return e;
+        }
+        static getDefaultDrawingOptions(e) {
+          p(`Not implemented`);
+        }
+        static get typesMap() {
+          p(`Not implemented`);
+        }
+        static get isDrawer() {
+          return !0;
+        }
+        static get _hasClipPath() {
+          return !1;
+        }
+        static get _hasDrawClass() {
+          return !0;
+        }
+        static get supportMultipleDrawings() {
+          return !1;
+        }
+        get _drawRotation() {
+          return this.rotation;
+        }
+        get _opacityName() {
+          return this.constructor.typesMap.get(this.opacityType);
+        }
+        get #f() {
+          return (this.parentRotation - this._drawRotation + 360) % 360;
+        }
+        static updateDefaultParams(t, n) {
+          let r = this.typesMap.get(t);
+          (r && this._defaultDrawingOptions.updateProperty(r, n),
+            this._currentParent &&
+              (e.#n.updateProperty(r, n),
+              this._currentParent.drawLayer.updateProperties(
+                this._currentDrawId,
+                this._defaultDrawingOptions.toSVGProperties()
+              )));
+        }
+        updateParams(e, t) {
+          let n = this.constructor.typesMap.get(e);
+          n && this._updateProperty(e, n, t);
+        }
+        static get defaultPropertiesToUpdate() {
+          let e = [],
+            t = this._defaultDrawingOptions;
+          for (let [n, r] of this.typesMap) e.push([n, t[r]]);
+          return e;
+        }
+        get propertiesToUpdate() {
+          let e = [],
+            { _drawingOptions: t } = this;
+          for (let [n, r] of this.constructor.typesMap) e.push([n, t[r]]);
+          return e;
+        }
+        _updateProperty(e, t, n) {
+          let r = this._drawingOptions,
+            i = r[t],
+            a = (n) => {
+              r.updateProperty(t, n);
+              let i = this._drawOutlines.updateProperty(t, n);
+              (i && this.#_(i),
+                this.parent?.drawLayer.updateProperties(this._drawId, r.toSVGProperties()),
+                e === this.colorType
+                  ? this.onUpdatedColor()
+                  : e === this.opacityType && this.onUpdatedOpacity());
+            };
+          this.addCommands({
+            cmd: a.bind(this, n),
+            undo: a.bind(this, i),
+            post: this._uiManager.updateUI.bind(this._uiManager, this),
+            mustExec: !0,
+            type: e,
+            overwriteIfSameType: !0,
+            keepUndo: !0,
+          });
+        }
+        _updateColorAndOpacity(e, t, n = this.colorAndOpacityType) {
+          let r = this.constructor.typesMap.get(this.colorType),
+            i = this._opacityName,
+            a = this._drawingOptions,
+            o = a[r],
+            s = a[i],
+            c = (e, t) => {
+              (a.updateProperty(r, e),
+                a.updateProperty(i, t),
+                this._drawOutlines.updateProperty(r, e),
+                this._drawOutlines.updateProperty(i, t),
+                this.parent?.drawLayer.updateProperties(this._drawId, a.toSVGProperties()),
+                this.onUpdatedColor(),
+                this.onUpdatedOpacity());
+            };
+          this.addCommands({
+            cmd: c.bind(this, e, t),
+            undo: c.bind(this, o, s),
+            post: this._uiManager.updateUI.bind(this._uiManager, this),
+            mustExec: !0,
+            type: n,
+            overwriteIfSameType: !0,
+            keepUndo: !0,
+          });
+        }
+        _onResizing() {
+          this.parent?.drawLayer.updateProperties(
+            this._drawId,
+            e._mergeSVGProperties(this._drawOutlines.getPathResizingSVGProperties(this.#g()), {
+              bbox: this.#v(),
+            })
+          );
+        }
+        _onResized() {
+          (this.parent?.drawLayer.updateProperties(
+            this._drawId,
+            e._mergeSVGProperties(this._drawOutlines.getPathResizedSVGProperties(this.#g()), {
+              bbox: this.#v(),
+            })
+          ),
+            this.#l());
+        }
+        _onTranslating(e, t) {
+          this.parent?.drawLayer.updateProperties(this._drawId, { bbox: this.#v() });
+        }
+        _onTranslated() {
+          this.parent?.drawLayer.updateProperties(
+            this._drawId,
+            e._mergeSVGProperties(
+              this._drawOutlines.getPathTranslatedSVGProperties(this.#g(), this.parentDimensions),
+              { bbox: this.#v() }
+            )
+          );
+        }
+        _onStartDragging() {
+          this.parent?.drawLayer.updateProperties(this._drawId, { rootClass: { moving: !0 } });
+        }
+        _onStopDragging() {
+          this.parent?.drawLayer.updateProperties(this._drawId, { rootClass: { moving: !1 } });
+        }
+        get _mustBeDisabledOnCommit() {
+          return !0;
+        }
+        commit() {
+          (super.commit(),
+            this._mustBeDisabledOnCommit && (this.disableEditMode(), this.disableEditing()));
+        }
+        disableEditing() {
+          (super.disableEditing(), this.div.classList.toggle(`disabled`, !0));
+        }
+        enableEditing() {
+          (super.enableEditing(), this.div.classList.toggle(`disabled`, !1));
+        }
+        getBaseTranslation() {
+          return [0, 0];
+        }
+        get isResizable() {
+          return !0;
+        }
+        onceAdded(e) {
+          (this.annotationElementId || this.parent.addUndoableEditor(this),
+            (this._isDraggable = !0),
+            this.#t &&
+              ((this.#t = !1),
+              this.commit(),
+              this.parent.setSelected(this),
+              e && this.isOnScreen && this.div.focus()));
+        }
+        remove() {
+          (this._uiManager.removeShouldRescale(this), this.#p(), super.remove());
+        }
+        rebuild() {
+          this.parent &&
+            (super.rebuild(),
+            this.div !== null &&
+              (this.#m(),
+              this.#_(this._drawOutlines.box),
+              this.isAttachedToDOM || this.parent.add(this)));
+        }
+        setParent(e) {
+          let t = !1;
+          (this.parent && !e
+            ? (this._uiManager.removeShouldRescale(this), this.#p())
+            : e &&
+              (this._uiManager.addShouldRescale(this),
+              this.#m(e),
+              (t = !this.parent && this.div?.classList.contains(`selectedEditor`))),
+            super.setParent(e),
+            this.#d(),
+            t && this.select());
+        }
+        #p() {
+          if (this._drawId === null || !this.parent) return;
+          let { drawLayer: e } = this.parent;
+          (e.remove(this._drawId),
+            (this._drawId = null),
+            this._focusDrawId !== null && (e.remove(this._focusDrawId), (this._focusDrawId = null)),
+            this._drawingOptions.reset());
+        }
+        #m(e = this.parent) {
+          if (this._drawId === null || this.parent !== e) {
+            if (this._drawId !== null) {
+              let { drawLayer: t } = this.parent;
+              (t.updateParent(this._drawId, e.drawLayer),
+                this._focusDrawId !== null && t.updateParent(this._focusDrawId, e.drawLayer));
+            } else
+              (this._drawingOptions.updateAll(),
+                (this._drawId = this.#s(this._drawOutlines, e)),
+                this._clipPathId && this.#e && (this.#e.style.clipPath = this._clipPathId));
+          }
+        }
+        #h([e, t, n, r]) {
+          let {
+            parentDimensions: [i, a],
+            _drawRotation: o,
+          } = this;
+          switch (o) {
+            case 90:
+              return [t, 1 - e, (a / i) * n, (i / a) * r];
+            case 180:
+              return [1 - e, 1 - t, n, r];
+            case 270:
+              return [1 - t, e, (a / i) * n, (i / a) * r];
+            default:
+              return [e, t, n, r];
+          }
+        }
+        #g() {
+          let {
+            x: e,
+            y: t,
+            width: n,
+            height: r,
+            parentDimensions: [i, a],
+            _drawRotation: o,
+          } = this;
+          switch (o) {
+            case 90:
+              return [1 - t, e, (i / a) * n, (a / i) * r];
+            case 180:
+              return [1 - e, 1 - t, n, r];
+            case 270:
+              return [t, 1 - e, (i / a) * n, (a / i) * r];
+            default:
+              return [e, t, n, r];
+          }
+        }
+        #_(e) {
+          (([this.x, this.y, this.width, this.height] = this.#h(e)),
+            this.div && (this.fixAndSetPosition(), this.setDims()),
+            this._onResized());
+        }
+        #v(e = this.parentRotation) {
+          let {
+            x: t,
+            y: n,
+            width: r,
+            height: i,
+            _drawRotation: a,
+            parentDimensions: [o, s],
+          } = this;
+          switch ((a * 4 + e) / 90) {
+            case 1:
+              return [1 - n - i, t, i, r];
+            case 2:
+              return [1 - t - r, 1 - n - i, r, i];
+            case 3:
+              return [n, 1 - t - r, i, r];
+            case 4:
+              return [t, n - (o / s) * r, (s / o) * i, (o / s) * r];
+            case 5:
+              return [1 - n, t, (o / s) * r, (s / o) * i];
+            case 6:
+              return [1 - t - (s / o) * i, 1 - n, (s / o) * i, (o / s) * r];
+            case 7:
+              return [n - (o / s) * r, 1 - t - (s / o) * i, (o / s) * r, (s / o) * i];
+            case 8:
+              return [t - r, n - i, r, i];
+            case 9:
+              return [1 - n, t - r, i, r];
+            case 10:
+              return [1 - t, 1 - n, r, i];
+            case 11:
+              return [n - i, 1 - t, i, r];
+            case 12:
+              return [t - (s / o) * i, n, (s / o) * i, (o / s) * r];
+            case 13:
+              return [1 - n - (o / s) * r, t - (s / o) * i, (o / s) * r, (s / o) * i];
+            case 14:
+              return [1 - t, 1 - n - (o / s) * r, (s / o) * i, (o / s) * r];
+            case 15:
+              return [n, 1 - t, (o / s) * r, (s / o) * i];
+            default:
+              return [t, n, r, i];
+          }
+        }
+        rotate(t = this.parentRotation) {
+          if (!this.parent || this._drawId === null) return;
+          let n = (t - this._drawRotation + 360) % 360;
+          (this.parent.drawLayer.updateProperties(
+            this._drawId,
+            e._mergeSVGProperties({ bbox: this.#v(t) }, this._drawOutlines.updateRotation(n))
+          ),
+            this.#l(n));
+        }
+        show(e = this._isVisible) {
+          (super.show(e), this.#d());
+        }
+        select() {
+          (super.select(), this.#u({ hovered: !1, selected: !0 }));
+        }
+        unselect() {
+          (super.unselect(), this.#u({ selected: !1 }));
+        }
+        pointerover() {
+          this.isSelected || this.#u({ hovered: !0 });
+        }
+        pointerleave() {
+          this.isSelected || this.#u({ hovered: !1 });
+        }
+        onScaleChanging() {
+          if (!this.parent) return;
+          let e = this._drawOutlines.updateParentDimensions(
+            this.parentDimensions,
+            this.parent.scale
+          );
+          e && this.#_(e);
+        }
+        static onScaleChangingWhenDrawing() {}
+        render() {
+          if (this.div) return this.div;
+          let e, t;
+          this._isCopy && ((e = this.x), (t = this.y));
+          let n = super.render();
+          this.constructor._hasDrawClass && n.classList.add(`draw`);
+          let r = (this.#e = document.createElement(`div`));
+          return (
+            n.append(r),
+            r.setAttribute(`aria-hidden`, `true`),
+            (r.className = `internal`),
+            this._clipPathId && (r.style.clipPath = this._clipPathId),
+            ge(this, r, [`pointerover`, `pointerleave`]),
+            this.setDims(),
+            this._uiManager.addShouldRescale(this),
+            this.disableEditing(),
+            this._isCopy && this._moveAfterPaste(e, t),
+            n
+          );
+        }
+        static createDrawerInstance(e) {
+          p(`Not implemented`);
+        }
+        static _getDrawingTarget(e, { target: t }) {
+          return t;
+        }
+        static _getPointerCoords({ offsetX: e, offsetY: t, clientX: n, clientY: r }, i = null) {
+          if (!i) return [e, t];
+          let a = n - i.clientX,
+            o = r - i.clientY;
+          switch (this._currentParent.viewport.rotation) {
+            case 90:
+              [a, o] = [o, -a];
+              break;
+            case 180:
+              [a, o] = [-a, -o];
+              break;
+            case 270:
+              [a, o] = [-o, a];
+          }
+          return [i.offsetX + a, i.offsetY + o];
+        }
+        static _addDrawingListeners(e, t) {}
+        static _endDrawingSession(e = !1) {
+          return this._currentParent.endDrawingSession(e);
+        }
+        static startDrawing(t, n, r, i) {
+          let { pointerId: a, pointerType: o } = i;
+          if (W.isInitializedAndDifferentPointerType(o)) return;
+          let s = this._getDrawingTarget(t, i),
+            [c, l] = this._getPointerCoords(i),
+            {
+              viewport: { rotation: u },
+            } = t,
+            { x: d, y: f, width: p, height: m } = s.getBoundingClientRect(),
+            h = (e.#r = new AbortController()),
+            g = t.combinedSignal(h);
+          if (
+            (W.setPointer(o, a),
+            window.addEventListener(
+              `pointerup`,
+              (e) => {
+                W.isSamePointerIdOrRemove(e.pointerId) && this._endDraw(e);
+              },
+              { signal: g }
+            ),
+            window.addEventListener(
+              `pointercancel`,
+              (e) => {
+                W.isSamePointerIdOrRemove(e.pointerId) && this._endDrawingSession();
+              },
+              { signal: g }
+            ),
+            window.addEventListener(
+              `pointerdown`,
+              (t) => {
+                W.isSamePointerType(t.pointerType) &&
+                  (W.initializeAndAddPointerId(t.pointerId),
+                  e.#n.isCancellable() &&
+                    (e.#n.removeLastElement(),
+                    e.#n.isEmpty() ? this._endDrawingSession(!0) : this._endDraw(null)));
+              },
+              { capture: !0, passive: !1, signal: g }
+            ),
+            window.addEventListener(`contextmenu`, A, { signal: g }),
+            s.addEventListener(`pointermove`, this._drawMove.bind(this), { signal: g }),
+            s.addEventListener(
+              `touchmove`,
+              (e) => {
+                W.isSameTimeStamp(e.timeStamp) && j(e);
+              },
+              { signal: g }
+            ),
+            this._addDrawingListeners(s, g),
+            t.toggleDrawing(),
+            n._editorUndoBar?.hide(),
+            e.#n)
+          ) {
+            t.drawLayer.updateProperties(this._currentDrawId, e.#n.startNew(c, l, p, m, u));
+            return;
+          }
+          (n.updateUIForDefaultProperties(this),
+            (e.#n = this.createDrawerInstance({
+              x: c,
+              y: l,
+              box: [d, f, p, m],
+              rotation: u,
+              parent: t,
+              isLTR: r,
+            })),
+            (e.#i = this.getDefaultDrawingOptions()),
+            (this._currentParent = t));
+          let { id: _, clipPathId: v } = t.drawLayer.draw(
+            this._mergeSVGProperties(e.#i.toSVGProperties(), e.#n.defaultSVGProperties),
+            !0,
+            this._hasClipPath
+          );
+          ((this._currentDrawId = _), (e.#a = this._hasClipPath ? v : null));
+        }
+        static _drawMove(t) {
+          if ((W.isSameTimeStamp(t.timeStamp), !e.#n || !W.isSamePointerId(t.pointerId))) return;
+          if (W.isUsingMultiplePointers()) {
+            this._endDraw(t);
+            return;
+          }
+          let n,
+            r = t.getCoalescedEvents?.();
+          if (r?.length) {
+            let i = [];
+            for (let e of r) i.push(...this._getPointerCoords(e, t));
+            n = e.#n.addPoints(i);
+          } else n = e.#n.add(...this._getPointerCoords(t));
+          (this._currentParent.drawLayer.updateProperties(this._currentDrawId, n),
+            W.setTimeStamp(t.timeStamp),
+            j(t));
+        }
+        static _cleanup(t) {
+          (t &&
+            ((this._currentDrawId = -1),
+            (this._currentParent = null),
+            (e.#n = null),
+            (e.#i = null),
+            (e.#a = null),
+            W.clearTimeStamp()),
+            e.#r && (e.#r.abort(), (e.#r = null), W.clearPointerIds()));
+        }
+        static _endDraw(t) {
+          let n = this._currentParent;
+          if (n) {
+            if (
+              (n.toggleDrawing(!0),
+              this._cleanup(!1),
+              n.drawLayer.updateProperties(
+                this._currentDrawId,
+                t?.target === n.div ? e.#n.end(...this._getPointerCoords(t)) : e.#n.end()
+              ),
+              this.supportMultipleDrawings)
+            ) {
+              let t = e.#n,
+                r = this._currentDrawId,
+                i = t.getLastElement();
+              n.addCommands({
+                cmd: () => {
+                  n.drawLayer.updateProperties(r, t.setLastElement(i));
+                },
+                undo: () => {
+                  n.drawLayer.updateProperties(r, t.removeLastElement());
+                },
+                mustExec: !1,
+                type: R.DRAW_STEP,
+              });
+            } else this.endDrawing(!1);
+          }
+        }
+        static endDrawing(t) {
+          let n = this._currentParent;
+          if (!n) return null;
+          if ((n.toggleDrawing(!0), n.cleanUndoStack(R.DRAW_STEP), !e.#n.isEmpty())) {
+            let {
+                pageDimensions: [r, i],
+                scale: a,
+              } = n,
+              o = n.createAndAddNewEditor({ offsetX: 0, offsetY: 0 }, !1, {
+                drawId: this._currentDrawId,
+                clipPathId: e.#a,
+                drawOutlines: e.#n.getOutlines(r * a, i * a, a, this._INNER_MARGIN),
+                drawingOptions: e.#i,
+                mustBeCommitted: !t,
+              });
+            return (this._cleanup(!0), o);
+          }
+          return (n.drawLayer.remove(this._currentDrawId), this._cleanup(!0), null);
+        }
+        createDrawingOptions(e) {}
+        static deserializeDraw(e, t, n, r, i, a, o) {
+          p(`Not implemented`);
+        }
+        static async deserialize(e, t, n) {
+          let {
+              rawDims: { pageWidth: r, pageHeight: i, pageX: a, pageY: o },
+            } = t.viewport,
+            s = this.deserializeDraw(a, o, r, i, this._INNER_MARGIN, e, n),
+            c = await super.deserialize(e, t, n);
+          return (
+            c.createDrawingOptions(e),
+            c.#o({ drawOutlines: s }),
+            c.#m(),
+            c.onScaleChanging(),
+            c.rotate(),
+            c
+          );
+        }
+        serializeDraw(e) {
+          let [t, n] = this.pageTranslation,
+            [r, i] = this.pageDimensions;
+          return this._drawOutlines.serialize([t, n, r, i], e);
+        }
+        renderAnnotationElement(e) {
+          return (e.updateEdited({ rect: this.getPDFRect() }), null);
+        }
+        static canCreateNewEmptyEditor() {
+          return !1;
+        }
+      }),
       ($ = class {
         static PRECISION = 1e-4;
+        focusOutline = null;
         toSVGPath() {
-          d('Abstract method `toSVGPath` must be implemented.');
+          p('Abstract method `toSVGPath` must be implemented.');
         }
         get box() {
-          d('Abstract getter `box` must be implemented.');
+          p('Abstract getter `box` must be implemented.');
         }
         serialize(e, t) {
-          d('Abstract method `serialize` must be implemented.');
+          p('Abstract method `serialize` must be implemented.');
+        }
+        get defaultSVGProperties() {
+          p('Abstract getter `defaultSVGProperties` must be implemented.');
+        }
+        get defaultProperties() {
+          return this.defaultSVGProperties;
+        }
+        getFocusSVGProperties(e) {
+          return null;
+        }
+        get focusMustRemoveSelfIntersections() {
+          return !1;
+        }
+        updateProperty(e, t) {
+          return null;
+        }
+        updateParentDimensions(e, t) {
+          return null;
+        }
+        serializeQuadPoints(e, t) {
+          return null;
+        }
+        updateRotation(e) {
+          return {};
+        }
+        getPathResizingSVGProperties(e) {
+          return {};
+        }
+        getPathResizedSVGProperties(e) {
+          return {};
+        }
+        getPathTranslatedSVGProperties(e, t) {
+          return {};
+        }
+        static _rotateBox([e, t, n, r], i) {
+          switch (i) {
+            case 90:
+              return [1 - t - r, e, r, n];
+            case 180:
+              return [1 - e - n, 1 - t - r, n, r];
+            case 270:
+              return [t, 1 - e - n, r, n];
+          }
+          return [e, t, n, r];
         }
         static _rescale(e, t, n, r, i, a) {
           a ||= new Float32Array(e.length);
@@ -16856,7 +17701,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ];
         }
       }),
-      (zi = class e {
+      (na = class e {
         #e;
         #t = [];
         #n;
@@ -16873,7 +17718,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         static #p = 8;
         static #m = 2;
         static #h = e.#p + e.#m;
-        constructor({ x: t, y: n }, r, i, a, o, s = 0) {
+        constructor(t, n, r, i, a, o, s = 0) {
           ((this.#e = r),
             (this.#d = a * i),
             (this.#r = o),
@@ -16887,6 +17732,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         isEmpty() {
           return isNaN(this.#a[8]);
         }
+        isCancellable() {
+          return this.#f.length <= 10;
+        }
+        removeLastElement() {
+          return (
+            this.#a.fill(NaN),
+            (this.#i.length = this.#t.length = this.#f.length = 0),
+            { path: { d: `` } }
+          );
+        }
         #g() {
           let e = this.#a.subarray(4, 6),
             t = this.#a.subarray(16, 18),
@@ -16898,7 +17753,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.#s + (t[1] - e[1]) / 2 - r) / a,
           ];
         }
-        add({ x: e, y: t }) {
+        add(e, t) {
           ((this.#o = e), (this.#s = t));
           let [n, r, i, a] = this.#e,
             [o, s, c, l] = this.#a.subarray(8, 12),
@@ -16995,7 +17850,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
         newFreeDrawOutline(e, t, n, r, i, a) {
-          return new Bi(e, t, n, r, i, a);
+          return new ra(e, t, n, r, i, a);
         }
         getOutlines() {
           let e = this.#i,
@@ -17013,22 +17868,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             return this.#b(s);
           let c = new Float32Array(this.#i.length + 24 + this.#t.length),
             l = e.length;
-          for (let t = 0; t < l; t += 2) {
-            if (isNaN(e[t])) {
-              c[t] = c[t + 1] = NaN;
-              continue;
-            }
-            ((c[t] = e[t]), (c[t + 1] = e[t + 1]));
-          }
+          for (let t = 0; t < l; t += 2)
+            isNaN(e[t]) ? (c[t] = c[t + 1] = NaN) : ((c[t] = e[t]), (c[t + 1] = e[t + 1]));
           l = this.#S(c, l);
           for (let e = t.length - 6; e >= 6; e -= 6)
-            for (let n = 0; n < 6; n += 2) {
-              if (isNaN(t[e + n])) {
-                ((c[l] = c[l + 1] = NaN), (l += 2));
-                continue;
-              }
-              ((c[l] = t[e + n]), (c[l + 1] = t[e + n + 1]), (l += 2));
-            }
+            for (let n = 0; n < 6; n += 2)
+              isNaN(t[e + n])
+                ? ((c[l] = c[l + 1] = NaN), (l += 2))
+                : ((c[l] = t[e + n]), (c[l + 1] = t[e + n + 1]), (l += 2));
           return (this.#x(c, l), this.newFreeDrawOutline(c, s, this.#e, this.#u, this.#n, this.#r));
         }
         #b(e) {
@@ -17124,7 +17971,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (Bi = class extends $ {
+      (ra = class extends $ {
         #e;
         #t = new Float32Array(4);
         #n;
@@ -17151,15 +17998,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         toSVGPath() {
           let e = [`M${this.#o[4]} ${this.#o[5]}`];
-          for (let t = 6, n = this.#o.length; t < n; t += 6) {
-            if (isNaN(this.#o[t])) {
-              e.push(`L${this.#o[t + 4]} ${this.#o[t + 5]}`);
-              continue;
-            }
-            e.push(
-              `C${this.#o[t]} ${this.#o[t + 1]} ${this.#o[t + 2]} ${this.#o[t + 3]} ${this.#o[t + 4]} ${this.#o[t + 5]}`
-            );
-          }
+          for (let t = 6, n = this.#o.length; t < n; t += 6)
+            isNaN(this.#o[t])
+              ? e.push(`L${this.#o[t + 4]} ${this.#o[t + 5]}`)
+              : e.push(
+                  `C${this.#o[t]} ${this.#o[t + 1]} ${this.#o[t + 2]} ${this.#o[t + 3]} ${this.#o[t + 4]} ${this.#o[t + 5]}`
+                );
           return (e.push(`Z`), e.join(` `));
         }
         serialize([e, t, n, r], i) {
@@ -17181,7 +18025,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             case 270:
               ((s = $._rescaleAndSwap(this.#o, n, r, -a, -o)),
                 (c = $._rescaleAndSwap(this.#i, n, r, -a, -o)));
-              break;
           }
           return { outline: Array.from(s), points: [Array.from(c)] };
         }
@@ -17200,12 +18043,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             let d = t[e + 4],
               f = t[e + 5];
             (isNaN(t[e])
-              ? (H.pointBoundingBox(d, f, i),
+              ? (U.pointBoundingBox(d, f, i),
                 o > f ? ((a = d), (o = f)) : o === f && (a = l(a, d)),
                 c < f ? ((s = d), (c = f)) : c === f && (s = l(s, d)))
-              : (u.set(ct, 0),
-                H.bezierBoundingBox(n, r, ...t.slice(e, e + 6), u),
-                H.rectBoundingBox(...u, i),
+              : (u.set(vt, 0),
+                U.bezierBoundingBox(n, r, ...t.slice(e, e + 6), u),
+                U.rectBoundingBox(...u, i),
                 o > u[1] ? ((a = u[0]), (o = u[1])) : o === u[1] && (a = l(a, u[0])),
                 c < u[3] ? ((s = u[2]), (c = u[3])) : c === u[3] && (s = l(s, u[2]))),
               (n = d),
@@ -17222,8 +18065,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         get box() {
           return this.#t;
         }
-        newOutliner(e, t, n, r, i, a = 0) {
-          return new zi(e, t, n, r, i, a);
+        newOutliner(e, t, n, r, i, a, o = 0) {
+          return new na(e, t, n, r, i, a, o);
+        }
+        updateThickness(e) {
+          let t = this.getNewOutline(e);
+          return (
+            (this.#o = t.#o),
+            (this.#i = t.#i),
+            this.#t.set(t.#t),
+            (this.firstPoint = t.firstPoint),
+            (this.lastPoint = t.lastPoint),
+            this.#t
+          );
         }
         getNewOutline(e, t) {
           let [n, r, i, a] = this.#t,
@@ -17232,27 +18086,28 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             d = a * l,
             f = n * c + o,
             p = r * l + s,
-            m = this.newOutliner(
-              { x: this.#i[0] * u + f, y: this.#i[1] * d + p },
+            m = this.#i,
+            h = this.newOutliner(
+              m[0] * u + f,
+              m[1] * d + p,
               this.#e,
               this.#a,
               e,
               this.#r,
               t ?? this.#n
             );
-          for (let e = 2; e < this.#i.length; e += 2)
-            m.add({ x: this.#i[e] * u + f, y: this.#i[e + 1] * d + p });
-          return m.getOutlines();
+          for (let e = 2, t = m.length; e < t; e += 2) h.add(m[e] * u + f, m[e + 1] * d + p);
+          return h.getOutlines();
         }
       }),
-      (Vi = class {
+      (ia = class {
         #e;
         #t;
         #n;
         #r = [];
         #i = [];
         constructor(e, t = 0, n = 0, r = !0) {
-          let i = ct.slice(),
+          let i = vt.slice(),
             a = 10 ** -4;
           for (let { x: n, y: r, width: o, height: s } of e) {
             let e = Math.floor((n - t) / a) * a,
@@ -17261,7 +18116,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               u = Math.ceil((r + s + t) / a) * a,
               d = [e, l, u, !0],
               f = [c, l, u, !1];
-            (this.#r.push(d, f), H.rectBoundingBox(e, l, c, u, i));
+            (this.#r.push(d, f), U.rectBoundingBox(e, l, c, u, i));
           }
           let o = i[2] - i[0] + 2 * n,
             s = i[3] - i[1] + 2 * n,
@@ -17304,27 +18159,27 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               i = t[e + 1][2];
             (r.push(i), i.push(r), n.add(r), n.add(i));
           }
-          let r = [],
-            i;
+          let r = [];
           for (; n.size > 0;) {
             let e = n.values().next().value,
-              [t, a, o, s, c] = e;
+              [t, i, a, o, s] = e;
             n.delete(e);
-            let l = t,
-              u = a;
-            for (i = [t, o], r.push(i); ;) {
+            let c = t,
+              l = i,
+              u = [t, a];
+            for (r.push(u); ;) {
               let e;
-              if (n.has(s)) e = s;
-              else if (n.has(c)) e = c;
+              if (n.has(o)) e = o;
+              else if (n.has(s)) e = s;
               else break;
               (n.delete(e),
-                ([t, a, o, s, c] = e),
-                l !== t && (i.push(l, u, t, u === a ? a : o), (l = t)),
-                (u = u === a ? o : a));
+                ([t, i, a, o, s] = e),
+                c !== t && (u.push(c, l, t, l === i ? i : a), (c = t)),
+                (l = l === i ? a : i));
             }
-            i.push(l, u);
+            u.push(c, l);
           }
-          return new Hi(r, this.#e, this.#t, this.#n);
+          return new aa(r, this.#e, this.#t, this.#n);
         }
         #o(e) {
           let t = this.#i,
@@ -17376,24 +18231,54 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                     if (a === 1) return [];
                     (i.splice(e, 1), e--, a--);
                   }
-                  continue;
-                }
-                ((i[e][2] = n), s > r && i.push([t, r, s]));
+                } else ((i[e][2] = n), s > r && i.push([t, r, s]));
               }
             }
           }
           return i;
         }
       }),
-      (Hi = class extends $ {
+      (aa = class extends $ {
         #e;
-        #t;
+        #t = null;
+        #n;
         constructor(e, t, n, r) {
-          (super(), (this.#t = e), (this.#e = t), (this.firstPoint = n), (this.lastPoint = r));
+          (super(), (this.#n = e), (this.#e = t), (this.firstPoint = n), (this.lastPoint = r));
+        }
+        static build(e, t) {
+          let n = new ia(e, 0.001).getOutlines();
+          return ((n.#t = e), (n.focusOutline = new ia(e, 0.0025, 0.001, t).getOutlines()), n);
+        }
+        get isFree() {
+          return !1;
+        }
+        get defaultSVGProperties() {
+          return dt(this);
+        }
+        getFocusSVGProperties(e) {
+          return ft(this, e);
+        }
+        updateRotation(e) {
+          return { root: { 'data-main-rotation': e } };
+        }
+        serializeQuadPoints([e, t], [n, r]) {
+          let i = this.#t,
+            a = new Float32Array(i.length * 8),
+            o = 0;
+          for (let { x: s, y: c, width: l, height: u } of i) {
+            let i = s * n + e,
+              d = (1 - c) * r + t;
+            ((a[o] = a[o + 4] = i),
+              (a[o + 1] = a[o + 3] = d),
+              (a[o + 2] = a[o + 6] = i + l * n),
+              (a[o + 5] = a[o + 7] = d - u * r),
+              (o += 8));
+          }
+          return a;
         }
         toSVGPath() {
           let e = [];
-          for (let t of this.#t) {
+          for (let t of this.#n) {
             let [n, r] = t;
             e.push(`M${n} ${r}`);
             for (let i = 2; i < t.length; i += 2) {
@@ -17409,7 +18294,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let a = [],
             o = n - e,
             s = r - t;
-          for (let t of this.#t) {
+          for (let t of this.#n) {
             let n = Array(t.length);
             for (let i = 0; i < t.length; i += 2)
               ((n[i] = e + t[i] * o), (n[i + 1] = r - t[i + 1] * s));
@@ -17421,49 +18306,115 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.#e;
         }
       }),
-      (Ui = class extends zi {
+      (oa = class extends na {
         newFreeDrawOutline(e, t, n, r, i, a) {
-          return new Wi(e, t, n, r, i, a);
+          return new ca(e, t, n, r, i, a);
         }
       }),
-      (Wi = class extends Bi {
-        newOutliner(e, t, n, r, i, a = 0) {
-          return new Ui(e, t, n, r, i, a);
+      (sa = class {
+        #e;
+        #t;
+        constructor(e, t, n, r, i, a, o) {
+          ((this.#e = new oa(e, t, n, r, i, a, o)), (this.#t = i));
+        }
+        add(e, t) {
+          return this.#e.add(e, t) ? { path: { d: this.#e.toSVGPath() } } : null;
+        }
+        addPoints(e) {
+          let t = !1;
+          for (let n = 0, r = e.length; n < r; n += 2) t = this.#e.add(e[n], e[n + 1]) || t;
+          return t ? { path: { d: this.#e.toSVGPath() } } : null;
+        }
+        end(e, t) {
+          return e === void 0 ? null : this.add(e, t);
+        }
+        isEmpty() {
+          return this.#e.isEmpty();
+        }
+        isCancellable() {
+          return this.#e.isCancellable();
+        }
+        removeLastElement() {
+          return this.#e.removeLastElement();
+        }
+        updateProperty(e, t) {
+          return null;
+        }
+        getOutlines() {
+          let e = this.#e.getOutlines();
+          return (e.buildFocusOutline(2 * this.#t), e);
+        }
+        get defaultSVGProperties() {
+          return {
+            bbox: [0, 0, 1, 1],
+            root: { viewBox: `0 0 1 1` },
+            rootClass: { highlight: !0, free: !0 },
+            path: { d: this.#e.toSVGPath() },
+          };
         }
       }),
-      (Gi = class e extends W {
+      (ca = class e extends ra {
+        static #e = 1.5;
+        newOutliner(e, t, n, r, i, a, o = 0) {
+          return new oa(e, t, n, r, i, a, o);
+        }
+        get isFree() {
+          return !0;
+        }
+        buildFocusOutline(t) {
+          this.focusOutline = this.getNewOutline(t / 2 + e.#e, 0.0025);
+        }
+        get defaultSVGProperties() {
+          return dt(this);
+        }
+        getFocusSVGProperties(e) {
+          return ft(this, e);
+        }
+        get focusMustRemoveSelfIntersections() {
+          return !0;
+        }
+        updateRotation(e) {
+          return { root: { 'data-main-rotation': e } };
+        }
+        updateProperty(e, t) {
+          if (e !== `thickness`) return null;
+          let n = this.updateThickness(t / 2);
+          return (this.buildFocusOutline(t), n);
+        }
+        getPathResizedSVGProperties() {
+          return { path: { d: this.toSVGPath() } };
+        }
+      }),
+      (la = class e extends ea {
+        constructor(e = null) {
+          (super(), super.updateProperties(e));
+        }
+        updateSVGProperty(e, t) {
+          e !== `thickness` && super.updateSVGProperty(e, t);
+        }
+        clone() {
+          let t = new e();
+          return (t.updateAll(this), t);
+        }
+      }),
+      (ua = class e extends ta {
         #e = null;
         #t = 0;
-        #n;
-        #r = null;
-        #i = null;
-        #a = null;
-        #o = null;
-        #s = 0;
-        #c = null;
-        #l = null;
-        #u = null;
-        #d = !1;
-        #f = null;
-        #p = null;
-        #m = null;
-        #h = ``;
-        #g;
-        #_ = ``;
-        static _defaultColor = null;
-        static _defaultOpacity = 1;
-        static _defaultThickness = 12;
+        #n = null;
+        #r = 0;
+        #i = ``;
+        #a = ``;
+        static _DEFAULT_OPACITY = 1;
+        static _DEFAULT_THICKNESS = 12;
+        static _defaultDrawingOptions = null;
         static _type = `highlight`;
         static _editorType = L.HIGHLIGHT;
-        static _freeHighlightId = -1;
-        static _freeHighlight = null;
-        static _freeHighlightClipId = ``;
         static get _keyboardManager() {
           let t = e.prototype;
-          return _(
+          return y(
             this,
             `_keyboardManager`,
-            new $t([
+            new dn([
               [[`ArrowLeft`], t._moveCaret, { args: [0] }],
               [[`ArrowRight`], t._moveCaret, { args: [1] }],
               [[`ArrowUp`], t._moveCaret, { args: [2] }],
@@ -17471,35 +18422,87 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             ])
           );
         }
-        constructor(t) {
-          (super({ ...t, name: `highlightEditor` }),
-            (this.color = t.color || e._defaultColor),
-            (this.#g = t.thickness || e._defaultThickness),
-            (this.opacity = t.opacity || e._defaultOpacity),
-            (this.#n = t.boxes || null),
-            (this.#_ = t.methodOfCreation || ``),
-            (this.#h = t.text || ``),
+        constructor(e) {
+          (super({ ...e, name: `highlightEditor` }),
+            (this.#e = e.anchorNode || null),
+            (this.#t = e.anchorOffset || 0),
+            (this.#n = e.focusNode || null),
+            (this.#r = e.focusOffset || 0),
+            (this.#i = e.methodOfCreation || (this._drawOutlines?.isFree ? `main_toolbar` : ``)),
+            (this.#a = e.text || ``),
             (this._isDraggable = !1),
             (this.defaultL10nId = `pdfjs-editor-highlight-editor`),
-            t.highlightId > -1
-              ? ((this.#d = !0), this.#y(t), this.#w())
-              : this.#n &&
-                ((this.#e = t.anchorNode),
-                (this.#t = t.anchorOffset),
-                (this.#o = t.focusNode),
-                (this.#s = t.focusOffset),
-                this.#v(),
-                this.#w(),
-                this.rotate(this.rotation)),
-            this.annotationElementId || this._uiManager.a11yAlert(W._l10nAlert.highlight));
+            this.rotate());
+        }
+        static initialize(t, n) {
+          (G.initialize(t, n),
+            (this._defaultDrawingOptions ||= new la({
+              fill: n.highlightColors?.values().next().value || `#fff066`,
+              'fill-opacity': e._DEFAULT_OPACITY,
+              thickness: e._DEFAULT_THICKNESS,
+            })));
+        }
+        static getDefaultDrawingOptions(e) {
+          let t = this._defaultDrawingOptions.clone();
+          return (t.updateProperties(e), t);
+        }
+        static get typesMap() {
+          return y(
+            this,
+            `typesMap`,
+            new Map([
+              [R.HIGHLIGHT_COLOR, `fill`],
+              [R.HIGHLIGHT_THICKNESS, `thickness`],
+            ])
+          );
+        }
+        static get isDrawer() {
+          return !1;
+        }
+        static get _hasClipPath() {
+          return !0;
+        }
+        static get _hasDrawClass() {
+          return !1;
+        }
+        _addOutlines(t) {
+          let { boxes: n, drawOutlines: r } = t;
+          (n || r) &&
+            ((this._drawingOptions ||= t.drawingOptions || e.getDefaultDrawingOptions()),
+            n && (t = { ...t, drawOutlines: aa.build(n, this._uiManager.direction === `ltr`) }),
+            super._addOutlines(t));
+        }
+        get colorType() {
+          return R.HIGHLIGHT_COLOR;
+        }
+        get color() {
+          return this._drawingOptions.fill;
+        }
+        get opacity() {
+          return this._drawingOptions[`fill-opacity`];
+        }
+        get _opacityName() {
+          return `fill-opacity`;
+        }
+        get _drawRotation() {
+          return this._drawOutlines?.isFree ? this.rotation : 0;
+        }
+        get isResizable() {
+          return !1;
+        }
+        get _mustBeDisabledOnCommit() {
+          return !1;
+        }
+        get _mustFixPosition() {
+          return !this._drawOutlines?.isFree;
         }
         get telemetryInitialData() {
           return {
             action: `added`,
-            type: this.#d ? `free_highlight` : `highlight`,
+            type: this._drawOutlines.isFree ? `free_highlight` : `highlight`,
             color: this._uiManager.getNonHCMColorName(this.color),
-            thickness: this.#g,
-            methodOfCreation: this.#_,
+            thickness: this._drawingOptions.thickness,
+            methodOfCreation: this.#i,
           };
         }
         get telemetryFinalData() {
@@ -17508,410 +18511,137 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         static computeTelemetryFinalData(e) {
           return { numberOfColors: e.get(`color`).size };
         }
-        #v() {
-          let e = new Vi(this.#n, 0.001);
-          ((this.#l = e.getOutlines()), ([this.x, this.y, this.width, this.height] = this.#l.box));
-          let t = new Vi(this.#n, 0.0025, 0.001, this._uiManager.direction === `ltr`);
-          this.#a = t.getOutlines();
-          let { firstPoint: n } = this.#l;
-          this.#f = [(n[0] - this.x) / this.width, (n[1] - this.y) / this.height];
-          let { lastPoint: r } = this.#a;
-          this.#p = [(r[0] - this.x) / this.width, (r[1] - this.y) / this.height];
-        }
-        #y({ highlightOutlines: t, highlightId: n, clipPathId: r }) {
-          if (((this.#l = t), (this.#a = t.getNewOutline(this.#g / 2 + 1.5, 0.0025)), n >= 0))
-            ((this.#u = n),
-              (this.#r = r),
-              this.parent.drawLayer.finalizeDraw(n, { bbox: t.box, path: { d: t.toSVGPath() } }),
-              (this.#m = this.parent.drawLayer.drawOutline(
-                {
-                  rootClass: { highlightOutline: !0, free: !0 },
-                  bbox: this.#a.box,
-                  path: { d: this.#a.toSVGPath() },
-                },
-                !0
-              )));
-          else if (this.parent) {
-            let n = this.parent.viewport.rotation;
-            (this.parent.drawLayer.updateProperties(this.#u, {
-              bbox: e.#T(this.#l.box, (n - this.rotation + 360) % 360),
-              path: { d: t.toSVGPath() },
-            }),
-              this.parent.drawLayer.updateProperties(this.#m, {
-                bbox: e.#T(this.#a.box, n),
-                path: { d: this.#a.toSVGPath() },
-              }));
-          }
-          let [i, a, o, s] = t.box;
-          switch (this.rotation) {
-            case 0:
-              ((this.x = i), (this.y = a), (this.width = o), (this.height = s));
-              break;
-            case 90: {
-              let [e, t] = this.parentDimensions;
-              ((this.x = a),
-                (this.y = 1 - i),
-                (this.width = (o * t) / e),
-                (this.height = (s * e) / t));
-              break;
-            }
-            case 180:
-              ((this.x = 1 - i), (this.y = 1 - a), (this.width = o), (this.height = s));
-              break;
-            case 270: {
-              let [e, t] = this.parentDimensions;
-              ((this.x = 1 - a),
-                (this.y = i),
-                (this.width = (o * t) / e),
-                (this.height = (s * e) / t));
-              break;
-            }
-          }
-          let { firstPoint: c } = t;
-          this.#f = [(c[0] - i) / o, (c[1] - a) / s];
-          let { lastPoint: l } = this.#a;
-          this.#p = [(l[0] - i) / o, (l[1] - a) / s];
-        }
-        static initialize(t, n) {
-          (W.initialize(t, n),
-            (e._defaultColor ||= n.highlightColors?.values().next().value || `#fff066`));
-        }
-        static updateDefaultParams(t, n) {
-          switch (t) {
-            case R.HIGHLIGHT_COLOR:
-              e._defaultColor = n;
-              break;
-            case R.HIGHLIGHT_THICKNESS:
-              e._defaultThickness = n;
-              break;
-          }
-        }
         translateInPage(e, t) {}
         get toolbarPosition() {
-          return this.#p;
+          return this.#o(this._drawOutlines.focusOutline.lastPoint);
         }
         get commentButtonPosition() {
-          return this.#f;
+          return this.#o(this._drawOutlines.firstPoint);
         }
-        updateParams(e, t) {
-          switch (e) {
+        #o([e, t]) {
+          let [n, r, i, a] = this._drawOutlines.box;
+          return [(e - n) / i, (t - r) / a];
+        }
+        updateParams(t, n) {
+          switch (t) {
             case R.HIGHLIGHT_COLOR:
-              this.#b(t);
+              (this._updateColorAndOpacity(n, e._DEFAULT_OPACITY, t),
+                this._reportTelemetry(
+                  { action: `color_changed`, color: this._uiManager.getNonHCMColorName(n) },
+                  !0
+                ));
               break;
             case R.HIGHLIGHT_THICKNESS:
-              this.#x(t);
-              break;
+              (super.updateParams(t, n),
+                this._reportTelemetry({ action: `thickness_changed`, thickness: n }, !0));
           }
         }
-        static get defaultPropertiesToUpdate() {
-          return [
-            [R.HIGHLIGHT_COLOR, e._defaultColor],
-            [R.HIGHLIGHT_THICKNESS, e._defaultThickness],
-          ];
-        }
         get propertiesToUpdate() {
-          return [
-            [R.HIGHLIGHT_COLOR, this.color || e._defaultColor],
-            [R.HIGHLIGHT_THICKNESS, this.#g || e._defaultThickness],
-            [R.HIGHLIGHT_FREE, this.#d],
-          ];
-        }
-        onUpdatedColor() {
-          (this.parent?.drawLayer.updateProperties(this.#u, {
-            root: { fill: this.color, 'fill-opacity': this.opacity },
-          }),
-            this.#i?.updateColor(this.color),
-            super.onUpdatedColor());
-        }
-        #b(t) {
-          let n = (e, t) => {
-              ((this.color = e), (this.opacity = t), this.onUpdatedColor());
-            },
-            r = this.color,
-            i = this.opacity;
-          (this.addCommands({
-            cmd: n.bind(this, t, e._defaultOpacity),
-            undo: n.bind(this, r, i),
-            post: this._uiManager.updateUI.bind(this._uiManager, this),
-            mustExec: !0,
-            type: R.HIGHLIGHT_COLOR,
-            overwriteIfSameType: !0,
-            keepUndo: !0,
-          }),
-            this._reportTelemetry(
-              { action: `color_changed`, color: this._uiManager.getNonHCMColorName(t) },
-              !0
-            ));
-        }
-        #x(e) {
-          let t = this.#g,
-            n = (e) => {
-              ((this.#g = e), this.#S(e));
-            };
-          (this.addCommands({
-            cmd: n.bind(this, e),
-            undo: n.bind(this, t),
-            post: this._uiManager.updateUI.bind(this._uiManager, this),
-            mustExec: !0,
-            type: R.INK_THICKNESS,
-            overwriteIfSameType: !0,
-            keepUndo: !0,
-          }),
-            this._reportTelemetry({ action: `thickness_changed`, thickness: e }, !0));
+          let e = super.propertiesToUpdate;
+          return (e.push([R.HIGHLIGHT_FREE, this._drawOutlines.isFree]), e);
         }
         get toolbarButtons() {
           return this._uiManager.highlightColors
-            ? [[`colorPicker`, (this.#i = new ei({ editor: this }))]]
+            ? ((this._colorPicker = new hi({ editor: this })), [[`colorPicker`, this._colorPicker]])
             : super.toolbarButtons;
         }
-        disableEditing() {
-          (super.disableEditing(), this.div.classList.toggle(`disabled`, !0));
-        }
-        enableEditing() {
-          (super.enableEditing(), this.div.classList.toggle(`disabled`, !1));
-        }
         fixAndSetPosition() {
-          return super.fixAndSetPosition(this.#O());
-        }
-        getBaseTranslation() {
-          return [0, 0];
+          return super.fixAndSetPosition(this._drawRotation);
         }
         getRect(e, t) {
-          return super.getRect(e, t, this.#O());
+          return super.getRect(e, t, this._drawRotation);
         }
         onceAdded(e) {
           (this.annotationElementId || this.parent.addUndoableEditor(this), e && this.div.focus());
         }
         remove() {
-          (this.#C(), this._reportTelemetry({ action: `deleted` }), super.remove());
-        }
-        rebuild() {
-          this.parent &&
-            (super.rebuild(),
-            this.div !== null && (this.#w(), this.isAttachedToDOM || this.parent.add(this)));
-        }
-        setParent(e) {
-          let t = !1;
-          (this.parent && !e
-            ? this.#C()
-            : e &&
-              (this.#w(e), (t = !this.parent && this.div?.classList.contains(`selectedEditor`))),
-            super.setParent(e),
-            this.show(this._isVisible),
-            t && this.select());
-        }
-        #S(e) {
-          this.#d &&
-            (this.#y({ highlightOutlines: this.#l.getNewOutline(e / 2) }),
-            this.fixAndSetPosition(),
-            this.setDims());
-        }
-        #C() {
-          this.#u === null ||
-            !this.parent ||
-            (this.parent.drawLayer.remove(this.#u),
-            (this.#u = null),
-            this.parent.drawLayer.remove(this.#m),
-            (this.#m = null));
-        }
-        #w(e = this.parent) {
-          this.#u === null &&
-            (({ id: this.#u, clipPathId: this.#r } = e.drawLayer.draw(
-              {
-                bbox: this.#l.box,
-                root: { viewBox: `0 0 1 1`, fill: this.color, 'fill-opacity': this.opacity },
-                rootClass: { highlight: !0, free: this.#d },
-                path: { d: this.#l.toSVGPath() },
-              },
-              !1,
-              !0
-            )),
-            (this.#m = e.drawLayer.drawOutline(
-              {
-                rootClass: { highlightOutline: !0, free: this.#d },
-                bbox: this.#a.box,
-                path: { d: this.#a.toSVGPath() },
-              },
-              this.#d
-            )),
-            this.#c && (this.#c.style.clipPath = this.#r));
-        }
-        static #T([e, t, n, r], i) {
-          switch (i) {
-            case 90:
-              return [1 - t - r, e, r, n];
-            case 180:
-              return [1 - e - n, 1 - t - r, n, r];
-            case 270:
-              return [t, 1 - e - n, r, n];
-          }
-          return [e, t, n, r];
-        }
-        rotate(t) {
-          let { drawLayer: n } = this.parent,
-            r;
-          (this.#d
-            ? ((t = (t - this.rotation + 360) % 360), (r = e.#T(this.#l.box, t)))
-            : (r = e.#T([this.x, this.y, this.width, this.height], t)),
-            n.updateProperties(this.#u, { bbox: r, root: { 'data-main-rotation': t } }),
-            n.updateProperties(this.#m, {
-              bbox: e.#T(this.#a.box, t),
-              root: { 'data-main-rotation': t },
-            }));
+          (this._reportTelemetry({ action: `deleted` }), super.remove());
         }
         render() {
           if (this.div) return this.div;
           let e = super.render();
-          (this.#h && (e.setAttribute(`aria-label`, this.#h), e.setAttribute(`role`, `mark`)),
-            this.#d
-              ? e.classList.add(`free`)
-              : this.div.addEventListener(`keydown`, this.#E.bind(this), {
-                  signal: this._uiManager._signal,
-                }));
-          let t = (this.#c = document.createElement(`div`));
           return (
-            e.append(t),
-            t.setAttribute(`aria-hidden`, `true`),
-            (t.className = `internal`),
-            (t.style.clipPath = this.#r),
-            this.setDims(),
-            me(this, this.#c, [`pointerover`, `pointerleave`]),
+            this.#a && (e.setAttribute(`aria-label`, this.#a), e.setAttribute(`role`, `mark`)),
+            this._drawOutlines.isFree
+              ? e.classList.add(`free`)
+              : e.addEventListener(`keydown`, this.#s.bind(this), {
+                  signal: this._uiManager._signal,
+                }),
             this.enableEditing(),
             e
           );
         }
-        pointerover() {
-          this.isSelected ||
-            this.parent?.drawLayer.updateProperties(this.#m, { rootClass: { hovered: !0 } });
-        }
-        pointerleave() {
-          this.isSelected ||
-            this.parent?.drawLayer.updateProperties(this.#m, { rootClass: { hovered: !1 } });
-        }
-        #E(t) {
+        #s(t) {
           e._keyboardManager.exec(this, t);
         }
         _moveCaret(e) {
           switch ((this.parent.unselect(this), e)) {
             case 0:
             case 2:
-              this.#D(!0);
+              this.#c(!0);
               break;
             case 1:
             case 3:
-              this.#D(!1);
-              break;
+              this.#c(!1);
           }
         }
-        #D(e) {
+        #c(e) {
           if (!this.#e) return;
           let t = window.getSelection();
-          e ? t.setPosition(this.#e, this.#t) : t.setPosition(this.#o, this.#s);
-        }
-        select() {
-          (super.select(),
-            this.#m &&
-              this.parent?.drawLayer.updateProperties(this.#m, {
-                rootClass: { hovered: !1, selected: !0 },
-              }));
+          e ? t.setPosition(this.#e, this.#t) : t.setPosition(this.#n, this.#r);
         }
         unselect() {
-          (super.unselect(),
-            this.#m &&
-              (this.parent?.drawLayer.updateProperties(this.#m, { rootClass: { selected: !1 } }),
-              this.#d || this.#D(!1)));
+          (super.unselect(), this._drawOutlines.isFree || this.#c(!1));
         }
-        get _mustFixPosition() {
-          return !this.#d;
+        static createDrawerInstance({ x: e, y: t, box: n, parent: r, isLTR: i }) {
+          return new sa(e, t, n, r.scale, this._defaultDrawingOptions.thickness / 2, i, 0.001);
         }
-        show(e = this._isVisible) {
-          (super.show(e),
-            this.parent &&
-              (this.parent.drawLayer.updateProperties(this.#u, { rootClass: { hidden: !e } }),
-              this.parent.drawLayer.updateProperties(this.#m, { rootClass: { hidden: !e } })));
+        static _getDrawingTarget(e, { target: t }) {
+          return t.closest(`.textLayer`);
         }
-        #O() {
-          return this.#d ? this.rotation : 0;
+        static _getPointerCoords({ x: e, y: t }) {
+          return [e, t];
         }
-        #k() {
-          if (this.#d) return null;
-          let [e, t] = this.pageDimensions,
-            [n, r] = this.pageTranslation,
-            i = this.#n,
-            a = new Float32Array(i.length * 8),
-            o = 0;
-          for (let { x: s, y: c, width: l, height: u } of i) {
-            let i = s * e + n,
-              d = (1 - c) * t + r;
-            ((a[o] = a[o + 4] = i),
-              (a[o + 1] = a[o + 3] = d),
-              (a[o + 2] = a[o + 6] = i + l * e),
-              (a[o + 5] = a[o + 7] = d - u * t),
-              (o += 8));
+        static _addDrawingListeners(e, t) {
+          (e.classList.add(`free`),
+            t.addEventListener(`abort`, () => e.classList.remove(`free`), { once: !0 }),
+            window.addEventListener(`blur`, () => this._endDraw(null), { signal: t }),
+            window.addEventListener(`pointerdown`, j, { capture: !0, passive: !1, signal: t }));
+        }
+        static _endDrawingSession(e = !1) {
+          return this.endDrawing(e);
+        }
+        createDrawingOptions({ color: t, opacity: n, thickness: r }) {
+          let { _defaultDrawingOptions: i, _DEFAULT_OPACITY: a } = e;
+          this._drawingOptions = e.getDefaultDrawingOptions({
+            fill: U.makeHexColor(...t),
+            'fill-opacity': n || a,
+            thickness: r || i.thickness,
+          });
+        }
+        static deserializeDraw(e, t, n, r, i, a, o) {
+          let { quadPoints: s } = a;
+          if (s) {
+            let i = [];
+            for (let a = 0, o = s.length; a < o; a += 8)
+              i.push({
+                x: (s[a] - e) / n,
+                y: 1 - (s[a + 1] - t) / r,
+                width: (s[a + 2] - s[a]) / n,
+                height: (s[a + 1] - s[a + 5]) / r,
+              });
+            return aa.build(i, o.direction === `ltr`);
           }
-          return a;
-        }
-        #A(e) {
-          return this.#l.serialize(e, this.#O());
-        }
-        static startHighlighting(e, t, { target: n, x: r, y: i }) {
-          let { x: a, y: o, width: s, height: c } = n.getBoundingClientRect(),
-            l = new AbortController(),
-            u = e.combinedSignal(l),
-            d = (t) => {
-              (l.abort(), this.#M(e, t));
-            };
-          (window.addEventListener(`blur`, d, { signal: u }),
-            window.addEventListener(`pointerup`, d, { signal: u }),
-            window.addEventListener(`pointerdown`, A, { capture: !0, passive: !1, signal: u }),
-            window.addEventListener(`contextmenu`, k, { signal: u }),
-            n.addEventListener(`pointermove`, this.#j.bind(this, e), { signal: u }),
-            (this._freeHighlight = new Ui(
-              { x: r, y: i },
-              [a, o, s, c],
-              e.scale,
-              this._defaultThickness / 2,
-              t,
-              0.001
-            )),
-            ({ id: this._freeHighlightId, clipPathId: this._freeHighlightClipId } =
-              e.drawLayer.draw(
-                {
-                  bbox: [0, 0, 1, 1],
-                  root: {
-                    viewBox: `0 0 1 1`,
-                    fill: this._defaultColor,
-                    'fill-opacity': this._defaultOpacity,
-                  },
-                  rootClass: { highlight: !0, free: !0 },
-                  path: { d: this._freeHighlight.toSVGPath() },
-                },
-                !0,
-                !0
-              )));
-        }
-        static #j(e, t) {
-          this._freeHighlight.add(t) &&
-            e.drawLayer.updateProperties(this._freeHighlightId, {
-              path: { d: this._freeHighlight.toSVGPath() },
-            });
-        }
-        static #M(e, t) {
-          (this._freeHighlight.isEmpty()
-            ? e.drawLayer.remove(this._freeHighlightId)
-            : e.createAndAddNewEditor(t, !1, {
-                highlightId: this._freeHighlightId,
-                highlightOutlines: this._freeHighlight.getOutlines(),
-                clipPathId: this._freeHighlightClipId,
-                methodOfCreation: `main_toolbar`,
-              }),
-            (this._freeHighlightId = -1),
-            (this._freeHighlight = null),
-            (this._freeHighlightClipId = ``));
+          let c = a.thickness || this._defaultDrawingOptions.thickness,
+            l = (a.inkLists || a.outlines.points)[0],
+            u = new oa(l[0] - e, r - (l[1] - t), [0, 0, n, r], 1, c / 2, !0, 0.001);
+          for (let n = 0, i = l.length; n < i; n += 2) u.add(l[n] - e, r - (l[n + 1] - t));
+          let d = u.getOutlines();
+          return (d.buildFocusOutline(c), d);
         }
         static async deserialize(e, t, n) {
           let r = null;
-          if (e instanceof ki) {
+          if (e instanceof Wi) {
             let {
               data: {
                 quadPoints: t,
@@ -17935,7 +18665,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               color: Array.from(o),
               opacity: s,
               quadPoints: t,
-              boxes: null,
               pageIndex: p - 1,
               rect: n.slice(0),
               rotation: i,
@@ -17948,7 +18677,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               creationDate: d,
               modificationDate: f,
             };
-          } else if (e instanceof Oi) {
+          } else if (e instanceof Ui) {
             let {
               data: {
                 inkLists: t,
@@ -17972,7 +18701,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               color: Array.from(o),
               thickness: s,
               inkLists: t,
-              boxes: null,
               pageIndex: p - 1,
               rect: n.slice(0),
               rotation: i,
@@ -17986,66 +18714,29 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               modificationDate: f,
             };
           }
-          let { color: i, quadPoints: a, inkLists: o, outlines: s, opacity: c } = e,
-            l = await super.deserialize(e, t, n);
-          ((l.color = H.makeHexColor(...i)),
-            (l.opacity = c || 1),
-            o && (l.#g = e.thickness),
-            (l._initialData = r),
-            e.comment && l.setCommentData(e));
-          let [u, d] = l.pageDimensions,
-            [f, p] = l.pageTranslation;
-          if (a) {
-            let e = (l.#n = []);
-            for (let t = 0; t < a.length; t += 8)
-              e.push({
-                x: (a[t] - f) / u,
-                y: 1 - (a[t + 1] - p) / d,
-                width: (a[t + 2] - a[t]) / u,
-                height: (a[t + 1] - a[t + 5]) / d,
-              });
-            (l.#v(), l.#w(), l.rotate(l.rotation));
-          } else if (o || s) {
-            l.#d = !0;
-            let e = (o || s.points)[0],
-              n = { x: e[0] - f, y: d - (e[1] - p) },
-              r = new Ui(n, [0, 0, u, d], 1, l.#g / 2, !0, 0.001);
-            for (let t = 0, i = e.length; t < i; t += 2)
-              ((n.x = e[t] - f), (n.y = d - (e[t + 1] - p)), r.add(n));
-            let { id: i, clipPathId: a } = t.drawLayer.draw(
-              {
-                bbox: [0, 0, 1, 1],
-                root: { viewBox: `0 0 1 1`, fill: l.color, 'fill-opacity': l._defaultOpacity },
-                rootClass: { highlight: !0, free: !0 },
-                path: { d: r.toSVGPath() },
-              },
-              !0,
-              !0
-            );
-            (l.#y({ highlightOutlines: r.getOutlines(), highlightId: i, clipPathId: a }),
-              l.#w(),
-              l.rotate(l.parentRotation));
-          }
-          return l;
+          let i = await super.deserialize(e, t, n);
+          return ((i._initialData = r), e.comment && i.setCommentData(e), i);
         }
         serialize(e = !1) {
           if (this.isEmpty() || e) return null;
           if (this.deleted) return this.serializeDeleted();
-          let t = W._colorManager.convert(this._uiManager.getNonHCMColor(this.color)),
-            n = super.serialize(e);
+          let t = super.serialize(e);
           return (
-            Object.assign(n, {
-              color: t,
+            Object.assign(t, {
+              color: G._colorManager.convert(this._uiManager.getNonHCMColor(this.color)),
               opacity: this.opacity,
-              thickness: this.#g,
-              quadPoints: this.#k(),
-              outlines: this.#A(n.rect),
+              thickness: this._drawingOptions.thickness,
+              quadPoints: this._drawOutlines.serializeQuadPoints(
+                this.pageTranslation,
+                this.pageDimensions
+              ),
+              outlines: this._drawOutlines.serialize(t.rect, this._drawRotation),
             }),
-            this.addComment(n),
-            this.annotationElementId && !this.#N(n) ? null : ((n.id = this.annotationElementId), n)
+            this.addComment(t),
+            this.annotationElementId && !this.#l(t) ? null : ((t.id = this.annotationElementId), t)
           );
         }
-        #N(e) {
+        #l(e) {
           let { color: t } = this._initialData;
           return this.hasEditedComment || e.color.some((e, n) => e !== t[n]);
         }
@@ -18054,663 +18745,147 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             ? (e.hide(), null)
             : (e.updateEdited({ rect: this.getPDFRect(), popup: this.comment }), null);
         }
-        static canCreateNewEmptyEditor() {
-          return !1;
-        }
       }),
-      (Ki = class {
-        #e = Object.create(null);
-        updateProperty(e, t) {
-          ((this[e] = t), this.updateSVGProperty(e, t));
-        }
-        updateProperties(e) {
-          if (e)
-            for (let [t, n] of Object.entries(e)) t.startsWith(`_`) || this.updateProperty(t, n);
-        }
-        updateSVGProperty(e, t) {
-          this.#e[e] = t;
-        }
-        toSVGProperties() {
-          let e = this.#e;
-          return ((this.#e = Object.create(null)), { root: e });
-        }
-        reset() {
-          this.#e = Object.create(null);
-        }
-        updateAll(e = this) {
-          this.updateProperties(e);
-        }
-        clone() {
-          d(`Not implemented`);
-        }
-      }),
-      (qi = class e extends W {
-        #e = null;
-        #t;
-        _colorPicker = null;
-        _drawId = null;
-        static _currentDrawId = -1;
-        static _currentParent = null;
-        static #n = null;
-        static #r = null;
-        static #i = null;
-        static _INNER_MARGIN = 3;
-        constructor(e) {
-          (super(e), (this.#t = e.mustBeCommitted || !1), this._addOutlines(e));
-        }
-        onUpdatedColor() {
-          (this._colorPicker?.update(this.color), super.onUpdatedColor());
-        }
-        onUpdatedOpacity() {
-          this._colorPicker?.updateOpacity?.(this.opacity);
-        }
-        _addOutlines(e) {
-          e.drawOutlines && (this.#a(e), this.#c());
-        }
-        #a({ drawOutlines: e, drawId: t, drawingOptions: n }) {
-          ((this.#e = e),
-            (this._drawingOptions ||= n),
-            this.annotationElementId || this._uiManager.a11yAlert(W._l10nAlert[this.editorType]),
-            t >= 0
-              ? ((this._drawId = t), this.parent.drawLayer.finalizeDraw(t, e.defaultProperties))
-              : (this._drawId = this.#o(e, this.parent)),
-            this.#d(e.box));
-        }
-        #o(t, n) {
-          let { id: r } = n.drawLayer.draw(
-            e._mergeSVGProperties(this._drawingOptions.toSVGProperties(), t.defaultSVGProperties),
-            !1,
-            !1
-          );
-          return r;
-        }
-        static _mergeSVGProperties(e, t) {
-          let n = new Set(Object.keys(e));
-          for (let [r, i] of Object.entries(t)) n.has(r) ? Object.assign(e[r], i) : (e[r] = i);
-          return e;
-        }
-        static getDefaultDrawingOptions(e) {
-          d(`Not implemented`);
-        }
-        static get typesMap() {
-          d(`Not implemented`);
-        }
-        static get isDrawer() {
-          return !0;
-        }
-        static get supportMultipleDrawings() {
-          return !1;
-        }
-        static updateDefaultParams(t, n) {
-          let r = this.typesMap.get(t);
-          (r && this._defaultDrawingOptions.updateProperty(r, n),
-            this._currentParent &&
-              (e.#n.updateProperty(r, n),
-              this._currentParent.drawLayer.updateProperties(
-                this._currentDrawId,
-                this._defaultDrawingOptions.toSVGProperties()
-              )));
-        }
-        updateParams(e, t) {
-          let n = this.constructor.typesMap.get(e);
-          n && this._updateProperty(e, n, t);
-        }
-        static get defaultPropertiesToUpdate() {
-          let e = [],
-            t = this._defaultDrawingOptions;
-          for (let [n, r] of this.typesMap) e.push([n, t[r]]);
-          return e;
-        }
-        get propertiesToUpdate() {
-          let e = [],
-            { _drawingOptions: t } = this;
-          for (let [n, r] of this.constructor.typesMap) e.push([n, t[r]]);
-          return e;
-        }
-        _updateProperty(e, t, n) {
-          let r = this._drawingOptions,
-            i = r[t],
-            a = (n) => {
-              r.updateProperty(t, n);
-              let i = this.#e.updateProperty(t, n);
-              (i && this.#d(i),
-                this.parent?.drawLayer.updateProperties(this._drawId, r.toSVGProperties()),
-                e === this.colorType
-                  ? this.onUpdatedColor()
-                  : e === this.opacityType && this.onUpdatedOpacity());
-            };
-          this.addCommands({
-            cmd: a.bind(this, n),
-            undo: a.bind(this, i),
-            post: this._uiManager.updateUI.bind(this._uiManager, this),
-            mustExec: !0,
-            type: e,
-            overwriteIfSameType: !0,
-            keepUndo: !0,
-          });
-        }
-        _updateColorAndOpacity(e, t) {
-          let n = this.constructor.typesMap.get(this.colorType),
-            r = this.constructor.typesMap.get(this.opacityType),
-            i = this._drawingOptions,
-            a = i[n],
-            o = i[r],
-            s = (e, t) => {
-              (i.updateProperty(n, e),
-                i.updateProperty(r, t),
-                this.#e.updateProperty(n, e),
-                this.#e.updateProperty(r, t),
-                this.parent?.drawLayer.updateProperties(this._drawId, i.toSVGProperties()),
-                this.onUpdatedColor(),
-                this.onUpdatedOpacity());
-            };
-          this.addCommands({
-            cmd: s.bind(this, e, t),
-            undo: s.bind(this, a, o),
-            post: this._uiManager.updateUI.bind(this._uiManager, this),
-            mustExec: !0,
-            type: R.INK_COLOR_AND_OPACITY,
-            overwriteIfSameType: !0,
-            keepUndo: !0,
-          });
-        }
-        _onResizing() {
-          this.parent?.drawLayer.updateProperties(
-            this._drawId,
-            e._mergeSVGProperties(this.#e.getPathResizingSVGProperties(this.#u()), {
-              bbox: this.#f(),
-            })
-          );
-        }
-        _onResized() {
-          this.parent?.drawLayer.updateProperties(
-            this._drawId,
-            e._mergeSVGProperties(this.#e.getPathResizedSVGProperties(this.#u()), {
-              bbox: this.#f(),
-            })
-          );
-        }
-        _onTranslating(e, t) {
-          this.parent?.drawLayer.updateProperties(this._drawId, { bbox: this.#f() });
-        }
-        _onTranslated() {
-          this.parent?.drawLayer.updateProperties(
-            this._drawId,
-            e._mergeSVGProperties(
-              this.#e.getPathTranslatedSVGProperties(this.#u(), this.parentDimensions),
-              { bbox: this.#f() }
-            )
-          );
-        }
-        _onStartDragging() {
-          this.parent?.drawLayer.updateProperties(this._drawId, { rootClass: { moving: !0 } });
-        }
-        _onStopDragging() {
-          this.parent?.drawLayer.updateProperties(this._drawId, { rootClass: { moving: !1 } });
-        }
-        commit() {
-          (super.commit(), this.disableEditMode(), this.disableEditing());
-        }
-        disableEditing() {
-          (super.disableEditing(), this.div.classList.toggle(`disabled`, !0));
-        }
-        enableEditing() {
-          (super.enableEditing(), this.div.classList.toggle(`disabled`, !1));
-        }
-        getBaseTranslation() {
-          return [0, 0];
-        }
-        get isResizable() {
-          return !0;
-        }
-        onceAdded(e) {
-          (this.annotationElementId || this.parent.addUndoableEditor(this),
-            (this._isDraggable = !0),
-            this.#t &&
-              ((this.#t = !1),
-              this.commit(),
-              this.parent.setSelected(this),
-              e && this.isOnScreen && this.div.focus()));
-        }
-        remove() {
-          (this.#s(), super.remove());
-        }
-        rebuild() {
-          this.parent &&
-            (super.rebuild(),
-            this.div !== null &&
-              (this.#c(), this.#d(this.#e.box), this.isAttachedToDOM || this.parent.add(this)));
-        }
-        setParent(e) {
-          let t = !1;
-          (this.parent && !e
-            ? (this._uiManager.removeShouldRescale(this), this.#s())
-            : e &&
-              (this._uiManager.addShouldRescale(this),
-              this.#c(e),
-              (t = !this.parent && this.div?.classList.contains(`selectedEditor`))),
-            super.setParent(e),
-            t && this.select());
-        }
-        #s() {
-          this._drawId === null ||
-            !this.parent ||
-            (this.parent.drawLayer.remove(this._drawId),
-            (this._drawId = null),
-            this._drawingOptions.reset());
-        }
-        #c(e = this.parent) {
-          if (!(this._drawId !== null && this.parent === e)) {
-            if (this._drawId !== null) {
-              this.parent.drawLayer.updateParent(this._drawId, e.drawLayer);
-              return;
-            }
-            (this._drawingOptions.updateAll(), (this._drawId = this.#o(this.#e, e)));
-          }
-        }
-        #l([e, t, n, r]) {
-          let {
-            parentDimensions: [i, a],
-            rotation: o,
-          } = this;
-          switch (o) {
-            case 90:
-              return [t, 1 - e, (a / i) * n, (i / a) * r];
-            case 180:
-              return [1 - e, 1 - t, n, r];
-            case 270:
-              return [1 - t, e, (a / i) * n, (i / a) * r];
-            default:
-              return [e, t, n, r];
-          }
-        }
-        #u() {
-          let {
-            x: e,
-            y: t,
-            width: n,
-            height: r,
-            parentDimensions: [i, a],
-            rotation: o,
-          } = this;
-          switch (o) {
-            case 90:
-              return [1 - t, e, (i / a) * n, (a / i) * r];
-            case 180:
-              return [1 - e, 1 - t, n, r];
-            case 270:
-              return [t, 1 - e, (i / a) * n, (a / i) * r];
-            default:
-              return [e, t, n, r];
-          }
-        }
-        #d(e) {
-          (([this.x, this.y, this.width, this.height] = this.#l(e)),
-            this.div && (this.fixAndSetPosition(), this.setDims()),
-            this._onResized());
-        }
-        #f() {
-          let {
-            x: e,
-            y: t,
-            width: n,
-            height: r,
-            rotation: i,
-            parentRotation: a,
-            parentDimensions: [o, s],
-          } = this;
-          switch ((i * 4 + a) / 90) {
-            case 1:
-              return [1 - t - r, e, r, n];
-            case 2:
-              return [1 - e - n, 1 - t - r, n, r];
-            case 3:
-              return [t, 1 - e - n, r, n];
-            case 4:
-              return [e, t - (o / s) * n, (s / o) * r, (o / s) * n];
-            case 5:
-              return [1 - t, e, (o / s) * n, (s / o) * r];
-            case 6:
-              return [1 - e - (s / o) * r, 1 - t, (s / o) * r, (o / s) * n];
-            case 7:
-              return [t - (o / s) * n, 1 - e - (s / o) * r, (o / s) * n, (s / o) * r];
-            case 8:
-              return [e - n, t - r, n, r];
-            case 9:
-              return [1 - t, e - n, r, n];
-            case 10:
-              return [1 - e, 1 - t, n, r];
-            case 11:
-              return [t - r, 1 - e, r, n];
-            case 12:
-              return [e - (s / o) * r, t, (s / o) * r, (o / s) * n];
-            case 13:
-              return [1 - t - (o / s) * n, e - (s / o) * r, (o / s) * n, (s / o) * r];
-            case 14:
-              return [1 - e, 1 - t - (o / s) * n, (s / o) * r, (o / s) * n];
-            case 15:
-              return [t, 1 - e, (o / s) * n, (s / o) * r];
-            default:
-              return [e, t, n, r];
-          }
-        }
-        rotate() {
-          this.parent &&
-            this.parent.drawLayer.updateProperties(
-              this._drawId,
-              e._mergeSVGProperties(
-                { bbox: this.#f() },
-                this.#e.updateRotation((this.parentRotation - this.rotation + 360) % 360)
-              )
-            );
-        }
-        onScaleChanging() {
-          this.parent &&
-            this.#d(this.#e.updateParentDimensions(this.parentDimensions, this.parent.scale));
-        }
-        static onScaleChangingWhenDrawing() {}
-        render() {
-          if (this.div) return this.div;
-          let e, t;
-          this._isCopy && ((e = this.x), (t = this.y));
-          let n = super.render();
-          n.classList.add(`draw`);
-          let r = document.createElement(`div`);
-          return (
-            n.append(r),
-            r.setAttribute(`aria-hidden`, `true`),
-            (r.className = `internal`),
-            this.setDims(),
-            this._uiManager.addShouldRescale(this),
-            this.disableEditing(),
-            this._isCopy && this._moveAfterPaste(e, t),
-            n
-          );
-        }
-        static createDrawerInstance(e, t, n, r, i) {
-          d(`Not implemented`);
-        }
-        static startDrawing(t, n, r, i) {
-          let { target: a, offsetX: o, offsetY: s, pointerId: c, pointerType: l } = i;
-          if (U.isInitializedAndDifferentPointerType(l)) return;
-          let {
-              viewport: { rotation: u },
-            } = t,
-            { width: d, height: f } = a.getBoundingClientRect(),
-            p = (e.#r = new AbortController()),
-            m = t.combinedSignal(p);
-          if (
-            (U.setPointer(l, c),
-            window.addEventListener(
-              `pointerup`,
-              (e) => {
-                U.isSamePointerIdOrRemove(e.pointerId) && this._endDraw(e);
-              },
-              { signal: m }
-            ),
-            window.addEventListener(
-              `pointercancel`,
-              (e) => {
-                U.isSamePointerIdOrRemove(e.pointerId) && this._currentParent.endDrawingSession();
-              },
-              { signal: m }
-            ),
-            window.addEventListener(
-              `pointerdown`,
-              (t) => {
-                U.isSamePointerType(t.pointerType) &&
-                  (U.initializeAndAddPointerId(t.pointerId),
-                  e.#n.isCancellable() &&
-                    (e.#n.removeLastElement(),
-                    e.#n.isEmpty()
-                      ? this._currentParent.endDrawingSession(!0)
-                      : this._endDraw(null)));
-              },
-              { capture: !0, passive: !1, signal: m }
-            ),
-            window.addEventListener(`contextmenu`, k, { signal: m }),
-            a.addEventListener(`pointermove`, this._drawMove.bind(this), { signal: m }),
-            a.addEventListener(
-              `touchmove`,
-              (e) => {
-                U.isSameTimeStamp(e.timeStamp) && A(e);
-              },
-              { signal: m }
-            ),
-            t.toggleDrawing(),
-            n._editorUndoBar?.hide(),
-            e.#n)
-          ) {
-            t.drawLayer.updateProperties(this._currentDrawId, e.#n.startNew(o, s, d, f, u));
-            return;
-          }
-          (n.updateUIForDefaultProperties(this),
-            (e.#n = this.createDrawerInstance(o, s, d, f, u)),
-            (e.#i = this.getDefaultDrawingOptions()),
-            (this._currentParent = t),
-            ({ id: this._currentDrawId } = t.drawLayer.draw(
-              this._mergeSVGProperties(e.#i.toSVGProperties(), e.#n.defaultSVGProperties),
-              !0,
-              !1
-            )));
-        }
-        static _drawMove(t) {
-          if ((U.isSameTimeStamp(t.timeStamp), !e.#n)) return;
-          let { offsetX: n, offsetY: r, pointerId: i } = t;
-          if (U.isSamePointerId(i)) {
-            if (U.isUsingMultiplePointers()) {
-              this._endDraw(t);
-              return;
-            }
-            (this._currentParent.drawLayer.updateProperties(this._currentDrawId, e.#n.add(n, r)),
-              U.setTimeStamp(t.timeStamp),
-              A(t));
-          }
-        }
-        static _cleanup(t) {
-          (t &&
-            ((this._currentDrawId = -1),
-            (this._currentParent = null),
-            (e.#n = null),
-            (e.#i = null),
-            U.clearTimeStamp()),
-            e.#r && (e.#r.abort(), (e.#r = null), U.clearPointerIds()));
-        }
-        static _endDraw(t) {
-          let n = this._currentParent;
-          if (n) {
-            if (
-              (n.toggleDrawing(!0),
-              this._cleanup(!1),
-              t?.target === n.div &&
-                n.drawLayer.updateProperties(this._currentDrawId, e.#n.end(t.offsetX, t.offsetY)),
-              this.supportMultipleDrawings)
-            ) {
-              let t = e.#n,
-                r = this._currentDrawId,
-                i = t.getLastElement();
-              n.addCommands({
-                cmd: () => {
-                  n.drawLayer.updateProperties(r, t.setLastElement(i));
-                },
-                undo: () => {
-                  n.drawLayer.updateProperties(r, t.removeLastElement());
-                },
-                mustExec: !1,
-                type: R.DRAW_STEP,
-              });
-              return;
-            }
-            this.endDrawing(!1);
-          }
-        }
-        static endDrawing(t) {
-          let n = this._currentParent;
-          if (!n) return null;
-          if ((n.toggleDrawing(!0), n.cleanUndoStack(R.DRAW_STEP), !e.#n.isEmpty())) {
-            let {
-                pageDimensions: [r, i],
-                scale: a,
-              } = n,
-              o = n.createAndAddNewEditor({ offsetX: 0, offsetY: 0 }, !1, {
-                drawId: this._currentDrawId,
-                drawOutlines: e.#n.getOutlines(r * a, i * a, a, this._INNER_MARGIN),
-                drawingOptions: e.#i,
-                mustBeCommitted: !t,
-              });
-            return (this._cleanup(!0), o);
-          }
-          return (n.drawLayer.remove(this._currentDrawId), this._cleanup(!0), null);
-        }
-        createDrawingOptions(e) {}
-        static deserializeDraw(e, t, n, r, i, a) {
-          d(`Not implemented`);
-        }
-        static async deserialize(e, t, n) {
-          let {
-              rawDims: { pageWidth: r, pageHeight: i, pageX: a, pageY: o },
-            } = t.viewport,
-            s = this.deserializeDraw(a, o, r, i, this._INNER_MARGIN, e),
-            c = await super.deserialize(e, t, n);
-          return (
-            c.createDrawingOptions(e),
-            c.#a({ drawOutlines: s }),
-            c.#c(),
-            c.onScaleChanging(),
-            c.rotate(),
-            c
-          );
-        }
-        serializeDraw(e) {
-          let [t, n] = this.pageTranslation,
-            [r, i] = this.pageDimensions;
-          return this.#e.serialize([t, n, r, i], e);
-        }
-        renderAnnotationElement(e) {
-          return (e.updateEdited({ rect: this.getPDFRect() }), null);
-        }
-        static canCreateNewEmptyEditor() {
-          return !1;
-        }
-      }),
-      (Ji = class {
+      (da = class {
         #e = new Float64Array(6);
-        #t;
+        #t = new Float64Array(2);
         #n;
         #r;
         #i;
         #a;
-        #o = ``;
-        #s = 0;
-        #c = new Yi();
-        #l;
+        #o;
+        #s = ``;
+        #c = 0;
+        #l = new fa();
         #u;
+        #d;
         constructor(e, t, n, r, i, a) {
-          ((this.#l = n), (this.#u = r), (this.#r = i), (this.#i = a), ([e, t] = this.#d(e, t)));
-          let o = (this.#t = [NaN, NaN, NaN, NaN, e, t]);
-          ((this.#a = [e, t]), (this.#n = [{ line: o, points: this.#a }]), this.#e.set(o, 0));
+          ((this.#u = n), (this.#d = r), (this.#i = i), (this.#a = a), ([e, t] = this.#f(e, t)));
+          let o = (this.#n = [NaN, NaN, NaN, NaN, e, t]);
+          ((this.#o = [e, t]),
+            (this.#r = [{ line: o, points: this.#o }]),
+            this.#e.set(o, 0),
+            this.#t.set([e, t], 0));
         }
         updateProperty(e, t) {
-          e === `stroke-width` && (this.#i = t);
+          e === `stroke-width` && (this.#a = t);
         }
-        #d(e, t) {
-          return $._normalizePoint(e, t, this.#l, this.#u, this.#r);
+        #f(e, t) {
+          return $._normalizePoint(e, t, this.#u, this.#d, this.#i);
         }
         isEmpty() {
-          return !this.#n?.length;
+          return !this.#r?.length;
         }
         isCancellable() {
-          return this.#a.length <= 10;
+          return this.#o.length <= 10;
         }
         add(e, t) {
-          [e, t] = this.#d(e, t);
+          return (this.#p(e, t) && this.toSVGPath(), { path: { d: this.#m() } });
+        }
+        addPoints(e) {
+          let t = !1;
+          for (let n = 0, r = e.length; n < r; n += 2)
+            this.#p(e[n], e[n + 1]) &&
+              ((t = !0), this.#o.length <= 6 && (this.toSVGPath(), (t = !1)));
+          return (t && this.toSVGPath(), { path: { d: this.#m() } });
+        }
+        #p(e, t) {
+          (([e, t] = this.#f(e, t)), this.#t.set([e, t], 0));
           let [n, r, i, a] = this.#e.subarray(2, 6),
             o = e - i,
             s = t - a;
-          return Math.hypot(this.#l * o, this.#u * s) <= 2
-            ? null
-            : (this.#a.push(e, t),
+          return Math.hypot(this.#u * o, this.#d * s) <= 2
+            ? !1
+            : (this.#o.push(e, t),
               isNaN(n)
-                ? (this.#e.set([i, a, e, t], 2),
-                  this.#t.push(NaN, NaN, NaN, NaN, e, t),
-                  { path: { d: this.toSVGPath() } })
-                : (isNaN(this.#e[0]) && this.#t.splice(6, 6),
+                ? (this.#e.set([i, a, e, t], 2), this.#n.push(NaN, NaN, NaN, NaN, e, t), !0)
+                : (isNaN(this.#e[0]) && this.#n.splice(6, 6),
                   this.#e.set([n, r, i, a, e, t], 0),
-                  this.#t.push(...$.createBezierPoints(n, r, i, a, e, t)),
-                  { path: { d: this.toSVGPath() } }));
+                  this.#n.push(...$.createBezierPoints(n, r, i, a, e, t)),
+                  !0));
         }
         end(e, t) {
-          return (
-            this.add(e, t) || (this.#a.length === 2 ? { path: { d: this.toSVGPath() } } : null)
-          );
+          return (e !== void 0 && this.#p(e, t)) || this.#o.length === 2
+            ? { path: { d: this.toSVGPath() } }
+            : { path: { d: this.#s } };
         }
         startNew(e, t, n, r, i) {
-          ((this.#l = n), (this.#u = r), (this.#r = i), ([e, t] = this.#d(e, t)));
-          let a = (this.#t = [NaN, NaN, NaN, NaN, e, t]);
-          this.#a = [e, t];
-          let o = this.#n.at(-1);
+          ((this.#u = n), (this.#d = r), (this.#i = i), ([e, t] = this.#f(e, t)));
+          let a = (this.#n = [NaN, NaN, NaN, NaN, e, t]);
+          ((this.#o = [e, t]), this.#t.set([e, t], 0));
+          let o = this.#r.at(-1);
           return (
             o && ((o.line = new Float32Array(o.line)), (o.points = new Float32Array(o.points))),
-            this.#n.push({ line: a, points: this.#a }),
+            this.#r.push({ line: a, points: this.#o }),
             this.#e.set(a, 0),
-            (this.#s = 0),
+            (this.#c = 0),
             this.toSVGPath(),
             null
           );
         }
         getLastElement() {
-          return this.#n.at(-1);
+          return this.#r.at(-1);
         }
         setLastElement(e) {
-          return this.#n
-            ? (this.#n.push(e),
-              (this.#t = e.line),
-              (this.#a = e.points),
-              (this.#s = 0),
+          return this.#r
+            ? (this.#r.push(e),
+              (this.#n = e.line),
+              (this.#o = e.points),
+              (this.#c = 0),
               { path: { d: this.toSVGPath() } })
-            : this.#c.setLastElement(e);
+            : this.#l.setLastElement(e);
         }
         removeLastElement() {
-          if (!this.#n) return this.#c.removeLastElement();
-          (this.#n.pop(), (this.#o = ``));
-          for (let e = 0, t = this.#n.length; e < t; e++) {
-            let { line: t, points: n } = this.#n[e];
-            ((this.#t = t), (this.#a = n), (this.#s = 0), this.toSVGPath());
+          if (!this.#r) return this.#l.removeLastElement();
+          (this.#r.pop(), (this.#s = ``));
+          for (let e = 0, t = this.#r.length; e < t; e++) {
+            let { line: t, points: n } = this.#r[e];
+            ((this.#n = t), (this.#o = n), (this.#c = 0), this.toSVGPath());
           }
-          return { path: { d: this.#o } };
+          return { path: { d: this.#s } };
+        }
+        #m() {
+          let e = $.svgRound(this.#t[0]),
+            t = $.svgRound(this.#t[1]);
+          if (this.#o.length === 2) {
+            let n = $.svgRound(this.#n[4]),
+              r = $.svgRound(this.#n[5]);
+            return `${this.#s} M ${n} ${r} L ${e} ${t}`;
+          }
+          return `${this.#s} L ${e} ${t}`;
         }
         toSVGPath() {
-          let e = $.svgRound(this.#t[4]),
-            t = $.svgRound(this.#t[5]);
-          if (this.#a.length === 2) return ((this.#o = `${this.#o} M ${e} ${t} Z`), this.#o);
-          if (this.#a.length <= 6) {
-            let n = this.#o.lastIndexOf(`M`);
-            ((this.#o = `${this.#o.slice(0, n)} M ${e} ${t}`), (this.#s = 6));
+          let e = $.svgRound(this.#n[4]),
+            t = $.svgRound(this.#n[5]);
+          if (this.#o.length === 2) return ((this.#s = `${this.#s} M ${e} ${t} Z`), this.#s);
+          if (this.#o.length <= 6) {
+            let n = this.#s.lastIndexOf(`M`);
+            ((this.#s = `${this.#s.slice(0, n)} M ${e} ${t}`), (this.#c = 6));
           }
-          if (this.#a.length === 4) {
-            let e = $.svgRound(this.#t[10]),
-              t = $.svgRound(this.#t[11]);
-            return ((this.#o = `${this.#o} L ${e} ${t}`), (this.#s = 12), this.#o);
+          if (this.#o.length === 4) {
+            let e = $.svgRound(this.#n[10]),
+              t = $.svgRound(this.#n[11]);
+            return ((this.#s = `${this.#s} L ${e} ${t}`), (this.#c = 12), this.#s);
           }
           let n = [];
-          this.#s === 0 && (n.push(`M ${e} ${t}`), (this.#s = 6));
-          for (let e = this.#s, t = this.#t.length; e < t; e += 6) {
-            let [t, r, i, a, o, s] = this.#t.slice(e, e + 6).map($.svgRound);
+          this.#c === 0 && (n.push(`M ${e} ${t}`), (this.#c = 6));
+          for (let e = this.#c, t = this.#n.length; e < t; e += 6) {
+            let [t, r, i, a, o, s] = this.#n.slice(e, e + 6).map($.svgRound);
             n.push(`C${t} ${r} ${i} ${a} ${o} ${s}`);
           }
-          return ((this.#o += n.join(` `)), (this.#s = this.#t.length), this.#o);
+          return ((this.#s += n.join(` `)), (this.#c = this.#n.length), this.#s);
         }
         getOutlines(e, t, n, r) {
-          let i = this.#n.at(-1);
+          let i = this.#r.at(-1);
           return (
             (i.line = new Float32Array(i.line)),
             (i.points = new Float32Array(i.points)),
-            this.#c.build(this.#n, e, t, n, this.#r, this.#i, r),
+            this.#l.build(this.#r, e, t, n, this.#i, this.#a, r),
             (this.#e = null),
-            (this.#t = null),
             (this.#n = null),
-            (this.#o = null),
-            this.#c
+            (this.#r = null),
+            (this.#s = null),
+            this.#l
           );
         }
         get defaultSVGProperties() {
@@ -18721,7 +18896,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           };
         }
       }),
-      (Yi = class extends $ {
+      (fa = class extends $ {
         #e;
         #t = 0;
         #n;
@@ -18752,20 +18927,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         toSVGPath() {
           let e = [];
-          for (let { line: t } of this.#r) {
-            if ((e.push(`M${$.svgRound(t[4])} ${$.svgRound(t[5])}`), t.length === 6)) {
-              e.push(`Z`);
-              continue;
-            }
-            if (t.length === 12 && isNaN(t[6])) {
+          for (let { line: t } of this.#r)
+            if ((e.push(`M${$.svgRound(t[4])} ${$.svgRound(t[5])}`), t.length === 6)) e.push(`Z`);
+            else if (t.length === 12 && isNaN(t[6]))
               e.push(`L${$.svgRound(t[10])} ${$.svgRound(t[11])}`);
-              continue;
-            }
-            for (let n = 6, r = t.length; n < r; n += 6) {
-              let [r, i, a, o, s, c] = t.subarray(n, n + 6).map($.svgRound);
-              e.push(`C${r} ${i} ${a} ${o} ${s} ${c}`);
-            }
-          }
+            else
+              for (let n = 6, r = t.length; n < r; n += 6) {
+                let [r, i, a, o, s, c] = t.subarray(n, n + 6).map($.svgRound);
+                e.push(`C${r} ${i} ${a} ${o} ${s} ${c}`);
+              }
           return e.join(``);
         }
         serialize([e, t, n, r], i) {
@@ -18825,7 +18995,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (g = t + (1 - s - l) * r),
                 (_ = e + (1 - c) * n),
                 (v = t + (1 - s) * r));
-              break;
           }
           for (let { line: e, points: t } of this.#r)
             (a.push(y(e, d, f, p, m, i ? Array(e.length) : null)),
@@ -18862,7 +19031,6 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (d = e / n + 1),
                 (f = -1 / r),
                 (p = -1 / n));
-              break;
           }
           if (!a) {
             a = [];
@@ -18920,24 +19088,24 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return [e + i, t + a, n - 2 * i, r - 2 * a];
         }
         #d() {
-          let e = (this.#e = lt.slice());
+          let e = (this.#e = yt.slice());
           for (let { line: t } of this.#r) {
             if (t.length <= 12) {
-              for (let n = 4, r = t.length; n < r; n += 6) H.pointBoundingBox(t[n], t[n + 1], e);
+              for (let n = 4, r = t.length; n < r; n += 6) U.pointBoundingBox(t[n], t[n + 1], e);
               continue;
             }
             let n = t[4],
               r = t[5];
             for (let i = 6, a = t.length; i < a; i += 6) {
               let [a, o, s, c, l, u] = t.subarray(i, i + 6);
-              (H.bezierBoundingBox(n, r, a, o, s, c, l, u, e), (n = l), (r = u));
+              (U.bezierBoundingBox(n, r, a, o, s, c, l, u, e), (n = l), (r = u));
             }
           }
           let [t, n] = this.#l();
-          ((e[0] = w(e[0] - t, 0, 1)),
-            (e[1] = w(e[1] - n, 0, 1)),
-            (e[2] = w(e[2] + t, 0, 1)),
-            (e[3] = w(e[3] + n, 0, 1)),
+          ((e[0] = E(e[0] - t, 0, 1)),
+            (e[1] = E(e[1] - n, 0, 1)),
+            (e[2] = E(e[2] + t, 0, 1)),
+            (e[3] = E(e[3] + n, 0, 1)),
             (e[2] -= e[0]),
             (e[3] -= e[1]));
         }
@@ -19106,13 +19274,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           };
         }
       }),
-      (Xi = class e extends Ki {
+      (pa = class e extends ea {
         constructor(e) {
           (super(),
             (this._viewParameters = e),
             super.updateProperties({
               fill: `none`,
-              stroke: W._defaultLineColor,
+              stroke: G._defaultLineColor,
               'stroke-opacity': 1,
               'stroke-width': 1,
               'stroke-linecap': `round`,
@@ -19130,7 +19298,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return (t.updateAll(this), t);
         }
       }),
-      (Zi = class e extends qi {
+      (ma = class e extends ta {
         static _type = `ink`;
         static _editorType = L.INK;
         static _defaultDrawingOptions = null;
@@ -19140,7 +19308,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.defaultL10nId = `pdfjs-editor-ink-editor`));
         }
         static initialize(e, t) {
-          (W.initialize(e, t), (this._defaultDrawingOptions = new Xi(t.viewParameters)));
+          (G.initialize(e, t), (this._defaultDrawingOptions = new pa(t.viewParameters)));
         }
         static getDefaultDrawingOptions(e) {
           let t = this._defaultDrawingOptions.clone();
@@ -19150,7 +19318,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return !0;
         }
         static get typesMap() {
-          return _(
+          return y(
             this,
             `typesMap`,
             new Map([
@@ -19160,15 +19328,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             ])
           );
         }
-        static createDrawerInstance(e, t, n, r, i) {
-          return new Ji(e, t, n, r, i, this._defaultDrawingOptions[`stroke-width`]);
+        static createDrawerInstance({ x: e, y: t, box: [, , n, r], rotation: i }) {
+          return new da(e, t, n, r, i, this._defaultDrawingOptions[`stroke-width`]);
         }
         static deserializeDraw(e, t, n, r, i, a) {
-          return Yi.deserialize(e, t, n, r, i, a);
+          return fa.deserialize(e, t, n, r, i, a);
         }
         static async deserialize(e, t, n) {
           let r = null;
-          if (e instanceof Oi) {
+          if (e instanceof Ui) {
             let {
               data: {
                 inkLists: t,
@@ -19212,7 +19380,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return ((i._initialData = r), e.comment && i.setCommentData(e), i);
         }
         get toolbarButtons() {
-          return ((this._colorPicker ||= new ti(this)), [[`colorPicker`, this._colorPicker]]);
+          return ((this._colorPicker ||= new gi(this)), [[`colorPicker`, this._colorPicker]]);
         }
         get colorType() {
           return R.INK_COLOR;
@@ -19224,19 +19392,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return R.INK_OPACITY;
         }
         updateParams(e, t) {
-          if (e === R.INK_COLOR_AND_OPACITY) {
-            this._updateColorAndOpacity(t.color, t.opacity);
-            return;
-          }
-          super.updateParams(e, t);
+          e === R.INK_COLOR_AND_OPACITY
+            ? this._updateColorAndOpacity(t.color, t.opacity)
+            : super.updateParams(e, t);
         }
         static updateDefaultParams(e, t) {
-          if (e === R.INK_COLOR_AND_OPACITY) {
-            (super.updateDefaultParams(R.INK_COLOR, t.color),
-              super.updateDefaultParams(R.INK_OPACITY, t.opacity));
-            return;
-          }
-          super.updateDefaultParams(e, t);
+          e === R.INK_COLOR_AND_OPACITY
+            ? (super.updateDefaultParams(R.INK_COLOR, t.color),
+              super.updateDefaultParams(R.INK_OPACITY, t.opacity))
+            : super.updateDefaultParams(e, t);
         }
         get color() {
           return this._drawingOptions.stroke;
@@ -19263,7 +19427,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         createDrawingOptions({ color: t, thickness: n, opacity: r }) {
           this._drawingOptions = e.getDefaultDrawingOptions({
-            stroke: H.makeHexColor(...t),
+            stroke: U.makeHexColor(...t),
             'stroke-width': n,
             'stroke-opacity': r,
           });
@@ -19276,7 +19440,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               _drawingOptions: { stroke: r, 'stroke-opacity': i, 'stroke-width': a },
             } = this,
             o = Object.assign(super.serialize(e), {
-              color: W._colorManager.convert(r),
+              color: G._colorManager.convert(r),
               opacity: i,
               thickness: a,
               paths: { lines: t, points: n },
@@ -19316,15 +19480,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (Qi = class extends Yi {
+      (ha = class extends fa {
         toSVGPath() {
           let e = super.toSVGPath();
           return (e.endsWith(`Z`) || (e += `Z`), e);
         }
       }),
-      ($i = 8),
-      (ea = 3),
-      (ta = class {
+      (ga = 8),
+      (_a = 3),
+      (va = class {
         static #e = { maxDim: 512, sigmaSFactor: 0.02, sigmaR: 25, kernelSize: 16 };
         static #t(e, t, n, r) {
           return ((n -= e), (r -= t), n === 0 ? (r > 0 ? 0 : 4) : n === 1 ? r + 6 : 2 - r);
@@ -19383,11 +19547,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   m = e;
                   break;
                 }
-              m
-                ? m.isHole
-                  ? (p.parent = f ? m.parent : s)
-                  : (p.parent = f ? s : m.parent)
-                : (p.parent = f ? s : 0);
+              p.parent = m ? (m.isHole ? (f ? m.parent : s) : f ? s : m.parent) : f ? s : 0;
               let h = this.#r(a, t, e, n, l, u, 0);
               if (h === -1) {
                 ((a[r] = -o), a[r] !== 1 && (s = Math.abs(a[r])));
@@ -19413,7 +19573,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 ) {
                   a[r] !== 1 && (s = Math.abs(a[r]));
                   break;
-                } else ((l = b), (u = x), (b = c), (x = f));
+                }
+                ((l = b), (u = x), (b = c), (x = f));
               }
             }
           }
@@ -19585,7 +19746,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (l.fillStyle = `white`),
             l.fillRect(0, 0, y, b),
             (l.fillStyle = `black`),
-            l.fillText(e, (y * (v - 1)) / 2, (b * (3 - v)) / 2));
+            l.fillText(e, (y * 0.5) / 2, (b * 1.5) / 2));
           let x = this.#u(l.getImageData(0, 0, y, b).data),
             S = this.#l(x),
             C = this.#d(S),
@@ -19665,7 +19826,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             }
           }
           if (d.length === 0) return null;
-          let g = o ? new Qi() : new Yi();
+          let g = o ? new ha() : new fa();
           return (
             g.build(d, t, n, 1, r, o ? 0 : u, i),
             { outline: g, newCurves: h, areContours: o, thickness: u, width: c, height: l }
@@ -19692,7 +19853,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           c =
             a >= -128 && o <= 127 ? Int8Array : a >= -32768 && o <= 32767 ? Int16Array : Int32Array;
           let l = e.length,
-            u = $i + ea * l,
+            u = ga + _a * l,
             d = new Uint32Array(u),
             f = 0;
           ((d[f++] = u * Uint32Array.BYTES_PER_ELEMENT + (s - 2 * l) * c.BYTES_PER_ELEMENT),
@@ -19743,7 +19904,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               p = s[6],
               m = s[7],
               h = [],
-              g = ($i + ea * p) * Uint32Array.BYTES_PER_ELEMENT,
+              g = (ga + _a * p) * Uint32Array.BYTES_PER_ELEMENT,
               _;
             switch (m) {
               case Int8Array.BYTES_PER_ELEMENT:
@@ -19754,41 +19915,40 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 break;
               case Int32Array.BYTES_PER_ELEMENT:
                 _ = new Int32Array(a.buffer, g);
-                break;
             }
             o = 0;
             for (let e = 0; e < p; e++) {
-              let t = s[ea * e + $i],
+              let t = s[_a * e + ga],
                 n = new Float32Array(t + 2);
               h.push(n);
-              for (let t = 0; t < ea - 1; t++) n[t] = s[ea * e + $i + t + 1];
+              for (let t = 0; t < 2; t++) n[t] = s[_a * e + ga + t + 1];
               for (let e = 0; e < t; e++) n[e + 2] = n[e] + _[o++];
             }
             return { areContours: d, thickness: f, outlines: h, width: l, height: u };
           } catch (e) {
-            return (u(`decompressSignature: ${e}`), null);
+            return (f(`decompressSignature: ${e}`), null);
           }
         }
       }),
-      (na = class e extends Ki {
+      (ya = class e extends ea {
         constructor() {
-          (super(), super.updateProperties({ fill: W._defaultLineColor, 'stroke-width': 0 }));
+          (super(), super.updateProperties({ fill: G._defaultLineColor, 'stroke-width': 0 }));
         }
         clone() {
           let t = new e();
           return (t.updateAll(this), t);
         }
       }),
-      (ra = class e extends Xi {
+      (ba = class e extends pa {
         constructor(e) {
-          (super(e), super.updateProperties({ stroke: W._defaultLineColor, 'stroke-width': 1 }));
+          (super(e), super.updateProperties({ stroke: G._defaultLineColor, 'stroke-width': 1 }));
         }
         clone() {
           let t = new e(this._viewParameters);
           return (t.updateAll(this), t);
         }
       }),
-      (ia = class e extends qi {
+      (xa = class e extends ta {
         #e = !1;
         #t = null;
         #n = null;
@@ -19804,9 +19964,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.defaultL10nId = `pdfjs-editor-signature-editor1`));
         }
         static initialize(e, t) {
-          (W.initialize(e, t),
-            (this._defaultDrawingOptions = new na()),
-            (this._defaultDrawnSignatureOptions = new ra(t.viewParameters)));
+          (G.initialize(e, t),
+            (this._defaultDrawingOptions = new ya()),
+            (this._defaultDrawnSignatureOptions = new ba(t.viewParameters)));
         }
         static getDefaultDrawingOptions(e) {
           let t = this._defaultDrawingOptions.clone();
@@ -19816,7 +19976,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return !1;
         }
         static get typesMap() {
-          return _(this, `typesMap`, new Map());
+          return y(this, `typesMap`, new Map());
         }
         static get isDrawer() {
           return !1;
@@ -19843,7 +20003,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (r && ((this._isCopy = !1), (t = this.x), (n = this.y)),
             super.render(),
             this._drawId === null)
-          )
+          ) {
             if (this.#n) {
               let {
                   lines: t,
@@ -19857,7 +20017,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   rawDims: { pageWidth: s, pageHeight: c },
                   rotation: l,
                 } = this.parent.viewport,
-                u = ta.processDrawnLines({
+                u = va.processDrawnLines({
                   lines: t,
                   pageWidth: s,
                   pageHeight: c,
@@ -19871,7 +20031,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               (this.div.setAttribute(`data-l10n-args`, JSON.stringify({ description: `` })),
                 (this.div.hidden = !0),
                 this._uiManager.getSignature(this));
-          else
+          } else
             this.div.setAttribute(`data-l10n-args`, JSON.stringify({ description: this.#t || `` }));
           return (r && ((this._isCopy = !0), this._moveAfterPaste(t, n)), this.div);
         }
@@ -19897,7 +20057,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             a = Math.max(r, i);
           return {
             areContours: t,
-            outline: ta.processDrawnLines({
+            outline: va.processDrawnLines({
               lines: { curves: e.map((e) => ({ points: e })), thickness: n, width: r, height: i },
               pageWidth: a,
               pageHeight: a,
@@ -19916,7 +20076,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         addSignature(t, n, r, i) {
           let { x: a, y: o } = this,
             { outline: s } = (this.#n = t);
-          ((this.#e = s instanceof Qi), (this.description = r));
+          ((this.#e = s instanceof ha), (this.description = r));
           let c;
           (this.#e
             ? (c = e.getDefaultDrawingOptions())
@@ -19949,21 +20109,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             rawDims: { pageWidth: n, pageHeight: r },
             rotation: i,
           } = this.parent.viewport;
-          return ta.process(t, n, r, i, e._INNER_MARGIN);
+          return va.process(t, n, r, i, e._INNER_MARGIN);
         }
         getFromText(t, n) {
           let {
             rawDims: { pageWidth: r, pageHeight: i },
             rotation: a,
           } = this.parent.viewport;
-          return ta.extractContoursFromText(t, n, r, i, a, e._INNER_MARGIN);
+          return va.extractContoursFromText(t, n, r, i, a, e._INNER_MARGIN);
         }
         getDrawnSignature(t) {
           let {
             rawDims: { pageWidth: n, pageHeight: r },
             rotation: i,
           } = this.parent.viewport;
-          return ta.processDrawnLines({
+          return va.processDrawnLines({
             lines: t,
             pageWidth: n,
             pageHeight: r,
@@ -20002,8 +20162,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         static deserializeDraw(e, t, n, r, i, a) {
           return a.areContours
-            ? Qi.deserialize(e, t, n, r, i, a)
-            : Yi.deserialize(e, t, n, r, i, a);
+            ? ha.deserialize(e, t, n, r, i, a)
+            : fa.deserialize(e, t, n, r, i, a);
         }
         static async deserialize(e, t, n) {
           let r = await super.deserialize(e, t, n);
@@ -20015,7 +20175,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (aa = class extends W {
+      (Sa = class extends G {
         #e = null;
         #t = null;
         #n = null;
@@ -20036,10 +20196,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.defaultL10nId = `pdfjs-editor-stamp-editor`));
         }
         static initialize(e, t) {
-          W.initialize(e, t);
+          G.initialize(e, t);
         }
         static isHandlingMimeForPasting(e) {
-          return Ut.includes(e);
+          return en.has(e);
         }
         static paste(e, t) {
           t.pasteEditor({ mode: L.STAMP }, { bitmapFile: e.getAsFile() });
@@ -20055,14 +20215,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return { hasAltText: t.get(!0) ?? 0, hasNoAltText: t.get(!1) ?? 0 };
         }
         #d(e, t = !1) {
-          if (!e) {
-            this.remove();
-            return;
-          }
-          ((this.#e = e.bitmap),
-            t || ((this.#t = e.id), (this.#l = e.isSvg)),
-            e.file && (this.#a = e.file.name),
-            this.#m());
+          e
+            ? ((this.#e = e.bitmap),
+              t || ((this.#t = e.id), (this.#l = e.isSvg)),
+              e.file && (this.#a = e.file.name),
+              this.#m())
+            : this.remove();
         }
         #f() {
           if (((this.#n = null), this._uiManager.enableWaiting(!1), this.#o)) {
@@ -20070,26 +20228,26 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               this._uiManager.useNewAltTextWhenAddingImage &&
               this._uiManager.useNewAltTextFlow &&
               this.#e
-            ) {
+            )
               this.addEditToolbar().then(() => {
                 (this._editToolbar.hide(), this._uiManager.editAltText(this, !0));
               });
-              return;
+            else {
+              if (
+                !this._uiManager.useNewAltTextWhenAddingImage &&
+                this._uiManager.useNewAltTextFlow &&
+                this.#e
+              ) {
+                this._reportTelemetry({
+                  action: `pdfjs.image.image_added`,
+                  data: { alt_text_modal: !1, alt_text_type: `empty` },
+                });
+                try {
+                  this.mlGuessAltText();
+                } catch {}
+              }
+              this.div.focus();
             }
-            if (
-              !this._uiManager.useNewAltTextWhenAddingImage &&
-              this._uiManager.useNewAltTextFlow &&
-              this.#e
-            ) {
-              this._reportTelemetry({
-                action: `pdfjs.image.image_added`,
-                data: { alt_text_modal: !1, alt_text_type: `empty` },
-              });
-              try {
-                this.mlGuessAltText();
-              } catch {}
-            }
-            this.div.focus();
           }
         }
         async mlGuessAltText(e = null, t = !0) {
@@ -20143,7 +20301,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             return;
           }
           let e = document.createElement(`input`);
-          ((e.type = `file`), (e.accept = Ut.join(`,`)));
+          ((e.type = `file`), (e.accept = en.keys().join(`,`)));
           let t = this._uiManager._signal;
           ((this.#n = new Promise((n) => {
             (e.addEventListener(
@@ -20183,14 +20341,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             super.remove());
         }
         rebuild() {
-          if (!this.parent) {
-            this.#t && this.#p();
-            return;
-          }
-          (super.rebuild(),
-            this.div !== null &&
-              (this.#t && this.#o === null && this.#p(),
-              this.isAttachedToDOM || this.parent.add(this)));
+          this.parent
+            ? (super.rebuild(),
+              this.div !== null &&
+                (this.#t && this.#o === null && this.#p(),
+                this.isAttachedToDOM || this.parent.add(this)))
+            : this.#t && this.#p();
         }
         onceAdded(e) {
           ((this._isDraggable = !0), e && this.div.focus());
@@ -20262,12 +20418,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (this.#u ||= (this.parent.addUndoableEditor(this), !0)),
             this._reportTelemetry({ action: `inserted_image` }),
             this.#a && this.div.setAttribute(`aria-description`, this.#a),
-            this.annotationElementId || this._uiManager.a11yAlert(W._l10nAlert.stamp));
+            this.annotationElementId || this._uiManager.a11yAlert(G._l10nAlert.stamp));
         }
         copyCanvas(e, t, n = !1) {
           e ||= 224;
           let { width: r, height: i } = this.#e,
-            a = new Ht(),
+            a = new $t(),
             o = this.#e,
             s = r,
             c = i,
@@ -20286,7 +20442,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             let d = `white`,
               f = `#cfcfd8`;
             this._uiManager.hcmFilter === `none`
-              ? Wt.isDarkMode && ((d = `#8f8f9d`), (f = `#42414d`))
+              ? tn.isDarkMode && ((d = `#8f8f9d`), (f = `#42414d`))
               : (f = `black`);
             let p = 15 * a.sx,
               m = 15 * a.sy,
@@ -20333,7 +20489,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         #g() {
           let [e, t] = this.parentDimensions,
             { width: n, height: r } = this,
-            i = new Ht(),
+            i = new $t(),
             a = Math.ceil(n * e * i.sx),
             o = Math.ceil(r * t * i.sy),
             s = this.#o;
@@ -20359,8 +20515,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
           if (this.#l) {
             let [e, t] = this.pageDimensions,
-              n = Math.round(this.width * e * Rt.PDF_TO_CSS_UNITS),
-              r = Math.round(this.height * t * Rt.PDF_TO_CSS_UNITS),
+              n = Math.round(this.width * e * Yt.PDF_TO_CSS_UNITS),
+              r = Math.round(this.height * t * Yt.PDF_TO_CSS_UNITS),
               i = new OffscreenCanvas(n, r);
             return (
               i
@@ -20374,7 +20530,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         static async deserialize(e, t, n) {
           let r = null,
             i = !1;
-          if (e instanceof Ni) {
+          if (e instanceof Ji) {
             let {
                 data: {
                   rect: a,
@@ -20400,7 +20556,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 ({ id: _, bitmap: v } = n.imageManager.getFromCanvas(m.id, g)),
                 g.remove())
               : ((i = !0), (e._hasNoCanvas = !0));
-            let y = (await t._structTree.getAriaAttributes(`${pt}${s}`))?.get(`aria-label`) || ``;
+            let y = (await t._structTree.getAriaAttributes(`${St}${s}`))?.get(`aria-label`) || ``;
             r = e = {
               annotationType: L.STAMP,
               bitmapId: _,
@@ -20497,7 +20653,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             : (e.updateEdited({ rect: this.getPDFRect(), popup: this.comment }), null);
         }
       }),
-      (oa = class e {
+      (Ca = class e {
         #e;
         #t = !1;
         #n = null;
@@ -20515,7 +20671,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         #m = -1;
         #h;
         static _initialized = !1;
-        static #g = new Map([Ri, Zi, aa, Gi, ia].map((e) => [e._editorType, e]));
+        static #g = new Map([$i, ma, Sa, ua, xa].map((e) => [e._editorType, e]));
         constructor({
           uiManager: t,
           pageIndex: n,
@@ -20656,7 +20812,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 let a = document.elementsFromPoint(t, n);
                 if ((i.toggle(`getElements`, !1), !this.div.contains(a[0]))) return;
                 let o,
-                  s = RegExp(`^${mt}[0-9]+$`);
+                  s = RegExp(`^${Ct}[0-9]+$`);
                 for (let e of a)
                   if (s.test(e.id)) {
                     o = e.id;
@@ -20664,7 +20820,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                   }
                 if (!o) return;
                 let c = this.#a.get(o);
-                c?.annotationElementId === null && (A(e), c.dblclick(e));
+                c?.annotationElementId === null && (j(e), c.dblclick(e));
               },
               { signal: e, capture: !0 }
             );
@@ -20674,17 +20830,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           if (t) {
             let e = new Map(),
               r = new Map();
-            for (let t of this.#_) {
-              if ((t.disableEditing(), !t.annotationElementId)) {
-                n.push(t);
-                continue;
-              }
-              if (t.serialize() !== null) {
-                e.set(t.annotationElementId, t);
-                continue;
-              } else r.set(t.annotationElementId, t);
-              (this.getEditableAnnotation(t.annotationElementId)?.show(), t.remove());
-            }
+            for (let t of this.#_)
+              (t.disableEditing(),
+                t.annotationElementId
+                  ? t.serialize() === null
+                    ? (r.set(t.annotationElementId, t),
+                      this.getEditableAnnotation(t.annotationElementId)?.show(),
+                      t.remove())
+                    : e.set(t.annotationElementId, t)
+                  : n.push(t));
             for (let n of t.getEditableAnnotations()) {
               let { id: t } = n.data;
               if (this.#h.isDeletedAnnotationElement(t)) {
@@ -20692,15 +20846,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 continue;
               }
               let i = r.get(t);
-              if (i) {
-                (i.resetAnnotationElement(n), i.show(!1), n.show());
-                continue;
-              }
-              ((i = e.get(t)),
-                i &&
-                  (this.#h.addChangedExistingAnnotation(i),
-                  i.renderAnnotationElement(n) && i.show(!1)),
-                n.show());
+              i
+                ? (i.resetAnnotationElement(n), i.show(!1), n.show())
+                : ((i = e.get(t)),
+                  i &&
+                    (this.#h.addChangedExistingAnnotation(i),
+                    i.renderAnnotationElement(n) && i.show(!1)),
+                  n.show());
             }
           }
           (this.#S(), this.isEmpty && (this.div.hidden = !0));
@@ -20742,23 +20894,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               t.classList.contains(`textLayerImagePlaceholder`)) &&
               this.#d.div.contains(t))
           ) {
-            let { isMac: t } = V.platform;
+            let { isMac: t } = H.platform;
             if (e.button !== 0 || (e.ctrlKey && t)) return;
             (this.#h.showAllEditors(`highlight`, !0, !0),
-              this.#d.div.classList.add(`free`),
-              this.toggleDrawing(),
-              Gi.startHighlighting(this, this.#h.direction === `ltr`, {
-                target: this.#d.div,
-                x: e.x,
-                y: e.y,
-              }),
-              this.#d.div.addEventListener(
-                `pointerup`,
-                () => {
-                  (this.#d.div.classList.remove(`free`), this.toggleDrawing(!0));
-                },
-                { once: !0, signal: this.#h._signal }
-              ),
+              ua.startDrawing(this, this.#h, this.#h.direction === `ltr`, e),
               e.preventDefault());
           }
         }
@@ -20792,7 +20931,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             (e.parent &&
               e.annotationElementId &&
               (this.#h.addDeletedAnnotationElement(e),
-              W.deleteAnnotationElement(e),
+              G.deleteAnnotationElement(e),
               (e.annotationElementId = null)),
             this.attach(e),
             e.parent?.detach(e),
@@ -20923,7 +21062,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.#h.unselect(e);
         }
         pointerup(e) {
-          let { isMac: t } = V.platform;
+          let { isMac: t } = H.platform;
           if (
             e.button !== 0 ||
             (e.ctrlKey && t) ||
@@ -20937,18 +21076,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             return;
           }
           let n = this.#h.getMode();
-          if (n === L.STAMP || n === L.POPUP || n === L.SIGNATURE) {
-            this.#h.unselectAll();
-            return;
-          }
-          this.createAndAddNewEditor(e, !1);
+          n === L.STAMP || n === L.POPUP || n === L.SIGNATURE
+            ? this.#h.unselectAll()
+            : this.createAndAddNewEditor(e, !1);
         }
         pointerdown(e) {
           if ((this.#h.getMode() === L.HIGHLIGHT && this.enableTextSelection(), this.#o)) {
             this.#o = !1;
             return;
           }
-          let { isMac: t } = V.platform;
+          let { isMac: t } = H.platform;
           if (e.button !== 0 || (e.ctrlKey && t) || e.target !== this.div) return;
           if (((this.#o = !0), this.#y?.isDrawer)) {
             this.startDrawingSession(e);
@@ -20977,12 +21114,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           if (e) {
             let { activeElement: e } = document;
             this.div.contains(e) && (this.#u = e);
-            return;
-          }
-          this.#u &&
-            setTimeout(() => {
-              (this.#u?.focus(), (this.#u = null));
-            }, 0);
+          } else
+            this.#u &&
+              setTimeout(() => {
+                (this.#u?.focus(), (this.#u = null));
+              }, 0);
         }
         endDrawingSession(e = !1) {
           return this.#l
@@ -21019,7 +21155,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           for (let e of this.#a.values()) e.isEmpty() && e.remove();
         }
         async render({ viewport: e }) {
-          ((this.viewport = e), ae(this.div, e));
+          ((this.viewport = e), se(this.div, e));
           for (let e of this.#h.getEditors(this.pageIndex)) (this.add(e), e.rebuild());
           (await this.#h.findClonesForPage(this),
             (this.div.hidden = this.isEmpty),
@@ -21029,7 +21165,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           (this.#h.commitOrRemove(), this.#S());
           let t = this.viewport.rotation,
             n = e.rotation;
-          if (((this.viewport = e), ae(this.div, { rotation: n }), t !== n))
+          if (((this.viewport = e), se(this.div, { rotation: n }), t !== n))
             for (let e of this.#a.values()) e.rotate(n);
         }
         get pageDimensions() {
@@ -21040,7 +21176,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return this.#h.viewParameters.realScale;
         }
       }),
-      (sa = class e {
+      (wa = class e {
         #e = null;
         #t = new Map();
         #n = null;
@@ -21069,7 +21205,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               e.#f.add(i),
               (this.#n = i),
               (this.#a = new MutationObserver((t) => {
-                if (!(!this.#e || !this.#n?.isConnected || !e.#h())) {
+                if (this.#e && this.#n?.isConnected && e.#h()) {
                   for (let { addedNodes: n } of t)
                     for (let t of n)
                       if (
@@ -21112,11 +21248,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
         }
         setParent(t) {
-          if (!this.#e) {
-            ((this.#e = t), this.#n?.isConnected && e.#h() && e.#_());
-            return;
-          }
-          if (this.#e !== t) {
+          if (!this.#e) ((this.#e = t), this.#n?.isConnected && e.#h() && e.#_());
+          else if (this.#e !== t) {
             if (this.#t.size > 0) for (let e of this.#t.values()) (e.remove(), t.append(e));
             this.#e = t;
           }
@@ -21134,7 +21267,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           return !!e && !e.isCollapsed;
         }
         static #g() {
-          return [...this.#f].filter((e) => e.isConnected).sort(rt);
+          return this.#f
+            .keys()
+            .filter((e) => e.isConnected)
+            .toArray()
+            .sort(pt);
         }
         static #_() {
           let t = document.getSelection();
@@ -21150,16 +21287,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             let n = t.getRangeAt(e);
             if (n.collapsed) continue;
             let { startContainer: a, startOffset: o, endContainer: s, endOffset: c } = n,
-              l = it(a),
-              u = it(s),
+              l = mt(a),
+              u = mt(s),
               d = l === null,
               f = u === null;
             if (this.#d && d !== f) return;
             if (t.rangeCount === 1) {
               let { anchorNode: e, anchorOffset: n, focusNode: r, focusOffset: i } = t,
-                d = it(e),
-                f = it(r),
-                p = at(e, n, r, i);
+                d = mt(e),
+                f = mt(r),
+                p = ht(e, n, r, i);
               d &&
                 f &&
                 p !== null &&
@@ -21181,36 +21318,34 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 ((s = e),
                   (c = e.nodeType === Node.TEXT_NODE ? e.textContent.length : e.childNodes.length));
               } else if (s.classList.contains(`textLayer`) && s.childNodes.length === c) {
-                let e = ot(s, c, u);
+                let e = gt(s, c, u);
                 if (!e) continue;
                 ((s = e.container), (c = e.offset));
               }
             }
             if (a.nodeType === Node.ELEMENT_NODE) {
-              let e = ot(a, o, l);
+              let e = gt(a, o, l);
               if (!e) continue;
               ((a = e.container), (o = e.offset));
             }
-            if (l === u && !m && p.includes(l)) {
-              i.push([n, l]);
-              continue;
-            }
-            for (let e of p) {
-              let t = e.firstChild;
-              if (!t) continue;
-              let n = document.createRange();
-              if ((e === l ? n.setStart(a, o) : n.setStartBefore(t), e === u)) n.setEnd(s, c);
-              else {
-                let t = e.lastChild;
+            if (l === u && !m && p.includes(l)) i.push([n, l]);
+            else
+              for (let e of p) {
+                let t = e.firstChild;
                 if (!t) continue;
-                if (t.nodeType === Node.ELEMENT_NODE && t.classList.contains(`endOfContent`)) {
-                  let e = t.previousSibling;
-                  if (!e) continue;
-                  n.setEndAfter(e);
-                } else n.setEndAfter(t);
+                let n = document.createRange();
+                if ((e === l ? n.setStart(a, o) : n.setStartBefore(t), e === u)) n.setEnd(s, c);
+                else {
+                  let t = e.lastChild;
+                  if (!t) continue;
+                  if (t.nodeType === Node.ELEMENT_NODE && t.classList.contains(`endOfContent`)) {
+                    let e = t.previousSibling;
+                    if (!e) continue;
+                    n.setEndAfter(e);
+                  } else n.setEndAfter(t);
+                }
+                n.collapsed || i.push([n, e]);
               }
-              n.collapsed || i.push([n, e]);
-            }
           }
           let a = new Set(i.map((e) => e[1]));
           for (let e of this.#f) a.has(e) || this.#m(e);
@@ -21230,10 +21365,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             }
             let o = [];
             for (let { x: e, y: n, width: r, height: i } of t.getClientRects())
-              r === 0 ||
-                i === 0 ||
+              r !== 0 &&
+                i !== 0 &&
                 (({ x: e, y: n, width: r, height: i } = a(e, n, r, i)),
-                !(r === 1 && i === 1) && o.push(`M${e} ${n} h${r} v${i} h-${r} Z`));
+                (r !== 1 || i !== 1) && o.push(`M${e} ${n} h${r} v${i} h-${r} Z`));
             if (o.length === 0) continue;
             let s = i.drawLayer,
               c = i.selectionDiv,
@@ -21259,12 +21394,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 (i.path = l),
                 (i.selectionDiv = c));
             }
-            (!c.parentNode && s.#e && (s.#e.append(c), this.#u.add(c)),
+            (s.#e && c.parentNode !== s.#e && (s.#e.append(c), this.#u.add(c)),
               l.setAttribute(`d`, o.join(` `)));
           }
         }
         static get _svgFactory() {
-          return _(this, `_svgFactory`, new ii());
+          return y(this, `_svgFactory`, new yi());
         }
         static #v(e, [t, n, r, i]) {
           let { style: a } = e;
@@ -21393,7 +21528,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               null)));
         }
       }),
-      (ca = class e {
+      (Ta = class e {
         #e = [];
         #t = new Map();
         #n = null;
@@ -21449,7 +21584,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
               0,
               0,
             ],
-            l = H.inverseTransform(c),
+            l = U.inverseTransform(c),
             u = document.createElement(`canvas`);
           return (
             (u.className = `textLayerImagePlaceholder`),
@@ -21458,10 +21593,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             Object.assign(u.style, {
               opacity: 0,
               position: `absolute`,
-              left: st(e),
-              top: st(t),
-              width: st(o / this.#i),
-              height: st(s / this.#a),
+              left: _t(e),
+              top: _t(t),
+              width: _t(o / this.#i),
+              height: _t(s / this.#a),
               transformOrigin: `0% 0%`,
               transform: `matrix(${c.join(`,`)})`,
             }),
@@ -21470,77 +21605,78 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           );
         }
       }),
-      (globalThis._pdfjsTestingUtils = { HighlightOutliner: Vi }),
+      (globalThis._pdfjsTestingUtils = { HighlightOutliner: ia }),
       (globalThis.pdfjsLib = {
-        AbortException: kt,
-        AnnotationEditorLayer: oa,
+        AbortException: Lt,
+        AnnotationEditorLayer: Ca,
         AnnotationEditorParamsType: R,
         AnnotationEditorType: L,
-        AnnotationEditorUIManager: tn,
-        AnnotationLayer: Ii,
-        AnnotationMode: ft,
+        AnnotationEditorUIManager: pn,
+        AnnotationLayer: Zi,
+        AnnotationMode: xt,
         AnnotationType: B,
-        applyOpacity: oe,
-        build: $r,
-        ColorPicker: ei,
-        createValidAbsoluteUrl: m,
-        CSSConstants: Gt,
-        DOMSVGFactory: ii,
-        DrawLayer: sa,
-        FeatureTest: V,
-        fetchData: T,
-        findContrastColor: de,
-        getDocument: et,
-        getFilenameFromUrl: ee,
+        applyOpacity: ce,
+        build: mi,
+        ColorPicker: hi,
+        createValidAbsoluteUrl: g,
+        CSSConstants: nn,
+        DOMSVGFactory: yi,
+        DrawLayer: wa,
+        FeatureTest: H,
+        fetchData: D,
+        findContrastColor: pe,
+        getDocument: ct,
+        getFilenameFromUrl: k,
         getPdfFilenameFromUrl: te,
-        getRGB: re,
-        getRGBA: ne,
-        getUuid: S,
-        GlobalWorkerOptions: jr,
-        ImageKind: gt,
-        InvalidPDFException: Et,
-        isDataScheme: E,
-        isPdfFile: D,
-        isValidExplicitDest: Fn,
-        makeArr: Mt,
-        makeMap: Nt,
-        makeObj: Pt,
-        MathClamp: w,
-        noContextMenu: k,
-        normalizeUnicode: x,
-        OPS: yt,
-        OutputScale: Ht,
-        PasswordException: wt,
-        PasswordResponses: xt,
-        PDFDataRangeTransport: Gr,
-        PDFDateString: Vt,
-        PDFWorker: Jr,
-        PermissionFlag: ht,
-        PixelsPerInch: Rt,
-        RenderingCancelledException: zt,
-        renderRichText: fe,
-        ResponseException: Dt,
-        setLayerDimensions: ae,
-        shadow: _,
-        SignatureExtractor: ta,
-        stopEvent: A,
-        SupportedImageMimeTypes: Ut,
-        TextLayer: Hr,
-        TextLayerImages: ca,
-        TouchManager: an,
-        updateUrlHash: h,
-        Util: H,
-        VerbosityLevel: vt,
-        version: Qr,
-        XfaLayer: Lt,
+        getRGB: ie,
+        getRGBA: re,
+        getUuid: w,
+        GlobalWorkerOptions: Kr,
+        ImageKind: Tt,
+        InvalidPDFException: Pt,
+        isDataScheme: O,
+        isPdfFile: ee,
+        isValidExplicitDest: Xn,
+        makeArr: Bt,
+        makeMap: Vt,
+        makeObj: Ht,
+        makeSet: Ut,
+        MathClamp: E,
+        noContextMenu: A,
+        normalizeUnicode: C,
+        OPS: V,
+        OutputScale: $t,
+        PasswordException: Mt,
+        PasswordResponses: kt,
+        PDFDataRangeTransport: oi,
+        PDFDateString: Qt,
+        PDFWorker: li,
+        PermissionFlag: wt,
+        PixelsPerInch: Yt,
+        RenderingCancelledException: Xt,
+        renderRichText: me,
+        ResponseException: Ft,
+        setLayerDimensions: se,
+        shadow: y,
+        SignatureExtractor: va,
+        stopEvent: j,
+        SupportedImageMimeTypes: en,
+        TextLayer: ri,
+        TextLayerImages: Ta,
+        TouchManager: _n,
+        updateUrlHash: _,
+        Util: U,
+        VerbosityLevel: Dt,
+        version: pi,
+        XfaLayer: Jt,
       }));
   }),
-  ua,
-  da = e(() => {
-    ua = `/assets/site/assets/pdf.worker-CPbhI6B3.mjs`;
+  Da,
+  Oa = e(() => {
+    Da = `/assets/site/assets/pdf.worker-PhvoOpM7.mjs`;
   }),
-  fa = t(() => {
-    (la(), da(), (jr.workerSrc = ua));
+  ka = t(() => {
+    (Ea(), Oa(), (Kr.workerSrc = Da));
     var e = {
         '/files/reddy_cv.pdf': `/files/reddy_cv.pdf`,
         '/files/reddy_resume.pdf': `/files/reddy_resume.pdf`,
@@ -21550,7 +21686,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       let r = ++t;
       (e.replaceChildren(), e.classList.add(`pdf-loading`));
       try {
-        let i = await et({ url: n }).promise;
+        let i = await ct({ url: n }).promise;
         if (r !== t) return;
         e.classList.remove(`pdf-loading`);
         for (let n = 1; n <= i.numPages; n++) {
@@ -21625,4 +21761,4 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }));
     });
   });
-export default fa();
+export default ka();

@@ -1,3 +1,4 @@
+% !TEX program = xelatex
 \documentclass[10pt, letterpaper]{article}
 % ----------------------------------------------------------------------
 % LaTeX Preamble
@@ -5,6 +6,79 @@
 
 % --- Required Packages ---
 \usepackage{reddy_resume}   % Custom resume style package
+
+% ----------------------------------------------------------------------
+% V2 TEST ONLY -- margins widened to the 0.5-1in ATS-recommended range
+% (shared .sty default is 0.85cm top/bottom, 1.2/1.3cm left/right --
+% under the 0.5in minimum). Font size compensates so nothing is cut.
+% ----------------------------------------------------------------------
+\geometry{top=0.5in, bottom=0.5in, left=0.5in, right=0.5in}
+
+% ----------------------------------------------------------------------
+% LOCAL OVERRIDES (scoped to this file only, not the shared .sty)
+% ----------------------------------------------------------------------
+% 1. Summary: drop full justification (ATS/readability guidance favors
+%    left-align; justified text can lose inter-word spacing in some
+%    parsers). Falls back to the document's default \raggedright.
+\renewenvironment{summary}{%
+    \par\noindent\begingroup\ignorespaces
+}{%
+    \par\endgroup
+}
+
+% 2. Single-column layout: replace paracol-based two-column entries
+%    (title/date, org/location as separate column blocks) with single
+%    lines using \hfill, so ATS text extraction reads each line in
+%    natural left-to-right order instead of column-by-column. Job
+%    title stays bold (added earlier) for the same readability reason.
+\renewenvironment{leadershipentry}[2]{%
+    \vspace{\entrySpacing}
+    \needspace{4\baselineskip}%
+    \noindent\textbf{#1}\hfill #2\par
+}{}
+
+\renewenvironment{positionentry}[2]{%
+    \vspace{\highlightSpacing}
+    \noindent\textbf{\textit{#1}}\hfill \textbf{#2}\par
+    \vspace{\highlightSpacing}
+    \begin{highlightsforbulletentries}
+}{%
+    \end{highlightsforbulletentries}
+}
+
+\renewenvironment{educationentry}[4]{%
+    \vspace{\entrySpacing}
+    \needspace{7\baselineskip}%
+    \noindent\textbf{#1}\hfill #4\par
+    \vspace{\highlightSpacing}
+    \noindent\textbf{\textit{#3}}\hfill \textbf{#2}\par
+    \vspace{\highlightSpacing}
+    \noindent\ignorespaces
+}{%
+    \par
+}
+
+% 3. Lato: swap the default Latin Modern (serif) for Lato (sans-serif),
+%    per ATS font-check guidance recommending Open Sans/Roboto/Lato.
+%    Requires compiling with xelatex or lualatex, NOT pdflatex --
+%    fontspec errors out under pdftex.
+\usepackage{fontspec}
+\setmainfont{Lato}[
+    Path = ./fonts/lato/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+    Renderer = Basic,
+]
+
+% Sans-serif fonts render noticeably wider than Latin Modern at the
+% same point size, which overflowed the page. Nudging normalsize down
+% (10pt -> 9.5pt) reclaims that space without touching margins or
+% content, since margins are staying fixed and nothing should be cut.
+\renewcommand{\normalsize}{\fontsize{9.5pt}{11.5pt}\selectfont}
+\normalsize
 
 % ----------------------------------------------------------------------
 % Document Body
@@ -17,9 +91,9 @@
 \begin{header}
 	\begin{minipage}[t]{1.0\textwidth}
 		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
-		\footnotesize
+		\fontsize{8.75pt}{10.8pt}\selectfont
 		% Location
-		\mbox{St. Louis, MO}%
+		\mbox{St. Louis, MO, USA}%
 		\kern \kernSpacing\AND\kern \kernSpacing
 		% Phone
 		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
@@ -47,7 +121,7 @@
 \vspace{\entrySpacing}
 \begin{samepage}
 	\begin{summary}
-		ML engineer who built end-to-end pipelines processing 790,000 naturalistic driving trips and trained recommendation systems serving seven user personas, seeking data/ML engineering roles.
+ML engineer who built end-to-end pipelines processing 790,000 naturalistic driving trips and trained recommendation systems serving seven user personas, seeking data/ML engineering roles.
 	\end{summary}
 \end{samepage}
 
@@ -73,7 +147,7 @@
 
 \vspace{\entrySpacing}
 \begin{skillcategory}{Tools \& Technologies}
-	\LaTeX, Git, AWS, Docker, PostgreSQL, MongoDB, Snowflake, Apache Airflow, Spark, Gemini/OpenAI APIs, Microsoft 365, Google Workspace.
+	LaTeX, Git, AWS, Docker, PostgreSQL, MongoDB, Snowflake, Apache Airflow, Spark, Gemini/OpenAI APIs, Microsoft 365, Google Workspace.
 \end{skillcategory}
 
 \vspace{\entrySpacing}
@@ -91,10 +165,16 @@
 \section{\sectionlink{https://agreddy.com/experience/}{PROFESSIONAL EXPERIENCE}}
 
 \vspace{\entrySpacing}
+\begin{leadershipentry}{Ignite Performance Consulting}{Remote}
+	\begin{positionentry}{Mobile Application Developer Intern}{September 2026 - Present}
+		\item Own development of the company's athlete coaching app (React Native, Next.js, Express/MongoDB, Rasa chatbot), modernizing the codebase and leading its Apple App Store/Google Play release ahead of an October 2026 launch.
+	\end{positionentry}
+\end{leadershipentry}
+
+\vspace{\entrySpacing}
 \begin{leadershipentry}{Washington University in St. Louis}{St. Louis, Missouri, USA}
 	\begin{positionentry}{Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale}{January 2026 - May 2026}
-		\item Taught large-scale data pipeline concepts (Snowflake, Airflow, Spark, Kafka, Flink) to a graduate cohort, covering fault-tolerant design, streaming windowing, and query optimization.
-		\item Designed oral midterms as mock technical interviews, requiring students to reason through pipeline architecture decisions and troubleshoot system failures under real-world constraints.
+		\item Taught large-scale data pipeline concepts (Snowflake, Airflow, Spark, Kafka, Flink) to a graduate cohort, then designed oral midterms as mock technical interviews to test pipeline architecture and troubleshooting under real-world constraints.
 	\end{positionentry}
 	\begin{positionentry}{\href{https://agreddy.com/projects/ms-thesis}{Master's Thesis Research}}{August 2025 - May 2026}
 		\item Built an end-to-end pipeline processing 790,000 naturalistic driving trips from 304 older adults, engineering vehicle-agnostic weekly behavioral features to predict cognitive impairment status.
@@ -105,8 +185,7 @@
 \vspace{\entrySpacing}
 \begin{leadershipentry}{Crittero, Inc.}{Remote}
 	\begin{positionentry}{AI Engineer Intern}{June 2025 - August 2025}
-		\item Generated 100,000 labeled social media posts across seven user personas via time-series behavioral modeling in TypeScript, capturing post sequences, engagement timings, and content preferences.
-		\item Trained a TensorFlow/Keras recommendation model achieving 80\% accuracy (30-percentage-point gain over random baseline) with persona-type, content-category, and temporal embeddings, plus a collaborative-filtering cold-start fallback for new users.
+		\item Generated 100,000 labeled social media posts across seven user personas via time-series behavioral modeling in TypeScript, then trained a TensorFlow/Keras recommendation model achieving 80\% accuracy (30-point gain over random baseline).
 	\end{positionentry}
 \end{leadershipentry}
 

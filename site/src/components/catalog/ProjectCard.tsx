@@ -16,10 +16,11 @@ function categoryClass(category: string): string {
 }
 
 function ProjectActions({ p }: { p: ProjectEntry }) {
+  const detailUrl = p.permalink.endsWith('.html') ? p.permalink : `${p.permalink}.html`;
   return (
     <div className="card-actions">
       <a
-        href={p.permalink}
+        href={detailUrl}
         className="card-btn btn-detail"
         aria-label={`Explore dedicated detail page for ${p.title}`}
       >
@@ -88,6 +89,7 @@ export function ProjectCard({ p }: { p: ProjectEntry }) {
   const search = [p.title, p.excerpt, p.venue, p.venue_tag, ...p.technologies, ...aliases]
     .join(' ')
     .toLowerCase();
+  const detailUrl = p.permalink.endsWith('.html') ? p.permalink : `${p.permalink}.html`;
   return (
     <div
       className="project-card card-surface timeline-card"
@@ -105,7 +107,7 @@ export function ProjectCard({ p }: { p: ProjectEntry }) {
         <span className="card-venue">{p.formatted_date}</span>
       </div>
       <h3 className="project-title">
-        <a href={p.permalink} aria-label={`Explore dedicated detail page for ${p.title}`}>
+        <a href={detailUrl} aria-label={`Explore dedicated detail page for ${p.title}`}>
           {p.title}
         </a>
       </h3>

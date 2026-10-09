@@ -21,10 +21,9 @@ export function ProjectDetailPage({
       activePage="projects"
       title={p.title}
       description={p.excerpt}
-      // SEO metadata (canonical/og/twitter) uses the .html-suffixed URL —
-      // matches today's sitemap.xml and generated <head> tags exactly.
-      // Internal <a href> navigation (ProjectCard, etc.) still uses the
-      // extension-less `permalink` field, unchanged.
+      // SEO metadata (canonical/og/twitter) and internal <a href> navigation
+      // (ProjectCard, Home featured projects, etc.) consistently use the
+      // canonical .html-suffixed URL — matches sitemap.xml and Search Console.
       canonicalUrl={`https://agreddy.com${p.permalink}.html`}
       ogImage={ogImage}
       jsonLd={jsonLd}

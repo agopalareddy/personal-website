@@ -1,7 +1,7 @@
 {
-  "../node_modules/pdfjs-dist/build/pdf.worker.mjs": {
-    "file": "assets/pdf.worker-CPbhI6B3.mjs",
-    "src": "../node_modules/pdfjs-dist/build/pdf.worker.mjs"
+  "../node_modules/.pnpm/pdfjs-dist@6.4.299/node_modules/pdfjs-dist/build/pdf.worker.mjs": {
+    "file": "assets/pdf.worker-PhvoOpM7.mjs",
+    "src": "../node_modules/.pnpm/pdfjs-dist@6.4.299/node_modules/pdfjs-dist/build/pdf.worker.mjs"
   },
   "_rolldown-runtime-Czjbc987.js": {
     "file": "assets/rolldown-runtime-Czjbc987.js",
@@ -20,12 +20,12 @@
     "imports": ["_rolldown-runtime-Czjbc987.js", "_toggle-Bl4j4AUN.js"]
   },
   "src/islands/cv-modal.ts": {
-    "file": "assets/cv-modal-BgqYJH8W.js",
+    "file": "assets/cv-modal-BQVBBmqS.js",
     "name": "cv-modal",
     "src": "src/islands/cv-modal.ts",
     "isEntry": true,
     "imports": ["_rolldown-runtime-Czjbc987.js"],
-    "assets": ["assets/pdf.worker-CPbhI6B3.mjs"]
+    "assets": ["assets/pdf.worker-PhvoOpM7.mjs"]
   },
   "src/islands/email-protection.ts": {
     "file": "assets/email-protection-BSRvsOKy.js",
@@ -49,7 +49,7 @@
     "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/theme.tsx": {
-    "file": "assets/theme-D_rgo2Xr.js",
+    "file": "assets/theme-CoKIc0-k.js",
     "name": "theme",
     "src": "src/islands/theme.tsx",
     "isEntry": true,

@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
-    "@primer/octicons": "^19.29.2",
+    "@primer/octicons": "^19.31.0",
     "@primer/primitives": "^11.9.0",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",

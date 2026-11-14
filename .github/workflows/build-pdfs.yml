@@ -6,6 +6,7 @@ on:
     paths:
       - 'files/cv_tex/**'
       - 'files/resume_tex/**'
+      - '.github/workflows/build-pdfs.yml'
   workflow_dispatch: {}
 
 permissions:
@@ -23,11 +24,20 @@ jobs:
           root_file: reddy_cv.tex
           working_directory: files/cv_tex
 
+      # reddy_resume.tex loads Lato via fontspec — requires XeLaTeX, not pdfLaTeX.
       - name: Compile Resume
         uses: xu-cheng/latex-action@v4
         with:
           root_file: reddy_resume.tex
           working_directory: files/resume_tex
+          latexmk_use_xelatex: true
+
+      # XeLaTeX + Lato maps hyphens to U+2010 in ToUnicode; patch to U+002D for copy/paste.
+      - name: Fix resume hyphen ToUnicode map
+        run: |
+          python3 -m pip install --quiet pikepdf
+          python3 files/resume_tex/fix_tounicode_hyphen.py files/resume_tex/reddy_resume.pdf
+          mv files/resume_tex/reddy_resume_fixed.pdf files/resume_tex/reddy_resume.pdf
 
       - name: Sync public PDFs
         run: |

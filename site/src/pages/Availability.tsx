@@ -29,7 +29,7 @@ export function AvailabilityPage() {
 
       <iframe
         className="availability-calendar-frame"
-        src="https://calendar.google.com/calendar/embed?src=90e3e7baecc6c8fb063ea0e230c0040bfe5ce8d086c944a9351720d1e9d72b9e%40group.calendar.google.com&ctz=America%2FChicago&mode=WEEK"
+        src="https://calendar.google.com/calendar/embed?src=90e3e7baecc6c8fb063ea0e230c0040bfe5ce8d086c944a9351720d1e9d72b9e%40group.calendar.google.com&ctz=America%2FNew_York&mode=WEEK"
         frameBorder={0}
         scrolling="no"
         loading="lazy"

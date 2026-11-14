@@ -71,3 +71,25 @@ ds-bundle/
 .design-sync/.cache/
 .design-sync/learnings/
 .design-sync/node_modules
+
+# Tailored application materials (local only).
+# Served downloads are the flat copies in files/: reddy_resume.pdf, reddy_cv.pdf, reddy_cover.pdf.
+# Keep the canonical sources: files/*_tex/reddy_{resume,cv,cover}.{tex,pdf,sty}
+files/resume_tex/reddy_resume_*.tex
+files/resume_tex/reddy_resume_*.pdf
+files/resume_tex/reddy_resume_*.png
+files/resume_tex/reddy_resume.docx
+files/resume_tex/rory_*
+files/cover_tex/reddy_cover_*.tex
+files/cover_tex/reddy_cover_*.pdf
+files/cover_tex/reddy_cover_*.png
+files/cover_tex/reddy_answers_*
+files/cover_tex/reddy_appform_*
+files/cover_tex/reddy_application_*
+files/cover_tex/reddy_email_*
+files/cover_tex/*_workday_*
+files/cv_tex/reddy_cv_*.tex
+files/cv_tex/reddy_cv_*.pdf
+files/reddy_resume_deprecated.pdf
+files/Resume*.md
+images/linkedin/

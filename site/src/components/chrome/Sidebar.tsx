@@ -30,6 +30,13 @@ function StatusBadge({
   );
 }
 
+/**
+ * Archived 2026-11: the "Open to opportunities" badge is hidden while
+ * employed. Flip to `true` to bring it back; StatusBadge and its CSS are
+ * kept intact for that.
+ */
+const SHOW_STATUS_BADGE = false;
+
 /** Ported from scripts/chrome.py's render_sidebar(). */
 export function Sidebar({ children }: { children?: ReactNode }) {
   return (
@@ -43,12 +50,13 @@ export function Sidebar({ children }: { children?: ReactNode }) {
         />
         <h2 className="author-name">Aadarsha Gopala Reddy</h2>
         <p className="author-bio">
-          M.S. Computer Science graduate from Washington University in St. Louis
+          IT Training Specialist at the University of Florida. M.S. Computer Science, Washington
+          University in St. Louis
         </p>
-        <StatusBadge />
+        {SHOW_STATUS_BADGE && <StatusBadge />}
         <ul className="author-links">
           <li>
-            <Icon name="LOCATION_16" /> St. Louis, Missouri, USA
+            <Icon name="LOCATION_16" /> Gainesville, Florida, USA
           </li>
           <li>
             <Icon name="MAIL_16" />{' '}

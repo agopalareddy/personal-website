@@ -11,7 +11,12 @@ const JSON_LD = JSON.stringify({
     name: 'Washington University in St. Louis',
     sameAs: 'https://www.wustl.edu',
   },
-  jobTitle: 'Software & Data Engineer',
+  jobTitle: 'IT Training Specialist',
+  worksFor: {
+    '@type': 'CollegeOrUniversity',
+    name: 'University of Florida',
+    sameAs: 'https://www.ufl.edu',
+  },
   sameAs: ['https://github.com/agopalareddy', 'https://www.linkedin.com/in/agopalareddy/'],
 });
 
@@ -96,7 +101,7 @@ export function HomePage() {
       activePage="home"
       bodyClassName="home-page"
       title="About Me"
-      description="M.S. Computer Science graduate from Washington University in St. Louis. Specializing in machine learning, distributed data pipelines, and vehicle-agnostic cognitive signatures."
+      description="IT Training Specialist at the University of Florida with an M.S. in Computer Science from Washington University in St. Louis. Research interests in machine learning for aging and Alzheimer's disease."
       canonicalUrl="https://agreddy.com/"
       ogType="website"
       contentAriaLabel="Biography and Overview"
@@ -105,13 +110,13 @@ export function HomePage() {
       <section className="page__content" itemProp="text">
         <h1 id="hello-im-aadarsha">Hello, I&rsquo;m Aadarsha</h1>
         <p>
-          My thesis used domain-adversarial learning to predict cognitive impairment from
-          naturalistic driving data, work I completed while earning an M.S. in Computer Science at{' '}
-          <a href="https://www.washu.edu/">Washington University in St. Louis</a>. I have hands-on
-          experience across machine learning, data engineering, and full-stack development, gained
-          through research, teaching, and industry internships. I&rsquo;m currently building the
-          athlete coaching mobile app at Ignite Performance Consulting while seeking software,
-          data, or ML engineering roles.
+          I&rsquo;m an IT Training Specialist at the{' '}
+          <a href="https://www.ufl.edu/">University of Florida</a>, where I develop and deliver AI
+          training for university employees in UF Information Technology. Before this, I earned an M.S. in Computer Science at{' '}
+          <a href="https://www.washu.edu/">Washington University in St. Louis</a>, where my thesis
+          used domain-adversarial learning to predict cognitive impairment from naturalistic driving
+          data. I have hands-on experience across machine learning, data engineering, and full-stack
+          development, gained through research, teaching, and industry internships.
         </p>
         <div className="home-skill-details card-surface">
           <button
@@ -193,14 +198,18 @@ export function HomePage() {
         <ul>
           <li>
             <strong>
-              <a href="/projects/ms-thesis.html">M.S. Thesis: Vehicle-Agnostic Driving Signatures</a>
+              <a href="/projects/ms-thesis.html">
+                M.S. Thesis: Vehicle-Agnostic Driving Signatures
+              </a>
             </strong>{' '}
             — Compared six modeling approaches for predicting cognitive impairment from naturalistic
             driving data.
           </li>
           <li>
             <strong>
-              <a href="/projects/multimodal-alzheimers.html">Multimodal Alzheimer&rsquo;s Prediction</a>
+              <a href="/projects/multimodal-alzheimers.html">
+                Multimodal Alzheimer&rsquo;s Prediction
+              </a>
             </strong>{' '}
             — Combined MRI imaging with clinical data for early Alzheimer&rsquo;s disease detection.
           </li>
@@ -222,15 +231,16 @@ export function HomePage() {
         <p>
           Check out more on my <a href="/projects/">Projects</a> page.
         </p>
-        <h2 id="applied-ml-and-data-systems">Applied ML and Data Systems</h2>
+        <h2 id="research-interests">Research Interests</h2>
         <p>
-          I&rsquo;m interested in roles and collaborations that turn applied ML research into
-          reliable data systems, especially in health, mobility, and human-centered AI.{' '}
+          My research interests are in public health, with a focus on aging and Alzheimer&rsquo;s
+          disease, and in applying machine learning and AI to those problems. I&rsquo;m glad to hear
+          from people working on related questions.{' '}
           <a
             href="#"
             className="protected-email"
-            data-email-user="YWR1cnMyMDAy"
-            data-email-domain="Z21haWwuY29t"
+            data-email-user="YWdy"
+            data-email-domain="YWdyZWRkeS5jb20="
           >
             Email me
           </a>

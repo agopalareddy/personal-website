@@ -126,24 +126,50 @@
     "excerpt": "Built a digital Lost Cities card game in Java and a heuristic-driven AI agent that won over 70% of test games against human players during a mentored summer research program."
   },
   {
+    "title": "IT Training Specialist",
+    "category": "professional",
+    "organization": "University of Florida",
+    "location": "Gainesville, Florida, USA",
+    "role_context": null,
+    "start_date": "2026-12-04",
+    "end_date": null,
+    "responsibilities": [
+      "Design, develop, and deliver instructor-led, virtual, and self-paced training on AI technologies and productivity tools for university employees, within Academic Technology, a unit of UF Information Technology.",
+      "Develop and maintain internal and public-facing documentation and tutorial materials, including video, screen-capture resources, and interactive training activities.",
+      "Consult with departments on AI implementation and workflow improvement, and facilitate communities of practice and user groups.",
+      "Verify training content for accessibility and usability, and run user surveys to improve the training."
+    ],
+    "related_projects": [],
+    "links": [
+      {
+        "label": "Center for Instructional Technology and Training",
+        "url": "https://citt.it.ufl.edu/",
+        "type": "organization"
+      }
+    ],
+    "has_detail": true,
+    "id": "2026-12-it-training-specialist",
+    "excerpt": "IT Training Specialist for AI in Academic Technology, a unit of UF Information Technology: AI training, documentation, and consultation for university employees."
+  },
+  {
     "title": "Mobile Application Developer Intern",
     "category": "professional",
     "organization": "Ignite Performance Consulting",
     "location": "Remote",
     "role_context": null,
     "start_date": "2026-09-01",
-    "end_date": null,
+    "end_date": "2026-12-03",
     "responsibilities": [
-      "Own development and launch of the company's athlete coaching app, a React Native mobile client backed by a Next.js web platform, an Express/MongoDB API, and a Rasa chatbot.",
-      "Work directly with the founder on product direction, delivering the remaining features, such as the daily check-in, to bring the mobile app level with the web platform.",
+      "Owned development and launch of the company's athlete coaching app, a React Native mobile client backed by a Next.js web platform, an Express/MongoDB API, and a Rasa chatbot.",
+      "Worked directly with the founder on product direction, delivering the remaining features, such as the daily check-in, to bring the mobile app level with the web platform.",
       "Modernized the mobile codebase and fixed security and cross-platform setup problems to get the app ready for production.",
-      "Leading testing and release of the app on the Apple App Store and Google Play ahead of its planned October 2026 launch."
+      "Led testing and release of the app on the Apple App Store and Google Play ahead of its planned October 2026 launch."
     ],
     "related_projects": [],
     "links": [],
     "has_detail": true,
     "id": "2026-09-mobile-application-developer-intern",
-    "excerpt": "Building Ignite Performance Consulting's athlete coaching app, a React Native client on a Next.js, Express/MongoDB, and Rasa stack, and preparing its App Store and Google Play release."
+    "excerpt": "Built Ignite Performance Consulting's athlete coaching app, a React Native client on a Next.js, Express/MongoDB, and Rasa stack, and prepared its App Store and Google Play release."
   },
   {
     "title": "Graduate Assistant with the Taylor Family Center for Student Success",

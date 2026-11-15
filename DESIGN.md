@@ -89,7 +89,7 @@ Category labels map to semantic roles:
 - **Header**: UnderlineNav (`.nav-links`), active tab with `aria-current="page"` + 2px accent underline
 - **Sidebar**: Profile card (`.academic-sidebar`), circular avatar, octicon contact links
 - **Cards**: Box pattern (`.card-surface`, `.project-card`, `.experience-card`), flat border, hover changes `border-color`
-- **Buttons**: Primer Button variants (`btn-github`, `btn-demo`, `btn-pdf`, `btn-detail`)
+- **Buttons**: three roles only — primary (green), default (outline), link. Legacy names (`btn-github`, `btn-demo`, `btn-pdf`, `btn-detail`) map onto those roles; dark/red fills removed.
 - **Category labels**: Colored Label (pill, 1px border, role-based color)
 - **Tech tags**: Topic tag (pill, `--bgColor-accent-muted`)
 - **Search/Select**: FormControl with leading octicon search icon
@@ -101,10 +101,19 @@ Category labels map to semantic roles:
 
 ## Typography
 
-- Body: `--fontStack-system`, 16px (`--text-body-size-large`)
-- Headings: `--fontStack-system`, `--text-title-size-large` (32px) / `-medium` (20px) / `-small` (16px)
-- Code: `--fontStack-monospace`, `--text-codeBlock-size`
+Site type scale (five steps only — defined as `--site-text-*` in `style.css`):
+
+| Token                 | Size            | Use                   |
+| --------------------- | --------------- | --------------------- |
+| `--site-text-display` | 32px / 2rem     | Page titles (`h1`)    |
+| `--site-text-title`   | 20px / 1.25rem  | Section titles (`h2`) |
+| `--site-text-body`    | 16px / 1rem     | Subheads (`h3`), root |
+| `--site-text-small`   | 14px / 0.875rem | Body copy, nav        |
+| `--site-text-caption` | 12px / 0.75rem  | Labels, meta, buttons |
+
+- Font: `--fontStack-system` (body/headings), `--fontStack-monospace` (code)
 - Line height: `--text-body-lineHeight-large` (1.5)
+- Root `html` font-size stays `16px` so rem math stays stable
 
 ## Accessibility
 

@@ -548,10 +548,13 @@
     outline-offset: -2px;
   }
 
+  /* An h3 in the lists, an h2 on the CV page: neither gets a section rule */
   .catalog-row .project-title {
     grid-column: 1;
     grid-row: 1;
     margin: 0;
+    padding: 0;
+    border: 0;
     font-size: var(--site-text-body);
     font-weight: var(--base-text-weight-semibold, 600);
     line-height: 1.4;
@@ -1671,119 +1674,6 @@
   @media (max-width: 35em) {
     .home-skill-group {
       grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  /* ─── Document rows ─── */
-  .document-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    margin-top: 2rem;
-  }
-
-  .document-row {
-    display: flex;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-    gap: 1.5rem;
-    cursor: pointer;
-    background: var(--bgColor-default);
-    border: 1px solid var(--borderColor-default);
-    border-radius: var(--borderRadius-medium, 6px);
-  }
-
-  .document-row:hover {
-    border-color: var(--borderColor-emphasis);
-  }
-
-  .doc-icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--borderRadius-medium, 6px);
-    background: var(--bgColor-accent-muted);
-    color: var(--fgColor-accent);
-    flex-shrink: 0;
-    font-size: var(--site-text-title);
-  }
-
-  .doc-info {
-    flex-grow: 1;
-    min-width: 0;
-  }
-
-  .document-row-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--fgColor-muted);
-    font-size: var(--site-text-caption);
-  }
-
-  /* An h2, but inside a card: no section rule under it */
-  .document-row-title {
-    margin: 0 0 0.25rem;
-    padding: 0;
-    border: 0;
-    font-size: var(--site-text-title);
-    color: var(--fgColor-default);
-  }
-
-  .document-row-description {
-    margin: 0;
-    font-size: var(--site-text-small);
-    line-height: 1.5;
-    color: var(--fgColor-muted);
-  }
-
-  .document-row-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-shrink: 0;
-  }
-
-  /* Narrow: actions drop under the text */
-  @media (max-width: 768px) {
-    .document-row {
-      display: grid;
-      grid-template-areas:
-        'icon info'
-        'actions actions';
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 1rem;
-      align-items: start;
-      padding: 1rem;
-    }
-
-    .doc-icon-wrapper {
-      grid-area: icon;
-      width: 2.5rem;
-      height: 2.5rem;
-    }
-
-    .doc-info {
-      grid-area: info;
-    }
-
-    .document-row-actions {
-      grid-area: actions;
-    }
-
-    .document-row-actions > * {
-      flex: 1;
-    }
-  }
-
-  /* cv-modal.ts opens the PDF in a new tab at this width instead of the
-     preview dialog, so "Preview" and "Open PDF" would do the same thing. */
-  @media (max-width: 640px) {
-    .document-row-actions .modal-trigger {
-      display: none;
     }
   }
 

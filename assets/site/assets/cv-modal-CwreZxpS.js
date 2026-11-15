@@ -21716,28 +21716,31 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           e.appendChild(i));
       }
     }
-    function r(t, r) {
-      let i = r.getAttribute(`data-doc-title`) || `Document preview`,
-        a = r.getAttribute(`data-doc-src`),
-        o = a && e[a];
-      if (!o) return;
-      if (window.innerWidth <= 640 || typeof t.showModal != `function`) {
+    function r(e) {
+      return window.innerWidth > 640 && typeof e.showModal == `function`;
+    }
+    function i(t, i) {
+      let a = i.getAttribute(`data-doc-title`) || `Document preview`,
+        o = i.getAttribute(`data-doc-src`),
+        s = o && e[o];
+      if (!s) return;
+      if (!r(t)) {
         let e = document.createElement(`a`);
-        ((e.href = o), (e.target = `_blank`), (e.rel = `noopener`), e.click());
+        ((e.href = s), (e.target = `_blank`), (e.rel = `noopener`), e.click());
         return;
       }
-      let s = t.querySelector(`#document-modal-title`),
-        c = t.querySelector(`#document-modal-viewer`),
-        l = t.querySelector(`#document-modal-open`);
-      (s && (s.textContent = i),
-        l && ((l.href = a), l.setAttribute(`aria-label`, `Open ${i} PDF in a new tab`)),
+      let c = t.querySelector(`#document-modal-title`),
+        l = t.querySelector(`#document-modal-viewer`),
+        u = t.querySelector(`#document-modal-open`);
+      (c && (c.textContent = a),
+        u && ((u.href = o), u.setAttribute(`aria-label`, `Open ${a} PDF in a new tab`)),
         t.open || t.showModal(),
-        c && (c.setAttribute(`aria-label`, `${i} PDF preview`), n(c, a)));
-    }
-    function i(e) {
-      e.open && e.close();
+        l && (l.setAttribute(`aria-label`, `${a} PDF preview`), n(l, o)));
     }
     function a(e) {
+      e.open && e.close();
+    }
+    function o(e) {
       t++;
       let n = e.querySelector(`#document-modal-viewer`);
       n && n.replaceChildren();
@@ -21746,18 +21749,23 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       let e = document.getElementById(`document-modal`);
       e &&
         (document.addEventListener(`click`, (t) => {
-          let n = t.target;
-          if (n.closest(`a`)) return;
-          let a = n.closest(`[data-action]`);
-          if (!a) return;
-          let o = a.getAttribute(`data-action`);
-          (o === `open` && r(e, a), o === `close` && i(e));
+          let n = t.target.closest(`[data-action]`);
+          if (!n) return;
+          let o = n.getAttribute(`data-action`);
+          if ((o === `close` && a(e), o === `open`)) {
+            if (n instanceof HTMLAnchorElement) {
+              if (t.metaKey || t.ctrlKey || t.shiftKey || t.altKey || t.button !== 0 || !r(e))
+                return;
+              t.preventDefault();
+            }
+            i(e, n);
+          }
         }),
         e.addEventListener(`click`, (t) => {
           t.target === e && e.close();
         }),
         e.addEventListener(`close`, () => {
-          a(e);
+          o(e);
         }));
     });
   });

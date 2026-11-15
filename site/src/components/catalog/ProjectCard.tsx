@@ -77,6 +77,9 @@ function ProjectActions({ p }: { p: ProjectEntry }) {
  * buildProjectActions(). Filter/search/sort behavior (renderProjects()) is
  * User Story 3 scope (useCatalogFilter) — this component only renders one
  * card's static markup.
+ *
+ * Layout is a catalog row (title | category | date) but keeps the legacy
+ * class names / data-* attributes the filter island and e2e tests select on.
  */
 export function ProjectCard({ p }: { p: ProjectEntry }) {
   const venueLabel = VENUE_LABELS[p.venue_tag] ?? p.venue_tag;
@@ -92,7 +95,7 @@ export function ProjectCard({ p }: { p: ProjectEntry }) {
   const detailUrl = p.permalink.endsWith('.html') ? p.permalink : `${p.permalink}.html`;
   return (
     <div
-      className="project-card card-surface timeline-card"
+      className="project-card card-surface timeline-card catalog-row"
       id={`proj-${p.id}`}
       data-category={p.category}
       data-group={p.venue_tag}
@@ -101,16 +104,14 @@ export function ProjectCard({ p }: { p: ProjectEntry }) {
       data-title={p.title}
       data-search={search}
     >
-      <span className="timeline-marker" />
-      <div className="card-meta">
-        <span className={`card-category ${categoryClass(p.category)}`}>{p.category}</span>
-        <span className="card-venue">{p.formatted_date}</span>
-      </div>
+      <span className="timeline-marker" aria-hidden="true" />
       <h3 className="project-title">
         <a href={detailUrl} aria-label={`Explore dedicated detail page for ${p.title}`}>
           {p.title}
         </a>
       </h3>
+      <span className={`card-category ${categoryClass(p.category)}`}>{p.category}</span>
+      <span className="card-venue">{p.formatted_date}</span>
       <div className="card-org-context">{venueLabel}</div>
       <p className="project-excerpt">{p.excerpt}</p>
       <div className="project-tech">

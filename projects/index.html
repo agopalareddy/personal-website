@@ -103,8 +103,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=8086e45c" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=8086e45c" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=e2b0673d" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=e2b0673d" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to Content</a>
@@ -307,170 +307,6 @@
                 </li>
               </ul>
             </div>
-            <div class="toc-container card-surface" id="filterControls">
-              <button
-                class="toc-toggle-btn"
-                id="filterToggleBtn"
-                aria-expanded="true"
-                aria-controls="filterNav"
-              >
-                <h3 class="toc-title">Filters &amp; Search</h3>
-                <span class="toc-toggle-icon" aria-hidden="true"></span>
-              </button>
-              <div id="filterNav">
-                <search>
-                  <div class="projects-controls projects-controls--stacked">
-                    <div class="controls-row">
-                      <div class="filter-pills" role="group" aria-label="Category Filters">
-                        <button class="filter-btn active" data-filter="all" aria-pressed="true">
-                          All</button
-                        ><button
-                          class="filter-btn"
-                          data-filter="Research &amp; ML"
-                          aria-pressed="false"
-                        >
-                          Research &amp; ML</button
-                        ><button
-                          class="filter-btn"
-                          data-filter="Software &amp; Tools"
-                          aria-pressed="false"
-                        >
-                          Software &amp; Tools</button
-                        ><button class="filter-btn" data-filter="Web Apps" aria-pressed="false">
-                          Web Apps
-                        </button>
-                      </div>
-                      <div class="search-wrapper">
-                        <span class="search-icon"
-                          ><span style="display: contents"
-                            ><svg
-                              class="octicon octicon-search"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              aria-hidden="true"
-                              focusable="false"
-                              fill="currentColor"
-                            >
-                              <path
-                                d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
-                              ></path></svg></span></span
-                        ><input
-                          type="text"
-                          class="search-input"
-                          id="projectSearch"
-                          aria-label="Search projects by title, tags, or venues"
-                          placeholder="Search projects, tags, venues..."
-                        />
-                      </div>
-                    </div>
-                    <div class="controls-row controls-row--bordered">
-                      <div class="select-wrapper">
-                        <select
-                          class="custom-select"
-                          id="venueFilter"
-                          data-role="group-filter"
-                          aria-label="Filter projects by institution or venue"
-                        >
-                          <option value="all">All Institutions/Venues</option>
-                          <option value="WashU">Washington University in St. Louis</option>
-                          <option value="OWU">Ohio Wesleyan University</option>
-                          <option value="MITxSureStart">MITxSureStart</option>
-                          <option value="Personal">Personal Projects</option></select
-                        ><span class="select-icon"
-                          ><span style="display: contents"
-                            ><svg
-                              class="octicon octicon-chevron-down"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              aria-hidden="true"
-                              focusable="false"
-                              fill="currentColor"
-                            >
-                              <path
-                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                              ></path></svg></span
-                        ></span>
-                      </div>
-                      <div class="select-wrapper">
-                        <select
-                          class="custom-select"
-                          id="yearFilter"
-                          data-role="year-filter"
-                          aria-label="Filter projects by year range"
-                        >
-                          <option value="all">All Years</option>
-                          <option value="2026">2026</option>
-                          <option value="2025">2025</option>
-                          <option value="2024">2024</option>
-                          <option value="2023">2023</option>
-                          <option value="2022">2022</option></select
-                        ><span class="select-icon"
-                          ><span style="display: contents"
-                            ><svg
-                              class="octicon octicon-chevron-down"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              aria-hidden="true"
-                              focusable="false"
-                              fill="currentColor"
-                            >
-                              <path
-                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                              ></path></svg></span
-                        ></span>
-                      </div>
-                      <div class="select-wrapper">
-                        <select
-                          class="custom-select"
-                          id="projectSort"
-                          data-role="sort"
-                          aria-label="Sort projects chronologically or alphabetically"
-                        >
-                          <option value="date-desc">Newest First</option>
-                          <option value="date-asc">Oldest First</option>
-                          <option value="title-asc">Alphabetical (A-Z)</option></select
-                        ><span class="select-icon"
-                          ><span style="display: contents"
-                            ><svg
-                              class="octicon octicon-chevron-down"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              aria-hidden="true"
-                              focusable="false"
-                              fill="currentColor"
-                            >
-                              <path
-                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                              ></path></svg></span
-                        ></span>
-                      </div>
-                    </div>
-                  </div>
-                </search>
-              </div>
-            </div>
-            <div class="toc-container card-surface" id="tocContainer" hidden="">
-              <button
-                class="toc-toggle-btn"
-                id="tocToggleBtn"
-                aria-expanded="true"
-                aria-controls="tocNav"
-              >
-                <h3 class="toc-title">On this page</h3>
-                <span class="toc-toggle-icon" aria-hidden="true"></span>
-              </button>
-              <nav aria-label="Table of contents" id="tocNav">
-                <ul class="toc-list" id="tocList"></ul>
-              </nav>
-            </div>
           </aside>
           <article class="academic-content" aria-label="Projects Grid Content">
             <h1 class="page-intro-title">Academic &amp; Engineering Projects</h1>
@@ -478,12 +314,182 @@
               Academic, full-stack applications, machine learning research, and systems engineering
               projects.
             </p>
+            <div class="catalog-toolbar">
+              <div class="toc-container card-surface catalog-toolbar-panel" id="filterControls">
+                <button
+                  class="toc-toggle-btn"
+                  id="filterToggleBtn"
+                  aria-expanded="true"
+                  aria-controls="filterNav"
+                >
+                  <h3 class="toc-title">Filters &amp; Search</h3>
+                  <span class="toc-toggle-icon" aria-hidden="true"></span>
+                </button>
+                <div id="filterNav">
+                  <search>
+                    <div class="projects-controls projects-controls--stacked">
+                      <div class="controls-row">
+                        <div class="filter-pills" role="group" aria-label="Category Filters">
+                          <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                            All</button
+                          ><button
+                            class="filter-btn"
+                            data-filter="Research &amp; ML"
+                            aria-pressed="false"
+                          >
+                            Research &amp; ML</button
+                          ><button
+                            class="filter-btn"
+                            data-filter="Software &amp; Tools"
+                            aria-pressed="false"
+                          >
+                            Software &amp; Tools</button
+                          ><button class="filter-btn" data-filter="Web Apps" aria-pressed="false">
+                            Web Apps
+                          </button>
+                        </div>
+                        <div class="search-wrapper">
+                          <span class="search-icon"
+                            ><span style="display: contents"
+                              ><svg
+                                class="octicon octicon-search"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                                focusable="false"
+                                fill="currentColor"
+                              >
+                                <path
+                                  d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
+                                ></path></svg></span></span
+                          ><input
+                            type="text"
+                            class="search-input"
+                            id="projectSearch"
+                            aria-label="Search projects by title, tags, or venues"
+                            placeholder="Search projects, tags, venues..."
+                          />
+                        </div>
+                      </div>
+                      <div class="controls-row controls-row--bordered">
+                        <div class="select-wrapper">
+                          <select
+                            class="custom-select"
+                            id="venueFilter"
+                            data-role="group-filter"
+                            aria-label="Filter projects by institution or venue"
+                          >
+                            <option value="all">All Institutions/Venues</option>
+                            <option value="WashU">Washington University in St. Louis</option>
+                            <option value="OWU">Ohio Wesleyan University</option>
+                            <option value="MITxSureStart">MITxSureStart</option>
+                            <option value="Personal">Personal Projects</option></select
+                          ><span class="select-icon"
+                            ><span style="display: contents"
+                              ><svg
+                                class="octicon octicon-chevron-down"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                                focusable="false"
+                                fill="currentColor"
+                              >
+                                <path
+                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                                ></path></svg></span
+                          ></span>
+                        </div>
+                        <div class="select-wrapper">
+                          <select
+                            class="custom-select"
+                            id="yearFilter"
+                            data-role="year-filter"
+                            aria-label="Filter projects by year range"
+                          >
+                            <option value="all">All Years</option>
+                            <option value="2026">2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option></select
+                          ><span class="select-icon"
+                            ><span style="display: contents"
+                              ><svg
+                                class="octicon octicon-chevron-down"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                                focusable="false"
+                                fill="currentColor"
+                              >
+                                <path
+                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                                ></path></svg></span
+                          ></span>
+                        </div>
+                        <div class="select-wrapper">
+                          <select
+                            class="custom-select"
+                            id="projectSort"
+                            data-role="sort"
+                            aria-label="Sort projects chronologically or alphabetically"
+                          >
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="title-asc">Alphabetical (A-Z)</option></select
+                          ><span class="select-icon"
+                            ><span style="display: contents"
+                              ><svg
+                                class="octicon octicon-chevron-down"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                                focusable="false"
+                                fill="currentColor"
+                              >
+                                <path
+                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                                ></path></svg></span
+                          ></span>
+                        </div>
+                      </div>
+                    </div>
+                  </search>
+                </div>
+              </div>
+              <div
+                class="toc-container card-surface catalog-toolbar-panel"
+                id="tocContainer"
+                hidden=""
+              >
+                <button
+                  class="toc-toggle-btn"
+                  id="tocToggleBtn"
+                  aria-expanded="true"
+                  aria-controls="tocNav"
+                >
+                  <h3 class="toc-title">On this page</h3>
+                  <span class="toc-toggle-icon" aria-hidden="true"></span>
+                </button>
+                <nav aria-label="Table of contents" id="tocNav">
+                  <ul class="toc-list" id="tocList"></ul>
+                </nav>
+              </div>
+            </div>
             <div class="projects-container">
               <p id="resultsCount" class="results-count" aria-live="polite"></p>
               <div class="project-timeline timeline-section" id="projectGrid">
                 <h2 class="timeline-year" id="year-2026">2026</h2>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2026-10-dolphin-file-converter"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -492,11 +498,7 @@
                   data-title="Dolphin File Converter"
                   data-search="dolphin file converter a native kde dolphin service menu extension and qt desktop application for converting audio, video, images, and documents directly from right-click context menus, powered by ffmpeg, imagemagick, and libreoffice. personal project personal python pyside6 qt kde ffmpeg imagemagick libreoffice linux bash  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Oct 2026</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/dolphin-file-converter.html"
@@ -504,6 +506,8 @@
                       >Dolphin File Converter</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Oct 2026</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     A native KDE Dolphin service menu extension and Qt desktop application for
@@ -564,7 +568,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2026-09-umm"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -573,11 +577,7 @@
                   data-title="Umm: Voice Typing"
                   data-search="umm: voice typing a voice keyboard and floating dictation assistant for android that transcribes and cleans up spoken text in real time using user-provided openrouter keys — stripping filler words, formatting lists, and preserving multilingual speech without server-side tracking. personal project personal kotlin android jetpack compose openrouter speech-to-text llm material 3 accessibility api  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Sep 2026</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/umm.html"
@@ -585,6 +585,8 @@
                       >Umm: Voice Typing</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Sep 2026</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     A voice keyboard and floating dictation assistant for Android that transcribes
@@ -647,7 +649,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2026-06-env-monitor"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -656,11 +658,7 @@
                   data-title="Environment Monitor"
                   data-search="environment monitor an arduino-based continuous environment monitor using a dht11 sensor and lcd 1602 display, with rolling eeprom buffer, dew point calculation, and ambient light sensing. personal project personal arduino c++ dht11 lcd 1602 eeprom embedded systems  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Jun 2026</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/env-monitor.html"
@@ -668,6 +666,8 @@
                       >Environment Monitor</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Jun 2026</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     An Arduino-based continuous environment monitor using a DHT11 sensor and LCD
@@ -727,7 +727,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2026-06-wellness-companion"
                   data-category="Web Apps"
                   data-group="Kaggle"
@@ -736,11 +736,7 @@
                   data-title="AURA: Ambient Wellness Companion"
                   data-search="aura: ambient wellness companion built aura, a privacy-first elderly wellness companion using google adk 2.0 multi-agent orchestration and gemini. empathetic check-ins, medication compliance tracking, anonymized telemetry, and automatic escalation for critical wellness drops. kaggle agents for good hackathon kaggle python fastapi google adk gemini mcp multi-agent systems javascript html css  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-web">Web Apps</span
-                    ><span class="card-venue">Jun 2026</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/wellness-companion.html"
@@ -748,6 +744,8 @@
                       >AURA: Ambient Wellness Companion</a
                     >
                   </h3>
+                  <span class="card-category cat-web">Web Apps</span
+                  ><span class="card-venue">Jun 2026</span>
                   <div class="card-org-context">Kaggle</div>
                   <p class="project-excerpt">
                     Built AURA, a privacy-first elderly wellness companion using Google ADK 2.0
@@ -830,7 +828,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2026-06-speedtest"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -839,11 +837,7 @@
                   data-title="Speed Test"
                   data-search="speed test a simple, single-page network speed test measuring download speed, upload speed, and ping against the server hosting this site, with live-updating results and connection details. personal project personal node.js express javascript streams api  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Jun 2026</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/speedtest.html"
@@ -851,6 +845,8 @@
                       >Speed Test</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Jun 2026</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     A simple, single-page network speed test measuring download speed, upload speed,
@@ -929,7 +925,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2026-06-blink-morse-decoder"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -938,11 +934,7 @@
                   data-title="Blink Morse Decoder"
                   data-search="blink morse decoder an accessibility-focused android app that translates deliberate eye blinks into morse code text using real-time camera-based facial landmark tracking and a custom blink state machine — enabling hands-free communication without extra hardware. codetilldawn hackathon personal kotlin android camerax smartspectra material 3  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Jun 2026</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/blink-morse-decoder.html"
@@ -950,6 +942,8 @@
                       >Blink Morse Decoder</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Jun 2026</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     An accessibility-focused Android app that translates deliberate eye blinks into
@@ -1009,7 +1003,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2026-04-ms-thesis"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1018,11 +1012,7 @@
                   data-title="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
                   data-search="toward vehicle-agnostic driving signatures for cognitive impairment prediction from naturalistic driving data master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults. washington university in st. louis washu python pytorch deep learning domain adaptation sequence modeling scikit-learn pandas numpy matplotlib git washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Aug 2025 – Apr 2026</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/ms-thesis.html"
@@ -1031,6 +1021,8 @@
                       Prediction from Naturalistic Driving Data</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Aug 2025 – Apr 2026</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Master&#x27;s thesis investigating whether naturalistic driving data can predict
@@ -1095,7 +1087,7 @@
                 </div>
                 <h2 class="timeline-year" id="year-2025">2025</h2>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2025-08-vlm-security"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1104,11 +1096,7 @@
                   data-title="Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses"
                   data-search="red-blue visual auto defender: automated visual jailbreak generation and explainable defenses built a red-blue teaming system for vlm security that automatically generates visual jailbreak attacks and explainable, code-based defenses using ocr and keyword detection. washington university in st. louis washu python pytorch transformers gemma-3 pillow opencv ocr openai api anthropic api washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Aug 2025 – Dec 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/vlm-security.html"
@@ -1117,6 +1105,8 @@
                       Explainable Defenses</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Aug 2025 – Dec 2025</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Built a Red-Blue teaming system for VLM security that automatically generates
@@ -1177,7 +1167,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2025-08-mlb-statcast-pipeline"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1186,11 +1176,7 @@
                   data-title="MLB Statcast Real-Time Data Pipeline"
                   data-search="mlb statcast real-time data pipeline built a real-time data pipeline for mlb pitch data using apache airflow, snowflake, and kafka, with an interactive streamlit dashboard for pitch analysis and visualization. washington university in st. louis washu python apache airflow snowflake apache kafka apache spark streamlit pybaseball pandas washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Aug 2025 – Dec 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/mlb-statcast-pipeline.html"
@@ -1198,6 +1184,8 @@
                       >MLB Statcast Real-Time Data Pipeline</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Aug 2025 – Dec 2025</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Built a real-time data pipeline for MLB pitch data using Apache Airflow,
@@ -1259,7 +1247,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2025-10-hackwashu-databases-workshop"
                   data-category="Software &amp; Tools"
                   data-group="WashU"
@@ -1268,11 +1256,7 @@
                   data-title="HackWashU Databases Workshop"
                   data-search="hackwashu databases workshop developed and facilitated a hands-on databases workshop teaching sqlite, supabase, api integration, and full-stack web development through two complete projects. washington university in st. louis - hackwashu washu python sqlite supabase postgresql javascript html css apis database design washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Sep 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/hackwashu-databases-workshop.html"
@@ -1280,6 +1264,8 @@
                       >HackWashU Databases Workshop</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Sep 2025</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Developed and facilitated a hands-on databases workshop teaching SQLite,
@@ -1340,7 +1326,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2025-08-google-calendar-sync"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -1349,11 +1335,7 @@
                   data-title="Google Calendar Availability Sync"
                   data-search="google calendar availability sync a google apps script that automatically syncs events from multiple source calendars to a single &#x27;availability&#x27; calendar, creating customizable availability blocks while preserving privacy. personal project personal google apps script javascript google calendar api  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Jun 2025 – Aug 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/google-calendar-sync.html"
@@ -1361,6 +1343,8 @@
                       >Google Calendar Availability Sync</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Jun 2025 – Aug 2025</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     A Google Apps Script that automatically syncs events from multiple source
@@ -1439,7 +1423,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2024-11-php-calendar-app"
                   data-category="Web Apps"
                   data-group="WashU"
@@ -1448,11 +1432,7 @@
                   data-title="PHP Calendar Application"
                   data-search="php calendar application developed chronos, a feature-rich personal calendar and event management web app using php 8.4 and mysql, with secure authentication, an interactive month-view dashboard, and a glassmorphic ui. washington university in st. louis washu php mysql html css javascript web security database design authentication git washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-web">Web Apps</span
-                    ><span class="card-venue">Jul 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/php-calendar-app.html"
@@ -1460,6 +1440,8 @@
                       >PHP Calendar Application</a
                     >
                   </h3>
+                  <span class="card-category cat-web">Web Apps</span
+                  ><span class="card-venue">Jul 2025</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Developed Chronos, a feature-rich personal calendar and event management web app
@@ -1541,7 +1523,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2025-07-bayesian-optimization"
                   data-category="Research &amp; ML"
                   data-group="Personal"
@@ -1550,11 +1532,7 @@
                   data-title="Bayesian Optimization for Material and Product Optimization"
                   data-search="bayesian optimization for material and product optimization applied bayesian optimization techniques for hyperparameter tuning and feature optimization across superconductivity, concrete strength, and wine quality prediction problems. personal project personal python jupyter notebooks scikit-learn scikit-optimize xgboost numpy pandas matplotlib seaborn  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Jun 2025 – Aug 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/bayesian-optimization.html"
@@ -1562,6 +1540,8 @@
                       >Bayesian Optimization for Material and Product Optimization</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Jun 2025 – Aug 2025</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     Applied Bayesian optimization techniques for hyperparameter tuning and feature
@@ -1624,7 +1604,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2025-11-instagram-unfollow-checker"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -1633,11 +1613,7 @@
                   data-title="Instagram Unfollow Checker"
                   data-search="instagram unfollow checker a cross-platform gui application that identifies instagram accounts you follow that don&#x27;t follow you back, with session management and 2fa support. personal project personal python tkinter instaloader pyinstaller  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-tools">Software &amp; Tools</span
-                    ><span class="card-venue">Jun 2025 – Aug 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/instagram-unfollow-checker.html"
@@ -1645,6 +1621,8 @@
                       >Instagram Unfollow Checker</a
                     >
                   </h3>
+                  <span class="card-category cat-tools">Software &amp; Tools</span
+                  ><span class="card-venue">Jun 2025 – Aug 2025</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     A cross-platform GUI application that identifies Instagram accounts you follow
@@ -1702,7 +1680,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2025-05-desperate-housewives-monologues"
                   data-category="Research &amp; ML"
                   data-group="Personal"
@@ -1711,11 +1689,7 @@
                   data-title="Desperate Housewives Monologues Dataset"
                   data-search="desperate housewives monologues dataset extracted and organized monologues from desperate housewives for nlp analysis, sentiment analysis, and text-based machine learning projects. personal project personal python nlp text processing  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Jan 2025 – May 2025</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/desperate-housewives-monologues.html"
@@ -1723,6 +1697,8 @@
                       >Desperate Housewives Monologues Dataset</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Jan 2025 – May 2025</span>
                   <div class="card-org-context">Personal Projects</div>
                   <p class="project-excerpt">
                     Extracted and organized monologues from Desperate Housewives for NLP analysis,
@@ -1780,7 +1756,7 @@
                 </div>
                 <h2 class="timeline-year" id="year-2024">2024</h2>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2024-12-datacenter-cooling"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1789,11 +1765,7 @@
                   data-title="Datacenter Cooling Optimization using Deep Reinforcement Learning"
                   data-search="datacenter cooling optimization using deep reinforcement learning implemented multiple deep reinforcement learning algorithms (ddqn, ppo, sac) integrated with energyplus simulations to optimize datacenter cooling systems for improved energy efficiency. washington university in st. louis washu python pytorch energyplus gymnasium sinergym numpy tensorboard git washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Aug 2024 – Dec 2024</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/datacenter-cooling.html"
@@ -1801,6 +1773,8 @@
                       >Datacenter Cooling Optimization using Deep Reinforcement Learning</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Aug 2024 – Dec 2024</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC)
@@ -1860,7 +1834,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2024-12-interactive-storybook"
                   data-category="Web Apps"
                   data-group="WashU"
@@ -1869,11 +1843,7 @@
                   data-title="Interactive Storybook"
                   data-search="interactive storybook built tales we weave, an ai-powered interactive storytelling platform where readers shape branching narratives through choices, with ai-generated text (google gemini) and illustrations (fal.ai), built with vue 3, express, and mongodb. washington university in st. louis washu vue.js pinia vue router node.js express.js mongodb google gemini api fal.ai javascript html css ai integration git washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-web">Web Apps</span
-                    ><span class="card-venue">Aug 2024 – Dec 2024</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/interactive-storybook.html"
@@ -1881,6 +1851,8 @@
                       >Interactive Storybook</a
                     >
                   </h3>
+                  <span class="card-category cat-web">Web Apps</span
+                  ><span class="card-venue">Aug 2024 – Dec 2024</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Built Tales We Weave, an AI-powered interactive storytelling platform where
@@ -1964,7 +1936,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2024-12-multimodal-alzheimers"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1973,11 +1945,7 @@
                   data-title="Multimodal Prediction of Alzheimer&#x27;s Disease"
                   data-search="multimodal prediction of alzheimer&#x27;s disease built a multimodal machine learning pipeline combining mri imaging and clinical data from the oasis-1 dataset for early alzheimer&#x27;s disease detection. washington university in st. louis washu python deep learning tensorflow keras pytorch machine learning scikit-learn xgboost pandas numpy matplotlib seaborn jupyter notebooks washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Aug 2024 – Dec 2024</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/multimodal-alzheimers.html"
@@ -1985,6 +1953,8 @@
                       >Multimodal Prediction of Alzheimer&#x27;s Disease</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Aug 2024 – Dec 2024</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Built a multimodal machine learning pipeline combining MRI imaging and clinical
@@ -2047,7 +2017,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2024-11-socketio-chat-app"
                   data-category="Web Apps"
                   data-group="WashU"
@@ -2056,11 +2026,7 @@
                   data-title="Socket.IO Multi-Room Chat Application"
                   data-search="socket.io multi-room chat application developed a feature-rich multi-room chat application using node.js and socket.io with password-protected rooms, private messaging, and user moderation capabilities. washington university in st. louis washu node.js socket.io javascript html css real-time communication web development authentication git washu "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-web">Web Apps</span
-                    ><span class="card-venue">Aug 2024 – Dec 2024</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/socketio-chat-app.html"
@@ -2068,6 +2034,8 @@
                       >Socket.IO Multi-Room Chat Application</a
                     >
                   </h3>
+                  <span class="card-category cat-web">Web Apps</span
+                  ><span class="card-venue">Aug 2024 – Dec 2024</span>
                   <div class="card-org-context">Washington University in St. Louis</div>
                   <p class="project-excerpt">
                     Developed a feature-rich multi-room chat application using Node.js and Socket.IO
@@ -2150,7 +2118,7 @@
                 </div>
                 <h2 class="timeline-year" id="year-2023">2023</h2>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2023-04-artificial-intelligence-opinion-survey"
                   data-category="Research &amp; ML"
                   data-group="OWU"
@@ -2159,11 +2127,7 @@
                   data-title="Artificial Intelligence Opinion Survey"
                   data-search="artificial intelligence opinion survey designed, fielded, and investigated a survey research of 1000 employees to analyze ai&#x27;s impact on work efficiency and attitudes. found ai improved efficiency across industries. ohio wesleyan university owu research data analysis r tableau qualtrics prolific artificial intelligence statistics  owu"
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Jan 2023 – May 2023</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/artificial-intelligence-opinion-survey.html"
@@ -2171,6 +2135,8 @@
                       >Artificial Intelligence Opinion Survey</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Jan 2023 – May 2023</span>
                   <div class="card-org-context">Ohio Wesleyan University</div>
                   <p class="project-excerpt">
                     Designed, fielded, and investigated a survey research of 1000 employees to
@@ -2232,7 +2198,7 @@
                 </div>
                 <h2 class="timeline-year" id="year-2022">2022</h2>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2022-11-connect-4-ai"
                   data-category="Web Apps"
                   data-group="OWU"
@@ -2241,11 +2207,7 @@
                   data-title="Connect 4 AI"
                   data-search="connect 4 ai co-developed an ai opponent for connect 4 using alpha-beta pruning algorithm. ohio wesleyan university owu java html css javascript oop artificial intelligence git  owu"
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-web">Web Apps</span
-                    ><span class="card-venue">Aug 2022 – Dec 2022</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/connect-4-ai.html"
@@ -2253,6 +2215,8 @@
                       >Connect 4 AI</a
                     >
                   </h3>
+                  <span class="card-category cat-web">Web Apps</span
+                  ><span class="card-venue">Aug 2022 – Dec 2022</span>
                   <div class="card-org-context">Ohio Wesleyan University</div>
                   <p class="project-excerpt">
                     Co-developed an AI opponent for Connect 4 using alpha-beta pruning algorithm.
@@ -2331,7 +2295,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2022-07-aiparkinscan"
                   data-category="Research &amp; ML"
                   data-group="MITxSureStart"
@@ -2340,11 +2304,7 @@
                   data-title="AIParkinScan"
                   data-search="aiparkinscan co-developed aiparkinscan software for parkinson&#x27;s diagnosis using audio and image data. utilized neural networks, spectrograms, and random forest algorithm. mitxsurestart futuremakers create-a-thon program mitxsurestart python tensorflow flask scikit-learn artificial intelligence machine learning  "
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-research">Research &amp; ML</span
-                    ><span class="card-venue">Jun 2022 – Aug 2022</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/aiparkinscan.html"
@@ -2352,6 +2312,8 @@
                       >AIParkinScan</a
                     >
                   </h3>
+                  <span class="card-category cat-research">Research &amp; ML</span
+                  ><span class="card-venue">Jun 2022 – Aug 2022</span>
                   <div class="card-org-context">MITxSureStart</div>
                   <p class="project-excerpt">
                     Co-developed AIParkinScan software for Parkinson&#x27;s diagnosis using audio
@@ -2433,7 +2395,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card"
+                  class="project-card card-surface timeline-card catalog-row"
                   id="proj-2022-07-artificial-intelligence-in-modern-board-games"
                   data-category="Web Apps"
                   data-group="OWU"
@@ -2442,11 +2404,7 @@
                   data-title="Artificial Intelligence in Modern Board Games"
                   data-search="artificial intelligence in modern board games built a browser-playable java lost cities game with greedy, minimax, and alpha-beta ai agents that evaluate complete turn outcomes. ohio wesleyan university owu java html css javascript artificial intelligence oop game theory git  owu"
                 >
-                  <span class="timeline-marker"></span>
-                  <div class="card-meta">
-                    <span class="card-category cat-web">Web Apps</span
-                    ><span class="card-venue">Jun 2022 – Aug 2022</span>
-                  </div>
+                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/projects/artificial-intelligence-in-modern-board-games.html"
@@ -2454,6 +2412,8 @@
                       >Artificial Intelligence in Modern Board Games</a
                     >
                   </h3>
+                  <span class="card-category cat-web">Web Apps</span
+                  ><span class="card-venue">Jun 2022 – Aug 2022</span>
                   <div class="card-org-context">Ohio Wesleyan University</div>
                   <p class="project-excerpt">
                     Built a browser-playable Java Lost Cities game with greedy, minimax, and
@@ -2616,6 +2576,6 @@
     <script type="module" src="/assets/site/assets/theme-CoKIc0-k.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
     <script type="module" src="/assets/site/assets/scroll-to-top-B-5Wv14u.js"></script>
-    <script type="module" src="/assets/site/assets/catalog-filter-DRp1Zsh-.js"></script>
+    <script type="module" src="/assets/site/assets/catalog-filter-CrN9cbBL.js"></script>
   </body>
 </html>

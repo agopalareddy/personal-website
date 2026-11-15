@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     tocContainer.hidden = false;
-    positionTocResponsive();
 
     const tocToggleBtn = document.getElementById('tocToggleBtn');
     if (tocToggleBtn && !tocToggleBtn.hasAttribute('data-initialized')) {
@@ -252,47 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
   clearFiltersBtn?.addEventListener('click', clearAllFilters);
 
   // ---------------------------------------------------------------------
-  // Responsive placement — ported near-verbatim from experience-catalog.js.
-  // The filter/TOC panels live in .academic-sidebar on desktop but must sit
-  // inline (in a sticky wrapper, right after the intro paragraph) on mobile.
+  // Filters/TOC stay in .catalog-toolbar above the list (sidebar is identity
+  // only). On mobile, wrap the panels for sticky positioning in-place.
   // ---------------------------------------------------------------------
-  function positionFilterControlsResponsive() {
-    if (!filterControls) return;
-    const isMobile = window.innerWidth < 768;
-    const sidebar = document.querySelector('.academic-sidebar');
-    const subtitle = document.querySelector('.academic-content > p');
-    const stickyWrapper = document.querySelector('.mobile-sticky-wrapper');
-
-    if (isMobile && subtitle) {
-      const layoutBlock = stickyWrapper ?? filterControls;
-      if (
-        layoutBlock.parentNode !== subtitle.parentNode ||
-        layoutBlock.previousElementSibling !== subtitle
-      ) {
-        subtitle.parentNode?.insertBefore(layoutBlock, subtitle.nextSibling);
-      }
-    } else if (!isMobile && sidebar && filterControls.parentNode !== sidebar) {
-      sidebar.append(filterControls);
-    }
-  }
-
-  function positionTocResponsive() {
-    if (!tocContainer) return;
-    const isMobile = window.innerWidth < 768;
-    const sidebar = document.querySelector('.academic-sidebar');
-
-    if (isMobile && filterControls) {
-      if (
-        tocContainer.parentNode !== filterControls.parentNode ||
-        tocContainer.previousElementSibling !== filterControls
-      ) {
-        filterControls.parentNode?.insertBefore(tocContainer, filterControls.nextSibling);
-      }
-    } else if (!isMobile && sidebar && tocContainer.parentNode !== sidebar) {
-      sidebar.append(tocContainer);
-    }
-  }
-
   function wrapMobileStickyPanels() {
     const isMobile = window.innerWidth < 768;
     const existingWrapper = document.querySelector('.mobile-sticky-wrapper');
@@ -323,8 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function repositionCatalogLayout() {
-    positionFilterControlsResponsive();
-    positionTocResponsive();
     wrapMobileStickyPanels();
   }
 
@@ -371,7 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const qParam = initParams.get('q');
   if (qParam && searchInput) searchInput.value = qParam;
 
-  positionFilterControlsResponsive();
-  wrapMobileStickyPanels();
+  repositionCatalogLayout();
   render();
 });

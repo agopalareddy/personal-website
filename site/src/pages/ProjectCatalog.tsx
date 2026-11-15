@@ -19,11 +19,11 @@ const VENUE_OPTIONS = [
 ];
 
 /**
- * Ported from projects/index.html. Static listing grouped by year (matching
- * assets/js/projects-catalog.js's renderProjects() grouping); filter/search/
- * sort/TOC are hydrated client-side by site/src/islands/catalog-filter.ts
- * (T039/T042) reading the data-* attributes ProjectCard sets on each card —
- * this initial server-rendered order is also the island's default state.
+ * /projects/ — static list grouped by year. The toolbar's search, dropdowns,
+ * category tabs, and "Jump to year" links are hydrated client-side by
+ * site/src/islands/catalog-filter.ts, reading the data-* attributes
+ * ProjectCard sets on each row — this server-rendered order is also the
+ * island's default state.
  */
 export function ProjectCatalogPage({ projects }: { projects: ProjectEntry[] }) {
   const sorted = [...projects].sort(
@@ -35,13 +35,29 @@ export function ProjectCatalogPage({ projects }: { projects: ProjectEntry[] }) {
     .filter((y): y is number => y !== null)
     .sort((a, b) => b - a);
 
+  const yearOf = (p: ProjectEntry): number | null =>
+    p.date ? parseInt(p.date.split('-')[0], 10) : null;
+  const yearCounts = new Map<number, number>();
+  const categoryCounts: Record<string, number> = { all: projects.length };
+  for (const p of projects) {
+    const y = yearOf(p);
+    if (y) yearCounts.set(y, (yearCounts.get(y) ?? 0) + 1);
+    categoryCounts[p.category] = (categoryCounts[p.category] ?? 0) + 1;
+  }
+
   let lastYear: number | null = null;
   const items: JSX.Element[] = [];
   for (const p of sorted) {
-    const year = p.date ? parseInt(p.date.split('-')[0], 10) : null;
+    const year = yearOf(p);
     if (year && year !== lastYear) {
+      const n = yearCounts.get(year) ?? 0;
       items.push(
-        <h2 className="timeline-year" id={`year-${year}`} key={`year-${year}`}>
+        <h2
+          className="timeline-year"
+          id={`year-${year}`}
+          key={`year-${year}`}
+          data-count={`${n} ${n === 1 ? 'project' : 'projects'}`}
+        >
           {year}
         </h2>
       );
@@ -65,6 +81,7 @@ export function ProjectCatalogPage({ projects }: { projects: ProjectEntry[] }) {
       </p>
       <CatalogFilter
         categories={CATEGORIES}
+        categoryCounts={categoryCounts}
         categoryGroupAriaLabel="Category Filters"
         searchId="projectSearch"
         searchPlaceholder="Search projects, tags, venues..."
@@ -77,16 +94,16 @@ export function ProjectCatalogPage({ projects }: { projects: ProjectEntry[] }) {
         years={years}
         sortSelectId="projectSort"
         sortAriaLabel="Sort projects chronologically or alphabetically"
+        initialResultsText={`Showing ${projects.length} projects.`}
       />
       <div className="projects-container">
-        <p id="resultsCount" className="results-count" aria-live="polite" />
         <div className="project-timeline timeline-section" id="projectGrid">
           {items}
         </div>
         <div id="emptyState" className="empty-state" hidden>
-          No projects match your search or filter criteria.
-          <button type="button" id="clearFiltersBtn" className="card-btn btn-detail">
-            Clear Filters
+          <p>No projects match your search or filters.</p>
+          <button type="button" id="clearFiltersBtn" className="btn-default">
+            Clear filters
           </button>
         </div>
       </div>

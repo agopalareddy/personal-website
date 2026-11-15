@@ -97,8 +97,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=e2b0673d" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=e2b0673d" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=3dcf8c75" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=3dcf8c75" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to Content</a>
@@ -308,189 +308,196 @@
               Professional, research, leadership, and academic experience across industry and
               academia.
             </p>
-            <div class="catalog-toolbar">
-              <div class="toc-container card-surface catalog-toolbar-panel" id="filterControls">
-                <button
-                  class="toc-toggle-btn"
-                  id="filterToggleBtn"
-                  aria-expanded="true"
-                  aria-controls="filterNav"
-                >
-                  <h3 class="toc-title">Filters &amp; Search</h3>
-                  <span class="toc-toggle-icon" aria-hidden="true"></span>
-                </button>
-                <div id="filterNav">
-                  <search>
-                    <div class="projects-controls projects-controls--stacked">
-                      <div class="controls-row">
-                        <div class="filter-pills" role="group" aria-label="Category Filters">
-                          <button class="filter-btn active" data-filter="all" aria-pressed="true">
-                            All</button
-                          ><button
-                            class="filter-btn"
-                            data-filter="professional"
-                            aria-pressed="false"
-                          >
-                            Professional</button
-                          ><button class="filter-btn" data-filter="education" aria-pressed="false">
-                            Education</button
-                          ><button class="filter-btn" data-filter="research" aria-pressed="false">
-                            Research</button
-                          ><button class="filter-btn" data-filter="leadership" aria-pressed="false">
-                            Leadership</button
-                          ><button
-                            class="filter-btn"
-                            data-filter="presentations"
-                            aria-pressed="false"
-                          >
-                            Presentations</button
-                          ><button class="filter-btn" data-filter="awards" aria-pressed="false">
-                            Awards
-                          </button>
-                        </div>
-                        <div class="search-wrapper">
-                          <span class="search-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-search"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
-                                ></path></svg></span></span
-                          ><input
-                            type="text"
-                            class="search-input"
-                            id="experienceSearch"
-                            aria-label="Search experience by title, organization, or keyword"
-                            placeholder="Search experience..."
-                          />
-                        </div>
-                      </div>
-                      <div class="controls-row controls-row--bordered">
-                        <div class="select-wrapper">
-                          <select
-                            class="custom-select"
-                            id="orgFilter"
-                            data-role="group-filter"
-                            aria-label="Filter experience by organization"
-                          >
-                            <option value="all">All Organizations</option>
-                            <option value="WashU">Washington University in St. Louis</option>
-                            <option value="OWU">Ohio Wesleyan University</option>
-                            <option value="Corporate">Corporate / Industry</option>
-                            <option value="Personal">Other / Personal</option></select
-                          ><span class="select-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-chevron-down"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                                ></path></svg></span
-                          ></span>
-                        </div>
-                        <div class="select-wrapper">
-                          <select
-                            class="custom-select"
-                            id="yearFilter"
-                            data-role="year-filter"
-                            aria-label="Filter experience by year range"
-                          >
-                            <option value="all">All Years</option>
-                            <option value="2026">2026</option>
-                            <option value="2025">2025</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="2020">2020</option></select
-                          ><span class="select-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-chevron-down"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                                ></path></svg></span
-                          ></span>
-                        </div>
-                        <div class="select-wrapper">
-                          <select
-                            class="custom-select"
-                            id="experienceSort"
-                            data-role="sort"
-                            aria-label="Sort experience chronologically or alphabetically"
-                          >
-                            <option value="date-desc">Newest First</option>
-                            <option value="date-asc">Oldest First</option>
-                            <option value="title-asc">Alphabetical (A-Z)</option></select
-                          ><span class="select-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-chevron-down"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                                ></path></svg></span
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </search>
+            <div class="catalog-toolbar" id="filterControls">
+              <search class="catalog-toolbar-controls">
+                <div class="catalog-toolbar-row">
+                  <div class="search-wrapper">
+                    <span class="search-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-search"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
+                          ></path></svg></span></span
+                    ><input
+                      type="search"
+                      class="search-input"
+                      id="experienceSearch"
+                      aria-label="Search experience by title, organization, or keyword"
+                      placeholder="Search experience..."
+                    />
+                  </div>
+                  <div class="select-wrapper">
+                    <select
+                      class="custom-select"
+                      id="orgFilter"
+                      data-role="group-filter"
+                      aria-label="Filter experience by organization"
+                    >
+                      <option value="all">All Organizations</option>
+                      <option value="WashU">Washington University in St. Louis</option>
+                      <option value="OWU">Ohio Wesleyan University</option>
+                      <option value="Corporate">Corporate / Industry</option>
+                      <option value="Personal">Other / Personal</option></select
+                    ><span class="select-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-chevron-down"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                          ></path></svg></span
+                    ></span>
+                  </div>
+                  <div class="select-wrapper">
+                    <select
+                      class="custom-select"
+                      id="yearFilter"
+                      data-role="year-filter"
+                      aria-label="Filter experience by year range"
+                    >
+                      <option value="all">All years</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2020">2020</option></select
+                    ><span class="select-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-chevron-down"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                          ></path></svg></span
+                    ></span>
+                  </div>
+                  <div class="select-wrapper">
+                    <select
+                      class="custom-select"
+                      id="experienceSort"
+                      data-role="sort"
+                      aria-label="Sort experience chronologically or alphabetically"
+                    >
+                      <option value="date-desc">Newest first</option>
+                      <option value="date-asc">Oldest first</option>
+                      <option value="title-asc">Alphabetical (A–Z)</option></select
+                    ><span class="select-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-chevron-down"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                          ></path></svg></span
+                    ></span>
+                  </div>
                 </div>
-              </div>
-              <div
-                class="toc-container card-surface catalog-toolbar-panel"
-                id="tocContainer"
-                hidden=""
-              >
-                <button
-                  class="toc-toggle-btn"
-                  id="tocToggleBtn"
-                  aria-expanded="true"
-                  aria-controls="tocNav"
-                >
-                  <h3 class="toc-title">On this page</h3>
-                  <span class="toc-toggle-icon" aria-hidden="true"></span>
-                </button>
-                <nav aria-label="Table of contents" id="tocNav">
-                  <ul class="toc-list" id="tocList"></ul>
+                <div class="filter-pills catalog-tabs" role="group" aria-label="Category Filters">
+                  <button
+                    type="button"
+                    class="filter-btn active"
+                    data-filter="all"
+                    aria-pressed="true"
+                  >
+                    All<span class="filter-count">37</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="professional"
+                    aria-pressed="false"
+                  >
+                    Professional<span class="filter-count">9</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="education"
+                    aria-pressed="false"
+                  >
+                    Education<span class="filter-count">2</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="research"
+                    aria-pressed="false"
+                  >
+                    Research<span class="filter-count">3</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="leadership"
+                    aria-pressed="false"
+                  >
+                    Leadership<span class="filter-count">10</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="presentations"
+                    aria-pressed="false"
+                  >
+                    Presentations<span class="filter-count">3</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="awards"
+                    aria-pressed="false"
+                  >
+                    Awards<span class="filter-count">10</span>
+                  </button>
+                </div>
+              </search>
+              <div class="catalog-subbar">
+                <nav class="catalog-jump" id="tocContainer" aria-label="Jump to year">
+                  <span class="catalog-jump-label" aria-hidden="true">Jump to</span>
+                  <ul class="toc-list" id="tocList">
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2026">2026</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2025">2025</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2024">2024</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2023">2023</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2022">2022</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2020">2020</a></li>
+                  </ul>
                 </nav>
+                <p id="resultsCount" class="results-count" aria-live="polite">
+                  Showing 37 entries.
+                </p>
               </div>
             </div>
             <div class="experience-container">
-              <p id="resultsCount" class="results-count" aria-live="polite"></p>
               <div class="experience-timeline timeline-section" id="experienceGrid">
-                <h2 class="timeline-year" id="year-2026">2026</h2>
+                <h2 class="timeline-year" id="year-2026" data-count="10 entries">2026</h2>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2026-12-it-training-specialist"
                   data-category="professional"
                   data-group="Personal"
@@ -499,11 +506,8 @@
                   data-title="IT Training Specialist"
                   data-search="it training specialist it training specialist for ai in academic technology, a unit of uf information technology: ai training, documentation, and consultation for university employees. university of florida gainesville, florida, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/professional/2026-12-it-training-specialist.html"
-                      aria-label="Explore dedicated detail page for IT Training Specialist"
+                    <a href="/experience/professional/2026-12-it-training-specialist.html"
                       >IT Training Specialist</a
                     >
                   </h3>
@@ -517,32 +521,9 @@
                     Technology: AI training, documentation, and consultation for university
                     employees.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2026-12-it-training-specialist.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for IT Training Specialist"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2026-09-mobile-application-developer-intern"
                   data-category="professional"
                   data-group="Corporate"
@@ -551,11 +532,9 @@
                   data-title="Mobile Application Developer Intern"
                   data-search="mobile application developer intern built ignite performance consulting&#x27;s athlete coaching app, a react native client on a next.js, express/mongodb, and rasa stack, and prepared its app store and google play release. ignite performance consulting remote"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/professional/2026-09-mobile-application-developer-intern.html"
-                      aria-label="Explore dedicated detail page for Mobile Application Developer Intern"
                       >Mobile Application Developer Intern</a
                     >
                   </h3>
@@ -567,32 +546,9 @@
                     client on a Next.js, Express/MongoDB, and Rasa stack, and prepared its App Store
                     and Google Play release.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2026-09-mobile-application-developer-intern.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Mobile Application Developer Intern"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2024-08-m-s-computer-science"
                   data-category="education"
                   data-group="WashU"
@@ -601,11 +557,8 @@
                   data-title="M.S. Computer Science"
                   data-search="m.s. computer science m.s. in computer science at washu&#x27;s mckelvey school of engineering (gpa 3.67/4.00), capped by a master&#x27;s thesis on predicting cognitive impairment from naturalistic driving data. washington university in st. louis st. louis, missouri, usa washu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/education/2024-08-m-s-computer-science.html"
-                      aria-label="Explore dedicated detail page for M.S. Computer Science"
+                    <a href="/experience/education/2024-08-m-s-computer-science.html"
                       >M.S. Computer Science</a
                     >
                   </h3>
@@ -619,32 +572,9 @@
                     3.67/4.00), capped by a master&#x27;s thesis on predicting cognitive impairment
                     from naturalistic driving data.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/education/2024-08-m-s-computer-science.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for M.S. Computer Science"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2025-11-graduate-assistant-with-the-taylor-family-center"
                   data-category="professional"
                   data-group="WashU"
@@ -653,11 +583,9 @@
                   data-title="Graduate Assistant with the Taylor Family Center for Student Success"
                   data-search="graduate assistant with the taylor family center for student success drove event programming, ferpa-compliant engagement analytics, and communications for washu&#x27;s center supporting first-generation and limited-income students. washington university in st. louis st. louis, missouri, usa washu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center.html"
-                      aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
                       >Graduate Assistant with the Taylor Family Center for Student Success</a
                     >
                   </h3>
@@ -671,32 +599,9 @@
                     communications for WashU&#x27;s center supporting first-generation and
                     limited-income students.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2026-01-graduate-teaching-assistant-cse-5114-data"
                   data-category="professional"
                   data-group="WashU"
@@ -705,11 +610,9 @@
                   data-title="Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale"
                   data-search="graduate teaching assistant - cse 5114: data manipulation and management at scale supported a graduate data engineering course spanning snowflake, airflow, spark, kafka, and flink — running interview-style oral midterms and mentoring three capstone teams. washington university in st. louis st. louis, missouri, usa washu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/professional/2026-01-graduate-teaching-assistant-cse-5114-data.html"
-                      aria-label="Explore dedicated detail page for Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale"
                       >Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at
                       Scale</a
                     >
@@ -724,32 +627,9 @@
                     Kafka, and Flink — running interview-style oral midterms and mentoring three
                     capstone teams.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2026-01-graduate-teaching-assistant-cse-5114-data.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2025-08-member"
                   data-category="leadership"
                   data-group="Personal"
@@ -758,13 +638,8 @@
                   data-title="Member - GSAAB"
                   data-search="member - gsaab provided strategic feedback to the vice chancellor for student affairs on critical issues impacting graduate student life and experience. graduate student affairs advisory board (gsaab) washington university in st. louis, st. louis, missouri, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2025-08-member.html"
-                      aria-label="Explore dedicated detail page for Member - GSAAB"
-                      >Member - GSAAB</a
-                    >
+                    <a href="/experience/leadership/2025-08-member.html">Member - GSAAB</a>
                   </h3>
                   <span class="card-category cat-leadership">Leadership</span
                   ><span class="card-venue">Aug 2025 – May 2026</span>
@@ -776,32 +651,9 @@
                     Provided strategic feedback to the Vice Chancellor for Student Affairs on
                     critical issues impacting graduate student life and experience.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2025-08-member.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Member - GSAAB"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2025-08-graduate-student-member"
                   data-category="leadership"
                   data-group="Personal"
@@ -810,11 +662,8 @@
                   data-title="Graduate Student Member - CCE Board"
                   data-search="graduate student member - cce board served on a 25-30 member advisory board guiding the strategic direction of washu&#x27;s center for career engagement on behalf of graduate students. center for career engagement (cce) student advisory board washington university in st. louis, st. louis, missouri, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2025-08-graduate-student-member.html"
-                      aria-label="Explore dedicated detail page for Graduate Student Member - CCE Board"
+                    <a href="/experience/leadership/2025-08-graduate-student-member.html"
                       >Graduate Student Member - CCE Board</a
                     >
                   </h3>
@@ -828,32 +677,9 @@
                     Served on a 25-30 member advisory board guiding the strategic direction of
                     WashU&#x27;s Center for Career Engagement on behalf of graduate students.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2025-08-graduate-student-member.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Graduate Student Member - CCE Board"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2025-05-vice-president-of-the-graduate-professional-council"
                   data-category="leadership"
                   data-group="Personal"
@@ -862,11 +688,9 @@
                   data-title="Vice President of the Graduate-Professional Council (GPC) Chamber - GPSC"
                   data-search="vice president of the graduate-professional council (gpc) chamber - gpsc launched the merged council&#x27;s first unified collaboration workspace and chaired the committee that drafted and ratified its founding constitution and bylaws. graduate and professional student council (gpsc) washington university in st. louis, st. louis, missouri, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/leadership/2025-05-vice-president-of-the-graduate-professional-council.html"
-                      aria-label="Explore dedicated detail page for Vice President of the Graduate-Professional Council (GPC) Chamber - GPSC"
                       >Vice President of the Graduate-Professional Council (GPC) Chamber - GPSC</a
                     >
                   </h3>
@@ -881,32 +705,9 @@
                     chaired the committee that drafted and ratified its founding Constitution and
                     Bylaws.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2025-05-vice-president-of-the-graduate-professional-council.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Vice President of the Graduate-Professional Council (GPC) Chamber - GPSC"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2025-08-toward-vehicle-agnostic-driving-signatures-for"
                   data-category="research"
                   data-group="WashU"
@@ -915,11 +716,9 @@
                   data-title="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
                   data-search="toward vehicle-agnostic driving signatures for cognitive impairment prediction from naturalistic driving data master&#x27;s thesis benchmarking six model families on 26,968 participant-weeks of naturalistic driving data from 304 older adults to predict cognitive impairment across vehicle types. drives project, washington university in st. louis master&#x27;s thesis (thesis supervisor &amp; lab pi: dr. ganesh babulal; thesis advisor &amp; committee chair: dr. alvitta ottley) st. louis, missouri, usa washu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/research/2025-08-toward-vehicle-agnostic-driving-signatures-for.html"
-                      aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
                       >Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment
                       Prediction from Naturalistic Driving Data</a
                     >
@@ -936,32 +735,9 @@
                     of naturalistic driving data from 304 older adults to predict cognitive
                     impairment across vehicle types.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/research/2025-08-toward-vehicle-agnostic-driving-signatures-for.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2026-04-bauer-leaders-academy-bla-leadership-development"
                   data-category="awards"
                   data-group="WashU"
@@ -970,11 +746,9 @@
                   data-title="Bauer Leaders Academy (BLA) Leadership Development Badge"
                   data-search="bauer leaders academy (bla) leadership development badge earned the bauer leaders academy leadership development badge through leadership workshops, one-on-one coaching, and experiential learning. washington university in st. louis washu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/awards/2026-04-bauer-leaders-academy-bla-leadership-development.html"
-                      aria-label="Explore dedicated detail page for Bauer Leaders Academy (BLA) Leadership Development Badge"
                       >Bauer Leaders Academy (BLA) Leadership Development Badge</a
                     >
                   </h3>
@@ -985,33 +759,10 @@
                     Earned the Bauer Leaders Academy Leadership Development Badge through leadership
                     workshops, one-on-one coaching, and experiential learning.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2026-04-bauer-leaders-academy-bla-leadership-development.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Bauer Leaders Academy (BLA) Leadership Development Badge"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
-                <h2 class="timeline-year" id="year-2025">2025</h2>
+                <h2 class="timeline-year" id="year-2025" data-count="4 entries">2025</h2>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2025-06-treasurer"
                   data-category="leadership"
                   data-group="Personal"
@@ -1020,13 +771,8 @@
                   data-title="Treasurer - Umang"
                   data-search="treasurer - umang managed finances and university funding requests for washu&#x27;s indian graduate student association, enabling cultural events and community programming. umang (indian graduate student association) washington university in st. louis, st. louis, missouri, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2025-06-treasurer.html"
-                      aria-label="Explore dedicated detail page for Treasurer - Umang"
-                      >Treasurer - Umang</a
-                    >
+                    <a href="/experience/leadership/2025-06-treasurer.html">Treasurer - Umang</a>
                   </h3>
                   <span class="card-category cat-leadership">Leadership</span
                   ><span class="card-venue">Jun 2025 – Oct 2025</span>
@@ -1039,32 +785,9 @@
                     graduate student association, enabling cultural events and community
                     programming.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2025-06-treasurer.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Treasurer - Umang"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2025-06-ai-engineer-intern"
                   data-category="professional"
                   data-group="Corporate"
@@ -1073,11 +796,8 @@
                   data-title="AI Engineer Intern"
                   data-search="ai engineer intern generated 100,000 labeled social media posts across seven personas and trained a tensorflow/keras recommendation model achieving 80% accuracy for crittercircle, crittero&#x27;s social platform. crittero, inc. remote"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/professional/2025-06-ai-engineer-intern.html"
-                      aria-label="Explore dedicated detail page for AI Engineer Intern"
+                    <a href="/experience/professional/2025-06-ai-engineer-intern.html"
                       >AI Engineer Intern</a
                     >
                   </h3>
@@ -1089,32 +809,9 @@
                     TensorFlow/Keras recommendation model achieving 80% accuracy for CritterCircle,
                     Crittero&#x27;s social platform.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2025-06-ai-engineer-intern.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for AI Engineer Intern"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2024-12-treasurer"
                   data-category="leadership"
                   data-group="Personal"
@@ -1123,11 +820,8 @@
                   data-title="Treasurer - HackWashU"
                   data-search="treasurer - hackwashu managed finances, fundraising, and sponsorship outreach for washu&#x27;s student hackathon organization. hackwashu washington university in st. louis, st. louis, missouri, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2024-12-treasurer.html"
-                      aria-label="Explore dedicated detail page for Treasurer - HackWashU"
+                    <a href="/experience/leadership/2024-12-treasurer.html"
                       >Treasurer - HackWashU</a
                     >
                   </h3>
@@ -1140,32 +834,9 @@
                     Managed finances, fundraising, and sponsorship outreach for WashU&#x27;s student
                     hackathon organization.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2024-12-treasurer.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Treasurer - HackWashU"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2024-08-graduate-assistant-with-the-taylor-family-center"
                   data-category="professional"
                   data-group="WashU"
@@ -1174,11 +845,9 @@
                   data-title="Graduate Assistant with the Taylor Family Center for Student Success"
                   data-search="graduate assistant with the taylor family center for student success organized signature community events and led engagement analytics and communications for washu&#x27;s center supporting first-generation and limited-income students. washington university in st. louis st. louis, missouri, usa washu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html"
-                      aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
                       >Graduate Assistant with the Taylor Family Center for Student Success</a
                     >
                   </h3>
@@ -1192,33 +861,10 @@
                     communications for WashU&#x27;s center supporting first-generation and
                     limited-income students.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Graduate Assistant with the Taylor Family Center for Student Success"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
-                <h2 class="timeline-year" id="year-2024">2024</h2>
+                <h2 class="timeline-year" id="year-2024" data-count="3 entries">2024</h2>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2024-09-an-introduction-to-artificial-intelligence-for-high"
                   data-category="presentations"
                   data-group="Personal"
@@ -1227,11 +873,9 @@
                   data-title="An Introduction to Artificial Intelligence for High School Students"
                   data-search="an introduction to artificial intelligence for high school students presented on artificial intelligence — with a hands-on connect 4 ai demo — to high school students at a workshop hosted by ages and science coach. engineering workshop by ages &amp; science coach washington university in st. louis"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/presentations/2024-09-an-introduction-to-artificial-intelligence-for-high.html"
-                      aria-label="Explore dedicated detail page for An Introduction to Artificial Intelligence for High School Students"
                       >An Introduction to Artificial Intelligence for High School Students</a
                     >
                   </h3>
@@ -1245,32 +889,9 @@
                     Presented on artificial intelligence — with a hands-on Connect 4 AI demo — to
                     high school students at a workshop hosted by AGES and Science Coach.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/presentations/2024-09-an-introduction-to-artificial-intelligence-for-high.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for An Introduction to Artificial Intelligence for High School Students"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2023-06-data-analyst-intern"
                   data-category="professional"
                   data-group="Corporate"
@@ -1279,11 +900,8 @@
                   data-title="Data Analyst Intern"
                   data-search="data analyst intern designed and engineered a figma-to-react ui for an environmental sensor device; analyzed iot sensor data on aws, building dashboards that cut client pool maintenance costs by 20%. lab714 boca raton, florida, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/professional/2023-06-data-analyst-intern.html"
-                      aria-label="Explore dedicated detail page for Data Analyst Intern"
+                    <a href="/experience/professional/2023-06-data-analyst-intern.html"
                       >Data Analyst Intern</a
                     >
                   </h3>
@@ -1295,32 +913,9 @@
                     analyzed IoT sensor data on AWS, building dashboards that cut client pool
                     maintenance costs by 20%.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2023-06-data-analyst-intern.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Data Analyst Intern"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2024-05-graduate-scholarship"
                   data-category="awards"
                   data-group="WashU"
@@ -1329,11 +924,8 @@
                   data-title="Graduate Scholarship"
                   data-search="graduate scholarship awarded a scholarship for graduate study at washington university in st. louis&#x27;s mckelvey school of engineering. washington university in st. louis washu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/awards/2024-05-graduate-scholarship.html"
-                      aria-label="Explore dedicated detail page for Graduate Scholarship"
+                    <a href="/experience/awards/2024-05-graduate-scholarship.html"
                       >Graduate Scholarship</a
                     >
                   </h3>
@@ -1344,33 +936,10 @@
                     Awarded a scholarship for graduate study at Washington University in St.
                     Louis&#x27;s McKelvey School of Engineering.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2024-05-graduate-scholarship.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Graduate Scholarship"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
-                <h2 class="timeline-year" id="year-2023">2023</h2>
+                <h2 class="timeline-year" id="year-2023" data-count="12 entries">2023</h2>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2020-08-b-a-computer-science-data-analytics"
                   data-category="education"
                   data-group="OWU"
@@ -1379,11 +948,8 @@
                   data-title="B.A. Computer Science &amp; Data Analytics"
                   data-search="b.a. computer science &amp; data analytics b.a. in computer science &amp; data analytics with an economics minor at ohio wesleyan university — four-year program completed in three years. ohio wesleyan university delaware, ohio, usa owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/education/2020-08-b-a-computer-science-data-analytics.html"
-                      aria-label="Explore dedicated detail page for B.A. Computer Science &amp; Data Analytics"
+                    <a href="/experience/education/2020-08-b-a-computer-science-data-analytics.html"
                       >B.A. Computer Science &amp; Data Analytics</a
                     >
                   </h3>
@@ -1394,32 +960,9 @@
                     B.A. in Computer Science &amp; Data Analytics with an Economics minor at Ohio
                     Wesleyan University — four-year program completed in three years.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/education/2020-08-b-a-computer-science-data-analytics.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for B.A. Computer Science &amp; Data Analytics"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2023-01-opinion-survey-on-artificial-intelligence-in-the"
                   data-category="research"
                   data-group="OWU"
@@ -1428,11 +971,9 @@
                   data-title="Opinion Survey on Artificial Intelligence in the Workplace"
                   data-search="opinion survey on artificial intelligence in the workplace designed and fielded a capstone survey experiment on workplace attitudes toward ai across four industries, analyzing 1,000 employee responses with r and tableau. ohio wesleyan university data analytics capstone — data 490 independent study (mentor: dr. nicholas dietrich) delaware, ohio, usa owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/research/2023-01-opinion-survey-on-artificial-intelligence-in-the.html"
-                      aria-label="Explore dedicated detail page for Opinion Survey on Artificial Intelligence in the Workplace"
                       >Opinion Survey on Artificial Intelligence in the Workplace</a
                     >
                   </h3>
@@ -1447,32 +988,9 @@
                     AI across four industries, analyzing 1,000 employee responses with R and
                     Tableau.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/research/2023-01-opinion-survey-on-artificial-intelligence-in-the.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Opinion Survey on Artificial Intelligence in the Workplace"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2021-09-media-center-assistant"
                   data-category="professional"
                   data-group="OWU"
@@ -1481,11 +999,8 @@
                   data-title="Media Center Assistant"
                   data-search="media center assistant provided audio-visual setup, logistics tracking, and on-site troubleshooting for events across the ohio wesleyan campus. ohio wesleyan university delaware, ohio, usa owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/professional/2021-09-media-center-assistant.html"
-                      aria-label="Explore dedicated detail page for Media Center Assistant"
+                    <a href="/experience/professional/2021-09-media-center-assistant.html"
                       >Media Center Assistant</a
                     >
                   </h3>
@@ -1496,32 +1011,9 @@
                     Provided audio-visual setup, logistics tracking, and on-site troubleshooting for
                     events across the Ohio Wesleyan campus.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2021-09-media-center-assistant.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Media Center Assistant"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-01-computer-science-lab-assistant"
                   data-category="professional"
                   data-group="OWU"
@@ -1530,11 +1022,8 @@
                   data-title="Computer Science Lab Assistant"
                   data-search="computer science lab assistant tutored 10+ students weekly across introductory through advanced computer science courses and graded assignments for roughly 35 students. ohio wesleyan university delaware, ohio, usa owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/professional/2022-01-computer-science-lab-assistant.html"
-                      aria-label="Explore dedicated detail page for Computer Science Lab Assistant"
+                    <a href="/experience/professional/2022-01-computer-science-lab-assistant.html"
                       >Computer Science Lab Assistant</a
                     >
                   </h3>
@@ -1545,32 +1034,9 @@
                     Tutored 10+ students weekly across introductory through advanced computer
                     science courses and graded assignments for roughly 35 students.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/professional/2022-01-computer-science-lab-assistant.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Computer Science Lab Assistant"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2023-01-treasurer-and-founding-member"
                   data-category="leadership"
                   data-group="Personal"
@@ -1579,11 +1045,8 @@
                   data-title="Treasurer and Founding Member - HSC"
                   data-search="treasurer and founding member - hsc co-founded ohio wesleyan&#x27;s hindu student council and managed its finances, organizing holi, diwali, and other cultural celebrations. hindu student council ohio wesleyan university, delaware, ohio, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2023-01-treasurer-and-founding-member.html"
-                      aria-label="Explore dedicated detail page for Treasurer and Founding Member - HSC"
+                    <a href="/experience/leadership/2023-01-treasurer-and-founding-member.html"
                       >Treasurer and Founding Member - HSC</a
                     >
                   </h3>
@@ -1596,32 +1059,9 @@
                     Co-founded Ohio Wesleyan&#x27;s Hindu Student Council and managed its finances,
                     organizing Holi, Diwali, and other cultural celebrations.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2023-01-treasurer-and-founding-member.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Treasurer and Founding Member - HSC"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-08-budget-committee-senator"
                   data-category="leadership"
                   data-group="Personal"
@@ -1630,11 +1070,8 @@
                   data-title="Budget Committee Senator - WCSA"
                   data-search="budget committee senator - wcsa oversaw the allocation of a $350,000+ annual budget as a student government senator, earning the golden bishop award for wcsa best new member. wesleyan council on student affairs (wcsa) ohio wesleyan university, delaware, ohio, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2022-08-budget-committee-senator.html"
-                      aria-label="Explore dedicated detail page for Budget Committee Senator - WCSA"
+                    <a href="/experience/leadership/2022-08-budget-committee-senator.html"
                       >Budget Committee Senator - WCSA</a
                     >
                   </h3>
@@ -1648,32 +1085,9 @@
                     Oversaw the allocation of a $350,000+ annual budget as a student government
                     senator, earning the Golden Bishop Award for WCSA Best New Member.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2022-08-budget-committee-senator.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Budget Committee Senator - WCSA"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-08-member"
                   data-category="leadership"
                   data-group="Personal"
@@ -1682,11 +1096,8 @@
                   data-title="Founding Member - The Neurds"
                   data-search="founding member - the neurds founding member of ohio wesleyan&#x27;s neuroscience club; presented on ai at brain fair 2023 during brain awareness week. the neurds (neuroscience club) ohio wesleyan university, delaware, ohio, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2022-08-member.html"
-                      aria-label="Explore dedicated detail page for Founding Member - The Neurds"
+                    <a href="/experience/leadership/2022-08-member.html"
                       >Founding Member - The Neurds</a
                     >
                   </h3>
@@ -1699,32 +1110,9 @@
                     Founding member of Ohio Wesleyan&#x27;s neuroscience club; presented on AI at
                     Brain Fair 2023 during Brain Awareness Week.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2022-08-member.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Founding Member - The Neurds"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2021-08-member"
                   data-category="leadership"
                   data-group="Personal"
@@ -1733,13 +1121,8 @@
                   data-title="Member - Math/CS Board"
                   data-search="member - math/cs board advised the department by analyzing faculty evaluations and synthesizing student feedback on course offerings. mathematics, computer science &amp; data analytics student board ohio wesleyan university, delaware, ohio, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2021-08-member.html"
-                      aria-label="Explore dedicated detail page for Member - Math/CS Board"
-                      >Member - Math/CS Board</a
-                    >
+                    <a href="/experience/leadership/2021-08-member.html">Member - Math/CS Board</a>
                   </h3>
                   <span class="card-category cat-leadership">Leadership</span
                   ><span class="card-venue">Aug 2021 – May 2023</span>
@@ -1751,32 +1134,9 @@
                     Advised the department by analyzing faculty evaluations and synthesizing student
                     feedback on course offerings.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2021-08-member.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Member - Math/CS Board"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2023-05-dean-s-list"
                   data-category="awards"
                   data-group="OWU"
@@ -1785,13 +1145,8 @@
                   data-title="Dean&#x27;s List"
                   data-search="dean&#x27;s list named to ohio wesleyan&#x27;s spring 2023 dean&#x27;s list for achieving a gpa of 3.5 or higher. ohio wesleyan university owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/awards/2023-05-dean-s-list.html"
-                      aria-label="Explore dedicated detail page for Dean&#x27;s List"
-                      >Dean&#x27;s List</a
-                    >
+                    <a href="/experience/awards/2023-05-dean-s-list.html">Dean&#x27;s List</a>
                   </h3>
                   <span class="card-category cat-awards">Awards</span
                   ><span class="card-venue">May 2023</span>
@@ -1800,32 +1155,9 @@
                     Named to Ohio Wesleyan&#x27;s Spring 2023 Dean&#x27;s List for achieving a GPA
                     of 3.5 or higher.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2023-05-dean-s-list.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Dean&#x27;s List"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2023-04-artificial-intelligence-opinion-survey"
                   data-category="presentations"
                   data-group="Personal"
@@ -1834,11 +1166,9 @@
                   data-title="Artificial Intelligence Opinion Survey"
                   data-search="artificial intelligence opinion survey presented the &#x27;artificial intelligence opinion survey&#x27; capstone research at ohio wesleyan&#x27;s 2023 spring student symposium. spring student symposium ohio wesleyan university"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/presentations/2023-04-artificial-intelligence-opinion-survey.html"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence Opinion Survey"
                       >Artificial Intelligence Opinion Survey</a
                     >
                   </h3>
@@ -1851,32 +1181,9 @@
                     Presented the &#x27;Artificial Intelligence Opinion Survey&#x27; capstone
                     research at Ohio Wesleyan&#x27;s 2023 Spring Student Symposium.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/presentations/2023-04-artificial-intelligence-opinion-survey.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence Opinion Survey"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2023-04-mortar-board-national-college-senior-honor-society"
                   data-category="awards"
                   data-group="OWU"
@@ -1885,11 +1192,9 @@
                   data-title="Mortar Board National College Senior Honor Society Membership"
                   data-search="mortar board national college senior honor society membership one of 15 ohio wesleyan students inducted into mortar board, the national senior honor society recognizing exemplary scholarship, leadership, and service. ohio wesleyan university owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/awards/2023-04-mortar-board-national-college-senior-honor-society.html"
-                      aria-label="Explore dedicated detail page for Mortar Board National College Senior Honor Society Membership"
                       >Mortar Board National College Senior Honor Society Membership</a
                     >
                   </h3>
@@ -1900,32 +1205,9 @@
                     One of 15 Ohio Wesleyan students inducted into Mortar Board, the national senior
                     honor society recognizing exemplary scholarship, leadership, and service.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2023-04-mortar-board-national-college-senior-honor-society.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Mortar Board National College Senior Honor Society Membership"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2023-04-golden-bishop-award-wcsa-best-new-member"
                   data-category="awards"
                   data-group="OWU"
@@ -1934,11 +1216,9 @@
                   data-title="Golden Bishop Award - WCSA Best New Member"
                   data-search="golden bishop award - wcsa best new member named wcsa best new member at ohio wesleyan&#x27;s 2022-23 golden bishop awards for the greatest overall contribution by a first-term member of the student government. ohio wesleyan university owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/awards/2023-04-golden-bishop-award-wcsa-best-new-member.html"
-                      aria-label="Explore dedicated detail page for Golden Bishop Award - WCSA Best New Member"
                       >Golden Bishop Award - WCSA Best New Member</a
                     >
                   </h3>
@@ -1950,33 +1230,10 @@
                     for the greatest overall contribution by a first-term member of the student
                     government.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2023-04-golden-bishop-award-wcsa-best-new-member.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Golden Bishop Award - WCSA Best New Member"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
-                <h2 class="timeline-year" id="year-2022">2022</h2>
+                <h2 class="timeline-year" id="year-2022" data-count="6 entries">2022</h2>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-01-vice-president-of-finance"
                   data-category="leadership"
                   data-group="Personal"
@@ -1985,11 +1242,8 @@
                   data-title="Vice President of Finance - CPB"
                   data-search="vice president of finance - cpb managed an $86,000+ events budget for ohio wesleyan&#x27;s campus programming board and negotiated a $10,000 annual funding increase. campus programming board ohio wesleyan university, delaware, ohio, usa"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/leadership/2022-01-vice-president-of-finance.html"
-                      aria-label="Explore dedicated detail page for Vice President of Finance - CPB"
+                    <a href="/experience/leadership/2022-01-vice-president-of-finance.html"
                       >Vice President of Finance - CPB</a
                     >
                   </h3>
@@ -2002,32 +1256,9 @@
                     Managed an $86,000+ events budget for Ohio Wesleyan&#x27;s Campus Programming
                     Board and negotiated a $10,000 annual funding increase.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/leadership/2022-01-vice-president-of-finance.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Vice President of Finance - CPB"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-09-artificial-intelligence-in-modern-board-games"
                   data-category="presentations"
                   data-group="Personal"
@@ -2036,11 +1267,9 @@
                   data-title="Artificial Intelligence in Modern Board Games"
                   data-search="artificial intelligence in modern board games presented &#x27;artificial intelligence in modern board games&#x27; research at ohio wesleyan&#x27;s patricia belt conrades summer science research symposium. patricia belt conrades summer science research symposium ohio wesleyan university"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/presentations/2022-09-artificial-intelligence-in-modern-board-games.html"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games"
                       >Artificial Intelligence in Modern Board Games</a
                     >
                   </h3>
@@ -2054,32 +1283,9 @@
                     Presented &#x27;Artificial Intelligence in Modern Board Games&#x27; research at
                     Ohio Wesleyan&#x27;s Patricia Belt Conrades Summer Science Research Symposium.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/presentations/2022-09-artificial-intelligence-in-modern-board-games.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-05-artificial-intelligence-in-modern-board-games-lost"
                   data-category="research"
                   data-group="OWU"
@@ -2088,11 +1294,9 @@
                   data-title="Artificial Intelligence in Modern Board Games - Lost Cities AI"
                   data-search="artificial intelligence in modern board games - lost cities ai built a digital lost cities card game in java and a heuristic-driven ai agent that won over 70% of test games against human players during a mentored summer research program. ohio wesleyan university summer science research program (mentor: dr. sean mcculloch) delaware, ohio, usa owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/research/2022-05-artificial-intelligence-in-modern-board-games-lost.html"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games - Lost Cities AI"
                       >Artificial Intelligence in Modern Board Games - Lost Cities AI</a
                     >
                   </h3>
@@ -2107,32 +1311,9 @@
                     that won over 70% of test games against human players during a mentored summer
                     research program.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/research/2022-05-artificial-intelligence-in-modern-board-games-lost.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games - Lost Cities AI"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-05-dean-s-list"
                   data-category="awards"
                   data-group="OWU"
@@ -2141,13 +1322,8 @@
                   data-title="Dean&#x27;s List"
                   data-search="dean&#x27;s list named to ohio wesleyan&#x27;s spring 2022 dean&#x27;s list for achieving a gpa of 3.5 or higher. ohio wesleyan university owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/awards/2022-05-dean-s-list.html"
-                      aria-label="Explore dedicated detail page for Dean&#x27;s List"
-                      >Dean&#x27;s List</a
-                    >
+                    <a href="/experience/awards/2022-05-dean-s-list.html">Dean&#x27;s List</a>
                   </h3>
                   <span class="card-category cat-awards">Awards</span
                   ><span class="card-venue">May 2022</span>
@@ -2156,32 +1332,9 @@
                     Named to Ohio Wesleyan&#x27;s Spring 2022 Dean&#x27;s List for achieving a GPA
                     of 3.5 or higher.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2022-05-dean-s-list.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Dean&#x27;s List"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-04-florence-leas-sophomore-prize"
                   data-category="awards"
                   data-group="OWU"
@@ -2190,11 +1343,8 @@
                   data-title="Florence Leas Sophomore Prize"
                   data-search="florence leas sophomore prize awarded the florence leas prize for excelling in mathematics or computer science, on faculty recommendation. ohio wesleyan university owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/awards/2022-04-florence-leas-sophomore-prize.html"
-                      aria-label="Explore dedicated detail page for Florence Leas Sophomore Prize"
+                    <a href="/experience/awards/2022-04-florence-leas-sophomore-prize.html"
                       >Florence Leas Sophomore Prize</a
                     >
                   </h3>
@@ -2205,32 +1355,9 @@
                     Awarded the Florence Leas Prize for excelling in mathematics or computer
                     science, on faculty recommendation.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2022-04-florence-leas-sophomore-prize.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Florence Leas Sophomore Prize"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2022-03-first-place-32nd-annual-spring-programming-contest"
                   data-category="awards"
                   data-group="Personal"
@@ -2239,11 +1366,9 @@
                   data-title="First Place - 32nd Annual Spring Programming Contest"
                   data-search="first place - 32nd annual spring programming contest won first place with team codebit-19, solving all eight problems against 28 teams from six schools at denison&#x27;s annual programming contest. denison university"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/awards/2022-03-first-place-32nd-annual-spring-programming-contest.html"
-                      aria-label="Explore dedicated detail page for First Place - 32nd Annual Spring Programming Contest"
                       >First Place - 32nd Annual Spring Programming Contest</a
                     >
                   </h3>
@@ -2254,33 +1379,10 @@
                     Won first place with team CODEBIT-19, solving all eight problems against 28
                     teams from six schools at Denison&#x27;s annual programming contest.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2022-03-first-place-32nd-annual-spring-programming-contest.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for First Place - 32nd Annual Spring Programming Contest"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
-                <h2 class="timeline-year" id="year-2020">2020</h2>
+                <h2 class="timeline-year" id="year-2020" data-count="2 entries">2020</h2>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2020-01-international-baccalaureate-scholarship"
                   data-category="awards"
                   data-group="OWU"
@@ -2289,11 +1391,9 @@
                   data-title="International Baccalaureate Scholarship"
                   data-search="international baccalaureate scholarship awarded ohio wesleyan&#x27;s international baccalaureate scholarship for excelling in the ib diploma programme. ohio wesleyan university owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
                     <a
                       href="/experience/awards/2020-01-international-baccalaureate-scholarship.html"
-                      aria-label="Explore dedicated detail page for International Baccalaureate Scholarship"
                       >International Baccalaureate Scholarship</a
                     >
                   </h3>
@@ -2304,32 +1404,9 @@
                     Awarded Ohio Wesleyan&#x27;s International Baccalaureate Scholarship for
                     excelling in the IB Diploma Programme.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2020-01-international-baccalaureate-scholarship.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for International Baccalaureate Scholarship"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card experience-card catalog-row"
+                  class="project-card timeline-card experience-card catalog-row"
                   id="exp-2020-01-scholar"
                   data-category="awards"
                   data-group="Personal"
@@ -2338,13 +1415,8 @@
                   data-title="Next Genius Scholar"
                   data-search="next genius scholar selected as a next genius scholar through a competitive program funding high-performing indian students at leading global universities. next genius scholarship foundation"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/experience/awards/2020-01-scholar.html"
-                      aria-label="Explore dedicated detail page for Next Genius Scholar"
-                      >Next Genius Scholar</a
-                    >
+                    <a href="/experience/awards/2020-01-scholar.html">Next Genius Scholar</a>
                   </h3>
                   <span class="card-category cat-awards">Awards</span
                   ><span class="card-venue">Jan 2020</span>
@@ -2353,38 +1425,12 @@
                     Selected as a Next Genius Scholar through a competitive program funding
                     high-performing Indian students at leading global universities.
                   </p>
-                  <div class="card-actions">
-                    <a
-                      href="/experience/awards/2020-01-scholar.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Next Genius Scholar"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
-                    >
-                  </div>
                 </div>
               </div>
               <div id="emptyState" class="empty-state" hidden="">
-                No experience entries match your search or filter criteria.<button
-                  type="button"
-                  id="clearFiltersBtn"
-                  class="card-btn btn-detail"
-                >
-                  Clear Filters
+                <p>No experience entries match your search or filters.</p>
+                <button type="button" id="clearFiltersBtn" class="btn-default">
+                  Clear filters
                 </button>
               </div>
             </div>
@@ -2461,6 +1507,6 @@
     <script type="module" src="/assets/site/assets/theme-CoKIc0-k.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
     <script type="module" src="/assets/site/assets/scroll-to-top-B-5Wv14u.js"></script>
-    <script type="module" src="/assets/site/assets/catalog-filter-CrN9cbBL.js"></script>
+    <script type="module" src="/assets/site/assets/catalog-filter-CeZEYEmP.js"></script>
   </body>
 </html>

@@ -115,7 +115,9 @@ async function main() {
     );
   }
 
-  written.push(renderPage(HomePage(), 'index.html', [...commonIslands, homeSkillToggleIsland]));
+  written.push(
+    renderPage(HomePage({ projects }), 'index.html', [...commonIslands, homeSkillToggleIsland])
+  );
   written.push(renderPage(CvHubPage(), 'cv/index.html', [...commonIslands, cvModalIsland]));
   written.push(renderPage(AvailabilityPage(), 'availability/index.html', commonIslands));
   written.push(renderPage(AccessibilityPage(), 'accessibility.html', commonIslands));

@@ -109,8 +109,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=3dcf8c75" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=3dcf8c75" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=ba86d3c5" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=ba86d3c5" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -328,98 +328,108 @@
             </div>
           </aside>
           <article class="academic-content">
-            <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
-              Instagram Unfollow Checker
-            </h1>
-            <p
-              style="
-                font-family: var(--font-body);
-                font-size: 0.9rem;
-                font-style: italic;
-                color: var(--text-muted);
-                margin-bottom: 2rem;
-              "
-            >
-              Personal Project — Jun 2025 – Aug 2025
-            </p>
-            <section class="page__content">
-              <p>
-                This desktop GUI application uses the instaloader library to log into Instagram,
-                fetch a user&apos;s followers and following lists, and report accounts they follow
-                that don&apos;t follow back. Results are saved to a text file as a list of profile
-                URLs, with status updates streamed to the GUI in real time.
+            <div class="detail">
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <ol>
+                  <li><a href="/projects/">Projects</a></li>
+                  <li aria-current="page">Instagram Unfollow Checker</li>
+                </ol>
+              </nav>
+              <h1 class="detail-title">Instagram Unfollow Checker</h1>
+              <p class="detail-subtitle">
+                A cross-platform GUI application that identifies Instagram accounts you follow that
+                don&#x27;t follow you back, with session management and 2FA support.
               </p>
-              <p>
-                The app supports session persistence to avoid repeated logins, handles two-factor
-                authentication prompts, and falls back to password entry if a saved session expires.
-                It&apos;s distributed as prebuilt executables for Windows, macOS, and Linux via
-                GitHub Releases, and emphasizes privacy: credentials are never stored, only session
-                cookies are cached locally, and all processing happens on-device.
-              </p>
-              <h4
-                style="
-                  font-family: var(--font-heading);
-                  margin-top: 1.5rem;
-                  margin-bottom: 0.5rem;
-                  color: var(--text-primary);
-                "
-              >
-                Highlights
-              </h4>
-              <ul>
-                <li>Identifies accounts you follow that don&apos;t follow back</li>
-                <li>Session persistence with 2FA and expired-session handling</li>
-                <li>Cross-platform prebuilt binaries for Windows, macOS, and Linux</li>
-                <li>Privacy-first: no credentials stored, all processing local</li>
-              </ul>
-            </section>
-            <div
-              style="
-                margin-top: 2rem;
-                border-top: 1px solid var(--border-color);
-                padding-top: 1.5rem;
-              "
-            >
-              <h4
-                style="
-                  font-family: var(--font-heading);
-                  margin-bottom: 0.5rem;
-                  color: var(--text-primary);
-                "
-              >
-                Technologies Applied
-              </h4>
-              <div class="project-tech">
-                <span class="tech-tag">Python</span><span class="tech-tag">Tkinter</span
-                ><span class="tech-tag">Instaloader</span><span class="tech-tag">PyInstaller</span>
+              <div class="detail-grid">
+                <div class="detail-main">
+                  <section class="page__content">
+                    <p>
+                      This desktop GUI application uses the instaloader library to log into
+                      Instagram, fetch a user&apos;s followers and following lists, and report
+                      accounts they follow that don&apos;t follow back. Results are saved to a text
+                      file as a list of profile URLs, with status updates streamed to the GUI in
+                      real time.
+                    </p>
+                    <p>
+                      The app supports session persistence to avoid repeated logins, handles
+                      two-factor authentication prompts, and falls back to password entry if a saved
+                      session expires. It&apos;s distributed as prebuilt executables for Windows,
+                      macOS, and Linux via GitHub Releases, and emphasizes privacy: credentials are
+                      never stored, only session cookies are cached locally, and all processing
+                      happens on-device.
+                    </p>
+                    <h4
+                      style="
+                        font-family: var(--font-heading);
+                        margin-top: 1.5rem;
+                        margin-bottom: 0.5rem;
+                        color: var(--text-primary);
+                      "
+                    >
+                      Highlights
+                    </h4>
+                    <ul>
+                      <li>Identifies accounts you follow that don&apos;t follow back</li>
+                      <li>Session persistence with 2FA and expired-session handling</li>
+                      <li>Cross-platform prebuilt binaries for Windows, macOS, and Linux</li>
+                      <li>Privacy-first: no credentials stored, all processing local</li>
+                    </ul>
+                  </section>
+                </div>
+                <aside class="detail-about" aria-label="About this project">
+                  <dl>
+                    <div class="detail-about-item">
+                      <dt>Category</dt>
+                      <dd><span class="card-category cat-tools">Software &amp; Tools</span></dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Venue</dt>
+                      <dd>Personal Project</dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Dates</dt>
+                      <dd>Jun 2025 – Aug 2025</dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Built with</dt>
+                      <dd>Python, Tkinter, Instaloader, PyInstaller</dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Links</dt>
+                      <dd>
+                        <ul class="detail-links">
+                          <li>
+                            <a
+                              href="https://github.com/agopalareddy/instagram-unfollow-checker"
+                              target="_blank"
+                              rel="noopener"
+                              ><span style="display: contents"
+                                ><svg
+                                  class="octicon octicon-mark-github"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  viewBox="0 0 16 16"
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  fill="currentColor"
+                                >
+                                  <path
+                                    d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
+                                  ></path></svg></span
+                              ><span
+                                >Code on GitHub<span class="sr-only">
+                                  (opens in a new tab)</span
+                                ></span
+                              ></a
+                            >
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </aside>
               </div>
-            </div>
-            <div
-              class="card-actions"
-              style="margin-top: 2rem; justify-content: flex-start; gap: 1rem"
-            >
-              <a
-                href="https://github.com/agopalareddy/instagram-unfollow-checker"
-                target="_blank"
-                rel="noopener"
-                class="card-btn btn-github"
-                ><span style="display: contents"
-                  ><svg
-                    class="octicon octicon-mark-github"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    aria-hidden="true"
-                    focusable="false"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
-                    ></path></svg
-                ></span>
-                GitHub <span class="sr-only">(opens in a new tab)</span></a
-              >
             </div>
           </article>
         </div>

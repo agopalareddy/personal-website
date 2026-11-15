@@ -206,19 +206,12 @@
     padding-bottom: 2rem;
   }
 
-  /* Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-    gap: 1.5rem;
-  }
-
   /* Touch targets */
   button,
   .nav-link,
   .filter-btn,
-  .card-action,
-  .doc-row-btn,
+  .btn-primary,
+  .btn-default,
   .row-link {
     touch-action: manipulation;
   }
@@ -482,145 +475,6 @@
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 0.5rem;
     }
-  }
-
-  /* ─── Cards (Box pattern) ─── */
-  .card {
-    background: var(--bgColor-default);
-    border: 1px solid var(--borderColor-default);
-    border-radius: var(--borderRadius-medium, 6px);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .card:hover {
-    border-color: var(--borderColor-emphasis);
-  }
-
-  .card-header {
-    margin-bottom: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .card-icon-wrapper {
-    width: 2.25rem;
-    height: 2.25rem;
-    color: var(--fgColor-muted);
-    display: flex;
-    align-items: center;
-  }
-
-  .card-icon-wrapper svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .card h2 {
-    font-size: var(--site-text-title);
-    color: var(--fgColor-default);
-    line-height: 1.25;
-    text-wrap: balance;
-  }
-
-  .card-body {
-    flex-grow: 1;
-  }
-
-  .card p {
-    color: var(--fgColor-muted);
-    font-size: var(--site-text-small);
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Tech Tags = topic tags */
-  .tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin-bottom: 1.5rem;
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .tech-tag {
-    background: var(--bgColor-accent-muted, var(--bgColor-muted));
-    border: 1px solid transparent;
-    padding: 0.15rem 0.55rem;
-    border-radius: var(--borderRadius-full, 9999px);
-    font-size: var(--site-text-caption);
-    font-weight: var(--base-text-weight-medium, 500);
-    color: var(--fgColor-default);
-  }
-
-  .tech-tag:hover {
-    background: var(--bgColor-accent-muted);
-    color: var(--fgColor-accent);
-  }
-
-  .tech-tag a {
-    display: block;
-    margin: -0.15rem -0.45rem;
-    padding: 0.15rem 0.45rem;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* Card action link */
-  .card-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-weight: var(--base-text-weight-semibold, 600);
-    font-size: var(--site-text-small);
-    color: var(--fgColor-accent);
-  }
-
-  .card-action:hover {
-    text-decoration: underline;
-  }
-
-  .card-action svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Dashed add card */
-  .card-add {
-    border: 2px dashed var(--borderColor-default);
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 300px;
-  }
-
-  .card-add:hover {
-    border-color: var(--borderColor-emphasis);
-    background: var(--bgColor-default);
-  }
-
-  .card-add-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .card-add h2 {
-    font-size: var(--site-text-title);
-  }
-
-  .card-add p {
-    font-size: var(--site-text-small);
-    margin-bottom: 0;
-    color: var(--fgColor-muted);
   }
 
   /* ─── Surfaces ─── */
@@ -921,17 +775,12 @@
   }
 
   /* ─── Buttons ───
-     Three roles only, one size:
-       primary — green fill; the one action a page or card most wants
-                 clicked (`.btn-primary`, `.site-action-btn`)
-       default — outline; every other real button (`.btn-default`,
-                 `.doc-row-btn`, `.btn-secondary`)
-       link    — text only (`.btn-link`; catalog rows use `.row-link`) */
+     Three roles, three classes, one size:
+       .btn-primary — green fill; the one action a page or card most wants
+       .btn-default — outline; every other real button
+       .btn-link    — text only (catalog rows use the quieter .row-link) */
   .btn-default,
-  .card-btn,
-  .btn-primary,
-  .site-action-btn,
-  .doc-row-btn {
+  .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -952,27 +801,21 @@
     cursor: pointer;
   }
 
-  .btn-default:hover,
-  .card-btn:hover,
-  .doc-row-btn:hover {
+  .btn-default:hover {
     background: var(--button-default-bgColor-hover, var(--bgColor-muted));
     border-color: var(--borderColor-emphasis);
     color: var(--fgColor-default);
     text-decoration: none;
   }
 
-  .btn-primary,
-  .site-action-btn,
-  .doc-row-btn.btn-primary {
+  .btn-primary {
     background: var(--button-primary-bgColor-rest, var(--bgColor-success-emphasis));
     border-color: var(--button-primary-bgColor-rest, var(--bgColor-success-emphasis));
     color: var(--fgColor-onEmphasis);
     font-weight: var(--base-text-weight-semibold, 600);
   }
 
-  .btn-primary:hover,
-  .site-action-btn:hover,
-  .doc-row-btn.btn-primary:hover {
+  .btn-primary:hover {
     background: var(--button-primary-bgColor-hover, var(--bgColor-success-emphasis));
     border-color: var(--button-primary-bgColor-hover, var(--bgColor-success-emphasis));
     color: var(--fgColor-onEmphasis);
@@ -980,9 +823,7 @@
   }
 
   .btn-default svg,
-  .btn-primary svg,
-  .site-action-btn svg,
-  .doc-row-btn svg {
+  .btn-primary svg {
     flex-shrink: 0;
   }
 
@@ -1248,20 +1089,150 @@
     }
   }
 
-  /* Detail-page leftovers — replaced by the shared detail template */
-  .project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin: 0.35rem 0 0.5rem;
-    padding-left: 0;
-    list-style: none;
+  /* ─── Breadcrumb ─── */
+  .breadcrumb {
+    margin-bottom: 0.75rem;
+    font-size: var(--site-text-small);
+    color: var(--fgColor-muted);
   }
 
-  .card-actions {
+  .breadcrumb ol {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .breadcrumb li {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .breadcrumb li + li::before {
+    content: '/';
+    margin: 0 0.5rem;
+  }
+
+  /* The current page is the only crumb allowed to shrink */
+  .breadcrumb [aria-current='page'] {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ─── Detail pages ───
+     One template for projects and experience (DetailShell.tsx): breadcrumb,
+     title, summary, then prose beside an About column of facts. The column
+     moves under the prose when the content area is narrower than 44rem. */
+  .detail {
+    container-type: inline-size;
+  }
+
+  .detail-title {
+    max-width: 36ch;
+    margin: 0 0 0.5rem;
+  }
+
+  .detail-subtitle {
+    max-width: 65ch;
+    margin: 0;
+    font-size: var(--site-text-body);
+    line-height: 1.5;
+    color: var(--fgColor-muted);
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--borderColor-muted);
+  }
+
+  .detail-main > :first-child,
+  .detail-main > section > :first-child {
+    margin-top: 0;
+  }
+
+  .detail-main > section + section {
+    margin-top: 2rem;
+  }
+
+  .detail-main > section > :last-child {
+    margin-bottom: 0;
+  }
+
+  .detail-about {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--borderColor-muted);
+  }
+
+  .detail-about dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem 1.5rem;
+    margin: 0;
+  }
+
+  .detail-about dt {
+    margin-bottom: 0.25rem;
+    font-size: var(--site-text-caption);
+    font-weight: var(--base-text-weight-semibold, 600);
+    color: var(--fgColor-muted);
+  }
+
+  .detail-about dd {
+    margin: 0;
+    font-size: var(--site-text-small);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .detail-links {
+    display: grid;
+    gap: 0.375rem;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .detail-links li {
+    margin: 0;
+  }
+
+  .detail-links a {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .detail-links svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 0.2rem;
+    color: var(--fgColor-muted);
+  }
+
+  @container (min-width: 44rem) {
+    .detail-grid {
+      grid-template-columns: minmax(0, 1fr) 14rem;
+    }
+
+    .detail-about {
+      padding-top: 0;
+      padding-left: 1.5rem;
+      border-top: 0;
+      border-left: 1px solid var(--borderColor-muted);
+    }
   }
 
   /* ─── Status Badge ─── */
@@ -1382,6 +1353,11 @@
     margin-bottom: 0.5rem;
   }
 
+  .page__content ul,
+  .page__content ol {
+    color: var(--fgColor-default);
+  }
+
   :where(.academic-content) img {
     max-width: 100%;
     border-radius: var(--borderRadius-medium, 6px);
@@ -1416,25 +1392,6 @@
 
   :where(.academic-content) td {
     color: var(--fgColor-muted);
-  }
-
-  /* ─── Pagination ─── */
-  .pagination {
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid var(--borderColor-muted);
-    padding-top: 1.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .pagination--pager {
-    font-size: var(--site-text-caption);
-    font-weight: var(--base-text-weight-semibold, 600);
-    color: var(--fgColor-accent);
-  }
-
-  .pagination--pager:hover {
-    text-decoration: underline;
   }
 
   /* ─── Footer ─── */
@@ -1498,188 +1455,205 @@
     }
   }
 
-  /* ─── Home page ─── */
-  header:not(.top-header) {
-    padding: 3rem 0 2.5rem;
-    text-align: center;
+  /* ─── Section heading ───
+     An h2 on a rule, with an optional link or control at the right end. */
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--borderColor-muted);
   }
 
-  .header-accent {
-    font-size: var(--site-text-caption);
-    font-weight: var(--base-text-weight-semibold, 600);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fgColor-muted);
-    margin-bottom: 0.75rem;
-    display: inline-block;
+  /* Space between a page's top-level sections (their first child is flush) */
+  .academic-content > section + section {
+    margin-top: 2.5rem;
   }
 
-  .subtitle {
+  .section-heading h2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .section-heading a,
+  .section-heading .btn-link {
+    flex-shrink: 0;
+    font-size: var(--site-text-small);
+    font-weight: var(--base-text-weight-normal, 400);
+  }
+
+  /* ─── Home page ─── */
+  .home-lede {
+    max-width: 65ch;
     font-size: var(--site-text-body);
-    color: var(--fgColor-muted);
-    max-width: 680px;
-    margin: 0 auto 2rem;
-    line-height: 1.5;
-    text-wrap: pretty;
+    line-height: 1.6;
   }
 
-  /* Meta pills */
-  .meta-pills {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-
-  .pill {
-    background: var(--bgColor-default);
-    border: 1px solid var(--borderColor-default);
-    padding: 0.35rem 0.85rem;
-    border-radius: var(--borderRadius-medium, 6px);
-    font-size: var(--site-text-caption);
-    font-weight: var(--base-text-weight-medium, 500);
-    color: var(--fgColor-muted);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .pill svg {
-    width: 14px;
-    height: 14px;
-    color: var(--fgColor-muted);
-  }
-
-  /* Home actions */
   .home-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
     align-items: center;
+    gap: 0.75rem 1rem;
     margin-top: 1.5rem;
-    margin-bottom: 2rem;
   }
 
-  .home-actions .site-action-btn,
-  .home-actions .doc-row-btn {
-    min-width: 160px;
-    height: 2.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Collapsible skill details */
-  .home-skill-details {
-    margin: 1rem 0;
-    overflow: hidden;
-  }
-
-  .home-skill-details > .home-skill-groups {
-    max-height: var(--collapse-h, 2000px);
-    padding: 0.85rem;
-    border-top-color: var(--borderColor-muted);
-    overflow: hidden;
-    transition:
-      max-height 0.25s cubic-bezier(0, 0, 0.2, 1),
-      padding 0.25s cubic-bezier(0, 0, 0.2, 1);
-  }
-
-  .home-skill-toggle[aria-expanded='false'] + .home-skill-groups {
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-top: none;
-  }
-
-  .home-skill-toggle {
-    width: 100%;
-    text-align: left;
-    color: var(--fgColor-default);
-    cursor: pointer;
-    font-size: var(--site-text-small);
-    font-weight: var(--base-text-weight-semibold, 600);
-    line-height: 1.45;
-    padding: 0.65rem 1rem;
-    user-select: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--bgColor-default);
-    border: none;
-    border-radius: 0;
-  }
-
-  .home-skill-toggle::after {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: currentColor;
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.75.75 0 0 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0Z'/%3E%3C/svg%3E");
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.75.75 0 0 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0Z'/%3E%3C/svg%3E");
-    mask-size: contain;
-    -webkit-mask-size: contain;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
+  .home-actions noscript {
+    font-size: var(--site-text-caption);
     color: var(--fgColor-muted);
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
   }
 
-  .home-skill-toggle[aria-expanded='false']::after {
-    transform: rotate(-90deg);
-  }
-
-  .home-skill-toggle:hover {
-    background: var(--bgColor-muted);
-  }
-
-  .home-skill-groups {
+  /* Pinned projects — two across when there is room, otherwise one */
+  .home-pins {
     display: grid;
-    gap: 0.6rem;
-    padding: 0.85rem;
-    border-top: 1px solid var(--borderColor-muted);
-    background: var(--bgColor-inset, var(--bgColor-muted));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1rem;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-pin {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium, 6px);
+    background: var(--bgColor-default);
+  }
+
+  .home-pin:hover {
+    border-color: var(--borderColor-emphasis);
+  }
+
+  /* The title link covers the card, so the card takes its focus ring */
+  .home-pin:has(.home-pin-title a:focus-visible) {
+    outline: 2px solid var(--focus-outlineColor, var(--fgColor-accent));
+    outline-offset: 2px;
+  }
+
+  .home-pin-title {
+    margin: 0;
+    font-size: var(--site-text-body);
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+
+  .home-pin-title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .home-pin-title a:focus-visible {
+    outline: none;
+  }
+
+  .home-pin-description {
+    flex: 1;
+    max-width: none;
+    margin: 0;
+    font-size: var(--site-text-small);
+    line-height: 1.5;
+    color: var(--fgColor-muted);
+  }
+
+  .home-pin-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin: 0.25rem 0 0;
+    font-size: var(--site-text-caption);
+    color: var(--fgColor-muted);
+  }
+
+  /* Category dot: takes its color from the .cat-* class beside it */
+  .home-pin-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 0;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* Skills: label column + a run of links per area */
+  .home-skills {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
   }
 
   .home-skill-group {
     display: grid;
-    grid-template-columns: minmax(7.5rem, max-content) 1fr;
-    gap: 0.35rem 0.75rem;
-    align-items: start;
-    border-bottom: 1px dashed var(--borderColor-muted);
-    padding-bottom: 0.45rem;
-  }
-
-  .home-skill-group:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 0.125rem 1rem;
+    align-items: baseline;
   }
 
   .home-skill-group dt {
-    color: var(--fgColor-default);
-    font-size: var(--site-text-caption);
+    font-size: var(--site-text-small);
     font-weight: var(--base-text-weight-semibold, 600);
-    line-height: 1.45;
   }
 
   .home-skill-group dd {
     margin: 0;
+    font-size: var(--site-text-small);
+    line-height: 1.6;
   }
 
-  .home-skill-tags.project-tech {
+  .home-skill-list {
+    display: inline;
+    max-width: none;
     margin: 0;
-    padding-left: 0;
+    padding: 0;
+    list-style: none;
+    font-size: inherit;
   }
 
-  @media (max-width: 560px) {
+  .home-skill-list li {
+    display: inline;
+    margin: 0;
+  }
+
+  /* "A · B": the dot stays with the word before it when a line wraps */
+  .home-skill-list li + li::before {
+    content: '\00a0·\0020';
+    color: var(--fgColor-muted);
+  }
+
+  .home-skill-list a {
+    color: var(--fgColor-default);
+  }
+
+  .home-skill-list a:hover {
+    color: var(--fgColor-accent);
+  }
+
+  /* Collapsing needs the toggle island; without scripting (or in a browser
+     that doesn't know this query) every group shows and the button doesn't. */
+  .home-skills-toggle {
+    display: none;
+  }
+
+  @media (scripting: enabled) {
+    .home-skills-toggle {
+      display: inline-flex;
+    }
+
+    .home-skills[data-expanded='false'] .home-skill-group--extra {
+      display: none;
+    }
+  }
+
+  @media (max-width: 35em) {
     .home-skill-group {
-      grid-template-columns: 1fr;
-      gap: 0.35rem;
-      padding-bottom: 0.85rem;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
@@ -1797,9 +1771,8 @@
       padding-top: 0.75rem;
     }
 
-    .doc-row-btn {
+    .document-row-actions > * {
       flex: 1;
-      justify-content: center;
     }
   }
 
@@ -1903,10 +1876,11 @@
   }
 
   .modal-body {
-    flex: 1;
-    padding: 0;
-    background: transparent;
     position: relative;
+    flex: 1;
+    padding: 0 0.25rem 0 0;
+    overflow-y: auto;
+    background: transparent;
   }
 
   .pdf-viewer {
@@ -1961,155 +1935,6 @@
     }
   }
 
-  /* ─── Tabbed modal (homepage) ─── */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100dvw;
-    height: 100dvh;
-    background: rgba(1, 4, 9, 0.5);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s ease-out;
-    overscroll-behavior: contain;
-  }
-
-  .modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .modal-content {
-    background: var(--bgColor-default);
-    border: 1px solid var(--borderColor-default);
-    border-radius: var(--borderRadius-medium, 6px);
-    width: 90%;
-    max-width: 720px;
-    max-height: 80dvh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding: 2.5rem;
-    overflow: hidden;
-  }
-
-  .modal-overlay .modal-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: transparent;
-    border: none;
-    color: var(--fgColor-muted);
-    font-size: var(--site-text-display);
-    cursor: pointer;
-    line-height: 1;
-  }
-
-  .modal-overlay .modal-close:hover {
-    color: var(--fgColor-default);
-  }
-
-  .modal-accent {
-    font-size: var(--site-text-caption);
-    font-weight: var(--base-text-weight-semibold, 600);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--fgColor-accent);
-    margin-bottom: 0.25rem;
-    display: inline-block;
-  }
-
-  .modal-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--borderColor-muted);
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .tab-btn {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: var(--fgColor-muted);
-    font-size: var(--site-text-small);
-    font-weight: var(--base-text-weight-medium, 500);
-    padding: 0.5rem 0;
-    cursor: pointer;
-  }
-
-  .tab-btn:hover {
-    color: var(--fgColor-default);
-  }
-
-  .tab-btn.active {
-    color: var(--fgColor-accent);
-    border-bottom-color: var(--fgColor-accent);
-  }
-
-  .tab-pane {
-    display: none;
-  }
-
-  .tab-pane.active {
-    display: block;
-  }
-
-  .tab-pane h3 {
-    font-size: var(--site-text-title);
-    margin-bottom: 0.5rem;
-  }
-
-  .tab-pane h4 {
-    font-size: var(--site-text-small);
-    font-weight: var(--base-text-weight-semibold, 600);
-    margin: 1.25rem 0 0.4rem;
-  }
-
-  .tab-pane p {
-    color: var(--fgColor-muted);
-    font-size: var(--site-text-small);
-    margin-bottom: 0.75rem;
-  }
-
-  .tab-pane code {
-    background: var(--bgColor-muted);
-    border: 1px solid var(--borderColor-muted);
-    padding: 0.1rem 0.3rem;
-    border-radius: var(--borderRadius-medium, 6px);
-    font-size: var(--site-text-caption);
-    color: var(--fgColor-accent);
-  }
-
-  .tab-pane pre {
-    background: var(--bgColor-muted);
-    border: 1px solid var(--borderColor-muted);
-    border-radius: var(--borderRadius-medium, 6px);
-    padding: 1rem;
-    overflow-x: auto;
-    margin: 0.75rem 0;
-  }
-
-  .tab-pane pre code {
-    background: transparent;
-    border: none;
-    padding: 0;
-    font-size: var(--site-text-caption);
-    color: var(--fgColor-default);
-  }
-
-  .modal-body {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 0.25rem;
-  }
-
   /* ─── 404 Page ─── */
   .error-page-content {
     text-align: center;
@@ -2142,22 +1967,6 @@
     align-items: center;
   }
 
-  /* ─── CV page ─── */
-  .cv-embed-container {
-    margin-top: 1.5rem;
-    border: 1px solid var(--borderColor-default);
-    border-radius: var(--borderRadius-medium, 6px);
-    background: var(--bgColor-default);
-    padding: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .cv-embed-container embed {
-    border-radius: 4px;
-    border: 1px solid var(--borderColor-default);
-    height: 700px;
-  }
-
   /* ─── Availability page ─── */
   .availability-actions {
     display: flex;
@@ -2177,7 +1986,7 @@
   }
 
   @media (max-width: 768px) {
-    .availability-actions .site-action-btn {
+    .availability-actions .btn-primary {
       flex: 1 1 100%;
       justify-content: center;
     }
@@ -2438,21 +2247,15 @@
       min-height: 2.75rem !important;
     }
 
-    .card {
-      padding: 1.25rem !important;
+    /* 44px touch targets for real buttons */
+    .btn-primary,
+    .btn-default {
+      min-height: 2.75rem;
     }
 
-    .home-actions {
-      flex-direction: row !important;
-      width: 100% !important;
-    }
-
-    .home-actions .site-action-btn,
-    .home-actions .doc-row-btn {
-      flex: 1 !important;
-      min-width: 0 !important;
-      height: 2.75rem !important;
-      padding: 0.5rem !important;
+    .home-actions .btn-primary,
+    .home-actions .btn-default {
+      flex: 1 1 8rem;
     }
 
     /* Clean up empty sidebar gap on mobile */
@@ -2473,24 +2276,6 @@
       top: auto !important;
       margin-top: 0 !important;
       margin-bottom: 0.25rem !important;
-    }
-  }
-
-  @media (max-width: 768px) {
-    header:not(.top-header) {
-      padding: 2rem 0;
-    }
-
-    .grid {
-      grid-template-columns: 1fr;
-    }
-
-    .modal-content {
-      padding: 1.5rem;
-    }
-
-    .modal-tabs {
-      gap: 1rem;
     }
   }
 
@@ -2546,28 +2331,6 @@
    @layer utilities
    ========================================================================== */
 @layer utilities {
-  /* Card filtering transitions */
-  .card.filtered-out,
-  .filtered-out {
-    display: none;
-  }
-
-  .card.filtered-in,
-  .filtered-in {
-    animation: simpleFadeIn 0.2s ease-out forwards;
-  }
-
-  @keyframes simpleFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *,

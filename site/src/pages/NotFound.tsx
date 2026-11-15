@@ -20,13 +20,13 @@ export function NotFoundPage() {
           It may have moved, or never existed. Try one of these instead.
         </p>
         <div className="error-recovery">
-          <a href="/" className="site-action-btn">
+          <a href="/" className="btn-primary">
             Go home
           </a>
-          <a href="/projects/" className="doc-row-btn btn-secondary">
+          <a href="/projects/" className="btn-default">
             View projects
           </a>
-          <a href="/cv/" className="doc-row-btn btn-secondary">
+          <a href="/cv/" className="btn-default">
             CV &amp; Resume
           </a>
         </div>

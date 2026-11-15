@@ -11,7 +11,7 @@ test.describe('CV PDF preview', () => {
     await page.goto('/cv/');
 
     const preview = page
-      .locator('button.modal-trigger[data-doc-src="/files/reddy_cv.pdf"]')
+      .locator('.modal-trigger[data-doc-src="/files/reddy_cv.pdf"]')
       .first();
     await expect(preview).toBeVisible();
     await preview.click();

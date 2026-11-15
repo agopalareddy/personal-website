@@ -61,13 +61,19 @@ async function renderPdf(viewer: HTMLElement, src: string) {
   }
 }
 
+// Phones get the browser's own PDF viewer instead of the dialog: it has
+// pinch-zoom, and a page-sized canvas in a 360px dialog is unreadable.
+function canPreview(dialog: HTMLDialogElement): boolean {
+  return window.innerWidth > 640 && typeof dialog.showModal === 'function';
+}
+
 function openDocument(dialog: HTMLDialogElement, trigger: HTMLElement) {
   const title = trigger.getAttribute('data-doc-title') || 'Document preview';
   const src = trigger.getAttribute('data-doc-src');
   const resolved = src && ALLOWED_DOC_SRCS[src];
   if (!resolved) return;
 
-  if (window.innerWidth <= 640 || typeof dialog.showModal !== 'function') {
+  if (!canPreview(dialog)) {
     const a = document.createElement('a');
     a.href = resolved;
     a.target = '_blank';
@@ -109,14 +115,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
-    if (target.closest('a')) return;
-
     const trigger = target.closest<HTMLElement>('[data-action]');
     if (!trigger) return;
 
     const action = trigger.getAttribute('data-action');
-    if (action === 'open') openDocument(dialog, trigger);
     if (action === 'close') closeDocument(dialog);
+    if (action !== 'open') return;
+
+    // The document titles are real links to the PDF. Leave them alone when
+    // the dialog isn't on offer, or when the click asks for a new tab/window.
+    if (trigger instanceof HTMLAnchorElement) {
+      const modified = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+      if (modified || event.button !== 0 || !canPreview(dialog)) return;
+      event.preventDefault();
+    }
+    openDocument(dialog, trigger);
   });
 
   dialog.addEventListener('click', (event) => {

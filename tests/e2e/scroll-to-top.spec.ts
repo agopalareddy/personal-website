@@ -1,5 +1,22 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+
+const nextFrame = (page: Page) =>
+  page.evaluate(
+    () =>
+      new Promise<void>((done) => requestAnimationFrame(() => requestAnimationFrame(() => done())))
+  );
+
+/**
+ * Scroll far down the page, then back up a little. On wide screens the button
+ * shows as soon as the page is scrolled past its threshold; on phones it only
+ * shows while scrolling up, so the second step is what reveals it there.
+ */
+async function scrollDownThenUp(page: Page) {
+  await page.evaluate(() => window.scrollTo({ top: 9999, behavior: 'instant' }));
+  await nextFrame(page);
+  await page.evaluate(() => window.scrollBy({ top: -120, behavior: 'instant' }));
+}
 
 // Long enough to scroll at both configured viewports (desktop 1280x720, mobile 375x667).
 const SCROLLABLE_PAGE = '/experience/';
@@ -15,7 +32,7 @@ test.describe('Scroll to top button', () => {
 
     await expect(button).not.toHaveClass(/is-visible/);
 
-    await page.evaluate(() => window.scrollTo(0, 9999));
+    await scrollDownThenUp(page);
     await expect(button).toHaveClass(/is-visible/);
 
     await button.click();
@@ -23,11 +40,31 @@ test.describe('Scroll to top button', () => {
     await expect(button).not.toHaveClass(/is-visible/);
   });
 
+  test('on phones it stays hidden while scrolling down and shows when scrolling back up', async ({
+    page,
+    viewport,
+  }) => {
+    test.skip((viewport?.width ?? 1280) >= 768, 'Phone-only behavior');
+
+    await page.goto(SCROLLABLE_PAGE);
+    const button = page.locator('#scroll-to-top');
+
+    await page.evaluate(() => window.scrollTo({ top: 1200, behavior: 'instant' }));
+    await nextFrame(page);
+    await expect(button).not.toHaveClass(/is-visible/);
+
+    await page.evaluate(() => window.scrollBy({ top: -120, behavior: 'instant' }));
+    await expect(button).toHaveClass(/is-visible/);
+
+    await page.evaluate(() => window.scrollBy({ top: 300, behavior: 'instant' }));
+    await expect(button).not.toHaveClass(/is-visible/);
+  });
+
   test('is keyboard-operable with a visible focus outline', async ({ page }) => {
     await page.goto(SCROLLABLE_PAGE);
     const button = page.locator('#scroll-to-top');
 
-    await page.evaluate(() => window.scrollTo(0, 9999));
+    await scrollDownThenUp(page);
     await expect(button).toHaveClass(/is-visible/);
 
     await button.focus();
@@ -64,16 +101,17 @@ test.describe('Scroll to top button', () => {
     // Short enough that the fixture's ~567px content clears both the
     // scrollability check and the show/hide scroll threshold.
     await page.setViewportSize({ width: 1280, height: 100 });
-    await page.evaluate(() => window.scrollTo(0, 9999));
+    await scrollDownThenUp(page);
     await expect(button).toHaveClass(/is-visible/);
   });
 
   test('does not overlap site navigation chrome', async ({ page, viewport }) => {
     await page.goto(SCROLLABLE_PAGE);
     const button = page.locator('#scroll-to-top');
-    const nav = page.locator('.top-header');
+    // The nav row: a top bar on wide screens, a bottom tab bar on phones.
+    const nav = page.locator('.top-header .top-bar');
 
-    await page.evaluate(() => window.scrollTo(0, 9999));
+    await scrollDownThenUp(page);
     await expect(button).toHaveClass(/is-visible/);
 
     const buttonBox = await button.boundingBox();
@@ -103,7 +141,7 @@ test.describe('Scroll to top button', () => {
       .analyze();
     expect(hiddenResults.violations).toEqual([]);
 
-    await page.evaluate(() => window.scrollTo(0, 9999));
+    await scrollDownThenUp(page);
     await page.locator('#scroll-to-top').waitFor({ state: 'visible' });
 
     const visibleResults = await new AxeBuilder({ page })

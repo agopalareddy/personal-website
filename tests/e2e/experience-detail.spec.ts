@@ -23,20 +23,33 @@ test.describe('Experience Detail Page', () => {
     await expect(page.locator('.site-footer')).toBeVisible();
   });
 
-  test('back to experience link works', async ({ page }) => {
+  test('breadcrumb leads back to the experience list', async ({ page }) => {
     await page.goto('/experience/education/2024-08-m-s-computer-science.html');
     await page.waitForLoadState('domcontentloaded');
 
-    // Find the back link
-    const backLink = page.locator('a[href="/experience/"]');
-    await expect(backLink.first()).toBeVisible();
+    const breadcrumb = page.getByRole('navigation', { name: 'Breadcrumb' });
+    await expect(breadcrumb.locator('[aria-current="page"]')).toContainText(/Computer Science/i);
 
-    // Click and verify navigation
-    await backLink.first().click();
+    // The category crumb opens the list filtered to that category
+    await expect(breadcrumb.getByRole('link', { name: 'Education' })).toHaveAttribute(
+      'href',
+      '/experience/?category=education'
+    );
+
+    await breadcrumb.getByRole('link', { name: 'Experience' }).click();
     await page.waitForLoadState('domcontentloaded');
 
-    expect(page.url()).toContain('/experience/');
+    expect(new URL(page.url()).pathname).toBe('/experience/');
     await expect(page.locator('.experience-card').first()).toBeVisible({ timeout: 10000 });
+  });
+
+  test('About column lists the facts for the entry', async ({ page }) => {
+    await page.goto('/experience/education/2024-08-m-s-computer-science.html');
+
+    const about = page.getByRole('complementary', { name: 'About this entry' });
+    await expect(about).toBeVisible();
+    await expect(about.locator('dt')).toContainText(['Category', 'Organization']);
+    await expect(about.locator('.card-category')).toHaveText('Education');
   });
 
   test('"Present" displayed for current/future roles', async ({ page }) => {

@@ -14,6 +14,14 @@ export type ActivePage = (typeof NAV_ITEMS)[number]['key'];
 export function Nav({ activePage }: { activePage?: ActivePage }) {
   return (
     <header className="top-header">
+      {/* Phones only: the nav row below is pinned to the bottom of the screen
+          there, so this bar keeps a way home and the theme control at the top. */}
+      <div className="mobile-topbar">
+        <a href="/" className="mobile-topbar-home">
+          agreddy.com
+        </a>
+        <div id="theme-toggle-top" />
+      </div>
       <div className="top-bar container">
         <nav className="nav-links" aria-label="Primary Navigation">
           {NAV_ITEMS.map(({ key, href, label, icon }) => {

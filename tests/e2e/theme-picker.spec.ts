@@ -19,6 +19,32 @@ test.describe('Theme Picker', () => {
     }
   });
 
+  test('phones get a compact theme button at the top of the page', async ({ page, viewport }) => {
+    const isMobile = viewport && viewport.width < 768;
+    const topPicker = page.locator('#theme-toggle-top .theme-picker');
+
+    if (!isMobile) {
+      await expect(topPicker).toBeHidden();
+      return;
+    }
+
+    // Reachable without scrolling, and big enough to tap
+    const summary = topPicker.locator('summary');
+    await expect(summary).toBeInViewport();
+    await expect(summary).toHaveAccessibleName(/^Theme: /);
+    const box = await summary.boundingBox();
+    expect(box?.width).toBeGreaterThanOrEqual(44);
+    expect(box?.height).toBeGreaterThanOrEqual(44);
+
+    await summary.click();
+    await topPicker.locator('button[data-theme-value="dark_dimmed"]').click();
+    await expect(page.locator('html')).toHaveAttribute('data-dark-theme', 'dark_dimmed');
+    // The footer picker follows the same setting
+    await expect(
+      page.locator('#theme-toggle-footer button[data-theme-value="dark_dimmed"]')
+    ).toHaveAttribute('aria-checked', 'true');
+  });
+
   test('should toggle color-scheme and light/dark theme attributes when selecting options', async ({
     page,
     viewport,

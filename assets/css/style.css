@@ -228,8 +228,11 @@
     z-index: 1000;
     background: var(--bgColor-default);
     border-bottom: 1px solid var(--borderColor-muted);
-    padding: 0 !important;
-    text-align: left !important;
+  }
+
+  /* Phones only — see "Phone chrome" below */
+  .mobile-topbar {
+    display: none;
   }
 
   .top-header .top-bar {
@@ -286,19 +289,6 @@
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-  }
-
-  /* Mobile: nav scrolls horizontally, stays in header */
-  @media (max-width: 47.99em) {
-    .nav-links {
-      width: 100%;
-      justify-content: flex-start;
-    }
-
-    .nav-link {
-      font-size: var(--site-text-caption);
-      padding: 0.65rem 0.6rem;
-    }
   }
 
   /* ─── Academic Layout (sidebar + content) ─── */
@@ -393,10 +383,14 @@
     gap: 0.5rem;
   }
 
-  .author-links li {
+  .author-links li,
+  .author-links a {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .author-links li {
     font-size: var(--site-text-small);
     color: var(--fgColor-muted);
   }
@@ -406,74 +400,93 @@
     font-weight: var(--base-text-weight-semibold, 600);
   }
 
-  .author-links a:hover {
-    color: var(--fgColor-accent);
-    text-decoration: underline;
-  }
-
   .author-links svg {
+    flex-shrink: 0;
     width: 16px;
     height: 16px;
-    text-align: center;
     color: var(--fgColor-muted);
-    flex-shrink: 0;
   }
 
-  /* Mobile sidebar card */
+  /* Phones: the profile is one compact row — avatar, then name, role and
+     icon-only links. (Only Home shows it; other pages hide the sidebar.) */
   @media (max-width: 47.99em) {
     .author-avatar-wrapper {
       display: grid;
+      grid-template-columns: 4rem minmax(0, 1fr);
       grid-template-areas:
         'avatar name'
-        'avatar badge'
-        'bio bio'
-        'links links';
-      grid-template-columns: 70px 1fr;
-      gap: 0.35rem 1rem;
-      text-align: left;
-      background: var(--bgColor-default);
+        'avatar bio'
+        'avatar links';
+      column-gap: 0.875rem;
+      align-items: center;
+      margin-bottom: 0;
+      padding: 0.75rem 1rem;
       border: 1px solid var(--borderColor-default);
       border-radius: var(--borderRadius-medium, 6px);
-      padding: 1.25rem;
-      margin-bottom: 0.5rem;
+      background: var(--bgColor-default);
+      text-align: left;
     }
 
     .author-avatar {
       grid-area: avatar;
-      width: 70px;
-      height: 70px;
-      margin: 0;
-      align-self: center;
+      width: 4rem;
+      height: 4rem;
     }
 
     .author-name {
       grid-area: name;
-      font-size: var(--site-text-title);
       margin: 0;
-      align-self: end;
-    }
-
-    .status-badge {
-      grid-area: badge;
-      margin: 0 !important;
-      justify-self: start;
-      align-self: start;
+      font-size: var(--site-text-body);
+      line-height: 1.3;
     }
 
     .author-bio {
       grid-area: bio;
-      font-size: var(--site-text-small);
-      margin: 0.25rem 0 0.5rem 0;
+      margin: 0;
+      font-size: var(--site-text-caption);
       line-height: 1.4;
-      border-bottom: 1px solid var(--borderColor-muted);
-      padding-bottom: 0.75rem;
     }
 
+    /* The degree line is in the page's first paragraph on Home */
+    .author-bio-more,
+    .author-links .author-location {
+      display: none;
+    }
+
+    .status-badge {
+      display: none;
+    }
+
+    /* 44px targets; the negative margins let them overlap the card's own
+       padding so the row still reads as one line of 16px icons. */
     .author-links {
       grid-area: links;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.5rem;
+      flex-direction: row;
+      gap: 0;
+      margin: 0 0 -0.625rem -0.875rem;
+    }
+
+    .author-links a {
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .author-links a:hover svg {
+      color: var(--fgColor-accent);
+    }
+
+    .author-links noscript {
+      font-size: var(--site-text-caption);
+    }
+
+    .author-link-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
   }
 
@@ -1063,13 +1076,16 @@
   }
 
   @media (max-width: 47.99em) {
-    /* Phones: search on its own line, the three dropdowns share the next. */
-    .search-wrapper {
-      flex-basis: 100%;
+    /* Phones: search, then the group dropdown (its labels are long), each on
+       a full line; year and sort share the last one. Nothing gets cut off. */
+    .catalog-toolbar-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .select-wrapper {
-      flex: 1 1 0;
+    .search-wrapper,
+    .search-wrapper + .select-wrapper {
+      grid-column: 1 / -1;
     }
 
     .custom-select {
@@ -1601,10 +1617,11 @@
     font-weight: var(--base-text-weight-semibold, 600);
   }
 
+  /* 1.75 × 14px keeps wrapped lines of links 24px apart (WCAG 2.5.8) */
   .home-skill-group dd {
     margin: 0;
     font-size: var(--site-text-small);
-    line-height: 1.6;
+    line-height: 1.75;
   }
 
   .home-skill-list {
@@ -1706,20 +1723,22 @@
     margin-bottom: 0.5rem;
     color: var(--fgColor-muted);
     font-size: var(--site-text-caption);
-    font-weight: var(--base-text-weight-semibold, 600);
   }
 
+  /* An h2, but inside a card: no section rule under it */
   .document-row-title {
+    margin: 0 0 0.25rem;
+    padding: 0;
+    border: 0;
     font-size: var(--site-text-title);
     color: var(--fgColor-default);
-    margin: 0 0 0.25rem 0 !important;
   }
 
   .document-row-description {
-    font-size: var(--site-text-caption);
-    color: var(--fgColor-muted);
     margin: 0;
-    line-height: 1.4;
+    font-size: var(--site-text-small);
+    line-height: 1.5;
+    color: var(--fgColor-muted);
   }
 
   .document-row-actions {
@@ -1728,51 +1747,43 @@
     flex-shrink: 0;
   }
 
-  /* Mobile document rows */
+  /* Narrow: actions drop under the text */
   @media (max-width: 768px) {
     .document-row {
       display: grid;
       grid-template-areas:
         'icon info'
         'actions actions';
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto minmax(0, 1fr);
       gap: 1rem;
-      padding: 1.25rem;
       align-items: start;
+      padding: 1rem;
     }
 
     .doc-icon-wrapper {
       grid-area: icon;
-      width: 42px;
-      height: 42px;
-      font-size: var(--site-text-title);
+      width: 2.5rem;
+      height: 2.5rem;
     }
 
     .doc-info {
       grid-area: info;
     }
 
-    .document-row-title {
-      font-size: var(--site-text-body);
-    }
-
-    .document-row-description {
-      white-space: normal;
-      font-size: var(--site-text-caption);
-    }
-
     .document-row-actions {
       grid-area: actions;
-      width: 100%;
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 0.25rem;
-      border-top: 1px solid var(--borderColor-muted);
-      padding-top: 0.75rem;
     }
 
     .document-row-actions > * {
       flex: 1;
+    }
+  }
+
+  /* cv-modal.ts opens the PDF in a new tab at this width instead of the
+     preview dialog, so "Preview" and "Open PDF" would do the same thing. */
+  @media (max-width: 640px) {
+    .document-row-actions .modal-trigger {
+      display: none;
     }
   }
 
@@ -1967,33 +1978,60 @@
     align-items: center;
   }
 
-  /* ─── Availability page ─── */
-  .availability-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+  /* ─── Availability page ───
+     The calendar sits in a card whose header names it and carries the
+     page's one primary action. */
+  .calendar-card {
+    overflow: hidden;
+    border: 1px solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium, 6px);
+    background: var(--bgColor-default);
   }
 
+  .calendar-card-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--borderColor-default);
+    background: var(--bgColor-muted);
+  }
+
+  .calendar-card-title {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: var(--site-text-small);
+    font-weight: var(--base-text-weight-semibold, 600);
+  }
+
+  .calendar-card-note {
+    font-weight: var(--base-text-weight-normal, 400);
+    color: var(--fgColor-muted);
+  }
+
+  /* Google's embed has no dark theme: the frame is white in every theme.
+     Heights are in px because the embed doesn't follow the site's font size:
+     its toolbar, day header and footer take ~175px and each hour row 48px
+     (40px on phones), so these show twelve hours of the week grid. Which
+     twelve is Google's call — it opens scrolled to the current time. */
   .availability-calendar-frame {
     display: block;
     width: 100%;
-    height: min(800px, 78dvh);
-    min-height: 560px;
+    height: 752px;
+    border: 0;
     background: #ffffff;
-    border: 1px solid var(--borderColor-default);
-    border-radius: var(--borderRadius-medium, 6px);
   }
 
-  @media (max-width: 768px) {
-    .availability-actions .btn-primary {
+  @media (max-width: 47.99em) {
+    .calendar-card-header .btn-primary {
       flex: 1 1 100%;
-      justify-content: center;
     }
 
     .availability-calendar-frame {
-      height: 680px;
-      min-height: 520px;
+      height: 632px;
     }
   }
 
@@ -2148,103 +2186,144 @@
     visibility: visible;
   }
 
-  /* Desktop: show header picker, hide footer picker */
+  /* Icon-only button (phone top bar) */
+  .theme-picker--compact summary {
+    justify-content: center;
+    width: 2.75rem;
+    padding: 0;
+    border-color: transparent;
+    background: transparent;
+  }
+
+  /* Wide screens: the header picker only. Phones swap to the compact one in
+     the top bar plus the labelled one in the footer ("Phone chrome"). */
   #theme-toggle-footer {
     display: none;
   }
 
-  /* ─── Mobile responsive ─── */
+  /* ─── Phone chrome ───
+     Below 48em the nav row is pinned to the bottom of the screen as a tab
+     bar, and a slim bar at the top of the page (not sticky) carries the site
+     name and a compact theme button. */
   @media (max-width: 47.99em) {
-    /* The nav bar sits at the bottom on phones, so anchors need little offset */
+    /* Nothing sticks to the top here, so anchors need little offset */
     html {
       scroll-padding-top: 1rem;
     }
 
-    .academic-layout {
-      margin-bottom: 3rem;
+    body {
+      padding-bottom: calc(72px + env(safe-area-inset-bottom));
     }
 
-    .footer-links li.footer-cv-link {
-      display: none !important;
+    .top-header {
+      position: static;
+      border-bottom: 0;
     }
 
-    /* Mobile: show footer picker, hide header picker */
+    .mobile-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.25rem 0.25rem 0.25rem var(--stack-padding-normal, 1rem);
+    }
+
+    .mobile-topbar-home {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      font-size: var(--site-text-small);
+      font-weight: var(--base-text-weight-semibold, 600);
+      color: var(--fgColor-default);
+    }
+
+    /* Bottom tab bar */
+    .top-header .top-bar {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      max-width: none;
+      padding: 0 0 env(safe-area-inset-bottom);
+      border-top: 1px solid var(--borderColor-muted);
+      background: var(--bgColor-default);
+    }
+
+    .nav-links {
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    .nav-link {
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.15rem;
+      padding: 0.4rem 0.25rem;
+      border-top: 2px solid transparent;
+      border-bottom: 0;
+      font-size: var(--site-text-caption);
+      font-weight: var(--base-text-weight-medium, 500);
+      color: var(--fgColor-muted);
+      text-align: center;
+    }
+
+    .nav-link:hover {
+      border-top-color: var(--borderColor-muted);
+    }
+
+    .nav-link.active {
+      border-top-color: var(--underlineNav-borderColor-active, var(--fgColor-accent));
+      font-weight: var(--base-text-weight-medium, 500);
+      color: var(--fgColor-accent);
+    }
+
+    .nav-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Theme: compact button up top, labelled picker in the footer */
     #theme-toggle {
       display: none;
     }
+
     #theme-toggle-footer {
       display: block;
     }
 
-    /* Mobile bottom nav */
-    .top-header {
-      position: fixed !important;
-      top: auto !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      width: 100% !important;
-      background: var(--bgColor-default) !important;
-      border-top: 1px solid var(--borderColor-muted) !important;
-      border-bottom: none !important;
-      padding: 0 !important;
-      padding-bottom: env(safe-area-inset-bottom) !important;
-      z-index: 1000 !important;
-    }
-
-    .top-bar {
-      justify-content: center !important;
-      padding: 0 !important;
-    }
-
-    .nav-links {
-      width: 100% !important;
-      display: flex !important;
-      justify-content: space-around !important;
-      align-items: center !important;
-      gap: 0 !important;
-      flex-wrap: nowrap !important;
-    }
-
-    .nav-link {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      font-size: var(--site-text-caption) !important;
-      font-weight: var(--base-text-weight-medium, 500) !important;
-      color: var(--fgColor-muted) !important;
-      padding: 0.4rem 0.25rem !important;
-      flex: 1 !important;
-      text-align: center !important;
-      border-bottom: none !important;
-      border-top: 2px solid transparent !important;
-    }
-
-    .nav-link.active {
-      color: var(--fgColor-accent) !important;
-      border-top-color: var(--underlineNav-borderColor-active, var(--fgColor-accent)) !important;
-    }
-
-    .nav-link svg {
-      width: 18px !important;
-      height: 18px !important;
-      margin-bottom: 0.15rem !important;
-    }
-
-    body {
-      padding-bottom: calc(72px + env(safe-area-inset-bottom)) !important;
-    }
-
-    /* Hide non-homepage sidebar avatar on mobile */
-    body:not(.home-page) .academic-sidebar .author-avatar-wrapper {
-      display: none !important;
-    }
-
-    /* WCAG 2.1 44x44px touch target for the theme toggle */
     .theme-picker summary,
     .theme-picker-option {
-      min-height: 2.75rem !important;
+      min-height: 2.75rem;
+    }
+
+    /* The footer picker's menu opens upward, from the left edge */
+    #theme-toggle-footer .theme-picker-menu {
+      top: auto;
+      right: auto;
+      bottom: 100%;
+      left: 0;
+      margin: 0 0 0.25rem;
+    }
+
+    /* Page body */
+    main.container {
+      padding-top: 0.5rem;
+    }
+
+    .academic-layout {
+      gap: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 3rem;
+    }
+
+    /* Only Home shows the profile; elsewhere the top bar is the way home */
+    body:not(.home-page) .academic-sidebar {
+      display: none;
+    }
+
+    .footer-links li.footer-cv-link {
+      display: none;
     }
 
     /* 44px touch targets for real buttons */
@@ -2256,26 +2335,6 @@
     .home-actions .btn-primary,
     .home-actions .btn-default {
       flex: 1 1 8rem;
-    }
-
-    /* Clean up empty sidebar gap on mobile */
-    body:not(.home-page) .academic-sidebar {
-      display: none !important;
-    }
-
-    /* Bring page intro title closer to top on mobile */
-    main.container {
-      padding-top: 0.75rem !important;
-    }
-
-    /* Adjust footer theme picker popup to open upwards and align left on mobile */
-    #theme-toggle-footer .theme-picker-menu {
-      left: 0 !important;
-      right: auto !important;
-      bottom: 100% !important;
-      top: auto !important;
-      margin-top: 0 !important;
-      margin-bottom: 0.25rem !important;
     }
   }
 
@@ -2320,7 +2379,7 @@
 
   @media (max-width: 47.99em) {
     .scroll-to-top {
-      /* Clears the fixed bottom nav bar (.top-header, ~72px + safe area). */
+      /* Clears the bottom tab bar (~72px + safe area). */
       bottom: calc(72px + env(safe-area-inset-bottom) + 1rem);
       right: 1rem;
     }

@@ -1,6 +1,22 @@
 import { Layout } from '../components/chrome/Layout';
 import { Icon } from '../components/common/Icon';
 
+// Week view in Eastern Time. The card header already says what this is, so
+// the embed's own title, tabs, print button, calendar list and time-zone
+// footer are switched off; its date and prev/next controls stay.
+const CALENDAR_SRC =
+  'https://calendar.google.com/calendar/embed?' +
+  [
+    'src=90e3e7baecc6c8fb063ea0e230c0040bfe5ce8d086c944a9351720d1e9d72b9e%40group.calendar.google.com',
+    'ctz=America%2FNew_York',
+    'mode=WEEK',
+    'showTitle=0',
+    'showPrint=0',
+    'showTabs=0',
+    'showCalendars=0',
+    'showTz=0',
+  ].join('&');
+
 /** Ported from availability/index.html. */
 export function AvailabilityPage() {
   return (
@@ -14,28 +30,32 @@ export function AvailabilityPage() {
     >
       <h1 className="page-intro-title">Availability</h1>
       <p className="page-intro-lead">View the weekly calendar or book a meeting directly.</p>
-      <div className="availability-actions">
-        <a
-          className="btn-primary"
-          href="https://calendar.app.google/rbrkCokvTAM6tb7i7"
-          target="_blank"
-          rel="noopener"
-          aria-label="Book an appointment on Google Calendar (opens in a new tab)"
-        >
-          <Icon name="CALENDAR_16" /> Book an appointment{' '}
-          <span className="sr-only">(opens in a new tab)</span>
-        </a>
-      </div>
 
-      <iframe
-        className="availability-calendar-frame"
-        src="https://calendar.google.com/calendar/embed?src=90e3e7baecc6c8fb063ea0e230c0040bfe5ce8d086c944a9351720d1e9d72b9e%40group.calendar.google.com&ctz=America%2FNew_York&mode=WEEK"
-        frameBorder={0}
-        scrolling="no"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="Weekly availability calendar"
-      />
+      <section className="calendar-card" aria-labelledby="calendar-card-title">
+        <div className="calendar-card-header">
+          <h2 className="calendar-card-title" id="calendar-card-title">
+            Week view <span className="calendar-card-note">· Eastern Time</span>
+          </h2>
+          <a
+            className="btn-primary"
+            href="https://calendar.app.google/rbrkCokvTAM6tb7i7"
+            target="_blank"
+            rel="noopener"
+          >
+            <Icon name="CALENDAR_16" /> Book a meeting
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        </div>
+        {/* Google's embed has no dark theme, so the frame stays white in every
+            site theme; the card around it is what follows the theme. */}
+        <iframe
+          className="availability-calendar-frame"
+          src={CALENDAR_SRC}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Weekly availability calendar"
+        />
+      </section>
     </Layout>
   );
 }

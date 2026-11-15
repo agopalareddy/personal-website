@@ -5,8 +5,11 @@ var t = e(() => {
       let t = `${atob(e.getAttribute(`data-email-user`))}@${atob(e.getAttribute(`data-email-domain`))}`;
       e.setAttribute(`href`, `mailto:${t}`);
       let n = e.getAttribute(`data-email-text`);
-      (n && (e.textContent = n),
-        e.removeAttribute(`data-email-user`),
+      if (n) {
+        let t = e.querySelector(`[data-email-label]`) ?? e;
+        t.textContent = n;
+      }
+      (e.removeAttribute(`data-email-user`),
         e.removeAttribute(`data-email-domain`),
         e.removeAttribute(`data-email-text`),
         e.classList.add(`email-decoded`));

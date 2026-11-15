@@ -8,8 +8,12 @@ function modeIcon(mode: ThemeMode): IconName {
   return 'DEVICE_DESKTOP_16';
 }
 
-/** Ported from assets/js/theme.js's buildPickerDOM()/syncPickers(). */
-export function ThemePicker() {
+/**
+ * Ported from assets/js/theme.js's buildPickerDOM()/syncPickers().
+ * `compact` drops the "Theme" label and chevron, leaving a square icon
+ * button (the summary's aria-label still names it).
+ */
+export function ThemePicker({ compact = false }: { compact?: boolean }) {
   const { mode, setMode } = useTheme();
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const current = THEME_MODES.find((m) => m.value === mode) ?? THEME_MODES[0];
@@ -32,11 +36,18 @@ export function ThemePicker() {
   }, []);
 
   return (
-    <details className="theme-picker" ref={detailsRef}>
+    <details
+      className={compact ? 'theme-picker theme-picker--compact' : 'theme-picker'}
+      ref={detailsRef}
+    >
       <summary aria-label={`Theme: ${current.label}`}>
         <Icon name={modeIcon(mode)} />
-        <span>Theme</span>
-        <Icon name="CHEVRON_DOWN_16" />
+        {!compact && (
+          <>
+            <span>Theme</span>
+            <Icon name="CHEVRON_DOWN_16" />
+          </>
+        )}
       </summary>
       <div className="theme-picker-menu" role="menu">
         {THEME_MODES.map((m) => (

@@ -111,8 +111,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=3dcf8c75" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=3dcf8c75" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=ba86d3c5" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=ba86d3c5" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -339,115 +339,131 @@
             </div>
           </aside>
           <article class="academic-content">
-            <h1 style="font-family: var(--font-heading); margin-bottom: 0.5rem">
-              Datacenter Cooling Optimization using Deep Reinforcement Learning
-            </h1>
-            <p
-              style="
-                font-family: var(--font-body);
-                font-size: 0.9rem;
-                font-style: italic;
-                color: var(--text-muted);
-                margin-bottom: 2rem;
-              "
-            >
-              Washington University in St. Louis — Aug 2024 – Dec 2024
-            </p>
-            <section class="page__content">
-              <p>
-                This project, built for Washington University&apos;s CSE 510A (Deep Reinforcement
-                Learning) course, tackles cooling optimization for small- and mid-sized datacenters
-                &mdash; a segment that makes up most of the market but is far less studied than
-                hyperscale facilities. Using the Sinergym wrapper around EnergyPlus, the project
-                simulates a two-zone datacenter under stochastic summer weather and trains three
-                deep RL agents &mdash; Dueling Double DQN (DDQN), PPO with generalized advantage
-                estimation, and SAC with automatic entropy tuning &mdash; to control HVAC cooling
-                against random and rules-based baselines.
+            <div class="detail">
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <ol>
+                  <li><a href="/projects/">Projects</a></li>
+                  <li aria-current="page">
+                    Datacenter Cooling Optimization using Deep Reinforcement Learning
+                  </li>
+                </ol>
+              </nav>
+              <h1 class="detail-title">
+                Datacenter Cooling Optimization using Deep Reinforcement Learning
+              </h1>
+              <p class="detail-subtitle">
+                Implemented multiple deep reinforcement learning algorithms (DDQN, PPO, SAC)
+                integrated with EnergyPlus simulations to optimize datacenter cooling systems for
+                improved energy efficiency.
               </p>
-              <p>
-                DDQN with a discretized action space was the strongest performer, improving energy
-                efficiency by 35.8% over a rules-based incremental controller, compared to 10.9% for
-                PPO and a negligible gain for SAC. Adding weather-forecast inputs generally hurt
-                performance. The results show that lightweight, model-free RL can meaningfully
-                reduce cooling energy use even on the limited compute budgets typical of smaller
-                facilities.
-              </p>
-              <h4
-                style="
-                  font-family: var(--font-heading);
-                  margin-top: 1.5rem;
-                  margin-bottom: 0.5rem;
-                  color: var(--text-primary);
-                "
-              >
-                Highlights
-              </h4>
-              <ul>
-                <li>
-                  Three DRL agents (DDQN, PPO, SAC) trained against a realistic EnergyPlus
-                  simulation
-                </li>
-                <li>
-                  Custom Sinergym environment modeling a two-zone datacenter under stochastic
-                  weather
-                </li>
-                <li>
-                  DDQN achieved a 35.8% energy-efficiency improvement over a rules-based controller
-                </li>
-                <li>
-                  Benchmarked against random, rules-based, and rules-based-incremental baselines
-                </li>
-              </ul>
-            </section>
-            <div
-              style="
-                margin-top: 2rem;
-                border-top: 1px solid var(--border-color);
-                padding-top: 1.5rem;
-              "
-            >
-              <h4
-                style="
-                  font-family: var(--font-heading);
-                  margin-bottom: 0.5rem;
-                  color: var(--text-primary);
-                "
-              >
-                Technologies Applied
-              </h4>
-              <div class="project-tech">
-                <span class="tech-tag">Python</span><span class="tech-tag">PyTorch</span
-                ><span class="tech-tag">EnergyPlus</span><span class="tech-tag">Gymnasium</span
-                ><span class="tech-tag">Sinergym</span><span class="tech-tag">NumPy</span
-                ><span class="tech-tag">TensorBoard</span><span class="tech-tag">Git</span>
+              <div class="detail-grid">
+                <div class="detail-main">
+                  <section class="page__content">
+                    <p>
+                      This project, built for Washington University&apos;s CSE 510A (Deep
+                      Reinforcement Learning) course, tackles cooling optimization for small- and
+                      mid-sized datacenters &mdash; a segment that makes up most of the market but
+                      is far less studied than hyperscale facilities. Using the Sinergym wrapper
+                      around EnergyPlus, the project simulates a two-zone datacenter under
+                      stochastic summer weather and trains three deep RL agents &mdash; Dueling
+                      Double DQN (DDQN), PPO with generalized advantage estimation, and SAC with
+                      automatic entropy tuning &mdash; to control HVAC cooling against random and
+                      rules-based baselines.
+                    </p>
+                    <p>
+                      DDQN with a discretized action space was the strongest performer, improving
+                      energy efficiency by 35.8% over a rules-based incremental controller, compared
+                      to 10.9% for PPO and a negligible gain for SAC. Adding weather-forecast inputs
+                      generally hurt performance. The results show that lightweight, model-free RL
+                      can meaningfully reduce cooling energy use even on the limited compute budgets
+                      typical of smaller facilities.
+                    </p>
+                    <h4
+                      style="
+                        font-family: var(--font-heading);
+                        margin-top: 1.5rem;
+                        margin-bottom: 0.5rem;
+                        color: var(--text-primary);
+                      "
+                    >
+                      Highlights
+                    </h4>
+                    <ul>
+                      <li>
+                        Three DRL agents (DDQN, PPO, SAC) trained against a realistic EnergyPlus
+                        simulation
+                      </li>
+                      <li>
+                        Custom Sinergym environment modeling a two-zone datacenter under stochastic
+                        weather
+                      </li>
+                      <li>
+                        DDQN achieved a 35.8% energy-efficiency improvement over a rules-based
+                        controller
+                      </li>
+                      <li>
+                        Benchmarked against random, rules-based, and rules-based-incremental
+                        baselines
+                      </li>
+                    </ul>
+                  </section>
+                </div>
+                <aside class="detail-about" aria-label="About this project">
+                  <dl>
+                    <div class="detail-about-item">
+                      <dt>Category</dt>
+                      <dd><span class="card-category cat-research">Research &amp; ML</span></dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Venue</dt>
+                      <dd>Washington University in St. Louis</dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Dates</dt>
+                      <dd>Aug 2024 – Dec 2024</dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Built with</dt>
+                      <dd>
+                        Python, PyTorch, EnergyPlus, Gymnasium, Sinergym, NumPy, TensorBoard, Git
+                      </dd>
+                    </div>
+                    <div class="detail-about-item">
+                      <dt>Links</dt>
+                      <dd>
+                        <ul class="detail-links">
+                          <li>
+                            <a
+                              href="https://github.com/agopalareddy/datacenter-cooling-rl"
+                              target="_blank"
+                              rel="noopener"
+                              ><span style="display: contents"
+                                ><svg
+                                  class="octicon octicon-mark-github"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  viewBox="0 0 16 16"
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  fill="currentColor"
+                                >
+                                  <path
+                                    d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
+                                  ></path></svg></span
+                              ><span
+                                >Code on GitHub<span class="sr-only">
+                                  (opens in a new tab)</span
+                                ></span
+                              ></a
+                            >
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </aside>
               </div>
-            </div>
-            <div
-              class="card-actions"
-              style="margin-top: 2rem; justify-content: flex-start; gap: 1rem"
-            >
-              <a
-                href="https://github.com/agopalareddy/datacenter-cooling-rl"
-                target="_blank"
-                rel="noopener"
-                class="card-btn btn-github"
-                ><span style="display: contents"
-                  ><svg
-                    class="octicon octicon-mark-github"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    aria-hidden="true"
-                    focusable="false"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
-                    ></path></svg
-                ></span>
-                GitHub <span class="sr-only">(opens in a new tab)</span></a
-              >
             </div>
           </article>
         </div>

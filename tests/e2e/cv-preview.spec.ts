@@ -1,7 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('CV PDF preview', () => {
-  test.skip(({ isMobile }) => isMobile, 'Preview opens PDF in a new tab on narrow viewports');
+  // cv-modal.ts opens the PDF in a new tab instead of the dialog at <= 640px.
+  test.skip(
+    ({ viewport }) => (viewport?.width ?? 1280) <= 640,
+    'Preview opens the PDF in a new tab on narrow viewports'
+  );
 
   test('Preview button loads the modal without a failure message', async ({ page }) => {
     await page.goto('/cv/');

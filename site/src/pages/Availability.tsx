@@ -16,7 +16,7 @@ export function AvailabilityPage() {
       <p className="page-intro-lead">View the weekly calendar or book a meeting directly.</p>
       <div className="availability-actions">
         <a
-          className="site-action-btn"
+          className="btn-primary"
           href="https://calendar.app.google/rbrkCokvTAM6tb7i7"
           target="_blank"
           rel="noopener"

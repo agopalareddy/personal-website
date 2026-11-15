@@ -45,7 +45,8 @@ test.describe('Home page', () => {
     await expect(groups).toHaveCount(8);
     await expect(groups.locator('visible=true')).toHaveCount(4);
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    await expect(toggle).toHaveText(/^Show all \d+$/);
+    // Unanchored: the committed HTML is formatted, so the label has whitespace around it
+    await expect(toggle).toHaveText(/Show all \d+/);
 
     await toggle.click();
     await expect(groups.locator('visible=true')).toHaveCount(8);

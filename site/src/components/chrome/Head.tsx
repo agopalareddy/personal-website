@@ -1,6 +1,6 @@
 import { THEME_INLINE_SNIPPET } from './theme-inline-snippet';
 
-const ASSETS_VERSION = '2.0.0';
+const ASSETS_VERSION = "329ea475";
 
 export interface HeadProps {
   title: string;

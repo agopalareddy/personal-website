@@ -62,7 +62,7 @@ def main() -> None:
     head_tsx = REPO_ROOT / "site" / "src" / "components" / "chrome" / "Head.tsx"
     head_src = head_tsx.read_text()
     new_head_src = re.sub(
-        r'const ASSETS_VERSION = "[^"]*"',
+        r"const ASSETS_VERSION = (['\"])[^'\"]*\1",
         f'const ASSETS_VERSION = "{react_version}"',
         head_src,
     )

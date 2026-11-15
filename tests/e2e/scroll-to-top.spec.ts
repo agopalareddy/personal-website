@@ -15,7 +15,10 @@ const nextFrame = (page: Page) =>
 async function scrollDownThenUp(page: Page) {
   await page.evaluate(() => window.scrollTo({ top: 9999, behavior: 'instant' }));
   await nextFrame(page);
-  await page.evaluate(() => window.scrollBy({ top: -120, behavior: 'instant' }));
+  // A small step: the shortest fixture only scrolls ~400px, and the button
+  // needs the page to stay more than 300px from the top.
+  await page.evaluate(() => window.scrollBy({ top: -40, behavior: 'instant' }));
+  await nextFrame(page);
 }
 
 // Long enough to scroll at both configured viewports (desktop 1280x720, mobile 375x667).

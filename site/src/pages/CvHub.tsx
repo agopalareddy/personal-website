@@ -43,7 +43,7 @@ export function CvHubPage() {
           <div className="document-row-actions">
             <button
               type="button"
-              className="doc-row-btn btn-primary modal-trigger"
+              className="btn-primary modal-trigger"
               data-doc-title="Curriculum Vitae"
               data-doc-src="/files/reddy_cv.pdf"
               data-action="open"
@@ -56,7 +56,7 @@ export function CvHubPage() {
               href="/files/reddy_cv.pdf"
               target="_blank"
               rel="noopener"
-              className="doc-row-btn btn-secondary"
+              className="btn-default"
               aria-label="Open Curriculum Vitae PDF in a new tab"
             >
               <Icon name="LINK_EXTERNAL_16" /> Open PDF
@@ -87,7 +87,7 @@ export function CvHubPage() {
           <div className="document-row-actions">
             <button
               type="button"
-              className="doc-row-btn btn-primary modal-trigger"
+              className="btn-primary modal-trigger"
               data-doc-title="Resume"
               data-doc-src="/files/reddy_resume.pdf"
               data-action="open"
@@ -100,7 +100,7 @@ export function CvHubPage() {
               href="/files/reddy_resume.pdf"
               target="_blank"
               rel="noopener"
-              className="doc-row-btn btn-secondary"
+              className="btn-default"
               aria-label="Open Resume PDF in a new tab"
             >
               <Icon name="LINK_EXTERNAL_16" /> Open PDF

@@ -1,55 +1,50 @@
 {
   "../node_modules/.pnpm/pdfjs-dist@6.4.299/node_modules/pdfjs-dist/build/pdf.worker.mjs": {
-    "file": "assets/pdf.worker-PhvoOpM7.mjs",
+    "file": "assets/pdf.worker-PhvoOpM7.js",
     "src": "../node_modules/.pnpm/pdfjs-dist@6.4.299/node_modules/pdfjs-dist/build/pdf.worker.mjs"
   },
   "_rolldown-runtime-Czjbc987.js": {
     "file": "assets/rolldown-runtime-Czjbc987.js",
     "name": "rolldown-runtime"
   },
-  "_toggle-Bl4j4AUN.js": {
-    "file": "assets/toggle-Bl4j4AUN.js",
-    "name": "toggle",
-    "imports": ["_rolldown-runtime-Czjbc987.js"]
-  },
   "src/islands/catalog-filter.ts": {
-    "file": "assets/catalog-filter-DRp1Zsh-.js",
+    "file": "assets/catalog-filter-CeZEYEmP.js",
     "name": "catalog-filter",
     "src": "src/islands/catalog-filter.ts",
     "isEntry": true,
-    "imports": ["_rolldown-runtime-Czjbc987.js", "_toggle-Bl4j4AUN.js"]
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/cv-modal.ts": {
-    "file": "assets/cv-modal-BQVBBmqS.js",
+    "file": "assets/cv-modal-CxDe67rm.js",
     "name": "cv-modal",
     "src": "src/islands/cv-modal.ts",
     "isEntry": true,
     "imports": ["_rolldown-runtime-Czjbc987.js"],
-    "assets": ["assets/pdf.worker-PhvoOpM7.mjs"]
+    "assets": ["assets/pdf.worker-PhvoOpM7.js"]
   },
   "src/islands/email-protection.ts": {
-    "file": "assets/email-protection-BSRvsOKy.js",
+    "file": "assets/email-protection-CpkrbSV7.js",
     "name": "email-protection",
     "src": "src/islands/email-protection.ts",
     "isEntry": true,
     "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/home-skill-toggle.ts": {
-    "file": "assets/home-skill-toggle-DZuxRk0Q.js",
+    "file": "assets/home-skill-toggle-BKDpsaRG.js",
     "name": "home-skill-toggle",
     "src": "src/islands/home-skill-toggle.ts",
     "isEntry": true,
-    "imports": ["_rolldown-runtime-Czjbc987.js", "_toggle-Bl4j4AUN.js"]
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/scroll-to-top.ts": {
-    "file": "assets/scroll-to-top-B-5Wv14u.js",
+    "file": "assets/scroll-to-top-haMK3rKp.js",
     "name": "scroll-to-top",
     "src": "src/islands/scroll-to-top.ts",
     "isEntry": true,
     "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/theme.tsx": {
-    "file": "assets/theme-CoKIc0-k.js",
+    "file": "assets/theme-CkQHppC3.js",
     "name": "theme",
     "src": "src/islands/theme.tsx",
     "isEntry": true,

@@ -7,8 +7,9 @@ server {
     server_tokens off;
     more_clear_headers Server;
 
-    # Serve the styled 404 page for missing paths (not the nginx default).
+    # Serve the styled 404 page for missing paths and forbidden directory indexes.
     error_page 404 /404.html;
+    error_page 403 /404.html;
 
     # Block access to hidden files/directories (.git, .env, etc.)
     location ~ /\.(git|env|htaccess|htpasswd|svn|hg) {
@@ -23,6 +24,13 @@ server {
 
     # Static assets — aggressive caching
     location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+    # Backstop: .mjs must be served as JavaScript (pdf.js worker, ES modules)
+    location ~* ^/assets/.*\.mjs$ {
+        default_type application/javascript;
         expires 1y;
         add_header Cache-Control "public, immutable";
         include /etc/nginx/conf.d/security-headers.conf;
@@ -55,6 +63,14 @@ server {
     location = /talkmap           { return 301 /; }
     location = /talkmap/          { return 301 /; }
     location = /talkmap.html      { return 301 /; }
+
+    # Category folder indexes have no index.html → nginx 403. Send to catalog filter.
+    location = /experience/awards/         { return 301 /experience/?category=awards; }
+    location = /experience/education/      { return 301 /experience/?category=education; }
+    location = /experience/leadership/     { return 301 /experience/?category=leadership; }
+    location = /experience/presentations/  { return 301 /experience/?category=presentations; }
+    location = /experience/professional/   { return 301 /experience/?category=professional; }
+    location = /experience/research/       { return 301 /experience/?category=research; }
 
     # Re-categorized leadership -> presentations entries
     location = /experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html {
@@ -296,8 +312,9 @@ server {
     server_tokens off;
     more_clear_headers Server;
 
-    # Serve the styled 404 page for missing paths (not the nginx default).
+    # Serve the styled 404 page for missing paths and forbidden directory indexes.
     error_page 404 /404.html;
+    error_page 403 /404.html;
 
     # Block access to hidden files/directories (.git, .env, etc.)
     location ~ /\.(git|env|htaccess|htpasswd|svn|hg) {
@@ -312,6 +329,13 @@ server {
 
     # Static assets — aggressive caching
     location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        include /etc/nginx/conf.d/security-headers.conf;
+    }
+    # Backstop: .mjs must be served as JavaScript (pdf.js worker, ES modules)
+    location ~* ^/assets/.*\.mjs$ {
+        default_type application/javascript;
         expires 1y;
         add_header Cache-Control "public, immutable";
         include /etc/nginx/conf.d/security-headers.conf;
@@ -344,6 +368,14 @@ server {
     location = /talkmap           { return 301 /; }
     location = /talkmap/          { return 301 /; }
     location = /talkmap.html      { return 301 /; }
+
+    # Category folder indexes have no index.html → nginx 403. Send to catalog filter.
+    location = /experience/awards/         { return 301 /experience/?category=awards; }
+    location = /experience/education/      { return 301 /experience/?category=education; }
+    location = /experience/leadership/     { return 301 /experience/?category=leadership; }
+    location = /experience/presentations/  { return 301 /experience/?category=presentations; }
+    location = /experience/professional/   { return 301 /experience/?category=professional; }
+    location = /experience/research/       { return 301 /experience/?category=research; }
 
     # Re-categorized leadership -> presentations entries
     location = /experience/leadership/2022-09-artificial-intelligence-in-modern-board-games.html {

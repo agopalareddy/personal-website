@@ -50,16 +50,21 @@ export function Sidebar({ children }: { children?: ReactNode }) {
         />
         <h2 className="author-name">Aadarsha Gopala Reddy</h2>
         <p className="author-bio">
-          IT Training Specialist at the University of Florida. M.S. Computer Science, Washington
-          University in St. Louis
+          <span className="author-bio-role">
+            IT Training Specialist at the University of Florida.
+          </span>{' '}
+          <span className="author-bio-more">
+            M.S. Computer Science, Washington University in St. Louis
+          </span>
         </p>
         {SHOW_STATUS_BADGE && <StatusBadge />}
         <ul className="author-links">
-          <li>
+          <li className="author-location">
             <Icon name="LOCATION_16" /> Gainesville, Florida, USA
           </li>
+          {/* Each link holds its own icon so the phone layout can show the
+              icon alone while the label stays as the accessible name. */}
           <li>
-            <Icon name="MAIL_16" />{' '}
             <a
               href="#"
               className="protected-email"
@@ -67,7 +72,10 @@ export function Sidebar({ children }: { children?: ReactNode }) {
               data-email-domain="YWdyZWRkeS5jb20="
               data-email-text="agr [at] agreddy [dot] com"
             >
-              agr [at] agreddy [dot] com
+              <Icon name="MAIL_16" />
+              <span className="author-link-label" data-email-label>
+                agr [at] agreddy [dot] com
+              </span>
             </a>
             <noscript>
               (requires JavaScript —{' '}
@@ -78,15 +86,17 @@ export function Sidebar({ children }: { children?: ReactNode }) {
             </noscript>
           </li>
           <li>
-            <Icon name="LINKEDIN_16" />{' '}
             <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
-              LinkedIn <span className="sr-only">(opens in a new tab)</span>
+              <Icon name="LINKEDIN_16" />
+              <span className="author-link-label">LinkedIn</span>
+              <span className="sr-only">(opens in a new tab)</span>
             </a>
           </li>
           <li>
-            <Icon name="MARK_GITHUB_16" />{' '}
             <a href="https://github.com/agopalareddy" target="_blank" rel="noopener">
-              GitHub <span className="sr-only">(opens in a new tab)</span>
+              <Icon name="MARK_GITHUB_16" />
+              <span className="author-link-label">GitHub</span>
+              <span className="sr-only">(opens in a new tab)</span>
             </a>
           </li>
         </ul>

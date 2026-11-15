@@ -15,9 +15,13 @@ function decodeEmail() {
 
     el.setAttribute('href', `mailto:${email}`);
 
+    // A link that also holds an icon marks its text node with
+    // [data-email-label]; replacing the link's own textContent would drop
+    // the icon.
     const displayText = el.getAttribute('data-email-text');
     if (displayText) {
-      el.textContent = displayText;
+      const label = el.querySelector('[data-email-label]') ?? el;
+      label.textContent = displayText;
     }
 
     el.removeAttribute('data-email-user');

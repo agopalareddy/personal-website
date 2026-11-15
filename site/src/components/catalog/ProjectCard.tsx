@@ -1,5 +1,6 @@
 import { Icon } from '../common/Icon';
 import type { ProjectEntry } from '../../content/types';
+import { projectCategoryClass, projectDetailUrl } from '../../content/projectDisplay';
 
 const VENUE_LABELS: Record<string, string> = {
   WashU: 'Washington University in St. Louis',
@@ -8,41 +9,34 @@ const VENUE_LABELS: Record<string, string> = {
   Personal: 'Personal Projects',
 };
 
-function categoryClass(category: string): string {
-  if (category === 'Research & ML') return 'cat-research';
-  if (category === 'Web Apps') return 'cat-web';
-  if (category === 'Software & Tools') return 'cat-tools';
-  return '';
-}
+/** How many technologies a row names before collapsing the rest into "+N". */
+const ROW_TECH_LIMIT = 4;
 
-function ProjectActions({ p }: { p: ProjectEntry }) {
-  const detailUrl = p.permalink.endsWith('.html') ? p.permalink : `${p.permalink}.html`;
+/** Quiet per-row links (code, demo, paper, slides) — text only, no fills. */
+function ProjectRowLinks({ p }: { p: ProjectEntry }) {
+  const shown = p.technologies.slice(0, ROW_TECH_LIMIT);
+  const hidden = p.technologies.length - shown.length;
   return (
     <div className="card-actions">
-      <a
-        href={detailUrl}
-        className="card-btn btn-detail"
-        aria-label={`Explore dedicated detail page for ${p.title}`}
-      >
-        <Icon name="INFO_16" /> Details
-      </a>
+      {shown.length > 0 && (
+        <span className="row-tech">
+          {shown.join(' · ')}
+          {hidden > 0 && ` · +${hidden}`}
+        </span>
+      )}
       {p.github && (
         <a
           href={p.github}
           target="_blank"
           rel="noopener"
-          className="card-btn btn-github"
-          aria-label={`View ${p.title} codebase on GitHub (opens in a new tab)`}
+          className="row-link"
+          aria-label={`Code for ${p.title} on GitHub (opens in a new tab)`}
         >
-          <Icon name="MARK_GITHUB_16" /> Code <span className="sr-only">(opens in a new tab)</span>
+          <Icon name="MARK_GITHUB_16" /> Code
         </a>
       )}
       {p.demo && (
-        <a
-          href={p.demo}
-          className="card-btn btn-demo"
-          aria-label={`Launch live interactive demo for ${p.title}`}
-        >
+        <a href={p.demo} className="row-link" aria-label={`Demo of ${p.title}`}>
           <Icon name="ROCKET_16" /> Demo
         </a>
       )}
@@ -51,10 +45,10 @@ function ProjectActions({ p }: { p: ProjectEntry }) {
           href={p.pdf}
           target="_blank"
           rel="noopener"
-          className="card-btn btn-pdf"
-          aria-label={`Download ${p.title} PDF paper (opens in a new tab)`}
+          className="row-link"
+          aria-label={`PDF paper for ${p.title} (opens in a new tab)`}
         >
-          <Icon name="FILE_16" /> PDF <span className="sr-only">(opens in a new tab)</span>
+          <Icon name="FILE_16" /> PDF
         </a>
       )}
       {p.presentation && (
@@ -62,10 +56,10 @@ function ProjectActions({ p }: { p: ProjectEntry }) {
           href={p.presentation}
           target="_blank"
           rel="noopener"
-          className="card-btn btn-pdf"
-          aria-label={`Download ${p.title} presentation slides (opens in a new tab)`}
+          className="row-link"
+          aria-label={`Slides for ${p.title} (opens in a new tab)`}
         >
-          <Icon name="FILE_16" /> Slide <span className="sr-only">(opens in a new tab)</span>
+          <Icon name="FILE_16" /> Slides
         </a>
       )}
     </div>
@@ -73,10 +67,14 @@ function ProjectActions({ p }: { p: ProjectEntry }) {
 }
 
 /**
- * Ported from assets/js/projects-catalog.js's buildProjectCard() +
- * buildProjectActions(). Filter/search/sort behavior (renderProjects()) is
- * User Story 3 scope (useCatalogFilter) — this component only renders one
- * card's static markup.
+ * One row in the /projects/ list: title | category | dates, then venue, a
+ * one-line excerpt, and a quiet line naming the main technologies and any
+ * code/demo/paper links. The title link is stretched over the whole row in
+ * CSS; the per-row links sit above it.
+ *
+ * Keeps the legacy class names / data-* attributes the filter island
+ * (catalog-filter.ts) and e2e specs select on. `data-search` still carries
+ * every technology, so search matches ones the row doesn't print.
  */
 export function ProjectCard({ p }: { p: ProjectEntry }) {
   const venueLabel = VENUE_LABELS[p.venue_tag] ?? p.venue_tag;
@@ -89,10 +87,9 @@ export function ProjectCard({ p }: { p: ProjectEntry }) {
   const search = [p.title, p.excerpt, p.venue, p.venue_tag, ...p.technologies, ...aliases]
     .join(' ')
     .toLowerCase();
-  const detailUrl = p.permalink.endsWith('.html') ? p.permalink : `${p.permalink}.html`;
   return (
     <div
-      className="project-card card-surface timeline-card"
+      className="project-card timeline-card catalog-row"
       id={`proj-${p.id}`}
       data-category={p.category}
       data-group={p.venue_tag}
@@ -101,26 +98,14 @@ export function ProjectCard({ p }: { p: ProjectEntry }) {
       data-title={p.title}
       data-search={search}
     >
-      <span className="timeline-marker" />
-      <div className="card-meta">
-        <span className={`card-category ${categoryClass(p.category)}`}>{p.category}</span>
-        <span className="card-venue">{p.formatted_date}</span>
-      </div>
       <h3 className="project-title">
-        <a href={detailUrl} aria-label={`Explore dedicated detail page for ${p.title}`}>
-          {p.title}
-        </a>
+        <a href={projectDetailUrl(p)}>{p.title}</a>
       </h3>
+      <span className={`card-category ${projectCategoryClass(p.category)}`}>{p.category}</span>
+      <span className="card-venue">{p.formatted_date}</span>
       <div className="card-org-context">{venueLabel}</div>
       <p className="project-excerpt">{p.excerpt}</p>
-      <div className="project-tech">
-        {p.technologies.map((t) => (
-          <span className="tech-tag" key={t}>
-            {t}
-          </span>
-        ))}
-      </div>
-      <ProjectActions p={p} />
+      <ProjectRowLinks p={p} />
     </div>
   );
 }

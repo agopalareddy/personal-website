@@ -24,7 +24,7 @@ primer.css (vendored tokens: size, typography, motion, colors, 5 themes)
        Uses ONLY Primer functional tokens — no raw hex values
 ```
 
-No build step. Static HTML/CSS/JS served by nginx.
+`style.css` itself has no build step. Pages are rendered to static HTML from `site/src/` by `npm run build:site` and served by nginx.
 
 ## Rules
 
@@ -86,25 +86,39 @@ Category labels map to semantic roles:
 
 ## Component Patterns
 
-- **Header**: UnderlineNav (`.nav-links`), active tab with `aria-current="page"` + 2px accent underline
-- **Sidebar**: Profile card (`.academic-sidebar`), circular avatar, octicon contact links
-- **Cards**: Box pattern (`.card-surface`, `.project-card`, `.experience-card`), flat border, hover changes `border-color`
-- **Buttons**: Primer Button variants (`btn-github`, `btn-demo`, `btn-pdf`, `btn-detail`)
-- **Category labels**: Colored Label (pill, 1px border, role-based color)
-- **Tech tags**: Topic tag (pill, `--bgColor-accent-muted`)
+- **Header**: UnderlineNav (`.nav-links`), active tab with `aria-current="page"` + 2px accent underline. Below 48em the nav row becomes a fixed bottom tab bar and `.mobile-topbar` (site name + compact theme button) sits at the top of the page.
+- **Sidebar**: Profile (`.academic-sidebar`), circular avatar, octicon contact links; identity only, on every page. On phones it shows on Home only, as one compact row (64px avatar, name, role, icon-only links).
+- **Section heading**: `.section-heading` — an `h2` on a rule with an optional link or control at the right end.
+- **Catalog rows**: Compact list rows (`.catalog-row` on `.project-card` / `.experience-card`) — title | category | date on one line, meta and a one-line excerpt under it. The whole row links to the detail page (stretched title link); `.row-link`s sit above it. Rows are grouped in a bordered box per year under a `.timeline-year` heading that shows the count.
+- **Catalog toolbar**: `.catalog-toolbar` above the list — search, three dropdowns, category tabs with counts (`.catalog-tabs` of `.filter-btn[aria-pressed]`), then "Jump to" year links and the results count.
+- **Detail pages**: one template (`DetailShell.tsx`) for projects and experience — `.breadcrumb`, `h1`, summary, then prose beside an About column (`.detail-about`: category, organization or venue, dates, built with, links). The column drops under the prose when the content area is narrower than 44rem.
+- **Home**: `.home-lede` + `.home-actions`, a 2×2 grid of pinned projects (`.home-pins`), and skills as a label/list grid (`.home-skills`) that shows four areas until expanded.
+- **Buttons**: three classes only — `.btn-primary` (green; at most one per page or card), `.btn-default` (outline), `.btn-link` (text). One size: 36px tall, 44px on phones.
+- **Category labels**: Colored Label (`.card-category.cat-*`: pill, 1px border, role-based color)
+- **Cards**: 1px border, 6px radius, border-color change on hover. Used for pinned projects, CV documents (`.document-row`) and the calendar (`.calendar-card`, which has a header bar).
 - **Search/Select**: FormControl with leading octicon search icon
-- **Timeline**: Vertical rail (2px line, dot markers at year headers and cards)
-- **TOC**: NavList (borderless, aria-expanded toggle)
 - **Footer**: GitHub-style (top border, muted link row + copyright)
-- **Theme picker**: `<details>` dropdown with 6 radio options
-- **Status badge**: Profile status pill (success/attention/danger variants)
+- **Theme picker**: `<details>` dropdown with 6 radio options; `--compact` variant is an icon-only button
+- **Scroll to top**: fixed round button; on phones it shows only while scrolling up
+- **Status badge**: Profile status pill (success/attention/danger variants); currently switched off in `Sidebar.tsx`
 
 ## Typography
 
-- Body: `--fontStack-system`, 16px (`--text-body-size-large`)
-- Headings: `--fontStack-system`, `--text-title-size-large` (32px) / `-medium` (20px) / `-small` (16px)
-- Code: `--fontStack-monospace`, `--text-codeBlock-size`
+Site type scale (five steps only — defined as `--site-text-*` in `style.css`):
+
+| Token                 | Size            | Use                                        |
+| --------------------- | --------------- | ------------------------------------------ |
+| `--site-text-display` | 32px / 2rem     | Page titles (`h1`)                         |
+| `--site-text-title`   | 20px / 1.25rem  | Section titles (`h2`)                      |
+| `--site-text-body`    | 16px / 1rem     | Subheads (`h3`), ledes, row and pin titles |
+| `--site-text-small`   | 14px / 0.875rem | Body copy, nav, buttons, form controls     |
+| `--site-text-caption` | 12px / 0.75rem  | Labels, meta, counts                       |
+
+- Font: `--fontStack-system` (body/headings), `--fontStack-monospace` (code)
 - Line height: `--text-body-lineHeight-large` (1.5)
+- Root `html` font-size stays `16px` so rem math stays stable
+- Prose is capped at 72ch (`:where(.academic-content) p, ul, ol`); components that need the full width set `max-width: none`
+- Prose defaults are written with `:where()` so they carry no specificity — component classes override them without `!important`
 
 ## Accessibility
 

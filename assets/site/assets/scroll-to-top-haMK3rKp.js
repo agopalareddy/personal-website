@@ -12,17 +12,28 @@ var t = e(() => {
           t.setAttribute(`aria-hidden`, String(!e)),
           (t.tabIndex = e ? 0 : -1));
       },
-      r = () => {
-        n(e() && window.scrollY > 300);
+      r = window.matchMedia(`(max-width: 47.99em)`),
+      i = window.scrollY,
+      a = !1,
+      o = () => {
+        let t = e() && window.scrollY > 300;
+        n(t && (!r.matches || a));
       };
-    (window.addEventListener(`scroll`, r, { passive: !0 }),
-      window.addEventListener(`resize`, r),
-      new ResizeObserver(r).observe(document.body),
+    (window.addEventListener(
+      `scroll`,
+      () => {
+        let e = window.scrollY;
+        (Math.abs(e - i) >= 4 && ((a = e < i), (i = e)), o());
+      },
+      { passive: !0 }
+    ),
+      window.addEventListener(`resize`, o),
+      new ResizeObserver(o).observe(document.body),
       t.addEventListener(`click`, () => {
         let e = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
         window.scrollTo({ top: 0, behavior: e ? `auto` : `smooth` });
       }),
-      r());
+      o());
   }
   document.readyState === `loading` ? document.addEventListener(`DOMContentLoaded`, t) : t();
 });

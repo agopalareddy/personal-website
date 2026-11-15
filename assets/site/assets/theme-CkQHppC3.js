@@ -13047,8 +13047,9 @@ Error generating stack: ` +
     };
   }),
   f = t((e) => {
-    var t = Symbol.for(`react.transitional.element`);
-    function n(e, n, r) {
+    var t = Symbol.for(`react.transitional.element`),
+      n = Symbol.for(`react.fragment`);
+    function r(e, n, r) {
       var i = null;
       if ((r !== void 0 && (i = `` + r), n.key !== void 0 && (i = `` + n.key), `key` in n))
         for (var a in ((r = {}), n)) a !== `key` && (r[a] = n[a]);
@@ -13058,7 +13059,7 @@ Error generating stack: ` +
         { $$typeof: t, type: e, key: i, ref: n === void 0 ? null : n, props: r }
       );
     }
-    ((e.jsx = n), (e.jsxs = n));
+    ((e.Fragment = n), (e.jsx = r), (e.jsxs = r));
   }),
   p = t((e, t) => {
     t.exports = f();
@@ -13205,17 +13206,17 @@ function ce(e) {
       ? `MOON_16`
       : `DEVICE_DESKTOP_16`;
 }
-function le() {
-  let { mode: e, setMode: t } = ee(),
-    n = (0, ue.useRef)(null),
-    r = ne.find((t) => t.value === e) ?? ne[0];
+function le({ compact: e = !1 }) {
+  let { mode: t, setMode: n } = ee(),
+    r = (0, ue.useRef)(null),
+    i = ne.find((e) => e.value === t) ?? ne[0];
   return (
     (0, ue.useEffect)(() => {
       let e = (e) => {
-          e.key === `Escape` && n.current && (n.current.open = !1);
+          e.key === `Escape` && r.current && (r.current.open = !1);
         },
         t = (e) => {
-          n.current && !n.current.contains(e.target) && (n.current.open = !1);
+          r.current && !r.current.contains(e.target) && (r.current.open = !1);
         };
       return (
         document.addEventListener(`keydown`, e),
@@ -13226,45 +13227,50 @@ function le() {
       );
     }, []),
     (0, C.jsxs)(`details`, {
-      className: `theme-picker`,
-      ref: n,
+      className: e ? `theme-picker theme-picker--compact` : `theme-picker`,
+      ref: r,
       children: [
         (0, C.jsxs)(`summary`, {
-          'aria-label': `Theme: ${r.label}`,
+          'aria-label': `Theme: ${i.label}`,
           children: [
-            (0, C.jsx)(m, { name: ce(e) }),
-            (0, C.jsx)(`span`, { children: `Theme` }),
-            (0, C.jsx)(m, { name: `CHEVRON_DOWN_16` }),
+            (0, C.jsx)(m, { name: ce(t) }),
+            !e &&
+              (0, C.jsxs)(C.Fragment, {
+                children: [
+                  (0, C.jsx)(`span`, { children: `Theme` }),
+                  (0, C.jsx)(m, { name: `CHEVRON_DOWN_16` }),
+                ],
+              }),
           ],
         }),
         (0, C.jsx)(`div`, {
           className: `theme-picker-menu`,
           role: `menu`,
-          children: ne.map((r) =>
+          children: ne.map((e) =>
             (0, C.jsxs)(
               `button`,
               {
                 type: `button`,
                 className: `theme-picker-option`,
                 role: `menuitemradio`,
-                'data-theme-value': r.value,
-                'aria-checked': r.value === e,
+                'data-theme-value': e.value,
+                'aria-checked': e.value === t,
                 onClick: () => {
-                  (t(r.value), n.current && (n.current.open = !1));
+                  (n(e.value), r.current && (r.current.open = !1));
                 },
                 children: [
                   (0, C.jsx)(`span`, {
                     className: `theme-picker-option-icon`,
-                    children: (0, C.jsx)(m, { name: ce(r.value) }),
+                    children: (0, C.jsx)(m, { name: ce(e.value) }),
                   }),
-                  (0, C.jsx)(`span`, { children: r.label }),
+                  (0, C.jsx)(`span`, { children: e.label }),
                   (0, C.jsx)(`span`, {
                     className: `theme-picker-option-check`,
                     children: (0, C.jsx)(m, { name: `CHECK_16` }),
                   }),
                 ],
               },
-              r.value
+              e.value
             )
           ),
         }),
@@ -13282,8 +13288,10 @@ var ue,
     de();
     var t = p(),
       n = document.getElementById(`theme-toggle`),
-      r = document.getElementById(`theme-toggle-footer`);
+      r = document.getElementById(`theme-toggle-top`),
+      i = document.getElementById(`theme-toggle-footer`);
     (n && (0, e.createRoot)(n).render((0, t.jsx)(le, {})),
-      r && (0, e.createRoot)(r).render((0, t.jsx)(le, {})));
+      r && (0, e.createRoot)(r).render((0, t.jsx)(le, { compact: !0 })),
+      i && (0, e.createRoot)(i).render((0, t.jsx)(le, {})));
   });
 export default fe();

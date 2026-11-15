@@ -1,0 +1,16 @@
+import { t as e } from './rolldown-runtime-Czjbc987.js';
+var t = e(() => {
+  document.addEventListener(`DOMContentLoaded`, () => {
+    let e = document.querySelector(`.home-skills-toggle`),
+      t = document.getElementById(`homeSkillGroups`);
+    e &&
+      t &&
+      e.addEventListener(`click`, () => {
+        let n = t.dataset.expanded !== `true`;
+        ((t.dataset.expanded = String(n)),
+          e.setAttribute(`aria-expanded`, String(n)),
+          (e.textContent = (n ? e.dataset.labelExpanded : e.dataset.labelCollapsed) ?? ``));
+      });
+  });
+});
+export default t();

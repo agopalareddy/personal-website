@@ -1,4 +1,3 @@
-import { Icon } from '../common/Icon';
 import type { ExperienceEntry } from '../../content/types';
 import {
   experienceDisplayTitle,
@@ -9,9 +8,13 @@ import {
 } from '../../content/experienceDisplay';
 
 /**
- * Ported from assets/js/experience-catalog.js's createExperienceCard().
- * Filter/search/sort behavior (renderExperiences()) is User Story 3 scope
- * (useCatalogFilter) — this component only renders one card's static markup.
+ * One row in the /experience/ list: title | category | dates, then a meta
+ * line (organization • context • location) and a one-line excerpt. The
+ * title link is stretched over the whole row in CSS, so the row is one
+ * click target and needs no separate "Details" button.
+ *
+ * Keeps the legacy class names / data-* attributes the filter island
+ * (catalog-filter.ts) and e2e specs select on.
  */
 export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
   const title = experienceDisplayTitle(e);
@@ -36,7 +39,7 @@ export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
 
   return (
     <div
-      className="project-card card-surface timeline-card experience-card"
+      className="project-card timeline-card experience-card catalog-row"
       id={`exp-${e.id}`}
       data-category={e.category}
       data-group={orgGroup(e.organization)}
@@ -45,29 +48,15 @@ export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
       data-title={title}
       data-search={search}
     >
-      <span className="timeline-marker" />
-      <div className="card-meta">
-        <span className={`card-category cat-${e.category}`}>{categoryLabel(e.category)}</span>
-        <span className="card-venue">{dateRange}</span>
-      </div>
       <h3 className="project-title">
-        <a href={detailUrl} aria-label={`Explore dedicated detail page for ${title}`}>
-          {title}
-        </a>
+        <a href={detailUrl}>{title}</a>
       </h3>
+      <span className={`card-category cat-${e.category}`}>{categoryLabel(e.category)}</span>
+      <span className="card-venue">{dateRange}</span>
       {subtitleParts.length > 0 && (
         <div className="card-org-context">{subtitleParts.join(' • ')}</div>
       )}
-      <p className="project-excerpt">{e.excerpt}</p>
-      <div className="card-actions">
-        <a
-          href={detailUrl}
-          className="card-btn btn-detail"
-          aria-label={`Explore dedicated detail page for ${title}`}
-        >
-          <Icon name="INFO_16" /> Details
-        </a>
-      </div>
+      {e.excerpt && <p className="project-excerpt">{e.excerpt}</p>}
     </div>
   );
 }

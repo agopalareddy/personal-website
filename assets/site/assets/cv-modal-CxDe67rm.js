@@ -21673,7 +21673,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
   }),
   Da,
   Oa = e(() => {
-    Da = `/assets/site/assets/pdf.worker-PhvoOpM7.mjs`;
+    Da = `/assets/site/assets/pdf.worker-PhvoOpM7.js`;
   }),
   ka = t(() => {
     (Ea(), Oa(), (Kr.workerSrc = Da));

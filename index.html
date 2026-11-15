@@ -97,12 +97,16 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=2.0.0" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=2.0.0" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=21a4867a" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=21a4867a" />
   </head>
   <body class="home-page">
     <a href="#main-content" class="skip-link">Skip to Content</a>
     <header class="top-header">
+      <div class="mobile-topbar">
+        <a href="/" class="mobile-topbar-home">agreddy.com</a>
+        <div id="theme-toggle-top"></div>
+      </div>
       <div class="top-bar container">
         <nav class="nav-links" aria-label="Primary Navigation">
           <a href="/" class="nav-link active" aria-current="page"
@@ -203,11 +207,15 @@
               />
               <h2 class="author-name">Aadarsha Gopala Reddy</h2>
               <p class="author-bio">
-                IT Training Specialist at the University of Florida. M.S. Computer Science,
-                Washington University in St. Louis
+                <span class="author-bio-role"
+                  >IT Training Specialist at the University of Florida.</span
+                >
+                <span class="author-bio-more"
+                  >M.S. Computer Science, Washington University in St. Louis</span
+                >
               </p>
               <ul class="author-links">
-                <li>
+                <li class="author-location">
                   <span style="display: contents"
                     ><svg
                       class="octicon octicon-location"
@@ -226,28 +234,29 @@
                   Gainesville, Florida, USA
                 </li>
                 <li>
-                  <span style="display: contents"
-                    ><svg
-                      class="octicon octicon-mail"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      aria-hidden="true"
-                      focusable="false"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"
-                      ></path></svg
-                  ></span>
                   <a
                     href="#"
                     class="protected-email"
                     data-email-user="YWdy"
                     data-email-domain="YWdyZWRkeS5jb20="
                     data-email-text="agr [at] agreddy [dot] com"
-                    >agr [at] agreddy [dot] com</a
+                    ><span style="display: contents"
+                      ><svg
+                        class="octicon octicon-mail"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                        focusable="false"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"
+                        ></path></svg></span
+                    ><span class="author-link-label" data-email-label="true"
+                      >agr [at] agreddy [dot] com</span
+                    ></a
                   ><noscript
                     >(requires JavaScript —
                     <a
@@ -260,43 +269,43 @@
                   >
                 </li>
                 <li>
-                  <span style="display: contents"
-                    ><svg
-                      class="octicon octicon-linkedin"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                      focusable="false"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                      /></svg
-                  ></span>
                   <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
-                    >LinkedIn <span class="sr-only">(opens in a new tab)</span></a
+                    ><span style="display: contents"
+                      ><svg
+                        class="octicon octicon-linkedin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        focusable="false"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                        /></svg></span
+                    ><span class="author-link-label">LinkedIn</span
+                    ><span class="sr-only">(opens in a new tab)</span></a
                   >
                 </li>
                 <li>
-                  <span style="display: contents"
-                    ><svg
-                      class="octicon octicon-mark-github"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      aria-hidden="true"
-                      focusable="false"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
-                      ></path></svg
-                  ></span>
                   <a href="https://github.com/agopalareddy" target="_blank" rel="noopener"
-                    >GitHub <span class="sr-only">(opens in a new tab)</span></a
+                    ><span style="display: contents"
+                      ><svg
+                        class="octicon octicon-mark-github"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                        focusable="false"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
+                        ></path></svg></span
+                    ><span class="author-link-label">GitHub</span
+                    ><span class="sr-only">(opens in a new tab)</span></a
                   >
                 </li>
               </ul>
@@ -327,353 +336,306 @@
                 ]
               }
             </script>
-            <section class="page__content" itemProp="text">
+            <section class="page__content home-intro" itemProp="text">
               <h1 id="hello-im-aadarsha">Hello, I’m Aadarsha</h1>
-              <p>
+              <p class="home-lede">
                 I’m an IT Training Specialist at the
                 <a href="https://www.ufl.edu/">University of Florida</a>, where I develop and
                 deliver AI training for university employees in UF Information Technology. Before
                 this, I earned an M.S. in Computer Science at
                 <a href="https://www.washu.edu/">Washington University in St. Louis</a>, where my
                 thesis used domain-adversarial learning to predict cognitive impairment from
-                naturalistic driving data. I have hands-on experience across machine learning, data
-                engineering, and full-stack development, gained through research, teaching, and
-                industry internships.
+                naturalistic driving data.
               </p>
-              <div class="home-skill-details card-surface">
-                <button
-                  class="home-skill-toggle toc-toggle-btn"
-                  type="button"
-                  aria-expanded="true"
-                  aria-controls="homeSkillGroups"
-                >
-                  Technical stack by area
-                </button>
-                <dl
-                  class="home-skill-groups"
-                  id="homeSkillGroups"
-                  aria-label="Technical stack by area"
-                >
-                  <div class="home-skill-group">
-                    <dt>Languages</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Python" rel="nofollow">Python</a>
-                        </li>
-                        <li class="tech-tag"><a href="/projects/?q=SQL" rel="nofollow">SQL</a></li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=JavaScript" rel="nofollow">JavaScript</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=TypeScript" rel="nofollow">TypeScript</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Java" rel="nofollow">Java</a>
-                        </li>
-                        <li class="tech-tag"><a href="/projects/?q=C%23" rel="nofollow">C#</a></li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=C%2B%2B" rel="nofollow">C++</a>
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                  <div class="home-skill-group">
-                    <dt>ML &amp; analytics</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Statistics" rel="nofollow">Statistics</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Data%20Analysis" rel="nofollow">Data Analysis</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Pandas" rel="nofollow">Pandas</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=NumPy" rel="nofollow">NumPy</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=PyTorch" rel="nofollow">PyTorch</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=TensorFlow" rel="nofollow">TensorFlow</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Keras" rel="nofollow">Keras</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Scikit-learn" rel="nofollow">Scikit-learn</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=XGBoost" rel="nofollow">XGBoost</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Transformers" rel="nofollow">Transformers</a>
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                  <div class="home-skill-group">
-                    <dt>Data systems</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Database%20Design" rel="nofollow"
-                            >Database Design</a
-                          >
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=PostgreSQL" rel="nofollow">PostgreSQL</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=MySQL" rel="nofollow">MySQL</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=SQLite" rel="nofollow">SQLite</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=MongoDB" rel="nofollow">MongoDB</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Supabase" rel="nofollow">Supabase</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Snowflake" rel="nofollow">Snowflake</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Spark" rel="nofollow">Spark</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Airflow" rel="nofollow">Airflow</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Kafka" rel="nofollow">Kafka</a>
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                  <div class="home-skill-group">
-                    <dt>Web &amp; apps</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag">
-                          <a href="/projects/?q=HTML" rel="nofollow">HTML</a>
-                        </li>
-                        <li class="tech-tag"><a href="/projects/?q=CSS" rel="nofollow">CSS</a></li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=React" rel="nofollow">React</a>
-                        </li>
-                        <li class="tech-tag"><a href="/projects/?q=Vue" rel="nofollow">Vue</a></li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Node" rel="nofollow">Node</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Express" rel="nofollow">Express</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=FastAPI" rel="nofollow">FastAPI</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Flask" rel="nofollow">Flask</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Streamlit" rel="nofollow">Streamlit</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Socket.IO" rel="nofollow">Socket.IO</a>
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                  <div class="home-skill-group">
-                    <dt>AI practice</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Agentic%20Coding" rel="nofollow">Agentic Coding</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Context%20Engineering" rel="nofollow"
-                            >Context Engineering</a
-                          >
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=AI%20Code%20Review" rel="nofollow"
-                            >AI Code Review</a
-                          >
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=AI-Assisted%20Testing" rel="nofollow"
-                            >AI-Assisted Testing</a
-                          >
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Multi-agent%20Systems" rel="nofollow"
-                            >Multi-agent Systems</a
-                          >
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                  <div class="home-skill-group">
-                    <dt>AI tools</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Claude%20Code" rel="nofollow">Claude Code</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Codex" rel="nofollow">Codex</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Copilot" rel="nofollow">Copilot</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Cursor" rel="nofollow">Cursor</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Antigravity" rel="nofollow">Antigravity</a>
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                  <div class="home-skill-group">
-                    <dt>Agents &amp; APIs</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Gemini" rel="nofollow">Gemini</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=OpenAI" rel="nofollow">OpenAI</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Claude" rel="nofollow">Claude</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Fal.ai%20API" rel="nofollow">Fal.ai API</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Google%20ADK" rel="nofollow">Google ADK</a>
-                        </li>
-                        <li class="tech-tag"><a href="/projects/?q=MCP" rel="nofollow">MCP</a></li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Skills" rel="nofollow">Skills</a>
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                  <div class="home-skill-group">
-                    <dt>Tools</dt>
-                    <dd>
-                      <ul class="project-tech home-skill-tags">
-                        <li class="tech-tag"><a href="/projects/?q=Git" rel="nofollow">Git</a></li>
-                        <li class="tech-tag"><a href="/projects/?q=AWS" rel="nofollow">AWS</a></li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Docker" rel="nofollow">Docker</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Tableau" rel="nofollow">Tableau</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Power%20BI" rel="nofollow">Power BI</a>
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Google%20Workspace" rel="nofollow"
-                            >Google Workspace</a
-                          >
-                        </li>
-                        <li class="tech-tag">
-                          <a href="/projects/?q=Microsoft%20365" rel="nofollow">Microsoft 365</a>
-                        </li>
-                      </ul>
-                    </dd>
-                  </div>
-                </dl>
-              </div>
+              <p>
+                I have hands-on experience across machine learning, data engineering, and full-stack
+                development, gained through research, teaching, and industry internships. For the
+                full story on my research, teaching, and work experience, see my
+                <a href="/experience/">Experience</a> page, or download my <a href="/cv/">CV</a>.
+              </p>
               <div class="home-actions">
                 <a
                   href="/files/reddy_resume.pdf"
                   target="_blank"
                   rel="noopener"
-                  class="site-action-btn"
-                  aria-label="Download Resume PDF (opens in a new tab)"
-                  ><svg
-                    class="octicon octicon-download"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    aria-hidden="true"
-                    focusable="false"
-                    fill="currentColor"
+                  class="btn-primary"
+                  aria-label="Resume PDF (opens in a new tab)"
+                  ><span style="display: contents"
+                    ><svg
+                      class="octicon octicon-download"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      aria-hidden="true"
+                      focusable="false"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"
+                      ></path>
+                      <path
+                        d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"
+                      ></path></svg
+                  ></span>
+                  Resume</a
+                ><a href="/availability/" class="btn-default"
+                  ><span style="display: contents"
+                    ><svg
+                      class="octicon octicon-calendar"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      aria-hidden="true"
+                      focusable="false"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"
+                      ></path></svg
+                  ></span>
+                  Book a meeting</a
+                ><a
+                  href="#"
+                  class="btn-link protected-email"
+                  data-email-user="YWdy"
+                  data-email-domain="YWdyZWRkeS5jb20="
+                  >Email me</a
+                ><noscript
+                  >(email requires JavaScript —
+                  <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
+                    >message me on LinkedIn</a
                   >
-                    <path
-                      d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"
-                    ></path>
-                    <path
-                      d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"
-                    ></path></svg
-                  >Resume<span class="sr-only">(opens in a new tab)</span></a
-                ><a href="/availability/" class="doc-row-btn btn-secondary"
-                  ><svg
-                    class="octicon octicon-calendar"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    aria-hidden="true"
-                    focusable="false"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"
-                    ></path></svg
-                  >Book a meeting</a
+                  instead)</noscript
                 >
               </div>
-              <p>
-                For the full story on my research, teaching, and work experience, see my
-                <a href="/experience/">Experience</a> page, or download my <a href="/cv/">CV</a>.
-              </p>
-              <h2 id="featured-projects">Featured Projects</h2>
-              <ul>
-                <li>
-                  <strong
-                    ><a href="/projects/ms-thesis.html"
+            </section>
+            <section aria-labelledby="featured-projects">
+              <div class="section-heading">
+                <h2 id="featured-projects">Featured projects</h2>
+                <a href="/projects/">All 23 projects</a>
+              </div>
+              <ul class="home-pins">
+                <li class="home-pin">
+                  <h3 class="home-pin-title">
+                    <a href="/projects/ms-thesis.html"
                       >M.S. Thesis: Vehicle-Agnostic Driving Signatures</a
-                    ></strong
-                  >
-                  — Compared six modeling approaches for predicting cognitive impairment from
-                  naturalistic driving data.
+                    >
+                  </h3>
+                  <p class="home-pin-description">
+                    Compared six modeling approaches for predicting cognitive impairment from
+                    naturalistic driving data.
+                  </p>
+                  <p class="home-pin-meta">
+                    <span class="home-pin-dot cat-research" aria-hidden="true"></span>Research &amp;
+                    ML<span aria-hidden="true">·</span>2026
+                  </p>
                 </li>
-                <li>
-                  <strong
-                    ><a href="/projects/multimodal-alzheimers.html"
+                <li class="home-pin">
+                  <h3 class="home-pin-title">
+                    <a href="/projects/multimodal-alzheimers.html"
                       >Multimodal Alzheimer’s Prediction</a
-                    ></strong
-                  >
-                  — Combined MRI imaging with clinical data for early Alzheimer’s disease detection.
+                    >
+                  </h3>
+                  <p class="home-pin-description">
+                    Combined MRI imaging with clinical data for early Alzheimer’s disease detection.
+                  </p>
+                  <p class="home-pin-meta">
+                    <span class="home-pin-dot cat-research" aria-hidden="true"></span>Research &amp;
+                    ML<span aria-hidden="true">·</span>2024
+                  </p>
                 </li>
-                <li>
-                  <strong
-                    ><a href="/projects/datacenter-cooling.html"
-                      >Datacenter Cooling Optimization</a
-                    ></strong
-                  >
-                  — Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter
-                  cooling efficiency.
+                <li class="home-pin">
+                  <h3 class="home-pin-title">
+                    <a href="/projects/datacenter-cooling.html">Datacenter Cooling Optimization</a>
+                  </h3>
+                  <p class="home-pin-description">
+                    Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter
+                    cooling efficiency.
+                  </p>
+                  <p class="home-pin-meta">
+                    <span class="home-pin-dot cat-research" aria-hidden="true"></span>Research &amp;
+                    ML<span aria-hidden="true">·</span>2024
+                  </p>
                 </li>
-                <li>
-                  <strong><a href="/storybook/">Tales We Weave</a></strong> — AI-powered interactive
-                  storytelling app with branching narratives, built with Vue 3, Express, and
-                  MongoDB.
+                <li class="home-pin">
+                  <h3 class="home-pin-title"><a href="/storybook/">Tales We Weave</a></h3>
+                  <p class="home-pin-description">
+                    AI-powered interactive storytelling app with branching narratives, built with
+                    Vue 3, Express, and MongoDB.
+                  </p>
+                  <p class="home-pin-meta">
+                    <span class="home-pin-dot cat-web" aria-hidden="true"></span>Web Apps<span
+                      aria-hidden="true"
+                      >·</span
+                    >2024
+                  </p>
                 </li>
               </ul>
-              <p>Check out more on my <a href="/projects/">Projects</a> page.</p>
-              <h2 id="research-interests">Research Interests</h2>
+            </section>
+            <section aria-labelledby="skills">
+              <div class="section-heading">
+                <h2 id="skills">Skills</h2>
+                <button
+                  type="button"
+                  class="btn-link home-skills-toggle"
+                  aria-expanded="false"
+                  aria-controls="homeSkillGroups"
+                  data-label-collapsed="Show all 61"
+                  data-label-expanded="Show fewer"
+                >
+                  Show all 61
+                </button>
+              </div>
+              <dl class="home-skills" id="homeSkillGroups" data-expanded="false">
+                <div class="home-skill-group">
+                  <dt>Languages</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li><a href="/projects/?q=Python" rel="nofollow">Python</a></li>
+                      <li><a href="/projects/?q=SQL" rel="nofollow">SQL</a></li>
+                      <li><a href="/projects/?q=JavaScript" rel="nofollow">JavaScript</a></li>
+                      <li><a href="/projects/?q=TypeScript" rel="nofollow">TypeScript</a></li>
+                      <li><a href="/projects/?q=Java" rel="nofollow">Java</a></li>
+                      <li><a href="/projects/?q=C%23" rel="nofollow">C#</a></li>
+                      <li><a href="/projects/?q=C%2B%2B" rel="nofollow">C++</a></li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="home-skill-group">
+                  <dt>ML &amp; analytics</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li><a href="/projects/?q=Statistics" rel="nofollow">Statistics</a></li>
+                      <li>
+                        <a href="/projects/?q=Data%20Analysis" rel="nofollow">Data Analysis</a>
+                      </li>
+                      <li><a href="/projects/?q=Pandas" rel="nofollow">Pandas</a></li>
+                      <li><a href="/projects/?q=NumPy" rel="nofollow">NumPy</a></li>
+                      <li><a href="/projects/?q=PyTorch" rel="nofollow">PyTorch</a></li>
+                      <li><a href="/projects/?q=TensorFlow" rel="nofollow">TensorFlow</a></li>
+                      <li><a href="/projects/?q=Keras" rel="nofollow">Keras</a></li>
+                      <li><a href="/projects/?q=Scikit-learn" rel="nofollow">Scikit-learn</a></li>
+                      <li><a href="/projects/?q=XGBoost" rel="nofollow">XGBoost</a></li>
+                      <li><a href="/projects/?q=Transformers" rel="nofollow">Transformers</a></li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="home-skill-group">
+                  <dt>Data systems</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li>
+                        <a href="/projects/?q=Database%20Design" rel="nofollow">Database Design</a>
+                      </li>
+                      <li><a href="/projects/?q=PostgreSQL" rel="nofollow">PostgreSQL</a></li>
+                      <li><a href="/projects/?q=MySQL" rel="nofollow">MySQL</a></li>
+                      <li><a href="/projects/?q=SQLite" rel="nofollow">SQLite</a></li>
+                      <li><a href="/projects/?q=MongoDB" rel="nofollow">MongoDB</a></li>
+                      <li><a href="/projects/?q=Supabase" rel="nofollow">Supabase</a></li>
+                      <li><a href="/projects/?q=Snowflake" rel="nofollow">Snowflake</a></li>
+                      <li><a href="/projects/?q=Spark" rel="nofollow">Spark</a></li>
+                      <li><a href="/projects/?q=Airflow" rel="nofollow">Airflow</a></li>
+                      <li><a href="/projects/?q=Kafka" rel="nofollow">Kafka</a></li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="home-skill-group">
+                  <dt>Web &amp; apps</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li><a href="/projects/?q=HTML" rel="nofollow">HTML</a></li>
+                      <li><a href="/projects/?q=CSS" rel="nofollow">CSS</a></li>
+                      <li><a href="/projects/?q=React" rel="nofollow">React</a></li>
+                      <li><a href="/projects/?q=Vue" rel="nofollow">Vue</a></li>
+                      <li><a href="/projects/?q=Node" rel="nofollow">Node</a></li>
+                      <li><a href="/projects/?q=Express" rel="nofollow">Express</a></li>
+                      <li><a href="/projects/?q=FastAPI" rel="nofollow">FastAPI</a></li>
+                      <li><a href="/projects/?q=Flask" rel="nofollow">Flask</a></li>
+                      <li><a href="/projects/?q=Streamlit" rel="nofollow">Streamlit</a></li>
+                      <li><a href="/projects/?q=Socket.IO" rel="nofollow">Socket.IO</a></li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="home-skill-group home-skill-group--extra">
+                  <dt>AI practice</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li>
+                        <a href="/projects/?q=Agentic%20Coding" rel="nofollow">Agentic Coding</a>
+                      </li>
+                      <li>
+                        <a href="/projects/?q=Context%20Engineering" rel="nofollow"
+                          >Context Engineering</a
+                        >
+                      </li>
+                      <li>
+                        <a href="/projects/?q=AI%20Code%20Review" rel="nofollow">AI Code Review</a>
+                      </li>
+                      <li>
+                        <a href="/projects/?q=AI-Assisted%20Testing" rel="nofollow"
+                          >AI-Assisted Testing</a
+                        >
+                      </li>
+                      <li>
+                        <a href="/projects/?q=Multi-agent%20Systems" rel="nofollow"
+                          >Multi-agent Systems</a
+                        >
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="home-skill-group home-skill-group--extra">
+                  <dt>AI tools</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li><a href="/projects/?q=Claude%20Code" rel="nofollow">Claude Code</a></li>
+                      <li><a href="/projects/?q=Codex" rel="nofollow">Codex</a></li>
+                      <li><a href="/projects/?q=Copilot" rel="nofollow">Copilot</a></li>
+                      <li><a href="/projects/?q=Cursor" rel="nofollow">Cursor</a></li>
+                      <li><a href="/projects/?q=Antigravity" rel="nofollow">Antigravity</a></li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="home-skill-group home-skill-group--extra">
+                  <dt>Agents &amp; APIs</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li><a href="/projects/?q=Gemini" rel="nofollow">Gemini</a></li>
+                      <li><a href="/projects/?q=OpenAI" rel="nofollow">OpenAI</a></li>
+                      <li><a href="/projects/?q=Claude" rel="nofollow">Claude</a></li>
+                      <li><a href="/projects/?q=Fal.ai%20API" rel="nofollow">Fal.ai API</a></li>
+                      <li><a href="/projects/?q=Google%20ADK" rel="nofollow">Google ADK</a></li>
+                      <li><a href="/projects/?q=MCP" rel="nofollow">MCP</a></li>
+                      <li><a href="/projects/?q=Skills" rel="nofollow">Skills</a></li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="home-skill-group home-skill-group--extra">
+                  <dt>Tools</dt>
+                  <dd>
+                    <ul class="home-skill-list">
+                      <li><a href="/projects/?q=Git" rel="nofollow">Git</a></li>
+                      <li><a href="/projects/?q=AWS" rel="nofollow">AWS</a></li>
+                      <li><a href="/projects/?q=Docker" rel="nofollow">Docker</a></li>
+                      <li><a href="/projects/?q=Tableau" rel="nofollow">Tableau</a></li>
+                      <li><a href="/projects/?q=Power%20BI" rel="nofollow">Power BI</a></li>
+                      <li>
+                        <a href="/projects/?q=Google%20Workspace" rel="nofollow"
+                          >Google Workspace</a
+                        >
+                      </li>
+                      <li>
+                        <a href="/projects/?q=Microsoft%20365" rel="nofollow">Microsoft 365</a>
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+              </dl>
+            </section>
+            <section aria-labelledby="research-interests">
+              <div class="section-heading"><h2 id="research-interests">Research interests</h2></div>
               <p>
                 My research interests are in public health, with a focus on aging and Alzheimer’s
                 disease, and in applying machine learning and AI to those problems. I’m glad to hear
@@ -710,8 +672,9 @@
               <a
                 href="#"
                 class="protected-email"
-                data-email-user="YWR1cnMyMDAy"
-                data-email-domain="Z21haWwuY29t"
+                data-email-user="YWdy"
+                data-email-domain="YWdyZWRkeS5jb20="
+                data-email-text="agr [at] agreddy [dot] com"
                 >Email</a
               ><noscript
                 >(requires JavaScript —
@@ -763,9 +726,9 @@
       ></span>
     </button>
     <script src="/assets/js/sw-register.js"></script>
-    <script type="module" src="/assets/site/assets/theme-CoKIc0-k.js"></script>
-    <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
-    <script type="module" src="/assets/site/assets/scroll-to-top-B-5Wv14u.js"></script>
-    <script type="module" src="/assets/site/assets/home-skill-toggle-DZuxRk0Q.js"></script>
+    <script type="module" src="/assets/site/assets/theme-CkQHppC3.js"></script>
+    <script type="module" src="/assets/site/assets/email-protection-CpkrbSV7.js"></script>
+    <script type="module" src="/assets/site/assets/scroll-to-top-haMK3rKp.js"></script>
+    <script type="module" src="/assets/site/assets/home-skill-toggle-BKDpsaRG.js"></script>
   </body>
 </html>

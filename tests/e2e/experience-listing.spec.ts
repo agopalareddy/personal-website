@@ -1,27 +1,10 @@
-import { test, expect, type Page } from '@playwright/test';
-
-/**
- * On mobile viewports the filter panel (category pills, search, sort) boots
- * collapsed behind #filterToggleBtn. Expand it the way a real visitor would
- * so the tests below can interact with the controls on every project.
- */
-async function expandFilterPanelIfCollapsed(page: Page) {
-  const toggleBtn = page.locator('#filterToggleBtn');
-  if (
-    (await toggleBtn.isVisible()) &&
-    (await toggleBtn.getAttribute('aria-expanded')) === 'false'
-  ) {
-    await toggleBtn.click();
-    await expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
-  }
-}
+import { test, expect } from '@playwright/test';
 
 test.describe('Experience Listing Page', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/experience/');
     // Wait for JS-rendered cards to appear
     await expect(page.locator('.experience-card').first()).toBeVisible({ timeout: 10000 });
-    await expandFilterPanelIfCollapsed(page);
   });
 
   test('loads and renders 30+ cards', async ({ page }) => {
@@ -112,18 +95,26 @@ test.describe('Experience Listing Page', () => {
     await expect(page.locator('#exp-2025-08-member .project-title a')).toHaveText('Member - GSAAB');
   });
 
-  test('TOC includes organization context in titles', async ({ page }) => {
-    const toggleBtn = page.locator('#tocToggleBtn');
-    if (
-      (await toggleBtn.isVisible()) &&
-      (await toggleBtn.getAttribute('aria-expanded')) === 'false'
-    ) {
-      await toggleBtn.click();
-    }
+  test('year headers show how many entries each year holds', async ({ page }) => {
+    const header = page.locator('#year-2026');
+    await expect(header).toHaveText('2026');
 
-    await expect(page.locator('#tocList .toc-link[href="#exp-2025-08-member"]')).toHaveText(
-      'Member - GSAAB'
+    // The count is printed by CSS from data-count, so the heading text stays the year.
+    const expected = await page.locator('.experience-card[data-year="2026"]').count();
+    await expect(header).toHaveAttribute(
+      'data-count',
+      `${expected} ${expected === 1 ? 'entry' : 'entries'}`
     );
+  });
+
+  test('the whole row is a link to the detail page', async ({ page }) => {
+    const row = page.locator('#exp-2025-08-member');
+    const box = await row.boundingBox();
+    expect(box).not.toBeNull();
+
+    // Click the row's bottom-right corner — well away from the title text.
+    await row.click({ position: { x: box!.width - 12, y: box!.height - 8 } });
+    await page.waitForURL(/\/experience\/leadership\/2025-08-member\.html$/);
   });
 
   test('clicking a card navigates to detail page', async ({ page }) => {
@@ -191,53 +182,38 @@ test.describe('Experience Listing Page', () => {
     await expect(researchFilter).toHaveAttribute('aria-pressed', 'false');
   });
 
-  test('dynamic Table of Contents renders, updates and is clickable', async ({ page }) => {
-    const tocContainer = page.locator('#tocContainer');
-    const tocList = page.locator('#tocList');
+  test('jump-to-year links follow the filtered list and scroll to a year header', async ({
+    page,
+  }) => {
+    const jumpNav = page.locator('#tocContainer');
+    const yearLinks = page.locator('#tocList .toc-year-header');
 
-    // Should be visible initially since we have > 1 cards
-    await expect(tocContainer).toBeVisible();
+    // One link per year header in the list, in the same order.
+    await expect(jumpNav).toBeVisible();
+    const headerYears = await page.locator('.timeline-year').allTextContents();
+    expect(headerYears.length).toBeGreaterThan(1);
+    await expect(yearLinks).toHaveText(headerYears);
 
-    // On mobile, the TOC is collapsed by default. We need to expand it to make links visible.
-    const toggleBtn = page.locator('#tocToggleBtn');
-    if (
-      (await toggleBtn.isVisible()) &&
-      (await toggleBtn.getAttribute('aria-expanded')) === 'false'
-    ) {
-      await toggleBtn.click();
-    }
-
-    // Check that we have year headers and card links
-    const yearHeaders = tocList.locator('.toc-year-header');
-    const links = tocList.locator('.toc-link');
-    await expect(yearHeaders.first()).toBeVisible();
-    await expect(links.first()).toBeVisible();
-
-    // Filter to an option that returns only 0 results
+    // Nothing to jump between when no entries match.
     const searchInput = page.locator('#experienceSearch');
     await searchInput.fill('zzzznonexistent');
-    await page.waitForTimeout(300);
+    await expect(jumpNav).toBeHidden();
 
-    // TOC should be hidden when <= 1 item matches
-    await expect(tocContainer).toBeHidden();
-
-    // Clear search
     await searchInput.fill('');
-    await page.waitForTimeout(300);
-    await expect(tocContainer).toBeVisible();
+    await expect(jumpNav).toBeVisible();
 
-    // Verify clicking a link updates URL hash
-    const firstLink = links.first();
-    const href = await firstLink.getAttribute('href');
-    expect(href).toMatch(/^#exp-/);
+    // Alphabetical order has no year groups, so no jump links either.
+    await page.locator('#experienceSort').selectOption('title-asc');
+    await expect(page.locator('.timeline-year')).toHaveCount(0);
+    await expect(jumpNav).toBeHidden();
+    await page.locator('#experienceSort').selectOption('date-desc');
 
-    // Mobile's fixed bottom nav bar can overlap the tail end of a fully
-    // expanded Filters+TOC panel — scroll the link into view first so the
-    // click lands on it instead of blindly forcing through whatever is
-    // frontmost at its pre-scroll coordinates.
-    await firstLink.scrollIntoViewIfNeeded();
-    await firstLink.click();
-    await page.waitForTimeout(300);
+    // Following a link lands on that year's header.
+    const lastLink = yearLinks.last();
+    const href = await lastLink.getAttribute('href');
+    expect(href).toMatch(/^#year-\d{4}$/);
+    await lastLink.click();
     expect(page.url()).toContain(href || '');
+    await expect(page.locator(href || '')).toBeInViewport();
   });
 });

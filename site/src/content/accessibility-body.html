@@ -48,8 +48,9 @@
     elements: <code>&lt;header&gt;</code> and <code>&lt;nav&gt;</code> for site navigation,
     <code>&lt;aside&gt;</code> for sidebar details, <code>&lt;main&gt;</code> and
     <code>&lt;article&gt;</code> for core page content, and <code>&lt;footer&gt;</code> for site
-    footer. The projects filter area uses the <code>&lt;search&gt;</code> element for improved
-    screen reader navigation.
+    footer. The filter area on the Experience and Projects lists uses the
+    <code>&lt;search&gt;</code> element, and detail pages carry a labelled breadcrumb
+    <code>&lt;nav&gt;</code>, for improved screen reader navigation.
   </li>
   <li>
     <strong>Heading Hierarchy:</strong> Each page contains a single primary
@@ -76,13 +77,14 @@
     keyboard navigation.
   </li>
   <li>
-    <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the navigation
-    headers, accordion detail menus, and search filters without becoming trapped or lost.
+    <strong>No Keyboard Traps:</strong> Keyboard focus flows logically through the navigation,
+    search and filter controls, and list rows without becoming trapped or lost.
   </li>
   <li>
-    <strong>Interactive Controls:</strong> Tab order is managed dynamically for collapsed states
-    (such as the theme selector popup or accordion card panels), updating their focusability states
-    when expanded.
+    <strong>Interactive Controls:</strong> Controls that show or hide content (the theme selector
+    popup and the "Show all" skills control on the home page) report their state with
+    <code>aria-expanded</code>, and hidden content is removed from the tab order. Category filters
+    are toggle buttons that report their state with <code>aria-pressed</code>.
   </li>
   <li>
     <strong>Decorative Icons:</strong> Decorative icons use Primer Octicons which are either
@@ -109,9 +111,9 @@
     layout disruption or clipping.
   </li>
   <li>
-    <strong>Reduced Motion Support:</strong> Theme transitions and interactive accordion toggles
-    respect the user's operating system setting for <code>prefers-reduced-motion</code>, disabling
-    animations automatically.
+    <strong>Reduced Motion Support:</strong> Theme transitions, smooth scrolling, and the
+    scroll-to-top button respect the user's operating system setting for
+    <code>prefers-reduced-motion</code>, disabling animations automatically.
   </li>
 </ul>
 

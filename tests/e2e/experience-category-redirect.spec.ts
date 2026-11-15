@@ -18,10 +18,12 @@ test.describe('Experience category folder redirects', () => {
 
       // The redirects live in the nginx config (infra/nginx/sites-enabled/showcase),
       // so a plain local static server (python -m http.server) can't exercise them.
+      // Skip only when the server says it is one: production strips its Server
+      // header, so "is it nginx?" would skip there too and never test anything.
       const server = (await response?.headerValue('server')) ?? '';
       test.skip(
-        !/nginx/i.test(server),
-        `needs nginx redirects; this server reports "${server || 'unknown'}"`
+        /SimpleHTTP|Python/i.test(server),
+        `needs the nginx redirects; this is a plain file server ("${server}")`
       );
 
       // Must not land on a raw nginx 403

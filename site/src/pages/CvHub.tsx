@@ -1,29 +1,11 @@
 import { Layout } from '../components/chrome/Layout';
 import { Icon } from '../components/common/Icon';
-
-const DOCUMENTS = [
-  {
-    title: 'Curriculum Vitae',
-    src: '/files/reddy_cv.pdf',
-    category: 'Academic',
-    categoryClass: 'cat-research',
-    updated: 'Updated July 2026',
-    description: 'Research, teaching, publications, awards, and full academic record.',
-  },
-  {
-    title: 'Resume',
-    src: '/files/reddy_resume.pdf',
-    category: 'Industry',
-    categoryClass: 'cat-tools',
-    updated: 'Updated July 2026',
-    description: 'Software engineering, ML, data systems, leadership, and selected projects.',
-  },
-];
+import type { DocumentEntry } from '../content/loadDocuments';
 
 /** Ported from cv/index.html. The preview dialog's interactivity is wired
  * by the cv-modal client island (assets/js/cv-modal.js's port) — this
  * component only renders the static, no-JS-safe markup. */
-export function CvHubPage() {
+export function CvHubPage({ documents }: { documents: DocumentEntry[] }) {
   return (
     <Layout
       activePage="cv"
@@ -45,7 +27,7 @@ export function CvHubPage() {
           dialog on wide screens. Without JavaScript, and on phones, it is a
           plain link to the PDF. */}
       <section className="document-list" aria-label="Available documents">
-        {DOCUMENTS.map((doc) => (
+        {documents.map((doc) => (
           <article className="catalog-row document-row" key={doc.src}>
             <h2 className="project-title">
               <a
@@ -61,7 +43,9 @@ export function CvHubPage() {
               </a>
             </h2>
             <span className={`card-category ${doc.categoryClass}`}>{doc.category}</span>
-            <span className="card-venue">{doc.updated}</span>
+            <span className="card-venue">
+              Updated <time dateTime={doc.updatedIso}>{doc.updatedLabel}</time>
+            </span>
             <p className="project-excerpt">{doc.description}</p>
             <div className="card-actions">
               <span className="row-tech">PDF</span>

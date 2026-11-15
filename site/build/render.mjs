@@ -11,6 +11,7 @@ import { build } from 'vite';
 
 import { loadProjects } from '../src/content/loadProjects.ts';
 import { loadExperience } from '../src/content/loadExperience.ts';
+import { loadDocuments } from '../src/content/loadDocuments.ts';
 import { buildProjectJsonLd } from '../src/content/projectSeo.ts';
 import { ProjectCatalogPage } from '../src/pages/ProjectCatalog.tsx';
 import { ProjectDetailPage } from '../src/pages/ProjectDetail.tsx';
@@ -118,7 +119,12 @@ async function main() {
   written.push(
     renderPage(HomePage({ projects }), 'index.html', [...commonIslands, homeSkillToggleIsland])
   );
-  written.push(renderPage(CvHubPage(), 'cv/index.html', [...commonIslands, cvModalIsland]));
+  written.push(
+    renderPage(CvHubPage({ documents: loadDocuments() }), 'cv/index.html', [
+      ...commonIslands,
+      cvModalIsland,
+    ])
+  );
   written.push(renderPage(AvailabilityPage(), 'availability/index.html', commonIslands));
   written.push(renderPage(AccessibilityPage(), 'accessibility.html', commonIslands));
   written.push(renderPage(NotFoundPage(), '404.html', commonIslands));

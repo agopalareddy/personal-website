@@ -6,10 +6,12 @@ test.describe('Availability page', () => {
 
     const card = page.getByRole('region', { name: /Week view/ });
     await expect(card).toBeVisible();
-    await expect(card.locator('iframe[title="Weekly availability calendar"]')).toHaveAttribute(
-      'src',
-      /mode=WEEK/
-    );
+    const frame = card.locator('iframe[title="Weekly availability calendar"]');
+    await expect(frame).toHaveAttribute('src', /mode=WEEK/);
+    // No pinned zone: the embed then shows times in the visitor's time zone,
+    // which is what the card header promises.
+    await expect(frame).not.toHaveAttribute('src', /ctz=/);
+    await expect(card).toContainText('Your local time');
 
     const book = card.getByRole('link', { name: /Book a meeting/ });
     await expect(book).toHaveClass(/btn-primary/);

@@ -103,8 +103,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=e2b0673d" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=e2b0673d" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=3dcf8c75" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=3dcf8c75" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to Content</a>
@@ -314,182 +314,173 @@
               Academic, full-stack applications, machine learning research, and systems engineering
               projects.
             </p>
-            <div class="catalog-toolbar">
-              <div class="toc-container card-surface catalog-toolbar-panel" id="filterControls">
-                <button
-                  class="toc-toggle-btn"
-                  id="filterToggleBtn"
-                  aria-expanded="true"
-                  aria-controls="filterNav"
-                >
-                  <h3 class="toc-title">Filters &amp; Search</h3>
-                  <span class="toc-toggle-icon" aria-hidden="true"></span>
-                </button>
-                <div id="filterNav">
-                  <search>
-                    <div class="projects-controls projects-controls--stacked">
-                      <div class="controls-row">
-                        <div class="filter-pills" role="group" aria-label="Category Filters">
-                          <button class="filter-btn active" data-filter="all" aria-pressed="true">
-                            All</button
-                          ><button
-                            class="filter-btn"
-                            data-filter="Research &amp; ML"
-                            aria-pressed="false"
-                          >
-                            Research &amp; ML</button
-                          ><button
-                            class="filter-btn"
-                            data-filter="Software &amp; Tools"
-                            aria-pressed="false"
-                          >
-                            Software &amp; Tools</button
-                          ><button class="filter-btn" data-filter="Web Apps" aria-pressed="false">
-                            Web Apps
-                          </button>
-                        </div>
-                        <div class="search-wrapper">
-                          <span class="search-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-search"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
-                                ></path></svg></span></span
-                          ><input
-                            type="text"
-                            class="search-input"
-                            id="projectSearch"
-                            aria-label="Search projects by title, tags, or venues"
-                            placeholder="Search projects, tags, venues..."
-                          />
-                        </div>
-                      </div>
-                      <div class="controls-row controls-row--bordered">
-                        <div class="select-wrapper">
-                          <select
-                            class="custom-select"
-                            id="venueFilter"
-                            data-role="group-filter"
-                            aria-label="Filter projects by institution or venue"
-                          >
-                            <option value="all">All Institutions/Venues</option>
-                            <option value="WashU">Washington University in St. Louis</option>
-                            <option value="OWU">Ohio Wesleyan University</option>
-                            <option value="MITxSureStart">MITxSureStart</option>
-                            <option value="Personal">Personal Projects</option></select
-                          ><span class="select-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-chevron-down"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                                ></path></svg></span
-                          ></span>
-                        </div>
-                        <div class="select-wrapper">
-                          <select
-                            class="custom-select"
-                            id="yearFilter"
-                            data-role="year-filter"
-                            aria-label="Filter projects by year range"
-                          >
-                            <option value="all">All Years</option>
-                            <option value="2026">2026</option>
-                            <option value="2025">2025</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option></select
-                          ><span class="select-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-chevron-down"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                                ></path></svg></span
-                          ></span>
-                        </div>
-                        <div class="select-wrapper">
-                          <select
-                            class="custom-select"
-                            id="projectSort"
-                            data-role="sort"
-                            aria-label="Sort projects chronologically or alphabetically"
-                          >
-                            <option value="date-desc">Newest First</option>
-                            <option value="date-asc">Oldest First</option>
-                            <option value="title-asc">Alphabetical (A-Z)</option></select
-                          ><span class="select-icon"
-                            ><span style="display: contents"
-                              ><svg
-                                class="octicon octicon-chevron-down"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="currentColor"
-                              >
-                                <path
-                                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                                ></path></svg></span
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </search>
+            <div class="catalog-toolbar" id="filterControls">
+              <search class="catalog-toolbar-controls">
+                <div class="catalog-toolbar-row">
+                  <div class="search-wrapper">
+                    <span class="search-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-search"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
+                          ></path></svg></span></span
+                    ><input
+                      type="search"
+                      class="search-input"
+                      id="projectSearch"
+                      aria-label="Search projects by title, tags, or venues"
+                      placeholder="Search projects, tags, venues..."
+                    />
+                  </div>
+                  <div class="select-wrapper">
+                    <select
+                      class="custom-select"
+                      id="venueFilter"
+                      data-role="group-filter"
+                      aria-label="Filter projects by institution or venue"
+                    >
+                      <option value="all">All Institutions/Venues</option>
+                      <option value="WashU">Washington University in St. Louis</option>
+                      <option value="OWU">Ohio Wesleyan University</option>
+                      <option value="MITxSureStart">MITxSureStart</option>
+                      <option value="Personal">Personal Projects</option></select
+                    ><span class="select-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-chevron-down"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                          ></path></svg></span
+                    ></span>
+                  </div>
+                  <div class="select-wrapper">
+                    <select
+                      class="custom-select"
+                      id="yearFilter"
+                      data-role="year-filter"
+                      aria-label="Filter projects by year range"
+                    >
+                      <option value="all">All years</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option></select
+                    ><span class="select-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-chevron-down"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                          ></path></svg></span
+                    ></span>
+                  </div>
+                  <div class="select-wrapper">
+                    <select
+                      class="custom-select"
+                      id="projectSort"
+                      data-role="sort"
+                      aria-label="Sort projects chronologically or alphabetically"
+                    >
+                      <option value="date-desc">Newest first</option>
+                      <option value="date-asc">Oldest first</option>
+                      <option value="title-asc">Alphabetical (A–Z)</option></select
+                    ><span class="select-icon"
+                      ><span style="display: contents"
+                        ><svg
+                          class="octicon octicon-chevron-down"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                          ></path></svg></span
+                    ></span>
+                  </div>
                 </div>
-              </div>
-              <div
-                class="toc-container card-surface catalog-toolbar-panel"
-                id="tocContainer"
-                hidden=""
-              >
-                <button
-                  class="toc-toggle-btn"
-                  id="tocToggleBtn"
-                  aria-expanded="true"
-                  aria-controls="tocNav"
-                >
-                  <h3 class="toc-title">On this page</h3>
-                  <span class="toc-toggle-icon" aria-hidden="true"></span>
-                </button>
-                <nav aria-label="Table of contents" id="tocNav">
-                  <ul class="toc-list" id="tocList"></ul>
+                <div class="filter-pills catalog-tabs" role="group" aria-label="Category Filters">
+                  <button
+                    type="button"
+                    class="filter-btn active"
+                    data-filter="all"
+                    aria-pressed="true"
+                  >
+                    All<span class="filter-count">23</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="Research &amp; ML"
+                    aria-pressed="false"
+                  >
+                    Research &amp; ML<span class="filter-count">9</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="Software &amp; Tools"
+                    aria-pressed="false"
+                  >
+                    Software &amp; Tools<span class="filter-count">8</span></button
+                  ><button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="Web Apps"
+                    aria-pressed="false"
+                  >
+                    Web Apps<span class="filter-count">6</span>
+                  </button>
+                </div>
+              </search>
+              <div class="catalog-subbar">
+                <nav class="catalog-jump" id="tocContainer" aria-label="Jump to year">
+                  <span class="catalog-jump-label" aria-hidden="true">Jump to</span>
+                  <ul class="toc-list" id="tocList">
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2026">2026</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2025">2025</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2024">2024</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2023">2023</a></li>
+                    <li class="toc-item"><a class="toc-year-header" href="#year-2022">2022</a></li>
+                  </ul>
                 </nav>
+                <p id="resultsCount" class="results-count" aria-live="polite">
+                  Showing 23 projects.
+                </p>
               </div>
             </div>
             <div class="projects-container">
-              <p id="resultsCount" class="results-count" aria-live="polite"></p>
               <div class="project-timeline timeline-section" id="projectGrid">
-                <h2 class="timeline-year" id="year-2026">2026</h2>
+                <h2 class="timeline-year" id="year-2026" data-count="7 projects">2026</h2>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2026-10-dolphin-file-converter"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -498,13 +489,8 @@
                   data-title="Dolphin File Converter"
                   data-search="dolphin file converter a native kde dolphin service menu extension and qt desktop application for converting audio, video, images, and documents directly from right-click context menus, powered by ffmpeg, imagemagick, and libreoffice. personal project personal python pyside6 qt kde ffmpeg imagemagick libreoffice linux bash  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/dolphin-file-converter.html"
-                      aria-label="Explore dedicated detail page for Dolphin File Converter"
-                      >Dolphin File Converter</a
-                    >
+                    <a href="/projects/dolphin-file-converter.html">Dolphin File Converter</a>
                   </h3>
                   <span class="card-category cat-tools">Software &amp; Tools</span
                   ><span class="card-venue">Oct 2026</span>
@@ -514,40 +500,14 @@
                     converting audio, video, images, and documents directly from right-click context
                     menus, powered by FFmpeg, ImageMagick, and LibreOffice.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">PySide6</span
-                    ><span class="tech-tag">Qt</span><span class="tech-tag">KDE</span
-                    ><span class="tech-tag">FFmpeg</span><span class="tech-tag">ImageMagick</span
-                    ><span class="tech-tag">LibreOffice</span><span class="tech-tag">Linux</span
-                    ><span class="tech-tag">Bash</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/dolphin-file-converter.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Dolphin File Converter"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · PySide6 · Qt · KDE · +5</span
                     ><a
                       href="https://github.com/agopalareddy/dolphin-file-converter"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Dolphin File Converter codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Dolphin File Converter on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -563,12 +523,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2026-09-umm"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -577,14 +537,7 @@
                   data-title="Umm: Voice Typing"
                   data-search="umm: voice typing a voice keyboard and floating dictation assistant for android that transcribes and cleans up spoken text in real time using user-provided openrouter keys — stripping filler words, formatting lists, and preserving multilingual speech without server-side tracking. personal project personal kotlin android jetpack compose openrouter speech-to-text llm material 3 accessibility api  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
-                  <h3 class="project-title">
-                    <a
-                      href="/projects/umm.html"
-                      aria-label="Explore dedicated detail page for Umm: Voice Typing"
-                      >Umm: Voice Typing</a
-                    >
-                  </h3>
+                  <h3 class="project-title"><a href="/projects/umm.html">Umm: Voice Typing</a></h3>
                   <span class="card-category cat-tools">Software &amp; Tools</span
                   ><span class="card-venue">Sep 2026</span>
                   <div class="card-org-context">Personal Projects</div>
@@ -594,41 +547,15 @@
                     stripping filler words, formatting lists, and preserving multilingual speech
                     without server-side tracking.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Kotlin</span><span class="tech-tag">Android</span
-                    ><span class="tech-tag">Jetpack Compose</span
-                    ><span class="tech-tag">OpenRouter</span
-                    ><span class="tech-tag">Speech-to-Text</span><span class="tech-tag">LLM</span
-                    ><span class="tech-tag">Material 3</span
-                    ><span class="tech-tag">Accessibility API</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/umm.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Umm: Voice Typing"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech"
+                      >Kotlin · Android · Jetpack Compose · OpenRouter · +4</span
                     ><a
                       href="https://github.com/agopalareddy/umm"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Umm: Voice Typing codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Umm: Voice Typing on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -644,12 +571,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2026-06-env-monitor"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -658,13 +585,8 @@
                   data-title="Environment Monitor"
                   data-search="environment monitor an arduino-based continuous environment monitor using a dht11 sensor and lcd 1602 display, with rolling eeprom buffer, dew point calculation, and ambient light sensing. personal project personal arduino c++ dht11 lcd 1602 eeprom embedded systems  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/env-monitor.html"
-                      aria-label="Explore dedicated detail page for Environment Monitor"
-                      >Environment Monitor</a
-                    >
+                    <a href="/projects/env-monitor.html">Environment Monitor</a>
                   </h3>
                   <span class="card-category cat-tools">Software &amp; Tools</span
                   ><span class="card-venue">Jun 2026</span>
@@ -674,39 +596,14 @@
                     1602 display, with rolling EEPROM buffer, dew point calculation, and ambient
                     light sensing.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Arduino</span><span class="tech-tag">C++</span
-                    ><span class="tech-tag">DHT11</span><span class="tech-tag">LCD 1602</span
-                    ><span class="tech-tag">EEPROM</span
-                    ><span class="tech-tag">Embedded Systems</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/env-monitor.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Environment Monitor"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Arduino · C++ · DHT11 · LCD 1602 · +2</span
                     ><a
                       href="https://github.com/agopalareddy/env-monitor"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Environment Monitor codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Environment Monitor on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -722,12 +619,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2026-06-wellness-companion"
                   data-category="Web Apps"
                   data-group="Kaggle"
@@ -736,13 +633,8 @@
                   data-title="AURA: Ambient Wellness Companion"
                   data-search="aura: ambient wellness companion built aura, a privacy-first elderly wellness companion using google adk 2.0 multi-agent orchestration and gemini. empathetic check-ins, medication compliance tracking, anonymized telemetry, and automatic escalation for critical wellness drops. kaggle agents for good hackathon kaggle python fastapi google adk gemini mcp multi-agent systems javascript html css  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/wellness-companion.html"
-                      aria-label="Explore dedicated detail page for AURA: Ambient Wellness Companion"
-                      >AURA: Ambient Wellness Companion</a
-                    >
+                    <a href="/projects/wellness-companion.html">AURA: Ambient Wellness Companion</a>
                   </h3>
                   <span class="card-category cat-web">Web Apps</span
                   ><span class="card-venue">Jun 2026</span>
@@ -753,41 +645,14 @@
                     compliance tracking, anonymized telemetry, and automatic escalation for critical
                     wellness drops.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">FastAPI</span
-                    ><span class="tech-tag">Google ADK</span><span class="tech-tag">Gemini</span
-                    ><span class="tech-tag">MCP</span
-                    ><span class="tech-tag">Multi-agent Systems</span
-                    ><span class="tech-tag">JavaScript</span><span class="tech-tag">HTML</span
-                    ><span class="tech-tag">CSS</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/wellness-companion.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for AURA: Ambient Wellness Companion"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · FastAPI · Google ADK · Gemini · +5</span
                     ><a
                       href="https://github.com/agopalareddy/wellness-companion"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View AURA: Ambient Wellness Companion codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for AURA: Ambient Wellness Companion on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -803,11 +668,11 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     ><a
                       href="/wellness/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for AURA: Ambient Wellness Companion"
+                      class="row-link"
+                      aria-label="Demo of AURA: Ambient Wellness Companion"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -828,7 +693,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2026-06-speedtest"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -837,14 +702,7 @@
                   data-title="Speed Test"
                   data-search="speed test a simple, single-page network speed test measuring download speed, upload speed, and ping against the server hosting this site, with live-updating results and connection details. personal project personal node.js express javascript streams api  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
-                  <h3 class="project-title">
-                    <a
-                      href="/projects/speedtest.html"
-                      aria-label="Explore dedicated detail page for Speed Test"
-                      >Speed Test</a
-                    >
-                  </h3>
+                  <h3 class="project-title"><a href="/projects/speedtest.html">Speed Test</a></h3>
                   <span class="card-category cat-tools">Software &amp; Tools</span
                   ><span class="card-venue">Jun 2026</span>
                   <div class="card-org-context">Personal Projects</div>
@@ -853,38 +711,14 @@
                     and ping against the server hosting this site, with live-updating results and
                     connection details.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Node.js</span><span class="tech-tag">Express</span
-                    ><span class="tech-tag">JavaScript</span
-                    ><span class="tech-tag">Streams API</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/speedtest.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Speed Test"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Node.js · Express · JavaScript · Streams API</span
                     ><a
                       href="https://github.com/agopalareddy/speedtest"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Speed Test codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Speed Test on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -900,11 +734,8 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
-                    ><a
-                      href="/speedtest/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for Speed Test"
+                      Code</a
+                    ><a href="/speedtest/" class="row-link" aria-label="Demo of Speed Test"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -925,7 +756,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2026-06-blink-morse-decoder"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -934,13 +765,8 @@
                   data-title="Blink Morse Decoder"
                   data-search="blink morse decoder an accessibility-focused android app that translates deliberate eye blinks into morse code text using real-time camera-based facial landmark tracking and a custom blink state machine — enabling hands-free communication without extra hardware. codetilldawn hackathon personal kotlin android camerax smartspectra material 3  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/blink-morse-decoder.html"
-                      aria-label="Explore dedicated detail page for Blink Morse Decoder"
-                      >Blink Morse Decoder</a
-                    >
+                    <a href="/projects/blink-morse-decoder.html">Blink Morse Decoder</a>
                   </h3>
                   <span class="card-category cat-tools">Software &amp; Tools</span
                   ><span class="card-venue">Jun 2026</span>
@@ -951,38 +777,14 @@
                     custom blink state machine — enabling hands-free communication without extra
                     hardware.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Kotlin</span><span class="tech-tag">Android</span
-                    ><span class="tech-tag">CameraX</span><span class="tech-tag">SmartSpectra</span
-                    ><span class="tech-tag">Material 3</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/blink-morse-decoder.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Blink Morse Decoder"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Kotlin · Android · CameraX · SmartSpectra · +1</span
                     ><a
                       href="https://github.com/agopalareddy/blink-morse-app"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Blink Morse Decoder codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Blink Morse Decoder on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -998,12 +800,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2026-04-ms-thesis"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1012,11 +814,8 @@
                   data-title="Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
                   data-search="toward vehicle-agnostic driving signatures for cognitive impairment prediction from naturalistic driving data master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults. washington university in st. louis washu python pytorch deep learning domain adaptation sequence modeling scikit-learn pandas numpy matplotlib git washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/ms-thesis.html"
-                      aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
+                    <a href="/projects/ms-thesis.html"
                       >Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment
                       Prediction from Naturalistic Driving Data</a
                     >
@@ -1030,42 +829,15 @@
                     approaches on over 26,000 participant-weeks of telematics data from 304 older
                     adults.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">PyTorch</span
-                    ><span class="tech-tag">Deep Learning</span
-                    ><span class="tech-tag">Domain Adaptation</span
-                    ><span class="tech-tag">Sequence Modeling</span
-                    ><span class="tech-tag">Scikit-learn</span><span class="tech-tag">Pandas</span
-                    ><span class="tech-tag">NumPy</span><span class="tech-tag">Matplotlib</span
-                    ><span class="tech-tag">Git</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/ms-thesis.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech"
+                      >Python · PyTorch · Deep Learning · Domain Adaptation · +6</span
                     ><a
                       href="https://openscholarship.wustl.edu/cgi/viewcontent.cgi?article=2429&amp;context=eng_etds"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-pdf"
-                      aria-label="Download Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data PDF paper (opens in a new tab)"
+                      class="row-link"
+                      aria-label="PDF paper for Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-file"
@@ -1081,13 +853,13 @@
                             d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"
                           ></path></svg
                       ></span>
-                      PDF <span class="sr-only">(opens in a new tab)</span></a
+                      PDF</a
                     >
                   </div>
                 </div>
-                <h2 class="timeline-year" id="year-2025">2025</h2>
+                <h2 class="timeline-year" id="year-2025" data-count="8 projects">2025</h2>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2025-08-vlm-security"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1096,11 +868,8 @@
                   data-title="Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses"
                   data-search="red-blue visual auto defender: automated visual jailbreak generation and explainable defenses built a red-blue teaming system for vlm security that automatically generates visual jailbreak attacks and explainable, code-based defenses using ocr and keyword detection. washington university in st. louis washu python pytorch transformers gemma-3 pillow opencv ocr openai api anthropic api washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/vlm-security.html"
-                      aria-label="Explore dedicated detail page for Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses"
+                    <a href="/projects/vlm-security.html"
                       >Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and
                       Explainable Defenses</a
                     >
@@ -1113,40 +882,14 @@
                     visual jailbreak attacks and explainable, code-based defenses using OCR and
                     keyword detection.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">PyTorch</span
-                    ><span class="tech-tag">Transformers</span><span class="tech-tag">Gemma-3</span
-                    ><span class="tech-tag">Pillow</span><span class="tech-tag">OpenCV</span
-                    ><span class="tech-tag">OCR</span><span class="tech-tag">OpenAI API</span
-                    ><span class="tech-tag">Anthropic API</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/vlm-security.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · PyTorch · Transformers · Gemma-3 · +5</span
                     ><a
                       href="https://github.com/agopalareddy/visual-jailbreak-defense"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Red-Blue Visual Auto Defender: Automated Visual Jailbreak Generation and Explainable Defenses on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1162,12 +905,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2025-08-mlb-statcast-pipeline"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1176,11 +919,8 @@
                   data-title="MLB Statcast Real-Time Data Pipeline"
                   data-search="mlb statcast real-time data pipeline built a real-time data pipeline for mlb pitch data using apache airflow, snowflake, and kafka, with an interactive streamlit dashboard for pitch analysis and visualization. washington university in st. louis washu python apache airflow snowflake apache kafka apache spark streamlit pybaseball pandas washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/mlb-statcast-pipeline.html"
-                      aria-label="Explore dedicated detail page for MLB Statcast Real-Time Data Pipeline"
+                    <a href="/projects/mlb-statcast-pipeline.html"
                       >MLB Statcast Real-Time Data Pipeline</a
                     >
                   </h3>
@@ -1192,41 +932,15 @@
                     Snowflake, and Kafka, with an interactive Streamlit dashboard for pitch analysis
                     and visualization.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">Apache Airflow</span
-                    ><span class="tech-tag">Snowflake</span
-                    ><span class="tech-tag">Apache Kafka</span
-                    ><span class="tech-tag">Apache Spark</span
-                    ><span class="tech-tag">Streamlit</span><span class="tech-tag">pybaseball</span
-                    ><span class="tech-tag">Pandas</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/mlb-statcast-pipeline.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for MLB Statcast Real-Time Data Pipeline"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech"
+                      >Python · Apache Airflow · Snowflake · Apache Kafka · +4</span
                     ><a
                       href="https://github.com/agopalareddy/mlb-statcast-pipeline"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View MLB Statcast Real-Time Data Pipeline codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for MLB Statcast Real-Time Data Pipeline on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1242,12 +956,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2025-10-hackwashu-databases-workshop"
                   data-category="Software &amp; Tools"
                   data-group="WashU"
@@ -1256,11 +970,8 @@
                   data-title="HackWashU Databases Workshop"
                   data-search="hackwashu databases workshop developed and facilitated a hands-on databases workshop teaching sqlite, supabase, api integration, and full-stack web development through two complete projects. washington university in st. louis - hackwashu washu python sqlite supabase postgresql javascript html css apis database design washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/hackwashu-databases-workshop.html"
-                      aria-label="Explore dedicated detail page for HackWashU Databases Workshop"
+                    <a href="/projects/hackwashu-databases-workshop.html"
                       >HackWashU Databases Workshop</a
                     >
                   </h3>
@@ -1272,40 +983,14 @@
                     Supabase, API integration, and full-stack web development through two complete
                     projects.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">SQLite</span
-                    ><span class="tech-tag">Supabase</span><span class="tech-tag">PostgreSQL</span
-                    ><span class="tech-tag">JavaScript</span><span class="tech-tag">HTML</span
-                    ><span class="tech-tag">CSS</span><span class="tech-tag">APIs</span
-                    ><span class="tech-tag">Database Design</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/hackwashu-databases-workshop.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for HackWashU Databases Workshop"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · SQLite · Supabase · PostgreSQL · +5</span
                     ><a
                       href="https://github.com/agopalareddy/HackWashU-Databases-Workshop"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View HackWashU Databases Workshop codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for HackWashU Databases Workshop on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1321,12 +1006,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2025-08-google-calendar-sync"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -1335,11 +1020,8 @@
                   data-title="Google Calendar Availability Sync"
                   data-search="google calendar availability sync a google apps script that automatically syncs events from multiple source calendars to a single &#x27;availability&#x27; calendar, creating customizable availability blocks while preserving privacy. personal project personal google apps script javascript google calendar api  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/google-calendar-sync.html"
-                      aria-label="Explore dedicated detail page for Google Calendar Availability Sync"
+                    <a href="/projects/google-calendar-sync.html"
                       >Google Calendar Availability Sync</a
                     >
                   </h3>
@@ -1351,38 +1033,15 @@
                     calendars to a single &#x27;Availability&#x27; calendar, creating customizable
                     availability blocks while preserving privacy.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Google Apps Script</span
-                    ><span class="tech-tag">JavaScript</span
-                    ><span class="tech-tag">Google Calendar API</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/google-calendar-sync.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Google Calendar Availability Sync"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech"
+                      >Google Apps Script · JavaScript · Google Calendar API</span
                     ><a
                       href="https://github.com/agopalareddy/GoogleCalendarSync"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Google Calendar Availability Sync codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Google Calendar Availability Sync on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1398,11 +1057,11 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     ><a
                       href="/availability/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for Google Calendar Availability Sync"
+                      class="row-link"
+                      aria-label="Demo of Google Calendar Availability Sync"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -1423,7 +1082,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2024-11-php-calendar-app"
                   data-category="Web Apps"
                   data-group="WashU"
@@ -1432,13 +1091,8 @@
                   data-title="PHP Calendar Application"
                   data-search="php calendar application developed chronos, a feature-rich personal calendar and event management web app using php 8.4 and mysql, with secure authentication, an interactive month-view dashboard, and a glassmorphic ui. washington university in st. louis washu php mysql html css javascript web security database design authentication git washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/php-calendar-app.html"
-                      aria-label="Explore dedicated detail page for PHP Calendar Application"
-                      >PHP Calendar Application</a
-                    >
+                    <a href="/projects/php-calendar-app.html">PHP Calendar Application</a>
                   </h3>
                   <span class="card-category cat-web">Web Apps</span
                   ><span class="card-venue">Jul 2025</span>
@@ -1448,41 +1102,14 @@
                     using PHP 8.4 and MySQL, with secure authentication, an interactive month-view
                     dashboard, and a glassmorphic UI.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span
-                    ><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span
-                    ><span class="tech-tag">JavaScript</span
-                    ><span class="tech-tag">Web Security</span
-                    ><span class="tech-tag">Database Design</span
-                    ><span class="tech-tag">Authentication</span><span class="tech-tag">Git</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/php-calendar-app.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for PHP Calendar Application"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">PHP · MySQL · HTML · CSS · +5</span
                     ><a
                       href="https://github.com/agopalareddy/calendar-app"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View PHP Calendar Application codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for PHP Calendar Application on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1498,11 +1125,11 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     ><a
                       href="/calendar/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for PHP Calendar Application"
+                      class="row-link"
+                      aria-label="Demo of PHP Calendar Application"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -1523,7 +1150,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2025-07-bayesian-optimization"
                   data-category="Research &amp; ML"
                   data-group="Personal"
@@ -1532,11 +1159,8 @@
                   data-title="Bayesian Optimization for Material and Product Optimization"
                   data-search="bayesian optimization for material and product optimization applied bayesian optimization techniques for hyperparameter tuning and feature optimization across superconductivity, concrete strength, and wine quality prediction problems. personal project personal python jupyter notebooks scikit-learn scikit-optimize xgboost numpy pandas matplotlib seaborn  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/bayesian-optimization.html"
-                      aria-label="Explore dedicated detail page for Bayesian Optimization for Material and Product Optimization"
+                    <a href="/projects/bayesian-optimization.html"
                       >Bayesian Optimization for Material and Product Optimization</a
                     >
                   </h3>
@@ -1548,42 +1172,15 @@
                     optimization across superconductivity, concrete strength, and wine quality
                     prediction problems.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span
-                    ><span class="tech-tag">Jupyter Notebooks</span
-                    ><span class="tech-tag">Scikit-learn</span
-                    ><span class="tech-tag">Scikit-optimize</span
-                    ><span class="tech-tag">XGBoost</span><span class="tech-tag">NumPy</span
-                    ><span class="tech-tag">Pandas</span><span class="tech-tag">Matplotlib</span
-                    ><span class="tech-tag">Seaborn</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/bayesian-optimization.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Bayesian Optimization for Material and Product Optimization"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech"
+                      >Python · Jupyter Notebooks · Scikit-learn · Scikit-optimize · +5</span
                     ><a
                       href="https://github.com/agopalareddy/BayesianOptimizationPractice"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Bayesian Optimization for Material and Product Optimization codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Bayesian Optimization for Material and Product Optimization on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1599,12 +1196,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2025-11-instagram-unfollow-checker"
                   data-category="Software &amp; Tools"
                   data-group="Personal"
@@ -1613,11 +1210,8 @@
                   data-title="Instagram Unfollow Checker"
                   data-search="instagram unfollow checker a cross-platform gui application that identifies instagram accounts you follow that don&#x27;t follow you back, with session management and 2fa support. personal project personal python tkinter instaloader pyinstaller  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/instagram-unfollow-checker.html"
-                      aria-label="Explore dedicated detail page for Instagram Unfollow Checker"
+                    <a href="/projects/instagram-unfollow-checker.html"
                       >Instagram Unfollow Checker</a
                     >
                   </h3>
@@ -1628,38 +1222,14 @@
                     A cross-platform GUI application that identifies Instagram accounts you follow
                     that don&#x27;t follow you back, with session management and 2FA support.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">Tkinter</span
-                    ><span class="tech-tag">Instaloader</span
-                    ><span class="tech-tag">PyInstaller</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/instagram-unfollow-checker.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Instagram Unfollow Checker"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · Tkinter · Instaloader · PyInstaller</span
                     ><a
                       href="https://github.com/agopalareddy/instagram-unfollow-checker"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Instagram Unfollow Checker codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Instagram Unfollow Checker on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1675,12 +1245,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2025-05-desperate-housewives-monologues"
                   data-category="Research &amp; ML"
                   data-group="Personal"
@@ -1689,11 +1259,8 @@
                   data-title="Desperate Housewives Monologues Dataset"
                   data-search="desperate housewives monologues dataset extracted and organized monologues from desperate housewives for nlp analysis, sentiment analysis, and text-based machine learning projects. personal project personal python nlp text processing  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/desperate-housewives-monologues.html"
-                      aria-label="Explore dedicated detail page for Desperate Housewives Monologues Dataset"
+                    <a href="/projects/desperate-housewives-monologues.html"
                       >Desperate Housewives Monologues Dataset</a
                     >
                   </h3>
@@ -1704,37 +1271,14 @@
                     Extracted and organized monologues from Desperate Housewives for NLP analysis,
                     sentiment analysis, and text-based machine learning projects.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">NLP</span
-                    ><span class="tech-tag">Text Processing</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/desperate-housewives-monologues.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Desperate Housewives Monologues Dataset"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · NLP · Text Processing</span
                     ><a
                       href="https://github.com/agopalareddy/Desperate-Housewives-Monologues"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Desperate Housewives Monologues Dataset codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Desperate Housewives Monologues Dataset on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1750,13 +1294,13 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
-                <h2 class="timeline-year" id="year-2024">2024</h2>
+                <h2 class="timeline-year" id="year-2024" data-count="4 projects">2024</h2>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2024-12-datacenter-cooling"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1765,11 +1309,8 @@
                   data-title="Datacenter Cooling Optimization using Deep Reinforcement Learning"
                   data-search="datacenter cooling optimization using deep reinforcement learning implemented multiple deep reinforcement learning algorithms (ddqn, ppo, sac) integrated with energyplus simulations to optimize datacenter cooling systems for improved energy efficiency. washington university in st. louis washu python pytorch energyplus gymnasium sinergym numpy tensorboard git washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/datacenter-cooling.html"
-                      aria-label="Explore dedicated detail page for Datacenter Cooling Optimization using Deep Reinforcement Learning"
+                    <a href="/projects/datacenter-cooling.html"
                       >Datacenter Cooling Optimization using Deep Reinforcement Learning</a
                     >
                   </h3>
@@ -1781,39 +1322,14 @@
                     integrated with EnergyPlus simulations to optimize datacenter cooling systems
                     for improved energy efficiency.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">PyTorch</span
-                    ><span class="tech-tag">EnergyPlus</span><span class="tech-tag">Gymnasium</span
-                    ><span class="tech-tag">Sinergym</span><span class="tech-tag">NumPy</span
-                    ><span class="tech-tag">TensorBoard</span><span class="tech-tag">Git</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/datacenter-cooling.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Datacenter Cooling Optimization using Deep Reinforcement Learning"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · PyTorch · EnergyPlus · Gymnasium · +4</span
                     ><a
                       href="https://github.com/agopalareddy/datacenter-cooling-rl"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Datacenter Cooling Optimization using Deep Reinforcement Learning codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Datacenter Cooling Optimization using Deep Reinforcement Learning on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1829,12 +1345,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2024-12-interactive-storybook"
                   data-category="Web Apps"
                   data-group="WashU"
@@ -1843,13 +1359,8 @@
                   data-title="Interactive Storybook"
                   data-search="interactive storybook built tales we weave, an ai-powered interactive storytelling platform where readers shape branching narratives through choices, with ai-generated text (google gemini) and illustrations (fal.ai), built with vue 3, express, and mongodb. washington university in st. louis washu vue.js pinia vue router node.js express.js mongodb google gemini api fal.ai javascript html css ai integration git washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/interactive-storybook.html"
-                      aria-label="Explore dedicated detail page for Interactive Storybook"
-                      >Interactive Storybook</a
-                    >
+                    <a href="/projects/interactive-storybook.html">Interactive Storybook</a>
                   </h3>
                   <span class="card-category cat-web">Web Apps</span
                   ><span class="card-venue">Aug 2024 – Dec 2024</span>
@@ -1860,42 +1371,14 @@
                     (Google Gemini) and illustrations (fal.ai), built with Vue 3, Express, and
                     MongoDB.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Vue.js</span><span class="tech-tag">Pinia</span
-                    ><span class="tech-tag">Vue Router</span><span class="tech-tag">Node.js</span
-                    ><span class="tech-tag">Express.js</span><span class="tech-tag">MongoDB</span
-                    ><span class="tech-tag">Google Gemini API</span
-                    ><span class="tech-tag">fal.ai</span><span class="tech-tag">JavaScript</span
-                    ><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span
-                    ><span class="tech-tag">AI Integration</span><span class="tech-tag">Git</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/interactive-storybook.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Interactive Storybook"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Vue.js · Pinia · Vue Router · Node.js · +9</span
                     ><a
                       href="https://github.com/agopalareddy/tales-we-weave"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Interactive Storybook codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Interactive Storybook on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -1911,11 +1394,11 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     ><a
                       href="/storybook/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for Interactive Storybook"
+                      class="row-link"
+                      aria-label="Demo of Interactive Storybook"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -1936,7 +1419,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2024-12-multimodal-alzheimers"
                   data-category="Research &amp; ML"
                   data-group="WashU"
@@ -1945,11 +1428,8 @@
                   data-title="Multimodal Prediction of Alzheimer&#x27;s Disease"
                   data-search="multimodal prediction of alzheimer&#x27;s disease built a multimodal machine learning pipeline combining mri imaging and clinical data from the oasis-1 dataset for early alzheimer&#x27;s disease detection. washington university in st. louis washu python deep learning tensorflow keras pytorch machine learning scikit-learn xgboost pandas numpy matplotlib seaborn jupyter notebooks washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/multimodal-alzheimers.html"
-                      aria-label="Explore dedicated detail page for Multimodal Prediction of Alzheimer&#x27;s Disease"
+                    <a href="/projects/multimodal-alzheimers.html"
                       >Multimodal Prediction of Alzheimer&#x27;s Disease</a
                     >
                   </h3>
@@ -1960,43 +1440,14 @@
                     Built a multimodal machine learning pipeline combining MRI imaging and clinical
                     data from the OASIS-1 dataset for early Alzheimer&#x27;s disease detection.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">Deep Learning</span
-                    ><span class="tech-tag">TensorFlow</span><span class="tech-tag">Keras</span
-                    ><span class="tech-tag">PyTorch</span
-                    ><span class="tech-tag">Machine Learning</span
-                    ><span class="tech-tag">Scikit-learn</span><span class="tech-tag">XGBoost</span
-                    ><span class="tech-tag">Pandas</span><span class="tech-tag">NumPy</span
-                    ><span class="tech-tag">Matplotlib</span><span class="tech-tag">Seaborn</span
-                    ><span class="tech-tag">Jupyter Notebooks</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/multimodal-alzheimers.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Multimodal Prediction of Alzheimer&#x27;s Disease"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · Deep Learning · TensorFlow · Keras · +9</span
                     ><a
                       href="https://github.com/agopalareddy/multimodal-alzheimers-prediction"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Multimodal Prediction of Alzheimer&#x27;s Disease codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Multimodal Prediction of Alzheimer&#x27;s Disease on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -2012,12 +1463,12 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2024-11-socketio-chat-app"
                   data-category="Web Apps"
                   data-group="WashU"
@@ -2026,11 +1477,8 @@
                   data-title="Socket.IO Multi-Room Chat Application"
                   data-search="socket.io multi-room chat application developed a feature-rich multi-room chat application using node.js and socket.io with password-protected rooms, private messaging, and user moderation capabilities. washington university in st. louis washu node.js socket.io javascript html css real-time communication web development authentication git washu "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/socketio-chat-app.html"
-                      aria-label="Explore dedicated detail page for Socket.IO Multi-Room Chat Application"
+                    <a href="/projects/socketio-chat-app.html"
                       >Socket.IO Multi-Room Chat Application</a
                     >
                   </h3>
@@ -2042,41 +1490,14 @@
                     with password-protected rooms, private messaging, and user moderation
                     capabilities.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Node.js</span><span class="tech-tag">Socket.IO</span
-                    ><span class="tech-tag">JavaScript</span><span class="tech-tag">HTML</span
-                    ><span class="tech-tag">CSS</span
-                    ><span class="tech-tag">Real-time Communication</span
-                    ><span class="tech-tag">Web Development</span
-                    ><span class="tech-tag">Authentication</span><span class="tech-tag">Git</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/socketio-chat-app.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Socket.IO Multi-Room Chat Application"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Node.js · Socket.IO · JavaScript · HTML · +5</span
                     ><a
                       href="https://github.com/agopalareddy/chat-app"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Socket.IO Multi-Room Chat Application codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Socket.IO Multi-Room Chat Application on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -2092,11 +1513,11 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     ><a
                       href="/chat/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for Socket.IO Multi-Room Chat Application"
+                      class="row-link"
+                      aria-label="Demo of Socket.IO Multi-Room Chat Application"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -2116,9 +1537,9 @@
                     >
                   </div>
                 </div>
-                <h2 class="timeline-year" id="year-2023">2023</h2>
+                <h2 class="timeline-year" id="year-2023" data-count="1 project">2023</h2>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2023-04-artificial-intelligence-opinion-survey"
                   data-category="Research &amp; ML"
                   data-group="OWU"
@@ -2127,11 +1548,8 @@
                   data-title="Artificial Intelligence Opinion Survey"
                   data-search="artificial intelligence opinion survey designed, fielded, and investigated a survey research of 1000 employees to analyze ai&#x27;s impact on work efficiency and attitudes. found ai improved efficiency across industries. ohio wesleyan university owu research data analysis r tableau qualtrics prolific artificial intelligence statistics  owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/artificial-intelligence-opinion-survey.html"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence Opinion Survey"
+                    <a href="/projects/artificial-intelligence-opinion-survey.html"
                       >Artificial Intelligence Opinion Survey</a
                     >
                   </h3>
@@ -2143,40 +1561,14 @@
                     analyze AI&#x27;s impact on work efficiency and attitudes. Found AI improved
                     efficiency across industries.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Research</span><span class="tech-tag">Data Analysis</span
-                    ><span class="tech-tag">R</span><span class="tech-tag">Tableau</span
-                    ><span class="tech-tag">Qualtrics</span><span class="tech-tag">Prolific</span
-                    ><span class="tech-tag">Artificial Intelligence</span
-                    ><span class="tech-tag">Statistics</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/artificial-intelligence-opinion-survey.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence Opinion Survey"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Research · Data Analysis · R · Tableau · +4</span
                     ><a
                       href="https://github.com/agopalareddy/ai-opinion-survey"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Artificial Intelligence Opinion Survey codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Artificial Intelligence Opinion Survey on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -2192,13 +1584,13 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     >
                   </div>
                 </div>
-                <h2 class="timeline-year" id="year-2022">2022</h2>
+                <h2 class="timeline-year" id="year-2022" data-count="3 projects">2022</h2>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2022-11-connect-4-ai"
                   data-category="Web Apps"
                   data-group="OWU"
@@ -2207,13 +1599,8 @@
                   data-title="Connect 4 AI"
                   data-search="connect 4 ai co-developed an ai opponent for connect 4 using alpha-beta pruning algorithm. ohio wesleyan university owu java html css javascript oop artificial intelligence git  owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/connect-4-ai.html"
-                      aria-label="Explore dedicated detail page for Connect 4 AI"
-                      >Connect 4 AI</a
-                    >
+                    <a href="/projects/connect-4-ai.html">Connect 4 AI</a>
                   </h3>
                   <span class="card-category cat-web">Web Apps</span
                   ><span class="card-venue">Aug 2022 – Dec 2022</span>
@@ -2221,40 +1608,14 @@
                   <p class="project-excerpt">
                     Co-developed an AI opponent for Connect 4 using alpha-beta pruning algorithm.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Java</span><span class="tech-tag">HTML</span
-                    ><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span
-                    ><span class="tech-tag">OOP</span
-                    ><span class="tech-tag">Artificial Intelligence</span
-                    ><span class="tech-tag">Git</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/connect-4-ai.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Connect 4 AI"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Java · HTML · CSS · JavaScript · +3</span
                     ><a
                       href="https://github.com/agopalareddy/connect-4-ai"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Connect 4 AI codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Connect 4 AI on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -2270,11 +1631,8 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
-                    ><a
-                      href="/connect4/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for Connect 4 AI"
+                      Code</a
+                    ><a href="/connect4/" class="row-link" aria-label="Demo of Connect 4 AI"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -2295,7 +1653,7 @@
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2022-07-aiparkinscan"
                   data-category="Research &amp; ML"
                   data-group="MITxSureStart"
@@ -2304,13 +1662,8 @@
                   data-title="AIParkinScan"
                   data-search="aiparkinscan co-developed aiparkinscan software for parkinson&#x27;s diagnosis using audio and image data. utilized neural networks, spectrograms, and random forest algorithm. mitxsurestart futuremakers create-a-thon program mitxsurestart python tensorflow flask scikit-learn artificial intelligence machine learning  "
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/aiparkinscan.html"
-                      aria-label="Explore dedicated detail page for AIParkinScan"
-                      >AIParkinScan</a
-                    >
+                    <a href="/projects/aiparkinscan.html">AIParkinScan</a>
                   </h3>
                   <span class="card-category cat-research">Research &amp; ML</span
                   ><span class="card-venue">Jun 2022 – Aug 2022</span>
@@ -2320,39 +1673,14 @@
                     and image data. Utilized neural networks, spectrograms, and Random Forest
                     algorithm.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span><span class="tech-tag">TensorFlow</span
-                    ><span class="tech-tag">Flask</span><span class="tech-tag">Scikit-learn</span
-                    ><span class="tech-tag">Artificial Intelligence</span
-                    ><span class="tech-tag">Machine Learning</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/aiparkinscan.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for AIParkinScan"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Python · TensorFlow · Flask · Scikit-learn · +2</span
                     ><a
                       href="https://github.com/agopalareddy/AIPS"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View AIParkinScan codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for AIParkinScan on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -2368,13 +1696,13 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     ><a
                       href="https://docs.google.com/presentation/d/10910WNa3CjiXIcH_T5OIXyOuOTiVKFHr/export/pptx"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-pdf"
-                      aria-label="Download AIParkinScan presentation slides (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Slides for AIParkinScan (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-file"
@@ -2390,12 +1718,12 @@
                             d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"
                           ></path></svg
                       ></span>
-                      Slide <span class="sr-only">(opens in a new tab)</span></a
+                      Slides</a
                     >
                   </div>
                 </div>
                 <div
-                  class="project-card card-surface timeline-card catalog-row"
+                  class="project-card timeline-card catalog-row"
                   id="proj-2022-07-artificial-intelligence-in-modern-board-games"
                   data-category="Web Apps"
                   data-group="OWU"
@@ -2404,11 +1732,8 @@
                   data-title="Artificial Intelligence in Modern Board Games"
                   data-search="artificial intelligence in modern board games built a browser-playable java lost cities game with greedy, minimax, and alpha-beta ai agents that evaluate complete turn outcomes. ohio wesleyan university owu java html css javascript artificial intelligence oop game theory git  owu"
                 >
-                  <span class="timeline-marker" aria-hidden="true"></span>
                   <h3 class="project-title">
-                    <a
-                      href="/projects/artificial-intelligence-in-modern-board-games.html"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games"
+                    <a href="/projects/artificial-intelligence-in-modern-board-games.html"
                       >Artificial Intelligence in Modern Board Games</a
                     >
                   </h3>
@@ -2419,40 +1744,14 @@
                     Built a browser-playable Java Lost Cities game with greedy, minimax, and
                     alpha-beta AI agents that evaluate complete turn outcomes.
                   </p>
-                  <div class="project-tech">
-                    <span class="tech-tag">Java</span><span class="tech-tag">HTML</span
-                    ><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span
-                    ><span class="tech-tag">Artificial Intelligence</span
-                    ><span class="tech-tag">OOP</span><span class="tech-tag">Game Theory</span
-                    ><span class="tech-tag">Git</span>
-                  </div>
                   <div class="card-actions">
-                    <a
-                      href="/projects/artificial-intelligence-in-modern-board-games.html"
-                      class="card-btn btn-detail"
-                      aria-label="Explore dedicated detail page for Artificial Intelligence in Modern Board Games"
-                      ><span style="display: contents"
-                        ><svg
-                          class="octicon octicon-info"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                          ></path></svg
-                      ></span>
-                      Details</a
+                    <span class="row-tech">Java · HTML · CSS · JavaScript · +4</span
                     ><a
                       href="https://github.com/agopalareddy/LostCities"
                       target="_blank"
                       rel="noopener"
-                      class="card-btn btn-github"
-                      aria-label="View Artificial Intelligence in Modern Board Games codebase on GitHub (opens in a new tab)"
+                      class="row-link"
+                      aria-label="Code for Artificial Intelligence in Modern Board Games on GitHub (opens in a new tab)"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-mark-github"
@@ -2468,11 +1767,11 @@
                             d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
                           ></path></svg
                       ></span>
-                      Code <span class="sr-only">(opens in a new tab)</span></a
+                      Code</a
                     ><a
                       href="/lost-cities/"
-                      class="card-btn btn-demo"
-                      aria-label="Launch live interactive demo for Artificial Intelligence in Modern Board Games"
+                      class="row-link"
+                      aria-label="Demo of Artificial Intelligence in Modern Board Games"
                       ><span style="display: contents"
                         ><svg
                           class="octicon octicon-rocket"
@@ -2494,12 +1793,9 @@
                 </div>
               </div>
               <div id="emptyState" class="empty-state" hidden="">
-                No projects match your search or filter criteria.<button
-                  type="button"
-                  id="clearFiltersBtn"
-                  class="card-btn btn-detail"
-                >
-                  Clear Filters
+                <p>No projects match your search or filters.</p>
+                <button type="button" id="clearFiltersBtn" class="btn-default">
+                  Clear filters
                 </button>
               </div>
             </div>
@@ -2576,6 +1872,6 @@
     <script type="module" src="/assets/site/assets/theme-CoKIc0-k.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-BSRvsOKy.js"></script>
     <script type="module" src="/assets/site/assets/scroll-to-top-B-5Wv14u.js"></script>
-    <script type="module" src="/assets/site/assets/catalog-filter-CrN9cbBL.js"></script>
+    <script type="module" src="/assets/site/assets/catalog-filter-CeZEYEmP.js"></script>
   </body>
 </html>

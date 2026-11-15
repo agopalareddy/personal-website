@@ -16,6 +16,14 @@ test.describe('Experience category folder redirects', () => {
         waitUntil: 'domcontentloaded',
       });
 
+      // The redirects live in the nginx config (infra/nginx/sites-enabled/showcase),
+      // so a plain local static server (python -m http.server) can't exercise them.
+      const server = (await response?.headerValue('server')) ?? '';
+      test.skip(
+        !/nginx/i.test(server),
+        `needs nginx redirects; this server reports "${server || 'unknown'}"`
+      );
+
       // Must not land on a raw nginx 403
       expect(response?.status()).not.toBe(403);
       await expect(page.locator('body')).not.toContainText('403 Forbidden');

@@ -7,17 +7,12 @@
     "file": "assets/rolldown-runtime-Czjbc987.js",
     "name": "rolldown-runtime"
   },
-  "_toggle-Bl4j4AUN.js": {
-    "file": "assets/toggle-Bl4j4AUN.js",
-    "name": "toggle",
-    "imports": ["_rolldown-runtime-Czjbc987.js"]
-  },
   "src/islands/catalog-filter.ts": {
-    "file": "assets/catalog-filter-CrN9cbBL.js",
+    "file": "assets/catalog-filter-CeZEYEmP.js",
     "name": "catalog-filter",
     "src": "src/islands/catalog-filter.ts",
     "isEntry": true,
-    "imports": ["_rolldown-runtime-Czjbc987.js", "_toggle-Bl4j4AUN.js"]
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/cv-modal.ts": {
     "file": "assets/cv-modal-CxDe67rm.js",
@@ -35,11 +30,11 @@
     "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/home-skill-toggle.ts": {
-    "file": "assets/home-skill-toggle-DZuxRk0Q.js",
+    "file": "assets/home-skill-toggle-Br4nUmNU.js",
     "name": "home-skill-toggle",
     "src": "src/islands/home-skill-toggle.ts",
     "isEntry": true,
-    "imports": ["_rolldown-runtime-Czjbc987.js", "_toggle-Bl4j4AUN.js"]
+    "imports": ["_rolldown-runtime-Czjbc987.js"]
   },
   "src/islands/scroll-to-top.ts": {
     "file": "assets/scroll-to-top-B-5Wv14u.js",

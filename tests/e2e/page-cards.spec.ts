@@ -20,29 +20,50 @@ test.describe('Availability page', () => {
 });
 
 test.describe('CV page', () => {
-  test('each card has one primary action and no rule under its title', async ({
+  test('documents are list rows whose title links to the PDF', async ({ page }) => {
+    await page.goto('/cv/');
+
+    const rows = page.locator('.document-row.catalog-row');
+    await expect(rows).toHaveCount(2);
+
+    for (const [index, src] of ['/files/reddy_cv.pdf', '/files/reddy_resume.pdf'].entries()) {
+      const row = rows.nth(index);
+      const title = row.locator('.project-title a');
+      // A real link, so it works without JavaScript and on phones
+      await expect(title).toHaveAttribute('href', src);
+      await expect(row.locator('.project-title')).toHaveCSS('border-bottom-width', '0px');
+      await expect(row.getByRole('link', { name: /in a new tab/ })).toHaveAttribute('href', src);
+      await expect(row.getByRole('link', { name: /^Download / })).toHaveAttribute('download', '');
+    }
+  });
+
+  test('clicking anywhere on a row opens the preview on wide screens', async ({
     page,
     viewport,
   }) => {
+    test.skip((viewport?.width ?? 1280) <= 640, 'Phones follow the link to the PDF instead');
     await page.goto('/cv/');
 
-    const cards = page.locator('.document-row');
-    await expect(cards).toHaveCount(2);
+    const row = page.locator('.document-row').nth(1);
+    const box = await row.boundingBox();
+    await row.click({ position: { x: box!.width - 24, y: 12 } });
 
-    for (const card of await cards.all()) {
-      await expect(card.locator('.btn-primary')).toHaveCount(1);
-      await expect(card.locator('.document-row-title')).toHaveCSS('border-bottom-width', '0px');
-      await expect(card.locator('.document-row-actions')).toHaveCSS('border-top-width', '0px');
-      await expect(card.getByRole('link', { name: /Open .* PDF/ })).toBeVisible();
+    const dialog = page.locator('#document-modal');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator('#document-modal-title')).toHaveText('Resume');
+    expect(new URL(page.url()).pathname).toBe('/cv/');
+  });
 
-      // Phones open the PDF in a new tab either way, so Preview is dropped there
-      const preview = card.getByRole('button', { name: 'Preview' });
-      if ((viewport?.width ?? 1280) <= 640) {
-        await expect(preview).toBeHidden();
-      } else {
-        await expect(preview).toBeVisible();
-      }
-    }
+  test('the row links are not swallowed by the row click', async ({ page }) => {
+    await page.goto('/cv/');
+    const download = page.waitForEvent('download');
+    await page
+      .locator('.document-row')
+      .first()
+      .getByRole('link', { name: /^Download / })
+      .click();
+    expect((await download).suggestedFilename()).toBe('reddy_cv.pdf');
+    await expect(page.locator('#document-modal')).toBeHidden();
   });
 });
 

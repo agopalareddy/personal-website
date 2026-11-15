@@ -1,6 +1,25 @@
 import { Layout } from '../components/chrome/Layout';
 import { Icon } from '../components/common/Icon';
 
+const DOCUMENTS = [
+  {
+    title: 'Curriculum Vitae',
+    src: '/files/reddy_cv.pdf',
+    category: 'Academic',
+    categoryClass: 'cat-research',
+    updated: 'Updated July 2026',
+    description: 'Research, teaching, publications, awards, and full academic record.',
+  },
+  {
+    title: 'Resume',
+    src: '/files/reddy_resume.pdf',
+    category: 'Industry',
+    categoryClass: 'cat-tools',
+    updated: 'Updated July 2026',
+    description: 'Software engineering, ML, data systems, leadership, and selected projects.',
+  },
+];
+
 /** Ported from cv/index.html. The preview dialog's interactivity is wired
  * by the cv-modal client island (assets/js/cv-modal.js's port) — this
  * component only renders the static, no-JS-safe markup. */
@@ -20,94 +39,52 @@ export function CvHubPage() {
         Download or preview a detailed academic CV and a concise industry resume.
       </p>
 
+      {/* Same .catalog-row rows as the Experience and Projects lists, with no
+          CSS of their own. The title link is
+          stretched over the row; cv-modal.ts turns its click into the preview
+          dialog on wide screens. Without JavaScript, and on phones, it is a
+          plain link to the PDF. */}
       <section className="document-list" aria-label="Available documents">
-        <article
-          className="document-row card-surface"
-          data-action="open"
-          data-doc-title="Curriculum Vitae"
-          data-doc-src="/files/reddy_cv.pdf"
-        >
-          <div className="doc-icon-wrapper" aria-hidden="true">
-            <Icon name="FILE_16" />
-          </div>
-          <div className="doc-info">
-            <div className="document-row-meta">
-              <span className="card-category cat-research">Academic</span>
-              <span>Updated July 2026</span>
+        {DOCUMENTS.map((doc) => (
+          <article className="catalog-row document-row" key={doc.src}>
+            <h2 className="project-title">
+              <a
+                href={doc.src}
+                className="modal-trigger"
+                data-action="open"
+                data-doc-title={doc.title}
+                data-doc-src={doc.src}
+                aria-haspopup="dialog"
+                aria-controls="document-modal"
+              >
+                {doc.title}
+              </a>
+            </h2>
+            <span className={`card-category ${doc.categoryClass}`}>{doc.category}</span>
+            <span className="card-venue">{doc.updated}</span>
+            <p className="project-excerpt">{doc.description}</p>
+            <div className="card-actions">
+              <span className="row-tech">PDF</span>
+              <a
+                href={doc.src}
+                target="_blank"
+                rel="noopener"
+                className="row-link"
+                aria-label={`Open ${doc.title} PDF in a new tab`}
+              >
+                <Icon name="LINK_EXTERNAL_16" /> Open in new tab
+              </a>
+              <a
+                href={doc.src}
+                download
+                className="row-link"
+                aria-label={`Download ${doc.title} PDF`}
+              >
+                <Icon name="DOWNLOAD_16" /> Download
+              </a>
             </div>
-            <h2 className="document-row-title">Curriculum Vitae</h2>
-            <p className="document-row-description">
-              Research, teaching, publications, awards, and full academic record.
-            </p>
-          </div>
-          <div className="document-row-actions">
-            <button
-              type="button"
-              className="btn-primary modal-trigger"
-              data-doc-title="Curriculum Vitae"
-              data-doc-src="/files/reddy_cv.pdf"
-              data-action="open"
-              aria-haspopup="dialog"
-              aria-controls="document-modal"
-            >
-              <Icon name="EYE_16" /> Preview
-            </button>
-            <a
-              href="/files/reddy_cv.pdf"
-              target="_blank"
-              rel="noopener"
-              className="btn-default"
-              aria-label="Open Curriculum Vitae PDF in a new tab"
-            >
-              <Icon name="LINK_EXTERNAL_16" /> Open PDF
-              <span className="sr-only">(opens in a new tab)</span>
-            </a>
-          </div>
-        </article>
-
-        <article
-          className="document-row card-surface"
-          data-action="open"
-          data-doc-title="Resume"
-          data-doc-src="/files/reddy_resume.pdf"
-        >
-          <div className="doc-icon-wrapper" aria-hidden="true">
-            <Icon name="FILE_16" />
-          </div>
-          <div className="doc-info">
-            <div className="document-row-meta">
-              <span className="card-category cat-tools">Industry</span>
-              <span>Updated July 2026</span>
-            </div>
-            <h2 className="document-row-title">Resume</h2>
-            <p className="document-row-description">
-              Software engineering, ML, data systems, leadership, and selected projects.
-            </p>
-          </div>
-          <div className="document-row-actions">
-            <button
-              type="button"
-              className="btn-primary modal-trigger"
-              data-doc-title="Resume"
-              data-doc-src="/files/reddy_resume.pdf"
-              data-action="open"
-              aria-haspopup="dialog"
-              aria-controls="document-modal"
-            >
-              <Icon name="EYE_16" /> Preview
-            </button>
-            <a
-              href="/files/reddy_resume.pdf"
-              target="_blank"
-              rel="noopener"
-              className="btn-default"
-              aria-label="Open Resume PDF in a new tab"
-            >
-              <Icon name="LINK_EXTERNAL_16" /> Open PDF
-              <span className="sr-only">(opens in a new tab)</span>
-            </a>
-          </div>
-        </article>
+          </article>
+        ))}
       </section>
 
       <dialog id="document-modal" className="document-modal" aria-labelledby="document-modal-title">

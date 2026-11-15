@@ -24,6 +24,18 @@ export default defineConfig({
         'home-skill-toggle': resolve(__dirname, 'site/src/islands/home-skill-toggle.ts'),
         'scroll-to-top': resolve(__dirname, 'site/src/islands/scroll-to-top.ts'),
       },
+      output: {
+        // pdf.js worker ships as .mjs. nginx's default MIME for .mjs is
+        // application/octet-stream, which browsers reject as a module worker.
+        // Emit it as .js so Content-Type is application/javascript everywhere.
+        assetFileNames: (assetInfo) => {
+          const name = assetInfo.names?.[0] ?? assetInfo.name ?? '';
+          if (name.includes('pdf.worker')) {
+            return 'assets/[name]-[hash].js';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
     },
   },
 });

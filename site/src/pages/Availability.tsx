@@ -1,14 +1,15 @@
 import { Layout } from '../components/chrome/Layout';
 import { Icon } from '../components/common/Icon';
 
-// Week view in Eastern Time. The card header already says what this is, so
-// the embed's own title, tabs, print button, calendar list and time-zone
-// footer are switched off; its date and prev/next controls stay.
+// Week view. There is deliberately no `ctz` parameter: without one the embed
+// shows times in the visitor's own time zone (with one, everyone gets that
+// zone). The card header already says what this is, so the embed's own
+// title, tabs, print button, calendar list and time-zone footer are switched
+// off; its date and prev/next controls stay.
 const CALENDAR_SRC =
   'https://calendar.google.com/calendar/embed?' +
   [
     'src=90e3e7baecc6c8fb063ea0e230c0040bfe5ce8d086c944a9351720d1e9d72b9e%40group.calendar.google.com',
-    'ctz=America%2FNew_York',
     'mode=WEEK',
     'showTitle=0',
     'showPrint=0',
@@ -34,7 +35,7 @@ export function AvailabilityPage() {
       <section className="calendar-card" aria-labelledby="calendar-card-title">
         <div className="calendar-card-header">
           <h2 className="calendar-card-title" id="calendar-card-title">
-            Week view <span className="calendar-card-note">· Eastern Time</span>
+            Week view <span className="calendar-card-note">· Your local time</span>
           </h2>
           <a
             className="btn-primary"

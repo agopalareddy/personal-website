@@ -47,8 +47,8 @@ export function CatalogFilter({
   sortAriaLabel,
 }: CatalogFilterProps) {
   return (
-    <>
-      <div className="toc-container card-surface" id="filterControls">
+    <div className="catalog-toolbar">
+      <div className="toc-container card-surface catalog-toolbar-panel" id="filterControls">
         <button
           className="toc-toggle-btn"
           id="filterToggleBtn"
@@ -147,7 +147,7 @@ export function CatalogFilter({
         </div>
       </div>
 
-      <div className="toc-container card-surface" id="tocContainer" hidden>
+      <div className="toc-container card-surface catalog-toolbar-panel" id="tocContainer" hidden>
         <button
           className="toc-toggle-btn"
           id="tocToggleBtn"
@@ -161,6 +161,6 @@ export function CatalogFilter({
           <ul className="toc-list" id="tocList" />
         </nav>
       </div>
-    </>
+    </div>
   );
 }

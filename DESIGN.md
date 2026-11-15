@@ -88,7 +88,7 @@ Category labels map to semantic roles:
 
 - **Header**: UnderlineNav (`.nav-links`), active tab with `aria-current="page"` + 2px accent underline
 - **Sidebar**: Profile card (`.academic-sidebar`), circular avatar, octicon contact links
-- **Cards**: Box pattern (`.card-surface`, `.project-card`, `.experience-card`), flat border, hover changes `border-color`
+- **Catalog rows**: Compact list rows (`.catalog-row` on `.project-card` / `.experience-card`) — title | fixed 118px category | date; filters live in `.catalog-toolbar` above the list; sidebar is identity-only
 - **Buttons**: three roles only — primary (green), default (outline), link. Legacy names (`btn-github`, `btn-demo`, `btn-pdf`, `btn-detail`) map onto those roles; dark/red fills removed.
 - **Category labels**: Colored Label (pill, 1px border, role-based color)
 - **Tech tags**: Topic tag (pill, `--bgColor-accent-muted`)

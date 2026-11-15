@@ -69,28 +69,26 @@ export function ExperienceCatalogPage({ entries }: { entries: ExperienceEntry[] 
       description="Aadarsha Gopala Reddy's professional, research, leadership, and academic experience."
       canonicalUrl="https://agreddy.com/experience/"
       contentAriaLabel="Experience Grid Content"
-      sidebarExtra={
-        <CatalogFilter
-          categories={CATEGORIES}
-          categoryGroupAriaLabel="Category Filters"
-          searchId="experienceSearch"
-          searchPlaceholder="Search experience..."
-          searchAriaLabel="Search experience by title, organization, or keyword"
-          groupSelectId="orgFilter"
-          groupAriaLabel="Filter experience by organization"
-          groupOptions={ORG_OPTIONS}
-          yearSelectId="yearFilter"
-          yearAriaLabel="Filter experience by year range"
-          years={years}
-          sortSelectId="experienceSort"
-          sortAriaLabel="Sort experience chronologically or alphabetically"
-        />
-      }
     >
       <h1 className="page-intro-title">Experience</h1>
       <p className="page-intro-lead">
         Professional, research, leadership, and academic experience across industry and academia.
       </p>
+      <CatalogFilter
+        categories={CATEGORIES}
+        categoryGroupAriaLabel="Category Filters"
+        searchId="experienceSearch"
+        searchPlaceholder="Search experience..."
+        searchAriaLabel="Search experience by title, organization, or keyword"
+        groupSelectId="orgFilter"
+        groupAriaLabel="Filter experience by organization"
+        groupOptions={ORG_OPTIONS}
+        yearSelectId="yearFilter"
+        yearAriaLabel="Filter experience by year range"
+        years={years}
+        sortSelectId="experienceSort"
+        sortAriaLabel="Sort experience chronologically or alphabetically"
+      />
       <div className="experience-container">
         <p id="resultsCount" className="results-count" aria-live="polite" />
         <div className="experience-timeline timeline-section" id="experienceGrid">

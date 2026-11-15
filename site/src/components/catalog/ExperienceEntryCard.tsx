@@ -12,6 +12,9 @@ import {
  * Ported from assets/js/experience-catalog.js's createExperienceCard().
  * Filter/search/sort behavior (renderExperiences()) is User Story 3 scope
  * (useCatalogFilter) — this component only renders one card's static markup.
+ *
+ * Layout is a catalog row (title | category | date) but keeps the legacy
+ * class names / data-* attributes the filter island and e2e tests select on.
  */
 export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
   const title = experienceDisplayTitle(e);
@@ -36,7 +39,7 @@ export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
 
   return (
     <div
-      className="project-card card-surface timeline-card experience-card"
+      className="project-card card-surface timeline-card experience-card catalog-row"
       id={`exp-${e.id}`}
       data-category={e.category}
       data-group={orgGroup(e.organization)}
@@ -45,16 +48,14 @@ export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
       data-title={title}
       data-search={search}
     >
-      <span className="timeline-marker" />
-      <div className="card-meta">
-        <span className={`card-category cat-${e.category}`}>{categoryLabel(e.category)}</span>
-        <span className="card-venue">{dateRange}</span>
-      </div>
+      <span className="timeline-marker" aria-hidden="true" />
       <h3 className="project-title">
         <a href={detailUrl} aria-label={`Explore dedicated detail page for ${title}`}>
           {title}
         </a>
       </h3>
+      <span className={`card-category cat-${e.category}`}>{categoryLabel(e.category)}</span>
+      <span className="card-venue">{dateRange}</span>
       {subtitleParts.length > 0 && (
         <div className="card-org-context">{subtitleParts.join(' • ')}</div>
       )}

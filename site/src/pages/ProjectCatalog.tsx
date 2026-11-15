@@ -57,29 +57,27 @@ export function ProjectCatalogPage({ projects }: { projects: ProjectEntry[] }) {
       description="Academic and engineering projects by Aadarsha Gopala Reddy, featuring research on cognitive driving signatures for early Alzheimer's prediction, reinforcement learning for datacenter cooling, and modern systems."
       canonicalUrl="https://agreddy.com/projects/"
       contentAriaLabel="Projects Grid Content"
-      sidebarExtra={
-        <CatalogFilter
-          categories={CATEGORIES}
-          categoryGroupAriaLabel="Category Filters"
-          searchId="projectSearch"
-          searchPlaceholder="Search projects, tags, venues..."
-          searchAriaLabel="Search projects by title, tags, or venues"
-          groupSelectId="venueFilter"
-          groupAriaLabel="Filter projects by institution or venue"
-          groupOptions={VENUE_OPTIONS}
-          yearSelectId="yearFilter"
-          yearAriaLabel="Filter projects by year range"
-          years={years}
-          sortSelectId="projectSort"
-          sortAriaLabel="Sort projects chronologically or alphabetically"
-        />
-      }
     >
       <h1 className="page-intro-title">Academic &amp; Engineering Projects</h1>
       <p className="page-intro-lead">
         Academic, full-stack applications, machine learning research, and systems engineering
         projects.
       </p>
+      <CatalogFilter
+        categories={CATEGORIES}
+        categoryGroupAriaLabel="Category Filters"
+        searchId="projectSearch"
+        searchPlaceholder="Search projects, tags, venues..."
+        searchAriaLabel="Search projects by title, tags, or venues"
+        groupSelectId="venueFilter"
+        groupAriaLabel="Filter projects by institution or venue"
+        groupOptions={VENUE_OPTIONS}
+        yearSelectId="yearFilter"
+        yearAriaLabel="Filter projects by year range"
+        years={years}
+        sortSelectId="projectSort"
+        sortAriaLabel="Sort projects chronologically or alphabetically"
+      />
       <div className="projects-container">
         <p id="resultsCount" className="results-count" aria-live="polite" />
         <div className="project-timeline timeline-section" id="projectGrid">

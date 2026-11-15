@@ -75,7 +75,7 @@ var r = e(() => {
           ((i.hidden = !0), a.replaceChildren());
           return;
         }
-        ((i.hidden = !1), w());
+        i.hidden = !1;
         let t = document.getElementById(`tocToggleBtn`);
         if (t && !t.hasAttribute(`data-initialized`)) {
           let e = window.innerWidth < 768;
@@ -189,27 +189,6 @@ var r = e(() => {
         }),
         c?.addEventListener(`click`, S));
       function C() {
-        if (!r) return;
-        let e = window.innerWidth < 768,
-          t = document.querySelector(`.academic-sidebar`),
-          n = document.querySelector(`.academic-content > p`),
-          i = document.querySelector(`.mobile-sticky-wrapper`);
-        if (e && n) {
-          let e = i ?? r;
-          (e.parentNode !== n.parentNode || e.previousElementSibling !== n) &&
-            n.parentNode?.insertBefore(e, n.nextSibling);
-        } else !e && t && r.parentNode !== t && t.append(r);
-      }
-      function w() {
-        if (!i) return;
-        let e = window.innerWidth < 768,
-          t = document.querySelector(`.academic-sidebar`);
-        e && r
-          ? (i.parentNode !== r.parentNode || i.previousElementSibling !== r) &&
-            r.parentNode?.insertBefore(i, r.nextSibling)
-          : !e && t && i.parentNode !== t && t.append(i);
-      }
-      function T() {
         let e = window.innerWidth < 768,
           t = document.querySelector(`.mobile-sticky-wrapper`);
         if (e) {
@@ -231,24 +210,24 @@ var r = e(() => {
           e?.removeChild(t);
         }
       }
-      function E() {
-        (C(), w(), T());
+      function w() {
+        C();
       }
-      window.matchMedia(`(max-width: 767px)`).addEventListener(`change`, E);
-      let D = document.getElementById(`filterToggleBtn`);
-      if (D) {
-        if (!D.hasAttribute(`data-initialized`)) {
+      window.matchMedia(`(max-width: 767px)`).addEventListener(`change`, w);
+      let T = document.getElementById(`filterToggleBtn`);
+      if (T) {
+        if (!T.hasAttribute(`data-initialized`)) {
           let e = window.innerWidth < 768;
-          (D.setAttribute(`aria-expanded`, e ? `false` : `true`),
-            D.setAttribute(`data-initialized`, `true`));
+          (T.setAttribute(`aria-expanded`, e ? `false` : `true`),
+            T.setAttribute(`data-initialized`, `true`));
         }
-        n(D);
+        n(T);
       }
       n(document.getElementById(`tocToggleBtn`));
-      let O = new URLSearchParams(window.location.search),
-        k = O.get(`category`);
-      if (k) {
-        let e = p.find((e) => e.dataset.filter === k);
+      let E = new URLSearchParams(window.location.search),
+        D = E.get(`category`);
+      if (D) {
+        let e = p.find((e) => e.dataset.filter === D);
         e &&
           (p.forEach((e) => {
             (e.classList.remove(`active`), e.setAttribute(`aria-pressed`, `false`));
@@ -256,14 +235,14 @@ var r = e(() => {
           e.classList.add(`active`),
           e.setAttribute(`aria-pressed`, `true`));
       }
-      let A = O.get(`group`);
-      A && u && (u.value = A);
-      let j = O.get(`year`);
-      j && d && (d.value = j);
-      let M = O.get(`sort`);
-      M && f && (f.value = M);
-      let N = O.get(`q`);
-      (N && l && (l.value = N), C(), T(), v());
+      let O = E.get(`group`);
+      O && u && (u.value = O);
+      let k = E.get(`year`);
+      k && d && (d.value = k);
+      let A = E.get(`sort`);
+      A && f && (f.value = A);
+      let j = E.get(`q`);
+      (j && l && (l.value = j), w(), v());
     }));
 });
 export default r();

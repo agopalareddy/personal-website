@@ -32,6 +32,12 @@ test.describe('CV page', () => {
       // A real link, so it works without JavaScript and on phones
       await expect(title).toHaveAttribute('href', src);
       await expect(row.locator('.project-title')).toHaveCSS('border-bottom-width', '0px');
+      // Read from git at build time (site/src/content/loadDocuments.ts)
+      await expect(row.locator('.card-venue')).toHaveText(/Updated [A-Z][a-z]+ \d{4}/);
+      await expect(row.locator('.card-venue time')).toHaveAttribute(
+        'datetime',
+        /^\d{4}-\d{2}-\d{2}$/
+      );
       await expect(row.getByRole('link', { name: /in a new tab/ })).toHaveAttribute('href', src);
       await expect(row.getByRole('link', { name: /^Download / })).toHaveAttribute('download', '');
     }

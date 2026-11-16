@@ -2,7 +2,7 @@
  * catalog-filter.ts
  *
  * One generic engine shared by /projects/ and /experience/: search, the
- * organization/year/sort dropdowns, the category tabs, and the "Jump to
+ * organization and sort dropdowns, the category tabs, and the "Jump to
  * year" links. The rows are already server-rendered (ProjectCard /
  * ExperienceEntryCard), tagged with data-category/data-group/data-year/
  * data-date/data-title/data-search — this island only shows/hides/reorders
@@ -27,9 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = filterControls?.querySelector<HTMLInputElement>('.search-input') ?? null;
   const groupSelect =
     filterControls?.querySelector<HTMLSelectElement>('[data-role="group-filter"]') ?? null;
-  const yearSelect =
-    filterControls?.querySelector<HTMLSelectElement>('[data-role="year-filter"]') ?? null;
   const sortSelect = filterControls?.querySelector<HTMLSelectElement>('[data-role="sort"]') ?? null;
+  const tabStrip = filterControls?.querySelector<HTMLElement>('.catalog-tabs') ?? null;
   const filterButtons = Array.from(
     filterControls?.querySelectorAll<HTMLButtonElement>('.filter-btn') ?? []
   );
@@ -42,19 +41,35 @@ document.addEventListener('DOMContentLoaded', () => {
     return filterButtons.find((b) => b.classList.contains('active'))?.dataset.filter ?? 'all';
   }
 
+  function setActiveFilter(value: string) {
+    filterButtons.forEach((b) => {
+      const isActive = b.dataset.filter === value;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
   function render() {
     const filter = activeFilter();
     const group = groupSelect?.value ?? 'all';
-    const year = yearSelect?.value ?? 'all';
     const q = (searchInput?.value ?? '').trim().toLowerCase();
 
-    const filtered = cards.filter((card) => {
-      const matchesCategory = filter === 'all' || card.dataset.category === filter;
+    // Everything except the category: what each tab would show if picked.
+    const pool = cards.filter((card) => {
       const matchesGroup = group === 'all' || card.dataset.group === group;
-      const matchesYear = year === 'all' || card.dataset.year === year;
       const matchesSearch = !q || (card.dataset.search ?? '').includes(q);
-      return matchesCategory && matchesGroup && matchesYear && matchesSearch;
+      return matchesGroup && matchesSearch;
     });
+    for (const btn of filterButtons) {
+      const count = btn.querySelector('.filter-count');
+      if (!count) continue;
+      const value = btn.dataset.filter;
+      const n =
+        value === 'all' ? pool.length : pool.filter((c) => c.dataset.category === value).length;
+      count.textContent = String(n);
+    }
+
+    const filtered = pool.filter((card) => filter === 'all' || card.dataset.category === filter);
 
     const sort = sortSelect?.value ?? 'date-desc';
     filtered.sort((a, b) => {
@@ -141,6 +156,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------------------------------------------------------------------
+  // Category tabs scroll sideways on a phone. Mark which edges have more
+  // tabs beyond them so CSS can fade those edges (style.css, .catalog-tabs).
+  // ---------------------------------------------------------------------
+  function updateTabFade() {
+    if (!tabStrip) return;
+    const max = tabStrip.scrollWidth - tabStrip.clientWidth;
+    const atStart = tabStrip.scrollLeft <= 1;
+    const atEnd = tabStrip.scrollLeft >= max - 1;
+    if (max <= 1) delete tabStrip.dataset.fade;
+    else tabStrip.dataset.fade = atStart ? 'end' : atEnd ? 'start' : 'both';
+  }
+  if (tabStrip) {
+    tabStrip.addEventListener('scroll', updateTabFade, { passive: true });
+    new ResizeObserver(updateTabFade).observe(tabStrip);
+  }
+
+  /** Scrolls the strip (never the page) so a tab is fully in view. */
+  function revealTab(btn: HTMLElement | undefined) {
+    if (!tabStrip || !btn) return;
+    const strip = tabStrip.getBoundingClientRect();
+    const tab = btn.getBoundingClientRect();
+    const margin = 40; // clear of the faded edge
+    if (tab.left < strip.left) tabStrip.scrollLeft -= strip.left - tab.left + margin;
+    else if (tab.right > strip.right) tabStrip.scrollLeft += tab.right - strip.right + margin;
+  }
+
+  // ---------------------------------------------------------------------
   // URL param sync — makes a filtered view shareable/bookmarkable.
   // replaceState (not pushState) keeps every keystroke off the back button.
   // ---------------------------------------------------------------------
@@ -149,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const filter = activeFilter();
     if (filter !== 'all') params.set('category', filter);
     if (groupSelect && groupSelect.value !== 'all') params.set('group', groupSelect.value);
-    if (yearSelect && yearSelect.value !== 'all') params.set('year', yearSelect.value);
     if (sortSelect && sortSelect.value !== 'date-desc') params.set('sort', sortSelect.value);
     if (searchInput?.value) params.set('q', searchInput.value);
     const qs = params.toString();
@@ -161,72 +202,54 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function clearAllFilters() {
-    filterButtons.forEach((b) => {
-      const isAll = b.dataset.filter === 'all';
-      b.classList.toggle('active', isAll);
-      b.setAttribute('aria-pressed', String(isAll));
-    });
+    setActiveFilter('all');
     if (groupSelect) groupSelect.value = 'all';
-    if (yearSelect) yearSelect.value = 'all';
     if (sortSelect) sortSelect.value = 'date-desc';
     if (searchInput) searchInput.value = '';
     updateUrlParams();
     render();
   }
 
-  searchInput?.addEventListener('input', () => {
+  function onChange() {
     updateUrlParams();
     render();
-  });
-  groupSelect?.addEventListener('change', () => {
-    updateUrlParams();
-    render();
-  });
-  yearSelect?.addEventListener('change', () => {
-    updateUrlParams();
-    render();
-  });
-  sortSelect?.addEventListener('change', () => {
-    updateUrlParams();
-    render();
-  });
+  }
+
+  searchInput?.addEventListener('input', onChange);
+  groupSelect?.addEventListener('change', onChange);
+  sortSelect?.addEventListener('change', onChange);
   filterButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      filterButtons.forEach((b) => {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
-      updateUrlParams();
-      render();
+      setActiveFilter(btn.dataset.filter ?? 'all');
+      revealTab(btn);
+      onChange();
     });
   });
   clearFiltersBtn?.addEventListener('click', clearAllFilters);
 
   // Read initial filter state from the URL so filtered views are
-  // shareable/bookmarkable.
+  // shareable/bookmarkable. A value this page doesn't offer (an old link, a
+  // typo) is ignored and dropped from the address rather than applied — a
+  // select set to an unknown value would otherwise match nothing.
   const initParams = new URLSearchParams(window.location.search);
+  const hasOption = (select: HTMLSelectElement, value: string) =>
+    Array.from(select.options).some((o) => o.value === value);
+
   const categoryParam = initParams.get('category');
-  if (categoryParam) {
-    const matchBtn = filterButtons.find((b) => b.dataset.filter === categoryParam);
-    if (matchBtn) {
-      filterButtons.forEach((b) => {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      matchBtn.classList.add('active');
-      matchBtn.setAttribute('aria-pressed', 'true');
-    }
+  if (categoryParam && filterButtons.some((b) => b.dataset.filter === categoryParam)) {
+    setActiveFilter(categoryParam);
   }
   const groupParam = initParams.get('group');
-  if (groupParam && groupSelect) groupSelect.value = groupParam;
-  const yearParam = initParams.get('year');
-  if (yearParam && yearSelect) yearSelect.value = yearParam;
+  if (groupParam && groupSelect && hasOption(groupSelect, groupParam)) {
+    groupSelect.value = groupParam;
+  }
   const sortParam = initParams.get('sort');
-  if (sortParam && sortSelect) sortSelect.value = sortParam;
+  if (sortParam && sortSelect && hasOption(sortSelect, sortParam)) sortSelect.value = sortParam;
   const qParam = initParams.get('q');
   if (qParam && searchInput) searchInput.value = qParam;
 
+  if (window.location.search) updateUrlParams();
   render();
+  revealTab(filterButtons.find((b) => b.classList.contains('active')));
+  updateTabFade();
 });

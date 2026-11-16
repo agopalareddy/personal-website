@@ -16,8 +16,7 @@ export interface CatalogFilterProps {
   groupSelectId: string;
   groupAriaLabel: string;
   groupOptions: Option[];
-  yearSelectId: string;
-  yearAriaLabel: string;
+  /** Years that have entries, newest first — the "Jump to" links. */
   years: number[];
   sortSelectId: string;
   sortAriaLabel: string;
@@ -28,7 +27,8 @@ export interface CatalogFilterProps {
 /**
  * Toolbar above a catalog list — one shared shape for /projects/ and
  * /experience/. Three rows: search + dropdowns, category tabs with counts,
- * then a "Jump to <year>" row beside the live results count.
+ * then a "Jump to <year>" row beside the live results count. Years are
+ * reached by jumping, not filtering — the list is already grouped by year.
  *
  * Hydrated by site/src/islands/catalog-filter.ts; this component renders the
  * static shell only (the behavior is DOM filtering/reordering of the already
@@ -48,8 +48,6 @@ export function CatalogFilter({
   groupSelectId,
   groupAriaLabel,
   groupOptions,
-  yearSelectId,
-  yearAriaLabel,
   years,
   sortSelectId,
   sortAriaLabel,
@@ -82,25 +80,6 @@ export function CatalogFilter({
               {groupOptions.map((o) => (
                 <option value={o.value} key={o.value}>
                   {o.label}
-                </option>
-              ))}
-            </select>
-            <span className="select-icon">
-              <Icon name="CHEVRON_DOWN_16" />
-            </span>
-          </div>
-
-          <div className="select-wrapper">
-            <select
-              className="custom-select"
-              id={yearSelectId}
-              data-role="year-filter"
-              aria-label={yearAriaLabel}
-            >
-              <option value="all">All years</option>
-              {years.map((y) => (
-                <option value={String(y)} key={y}>
-                  {y}
                 </option>
               ))}
             </select>

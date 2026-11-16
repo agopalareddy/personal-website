@@ -7,19 +7,25 @@ import {
   type DetailLink,
 } from '../components/detail/DetailShell';
 import { projectCategoryClass } from '../content/projectDisplay';
-import type { ProjectEntry } from '../content/types';
+import { projectPager, projectRelated } from '../content/detailNav';
+import type { ExperienceEntry, ProjectEntry } from '../content/types';
 
 /**
  * A project's detail page, on the shared DetailShell. `content_html` is
  * trusted, pre-rendered HTML from the content pipeline (research.md R4) —
- * injected as-is, not re-parsed.
+ * injected as-is, not re-parsed. `projects` and `experiences` are the full
+ * lists, for the newer/older links and the related experience entries.
  */
 export function ProjectDetailPage({
   p,
+  projects,
+  experiences,
   ogImage,
   jsonLd,
 }: {
   p: ProjectEntry;
+  projects: ProjectEntry[];
+  experiences: ExperienceEntry[];
   ogImage?: string;
   jsonLd?: string;
 }) {
@@ -37,15 +43,16 @@ export function ProjectDetailPage({
       value: (
         <span className={`card-category ${projectCategoryClass(p.category)}`}>{p.category}</span>
       ),
+      lead: true,
     },
     { label: 'Venue', value: p.venue },
-    { label: 'Dates', value: p.formatted_date },
+    { label: 'Dates', value: p.formatted_date, lead: true },
   ];
   if (p.technologies.length > 0) {
     about.push({ label: 'Built with', value: p.technologies.join(', ') });
   }
   if (links.length > 0) {
-    about.push({ label: 'Links', value: <DetailLinks links={links} /> });
+    about.push({ label: 'Links', value: <DetailLinks links={links} />, lead: true });
   }
 
   return (
@@ -66,7 +73,21 @@ export function ProjectDetailPage({
         subtitle={p.excerpt}
         about={about}
         aboutLabel="About this project"
+        related={projectRelated(p, experiences)}
+        pager={projectPager(p, projects)}
       >
+        {p.figure && (
+          <figure className="detail-figure">
+            <img
+              src={p.figure.src}
+              alt={p.figure.alt}
+              width={p.figure.width}
+              height={p.figure.height}
+              decoding="async"
+            />
+            <figcaption>{p.figure.caption}</figcaption>
+          </figure>
+        )}
         <section className="page__content" dangerouslySetInnerHTML={{ __html: p.content_html }} />
       </DetailShell>
     </Layout>

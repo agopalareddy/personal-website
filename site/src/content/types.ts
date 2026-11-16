@@ -15,6 +15,20 @@ export interface ProjectEntry {
   presentation: string | null;
   has_detail: boolean;
   content_html: string;
+  /**
+   * One image at the top of the project's page: a capture of the running
+   * project or a figure from the work itself. Never an illustration.
+   */
+  figure?: ProjectFigure;
+}
+
+export interface ProjectFigure {
+  /** Site-relative path, e.g. /images/projects/figures/connect-4-ai.webp */
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
 }
 
 export type ExperienceCategory =

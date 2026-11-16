@@ -1,6 +1,6 @@
 import { THEME_INLINE_SNIPPET } from './theme-inline-snippet';
 
-const ASSETS_VERSION = "298002a5";
+const ASSETS_VERSION = "05236edb";
 
 export interface HeadProps {
   title: string;
@@ -15,6 +15,8 @@ export interface HeadProps {
 
 const GA4_MEASUREMENT_ID = 'G-QWNGSMS0LY';
 
+export const SITE_NAME = 'Aadarsha Gopala Reddy';
+
 /** Ported from scripts/chrome.py's render_head(). */
 export function Head({
   title,
@@ -24,7 +26,9 @@ export function Head({
   ogImage = 'https://agreddy.com/images/og-default.jpg',
   jsonLd,
 }: HeadProps) {
-  const fullTitle = `${title} - Aadarsha Gopala Reddy`;
+  // Home is titled with the name alone — "About Me - <name>" told a browser
+  // tab or a search result nothing the name doesn't.
+  const fullTitle = title === SITE_NAME ? SITE_NAME : `${title} - ${SITE_NAME}`;
   return (
     <head>
       {/* Google tag (gtag.js) */}

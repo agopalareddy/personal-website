@@ -13,7 +13,7 @@
       "Coursework: Data Manipulation & Management at Scale, Advances in Computer Vision, Deep Reinforcement Learning, Bayesian Methods in Machine Learning, AI for Health, Algorithms for Computational Biology, Systems Security, Quantum Computing, Rapid Prototype Development, and Cognitive & Systems Neuroscience.",
       "Highlights: master's thesis with the DRIVES Project; Vice President of the GPSC's GPC Chamber; Graduate Assistant with the Taylor Family Center for Student Success; Graduate TA for CSE 5114; AI engineering internship at Crittero, Inc."
     ],
-    "related_projects": [],
+    "related_projects": ["ms-thesis"],
     "links": [
       {
         "label": "Master's Thesis — WashU Open Scholarship",
@@ -58,7 +58,7 @@
       "Benchmarked six model families (logistic regression, random forest, XGBoost, MLP, DANN, GRU-DANN) under leave-one-participant-out cross-validation; GRU-DANN achieved the highest participant-level ROC AUC (0.599) and balanced accuracy (0.584).",
       "Defended April 2026; published as no. 1341 in the McKelvey School of Engineering Graduate Student Theses & Dissertations."
     ],
-    "related_projects": [],
+    "related_projects": ["ms-thesis"],
     "links": [
       {
         "label": "Thesis — WashU Open Scholarship",
@@ -83,7 +83,7 @@
       "Analyzed quantitative and qualitative responses using R and Tableau dashboards, finding consistently positive reported impacts of AI on efficiency and time savings across all four industries.",
       "Presented preliminary findings at Ohio Wesleyan's 2023 Spring Student Symposium."
     ],
-    "related_projects": [],
+    "related_projects": ["artificial-intelligence-opinion-survey"],
     "links": [
       {
         "label": "Project repository",
@@ -108,7 +108,7 @@
       "Designed an intelligent agent that uses mathematical heuristics to evaluate moves, winning over 70% of test games against human players.",
       "Presented the research at Ohio Wesleyan's Patricia Belt Conrades Summer Science Research Symposium."
     ],
-    "related_projects": [],
+    "related_projects": ["artificial-intelligence-in-modern-board-games"],
     "links": [
       {
         "label": "Lost Cities AI demo",
@@ -295,7 +295,7 @@
       "Presented an introduction to artificial intelligence to high school students at an engineering workshop hosted by the Association of Graduate Engineering Students (AGES) at WashU and Science Coach, a nonprofit that brings real STEM research into 6th-12th grade classrooms.",
       "Gave a hands-on demonstration of a self-built Connect 4 AI, showing how game-playing agents work and how the underlying techniques generalize beyond games."
     ],
-    "related_projects": [],
+    "related_projects": ["connect-4-ai"],
     "links": [
       {
         "label": "AGES at WashU",
@@ -330,7 +330,7 @@
       "Presented the Data Analytics capstone project 'Artificial Intelligence Opinion Survey' — a group survey experiment mentored by Dr. Nicholas Dietrich — at Ohio Wesleyan's 2023 Spring Student Symposium.",
       "The annual symposium highlights the breadth, depth, and quality of original student work produced in classes, mentored research, performances, and other projects."
     ],
-    "related_projects": [],
+    "related_projects": ["artificial-intelligence-opinion-survey"],
     "links": [
       {
         "label": "Merit Pages announcement",
@@ -360,7 +360,7 @@
       "Presented summer research on an AI agent for the board game Lost Cities at Ohio Wesleyan's Patricia Belt Conrades Summer Science Research Symposium, one of 45 student presenters at the university's inaugural OWU Connection Conference.",
       "Discussed the heuristic-driven agent design and fielded audience questions during the two-hour session."
     ],
-    "related_projects": [],
+    "related_projects": ["artificial-intelligence-in-modern-board-games"],
     "links": [
       {
         "label": "Merit Pages announcement",

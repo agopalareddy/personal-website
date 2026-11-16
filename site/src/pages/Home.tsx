@@ -1,3 +1,4 @@
+import { SITE_NAME } from '../components/chrome/Head';
 import { Layout } from '../components/chrome/Layout';
 import { Icon } from '../components/common/Icon';
 import { projectCategoryClass, projectDetailUrl, projectYear } from '../content/projectDisplay';
@@ -153,7 +154,7 @@ export function HomePage({ projects }: { projects: ProjectEntry[] }) {
     <Layout
       activePage="home"
       bodyClassName="home-page"
-      title="About Me"
+      title={SITE_NAME}
       description="IT Training Specialist at the University of Florida with an M.S. in Computer Science from Washington University in St. Louis. Research interests in machine learning for aging and Alzheimer's disease."
       canonicalUrl="https://agreddy.com/"
       ogType="website"
@@ -171,12 +172,8 @@ export function HomePage({ projects }: { projects: ProjectEntry[] }) {
           used domain-adversarial learning to predict cognitive impairment from naturalistic driving
           data.
         </p>
-        <p>
-          I have hands-on experience across machine learning, data engineering, and full-stack
-          development, gained through research, teaching, and industry internships. For the full
-          story on my research, teaching, and work experience, see my{' '}
-          <a href="/experience/">Experience</a> page, or download my <a href="/cv/">CV</a>.
-        </p>
+        {/* Straight after the lede so both buttons are in the first screen on a
+            phone. Email is in the profile beside this, and at the end of the page. */}
         <div className="home-actions">
           <a
             href="/files/reddy_resume.pdf"
@@ -190,22 +187,13 @@ export function HomePage({ projects }: { projects: ProjectEntry[] }) {
           <a href="/availability/" className="btn-default">
             <Icon name="CALENDAR_16" /> Book a meeting
           </a>
-          <a
-            href="#"
-            className="btn-link protected-email"
-            data-email-user="YWdy"
-            data-email-domain="YWdyZWRkeS5jb20="
-          >
-            Email me
-          </a>
-          <noscript>
-            (email requires JavaScript —{' '}
-            <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener">
-              message me on LinkedIn
-            </a>{' '}
-            instead)
-          </noscript>
         </div>
+        <p>
+          I have hands-on experience across machine learning, data engineering, and full-stack
+          development, gained through research, teaching, and industry internships. For the full
+          story on my research, teaching, and work experience, see my{' '}
+          <a href="/experience/">Experience</a> page, or download my <a href="/cv/">CV</a>.
+        </p>
       </section>
 
       <section aria-labelledby="featured-projects">

@@ -20,8 +20,37 @@ test.describe('Home page', () => {
     const html = await (await request.get('/')).text();
     expect(html).not.toContain('mailto:');
 
-    const email = page.locator('.home-actions .protected-email');
+    const email = page.locator('.protected-email', { hasText: 'Email me' });
+    await expect(email).toHaveCount(1);
     await expect(email).toHaveAttribute('href', /^mailto:/);
+  });
+
+  test('the tab title is the name alone', async ({ page }) => {
+    await expect(page).toHaveTitle('Aadarsha Gopala Reddy');
+  });
+
+  test('the first heading on the page is the h1', async ({ page }) => {
+    await expect(page.locator('h1')).toHaveCount(1);
+    const first = page.locator('h1, h2, h3, h4, h5, h6').first();
+    expect(await first.evaluate((el) => el.tagName)).toBe('H1');
+  });
+
+  test('phones show both buttons in the first screen, and the name once', async ({
+    page,
+    viewport,
+  }) => {
+    test.skip((viewport?.width ?? 1280) >= 768, 'Phone-only layout');
+
+    for (const name of ['Resume', /Book a meeting/]) {
+      const box = await page.locator('.home-actions').getByRole('link', { name }).boundingBox();
+      expect(box!.y + box!.height).toBeLessThanOrEqual(viewport!.height);
+    }
+
+    // The profile card gives the name; the greeting stays for assistive tech only
+    const h1 = page.getByRole('heading', { level: 1 });
+    await expect(h1).toHaveText(/Aadarsha/);
+    const size = await h1.boundingBox();
+    expect(size!.width).toBeLessThanOrEqual(1);
   });
 
   test('four featured projects, each card linking to its page', async ({ page }) => {

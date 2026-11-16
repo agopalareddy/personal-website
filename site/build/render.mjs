@@ -63,6 +63,7 @@ async function main() {
   const commonIslands = [themeIsland, emailProtectionIsland, scrollToTopIsland];
 
   const projects = loadProjects();
+  const experiences = loadExperience();
   const written = [];
 
   // Calling these as plain functions (not JSX) is safe here — none of them
@@ -90,11 +91,13 @@ async function main() {
     const jsonLd = buildProjectJsonLd(p, canonicalUrl, ogImage);
 
     written.push(
-      renderPage(ProjectDetailPage({ p, ogImage, jsonLd }), `projects/${slug}.html`, commonIslands)
+      renderPage(
+        ProjectDetailPage({ p, projects, experiences, ogImage, jsonLd }),
+        `projects/${slug}.html`,
+        commonIslands
+      )
     );
   }
-
-  const experiences = loadExperience();
 
   written.push(
     renderPage(ExperienceCatalogPage({ entries: experiences }), 'experience/index.html', [
@@ -109,7 +112,7 @@ async function main() {
     // projects but never for experience) — matched here for parity.
     written.push(
       renderPage(
-        ExperienceDetailPage({ e }),
+        ExperienceDetailPage({ e, experiences, projects }),
         `experience/${e.category}/${e.id}.html`,
         commonIslands
       )

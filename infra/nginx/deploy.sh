@@ -15,6 +15,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIGS=(
   "conf.d/security-headers.conf:/etc/nginx/conf.d/security-headers.conf"
   "conf.d/rate-limits.conf:/etc/nginx/conf.d/rate-limits.conf"
+  "conf.d/compression.conf:/etc/nginx/conf.d/compression.conf"
   "sites-enabled/showcase:/etc/nginx/sites-enabled/showcase"
 )
 

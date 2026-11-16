@@ -8,7 +8,7 @@ const JSON_LD = JSON.stringify({
   '@type': 'Person',
   name: 'Aadarsha Gopala Reddy',
   url: 'https://agreddy.com',
-  image: 'https://agreddy.com/images/profile.png',
+  image: 'https://agreddy.com/images/profile-640.jpg',
   alumniOf: {
     '@type': 'EducationalOrganization',
     name: 'Washington University in St. Louis',

@@ -362,6 +362,7 @@
   .author-name {
     font-size: var(--site-text-title);
     font-weight: var(--base-text-weight-semibold, 600);
+    line-height: var(--text-title-lineHeight-medium, 1.3);
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     color: var(--fgColor-default);
@@ -2004,6 +2005,16 @@
     flex-shrink: 0;
     display: block;
     color: var(--fgColor-muted);
+  }
+
+  /* The summary carries one icon per mode; the island unhides the current
+     one. The wrapper itself takes no box, so the svg stays the flex item. */
+  .theme-picker-icon {
+    display: contents;
+  }
+
+  .theme-picker-icon[hidden] {
+    display: none;
   }
 
   .theme-picker-menu {

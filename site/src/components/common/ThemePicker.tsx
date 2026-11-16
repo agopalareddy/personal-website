@@ -1,78 +1,63 @@
-import { useEffect, useRef } from 'react';
 import { Icon, type IconName } from './Icon';
-import { THEME_MODES, useTheme, type ThemeMode } from '../../hooks/useTheme';
+import { THEME_MODES, themeIconKind, type ThemeIconKind } from './themeModes';
 
-function modeIcon(mode: ThemeMode): IconName {
-  if (mode === 'light' || mode === 'light_high_contrast') return 'SUN_16';
-  if (mode === 'dark' || mode === 'dark_dimmed' || mode === 'dark_high_contrast') return 'MOON_16';
-  return 'DEVICE_DESKTOP_16';
-}
+const KIND_ICONS: Record<ThemeIconKind, IconName> = {
+  auto: 'DEVICE_DESKTOP_16',
+  light: 'SUN_16',
+  dark: 'MOON_16',
+};
 
 /**
- * Ported from assets/js/theme.js's buildPickerDOM()/syncPickers().
- * `compact` drops the "Theme" label and chevron, leaving a square icon
- * button (the summary's aria-label still names it).
+ * The theme picker's markup, rendered once per page inside a <template>.
+ * site/src/islands/theme.ts clones it into each slot (#theme-toggle,
+ * #theme-toggle-top, #theme-toggle-footer) and wires up the behavior, so the
+ * browser downloads no framework code for it. Without JavaScript the template
+ * stays inert and no picker shows, as before.
+ *
+ * The summary holds all three icons; the island shows the one for the
+ * current mode.
  */
-export function ThemePicker({ compact = false }: { compact?: boolean }) {
-  const { mode, setMode } = useTheme();
-  const detailsRef = useRef<HTMLDetailsElement>(null);
-  const current = THEME_MODES.find((m) => m.value === mode) ?? THEME_MODES[0];
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && detailsRef.current) detailsRef.current.open = false;
-    };
-    const onClickOutside = (e: MouseEvent) => {
-      if (detailsRef.current && !detailsRef.current.contains(e.target as Node)) {
-        detailsRef.current.open = false;
-      }
-    };
-    document.addEventListener('keydown', onKeyDown);
-    document.addEventListener('click', onClickOutside);
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.removeEventListener('click', onClickOutside);
-    };
-  }, []);
-
+export function ThemePickerTemplate() {
   return (
-    <details
-      className={compact ? 'theme-picker theme-picker--compact' : 'theme-picker'}
-      ref={detailsRef}
-    >
-      <summary aria-label={`Theme: ${current.label}`}>
-        <Icon name={modeIcon(mode)} />
-        {!compact && (
-          <>
-            <span>Theme</span>
+    <template id="theme-picker-template">
+      <details className="theme-picker">
+        <summary aria-label="Theme">
+          {(Object.keys(KIND_ICONS) as ThemeIconKind[]).map((kind) => (
+            <span
+              className="theme-picker-icon"
+              data-theme-icon={kind}
+              hidden={kind !== 'auto'}
+              key={kind}
+            >
+              <Icon name={KIND_ICONS[kind]} />
+            </span>
+          ))}
+          <span data-theme-label>Theme</span>
+          <span className="theme-picker-icon" data-theme-chevron>
             <Icon name="CHEVRON_DOWN_16" />
-          </>
-        )}
-      </summary>
-      <div className="theme-picker-menu" role="menu">
-        {THEME_MODES.map((m) => (
-          <button
-            key={m.value}
-            type="button"
-            className="theme-picker-option"
-            role="menuitemradio"
-            data-theme-value={m.value}
-            aria-checked={m.value === mode}
-            onClick={() => {
-              setMode(m.value);
-              if (detailsRef.current) detailsRef.current.open = false;
-            }}
-          >
-            <span className="theme-picker-option-icon">
-              <Icon name={modeIcon(m.value)} />
-            </span>
-            <span>{m.label}</span>
-            <span className="theme-picker-option-check">
-              <Icon name="CHECK_16" />
-            </span>
-          </button>
-        ))}
-      </div>
-    </details>
+          </span>
+        </summary>
+        <div className="theme-picker-menu" role="menu">
+          {THEME_MODES.map((m) => (
+            <button
+              key={m.value}
+              type="button"
+              className="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value={m.value}
+              aria-checked={m.value === 'auto'}
+            >
+              <span className="theme-picker-option-icon">
+                <Icon name={KIND_ICONS[themeIconKind(m.value)]} />
+              </span>
+              <span>{m.label}</span>
+              <span className="theme-picker-option-check">
+                <Icon name="CHECK_16" />
+              </span>
+            </button>
+          ))}
+        </div>
+      </details>
+    </template>
   );
 }

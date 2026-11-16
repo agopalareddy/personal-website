@@ -17,7 +17,7 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       input: {
-        theme: resolve(__dirname, 'site/src/islands/theme.tsx'),
+        theme: resolve(__dirname, 'site/src/islands/theme.ts'),
         'email-protection': resolve(__dirname, 'site/src/islands/email-protection.ts'),
         'cv-modal': resolve(__dirname, 'site/src/islands/cv-modal.ts'),
         'catalog-filter': resolve(__dirname, 'site/src/islands/catalog-filter.ts'),

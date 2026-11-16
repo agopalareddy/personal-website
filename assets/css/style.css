@@ -362,6 +362,7 @@
   .author-name {
     font-size: var(--site-text-title);
     font-weight: var(--base-text-weight-semibold, 600);
+    line-height: var(--text-title-lineHeight-medium, 1.3);
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     color: var(--fgColor-default);
@@ -771,8 +772,8 @@
   }
 
   .cat-education {
-    color: var(--fgColor-attention);
-    border-color: var(--borderColor-attention-emphasis);
+    color: var(--fgColor-success);
+    border-color: var(--borderColor-success-emphasis);
   }
 
   .cat-leadership {
@@ -780,9 +781,10 @@
     border-color: var(--borderColor-severe-emphasis);
   }
 
+  /* Gold, not red: red reads as an error */
   .cat-awards {
-    color: var(--fgColor-danger);
-    border-color: var(--borderColor-danger-emphasis);
+    color: var(--fgColor-attention);
+    border-color: var(--borderColor-attention-emphasis);
   }
 
   .cat-presentations {
@@ -983,6 +985,30 @@
     display: none;
   }
 
+  /* When the tabs overflow (phones), the edge with more tabs beyond it fades
+     out — the cue that the strip scrolls. catalog-filter.ts sets data-fade. */
+  .catalog-tabs[data-fade] {
+    --tab-fade: 2.5rem;
+  }
+
+  .catalog-tabs[data-fade='end'] {
+    mask-image: linear-gradient(to right, black calc(100% - var(--tab-fade)), transparent);
+  }
+
+  .catalog-tabs[data-fade='start'] {
+    mask-image: linear-gradient(to left, black calc(100% - var(--tab-fade)), transparent);
+  }
+
+  .catalog-tabs[data-fade='both'] {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black var(--tab-fade),
+      black calc(100% - var(--tab-fade)),
+      transparent
+    );
+  }
+
   .filter-btn {
     display: inline-flex;
     align-items: center;
@@ -1079,15 +1105,16 @@
   }
 
   @media (max-width: 47.99em) {
-    /* Phones: search, then the group dropdown (its labels are long), each on
-       a full line; year and sort share the last one. Nothing gets cut off. */
+    /* Phones: search on its own line, then the two dropdowns side by side
+       in equal halves. Where a half would be too narrow for "All
+       organizations" (screens under about 390px), auto-fit gives each
+       dropdown a line of its own instead. */
     .catalog-toolbar-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(10.25rem, 1fr));
     }
 
-    .search-wrapper,
-    .search-wrapper + .select-wrapper {
+    .search-wrapper {
       grid-column: 1 / -1;
     }
 
@@ -1164,6 +1191,45 @@
     color: var(--fgColor-muted);
   }
 
+  /* Lead facts under the title — the narrow layout's copy of what the About
+     column shows first on a wide one (only one of the two is ever displayed). */
+  .detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem 0.75rem;
+    max-width: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--site-text-small);
+    color: var(--fgColor-muted);
+  }
+
+  .detail-meta > li {
+    margin: 0;
+  }
+
+  /* The links take their own line, side by side */
+  .detail-meta > li:has(.detail-links) {
+    flex-basis: 100%;
+  }
+
+  .detail-meta .detail-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.25rem;
+  }
+
+  .detail-meta .detail-links a {
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .detail-meta .detail-links svg {
+    margin-top: 0;
+  }
+
   .detail-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -1171,6 +1237,109 @@
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--borderColor-muted);
+  }
+
+  .detail-meta + .detail-grid {
+    margin-top: 0.75rem;
+  }
+
+  /* A real capture of the running project, above the write-up */
+  .detail-figure {
+    margin: 0 0 1.5rem;
+  }
+
+  .detail-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium, 6px);
+    background: var(--bgColor-muted);
+  }
+
+  .detail-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: var(--site-text-caption);
+    color: var(--fgColor-muted);
+  }
+
+  /* Pages about the same work elsewhere on the site */
+  .detail-related ul {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .detail-related li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.75rem;
+    margin: 0;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--borderColor-muted);
+  }
+
+  .detail-related li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .detail-related a {
+    font-weight: var(--base-text-weight-semibold, 600);
+  }
+
+  .detail-related-note {
+    font-size: var(--site-text-caption);
+    color: var(--fgColor-muted);
+  }
+
+  /* Newer / older entry in the same list */
+  .detail-pager {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .detail-pager-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium, 6px);
+    color: var(--fgColor-default);
+    text-decoration: none;
+  }
+
+  .detail-pager-link:hover {
+    border-color: var(--borderColor-accent-emphasis);
+    text-decoration: none;
+  }
+
+  .detail-pager-link:hover .detail-pager-title {
+    color: var(--fgColor-accent);
+  }
+
+  /* "Older" keeps the right-hand half, also when it is the only link */
+  .detail-pager-link--older {
+    grid-column: 2;
+    text-align: right;
+  }
+
+  .detail-pager-dir {
+    font-size: var(--site-text-caption);
+    color: var(--fgColor-muted);
+  }
+
+  .detail-pager-title {
+    font-size: var(--site-text-small);
+    font-weight: var(--base-text-weight-semibold, 600);
+    line-height: 1.4;
+    overflow-wrap: anywhere;
   }
 
   .detail-main > :first-child,
@@ -1241,7 +1410,39 @@
     color: var(--fgColor-muted);
   }
 
+  /* Narrow: the lead facts are in .detail-meta under the title instead */
+  .detail-about-item--lead,
+  .detail-about--lead-only {
+    display: none;
+  }
+
+  /* A long title would fill a phone screen at display size */
+  @container (max-width: 30rem) {
+    .detail-title--long {
+      font-size: var(--site-text-title);
+      line-height: var(--text-title-lineHeight-medium, 1.3);
+      letter-spacing: 0;
+    }
+
+    .detail-pager {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .detail-pager-link--older {
+      grid-column: 1;
+    }
+  }
+
   @container (min-width: 44rem) {
+    .detail-meta {
+      display: none;
+    }
+
+    .detail-about-item--lead,
+    .detail-about--lead-only {
+      display: block;
+    }
+
     .detail-grid {
       grid-template-columns: minmax(0, 1fr) 14rem;
     }
@@ -1516,12 +1717,30 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem 1rem;
-    margin-top: 1.5rem;
+    margin: 1.25rem 0 1.5rem;
   }
 
-  .home-actions noscript {
-    font-size: var(--site-text-caption);
-    color: var(--fgColor-muted);
+  /* The role under the name says what the page's first sentence says */
+  .home-page .author-bio {
+    display: none;
+  }
+
+  /* Phones: the profile card directly above already gives the name, so the
+     greeting stays for assistive tech and the lede starts the page. */
+  @media (max-width: 47.99em) {
+    .home-page .home-intro > h1 {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .home-page .home-intro > .home-lede {
+      margin-top: 0;
+    }
   }
 
   /* Pinned projects — two across when there is room, otherwise one */
@@ -1627,23 +1846,33 @@
     line-height: 1.75;
   }
 
+  /* "A · B · C": each item carries the dot to its left, and the list clips
+     its own left edge — so the first item on every line shows no dot and no
+     line ends with one, however the list wraps. The 4px inset keeps focus
+     rings on the first item of a line from being clipped with the dots. */
   .home-skill-list {
-    display: inline;
+    --skill-gap: 1.125rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--skill-gap);
     max-width: none;
-    margin: 0;
-    padding: 0;
+    margin: 0 0 0 -4px;
+    padding: 0 0 0 4px;
+    clip-path: inset(-4px -4px -4px 0);
     list-style: none;
     font-size: inherit;
   }
 
   .home-skill-list li {
-    display: inline;
+    position: relative;
     margin: 0;
   }
 
-  /* "A · B": the dot stays with the word before it when a line wraps */
-  .home-skill-list li + li::before {
-    content: '\00a0·\0020';
+  .home-skill-list li::before {
+    content: '·';
+    position: absolute;
+    left: calc(var(--skill-gap) / -2);
+    transform: translateX(-50%);
     color: var(--fgColor-muted);
   }
 
@@ -2006,6 +2235,16 @@
     color: var(--fgColor-muted);
   }
 
+  /* The summary carries one icon per mode; the island unhides the current
+     one. The wrapper itself takes no box, so the svg stays the flex item. */
+  .theme-picker-icon {
+    display: contents;
+  }
+
+  .theme-picker-icon[hidden] {
+    display: none;
+  }
+
   .theme-picker-menu {
     position: absolute;
     right: 0;
@@ -2171,6 +2410,15 @@
     .nav-link svg {
       width: 18px;
       height: 18px;
+    }
+
+    /* Five equal tabs are narrower than "Availability" below about 360px,
+       so there each tab takes the width of its own label instead. */
+    @media (max-width: 22.49em) {
+      .nav-link {
+        flex: 1 1 auto;
+        padding-inline: 0.125rem;
+      }
     }
 
     /* Theme: compact button up top, labelled picker in the footer */

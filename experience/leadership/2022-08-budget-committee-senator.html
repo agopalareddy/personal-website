@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preload" as="image" href="/images/profile.png" fetchpriority="high" />
+    <link
+      rel="preload"
+      as="image"
+      imagesrcset="/images/profile-192.webp 192w, /images/profile-384.webp 384w"
+      imagesizes="(max-width: 47.99em) 64px, 150px"
+      fetchpriority="high"
+    />
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
@@ -31,7 +37,7 @@
       property="og:description"
       content="Oversaw the allocation of a $350,000+ annual budget as a student government senator, earning the Golden Bishop Award for WCSA Best New Member."
     />
-    <meta property="og:image" content="https://agreddy.com/images/profile.png" />
+    <meta property="og:image" content="https://agreddy.com/images/og-default.jpg" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -43,7 +49,7 @@
       name="twitter:description"
       content="Oversaw the allocation of a $350,000+ annual budget as a student government senator, earning the Golden Bishop Award for WCSA Best New Member."
     />
-    <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
+    <meta name="twitter:image" content="https://agreddy.com/images/og-default.jpg" />
     <meta name="twitter:site" content="@aadarsha2002" />
     <link
       rel="canonical"
@@ -106,8 +112,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=81f3cb28" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=81f3cb28" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=05236edb" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=05236edb" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to Content</a>
@@ -202,6 +208,310 @@
         </nav>
         <div id="theme-toggle"></div>
       </div>
+      <template id="theme-picker-template"
+        ><details class="theme-picker">
+          <summary aria-label="Theme">
+            <span class="theme-picker-icon" data-theme-icon="auto"
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-device-desktop"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M14.25 1c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 12h-3.727c.099 1.041.52 1.872 1.292 2.757A.752.752 0 0 1 11.25 16h-6.5a.75.75 0 0 1-.565-1.243c.772-.885 1.192-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5C0 1.784.784 1 1.75 1ZM1.75 2.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25ZM9.018 12H6.982a5.72 5.72 0 0 1-.765 2.5h3.566a5.72 5.72 0 0 1-.765-2.5Z"
+                  ></path></svg></span></span
+            ><span class="theme-picker-icon" data-theme-icon="light" hidden=""
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-sun"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"
+                  ></path></svg></span></span
+            ><span class="theme-picker-icon" data-theme-icon="dark" hidden=""
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-moon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                  ></path></svg></span></span
+            ><span data-theme-label="true">Theme</span
+            ><span class="theme-picker-icon" data-theme-chevron="true"
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-chevron-down"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                  ></path></svg></span
+            ></span>
+          </summary>
+          <div class="theme-picker-menu" role="menu">
+            <button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="auto"
+              aria-checked="true"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-device-desktop"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M14.25 1c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 12h-3.727c.099 1.041.52 1.872 1.292 2.757A.752.752 0 0 1 11.25 16h-6.5a.75.75 0 0 1-.565-1.243c.772-.885 1.192-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5C0 1.784.784 1 1.75 1ZM1.75 2.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25ZM9.018 12H6.982a5.72 5.72 0 0 1-.765 2.5h3.566a5.72 5.72 0 0 1-.765-2.5Z"
+                    ></path></svg></span></span
+              ><span>Sync with system</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="light"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-sun"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"
+                    ></path></svg></span></span
+              ><span>Light</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="light_high_contrast"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-sun"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"
+                    ></path></svg></span></span
+              ><span>Light high contrast</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="dark"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-moon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                    ></path></svg></span></span
+              ><span>Dark</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="dark_dimmed"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-moon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                    ></path></svg></span></span
+              ><span>Dark dimmed</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="dark_high_contrast"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-moon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                    ></path></svg></span></span
+              ><span>Dark high contrast</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span>
+            </button>
+          </div></details
+      ></template>
     </header>
     <div id="main-content" tabindex="-1">
       <main class="container">
@@ -209,12 +519,16 @@
           <aside class="academic-sidebar" aria-label="Author Biography">
             <div class="author-avatar-wrapper">
               <img
-                src="/images/profile.png"
+                src="/images/profile-384.webp"
+                srcset="/images/profile-192.webp 192w, /images/profile-384.webp 384w"
+                sizes="(max-width: 47.99em) 64px, 150px"
+                width="384"
+                height="384"
                 class="author-avatar"
                 alt="Aadarsha Gopala Reddy"
                 fetchpriority="high"
               />
-              <h2 class="author-name">Aadarsha Gopala Reddy</h2>
+              <p class="author-name">Aadarsha Gopala Reddy</p>
               <p class="author-bio">
                 <span class="author-bio-role"
                   >IT Training Specialist at the University of Florida.</span
@@ -334,6 +648,42 @@
                 Oversaw the allocation of a $350,000+ annual budget as a student government senator,
                 earning the Golden Bishop Award for WCSA Best New Member.
               </p>
+              <ul class="detail-meta" aria-label="About this entry">
+                <li>
+                  <span class="sr-only">Category: </span
+                  ><span class="card-category cat-leadership">Leadership</span>
+                </li>
+                <li>
+                  <span class="sr-only">Organization: </span>Wesleyan Council on Student Affairs
+                  (WCSA)
+                </li>
+                <li><span class="sr-only">Dates: </span>Aug 2022 – May 2023</li>
+                <li>
+                  <span class="sr-only">Links: </span>
+                  <ul class="detail-links">
+                    <li>
+                      <a
+                        href="/experience/awards/2023-04-golden-bishop-award-wcsa-best-new-member.html"
+                        ><span style="display: contents"
+                          ><svg
+                            class="octicon octicon-trophy"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M3.217 6.962A3.75 3.75 0 0 1 0 3.25v-.5C0 1.784.784 1 1.75 1h1.356c.228-.585.796-1 1.462-1h6.864c.647 0 1.227.397 1.462 1h1.356c.966 0 1.75.784 1.75 1.75v.5a3.75 3.75 0 0 1-3.217 3.712 5.014 5.014 0 0 1-2.771 3.117l.144 1.446c.005.05.03.12.114.204.086.087.217.17.373.227.283.103.618.274.89.568.285.31.467.723.467 1.226v.75h1.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H4v-.75c0-.503.182-.916.468-1.226.27-.294.606-.465.889-.568.139-.048.266-.126.373-.227.084-.085.109-.153.114-.204l.144-1.446a5.015 5.015 0 0 1-2.77-3.117ZM4.5 1.568V5.5a3.5 3.5 0 1 0 7 0V1.568a.068.068 0 0 0-.068-.068H4.568a.068.068 0 0 0-.068.068Zm2.957 8.902-.12 1.204c-.093.925-.858 1.47-1.467 1.691a.766.766 0 0 0-.3.176c-.037.04-.07.093-.07.21v.75h5v-.75c0-.117-.033-.17-.07-.21a.766.766 0 0 0-.3-.176c-.609-.221-1.374-.766-1.466-1.69l-.12-1.204a5.064 5.064 0 0 1-1.087 0ZM13 2.5v2.872a2.25 2.25 0 0 0 1.5-2.122v-.5a.25.25 0 0 0-.25-.25H13Zm-10 0H1.75a.25.25 0 0 0-.25.25v.5c0 .98.626 1.813 1.5 2.122Z"
+                            ></path></svg></span
+                        ><span>Golden Bishop Award — WCSA Best New Member</span></a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
               <div class="detail-grid">
                 <div class="detail-main">
                   <section class="page__content">
@@ -354,11 +704,11 @@
                 </div>
                 <aside class="detail-about" aria-label="About this entry">
                   <dl>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Category</dt>
                       <dd><span class="card-category cat-leadership">Leadership</span></dd>
                     </div>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Organization</dt>
                       <dd>Wesleyan Council on Student Affairs (WCSA)</dd>
                     </div>
@@ -366,11 +716,11 @@
                       <dt>Location</dt>
                       <dd>Ohio Wesleyan University, Delaware, Ohio, USA</dd>
                     </div>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Dates</dt>
                       <dd>Aug 2022 – May 2023</dd>
                     </div>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Links</dt>
                       <dd>
                         <ul class="detail-links">
@@ -400,6 +750,19 @@
                   </dl>
                 </aside>
               </div>
+              <nav class="detail-pager" aria-label="More in Leadership">
+                <a
+                  class="detail-pager-link"
+                  href="/experience/leadership/2023-01-treasurer-and-founding-member.html"
+                  ><span class="detail-pager-dir">Newer</span
+                  ><span class="detail-pager-title">Treasurer and Founding Member - HSC</span></a
+                ><a
+                  class="detail-pager-link detail-pager-link--older"
+                  href="/experience/leadership/2022-08-member.html"
+                  ><span class="detail-pager-dir">Older</span
+                  ><span class="detail-pager-title">Founding Member - The Neurds</span></a
+                >
+              </nav>
             </div>
           </article>
         </div>
@@ -471,7 +834,7 @@
       ></span>
     </button>
     <script src="/assets/js/sw-register.js"></script>
-    <script type="module" src="/assets/site/assets/theme-CkQHppC3.js"></script>
+    <script type="module" src="/assets/site/assets/theme-CXbMquzM.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-CpkrbSV7.js"></script>
     <script type="module" src="/assets/site/assets/scroll-to-top-haMK3rKp.js"></script>
   </body>

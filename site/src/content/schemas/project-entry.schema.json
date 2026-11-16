@@ -41,6 +41,18 @@
     "pdf": { "type": ["string", "null"] },
     "presentation": { "type": ["string", "null"] },
     "has_detail": { "type": "boolean" },
-    "content_html": { "type": "string" }
+    "content_html": { "type": "string" },
+    "figure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["src", "alt", "caption", "width", "height"],
+      "properties": {
+        "src": { "type": "string", "pattern": "^/images/" },
+        "alt": { "type": "string", "minLength": 1 },
+        "caption": { "type": "string", "minLength": 1 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    }
   }
 }

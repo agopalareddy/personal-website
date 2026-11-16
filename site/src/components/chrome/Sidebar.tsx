@@ -42,13 +42,20 @@ export function Sidebar({ children }: { children?: ReactNode }) {
   return (
     <aside className="academic-sidebar" aria-label="Author Biography">
       <div className="author-avatar-wrapper">
+        {/* Shown at 64–150 CSS px; the two files cover 1x and 2x screens. */}
         <img
-          src="/images/profile.png"
+          src="/images/profile-384.webp"
+          srcSet="/images/profile-192.webp 192w, /images/profile-384.webp 384w"
+          sizes="(max-width: 47.99em) 64px, 150px"
+          width={384}
+          height={384}
           className="author-avatar"
           alt="Aadarsha Gopala Reddy"
           fetchPriority="high"
         />
-        <h2 className="author-name">Aadarsha Gopala Reddy</h2>
+        {/* A paragraph, not a heading: the page's own h1 comes after this in
+            the document, and the heading outline should start there. */}
+        <p className="author-name">Aadarsha Gopala Reddy</p>
         <p className="author-bio">
           <span className="author-bio-role">
             IT Training Specialist at the University of Florida.

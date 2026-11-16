@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preload" as="image" href="/images/profile.png" fetchpriority="high" />
+    <link
+      rel="preload"
+      as="image"
+      imagesrcset="/images/profile-192.webp 192w, /images/profile-384.webp 384w"
+      imagesizes="(max-width: 47.99em) 64px, 150px"
+      fetchpriority="high"
+    />
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
@@ -36,7 +42,7 @@
       property="og:description"
       content="Built a digital Lost Cities card game in Java and a heuristic-driven AI agent that won over 70% of test games against human players during a mentored summer research program."
     />
-    <meta property="og:image" content="https://agreddy.com/images/profile.png" />
+    <meta property="og:image" content="https://agreddy.com/images/og-default.jpg" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -51,7 +57,7 @@
       name="twitter:description"
       content="Built a digital Lost Cities card game in Java and a heuristic-driven AI agent that won over 70% of test games against human players during a mentored summer research program."
     />
-    <meta name="twitter:image" content="https://agreddy.com/images/profile.png" />
+    <meta name="twitter:image" content="https://agreddy.com/images/og-default.jpg" />
     <meta name="twitter:site" content="@aadarsha2002" />
     <link
       rel="canonical"
@@ -114,8 +120,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=81f3cb28" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=81f3cb28" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=05236edb" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=05236edb" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to Content</a>
@@ -210,6 +216,310 @@
         </nav>
         <div id="theme-toggle"></div>
       </div>
+      <template id="theme-picker-template"
+        ><details class="theme-picker">
+          <summary aria-label="Theme">
+            <span class="theme-picker-icon" data-theme-icon="auto"
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-device-desktop"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M14.25 1c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 12h-3.727c.099 1.041.52 1.872 1.292 2.757A.752.752 0 0 1 11.25 16h-6.5a.75.75 0 0 1-.565-1.243c.772-.885 1.192-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5C0 1.784.784 1 1.75 1ZM1.75 2.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25ZM9.018 12H6.982a5.72 5.72 0 0 1-.765 2.5h3.566a5.72 5.72 0 0 1-.765-2.5Z"
+                  ></path></svg></span></span
+            ><span class="theme-picker-icon" data-theme-icon="light" hidden=""
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-sun"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"
+                  ></path></svg></span></span
+            ><span class="theme-picker-icon" data-theme-icon="dark" hidden=""
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-moon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                  ></path></svg></span></span
+            ><span data-theme-label="true">Theme</span
+            ><span class="theme-picker-icon" data-theme-chevron="true"
+              ><span style="display: contents"
+                ><svg
+                  class="octicon octicon-chevron-down"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+                  ></path></svg></span
+            ></span>
+          </summary>
+          <div class="theme-picker-menu" role="menu">
+            <button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="auto"
+              aria-checked="true"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-device-desktop"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M14.25 1c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 12h-3.727c.099 1.041.52 1.872 1.292 2.757A.752.752 0 0 1 11.25 16h-6.5a.75.75 0 0 1-.565-1.243c.772-.885 1.192-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5C0 1.784.784 1 1.75 1ZM1.75 2.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25ZM9.018 12H6.982a5.72 5.72 0 0 1-.765 2.5h3.566a5.72 5.72 0 0 1-.765-2.5Z"
+                    ></path></svg></span></span
+              ><span>Sync with system</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="light"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-sun"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"
+                    ></path></svg></span></span
+              ><span>Light</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="light_high_contrast"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-sun"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"
+                    ></path></svg></span></span
+              ><span>Light high contrast</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="dark"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-moon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                    ></path></svg></span></span
+              ><span>Dark</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="dark_dimmed"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-moon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                    ></path></svg></span></span
+              ><span>Dark dimmed</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span></button
+            ><button
+              type="button"
+              class="theme-picker-option"
+              role="menuitemradio"
+              data-theme-value="dark_high_contrast"
+              aria-checked="false"
+            >
+              <span class="theme-picker-option-icon"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-moon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"
+                    ></path></svg></span></span
+              ><span>Dark high contrast</span
+              ><span class="theme-picker-option-check"
+                ><span style="display: contents"
+                  ><svg
+                    class="octicon octicon-check"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    ></path></svg></span
+              ></span>
+            </button>
+          </div></details
+      ></template>
     </header>
     <div id="main-content" tabindex="-1">
       <main class="container">
@@ -217,12 +527,16 @@
           <aside class="academic-sidebar" aria-label="Author Biography">
             <div class="author-avatar-wrapper">
               <img
-                src="/images/profile.png"
+                src="/images/profile-384.webp"
+                srcset="/images/profile-192.webp 192w, /images/profile-384.webp 384w"
+                sizes="(max-width: 47.99em) 64px, 150px"
+                width="384"
+                height="384"
                 class="author-avatar"
                 alt="Aadarsha Gopala Reddy"
                 fetchpriority="high"
               />
-              <h2 class="author-name">Aadarsha Gopala Reddy</h2>
+              <p class="author-name">Aadarsha Gopala Reddy</p>
               <p class="author-bio">
                 <span class="author-bio-role"
                   >IT Training Specialist at the University of Florida.</span
@@ -339,7 +653,7 @@
                   </li>
                 </ol>
               </nav>
-              <h1 class="detail-title">
+              <h1 class="detail-title detail-title--long">
                 Artificial Intelligence in Modern Board Games - Lost Cities AI
               </h1>
               <p class="detail-subtitle">
@@ -347,6 +661,68 @@
                 won over 70% of test games against human players during a mentored summer research
                 program.
               </p>
+              <ul class="detail-meta" aria-label="About this entry">
+                <li>
+                  <span class="sr-only">Category: </span
+                  ><span class="card-category cat-research">Research</span>
+                </li>
+                <li><span class="sr-only">Organization: </span>Ohio Wesleyan University</li>
+                <li><span class="sr-only">Dates: </span>May 2022 – Jul 2022</li>
+                <li>
+                  <span class="sr-only">Links: </span>
+                  <ul class="detail-links">
+                    <li>
+                      <a href="https://agreddy.com/lost-cities/" target="_blank" rel="noopener"
+                        ><span style="display: contents"
+                          ><svg
+                            class="octicon octicon-rocket"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M14.064 0h.186C15.216 0 16 .784 16 1.75v.186a8.752 8.752 0 0 1-2.564 6.186l-.458.459c-.314.314-.641.616-.979.904v3.207c0 .608-.315 1.172-.833 1.49l-2.774 1.707a.749.749 0 0 1-1.11-.418l-.954-3.102a1.214 1.214 0 0 1-.145-.125L3.754 9.816a1.218 1.218 0 0 1-.124-.145L.528 8.717a.749.749 0 0 1-.418-1.11l1.71-2.774A1.748 1.748 0 0 1 3.31 4h3.204c.288-.338.59-.665.904-.979l.459-.458A8.749 8.749 0 0 1 14.064 0ZM8.938 3.623h-.002l-.458.458c-.76.76-1.437 1.598-2.02 2.5l-1.5 2.317 2.143 2.143 2.317-1.5c.902-.583 1.74-1.26 2.499-2.02l.459-.458a7.25 7.25 0 0 0 2.123-5.127V1.75a.25.25 0 0 0-.25-.25h-.186a7.249 7.249 0 0 0-5.125 2.123ZM3.56 14.56c-.732.732-2.334 1.045-3.005 1.148a.234.234 0 0 1-.201-.064.234.234 0 0 1-.064-.201c.103-.671.416-2.273 1.15-3.003a1.502 1.502 0 1 1 2.12 2.12Zm6.94-3.935c-.088.06-.177.118-.266.175l-2.35 1.521.548 1.783 1.949-1.2a.25.25 0 0 0 .119-.213ZM3.678 8.116 5.2 5.766c.058-.09.117-.178.176-.266H3.309a.25.25 0 0 0-.213.119l-1.2 1.95ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                            ></path></svg></span
+                        ><span
+                          >Lost Cities AI demo<span class="sr-only">
+                            (opens in a new tab)</span
+                          ></span
+                        ></a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="https://github.com/agopalareddy/LostCities"
+                        target="_blank"
+                        rel="noopener"
+                        ><span style="display: contents"
+                          ><svg
+                            class="octicon octicon-mark-github"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
+                            ></path></svg></span
+                        ><span
+                          >Project repository<span class="sr-only">
+                            (opens in a new tab)</span
+                          ></span
+                        ></a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
               <div class="detail-grid">
                 <div class="detail-main">
                   <section class="page__content">
@@ -366,14 +742,24 @@
                       </li>
                     </ul>
                   </section>
+                  <section class="detail-related">
+                    <h2>Related</h2>
+                    <ul>
+                      <li>
+                        <a href="/projects/artificial-intelligence-in-modern-board-games.html"
+                          >Artificial Intelligence in Modern Board Games</a
+                        ><span class="detail-related-note">Project · 2022</span>
+                      </li>
+                    </ul>
+                  </section>
                 </div>
                 <aside class="detail-about" aria-label="About this entry">
                   <dl>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Category</dt>
                       <dd><span class="card-category cat-research">Research</span></dd>
                     </div>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Organization</dt>
                       <dd>Ohio Wesleyan University</dd>
                     </div>
@@ -385,11 +771,11 @@
                       <dt>Location</dt>
                       <dd>Delaware, Ohio, USA</dd>
                     </div>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Dates</dt>
                       <dd>May 2022 – Jul 2022</dd>
                     </div>
-                    <div class="detail-about-item">
+                    <div class="detail-about-item detail-about-item--lead">
                       <dt>Links</dt>
                       <dd>
                         <ul class="detail-links">
@@ -451,6 +837,16 @@
                   </dl>
                 </aside>
               </div>
+              <nav class="detail-pager" aria-label="More in Research">
+                <a
+                  class="detail-pager-link"
+                  href="/experience/research/2023-01-opinion-survey-on-artificial-intelligence-in-the.html"
+                  ><span class="detail-pager-dir">Newer</span
+                  ><span class="detail-pager-title"
+                    >Opinion Survey on Artificial Intelligence in the Workplace</span
+                  ></a
+                >
+              </nav>
             </div>
           </article>
         </div>
@@ -522,7 +918,7 @@
       ></span>
     </button>
     <script src="/assets/js/sw-register.js"></script>
-    <script type="module" src="/assets/site/assets/theme-CkQHppC3.js"></script>
+    <script type="module" src="/assets/site/assets/theme-CXbMquzM.js"></script>
     <script type="module" src="/assets/site/assets/email-protection-CpkrbSV7.js"></script>
     <script type="module" src="/assets/site/assets/scroll-to-top-haMK3rKp.js"></script>
   </body>

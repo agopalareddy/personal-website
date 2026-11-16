@@ -15,7 +15,7 @@ const CATEGORIES = [
 ];
 
 const ORG_OPTIONS = [
-  { value: 'all', label: 'All Organizations' },
+  { value: 'all', label: 'All organizations' },
   { value: 'WashU', label: 'Washington University in St. Louis' },
   { value: 'OWU', label: 'Ohio Wesleyan University' },
   { value: 'Corporate', label: 'Corporate / Industry' },
@@ -94,13 +94,11 @@ export function ExperienceCatalogPage({ entries }: { entries: ExperienceEntry[] 
         categoryCounts={categoryCounts}
         categoryGroupAriaLabel="Category Filters"
         searchId="experienceSearch"
-        searchPlaceholder="Search experience..."
+        searchPlaceholder="Search experience"
         searchAriaLabel="Search experience by title, organization, or keyword"
         groupSelectId="orgFilter"
         groupAriaLabel="Filter experience by organization"
         groupOptions={ORG_OPTIONS}
-        yearSelectId="yearFilter"
-        yearAriaLabel="Filter experience by year range"
         years={years}
         sortSelectId="experienceSort"
         sortAriaLabel="Sort experience chronologically or alphabetically"

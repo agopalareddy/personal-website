@@ -1,4 +1,5 @@
 import { Icon, type IconName } from '../common/Icon';
+import { ThemePickerTemplate } from '../common/ThemePicker';
 
 const NAV_ITEMS: Array<{ key: string; href: string; label: string; icon: IconName }> = [
   { key: 'home', href: '/', label: 'Home', icon: 'HOME_16' },
@@ -39,9 +40,10 @@ export function Nav({ activePage }: { activePage?: ActivePage }) {
             );
           })}
         </nav>
-        {/* Hydration mount point for the ThemePicker island (T014/T016) */}
+        {/* Mount point for the theme picker (islands/theme.ts) */}
         <div id="theme-toggle" />
       </div>
+      <ThemePickerTemplate />
     </header>
   );
 }

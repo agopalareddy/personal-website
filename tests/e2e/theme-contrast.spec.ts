@@ -25,7 +25,12 @@ test.describe('Colour contrast', () => {
 
       for (const url of PAGES) {
         await page.goto(url);
-        const results = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze();
+        // The booking calendar on Availability is Google's embed. Its colours are
+        // not ours to set, and it only loads when Google is reachable.
+        const results = await new AxeBuilder({ page })
+          .exclude('iframe')
+          .withRules(['color-contrast'])
+          .analyze();
         const failures = results.violations.flatMap((violation) =>
           violation.nodes.map((node) => `${node.target.join(' ')}: ${node.failureSummary}`)
         );

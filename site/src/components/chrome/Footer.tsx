@@ -51,7 +51,7 @@ export function Footer() {
             </li>
           </ul>
         </nav>
-        {/* Hydration mount point for the ThemePicker island (T014/T016) */}
+        {/* Mount point for the theme picker (islands/theme.ts) */}
         <div id="theme-toggle-footer" />
       </div>
     </footer>

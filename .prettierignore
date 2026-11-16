@@ -2,5 +2,7 @@ node_modules/
 .git/
 fonts/
 images/
+# Vite output: already minified. Reformatting it quadruples the download.
+assets/site/
 files/reddy_cv.pdf
 files/reddy_resume.pdf

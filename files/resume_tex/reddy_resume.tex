@@ -81,11 +81,16 @@
 \normalsize
 
 % --- Web copy vs. application copy ---
-% This file compiles to the PDF served on agreddy.com, a public page that
-% scrapers read, so the phone number is left out. For a copy sent to an
-% employer, change \webcopytrue to \webcopyfalse.
+% This file compiles to the PDF served on agreddy.com, and the file itself is
+% public, so the phone number is not written here. For a copy sent to an
+% employer:
+%   1. create files/private_contact.tex (gitignored, never deployed) with
+%        \newcommand{\privatephone}{<number as printed>}
+%        \newcommand{\privatephonetel}{<number as dialled, digits only after the +>}
+%   2. change \webcopytrue to \webcopyfalse below.
 \newif\ifwebcopy
 \webcopytrue
+\InputIfFileExists{../private_contact.tex}{}{}
 
 % ----------------------------------------------------------------------
 % Document Body
@@ -104,7 +109,10 @@
 		\kern \kernSpacing\AND\kern \kernSpacing
 		% Phone (application copies only, see \ifwebcopy above)
 		\ifwebcopy\else
-		\mbox{\hrefWithoutArrow{tel:+10000000000}{+1 (000) 000-0000}}%
+		\ifdefined\privatephone\else
+		\errmessage{\string\webcopyfalse\space needs files/private_contact.tex, see the top of this file}%
+		\fi
+		\mbox{\hrefWithoutArrow{tel:\privatephonetel}{\privatephone}}%
 		\kern \kernSpacing\AND\kern \kernSpacing
 		\fi
 		% Email

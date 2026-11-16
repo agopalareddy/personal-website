@@ -138,10 +138,16 @@ npm run build:site
 This writes `experience/index.html`, every entry's detail page, and regenerates
 `sitemap.xml`.
 
-### CV, Resume, and Cover Letter PDFs
+### CV and Resume PDFs
 
-Public PDFs are stored in `files/`. LaTeX source lives in `files/cv_tex/`,
-`files/resume_tex/`, and `files/cover_tex/`.
+Public PDFs are stored in `files/`. LaTeX source lives in `files/cv_tex/` and
+`files/resume_tex/`.
+
+Everything tracked under `files/` is served as is, and this repository is
+public. Cover letters, references and tailored copies stay local
+(`files/cover_tex/` is gitignored). The phone number is read from the
+gitignored `files/private_contact.tex` and only when a source is switched to
+`\webcopyfalse`; see the note at the top of each `.tex` file.
 
 Build a document from its source directory:
 

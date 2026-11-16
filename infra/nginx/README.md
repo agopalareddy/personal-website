@@ -7,7 +7,9 @@ Tracked copies of nginx configuration for the personal-website production deploy
 ```
 infra/nginx/
 ├── conf.d/
-│   └── security-headers.conf   # CSP, HSTS, X-Frame-Options, etc.
+│   ├── security-headers.conf   # CSP, HSTS, X-Frame-Options, etc.
+│   ├── rate-limits.conf        # Rate limit zones for email-finder
+│   └── compression.conf        # gzip for CSS, JS, SVG (nginx only does HTML by default)
 ├── sites-enabled/
 │   └── showcase                 # Main site config (HTTP+HTTPS+redirects)
 └── deploy.sh                    # Sync script
@@ -39,7 +41,7 @@ cd /home/adurs/repos/GCP_Projects/personal-website
 
 The script:
 
-1. `scp`s both config files to the VM
+1. `scp`s the config files to the VM
 2. Validates with `sudo nginx -t`
 3. Reloads with `sudo nginx -s reload`
 4. Verifies the live CSP header includes `google-analytics.com` (catches the GA4-blocking regression)

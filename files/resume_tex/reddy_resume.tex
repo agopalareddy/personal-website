@@ -80,6 +80,13 @@
 \renewcommand{\normalsize}{\fontsize{9.5pt}{11.5pt}\selectfont}
 \normalsize
 
+% --- Web copy vs. application copy ---
+% This file compiles to the PDF served on agreddy.com, a public page that
+% scrapers read, so the phone number is left out. For a copy sent to an
+% employer, change \webcopytrue to \webcopyfalse.
+\newif\ifwebcopy
+\webcopytrue
+
 % ----------------------------------------------------------------------
 % Document Body
 % ----------------------------------------------------------------------
@@ -95,9 +102,11 @@
 		% Location
 		\mbox{Gainesville, FL, USA}%
 		\kern \kernSpacing\AND\kern \kernSpacing
-		% Phone
+		% Phone (application copies only, see \ifwebcopy above)
+		\ifwebcopy\else
 		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
 		\kern \kernSpacing\AND\kern \kernSpacing
+		\fi
 		% Email
 		\mbox{\hrefWithoutArrow{mailto:agr@agreddy.com}{agr@agreddy.com}}%
 		\kern \kernSpacing\AND\kern \kernSpacing

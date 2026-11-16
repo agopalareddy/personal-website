@@ -6,6 +6,13 @@
 % --- Required Packages ---
 \usepackage{reddy_cv}       % Custom CV style package
 
+% --- Web copy vs. application copy ---
+% This file compiles to the PDF served on agreddy.com, a public page that
+% scrapers read, so the phone number is left out. For a copy sent to an
+% employer, change \webcopytrue to \webcopyfalse.
+\newif\ifwebcopy
+\webcopytrue
+
 % ----------------------------------------------------------------------
 % Document Body
 % ----------------------------------------------------------------------
@@ -18,9 +25,11 @@
 	\begin{minipage}[t]{1.0\textwidth}
 		\fontsize{20pt}{20pt}\selectfont \textbf{Aadarsha Gopala Reddy}\\
 		\normalsize
-		% Phone
+		% Phone (application copies only, see \ifwebcopy above)
+		\ifwebcopy\else
 		\mbox{\hrefWithoutArrow{tel:+17408021776}{+1 (740) 802-1776}}%
 		\kern \kernSpacing\AND\kern \kernSpacing
+		\fi
 		% Email
 		\mbox{\hrefWithoutArrow{mailto:agr@agreddy.com}{agr@agreddy.com}}%
 		\kern \kernSpacing\AND\kern \kernSpacing

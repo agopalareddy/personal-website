@@ -22,6 +22,7 @@ git add assets/css/primer/ scripts/icons.py assets/js/icons.js
 primer.css (vendored tokens: size, typography, motion, colors, 5 themes)
   └─ style.css (@layer reset, base, components, utilities)
        Uses ONLY Primer functional tokens — no raw hex values
+       (one exception: the Dark dimmed text colours, see rule 1)
 ```
 
 `style.css` itself has no build step. Pages are rendered to static HTML from `site/src/` by `npm run build:site` and served by nginx.
@@ -29,6 +30,7 @@ primer.css (vendored tokens: size, typography, motion, colors, 5 themes)
 ## Rules
 
 1. **Only Primer functional tokens.** Never raw hex in `style.css` or page markup.
+   - **One exception: Dark dimmed text colours.** Primer's dimmed theme puts `--fgColor-accent` (links), `-done`, `-severe`, `-sponsors` and `-danger` at 4.0–4.3:1 on its page background, under the 4.5:1 the Accessibility page promises. The unlayered block at the top of `style.css` replaces each with the next lighter step of the same Primer dimmed scale (5.2:1). It is unlayered because `primer.css` is, and unlayered rules beat `@layer`. `tests/e2e/theme-contrast.spec.ts` checks every theme; re-check the block after `npm run vendor:primer`.
 2. **System font stack only.** `--fontStack-system` for body, `--fontStack-monospace` for code.
 3. **Flat, restrained interactions.** Border-color transitions on hover. No shadows, transforms, or glow effects.
 4. **Octicons only.** Vendored inline SVGs from `@primer/octicons`. Font Awesome fully removed.

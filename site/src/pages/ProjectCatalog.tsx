@@ -11,7 +11,7 @@ const CATEGORIES = [
 ];
 
 const VENUE_OPTIONS = [
-  { value: 'all', label: 'All Institutions/Venues' },
+  { value: 'all', label: 'All venues' },
   { value: 'WashU', label: 'Washington University in St. Louis' },
   { value: 'OWU', label: 'Ohio Wesleyan University' },
   { value: 'MITxSureStart', label: 'MITxSureStart' },
@@ -84,13 +84,11 @@ export function ProjectCatalogPage({ projects }: { projects: ProjectEntry[] }) {
         categoryCounts={categoryCounts}
         categoryGroupAriaLabel="Category Filters"
         searchId="projectSearch"
-        searchPlaceholder="Search projects, tags, venues..."
+        searchPlaceholder="Search projects"
         searchAriaLabel="Search projects by title, tags, or venues"
         groupSelectId="venueFilter"
         groupAriaLabel="Filter projects by institution or venue"
         groupOptions={VENUE_OPTIONS}
-        yearSelectId="yearFilter"
-        yearAriaLabel="Filter projects by year range"
         years={years}
         sortSelectId="projectSort"
         sortAriaLabel="Sort projects chronologically or alphabetically"

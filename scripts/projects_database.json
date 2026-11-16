@@ -58,6 +58,13 @@
     "venue": "Ohio Wesleyan University",
     "venue_tag": "OWU",
     "permalink": "/projects/connect-4-ai",
+    "figure": {
+      "src": "/images/projects/figures/connect-4-ai.webp",
+      "alt": "The Connect 4 live demo at the start of a game against the AI: an empty seven-column board with a drop button above each column, a match status panel reading \"Your turn\", and the Java engine's log.",
+      "caption": "The live demo at the start of a game against the AI.",
+      "width": 1200,
+      "height": 750
+    },
     "date": "2022-11-30",
     "category": "Web Apps",
     "technologies": ["Java", "HTML", "CSS", "JavaScript", "OOP", "Artificial Intelligence", "Git"],
@@ -103,6 +110,13 @@
     "venue": "Washington University in St. Louis",
     "venue_tag": "WashU",
     "permalink": "/projects/php-calendar-app",
+    "figure": {
+      "src": "/images/projects/figures/php-calendar-app.webp",
+      "alt": "The calendar app's month view for November 2026, with previous, next and today buttons, category checkboxes for work, personal, social and other, and login and register links.",
+      "caption": "The live demo's month view, signed out.",
+      "width": 1200,
+      "height": 750
+    },
     "date": "2025-07-15",
     "category": "Web Apps",
     "technologies": [
@@ -186,6 +200,13 @@
     "venue": "Washington University in St. Louis",
     "venue_tag": "WashU",
     "permalink": "/projects/interactive-storybook",
+    "figure": {
+      "src": "/images/projects/figures/interactive-storybook.webp",
+      "alt": "The storybook app's Explore Stories page: a search box, genre and sort menus, a Create New Story card, and two published adventure stories with cover images.",
+      "caption": "The live demo's story library.",
+      "width": 1200,
+      "height": 750
+    },
     "date": "2024-11-30",
     "category": "Web Apps",
     "technologies": [
@@ -415,6 +436,13 @@
     "venue": "Washington University in St. Louis",
     "venue_tag": "WashU",
     "permalink": "/projects/ms-thesis",
+    "figure": {
+      "src": "/images/projects/figures/ms-thesis.webp",
+      "alt": "Flow diagram in three stages. Stage 1, data acquisition and preprocessing: raw Azuga high-frequency trip data, then trip parsing and sensor synchronization. Stage 2, data linkage and aggregation: linkage with study metrics and demographics, then weekly aggregation into participant-week observations. Stage 3, modeling and evaluation: CDR alignment and cohort filtering, then the final modeling dataset and participant-level evaluation outputs.",
+      "caption": "The data pipeline, from raw trip data to participant-level evaluation.",
+      "width": 901,
+      "height": 586
+    },
     "date": "2026-04-01",
     "category": "Research & ML",
     "technologies": [
@@ -480,6 +508,13 @@
     "venue": "Kaggle Agents for Good Hackathon",
     "venue_tag": "Kaggle",
     "permalink": "/projects/wellness-companion",
+    "figure": {
+      "src": "/images/projects/figures/wellness-companion.webp",
+      "alt": "The AURA dashboard for a sample patient: a profile card, a medication schedule with three doses marked missed, daily wellness analytics, and the companion check-in panel.",
+      "caption": "The live demo's dashboard, showing its built-in sample patient.",
+      "width": 1200,
+      "height": 750
+    },
     "date": "2026-06-21",
     "category": "Web Apps",
     "technologies": [

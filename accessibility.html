@@ -103,8 +103,8 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=298002a5" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=298002a5" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=05236edb" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=05236edb" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to Content</a>
@@ -640,7 +640,7 @@
               <p>
                 To achieve this commitment, this site is built upon GitHub's open-source
                 <a href="https://primer.style/accessibility/" target="_blank" rel="noopener"
-                  >Primer Design System <span class="sr-only">(opens in a new tab)</span></a
+                  >Primer Design System<span class="sr-only"> (opens in a new tab)</span></a
                 >, inheriting its robust accessibility foundations, design primitives, and
                 interactive guidelines.
               </p>
@@ -681,14 +681,16 @@
                   <code>&lt;main&gt;</code> and <code>&lt;article&gt;</code> for core page content,
                   and <code>&lt;footer&gt;</code> for site footer. The filter area on the Experience
                   and Projects lists uses the <code>&lt;search&gt;</code> element, and detail pages
-                  carry a labelled breadcrumb <code>&lt;nav&gt;</code>, for improved screen reader
-                  navigation.
+                  carry a labelled breadcrumb <code>&lt;nav&gt;</code> and a labelled
+                  <code>&lt;nav&gt;</code> for the newer and older entries, for improved screen
+                  reader navigation.
                 </li>
                 <li>
                   <strong>Heading Hierarchy:</strong> Each page contains a single primary
                   <code>&lt;h1&gt;</code> element with logical sequential headings
                   (<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>) to produce a coherent
-                  screen-reader outline.
+                  screen-reader outline. The <code>&lt;h1&gt;</code> is the first heading on every
+                  page; the name in the sidebar is plain text, not a heading.
                 </li>
                 <li>
                   <strong>ARIA Labels:</strong> Navigation regions, form controls, and interactive
@@ -879,7 +881,7 @@
                   </svg>
                   LinkedIn:
                   <a href="https://www.linkedin.com/in/agopalareddy" target="_blank" rel="noopener"
-                    >Aadarsha Gopala Reddy <span class="sr-only">(opens in a new tab)</span></a
+                    >Aadarsha Gopala Reddy<span class="sr-only"> (opens in a new tab)</span></a
                   >
                 </li>
               </ul>

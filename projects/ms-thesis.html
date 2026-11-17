@@ -10,13 +10,12 @@
       imagesizes="(max-width: 47.99em) 64px, 150px"
       fetchpriority="high"
     />
-    <link rel="preload" as="image" href="/images/projects/figures/ms-thesis.webp" />
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QWNGSMS0LY"></script>
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
     <meta
       name="description"
-      content="Master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults."
+      content="Master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, comparing six modeling approaches."
     />
     <title>
       Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from
@@ -39,7 +38,7 @@
     />
     <meta
       property="og:description"
-      content="Master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults."
+      content="Master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, comparing six modeling approaches."
     />
     <meta property="og:image" content="https://agreddy.com/images/projects/ms-thesis.png" />
     <meta property="og:site_name" content="Aadarsha Gopala Reddy" />
@@ -51,7 +50,7 @@
     />
     <meta
       name="twitter:description"
-      content="Master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults."
+      content="Master&#x27;s thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, comparing six modeling approaches."
     />
     <meta name="twitter:image" content="https://agreddy.com/images/projects/ms-thesis.png" />
     <meta name="twitter:site" content="@aadarsha2002" />
@@ -113,13 +112,13 @@
         for (var k in s) e.setAttribute(k, s[k]);
       })();
     </script>
-    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=5f3dc06f" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=5f3dc06f" />
+    <link rel="stylesheet" href="/assets/css/primer/primer.css?v=dd871c8b" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=dd871c8b" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "name": "Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment Prediction from Naturalistic Driving Data",
-        "description": "Master's thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, evaluating six modeling approaches on over 26,000 participant-weeks of telematics data from 304 older adults.",
+        "description": "Master's thesis investigating whether naturalistic driving data can predict cognitive impairment status across different vehicles, comparing six modeling approaches.",
         "url": "https://agreddy.com/projects/ms-thesis.html",
         "image": "https://agreddy.com/images/projects/ms-thesis.png",
         "author": { "@type": "Person", "name": "Aadarsha Gopala Reddy" },
@@ -665,9 +664,8 @@
               </h1>
               <p class="detail-subtitle">
                 Master&#x27;s thesis investigating whether naturalistic driving data can predict
-                cognitive impairment status across different vehicles, evaluating six modeling
-                approaches on over 26,000 participant-weeks of telematics data from 304 older
-                adults.
+                cognitive impairment status across different vehicles, comparing six modeling
+                approaches.
               </p>
               <ul class="detail-meta" aria-label="About this project">
                 <li>
@@ -708,13 +706,39 @@
               <div class="detail-grid">
                 <div class="detail-main">
                   <figure class="detail-figure">
-                    <img
-                      src="/images/projects/figures/ms-thesis.webp"
-                      alt="Flow diagram in three stages. Stage 1, data acquisition and preprocessing: raw Azuga high-frequency trip data, then trip parsing and sensor synchronization. Stage 2, data linkage and aggregation: linkage with study metrics and demographics, then weekly aggregation into participant-week observations. Stage 3, modeling and evaluation: CDR alignment and cohort filtering, then the final modeling dataset and participant-level evaluation outputs."
-                      width="901"
-                      height="586"
-                      decoding="async"
-                    />
+                    <ol class="pipeline">
+                      <li class="pipeline-stage">
+                        <p class="pipeline-stage-title">
+                          <span class="pipeline-stage-number">Stage 1</span> Data acquisition and
+                          preprocessing
+                        </p>
+                        <ol class="pipeline-steps">
+                          <li>Raw Azuga high-frequency trip data</li>
+                          <li>Trip parsing and sensor synchronization</li>
+                        </ol>
+                      </li>
+                      <li class="pipeline-stage">
+                        <p class="pipeline-stage-title">
+                          <span class="pipeline-stage-number">Stage 2</span> Data linkage and
+                          aggregation
+                        </p>
+                        <ol class="pipeline-steps">
+                          <li>Linkage with study metrics and demographics</li>
+                          <li>Weekly aggregation</li>
+                          <li>Participant-week observations</li>
+                        </ol>
+                      </li>
+                      <li class="pipeline-stage">
+                        <p class="pipeline-stage-title">
+                          <span class="pipeline-stage-number">Stage 3</span> Modeling and evaluation
+                        </p>
+                        <ol class="pipeline-steps">
+                          <li>CDR alignment and cohort filtering</li>
+                          <li>Final modeling dataset</li>
+                          <li>Participant-level evaluation outputs</li>
+                        </ol>
+                      </li>
+                    </ol>
                     <figcaption>
                       The data pipeline, from raw trip data to participant-level evaluation.
                     </figcaption>
@@ -732,13 +756,9 @@
                       population.
                     </p>
                     <p>
-                      The analysis used a final dataset of 790,000 naturalistic driving trips
-                      (26,968 participant-weeks) from 304 participants, combined with demographic
-                      covariates, evaluated under leave-one-participant-out cross-validation across
-                      six modeling approaches &mdash; including baseline classifiers, a
-                      domain-adversarial neural network (DANN), and a sequence-based GRU-DANN model.
-                      The best model (GRU-DANN) reached a participant-level ROC AUC of 0.599, with
-                      Random Forest close behind as the strongest non-deep baseline. The
+                      The six approaches ranged from baseline classifiers to a domain-adversarial
+                      neural network (DANN) and a sequence-based GRU-DANN model; GRU-DANN scored
+                      best, with Random Forest close behind as the strongest non-deep baseline. The
                       thesis&apos;s main contribution is a rigorous, vehicle-agnostic comparison of
                       these modeling choices, alongside a candid account of the limits of
                       naturalistic driving data alone as a cognitive-status signal &mdash; tempering
@@ -752,18 +772,10 @@
                         participant-weeks) from 304 participants, with demographic covariates
                       </li>
                       <li>
-                        Six modeling approaches compared under leave-one-participant-out
-                        cross-validation
+                        Evaluated with leave-one-participant-out cross-validation, so no
+                        participant&apos;s trips appear in both training and test data
                       </li>
                       <li>Best model (GRU-DANN) achieved a participant-level ROC AUC of 0.599</li>
-                      <li>
-                        Vehicle-agnostic framing designed to generalize across heterogeneous
-                        vehicles and sensors
-                      </li>
-                      <li>
-                        Conducted with the DRIVES Lab (PI: Dr. Ganesh Babulal), advised by Dr.
-                        Alvitta Ottley and Dr. Nathan Jacobs
-                      </li>
                     </ul>
                     <p>
                       <a
@@ -771,8 +783,7 @@
                         target="_blank"
                         rel="noopener"
                         >Read the full thesis on WashU Open Scholarship</a
-                      >
-                      <span class="sr-only">(opens in a new tab)</span>.
+                      ><span class="sr-only"> (opens in a new tab)</span>.
                     </p>
                   </section>
                   <section class="detail-related">
@@ -786,8 +797,7 @@
                       <li>
                         <a
                           href="/experience/research/2025-08-toward-vehicle-agnostic-driving-signatures-for.html"
-                          >Toward Vehicle-Agnostic Driving Signatures for Cognitive Impairment
-                          Prediction from Naturalistic Driving Data</a
+                          >Research entry: DRIVES Project, Washington University in St. Louis</a
                         ><span class="detail-related-note">Research · Aug 2025 – Apr 2026</span>
                       </li>
                     </ul>

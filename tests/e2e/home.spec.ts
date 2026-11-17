@@ -67,6 +67,24 @@ test.describe('Home page', () => {
     await expect(page).toHaveURL(new RegExp(`${href!.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`));
   });
 
+  test('skill links search whole words and find something', async ({ page }) => {
+    // Every link is a search of one list; all but SQL search whole words
+    for (const href of await page
+      .locator('.home-skill-list a')
+      .evaluateAll((as) => as.map((a) => a.getAttribute('href')))) {
+      expect(href).toMatch(/^\/(projects|experience)\/\?q=(%22[^%]|sql$)/);
+    }
+
+    // "Java" opens the Java projects, not every JavaScript one
+    await page.getByRole('link', { name: 'Java', exact: true }).click();
+    const rows = page.locator('#projectGrid .catalog-row:visible');
+    await expect(rows.first()).toBeVisible();
+    const searched = await rows.evaluateAll((rs) =>
+      rs.map((r) => (r as HTMLElement).dataset.search)
+    );
+    for (const text of searched) expect(text).toMatch(/(^|[^a-z0-9])java([^a-z0-9]|$)/);
+  });
+
   test('skills show the first areas and expand to all of them', async ({ page }) => {
     const groups = page.locator('.home-skill-group');
     const toggle = page.locator('.home-skills-toggle');

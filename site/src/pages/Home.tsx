@@ -2,7 +2,8 @@ import { SITE_NAME } from '../components/chrome/Head';
 import { Layout } from '../components/chrome/Layout';
 import { Icon } from '../components/common/Icon';
 import { projectCategoryClass, projectDetailUrl, projectYear } from '../content/projectDisplay';
-import type { ProjectEntry } from '../content/types';
+import { experienceSearchText, matchesQuery, projectSearchText } from '../content/search';
+import type { ExperienceEntry, ProjectEntry } from '../content/types';
 
 const JSON_LD = JSON.stringify({
   '@context': 'https://schema.org',
@@ -103,47 +104,87 @@ const LEAD_SKILL_GROUPS = 4;
 const SKILL_COUNT = SKILL_GROUPS.reduce((n, g) => n + g.skills.length, 0);
 
 /**
- * The four pinned projects. Category and year come from the projects
- * database by id; the title and one-line description are home-page copy.
+ * The four pinned projects. Title, category and year come from the projects
+ * database by id, so a pin reads the same as the page it opens. The
+ * description, result and stack are home-page copy; each result is a figure
+ * stated on the project's own page.
  * `href` overrides the detail-page link (Tales We Weave opens the live app).
  */
-const FEATURED: Array<{ id: string; title: string; description: string; href?: string }> = [
+const FEATURED: Array<{
+  id: string;
+  description: string;
+  result: string;
+  stack: string[];
+  href?: string;
+}> = [
   {
     id: '2026-04-ms-thesis',
-    title: 'M.S. Thesis: Vehicle-Agnostic Driving Signatures',
     description:
-      'Compared six modeling approaches for predicting cognitive impairment from naturalistic driving data.',
+      'M.S. thesis comparing six models for predicting cognitive impairment from everyday driving, across vehicle makes and models.',
+    result:
+      '790,000 trips from 304 older adults; the best model reached a participant-level ROC AUC of 0.599.',
+    stack: ['Python', 'PyTorch', 'scikit-learn'],
   },
   {
-    id: '2024-12-multimodal-alzheimers',
-    title: 'Multimodal Alzheimer’s Prediction',
-    description: 'Combined MRI imaging with clinical data for early Alzheimer’s disease detection.',
+    id: '2026-09-umm',
+    description:
+      'Android voice keyboard that strips filler words and formats dictation, using your own OpenRouter key.',
+    result: 'A short dictation costs about $0.0004 and comes back in 1.2 to 1.8 seconds.',
+    stack: ['Kotlin', 'Jetpack Compose', 'OpenRouter'],
   },
   {
     id: '2024-12-datacenter-cooling',
-    title: 'Datacenter Cooling Optimization',
     description:
-      'Applied deep reinforcement learning (DDQN, PPO, SAC) to optimize datacenter cooling efficiency.',
+      'Trained DDQN, PPO and SAC agents to run cooling in an EnergyPlus datacenter simulation.',
+    result: 'DDQN improved energy efficiency 35.8% over a rules-based controller.',
+    stack: ['Python', 'PyTorch', 'EnergyPlus'],
   },
   {
     id: '2024-12-interactive-storybook',
-    title: 'Tales We Weave',
     href: '/storybook/',
     description:
-      'AI-powered interactive storytelling app with branching narratives, built with Vue 3, Express, and MongoDB.',
+      'Branching stories written by Gemini and illustrated by fal.ai, with a zoomable map of the story tree.',
+    result: 'Live demo: read or write a story in the browser.',
+    stack: ['Vue 3', 'Express', 'MongoDB'],
   },
 ];
+
+/** Skills whose search should match inside words: "sql" finds MySQL and SQLite. */
+const SKILL_QUERY: Record<string, string> = { SQL: 'sql' };
+
+/**
+ * Where a skill links: the projects that name it, else the experience
+ * entries that do, else nowhere (plain text). The quoted query matches
+ * whole words, so "Java" does not open the JavaScript projects.
+ */
+function skillHref(skill: string, projectTexts: string[], experienceTexts: string[]) {
+  const q = SKILL_QUERY[skill] ?? `"${skill}"`;
+  if (projectTexts.some((t) => matchesQuery(t, q))) return `/projects/?q=${encodeURIComponent(q)}`;
+  if (experienceTexts.some((t) => matchesQuery(t, q))) {
+    return `/experience/?q=${encodeURIComponent(q)}`;
+  }
+  return null;
+}
 
 /**
  * Home: a short introduction with the three main actions, four pinned
  * projects, and skills (the first few areas, the rest behind "Show all").
  */
-export function HomePage({ projects }: { projects: ProjectEntry[] }) {
+export function HomePage({
+  projects,
+  experiences,
+}: {
+  projects: ProjectEntry[];
+  experiences: ExperienceEntry[];
+}) {
+  const projectTexts = projects.map(projectSearchText);
+  const experienceTexts = experiences.map(experienceSearchText);
   const pins = FEATURED.map((f) => {
     const p = projects.find((x) => x.id === f.id);
     if (!p) throw new Error(`Home: featured project "${f.id}" is not in the projects database`);
     return {
       ...f,
+      title: p.title,
       href: f.href ?? projectDetailUrl(p),
       category: p.category,
       year: projectYear(p),
@@ -208,6 +249,11 @@ export function HomePage({ projects }: { projects: ProjectEntry[] }) {
                 <a href={pin.href}>{pin.title}</a>
               </h3>
               <p className="home-pin-description">{pin.description}</p>
+              <p className="home-pin-result">{pin.result}</p>
+              <p className="home-pin-stack">
+                <span className="sr-only">Built with </span>
+                {pin.stack.join(' · ')}
+              </p>
               <p className="home-pin-meta">
                 <span
                   className={`home-pin-dot ${projectCategoryClass(pin.category)}`}
@@ -249,13 +295,20 @@ export function HomePage({ projects }: { projects: ProjectEntry[] }) {
               <dt>{group.label}</dt>
               <dd>
                 <ul className="home-skill-list">
-                  {group.skills.map((skill) => (
-                    <li key={skill}>
-                      <a href={`/projects/?q=${encodeURIComponent(skill)}`} rel="nofollow">
-                        {skill}
-                      </a>
-                    </li>
-                  ))}
+                  {group.skills.map((skill) => {
+                    const href = skillHref(skill, projectTexts, experienceTexts);
+                    return (
+                      <li key={skill}>
+                        {href ? (
+                          <a href={href} rel="nofollow">
+                            {skill}
+                          </a>
+                        ) : (
+                          skill
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </dd>
             </div>

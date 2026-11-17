@@ -1,6 +1,6 @@
 # Aadarsha Gopala Reddy — Personal Website _(personal-website)_
 
-Static personal website and project archive for agreddy.com, built with HTML, CSS, and JavaScript.
+Static personal website and project archive for agreddy.com, rendered at build time from React and served as plain HTML.
 
 The site presents projects, research and teaching experience, CV/resume documents, and
 availability, served as a static Nginx site on a Contabo Cloud VPS with no
@@ -30,12 +30,19 @@ databases in `scripts/`; end-to-end coverage lives under `tests/` using Playwrig
 - External links opened in a new tab use `rel="noopener"`.
 - Do not commit `.env` files, private keys, service-account keys, or temporary build
   artifacts.
-- Keep public PDFs intentional — anything in `files/` can be served by the web server.
+- Keep public PDFs intentional — anything tracked in `files/` is served by the web server.
+  Cover letters, references and the LinkedIn export are gitignored and stay local;
+  `tests/e2e/private-files.spec.ts` checks that they return 404 in production.
+- The phone number is not in any tracked file. The CV and resume read it from a
+  gitignored `files/private_contact.tex` and print it only in copies built for an
+  employer.
 - See [ACCESSIBILITY.md](ACCESSIBILITY.md) for the WCAG statement.
 
 ## Background
 
-- Shared design tokens and component styles live in `assets/css/style.css`.
+- The design system is GitHub Primer: tokens are vendored from `@primer/primitives` into
+  `assets/css/primer/`, icons are inline Octicons, and `assets/css/style.css` uses only
+  Primer functional tokens. See [DESIGN.md](DESIGN.md).
 - The site is built from React components in `site/src/` via `site/build/render.mjs`
   (`react-dom/server`), which writes static HTML directly to the repo-root paths Nginx
   serves. Small interactive behaviors (theme selection, email protection, catalog
@@ -52,13 +59,12 @@ personal-website/
 ├── cv/                         # CV and resume document hub
 ├── availability/               # Public availability page
 ├── assets/
-│   ├── css/                    # Site-wide design system and page styles
-│   ├── fonts/                  # Self-hosted font files
+│   ├── css/                    # Vendored Primer tokens and site styles
 │   ├── js/                     # Legacy scripts still used by out-of-scope /files/ pages
 │   └── site/                   # Vite-built hydration island bundles (generated)
 ├── site/                       # React components, pages, and the build script
-├── files/                      # Public PDFs and LaTeX source directories
-├── images/                     # Site images, icons, and manifest assets
+├── files/                      # Public CV/resume PDFs and their LaTeX sources
+├── images/                     # Site images, CV thumbnails, icons, manifest assets
 ├── scripts/                    # Content databases and content-adjacent tooling
 ├── tests/                      # Playwright test suite
 └── infra/nginx/                # Production Nginx config snapshots and deploy script
@@ -75,6 +81,8 @@ npm install
 
 ### Dependencies
 
+- `npm run build:site` calls `pdfinfo` and `pdftoppm` (poppler-utils) to read each CV
+  PDF's page count and render its page-1 thumbnail for `/cv/`.
 - Playwright end-to-end tests have their own dependency set — see
   [Testing](#testing).
 - GA4 verification (`scripts/verify_ga4.py`) needs a service-account key at
@@ -126,6 +134,11 @@ npm run build:site
 This writes `projects/index.html` and every `has_detail: true` entry's detail page,
 and regenerates `sitemap.xml` from the build's own route manifest.
 
+A project can open its detail page with a `figure` (one WebP image with a caption) or a
+`pipeline` (a staged flow diagram drawn in HTML, so it follows the theme and stays
+legible on phones). Cross-links to experience entries are set once, in each experience
+entry's `related_projects` list; the build fails if a slug has no detail page.
+
 ### Experience
 
 Experience metadata lives in `scripts/experience_database.json`. After editing,
@@ -136,24 +149,28 @@ npm run build:site
 ```
 
 This writes `experience/index.html`, every entry's detail page, and regenerates
-`sitemap.xml`.
+`sitemap.xml`. An entry may list `people` (role and name), shown in its About column
+and included in search.
+
+When an entry's URL changes or two entries merge, add a 301 for the old path to
+`infra/nginx/sites-enabled/showcase`.
 
 ### CV and Resume PDFs
 
 Public PDFs are stored in `files/`. LaTeX source lives in `files/cv_tex/` and
-`files/resume_tex/`.
+`files/resume_tex/`; `files/cover_tex/` is local only.
 
-Everything tracked under `files/` is served as is, and this repository is
-public. Cover letters, references and tailored copies stay local
-(`files/cover_tex/` is gitignored). The phone number is read from the
-gitignored `files/private_contact.tex` and only when a source is switched to
-`\webcopyfalse`; see the note at the top of each `.tex` file.
-
-Build a document from its source directory:
+Build a document from its source directory (the resume needs `xelatex`, since it loads
+Lato through `fontspec`):
 
 ```bash
-latexmk -pdf <document>.tex
+latexmk -pdf reddy_cv.tex
+latexmk -xelatex reddy_resume.tex
 ```
+
+The `/cv/` page reads its "Updated" date from git and its page counts, thumbnails and
+section lists from the PDFs and `.tex` files, so rebuild the site after committing a
+document change.
 
 Clean LaTeX auxiliary files before committing:
 
@@ -193,11 +210,11 @@ git push origin main
 ssh contabo-showcase "cd /opt/personal-website && git fetch origin && git reset --hard origin/main"
 ```
 
-There is no build step for the public site — Nginx serves files directly from the
-checked-out repository. Cache busting is automated: `npm run cache:bump` (or the
-`pre-commit` hook, which runs it whenever a shared chrome asset or catalog script is
-staged) rewrites every `?v=` query string to a content hash of the changed file, so
-there's nothing to bump by hand.
+There is no build step on the server — the generated HTML is committed, and Nginx
+serves files directly from the checked-out repository. Cache busting is automated:
+`npm run cache:bump` (or the `pre-commit` hook, which runs it whenever `style.css` or
+another shared chrome asset is staged) rewrites every `?v=` query string to a content
+hash of the changed file, so there's nothing to bump by hand.
 
 ## Nginx and Analytics
 
@@ -216,7 +233,8 @@ Re-run the verifier after tightening CSP:
 
 ## Thanks
 
-- [Font Awesome](https://fontawesome.com/) for iconography.
+- [Primer](https://primer.style/) design tokens and
+  [Octicons](https://primer.style/octicons/) for the design system and icons.
 - [Playwright](https://playwright.dev/) and [Axe](https://github.com/dequelabs/axe-core)
   for end-to-end and accessibility testing.
 

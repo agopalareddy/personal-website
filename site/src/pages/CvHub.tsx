@@ -29,6 +29,15 @@ export function CvHubPage({ documents }: { documents: DocumentEntry[] }) {
       <section className="document-list" aria-label="Available documents">
         {documents.map((doc) => (
           <article className="catalog-row document-row" key={doc.src}>
+            <img
+              className="document-thumb"
+              src={doc.thumbSrc}
+              alt=""
+              width={doc.thumbWidth}
+              height={doc.thumbHeight}
+              loading="lazy"
+              decoding="async"
+            />
             <h2 className="project-title">
               <a
                 href={doc.src}
@@ -47,8 +56,14 @@ export function CvHubPage({ documents }: { documents: DocumentEntry[] }) {
               Updated <time dateTime={doc.updatedIso}>{doc.updatedLabel}</time>
             </span>
             <p className="project-excerpt">{doc.description}</p>
+            <p className="document-sections">
+              <span className="sr-only">Sections: </span>
+              {doc.sections.join(' · ')}
+            </p>
             <div className="card-actions">
-              <span className="row-tech">PDF</span>
+              <span className="row-tech">
+                PDF · {doc.pages} {doc.pages === 1 ? 'page' : 'pages'}
+              </span>
               <a
                 href={doc.src}
                 target="_blank"

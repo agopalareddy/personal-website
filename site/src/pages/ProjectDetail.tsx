@@ -88,6 +88,25 @@ export function ProjectDetailPage({
             <figcaption>{p.figure.caption}</figcaption>
           </figure>
         )}
+        {p.pipeline && (
+          <figure className="detail-figure">
+            <ol className="pipeline">
+              {p.pipeline.stages.map((stage, i) => (
+                <li className="pipeline-stage" key={stage.title}>
+                  <p className="pipeline-stage-title">
+                    <span className="pipeline-stage-number">Stage {i + 1}</span> {stage.title}
+                  </p>
+                  <ol className="pipeline-steps">
+                    {stage.steps.map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ol>
+                </li>
+              ))}
+            </ol>
+            <figcaption>{p.pipeline.caption}</figcaption>
+          </figure>
+        )}
         <section className="page__content" dangerouslySetInnerHTML={{ __html: p.content_html }} />
       </DetailShell>
     </Layout>

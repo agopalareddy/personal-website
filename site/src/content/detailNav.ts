@@ -30,7 +30,9 @@ export function experienceRelated(e: ExperienceEntry, projects: ProjectEntry[]):
     if (!p) {
       throw new Error(`Experience "${e.id}": related project "${slug}" has no detail page`);
     }
-    return { label: p.title, href: projectDetailUrl(p), note: `Project · ${projectYear(p)}` };
+    // A link that repeats the page's own title reads as a link to itself.
+    const label = p.title === experienceDisplayTitle(e) ? 'Project write-up' : p.title;
+    return { label, href: projectDetailUrl(p), note: `Project · ${projectYear(p)}` };
   });
 }
 
@@ -40,7 +42,10 @@ export function projectRelated(p: ProjectEntry, experiences: ExperienceEntry[]):
   return experiences
     .filter((e) => e.related_projects.includes(slug))
     .map((e) => ({
-      label: experienceDisplayTitle(e),
+      label:
+        experienceDisplayTitle(e) === p.title
+          ? `${categoryLabel(e.category)} entry: ${e.organization}`
+          : experienceDisplayTitle(e),
       href: experienceDetailUrl(e),
       note: [categoryLabel(e.category), formatDateRange(e.start_date, e.end_date)]
         .filter(Boolean)

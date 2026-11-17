@@ -12,6 +12,8 @@
  * cv-modal.ts/email-protection.ts: the behavior is imperative DOM filtering
  * over server-rendered content, not client-owned state.
  */
+import { matchesQuery } from '../content/search';
+
 document.addEventListener('DOMContentLoaded', () => {
   const gridEl =
     document.getElementById('projectGrid') || document.getElementById('experienceGrid');
@@ -52,12 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function render() {
     const filter = activeFilter();
     const group = groupSelect?.value ?? 'all';
-    const q = (searchInput?.value ?? '').trim().toLowerCase();
+    const q = searchInput?.value ?? '';
 
     // Everything except the category: what each tab would show if picked.
     const pool = cards.filter((card) => {
       const matchesGroup = group === 'all' || card.dataset.group === group;
-      const matchesSearch = !q || (card.dataset.search ?? '').includes(q);
+      const matchesSearch = matchesQuery(card.dataset.search ?? '', q);
       return matchesGroup && matchesSearch;
     });
     for (const btn of filterButtons) {

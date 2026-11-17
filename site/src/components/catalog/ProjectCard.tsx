@@ -1,6 +1,7 @@
 import { Icon } from '../common/Icon';
 import type { ProjectEntry } from '../../content/types';
 import { projectCategoryClass, projectDetailUrl } from '../../content/projectDisplay';
+import { projectSearchText } from '../../content/search';
 
 const VENUE_LABELS: Record<string, string> = {
   WashU: 'Washington University in St. Louis',
@@ -79,14 +80,7 @@ function ProjectRowLinks({ p }: { p: ProjectEntry }) {
 export function ProjectCard({ p }: { p: ProjectEntry }) {
   const venueLabel = VENUE_LABELS[p.venue_tag] ?? p.venue_tag;
   const year = p.date ? p.date.split('-')[0] : '';
-  const venueLower = p.venue.toLowerCase();
-  const aliases = [
-    venueLower.includes('washington university') ? 'washu' : '',
-    venueLower.includes('ohio wesleyan') ? 'owu' : '',
-  ];
-  const search = [p.title, p.excerpt, p.venue, p.venue_tag, ...p.technologies, ...aliases]
-    .join(' ')
-    .toLowerCase();
+  const search = projectSearchText(p);
   return (
     <div
       className="project-card timeline-card catalog-row"

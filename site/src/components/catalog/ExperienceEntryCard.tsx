@@ -6,6 +6,7 @@ import {
   experienceOrderDate,
   orgGroup,
 } from '../../content/experienceDisplay';
+import { experienceSearchText } from '../../content/search';
 
 /**
  * One row in the /experience/ list: title | category | dates, then a meta
@@ -27,15 +28,7 @@ export function ExperienceEntryCard({ e }: { e: ExperienceEntry }) {
 
   const orderDate = experienceOrderDate(e);
   const year = orderDate ? orderDate.split('-')[0] : '';
-  const orgLower = (e.organization || '').toLowerCase();
-  const aliases = [
-    orgLower.includes('washington university') ? 'washu' : '',
-    orgLower.includes('ohio wesleyan') ? 'owu' : '',
-  ];
-  const search = [title, e.excerpt, e.organization, e.role_context, e.location, ...aliases]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase();
+  const search = experienceSearchText(e);
 
   return (
     <div

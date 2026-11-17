@@ -20,6 +20,17 @@ export interface ProjectEntry {
    * project or a figure from the work itself. Never an illustration.
    */
   figure?: ProjectFigure;
+  /**
+   * A staged pipeline diagram, drawn as HTML instead of an image so it
+   * follows the theme and reflows on a phone. Shown where `figure` would be.
+   */
+  pipeline?: ProjectPipeline;
+}
+
+export interface ProjectPipeline {
+  caption: string;
+  /** In order; each stage's steps run left to right, then the next stage. */
+  stages: Array<{ title: string; steps: string[] }>;
 }
 
 export interface ProjectFigure {
@@ -55,4 +66,6 @@ export interface ExperienceEntry {
   has_detail: boolean;
   excerpt: string;
   is_presentation?: boolean;
+  /** Named people on the work (advisors, supervisors): one About row each. */
+  people?: Array<{ role: string; name: string }>;
 }

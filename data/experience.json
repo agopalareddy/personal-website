@@ -50,7 +50,17 @@
     "category": "research",
     "organization": "DRIVES Project, Washington University in St. Louis",
     "location": "St. Louis, Missouri, USA",
-    "role_context": "Master's Thesis (Thesis Supervisor & Lab PI: Dr. Ganesh Babulal; Thesis Advisor & Committee Chair: Dr. Alvitta Ottley)",
+    "role_context": "Master's Thesis",
+    "people": [
+      {
+        "role": "Thesis supervisor & lab PI",
+        "name": "Dr. Ganesh Babulal"
+      },
+      {
+        "role": "Thesis advisor & committee chair",
+        "name": "Dr. Alvitta Ottley"
+      }
+    ],
     "start_date": "2025-08-01",
     "end_date": "2026-04-30",
     "responsibilities": [
@@ -96,7 +106,7 @@
     "excerpt": "Designed and fielded a capstone survey experiment on workplace attitudes toward AI across four industries, analyzing 1,000 employee responses with R and Tableau."
   },
   {
-    "title": "Artificial Intelligence in Modern Board Games - Lost Cities AI",
+    "title": "Artificial Intelligence in Modern Board Games – Lost Cities AI",
     "category": "research",
     "organization": "Ohio Wesleyan University",
     "location": "Delaware, Ohio, USA",
@@ -172,31 +182,6 @@
     "excerpt": "Built Ignite Performance Consulting's athlete coaching app, a React Native client on a Next.js, Express/MongoDB, and Rasa stack, and prepared its App Store and Google Play release."
   },
   {
-    "title": "Graduate Assistant with the Taylor Family Center for Student Success",
-    "category": "professional",
-    "organization": "Washington University in St. Louis",
-    "location": "St. Louis, Missouri, USA",
-    "role_context": null,
-    "start_date": "2025-11-01",
-    "end_date": "2026-05-31",
-    "responsibilities": [
-      "Planned and organized student engagement events such as End of Week Unwind, supporting the center's mission of helping first-generation and limited-income (FLI) students thrive.",
-      "Analyzed student engagement and survey data in compliance with FERPA, and developed process manuals establishing best practices for data evaluation in the department.",
-      "Managed survey design, the center's website, weekly newsletter, and social media; represented the department at off-campus excursions and trips."
-    ],
-    "related_projects": [],
-    "links": [
-      {
-        "label": "Taylor Family Center for Student Success",
-        "url": "https://taylorfamilycenter.washu.edu/",
-        "type": "organization"
-      }
-    ],
-    "has_detail": true,
-    "id": "2025-11-graduate-assistant-with-the-taylor-family-center",
-    "excerpt": "Drove event programming, FERPA-compliant engagement analytics, and communications for WashU's center supporting first-generation and limited-income students."
-  },
-  {
     "title": "AI Engineer Intern",
     "category": "professional",
     "organization": "Crittero, Inc.",
@@ -226,13 +211,15 @@
     "category": "professional",
     "organization": "Washington University in St. Louis",
     "location": "St. Louis, Missouri, USA",
-    "role_context": null,
+    "role_context": "Two terms: Aug 2024 – May 2025 and Nov 2025 – May 2026",
     "start_date": "2024-08-01",
-    "end_date": "2025-05-31",
+    "end_date": "2026-05-31",
     "responsibilities": [
-      "Helped organize Welcome Dinner, First-Gen Week, and End of Week Unwind events, building community among first-generation and limited-income (FLI) students.",
+      "Helped organize Welcome Dinner, First-Gen Week, and End of Week Unwind events, building community among first-generation and limited-income (FLI) students and supporting the center's mission of helping them thrive.",
       "Led data assessment efforts by tracking event, Instagram, and newsletter engagement, translating insights into actionable engagement improvements.",
-      "Managed social media and co-developed newsletters for students, alumni, and families; reorganized the center's Canva design repository and documented a unified design language."
+      "Analyzed student engagement and survey data in compliance with FERPA, and developed process manuals establishing best practices for data evaluation in the department.",
+      "Managed survey design, the center's website, weekly newsletter, and social media, and co-developed newsletters for students, alumni, and families.",
+      "Reorganized the center's Canva design repository and documented a unified design language; represented the department at off-campus excursions and trips."
     ],
     "related_projects": [],
     "links": [
@@ -244,7 +231,7 @@
     ],
     "has_detail": true,
     "id": "2024-08-graduate-assistant-with-the-taylor-family-center",
-    "excerpt": "Organized signature community events and led engagement analytics and communications for WashU's center supporting first-generation and limited-income students."
+    "excerpt": "Organized community events and led FERPA-compliant engagement analytics and communications for WashU's center supporting first-generation and limited-income students."
   },
   {
     "title": "Data Analyst Intern",
@@ -379,7 +366,7 @@
     "excerpt": "Presented 'Artificial Intelligence in Modern Board Games' research at Ohio Wesleyan's Patricia Belt Conrades Summer Science Research Symposium."
   },
   {
-    "title": "Graduate Teaching Assistant - CSE 5114: Data Manipulation and Management at Scale",
+    "title": "Graduate Teaching Assistant – CSE 5114: Data Manipulation and Management at Scale",
     "category": "professional",
     "organization": "Washington University in St. Louis",
     "location": "St. Louis, Missouri, USA",
@@ -514,7 +501,7 @@
     "excerpt": "One of 15 Ohio Wesleyan students inducted into Mortar Board, the national senior honor society recognizing exemplary scholarship, leadership, and service."
   },
   {
-    "title": "Golden Bishop Award - WCSA Best New Member",
+    "title": "Golden Bishop Award – WCSA Best New Member",
     "category": "awards",
     "organization": "Ohio Wesleyan University",
     "location": null,
@@ -578,7 +565,7 @@
     "excerpt": "Awarded the Florence Leas Prize for excelling in mathematics or computer science, on faculty recommendation."
   },
   {
-    "title": "First Place - 32nd Annual Spring Programming Contest",
+    "title": "First Place – 32nd Annual Spring Programming Contest",
     "category": "awards",
     "organization": "Denison University",
     "location": null,

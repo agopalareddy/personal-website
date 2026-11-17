@@ -54,6 +54,20 @@ test.describe('Detail page links', () => {
     await expect(page.locator('.detail-figure figcaption')).not.toBeEmpty();
   });
 
+  test('a pipeline figure is text in stages, not an image', async ({ page }) => {
+    await page.goto('/projects/ms-thesis.html');
+    const figure = page.locator('.detail-figure');
+    await expect(figure.locator('img')).toHaveCount(0);
+    await expect(figure.locator('.pipeline-stage')).toHaveCount(3);
+    await expect(figure.locator('figcaption')).not.toBeEmpty();
+    // Readable on a phone: steps keep the body's small size
+    const size = await figure
+      .locator('.pipeline-steps li')
+      .first()
+      .evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+    expect(size).toBeGreaterThanOrEqual(14);
+  });
+
   test('the lead facts show once: under the title on phones, in the About column otherwise', async ({
     page,
     viewport,

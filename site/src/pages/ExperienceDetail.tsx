@@ -51,6 +51,7 @@ export function ExperienceDetailPage({
   ];
   if (e.organization) about.push({ label: 'Organization', value: e.organization, lead: true });
   if (e.role_context) about.push({ label: 'Context', value: e.role_context });
+  for (const person of e.people ?? []) about.push({ label: person.role, value: person.name });
   if (e.location) about.push({ label: 'Location', value: e.location });
   if (dateRange) about.push({ label: 'Dates', value: dateRange, lead: true });
   if (links.length > 0) {

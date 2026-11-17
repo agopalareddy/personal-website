@@ -120,7 +120,7 @@ async function main() {
   }
 
   written.push(
-    renderPage(HomePage({ projects }), 'index.html', [...commonIslands, homeSkillToggleIsland])
+    renderPage(HomePage({ projects, experiences }), 'index.html', [...commonIslands, homeSkillToggleIsland])
   );
   written.push(
     renderPage(CvHubPage({ documents: loadDocuments() }), 'cv/index.html', [

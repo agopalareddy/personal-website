@@ -30,7 +30,10 @@ export function AvailabilityPage() {
       contentAriaLabel="Weekly scheduling availability"
     >
       <h1 className="page-intro-title">Availability</h1>
-      <p className="page-intro-lead">View the weekly calendar or book a meeting directly.</p>
+      <p className="page-intro-lead">
+        View the weekly calendar or book a meeting directly. I work on US Eastern time; the calendar
+        below shows your own. The booking page lists open slots and sends you a calendar invite.
+      </p>
 
       <section className="calendar-card" aria-labelledby="calendar-card-title">
         <div className="calendar-card-header">
@@ -44,7 +47,7 @@ export function AvailabilityPage() {
             rel="noopener"
           >
             <Icon name="CALENDAR_16" /> Book a meeting
-            <span className="sr-only">(opens in a new tab)</span>
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
         {/* Google's embed has no dark theme, so the frame stays white in every
@@ -56,6 +59,15 @@ export function AvailabilityPage() {
           referrerPolicy="no-referrer-when-downgrade"
           title="Weekly availability calendar"
         />
+        {/* Privacy extensions and some browsers block Google embeds, which
+            leaves a blank frame; this line is the way out either way. */}
+        <p className="calendar-card-footer">
+          Calendar not showing?{' '}
+          <a href={CALENDAR_SRC} target="_blank" rel="noopener">
+            Open it on Google Calendar<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          , or use Book a meeting.
+        </p>
       </section>
     </Layout>
   );

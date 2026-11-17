@@ -51,6 +51,17 @@
         }
       }
     },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role", "name"],
+        "properties": {
+          "role": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      }
+    },
     "has_detail": { "type": "boolean" },
     "excerpt": { "type": "string" },
     "is_presentation": { "type": "boolean" }

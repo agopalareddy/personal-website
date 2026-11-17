@@ -33,7 +33,7 @@ function orgShort(org: string): string {
 /**
  * Ported from experience-catalog.js's getExperienceDisplayTitle() /
  * generate_site.py's experience_display_title(). Leadership entries get a
- * " - <org short label>" suffix appended, unless the org is already implied
+ * " – <org short label>" suffix (en dash) appended, unless the org is already implied
  * by the title.
  */
 export function experienceDisplayTitle(e: ExperienceEntry): string {
@@ -49,7 +49,7 @@ export function experienceDisplayTitle(e: ExperienceEntry): string {
   if (titleLower.includes(short.toLowerCase())) return title;
   if (org && titleLower.includes(org.toLowerCase())) return title;
 
-  return `${title} - ${short}`;
+  return `${title} – ${short}`;
 }
 
 const MONTH_NAMES_SHORT = [

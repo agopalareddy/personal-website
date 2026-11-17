@@ -64,6 +64,11 @@ server {
     location = /talkmap/          { return 301 /; }
     location = /talkmap.html      { return 301 /; }
 
+    # Merged experience entries: the second Taylor Family Center term now
+    # lives on the first term's page.
+    location = /experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center.html { return 301 /experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html; }
+    location = /experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center      { return 301 /experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html; }
+
     # Category folder indexes have no index.html → nginx 403. Send to catalog filter.
     location = /experience/awards/         { return 301 /experience/?category=awards; }
     location = /experience/education/      { return 301 /experience/?category=education; }
@@ -368,6 +373,11 @@ server {
     location = /talkmap           { return 301 /; }
     location = /talkmap/          { return 301 /; }
     location = /talkmap.html      { return 301 /; }
+
+    # Merged experience entries: the second Taylor Family Center term now
+    # lives on the first term's page.
+    location = /experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center.html { return 301 /experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html; }
+    location = /experience/professional/2025-11-graduate-assistant-with-the-taylor-family-center      { return 301 /experience/professional/2024-08-graduate-assistant-with-the-taylor-family-center.html; }
 
     # Category folder indexes have no index.html → nginx 403. Send to catalog filter.
     location = /experience/awards/         { return 301 /experience/?category=awards; }

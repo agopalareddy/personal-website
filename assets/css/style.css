@@ -656,6 +656,50 @@
     flex-shrink: 0;
   }
 
+  /* CV page rows: a page-1 thumbnail in its own column, then the usual row */
+  /* The last row takes the thumbnail's extra height, so the text rows
+     stay packed at the top instead of spreading out beside it */
+  .document-row {
+    grid-template-columns: 6rem minmax(0, 1fr) 8rem 9.5rem;
+    grid-template-rows: repeat(4, auto) 1fr;
+  }
+
+  .document-row .document-thumb {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    align-self: start;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--borderColor-default);
+    border-radius: var(--borderRadius-small, 3px);
+  }
+
+  .document-row .project-title {
+    grid-column: 2;
+  }
+
+  .document-row .card-category {
+    grid-column: 3;
+  }
+
+  .document-row .card-venue {
+    grid-column: 4;
+  }
+
+  .document-row .project-excerpt,
+  .document-row .card-actions {
+    grid-column: 2 / -1;
+  }
+
+  .document-row .document-sections {
+    grid-column: 2 / -1;
+    max-width: none;
+    margin: 0;
+    font-size: var(--site-text-caption);
+    line-height: 1.5;
+    color: var(--fgColor-muted);
+  }
+
   @media (max-width: 47.99em) {
     /* Phones: title on its own line; category and dates share the next. */
     .catalog-row {
@@ -689,6 +733,29 @@
     /* Comfortable tap height for the per-row links */
     .catalog-row .row-link {
       min-height: 1.75rem;
+    }
+  }
+
+  @media (max-width: 47.99em) {
+    /* Phones: a narrower thumbnail; title, category and date stacked beside it */
+    .document-row {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+      grid-template-rows: repeat(6, auto) 1fr;
+      column-gap: 0.75rem;
+    }
+
+    .document-row .project-title {
+      grid-column: 2;
+    }
+
+    .document-row .card-category {
+      grid-column: 2;
+    }
+
+    .document-row .card-venue {
+      grid-column: 2;
+      grid-row: 3;
+      text-align: left;
     }
   }
 
@@ -1257,6 +1324,109 @@
     background: var(--bgColor-muted);
   }
 
+  /* A staged pipeline drawn in HTML (project `pipeline` field): stages
+     top to bottom, steps left to right with an arrow between them. Steps
+     stack when the row is too narrow, and the arrows turn to point down. */
+  .pipeline {
+    display: grid;
+    gap: 1.5rem;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pipeline-stage {
+    position: relative;
+    margin: 0;
+    padding: 0.75rem 1rem 1rem;
+    border: 1px solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium, 6px);
+    background: var(--bgColor-muted);
+  }
+
+  /* The arrow from one stage to the next */
+  .pipeline-stage + .pipeline-stage::before {
+    content: '↓';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1.5rem;
+    color: var(--fgColor-muted);
+  }
+
+  .pipeline-stage-title {
+    max-width: none;
+    margin: 0 0 0.75rem;
+    font-size: var(--site-text-small);
+    font-weight: var(--base-text-weight-semibold, 600);
+  }
+
+  .pipeline-stage-number {
+    margin-right: 0.25rem;
+    color: var(--fgColor-muted);
+  }
+
+  .pipeline-stage {
+    container: pipeline-stage / inline-size;
+  }
+
+  .pipeline-steps {
+    display: flex;
+    gap: 1.75rem;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pipeline-steps li {
+    position: relative;
+    flex: 1 1 0;
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium, 6px);
+    background: var(--bgColor-default);
+    font-size: var(--site-text-small);
+    line-height: 1.4;
+  }
+
+  .pipeline-steps li + li::before {
+    content: '→';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 1.75rem;
+    transform: translateY(-50%);
+    text-align: center;
+    color: var(--fgColor-muted);
+  }
+
+  /* Too narrow for three steps side by side: stack them */
+  @container pipeline-stage (max-width: 32rem) {
+    .pipeline-steps {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pipeline-steps li {
+      flex-basis: auto;
+    }
+
+    .pipeline-steps li + li::before {
+      content: '↓';
+      top: auto;
+      right: auto;
+      bottom: 100%;
+      left: 50%;
+      width: auto;
+      transform: translateX(-50%);
+      line-height: 1.5rem;
+    }
+  }
+
   .detail-figure figcaption {
     margin-top: 0.5rem;
     font-size: var(--site-text-caption);
@@ -1802,6 +1972,22 @@
     color: var(--fgColor-muted);
   }
 
+  /* The one figure that says how it went, then what it was built with */
+  .home-pin-result {
+    max-width: none;
+    margin: 0;
+    font-size: var(--site-text-small);
+    line-height: 1.5;
+    color: var(--fgColor-default);
+  }
+
+  .home-pin-stack {
+    max-width: none;
+    margin: 0;
+    font-size: var(--site-text-caption);
+    color: var(--fgColor-muted);
+  }
+
   .home-pin-meta {
     display: flex;
     align-items: center;
@@ -1863,9 +2049,11 @@
     font-size: inherit;
   }
 
+  /* Skills with nothing on the site to search for are plain text, same color */
   .home-skill-list li {
     position: relative;
     margin: 0;
+    color: var(--fgColor-default);
   }
 
   .home-skill-list li::before {
@@ -2142,6 +2330,16 @@
     height: 752px;
     border: 0;
     background: #ffffff;
+  }
+
+  .calendar-card-footer {
+    max-width: none;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--borderColor-default);
+    background: var(--bgColor-muted);
+    font-size: var(--site-text-caption);
+    color: var(--fgColor-muted);
   }
 
   @media (max-width: 47.99em) {

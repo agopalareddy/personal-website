@@ -6,6 +6,27 @@
  */
 
 /* ==========================================================================
+   Dark dimmed: text colours that meet 4.5:1
+   --------------------------------------------------------------------------
+   The one place this file sets raw colour values (see DESIGN.md, rule 1).
+   Primer's dimmed theme puts these five text colours at 4.0 to 4.3:1 on its
+   own page background (#212830), below the 4.5:1 the site promises for body
+   text. Each is replaced by the next lighter step of the same Primer dimmed
+   scale (blue, purple, orange, pink, red 3), which gives 5.2:1.
+
+   Unlayered on purpose: primer.css is unlayered, and unlayered rules beat
+   anything inside @layer, so this has to sit outside the layers to win.
+   Re-check after `npm run vendor:primer`; drop it if Primer fixes the theme.
+   ========================================================================== */
+html[data-color-mode='dark'][data-dark-theme='dark_dimmed'] {
+  --fgColor-accent: #539bf5; /* links, and --fgColor-link through it */
+  --fgColor-done: #b083f0;
+  --fgColor-severe: #e0823d;
+  --fgColor-sponsors: #e275ad;
+  --fgColor-danger: #f47067;
+}
+
+/* ==========================================================================
    @layer reset
    ========================================================================== */
 @layer reset {

@@ -1,6 +1,6 @@
-# CV, Resume, and Cover Letter TeX Templates
+# CV and Resume TeX Templates
 
-This directory contains TeX files for creating a CV, a resume, and a cover letter. These templates are designed to be easily customizable.
+This directory contains TeX files for creating a CV and a resume. These templates are designed to be easily customizable.
 
 ## Directory Structure
 
@@ -12,11 +12,6 @@ This directory contains TeX files for creating a CV, a resume, and a cover lette
   - `reddy_resume.tex`: The main TeX file for the resume.
   - `reddy_resume.sty`: The style file associated with the resume.
   - `reddy_resume.pdf`: An example PDF output of the resume.
-- **`cover_tex/`**: Contains the TeX files for a cover letter.
-  - `reddy_cover.tex`: The main TeX file for the cover letter.
-  - `reddy_cover.sty`: The style file associated with the cover letter, defining formatting and layout.
-  - `reddy_cover.pdf`: The compiled PDF output of the cover letter.
-  - **Tailoring**: Use the `cover-letter-tailor` skill (AI agent) to automatically rewrite the cover letter for specific job applications based on a job description and title.
 
 ## How to Use
 
@@ -57,7 +52,7 @@ Once you have your project open in Overleaf or your local editor, you'll primari
 
 - **Header Section**:
   - Locate the `\\begin{header}` environment at the beginning of the `.tex` file.
-  - Update your **Name**, **Email**, and **Phone Number** within the minipages.
+  - Update your **Name** and **Email** within the minipages. The phone number is not in the file; the note at the top of each `.tex` file explains how to add one for a copy you send out.
   - Change the website URL in `\\href{https://agopalareddy.github.io}{agopalareddy.github.io}`.
   - Update the URL within the `\\qrcode{https://agopalareddy.github.io}` command to generate your personal QR code.
 - **Content Sections**:

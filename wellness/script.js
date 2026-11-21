@@ -340,6 +340,33 @@ function updateDashboard(mood, complianceText) {
 }
 
 // API Communication and stream parsing
+async function parseSSEStream(response, onEvent) {
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop();
+
+    for (const line of lines) {
+      const cleanLine = line.trim();
+      if (cleanLine.startsWith('data: ')) {
+        try {
+          const eventData = JSON.parse(cleanLine.substring(6));
+          onEvent(eventData);
+        } catch (parseErr) {
+          console.warn('Could not parse SSE line:', parseErr);
+        }
+      }
+    }
+  }
+}
+
 async function sendMessageToAgent(inputText) {
   if (!sessionId) {
     appendSystemMessage('Session not initialized. Reconnecting...');
@@ -371,59 +398,38 @@ async function sendMessageToAgent(inputText) {
 
     if (!response.ok) throw new Error('Agent node communication failure.');
 
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
     let finalResponseText = '';
     let isEscalated = false;
 
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
+    await parseSSEStream(response, (eventData) => {
+      if (eventData.errorCode) {
+        throw new Error(eventData.errorMessage || 'Agent error');
+      }
 
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop();
+      // Track active execution node progress
+      const nodePath = eventData.nodeInfo?.path || '';
+      if (nodePath.includes('CompanionNode')) {
+        showThinking('anonymizer');
+      } else if (nodePath.includes('AnonymizerNode')) {
+        showThinking('escalation');
+      }
 
-      for (const line of lines) {
-        const cleanLine = line.trim();
-        if (cleanLine.startsWith('data: ')) {
-          try {
-            const eventData = JSON.parse(cleanLine.substring(6));
+      const stateDelta = eventData.actions?.stateDelta || {};
+      if (stateDelta.escalation_triggered !== undefined) {
+        isEscalated = stateDelta.escalation_triggered;
+      }
 
-            if (eventData.errorCode) {
-              throw new Error(eventData.errorMessage || 'Agent error');
-            }
-
-            // Track active execution node progress
-            const nodePath = eventData.nodeInfo?.path || '';
-            if (nodePath.includes('CompanionNode')) {
-              showThinking('anonymizer');
-            } else if (nodePath.includes('AnonymizerNode')) {
-              showThinking('escalation');
-            }
-
-            const stateDelta = eventData.actions?.stateDelta || {};
-            if (stateDelta.escalation_triggered !== undefined) {
-              isEscalated = stateDelta.escalation_triggered;
-            }
-
-            // Extract output from final nodes
-            if (
-              nodePath.includes('alert_node') ||
-              nodePath.includes('normal_end_node') ||
-              nodePath.includes('escalation_node')
-            ) {
-              if (eventData.output) {
-                finalResponseText = eventData.output;
-              }
-            }
-          } catch (parseErr) {
-            console.warn('Could not parse SSE line:', parseErr);
-          }
+      // Extract output from final nodes
+      if (
+        nodePath.includes('alert_node') ||
+        nodePath.includes('normal_end_node') ||
+        nodePath.includes('escalation_node')
+      ) {
+        if (eventData.output) {
+          finalResponseText = eventData.output;
         }
       }
-    }
+    });
 
     hideThinking();
     if (finalResponseText) {
